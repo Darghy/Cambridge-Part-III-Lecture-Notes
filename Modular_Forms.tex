@@ -1,0 +1,150 @@
+\documentclass{article}
+%build with recipe latexmk
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+
+\usepackage{tcolorbox}
+\tcbuselibrary{theorems}
+\usepackage{babel}
+\usepackage{enumerate}
+\usepackage{amsmath, amssymb, amsthm}
+%\usepackage{a4wide}
+\usepackage{float}
+\usepackage{tikz-cd}
+\usepackage{tikz}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{wrapfig}
+\usepackage{setspace}
+\setstretch{1.1}
+\usepackage{color}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true, %set true if you want colored links
+    linktoc=all,     %set to all if you want both sections and subsections linked
+    linkcolor=black,  %choose some color if you want links to stand out
+}
+\usepackage{stackrel}
+
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{cor}[theorem]{Corollary}
+\newtheorem{prop}[theorem]{Proposition}
+\newtheorem{example}{Example}[section]
+\newtheorem{defn}{Definition}[section]
+
+\title{Part III - Modular Forms
+    \\ \large
+    Lectured by Jack Thorne
+}
+ 
+\author{Artur Avameri}
+\date{}
+ 
+\setcounter{section}{0}
+ 
+\begin{document}
+\maketitle
+\tableofcontents
+\newpage
+
+\section{Introduction}
+
+\marginpar{06 Oct 2022, Lecture 1}
+
+\begin{defn}
+    We define the following groups:
+    \begin{align*}
+        &\mathfrak{H} = \{\tau \in \mathbb{C} \mid \text{Im}(\tau)>0\}\\
+        &GL_2(\mathbb{R})^{+} = \{g \in GL_2(\mathbb{R}) \mid \det(g)>0\}\\
+        &\Gamma(1) = SL_2(\mathbb{Z}) = \{g \in M_2(\mathbb{Z}) \mid  \det(g)=1\} .
+    \end{align*}
+    Note that $\Gamma(1)$ is a subgroup of $GL_2(\mathbb{R})^+$.
+\end{defn}
+\begin{lemma}
+    $GL_2(\mathbb{R})^+$ acts transitively on $\mathfrak{H}$ by Möbius transformations.
+\end{lemma}
+\begin{proof}
+    Let $g = \begin{pmatrix} a & b\\c&d \end{pmatrix} \in GL_2(\mathbb{R})^+, \tau \in \mathfrak{H}$. Then \[
+    \text{Im}(g \tau) = \frac{1}{2i}\left(\frac{a \tau + b}{c \tau + d} - \frac{a \overline{\tau}+ b}{c \overline{\tau } + d} \right) = \frac{1}{2i} \frac{(ad-bc)(\tau - \overline{\tau})}{|c \tau + d|^2} = \frac{\det(g) \text{Im}(\tau)}{|c \tau + d |^2} > 0,
+    \]
+    so $g \tau \in \mathfrak{H}$. This action is transitive since \[
+    x + iy  \in \mathfrak{H} \implies \begin{pmatrix} y & x \\ 0 & 1 \end{pmatrix} i  = x + iy,
+    \]
+    so everything in $\mathfrak{H}$ is conjugate to $i$.   
+\end{proof}
+\begin{defn}
+    If $g = \begin{pmatrix} a & b\\ c & d\end{pmatrix}\in GL_2(\mathbb{R})^+$ and $\tau \in \mathfrak{H}$, then define \[
+    j(g, \tau) =  c \tau + d.
+    \]
+    This is called a \textbf{modular cocycle}.
+    If $k \in \mathbb{Z}$ and $f : \mathfrak{H} \to \mathbb{C}$, then \[
+    f |_k[g]: \mathfrak{H} \to \mathbb{C}
+    \]
+    is defined by \[
+    f |_k[g](\tau) = \det(g)^{k-1} f(g \tau) j(g, \tau)^{-k}.
+    \]
+    This is the \textbf{weight $k$ action of $g$ on $f$}.
+\end{defn}
+\begin{lemma}
+    This is a right action of $GL_2(\mathbb{R})^+$: if $g,h \in GL_2(\mathbb{R})^+$, then $$f|_k[gh] = (f|_k[g])|_k[h].$$
+\end{lemma}
+\begin{proof}
+    We compute
+    \begin{align*}
+        &(f|_k[g])|_k[h](\tau) = \det(h)^{k-1}f|_k[g](h \tau) j(h, \tau)^{-k} = \\
+        &\det(h)^{k-1}\det(g)^{k-1}f(g h \tau) j(g, h \tau)^{-k} j(h, \tau)^{-k}  \stackrel{?}{=}\\
+        & \det(gh)^{k-1} f(gh \tau) j(gh, \tau)^{-k} = f|_k[gh](\tau). 
+    \end{align*}
+    Hence we need to check that $j(gh, \tau) = j(gh, \tau)j(h, \tau)$. Note that if $g = \begin{pmatrix} a & b \\ c & d \end{pmatrix}$, then \[
+    g \begin{pmatrix} \tau & 1 \end{pmatrix} = \begin{pmatrix} a \tau + b\\ c \tau + d \end{pmatrix} = j(g,\tau)\begin{pmatrix} g \tau \\ 1 \end{pmatrix}.
+    \]
+    We now get\[
+    j(gh, \tau) \begin{pmatrix} g h \tau \\ 1 \end{pmatrix} = gh \begin{pmatrix} \tau 1 \end{pmatrix} = g \left( j(h, \tau) \begin{pmatrix} h \tau \\ 1 \end{pmatrix}\right) = j(h, \tau) j(g, h \tau) \begin{pmatrix} g h \tau \\ 1 \end{pmatrix},
+    \]
+    which finishes the computation and proof.
+\end{proof}
+\textbf{Formulae.} For $g \in GL_2(\mathbb{R})^+, \tau \in \mathfrak{H}$, we have \begin{align*}
+    \text{Im}(g \tau) = \det(g) \frac{\text{Im}(\tau)}{|j(g,\tau)|^2} \text{ and } j(g,\tau) \begin{pmatrix} g \tau \\ 1 \end{pmatrix} = g \begin{pmatrix} \tau \\ 1 \end{pmatrix}.
+\end{align*} 
+\begin{defn}
+    Let $k \in \mathbb{Z}$ and $\gamma \le \Gamma(1)$ of finite index\footnote{In other words, $\gamma$ is a (finite index) subgroup of $\Gamma(1)$.}. A \textbf{weakly modular function of weight $k$ and level $\Gamma$} is a meromorphic function $f : \mathfrak{H} \to \mathbb{C}$ which is invariant under the weight $k$ action of $\Gamma$, i.e. such that $$\forall \tau \in \mathfrak{H}, \forall \gamma \in \Gamma, f|_k(\gamma) = f.$$
+\end{defn}
+We will define modular forms next time: they are weakly modular functions which are holomorphic both in $\mathfrak{H}$ and at $\infty$.
+\vspace{1mm}
+ 
+It is a fact that modular forms of fixed weight and level live in finite-dimensional $\mathbb{C}$-vector spaces called $M_k(\Gamma)$. These form the main objects of study in this course.
+\vspace{1mm}
+ 
+\textbf{Motivation.} Why study modular forms?
+\begin{enumerate}[(1)]
+    \item They are related to the theory of elliptic functions.
+    Let $E/\mathbb{C}$ be an elliptic curve and $\omega$ a holomorphic non--zero 1--form. Then there exists a unique lattice\footnote{i.e. a discrete cocompact subgroup, or an abelian subgroup which is freely generated by two elements that are linearly independent over $\mathbb{R}$.} $\Lambda \in \mathbb{C}$ and isomorphism $\phi : \mathbb{C}/\Lambda \to E$ such that $\phi^*(\omega) = dz$. Then $E$ is isomorphic to the elliptic curve $y^2 = 4x^3 - 60G_4(\Lambda)x - 140G_6(\Lambda)$ where if $k \in \mathbb{Z}$, then $G_k(\Lambda) = \sum_{\lambda \in \Lambda - \{0\}}^{} \lambda^{-k}$. This converges absolutely for $k>2$.
+
+    If $\tau \in \mathfrak{H}$, then $\Lambda \tau = \mathbb{Z} \tau \oplus \mathbb{Z} \subset \mathbb{C}$ is a lattice and $G_k(\tau) = G_k(\Lambda_\tau)$. This is a modular form of weight $k$ and level $\Gamma(1)$, called an Eisenstein series.
+    \vspace{1mm}
+     
+    $\mathfrak{H}/SL_2(\mathbb{Z})$ can be identified with the set of (isomorphism classes of) elliptic curves over $\mathbb{C}$.
+    \item Modular forms $f$ have Fourier expansions $\sum_{n \in \mathbb{Z}}^{} a_n g^n$, $a_n \in \mathbb{C}$ and they often serve as a generating functions for arithmetically interesting sequences $a_n$.
+    \vspace{1mm}
+     
+    For example, take $\theta(\tau) = \sum_{n \in \mathbb{Z}}^{} e^{\pi i n^2 \tau}$. If $k \in 2\mathbb{N}$, then $\theta^{k}$ is a modular form with $q$--expansion $\theta^{k} = \sum_{n \in \mathbb{Z}}^{} r_k(n) e^{\pi i n \tau}$, where $r_k(n)$ is the number of ways of writing $n$ as a sum of $k$ squares, i.e. $r_k(n) = |\{x \in \mathbb{Z}^k \mid \sum_{i=1}^{k} x_i^2 = n\}|$.
+    By expressing $\theta^k$ in terms of other modular forms, we can prove formulae such as $r_4(n) = 8 \sum_{d \mid n, 4 \nmid d}^{} d$.
+    \item The Riemann zeta function $\zeta(s)$ is an important object of study. Its pleasant features include:
+    \begin{itemize}
+        \item The Euler product $\zeta(s) = \prod_{p}^{} (1-p^{-s})^{-1}$.
+        \item It has a meromorphic continuation to $\mathbb{C}$ and has a functional equation relating $\zeta(s)$ and $\zeta(1-s)$.
+    \end{itemize}
+    A Dirichlet series $\sum_{n\ge 1}^{} a_n n^{-s}$ which has similar properties (Euler product, meromorphic extension, some nice function equation) is called an $L$--function. Modular forms can be used to construct interesting examples of $L$--functions. In practice, we take $M_k(\Gamma)$ and decompose it under Hecke operators to get Hecke eigenforms, the nicest possible modular forms, which have the above properties.
+    \item The Langlands program predicts a relation between modular forms and objects in arithmetic geometry. A special case of this is the modularity conjecture, which says that there is a bijective correspondence between elliptic curves $E/\mathbb{C}$ up to isogeny and the set of Hecke eigenforms of weight 2. This implies Fermat's last theorem. Note that this is formulated in the language of Hecke operators and $L$--functions.
+\end{enumerate}
+\textbf{Homework.} There is a handout on Moodle called ''Reminder on Complex Analysis''. Have a look at it before the next lecture.
+\vspace{1mm}
+ 
+\textbf{Warning.} 
+
+\end{document}
