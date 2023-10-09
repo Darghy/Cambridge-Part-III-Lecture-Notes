@@ -156,16 +156,13 @@ It is a fact that modular forms of fixed weight and level live in finite-dimensi
 $f$ then has a Laurent expansion $\sum_{m \in \mathbb{Z}}^{} a_m (z-a)^{m}$ valid on $D^*(a,\delta)$.
 
 \begin{lemma}
-    Let $f$ be a weakly modular function of weight $k$ and level $\Gamma(1)$. Then there exists a meromorphic function $\tilde{f}$ in $D^*(0,1)$ such that $f(\tau) = \tilde{f}(e^{2\pi i \tau})$.
+    Let $f$ be a weakly modular function of weight $k$ and level $\Gamma(1)$. Then there exists a meromorphic function $\tilde{f}$ in $D^*(0,1)$ such that $$f(\tau) = \tilde{f}(e^{2\pi i \tau}).$$
 \end{lemma}
 \begin{proof}
     $f$ is meromorphic in $\mathfrak{h}$ by assumption. Take $\gamma = \begin{pmatrix} 1 & 1 \\ 0 & 1 \end{pmatrix} \in \Gamma(1)$. Then $f|_h[\gamma](\tau) = f(\gamma \tau) = f(\tau)$, as $f$ is invariant under the weight $k$ action of $\gamma$. But also $f(\gamma \tau) = f(\tau+1)$, so $f$ is periodic. 
     \vspace{1mm}
      
-    Now map a strip of $\mathfrak{h}$ of width 1 to $D^*(0,1)$ by $\tau \mapsto e^{2 \pi i \tau}$. Existence of $\tilde{f}$: Let $a \in D^*(0,1)$ and $\delta>0$ be such that $D(\alpha,\delta) \subset D^*(0,1)$. Define $\tilde{f}$ on $D(a,\delta)$ by $\tilde{f}(q) = f(\frac{1}{2\pi i} \log q)$, for any branch of $\log$ defined in $D(a,\delta)$. This is meromorphic and independent of the choice of the branch of log, as $f$ is periodic with period 1. This defines $\tilde{f}$ in $D^*(0,1)$.
-    \vspace{1mm}
-     
-    $\tilde{f}$ is unique since $\tau \mapsto e^{2\pi i \tau}$ is surjective.
+    Now map a strip of $\mathfrak{h}$ of width 1 to $D^*(0,1)$ by $\tau \mapsto e^{2 \pi i \tau}$. Let $a \in D^*(0,1)$ and $\delta>0$ be such that $D(a,\delta) \subset D^*(0,1)$. Define $\tilde{f}$ on $D(a,\delta)$ by $$\tilde{f}(q) = f\left(\frac{1}{2\pi i} \log q\right),$$ for any branch of $\log$ defined in $D(a,\delta)$. This is meromorphic and independent of the choice of the branch of log, as $f$ is periodic with period 1. This defines $\tilde{f}$ in $D^*(0,1)$. Finally, $\tilde{f}$ is unique since $\tau \mapsto e^{2\pi i \tau}$ is surjective.
 \end{proof}
 
 If $\tilde{f}$ extends to a meromorphic function\footnote{This might not be the case if the set of poles has a limit inside the disk.} in $D(0,1)$, then $\exists \delta > 0$ such that $\tilde{f}$ has a Laurent expansion $\tilde{f}(q) = \sum_{n \in \mathbb{Z}}^{} a_n q^n$ valid in $D^*(0,\delta)$. 
@@ -176,7 +173,7 @@ In the region $\{\tau \in \mathfrak{h} \mid \text{Im}(\tau) > \frac{1}{2\pi} \lo
 \begin{defn}
     Let $f$ be a weakly modular function of weight $k$ and level $\Gamma(1)$. We say that $f$ is \textbf{meromorphic at $\infty$} if $\tilde{f}$ extends to a meromorphic function in $D(0,1)$. \vspace{1mm}
      
-    We say $f$ is \textbf{holomorphic at $\infty$} if $\tilde{f}$ is meromorphic at $\infty$ and has a removable singularity at $q = 0$. In this case, we define $f(\infty) = \tilde{f}(0) = \lim_{\text{Im}(\tau) \to \infty}f(\tau)$
+    We say $f$ is \textbf{holomorphic at $\infty$} if $\tilde{f}$ is meromorphic at $\infty$ and has a removable singularity at $q = 0$. In this case, we define $$f(\infty) = \tilde{f}(0) = \lim_{\text{Im}(\tau) \to \infty}f(\tau).$$
     \vspace{1mm}
      
     We say $f$ \textbf{vanishes at $\infty$} if $f$ is holomorphic at $\infty$ and $f(\infty)=0$.
@@ -203,12 +200,12 @@ where $\Lambda_\tau = \mathbb{Z} \tau \oplus \mathbb{Z}$ for any $\tau \in \math
 If $\gamma \in \Gamma(1)$, then formally we have $$G_k|_k[\gamma](\tau) = G_k(\gamma \tau)j(\gamma, \tau)^{-k} = \sum_{\lambda \in \Lambda_{\gamma \tau} \setminus 0}^{} \lambda^{-k} j(\gamma, \tau)^{-k},$$
 but $\Lambda_{\gamma \tau} = \mathbb{Z} \frac{a \tau + b}{c \tau +d} \oplus \mathbb{Z} = (c \tau + d)^{-1}\left(\mathbb{Z}(a \tau + b) \oplus \mathbb{Z}(c \tau + d)\right) = (c \tau + d)^{-1} \Lambda_\tau$. Hence 
 \begin{align*}
-    G_k|_k[g](\tau) &= \sum_{\lambda \in (c \tau + d)^{-1} \Lambda_\tau \setminus 0}^{} \lambda^{-k} (c \tau +d)^{-k}\\ &= \sum_{\lambda \in (c \tau + d)^{-1}\Lambda_\tau \setminus 0} ((c \tau + d)^{-1}\lambda)^{-k}(c \tau + d)^{-k} = G_k(\tau).
+    G_k|_k[g](\tau) &= \sum_{\lambda \in (c \tau + d)^{-1} \Lambda_\tau \setminus 0}^{} \lambda^{-k} (c \tau +d)^{-k}\\ &= \sum_{\lambda \in \Lambda_\tau \setminus 0} ((c \tau + d)^{-1}\lambda)^{-k}(c \tau + d)^{-k} = G_k(\tau).
 \end{align*}
 
 This is justified only when the series defining $G_k(\tau)$ converges absolutely. Hence:
 \begin{prop}
-    Let $k > 2$ be an even integer. Then $G_k(\tau)$ converges absolutely and defines a modular form of weight $k$ and level $\Gamma(1)$ with $G_k(\infty) = 2\zeta(k)$. $G_k$ is the \textbf{weight $k$ Eisenstein series}.
+    Let $k > 2$ be an even integer. Then $G_k(\tau)$ converges absolutely and defines a modular form of weight $k$ and level $\Gamma(1)$ which has   $G_k(\infty) = 2\zeta(k)$. $G_k$ is the \textbf{weight $k$ Eisenstein series}.
 \end{prop}
 We will later see that $M_2(\Gamma(1)) = 0$.
 \begin{proof}
@@ -216,12 +213,12 @@ We will later see that $M_2(\Gamma(1)) = 0$.
         \frac{1}{A} & |x|\le 2A\\
         \frac{|x|}{2} & |x|\ge 2A.
     \end{cases}$ 
-    Hence $$|\tau + x| \ge \sup\left(\frac{1}{A},\frac{|x|}{2A^2}\right) \ge \sup\left(\frac{1}{2A^2}, \frac{|x|}{2A^2}\right) = \frac{1}{2A^2}\sup(1,|x|).$$
-    If $(m,n) \in \mathbb{Z}^2, m \neq 0$, then $$|m \tau + n| = |m| |\tau + \frac{n}{m}| \ge \frac{1}{2A^2} \sup\left(1, |\frac{n}{m}|\right) \cdot |m| = \frac{1}{2A^2}\sup\left(|m|, |n|\right).$$ This is also valid when $m=0$ by inspection. If $\tau \in \Omega_A$, then 
+    Hence $$|\tau + x| \stackrel{(\dagger)}{\ge} \sup\left(\frac{1}{A},\frac{|x|}{2A^2}\right) \ge \sup\left(\frac{1}{2A^2}, \frac{|x|}{2A^2}\right) = \frac{1}{2A^2}\sup(1,|x|).$$
+    $(\dagger)$ follows by drawing a diagram with the lines $y=\frac{1}{A}$ and $y = \frac{x}{2A^2}$ and marking the point $(2A,\frac{1}{A})$ on it, then noticing that out supremum always lies above the supremum of these two lines. If $(m,n) \in \mathbb{Z}^2, m \neq 0$, then $$|m \tau + n| = |m| \left|\tau + \frac{n}{m}\right| \ge |m| \frac{1}{2A^2} \sup\left(1, \left|\frac{n}{m}\right|\right) = \frac{1}{2A^2}\sup\left(|m|, |n|\right).$$ This is also valid when $m=0$ by inspection. If $\tau \in \Omega_A$, then 
     \begin{align*}
-        &\sum_{(m,n) \in \mathbb{Z}^2 \setminus  0}^{} |m \tau + n|^{-k} \\\le&~ \left(\frac{1}{2n^2}\right)^{-k}\sum_{(m,n) \in \mathbb{Z}^2 \setminus  0}^{} \sup\left(|m|, |n|\right)^{-k} \\=&~ (2A^2)^k \sum_{d \in \mathbb{N}}^{} d^{-k} \cdot \left|\{(m,n) \in \mathbb{Z}^2 \mid \sup\left(|m|, |n|\right) = d\}\right| \\=&~ (2A^2)^k \sum_{d \in \mathbb{N}}^{} d^{-k}8d = 8(2A^2)^k \sum_{d \in \mathbb{N}}^{} d^{1-k} \\<&~ \infty
+        &\sum_{(m,n) \in \mathbb{Z}^2 \setminus  0}^{} |m \tau + n|^{-k} \\\le&~ \left(\frac{1}{2A^2}\right)^{-k}\sum_{(m,n) \in \mathbb{Z}^2 \setminus  0}^{} \sup\left(|m|, |n|\right)^{-k} \\=&~ (2A^2)^k \sum_{d \in \mathbb{N}}^{} d^{-k} \cdot \left|\{(m,n) \in \mathbb{Z}^2 \mid \sup\left(|m|, |n|\right) = d\}\right| \\=&~ (2A^2)^k \sum_{d \in \mathbb{N}}^{} d^{-k}8d = 8(2A^2)^k \sum_{d \in \mathbb{N}}^{} d^{1-k} \\<&~ \infty
     \end{align*}
-    whenever $k-1>1$, i.e. $k>2$. This shows absolute convergence, and uniform convergence in $\Omega_A$ by the Weierstrass M-test\footnote{If we have a sequence of functions $f_n : \Omega \to \mathbb{C}$, $M_n>0$, $|f_n(x)|<M_n$ and $\sum_{}^{} M_n < \infty$, then $\sum_{}^{} f_n$ converges uniformly} Hence $G_k$ is holomorphic in $\mathfrak{h}$ and invariant under the weight $k$ action of $\Gamma(1)$. It remains to show that $G_k$ is holomorphic at $\infty$ with $G_k(\infty) = 2\zeta(k)$. For this, it suffices to check that \[
+    whenever $k-1>1$, i.e. $k>2$. This shows absolute convergence, and uniform convergence in $\Omega_A$ by the Weierstrass M-test\footnote{If we have a sequence of functions $f_n : \Omega \to \mathbb{C}$ and values $M_n>0$ with $|f_n(x)|<M_n$ and $\sum_{}^{} M_n < \infty$, then $\sum_{}^{} f_n$ converges absolutely and uniformly on $\Omega$. Here, replace $n$ with $d$ and sum $d$ over $\sum_{(m,n)\in\mathbb{Z}^2\setminus 0, \sup(|m|,|n|)=d}^{} |m \tau + n|^{-k}$.}. Hence $G_k$ is holomorphic in $\mathfrak{h}$ and invariant under the weight $k$ action of $\Gamma(1)$. It remains to show that $G_k$ is holomorphic at $\infty$ with $G_k(\infty) = 2\zeta(k)$. For this, it suffices to check that \[
     \lim_{\text{Im}(\tau) \to \infty} G_k(\tau) = 2\zeta(k).
     \]
     This follows from uniform convergence in $\Omega_A$: we get 
