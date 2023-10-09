@@ -121,10 +121,10 @@ Any absolute value $|\cdot |$ on $K$ induces a metric $d(x,y) = |x-y|$ on $K$, h
     a contradiction. The other inequality is analogous.
     \vspace{1mm}
      
-    (iii) $\implies$ (i): Clear.
+    (iii) $\implies$ (i): Clear, since they have the same open balls.
 \end{proof}
 
-\textbf{Remark.} $|\cdot|_{\infty}^2$ on $\mathbb{C}$ is not an absolute value by our definition (doesn't satisfy the triangle inequality). Some authors replace this by the condition $|x+y|^{\beta} \le |x|^{\beta} + |y|^{\beta}$ for some fixed $\beta \in \mathbb{R}_{>0}$. The induced topologies are the same in either case.
+\textbf{Remark.} $|\cdot|_{\infty}^2$ on $\mathbb{C}$ is not an absolute value by our definition (doesn't satisfy the triangle inequality). Some authors replace the triangle inquality by the condition $|x+y|^{\beta} \le |x|^{\beta} + |y|^{\beta}$ for some fixed $\beta \in \mathbb{R}_{>0}$. The equivalence classes are the same in either case.
 
 In this course, we will mainly be interested in the following:
 
@@ -153,7 +153,7 @@ In this course, we will mainly be interested in the following:
 
 Convergence is easier in non--archimedean fields:
 \begin{prop}
-    Let $(K,|\cdot|)$ be non--archimedean and $(x_n)_{n=1}^{\infty}$ a sequence on $K$. If $|x_n-x_{n+1}| \to01$, then $(x_n)_{n=1}^{\infty}$ is Cauchy. In particular, if $K$ is complete, then the sequence converges.
+    Let $(K,|\cdot|)$ be non--archimedean and $(x_n)_{n=1}^{\infty}$ a sequence on $K$. If $|x_n-x_{n+1}| \to 0$, then $(x_n)_{n=1}^{\infty}$ is Cauchy. In particular, if $K$ is complete, then the sequence converges.
 \end{prop}
 \begin{proof}
     For $\epsilon > 0 $, choose $N$ such that $|x_n-x_{n+1}| < \epsilon$ for $n \ge N$. Then for $N<n<m$, \[
@@ -168,7 +168,7 @@ Convergence is easier in non--archimedean fields:
         \item $x_n \equiv x_{n+1} \pmod{5^n}$.
     \end{enumerate}
     We construct it by induction. Take $x_1=2$. Now suppose we've constructed $x_n$ and write $x_n^2+1 = a\cdot 5^n$ and set $x_{n+1} = x_n + b\cdot 5^n$. We compute \[
-    x_{n+1}^2 + 1 = x_n^2 + 2b x_n 5^n + b^2 5^{2n} + 1 = a5^n + 2bx_n 5^n + \stackrel{\equiv 0 \pmod{5^{n+1}}}{b^2 5^{2n}}. 
+    x_{n+1}^2 + 1 = x_n^2 + 2b x_n 5^n + b^2 5^{2n} + 1 = a5^n + 2bx_n 5^n + \underbrace{b^2 5^{2n}}_{\equiv 0 \text{ (mod }5^{n+1})} + 1. 
     \]
     Hence we choose $b$ such that $a+2bx_n \equiv 0 \pmod{5}$ and we're done. 
     \vspace{1mm}
