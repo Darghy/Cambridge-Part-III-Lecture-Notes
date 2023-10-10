@@ -65,7 +65,7 @@ This is a first class in graduate algebraic number theory. Something we'd like t
         \item $|x+y|\le |x|+|y| ~\forall x,y \in K$ (triangle inequality).
     \end{enumerate}
 \end{defn}
-We say that $(K, |\cdot|)$ is a \textbf{value field}.
+We say that $(K, |\cdot|)$ is a \textbf{valued field}.
 Examples:
 \begin{itemize}
     \item Take $K=\mathbb{Q},\mathbb{R},\mathbb{C}$ with the usual absolute value $|a+ib| = \sqrt{a^2+b^2}$. We call this $|\cdot |_{\infty}$.
@@ -180,5 +180,134 @@ This tells us that $(\mathbb{Q}, |\cdot|_{5})$ is not complete.
     The $p$--adic numbers $\mathbb{Q}_p$ are the completion of $\mathbb{Q}$ with respect to $|\cdot|_p$.
 \end{defn}
 
+\marginpar{10 Oct 2022, Lecture 2}
+
+Let $(K,|\cdot|)$ be a non--archimedean valued field. For $x \in K$ and $r \in \mathbb{R}_{>0}$, we define $B(x,r) = \{y \in K \mid |y-x|<r\}$ and $\overline{B} = \{y \in K \mid |y-x|\le r\}$ to be the open and closed balls of radius $r$.
+
+\begin{lemma}
+    \begin{enumerate}[(i)]
+        \item If $z \in B(x,r)$, then $B(z,r) = B(x,r)$, i.e. open balls don't have centers.
+        \item If $z \in \overline{B}(x,r)$, then $\overline{B}(x,r) = \overline{B}(z,r)$.
+        \item $B(x,r)$ is closed.
+        \item $\overline{B}(x,r)$ is open.
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+    \begin{enumerate}[(i)]
+        \item Let $y \in B(x,r)$. Then $|x-y|<r \implies |z-y| = |(z-x) + (x-y)| \le \max(|z-x|,|x-y|) < r$, so $B(x,r) \subset B(z,r)$. The reverse inclusion is analogous.
+        \item Analogous to (i) by replacing $<$ with $\le$.
+        \item Let $y \in K \setminus B(x,r)$. If $z \in B(x,r) \cap B(y,r)$, then $B(x,r) = B(z,r) = B(y,r)$ by (i), so $y \in B(x,r)$, a contradiction. Hence $B(x,r) \cap B(y,r) = \varnothing$. Since $y$ was arbitrary, $K \setminus B(x,r)$ is open, so $B(x,r)$ is closed.
+        \item If $z \in \overline{B}(x,r)$, then $B(z,r) \subset \overline{B}(z,r) \stackrel{\text{(ii)}}{=} \overline{B}(x,r)$.
+    \end{enumerate}
+\end{proof}
+
+\subsection{Valuation rings}
+\begin{defn}
+    Let $K$ be a field. A \textbf{valuation} on $K$ is a function $v : K^\times \to \mathbb{R}$ such that 
+    \begin{enumerate}[(i)]
+        \item $v(xy) = v(x)+v(y)$.
+        \item $v(x+y) \ge \min(v(x),v(y))$.
+    \end{enumerate}
+\end{defn}
+Fix $0<\alpha<1$. If $v$ is a valuation on $K$, then $|x| = \begin{cases}
+    \alpha^{v(x)} & x \neq 0\\
+    0 & x = 0
+\end{cases}$
+determines a non--archimedean absolute value on $K$. Conversely, a non--archimedean absolute value on $K$ determines a valuation $v(x) = \log_{\alpha} |x|$.
+
+\textbf{Remark.} We ignore the trivial evaluation $v(x)=0 ~\forall x \in K$, which  corresponds to the trivial absolute value.
+
+\begin{defn}
+    We say valuations $v_1,v_2$ are equivalent if $\exists c \in \mathbb{R}_{>0}$ such that $v_1(x) = cv_2(x) ~\forall x \in K^{\times}$.
+\end{defn}
+\begin{example}
+    \begin{itemize}
+        \item If $K=\mathbb{Q}$, $v_p(x) = -\log_p |x|_p$ is the $p$--adic valuation.
+        \item Let $k$ be a field. Let $K=k(t) = \text{Frac}(k[t])$ be a rational function field. We let \[
+        v\left(t^n \frac{f(t)}{g(t)}\right) = n
+        \]
+        for $f, g \in k[t]$, $f(0)\neq 0, g(0) \neq 0$. This is called a $t$--adic valuation.
+        \item Let $K = k((t)) = \text{Frac}(k[[t]]) = \{\sum_{i=n}^{\infty} a_i t^i \mid a_i \in k, n \in \mathbb{Z}\}$, the field of formal Laurent series over $k$. We define \[
+        v(\sum_{i}^{} a_i t^i) = \min \{i \mid a_i \neq 0\},
+        \]
+        the $t$--adic valuation on $K$.
+    \end{itemize}
+\end{example}
+\begin{defn}
+    Let $(K, |\cdot|)$ be a non--archimedean valued field. The \textbf{valuation ring} of $K$ is defined to be \[
+    \mathcal{O}_K = \{x \in K \mid |x|\le 1\}.
+    \]
+    (i.e. the closed unit ball, $\mathcal{O}_K = \overline{B}(0,1)$).\footnote{Another alternative definition given was $\mathcal{O}_K = \{x \in K^{\times} \mid v(x) \ge  0\} \cup \{0\}$. Is this equivalent to the above?}
+\end{defn}
+\begin{prop}
+    \begin{enumerate}[(i)]
+        \item $\mathcal{O}_K$ is an open subring of $K$.
+        \item The subsets $\{x \in K \mid |x|\le r\}$ and $\{x \in K \mid |x|< r\}$ for $r\le 1$ are open ideals in $\mathcal{O}_K$.
+        \item $\mathcal{O}_K^\times = \{x \in K \mid |x|=1\}$.
+    \end{enumerate}
+\end{prop}
+\begin{proof}
+    \begin{enumerate}[(i)]
+        \item We find:
+        \begin{itemize}
+            \item $|0|=0$ and $|1|=1$, so $0,1 \in \mathcal{O}_K$.
+            \item If $x \in \mathcal{O}_K$, then $|-x|=|x| \implies -x \in \mathcal{O}_K$. 
+            \item If $x,y \in \mathcal{O}_K$, then $|x+y|\le \max(|x|,|y|)\le 1$, so $x+y \in \mathcal{O}_K$. 
+            \item If $x,y \in \mathcal{O}_K$, then $|xy| = |x||y| \le 1$, so $xy \in \mathcal{O}_K$.
+        \end{itemize}
+        Thus $\mathcal{O}_K$ is a subring, and since $\mathcal{O}_K = \overline{B}(0,1)$, it is open.
+        \item Similar to (i), left as an exercise.
+        \item Note that $|x||x^{-1}|= |x x^{-1}| = 1$. Thus $|x| = 1 \iff |x^{-1}| = 1 \iff x,x^{-1} \in \mathcal{O}_K \iff x \in \mathcal{O}_K^\times$.
+    \end{enumerate}
+\end{proof}
+
+\textbf{Notation.} Let $\mathfrak{m} = \{x \in \mathcal{O}_K \mid |x|<1\}$. It turns out this is a maximal ideal in $\mathcal{O}_K$. Also let $\mathfrak{k} = \mathcal{O}_K/\mathfrak{m}$, the residue field. 
+
+\begin{cor}
+    $\mathcal{O}_K$ is a \textbf{local ring} (i.e. a ring with a unique maximal ideal) with unique maximal ideal $\mathfrak{m}$.
+\end{cor}
+\begin{proof}
+    Let $\mathfrak{m'}$ be a maximal ideal. If $\mathfrak{m'} \neq \mathfrak{m}$, then $\exists x \in \mathfrak{m'}\setminus \mathfrak{m}$. Hence $|x|= 1$, so by (iii) above, $x$ is a unit, so $\mathfrak{m'}=R$, a contradiction.
+\end{proof}
+
+\begin{example}
+    $K=\mathbb{Q}$ with $|\cdot|_p$. Then $\mathcal{O}_K = \mathbb{Z}_{(p)} = \{\frac{a}{b} \in \mathbb{Q} \mid p \nmid b\}$. In this case, $\mathfrak{m} = p\mathbb{Z}_{(p)}$ and $\mathfrak{k} = \mathbb{F}_p$.
+\end{example}
+
+\begin{defn}
+    Let $v:K^{\times} \to \mathbb{R}$ be a valuation. If $v(K^{\times}) \cong \mathbb{Z}$, then we say $v$ is a \textbf{discrete valuation}. In this case, $K$ is said to be a \textbf{discretely valued field}. 
+    \vspace{1mm}
+     
+    An element $\pi \in \mathcal{O}_K$ is said to be a \textbf{uniformizer} if $v(\pi)>0$ and $v(\pi)$ generates $v(K^\times)$.
+\end{defn}
+\begin{example}
+    \begin{itemize}
+        \item $K=\mathbb{Q}$ with the $p$--adic valuation and $K=k(t)$ with the $t$--adic valuation are discretely valued fields.
+        \item $K=k(t)(t^{\frac{1}{2}}, t^{\frac{1}{4}}, t^{\frac{1}{8}},\ldots)$ with the $t$--adic valuation is not a discretely valued field.
+    \end{itemize}
+\end{example}
+\textbf{Remark.} If $v$ is a discrete valuation, we can scale $v$, i.e. replace it with an equivalent valuation such that $v(K^\times) = \mathbb{Z}$. Such $v$ are called \textbf{normalized valuations}. Then $\pi$ is a uniformizer $\iff v(\pi) = 1$.
+
+\begin{lemma}
+    Let $v$ be a valuation on $K$. Then the following are equivalent:
+    \begin{enumerate}[(i)]
+        \item $v$ is discrete;
+        \item $\mathcal{O}_K$ is a PID;
+        \item $\mathcal{O}_K$ is Noetherian;
+        \item $\mathfrak{m}$ is principal.
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+    (i) $\implies$ (ii): $\mathcal{O}_K \subset K$, so $\mathcal{O}_K$ is an integral domain. Let $I \subset \mathcal{O}_K$ be a nonzero ideal and pick $x \in I$ such that $v(x) = \min \{v(a) \mid a \in I, a \neq 0\}$, which exists as $v$ is discrete. Then we claim that $x \mathcal{O}_K = \{a \in \mathcal{O}_K \mid v(a)\ge v(x)\}$ is equal to $I$. The inclusion $x\mathcal{O}_K\subset I$ is clear, as $I$ is an ideal. For $x\mathcal{O}_K\supset I$, let $y \in I$, then $v(x^{-1}y)\ge 0 \implies y = x(x^{-1}y) \in x \mathcal{O}_K$.
+    \vspace{1mm}
+     
+    (ii) $\implies $ (iii): Clear, as being a PID means every ideal is generated by one element, i.e. by finitely many. 
+    \vspace{1mm}
+     
+    (iii) $\implies $ (iv): Write $\mathfrak{m} = x_1 \mathcal{O}_K +\ldots+ x_n \mathcal{O}_K$ and WLOG assume $v(x_1)\le v(x_2)\le \ldots\le v(x_n)$. Then $x_2,\ldots,x_n \in x_1 \mathcal{O}_K$, so $\mathfrak{m} = x_1 \mathcal{O}_K$.
+    \vspace{1mm}
+     
+    (iv) $\implies $ (i): Let $\mathfrak{m} = \pi \mathcal{O}_K$ for some $\pi \in \mathcal{O}_K$ and let $c = v(\pi)$. Then if $v(x)>0$, i.e. $x \in \mathfrak{m}$, then $v(x) \ge c$. Thus $v(K^\times) \cap (0,c) = \varnothing$. Since $v(K^\times)$ is a subgroup of $(\mathbb{R}, +)$, we have $v(K^{\times}) = c\mathbb{Z}$.
+\end{proof}
+
 \end{document}
- 
