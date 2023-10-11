@@ -13,6 +13,8 @@
 \usepackage{amsmath, amssymb, amsthm}
 %\usepackage{a4wide}
 \usepackage{float}
+\usepackage{pgfplots}
+\usepgfplotslibrary{fillbetween}
 \usepackage{tikz-cd}
 \usepackage{tikz}
 \usepackage{graphicx}
@@ -230,13 +232,13 @@ We will later see that $M_2(\Gamma(1)) = 0$.
 
 \marginpar{11 Oct 2022, Lecture 3}
 
-\textbf{Recap.} We defined what it meansfor a function $f : \mathfrak{h} \to \mathbb{C}$ to be a modular form of weight $k$ and level $\Gamma(1)$. $M_k(\Gamma(1))$ is the $\mathbb{C}$--vector space of such forms. If $f \in M_k(\Gamma(1))$, then there exists a holomorphic $\tilde{f} : D(0,1) \to \mathbb{C}$ ($D(0,1)$ is the $q$--disk) such that $~\forall \tau \in \mathfrak{h}$, $f(\tau) = \tilde{f}(e^{2\pi i \tau})$. The Taylor expansion of $\tilde{f}$ gives the $q$--expansion \[
+\textbf{Recap.} We defined what it means for a function $f : \mathfrak{h} \to \mathbb{C}$ to be a modular form of weight $k$ and level $\Gamma(1)$. $M_k(\Gamma(1))$ is the $\mathbb{C}$--vector space of such forms. If $f \in M_k(\Gamma(1))$, then there exists a holomorphic $\tilde{f} : D(0,1) \to \mathbb{C}$ (here we call $D(0,1)$ the $q$--disk) such that $\forall \tau \in \mathfrak{h}$, $f(\tau) = \tilde{f}(e^{2\pi i \tau})$. The Taylor expansion of $\tilde{f}$ gives the $q$--expansion \[
 f(\tau) = \sum_{n\ge 0}^{} a_nq^n, ~ q = e^{2\pi i \tau}.
 \]
 We have $f(\infty) = \tilde{f}(0)=a_0$. If $k>2$ is even, then $G_k(\tau) = \sum_{ \lambda \in \Lambda_{\tau}\setminus 0}^{} \lambda^{-k}$ converges absolutely and defines an element of $M_k(\Gamma(1))$ with $G_k(\infty)= 2\zeta(k)$.
 \vspace{1mm}
  
-We define $E_k(\tau) = \frac{G_k(\tau)}{2\zeta(k)} = 1 + \sum_{n\ge 1}^{} a_nq^n$. We will soon show that we have $a_n \in \mathbb{Q} ~\forall n\ge 1$.
+We define $$E_k(\tau) = \frac{G_k(\tau)}{2\zeta(k)} = 1 + \sum_{n\ge 1}^{} a_nq^n.$$ We will soon show that we have $a_n \in \mathbb{Q} ~\forall n\ge 1$.
 \vspace{1mm}
  
 We can construct more modular forms: if $f \in M_k(\Gamma(1))$ and $g \in M_l(\Gamma(1))$, then $fg \in M_{k+l}(\Gamma(1))$. To check this is a modular form, we need to check that:
@@ -248,47 +250,105 @@ We can construct more modular forms: if $f \in M_k(\Gamma(1))$ and $g \in M_l(\G
 Hence we get e.g. $E_4^3, E_6^2 \in M_{12}(\Gamma(1))$ and $E_4^3-E_6^2 \in S_{12}(\Gamma(1))$ (i.e. it is cuspidal since zero at infinity). This difference is Ramanujan's $\Delta$--function. We will show it is nonzero later. 
 \vspace{1mm}
  
-We now want to show that $M_k(\Gamma(1))$ is finite--dimensional. We first study $\Gamma(1)/\mathfrak{h}$. For this, introduce a fundamental set $\mathfrak{f}' \subset \mathfrak{f}$ for the $\Gamma(1)$ action. We define\footnote{Definitions in literature may vary, so we omit a formal definition.} a fundamental set to be a set that intersects each $\Gamma(1)$--orbit in exactly one element. Define 
+We now want to show that $M_k(\Gamma(1))$ is finite--dimensional. We first study $\Gamma(1)/\mathfrak{h}$. For this, introduce a fundamental set $\mathfrak{f}' \subset \mathfrak{h}$ for the $\Gamma(1)$--action. We define\footnote{Definitions in literature may vary, so we omit a formal definition.} a fundamental set to be a set that intersects each $\Gamma(1)$--orbit in exactly one element. Define 
 \begin{align*}
-    &\mathfrak{f} = \left\{\tau \in \mathfrak{h} \mid \text{Re}(\tau) \in \left[-\frac{1}{2},\frac{1}{2}\right], |\tau|\le 1\right\}.\\
+    &\mathfrak{f} = \left\{\tau \in \mathfrak{h} \mid \text{Re}(\tau) \in \left[-\frac{1}{2},\frac{1}{2}\right], |\tau|\ge 1\right\}.\\
     &\mathfrak{f}' = \left\{\tau \in \mathfrak{f} \mid \text{Re}(\tau) \in \left[-\frac{1}{2},\frac{1}{2}\right), |\tau|=1 \implies \text{Re}(\tau) \in \left[-\frac{1}{2},0\right]\right\}.
 \end{align*}
 Introduce $T = \begin{pmatrix} 1&1\\0&1 \end{pmatrix}$ and $S = \begin{pmatrix} 0 & 1\\-1 & 0 \end{pmatrix}$ in $\Gamma(1)$. We observe that every element of $\mathfrak{f}$ is conjugate under $S$ or $T^{-1}$ to an element of $\mathfrak{f}'$, which is true since $T(\tau) = \tau + 1$ and $S(\tau) = -\frac{1}{\tau}$.
+
+\begin{center}
+    \begin{tikzpicture}
+        \begin{axis}[
+            axis lines=center,
+            xlabel=$x$,
+            ylabel=$y$,
+            xmin=-1.5, xmax=1.5,
+            ymin=-0.2, ymax=3, % Adjusted ymax
+            axis equal,
+            legend pos=outer north east,
+            legend style={draw=none}
+        ]
+    
+        % Draw x-axis and y-axis
+        \draw[->] (axis cs: -1.5,0) -- (axis cs: 1.5,0) node[below right] {$x$};
+        
+        % Draw y-axis with cutoff
+        \ifnum\pdfstrcmp{\pgfkeysvalueof{/pgfplots/ymin}}{-0.2}>0
+            \draw[->] (axis cs: 0,-0.2) -- (axis cs: 0,3) node[above left] {$y$};
+        \else
+            \draw[->] (axis cs: 0,0) -- (axis cs: 0,3) node[above left] {$y$};
+        \fi
+    
+        % Draw semicircle
+        \addplot[domain=0:180, samples=100, black] ({cos(x)}, {sin(x)});
+        \node[black] at (axis cs: 1.1, 0.9) {$x^2 + y^2 = 1$};
+    
+        % Draw lines x=1/2 and x=-1/2 with cutoff
+        \ifnum\pdfstrcmp{\pgfkeysvalueof{/pgfplots/xmin}}{-0.2}>0
+            \draw[dashed] (axis cs: 0.5,-0.2) -- (axis cs: 0.5,3) node[above] {$x=\frac{1}{2}$};
+            \draw[dashed] (axis cs: -0.5,-0.2) -- (axis cs: -0.5,3) node[above] {$x=-\frac{1}{2}$};
+        \else
+            \draw[dashed] (axis cs: 0.5,0) -- (axis cs: 0.5,3) node[above] {$x=\frac{1}{2}$};
+            \draw[dashed] (axis cs: -0.5,0) -- (axis cs: -0.5,3) node[above] {$x=-\frac{1}{2}$};
+        \fi
+% Mark the point (0,1) and label it as i (changed coordinates)
+\fill[blue] (axis cs:0,1) circle[radius=2pt] node[above right,blue] {$i$};
+
+% Mark the point (-1/2, sqrt(3)/2) and label it as \rho
+\fill[blue] (axis cs:-0.5,{sqrt(3)/2}) circle[radius=2pt] node[above left,blue] {$\rho$};
+    
+        \end{axis}
+    \end{tikzpicture}    
+\end{center}
 
 \begin{prop}
     Let $G = \Gamma(1)/\{\pm I\}$. Then
     \begin{enumerate}[(i)]
         \item $\forall \tau \in \mathfrak{h}, \tau$ is $\Gamma(1)$--conjugate to an element of $\mathfrak{f}'$.
         \item If $\tau, \tau' \in \mathfrak{f}'$ are $\Gamma(1)$--conjugate, then $\tau = \tau'$.
-        \item If $\tau \in \mathfrak{f'}$, then $\text{Stab}_G(\tau)$ is trivial, except $\text{Stab}_G(i) = \langle S \rangle, \text{Stab}_G(\rho) = \langle ST \rangle$, where $\rho = e^{2\pi i / 3}$.
-        \item $\Gamma(1)$ is generated by $S,T$.
+        \item If $\tau \in \mathfrak{f'}$, then $\text{Stab}_G(\tau)$ is trivial, except in the two cases $\text{Stab}_G(i) = \langle S \rangle$ and $\text{Stab}_G(\rho) = \langle ST \rangle$, where $\rho = e^{2\pi i / 3}$.
+        \item $\Gamma(1)$ is generated by $S$ and $T$.
     \end{enumerate}
 \end{prop}
 \begin{proof}
     Let $H$ be the subgroup of $G$ generated by $S$ and $T$.
     \begin{claim*}
-        Every $\tau \in \mathfrak{h}$ is $H$--conjugate to $\mathfrak{f}'$.
+        Every $\tau \in \mathfrak{h}$ is $H$--conjugate to an element of $\mathfrak{f}'$.
     \end{claim*}
     \begin{proof}
-        By our above observation and since $S,T \in H$, it suffices to prove that every $\tau \in \mathfrak{h}$ is $H$--conjugate to $\mathfrak{f}$. Let $\tau \in \mathfrak{h}$. Recall that if $\gamma = \begin{pmatrix} a & b\\c &d \end{pmatrix} \in SL_2(\mathbb{Z})$, then $\text{Im}(\gamma \tau) = \frac{\text{Im}(\tau)}{|c \tau + d|^2}$. In particular, $~\forall R \ge 0$, the intersection $H \tau \cap \{\text{Im}(\tau') > R\}$ is finite, since $\text{Im}(\gamma \tau) > R \iff |c \tau + d|^2 < \frac{\text{Im}(\tau)}{R}$. But $\Lambda_\tau = \mathbb{Z} \tau \oplus \mathbb{Z}$ is a lattice, so $\{(c,d) \in \mathbb{Z}^2 \mid |c \tau +d| < R'\}$ is finite. So there exists $h \in H$ such that $\text{Im}(h \tau) \ge \text{Im}(h' \tau) ~\forall h' \in H$. After replacing $\tau$ by $h \tau$, we can assume $\text{Im}(\tau) \ge \text{Im}(h \tau) ~\forall h \in H$. Since acting by $T$ does not change $\text{Im}(\tau)$, we can also assume $\text{Re}(\tau) \in \left[-\frac{1}{2},\frac{1}{2}\right]$. We have $\text{Im}(\tau) \ge \text{Im}(S \tau) = \frac{\text{Im}(\tau)}{|\tau|^2} \implies |\tau|\ge 1$, proving the claim and (i).
+        By our above observation and since $S,T \in H$, it suffices to prove that every $\tau \in \mathfrak{h}$ is $H$--conjugate to $\mathfrak{f}$. Take $\tau \in \mathfrak{h}$. Recall that if $\gamma = \begin{pmatrix} a & b\\c &d \end{pmatrix} \in SL_2(\mathbb{Z})$, then $\text{Im}(\gamma \tau) = \frac{\text{Im}(\tau)}{|c \tau + d|^2}$. 
+        \vspace{1mm}
+         
+        In particular, $\forall R \ge 0$, the intersection $H \tau \cap \{\text{Im}(\tau') > R\}$ is finite, since $\text{Im}(\gamma \tau) > R \iff |c \tau + d|^2 < \frac{\text{Im}(\tau)}{R}$, but $\Lambda_\tau = \mathbb{Z} \tau \oplus \mathbb{Z}$ is a lattice, so the set $\{(c,d) \in \mathbb{Z}^2 \mid |c \tau +d| < R'\}$ is finite. 
+        \vspace{1mm}
+         
+        So there exists $h \in H$ such that $\text{Im}(h \tau) \ge \text{Im}(h' \tau) ~\forall h' \in H$. After replacing $\tau$ by $h \tau$, we can assume $\text{Im}(\tau) \ge \text{Im}(h \tau) ~\forall h \in H$. Since acting by $T$ does not change $\text{Im}(\tau)$, we can also assume $\text{Re}(\tau) \in \left[-\frac{1}{2},\frac{1}{2}\right]$. We have $\text{Im}(\tau) \ge \text{Im}(S \tau) = \frac{\text{Im}(\tau)}{|\tau|^2} \implies |\tau|\ge 1$, proving the claim and (i).
     \end{proof}
-    Now take $\tau, \tau' \in \mathfrak{f}'$ and suppose $\gamma \tau = \tau'$ for some $\gamma = \begin{pmatrix} a & b \\ c & d \end{pmatrix} \in \Gamma(1)$. We want to show that either $\gamma = \pm I, \gamma = i$ or $\gamma = \rho$. WLOG assume $\text{Im}(\tau') = \text{Im}(\gamma \tau) \ge \text{Im}(\tau)$, i.e. $\text{Im}(\gamma \tau) = \frac{\text{Im}(\tau)}{|c \tau + d|^2} \ge \text{Im}(\tau)$, so $|c \tau +d| \le 1$. However, if $\tau \in \mathfrak{f}'$, then $\text{Im}(\tau) \ge \frac{\sqrt{3}}{2}$ with equality if and only if $\tau = \rho$. Hence $|c \tau + d| \ge |c| \text{Im}(\tau) \ge |c|\frac{\sqrt{3}}{2} \implies |c|\le \frac{2}{\sqrt{3}} \implies |c| = 0, 1 \implies c = 0$ or $c = \pm 1$. 
+    Now take $\tau, \tau' \in \mathfrak{f}'$ and suppose $\gamma \tau = \tau'$ for some $\gamma = \begin{pmatrix} a & b \\ c & d \end{pmatrix} \in \Gamma(1)$. We want to show that either $\gamma = \pm I$ or $\tau = i, \rho$. 
+    \vspace{1mm}
+     
+    WLOG assume $\text{Im}(\tau') = \text{Im}(\gamma \tau) \ge \text{Im}(\tau)$, i.e. $\text{Im}(\gamma \tau) = \frac{\text{Im}(\tau)}{|c \tau + d|^2} \ge \text{Im}(\tau)$, so $|c \tau +d| \le 1$. However, if $\tau \in \mathfrak{f}'$, then $\text{Im}(\tau) \ge \frac{\sqrt{3}}{2}$ with equality if and only if $\tau = \rho$. Hence $|c \tau + d| \ge |c| \text{Im}(\tau) \ge |c|\frac{\sqrt{3}}{2} \implies |c|\le \frac{2}{\sqrt{3}} \implies |c| = 0, 1 \implies c = 0$ or $c = \pm 1$. 
     \begin{itemize}
-        \item If $c=0, \gamma =\begin{pmatrix} a&b\\0&d \end{pmatrix}$, then $\gamma = \pm T^m$, but we need $m = 0$, so $\gamma = \pm I$ and $\tau' = \tau$.
+        \item If $c=0$, then $\gamma =\begin{pmatrix} a&b\\0&d \end{pmatrix}$, so $ad = 1 \implies a = d = \pm 1$, so $\gamma = \pm T^m$ for $m \in \mathbb{Z}$. However, $T$ acts on $\mathfrak{f}'$ by shifting the real part, so it can only stay in $\mathfrak{f}'$ if $m = 0$ (as $\text{Re}(\mathfrak{f}') \in \left[-\frac{1}{2},\frac{1}{2}\right)$), so $\gamma = \pm I$ and $\tau' = \tau$.
         \item If $c=1$, then $\gamma = \begin{pmatrix} a & b\\1 & d \end{pmatrix}$ and $|\tau +d|\le 1$. By drawing another picture, we see that the only circles centered at integers of radius 1 which intersect $\mathfrak{f}'$ are centered at $-d = 0, -d = -1$. Hence either $d = 0$, whence $|\tau|=1$, or $d=1$, whence $\tau = \rho$.
         \begin{itemize}
-            \item If $c=1, d= 0, |\tau|=1$, then $\gamma = \begin{pmatrix} a & b \\ 1& 0 \end{pmatrix} = \begin{pmatrix} a & -1 \\ 1 & 0 \end{pmatrix}$ since the determinant must be 1. Then $\gamma \tau =  \frac{a \tau - 1}{\tau} = a -\frac{1}{\tau} = a - \overline{\tau}$, so $\text{Re}(\gamma\tau) = a - \text{Re}(\tau) \in \text{Re}(\mathfrak{f}' \cap \{|\tau|=1\}) = \left[-\frac{1}{2}, 0\right]$. However, we also have $\text{Re}(\gamma \tau) \in a - \left[-\frac{1}{2},0\right] = a + \left[0,\frac{1}{2}\right]$. The intersection $\left[-\frac{1}{2}, 0 \right] \cap \left(a + \left[0, \frac{1}{2}\right]\right)$ can be nonempty only if either $a=0$, whence $\text{Re}(\gamma \tau) = \text{Re}(\tau) = 0$, so $\tau = \gamma \tau = i$, or $a = -1$, whence $\text{Re}(\tau) = \text{Re}(\gamma \tau) = -\frac{1}{2}$, so $\tau = \gamma \tau = \rho$. 
+            \item If $c=1, d= 0, |\tau|=1$, then $\gamma = \begin{pmatrix} a & b \\ 1& 0 \end{pmatrix} = \begin{pmatrix} a & -1 \\ 1 & 0 \end{pmatrix}$ since the determinant must be 1. Then $\gamma \tau =  \frac{a \tau - 1}{\tau} = a -\frac{1}{\tau} = a - \overline{\tau}$, so $\text{Re}(\gamma\tau) = a - \text{Re}(\tau) \in \text{Re}(\mathfrak{f}' \cap \{|\tau|=1\}) = \left[-\frac{1}{2}, 0\right]$. However, we also have $\text{Re}(\gamma \tau) \in a - \left[-\frac{1}{2},0\right] = a + \left[0,\frac{1}{2}\right]$. \vspace{1mm}
+             
+            The intersection $\left[-\frac{1}{2}, 0 \right] \cap \left(a + \left[0, \frac{1}{2}\right]\right)$ can be nonempty only if either $a=0$, whence $\text{Re}(\gamma \tau) = \text{Re}(\tau) = 0$, so $\tau = \gamma \tau = i$, or $a = -1$, whence $\text{Re}(\tau) = \text{Re}(\gamma \tau) = -\frac{1}{2}$, so $\tau = \gamma \tau = \rho$. 
             \vspace{1mm}
              
-            If $a=0$, then $\gamma = \begin{pmatrix} 0  & -1 \\ 1 & 0 \end{pmatrix} = -S$, which stabilizes $i$.
+            If $a=0$, then $\gamma = \begin{pmatrix} 0  & -1 \\ 1 & 0 \end{pmatrix} = -S$, which stabilizes $i$, and $\langle -S \rangle = \langle S \rangle$.
             \vspace{1mm}
              
-            If $a=-1$, then $\gamma = \begin{pmatrix} -1 & -1 \\ 1 & 0 \end{pmatrix} = (ST)^2$, which stabilizes $\rho$.
-            \item If $c=1, d=1, \tau = \rho$, then $\gamma = \begin{pmatrix} a & b \\1 & 1 \end{pmatrix}$, then $\gamma \rho = \frac{a \rho + b}{\rho + 1}= \rho$!!. We have $\rho^2 + \rho + 1 = 0$, so $\rho + 1 = -\rho^2$, so $a \rho + b = \rho^2 + \rho = -1$. But $a, b \in \mathbb{Z}$ and $1,\rho$ are linearly independent over $\mathbb{R}$, so $a = 0, b = -1$, so $\gamma = \begin{pmatrix} 0 & -1 \\ 1 & 1 \end{pmatrix} = -ST$.
+            If $a=-1$, then $\gamma = \begin{pmatrix} -1 & -1 \\ 1 & 0 \end{pmatrix} = (ST)^2$, which stabilizes $\rho$, and $(ST)^3 = I$, so $\langle (ST)^2 \rangle = \langle ST \rangle$.
+            \item If $c=1, d=1, \tau = \rho$, then $\gamma = \begin{pmatrix} a & b \\1 & 1 \end{pmatrix}$, so $\rho = \gamma \rho = \frac{a \rho + b}{\rho + 1}$. We have $\rho^2 + \rho + 1 = 0$, so $\rho^2 + \rho = -1$, so $a \rho + b = \rho^2 + \rho = -1$. But $a, b \in \mathbb{Z}$ and $1,\rho$ are linearly independent over $\mathbb{R}$, so $a = 0, b = -1$, so $\gamma = \begin{pmatrix} 0 & -1 \\ 1 & 1 \end{pmatrix} = -ST$, which stabilizes $\rho$.
         \end{itemize}
         \item If $c = -1$, we can reduce this to the case $c=1$ by replacing $\gamma$ with $-\gamma$.
     \end{itemize}
-    We have now shown the first three parts of the proposition. It remains to show the last part, i.e. $\Gamma(1) = \langle S,T \rangle$. Since $S^2 = -I$, it is enough to show that $H = G$. Choose $\tau \in \text{Int}(f)$, so $\text{Stab}_G(\tau) = \{I\}$. Let $g \in G$. By (i), $\exists h \in H$ such that $hg \tau  \in \mathfrak{f}'$. We must therefore have $hg \tau = \tau$, hence $h g  \in \text{Stab}_G(\tau) = \{I\}$, so $g = h^{-1} \in H$.
+    We have now shown the first three parts of the proposition. It remains to show the last part, i.e. $\Gamma(1) = \langle S,T \rangle$. Since $S^2 = -I$, it is enough to show that $H = G$. Choose $\tau \in \text{Int}(f)$, so $\text{Stab}_G(\tau) = \{I\}$. Let $g \in G$. By our claim proving (i), $\exists h \in H$ such that $hg \tau  \in \mathfrak{f}'$. We must therefore have $hg \tau = \tau$, hence $h g  \in \text{Stab}_G(\tau) = \{I\}$, so $g = h^{-1} \in H$.
 \end{proof}
+
+
 
 \end{document}
