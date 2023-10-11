@@ -10,6 +10,7 @@
 \tcbuselibrary{theorems}
 \usepackage{babel}
 \usepackage{enumerate}
+\usepackage{stmaryrd}
 \usepackage{amsmath, amssymb, amsthm}
 %\usepackage{a4wide}
 \usepackage{float}
@@ -53,6 +54,9 @@
  
 \section{Introduction}
 
+\marginpar{6 Oct 2022, Lecture 1}
+
+
 The course consists of four parts.
 \begin{enumerate}[(1)]
     \item Basics of sheaves on topological spaces.
@@ -64,6 +68,8 @@ The course consists of four parts.
 The main reference for the course is Hartshorne's \textit{Algebraic Geometry}.
 
 \section{Beyond algebraic varieties}
+\marginpar{08 Oct 2022, Lecture 2}
+
 \subsection{Summary of classical algebraic geometry}
 We let $k = \overline{k}$ be a algebraically closed field and consider $\mathbb{A}_k^n = \mathbb{A}^n = k^n$ as a set.
 
@@ -123,7 +129,7 @@ If $V \cong W$, then the Zariski topological spaces are homeomorphic as varietie
     Nullstellensatz says that this is actually a bijection. For the converse map, given $m \subset k[V]$, we get a quotient $k[V] \to k[V]/m = k$ (Nullstellensatz says this extension is finite, hence must be $k$). So using/choosing a representation for $V$ in $k[x_1,\ldots,x_n]$ gives a surjective homomorphism onto $k$ and specifies a bunch of points.
 \end{theorem}
 \subsection{Limitations of classical algebraic geometry}
-\textbf{Question.} What is an abstract variety, i.e. ''some ''space'' $X$ such that locally as a cover $\{U_i\}$, each $U_i$ is an affine variety, compatible with overlaps''. 
+\textbf{Question.} What is an abstract variety, i.e. ''some ''space'' $X$ such that  locally as a cover $\{U_i\}$, each $U_i$ is an affine variety, compatible with overlaps''. 
 
 \begin{example}[non--algebraically closed fields]
     Take $I = (x^2+y^2+1) \subset \mathbb{R}[x,y]$. Then $\mathbb{V}(I) = \varnothing \subset \mathbb{R}^2$, but $I$ is prime, so radical, so nullstellensatz fails.
@@ -134,5 +140,87 @@ If $V \cong W$, then the Zariski topological spaces are homeomorphic as varietie
 \begin{example}[Why restrict to radical ideals?]
     Take $C = \mathbb{V}(y-x^2) \subset \mathbb{A}_k^2$ and $D = \mathbb{V}(x,y)$, so $C \cap D = \mathbb{V}(y, y-x^2) = \mathbb{V}(x,y) = \{(0,0)\}$. This is a single point, but if $D_\delta = \mathbb{V}(y+\delta)$ for some $\delta \in k$, then $C \cap D_\delta = \{\pm \sqrt{\delta}\}$, which is 2 points for all $\delta \neq 0$. In other words, intersections of varieties don't want to be varieties.
 \end{example}
+
+\subsection{The spectrum of a ring}
+
+\marginpar{11 Oct 2022, Lecture 3}
+
+Let $A$ be a commutative ring with identity. We will define a topological space on which $A$ is the ring of functions.
+
+\begin{defn}
+    The \textbf{Zariski spectrum} of $A$ is $$\text{Spec }A = \{\mathfrak{p} \subset A \mid \mathfrak{p} \text{ is a prime ideal}\}.$$
+\end{defn}
+A ring homomorphism $\phi : A \to B$ induces a map $\phi^{-1} : \text{Spec }B \to \text{Spec }A$ by $q \mapsto \phi^{-1}(q)$. In general, the preimage of a prime ideal is a prime ideal.
+\vspace{1mm}
+ 
+\textbf{Warning.} This would fail if we only considered maximal ideals, since the preimage of a maximal ideal need not be maximal. 
+\vspace{1mm}
+ 
+Given $f \in A$ and $\mathfrak{p} \in \text{Spec}(A)$, we have an induced $\overline{f} \in A/\mathfrak{p}$ obtained via a quotient. Informally, we can evaluate any $f \in A$ at points $\mathfrak{p} \in \text{Spec}(A)$ with the caveat that the codomain of this evaluation depends on $\mathfrak{p}$.
+
+\begin{example}
+    Take $A = \mathbb{Z}$. Then $\text{Spec }A  = \text{Spec }(\mathbb{Z}) = \{p \mid p \text{ is prime}\} \cup \{(0)\}$. Let's pick an element in $\mathbb{Z}$, say $132 \in \mathbb{Z}$. Given a prime $p$, we can look at ${132\pmod{p}} \in \mathbb{Z}/p$. The takeaway here is that 
+    \begin{align*}
+        \text{Spec }\mathbb{Z} &\rightarrow \text{Space}\\
+        132 \in \mathbb{Z} &\rightarrow \text{a function}\\
+        132 \text{ (mod }p) &\rightarrow \text{value of that function at }p.
+    \end{align*}
+    Note that based on the value of $p$, our codomain changes from point to point.
+\end{example}
+\begin{example}
+    Take $A = \mathbb{R}[x]$, then $\text{Spec }\mathbb{R}[x] = \mathbb{C}/ \text{complex conjugation} \cup \{(0)\}$. 
+\end{example}
+\textbf{Exercise.} Draw $\text{Spec }\mathbb{Z}[x]$ and $\text{Spec }k[x]$ for $k$ any field (i.e. describe all prime ideals and their containment). This is on example sheet 1.
+\begin{example}
+    If $A = \mathbb{C}[x]$, then $\text{Spec }A = \mathbb{C} \cup\{(0)\}$, where given $a \in \mathbb{C}$, we send it to the maximal ideal $\langle z-a\rangle$.
+\end{example}
+\subsection{A topology on Spec $A$}
+Fix $f \in A$. Then $\mathbb{V}(f) = \{\mathfrak{p} \in \text{Spec }A \mid f \equiv 0 \pmod{\mathfrak{p}}\} \subset \text{Spec }A$. (Note that $f \equiv 0 \pmod{\mathfrak{p}}$ is the same as $f  \in \mathfrak{p}$). \vspace{1mm}
+ 
+Similarly for $J \subset A$ an ideal, $\mathbb{V}(J) = \{\mathfrak{p} \in \text{Spec }A \mid f \in \mathfrak{p} ~\forall f \in J\}$.
+
+\begin{prop}
+    The sets $\mathbb{V}(J) \subset \text{Spec }A$ ranging over all ideals $J$ form the closed sets of a topology on $\text{Spec }A$. This topology is called the \textbf{Zariski topology}.
+\end{prop}
+\begin{proof}
+    Easy fact: $\varnothing$ and $\text{Spec }A$ are closed, since we have functions $1$ (vanishing nowhere) and $0$ (vanishing everywhere). Since $\mathbb{V}(\sum_{\alpha}^{} I_\alpha) = \bigcap_\alpha \mathbb{V}(I_\alpha)$ (this is because $I_1 + I_2$ is the smallest ideal containing $I_1 \cup I_2$), arbitrary intersections are closed.
+    \vspace{1mm}
+     
+    Finally, we claim $\mathbb{V}(I_1) \cup \mathbb{V}(I_2) = \mathbb{V}(I_1 \cap I_2)$. The containment $\subset $ is clear: if a prime ideal contains $I_1$ or $I_2$, it contains $I_1 \cap I_2$. Conversely, $I_1I_2 \subset I_1 \cap I_2$, so if $I_1 I_2 \subset I_1 \cap I_2 \subset \mathfrak{p}$, then by primality $I_1 \subset \mathfrak{p}$ or $I_2 \subset \mathfrak{p}$. 
+\end{proof}
+
+\begin{example}
+    Let $k = \mathbb{C}$ and consider $\text{Spec }\mathbb{C}[x,y]$. We make a few observations:
+    \begin{itemize}
+        \item The point $(0) \in \text{Spec }\mathbb{C}[x,y]$ is dense in the Zariski topology, i.e. $\overline{\{(0)\}} = \text{Spec }\mathbb{C}[x,y]$ because every prime ideal contains $(0)$ (because we are in an integral domain).
+        \item Consider the prime ideal $(y^2-x^3)$ (which is prime since the quotient is an integral domain). Consider a maximal ideal $\mathfrak{m}_{a,b} = (x-a, y-b)$. We can ask: when is $\mathfrak{m}_{a,b} \in \overline{\{(y^2-x^3)\}}$? The answer: if and only if $b^2 = a^3$, e.g. $(1,1)$ (see example sheet 1). The lesson here is that points are not closed in the Zariski topology.
+    \end{itemize}
+\end{example}
+\subsection{Functions on opens}
+\begin{defn}
+    Let $f \in A$. Define the \textbf{distinguished open} corresponding to $f$ to be \[
+    \mathcal{U}_{f} = (\text{Spec}(A))/\mathbb{V}(f).
+    \]
+\end{defn}
+\begin{example}
+    \begin{itemize}
+        \item Let $A = \mathbb{C}[x]$, so $\text{Spec }A = \mathbb{C} \cup \{(0)\}$ (with the Zariski topology). Take $f = x$ and consider $\mathcal{U}_x$. Recall the bijection $\text{Spec }\mathbb{C} \leftrightarrow \mathbb{C} \cup \{(0)\}$ by $(x-a) \mapsfrom a \in \mathbb{C}$ and $(0) \mapsfrom (0)$. Then $\mathbb{V}(x) = \{\mathfrak{p} \in \text{Spec }A \mid x \in \mathfrak{p}\} = \{(x)\}$, so $\mathcal{U}_f = \text{Spec }A \setminus \{(x)\}$.
+        \item More generally, suppose we fix $a_1,\ldots,a_r \in \mathbb{C}$, then $\text{Spec }A\setminus \{(x-a_i)\}_{i=1}^r = \mathcal{U}$ and $\mathcal{U} = \mathcal{U}_f$, where $f = \prod_{i=1}^{r} (x-a_i)$.
+    \end{itemize}
+\end{example}
+\begin{lemma}
+    The distinguished opens $\mathcal{U}_f$ taken over all $f \in A$ form a basis for the Zariski topology on $\text{Spec }A$.
+\end{lemma}
+\begin{proof}
+    Left as an exercise on example sheet 1.
+\end{proof}
+
+A bit of commutative algebra: 
+\begin{defn}
+    Given $f \in A$, the \textbf{localization of $A$ at $f$} is $A_f = A[x]/(xf-1)$, which we can informally think of as $A_f = A[\frac{1}{f}]$.
+\end{defn}
+\begin{lemma}
+    The distinguished open $\mathcal{U}_f \subset \text{Spec }A$ is naturally homeomorphic to $\text{Spec }A_f$.
+\end{lemma}
 
 \end{document}
