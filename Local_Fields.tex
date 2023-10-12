@@ -10,6 +10,7 @@
 \tcbuselibrary{theorems}
 \usepackage{babel}
 \usepackage{enumerate}
+\usepackage{mathtools}
 \usepackage{amsmath, amssymb, amsthm}
 %\usepackage{a4wide}
 \usepackage{float}
@@ -55,8 +56,7 @@
 
 This is a first class in graduate algebraic number theory. Something we'd like to do is solve diophantine equations, e.g. $f(x_1,\ldots,x_r) \in \mathbb{Z}[x_1,\ldots,x_r]$. In general, solving $f(x_1,\ldots,x_r) = 0$ is very difficult. A simpler question we might consider is solving $f(x_1,\ldots,x_r) \equiv 0 \pmod{p}$, or $\pmod{p^2}, \pmod{p^3}$, etc. Local fields package all of this information together. 
 
-\section{Basic Theory}
-\subsection{Absolute values}
+\section{Absolute values}
 \begin{defn}
     Let $K$ be a field. An \textbf{absolute value} on $K$ is a function $|\cdot| : K \to \mathbb{R}_{\ge 0}$ satisfying:
     \begin{enumerate}[(1)]
@@ -201,7 +201,7 @@ Let $(K,|\cdot|)$ be a non--archimedean valued field. For $x \in K$ and $r \in \
     \end{enumerate}
 \end{proof}
 
-\subsection{Valuation rings}
+\section{Valuation rings}
 \begin{defn}
     Let $K$ be a field. A \textbf{valuation} on $K$ is a function $v : K^\times \to \mathbb{R}$ such that 
     \begin{enumerate}[(i)]
@@ -330,15 +330,15 @@ determines a non--archimedean absolute value on $K$. Conversely, a non--archimed
 \end{lemma}
 \begin{proof}
     \begin{enumerate}[(i)]
-        \item $\mathcal{O}_K$ is a PID by the previous lemma, hence any nonzero prime ideal is maximal. Hence $\mathcal{O}_K$ is a DVR, since it is a local ring.
-        \item Let $R$ be a DVR with maximal ideal $\mathfrak{m}$. Then $\mathfrak{m} = (\pi)$ since $\pi \in R$. Since PIDs are UFDs, we can write any nonzero $x \in R$ uniquely as $\pi^n u$ for some $n \ge 0$, $u$ a unit (since $\pi$ is the only prime). Then any $y \in R^{\times}$ can be written uniquely as $\pi^m u$, $m \in \mathbb{Z}$. Define $v(\pi^m) u = m$. Exercise: check that this is a valuation and $R = \mathcal{O}_K$.
+        \item $\mathcal{O}_K$ is a PID by the previous lemma, hence any nonzero prime ideal is maximal. Since $\mathcal{O}_K$ is a local ring, it is a DVR.
+        \item Let $R$ be a DVR with maximal ideal $\mathfrak{m}$. Then $\mathfrak{m} = (\pi)$ for $\pi \in R$. Since PIDs are UFDs, we can write any nonzero $x \in R$ uniquely as $\pi^n u$ for some $n \ge 0$, $u$ a unit (since $\pi$ is the only prime). Then any $y \in K^{\times}$ can be written uniquely as $\pi^m u$, $m \in \mathbb{Z}$. Define $v(\pi^m u) = m$. Exercise: check that this is a valuation and $R = \mathcal{O}_K$.
     \end{enumerate}
 \end{proof}
 \begin{example}
     $\mathbb{Z}_{(p)}$, $R[[t]]$ for $R$ a field are DVRs.
 \end{example}
 
-\subsection{$p$--adic numbers}
+\section{$p$--adic numbers}
 
 Recall that $\mathbb{Q}_p$ is the completion of $\mathbb{Q}$ with respect to $|\cdot|_p$. It is an exercise on example sheet 1 to show that $\mathbb{Q}_p$ is a field. Moreover, $|\cdot|_p$ extends to $\mathbb{Q}_p$ and the associated valuation is discrete (example sheet again).
 \begin{defn}
@@ -351,7 +351,7 @@ Recall that $\mathbb{Q}_p$ is the completion of $\mathbb{Q}$ with respect to $|\
     $\mathbb{Z}_p$ is the closure of $\mathbb{Z}$ inside $\mathbb{Q}_p$. In particular, $\mathbb{Z}_p$ is the completion of $\mathbb{Z}$ with respect to $|\cdot|_p$.
 \end{prop}
 \begin{proof}
-    We need to show $\mathbb{Z}$ is dense in $\mathbb{Z}_p$. Note $\mathbb{Q}$ is dense in $\mathbb{Q}_p$. Since $\mathbb{Z}_p \subset \mathbb{Q}_p$ is open, $\mathbb{Z}_p \cap \mathbb{Q}_p$ is dense in $\mathbb{Z}_p$. But $$\mathbb{Z}_p \cap \mathbb{Q} = \{x \in \mathbb{Q}\mid |x|_p \le 1\} = \left\{\frac{a}{b} \in \mathbb{Q} \mid  p \nmid b\right\} = \mathbb{Z}_{(p)}.$$
+    We need to show $\mathbb{Z}$ is dense in $\mathbb{Z}_p$. Note $\mathbb{Q}$ is dense in $\mathbb{Q}_p$. Since $\mathbb{Z}_p \subset \mathbb{Q}_p$ is open, $\mathbb{Z}_p \cap \mathbb{Q}$ is dense in $\mathbb{Z}_p$. But $$\mathbb{Z}_p \cap \mathbb{Q} = \{x \in \mathbb{Q}\mid |x|_p \le 1\} = \left\{\frac{a}{b} \in \mathbb{Q} \mid  p \nmid b\right\} = \mathbb{Z}_{(p)}.$$
     Thus it suffices to show that $\mathbb{Z}$ is dense in $\mathbb{Z}_{(p)}$. Let $\frac{a}{b} \in \mathbb{Z}_{(p)}$ with $a,b \in \mathbb{Z}$ and $p \nmid b$. For $n \in \mathbb{N}$, choose $y_n \in \mathbb{Z}$ such that $by_n \equiv a \pmod{p^n}$. Then $y_n \to \frac{a}{b}$ as $n \to \infty$. 
     \vspace{1mm}
      
@@ -359,20 +359,28 @@ Recall that $\mathbb{Q}_p$ is the completion of $\mathbb{Q}$ with respect to $|\
 \end{proof}
 
 \textbf{Inverse limits.} Let $(A_n)_{n=1}^\infty$ be a sequence of sets/groups/rings together with homomorphisms $\phi_n : A_{n+1} \to A_n$ (called \textbf{transition maps}). Then the \textbf{inverse limit} of $(A_n)_{n=1}^\infty$ is the set/group/ring \[
-\stackrel{\lim}{\leftarrow_n} A_n = \left\{(a_n)_{n=1}^\infty \in \prod_{n=1}^{\infty} A_n \mid \phi_n(a_{n+1}) = a_n ~\forall n\right\}. 
+\underset{n}{\varprojlim} A_n = \left\{(a_n)_{n=1}^\infty \in \prod_{n=1}^{\infty} A_n \mid \phi_n(a_{n+1}) = a_n ~\forall n\right\}. 
 \]
-\textbf{Fact.} If $A_n$ is a group/ring, then the inverse limit is also a group/ring. Here the group/ring operations are defined componentwise. Let $\theta_m : \stackrel{\lim}{\leftarrow_n} A_n \to A_m$ denote the natural projection.
+\textbf{Fact.} If $A_n$ is a group/ring, then the inverse limit is also a group/ring. Here the group/ring operations are defined componentwise. Let $\theta_m : \underset{n}{\varprojlim} A_n \to A_m$ denote the natural projection.
 \vspace{1mm}
  
 The inverse limit satisfies the following universal property:
 \begin{prop}
-    For any set/group/ring $B$ together with homomorphisms $\psi_n : B \to A_n$ such that the following diagram commutes: *draw a diagram here*. Then there exists a unique homomorphism $\psi : B \to \lim_{\leftarrow_n} A_n$ such that $\theta_n \circ \psi = \psi_n$ for all $n$.
+    For any set/group/ring $B$ together with homomorphisms $\psi_n : B \to A_n$ such that the following diagram commutes,
+    \[\begin{tikzcd}[row sep=large,column sep=large]
+        B & A_{n+1} \\
+        & A_n
+        \arrow["\psi_{n+1}", from=1-1, to=1-2]
+        \arrow["\psi_n", from=1-1, to=2-2]
+        \arrow["\phi_n", from=1-2, to=2-2]
+    \end{tikzcd}\]
+    there exists a unique homomorphism $\psi : B \to \underset{n}{\varprojlim} A_n$ such that $\theta_n \circ \psi = \psi_n$ for all $n$.
 \end{prop} 
 \begin{proof}
-    Define $\psi : B \to \prod_{n=1}^{\infty} A_n$ by $b \mapsto (\psi_n(b))_{n=1}^{\infty}$. Then $\psi_n = \theta_n \circ \psi_{n+1} \implies \psi(b) \in \lim_{\leftarrow_n} A_n$. This map is clearly unique (determined by $\psi_n = \phi_n \circ \psi_{n+1}$), and is a homomorphism of sets/groups/rings.
+    Define $\psi : B \to \prod_{n=1}^{\infty} A_n$ by $b \mapsto (\psi_n(b))_{n=1}^{\infty}$. Then $\psi_n = \theta_n \circ \psi_{n+1} \implies \psi(b) \in \underset{n}{\varprojlim} A_n$. This map is clearly unique (determined by $\psi_n = \phi_n \circ \psi_{n+1}$), and is a homomorphism of sets/groups/rings.
 \end{proof}
 \begin{defn}
-    Let $I \subset R$ be an ideal (in a ring $R$). The $I$--adic completion of $R$ is the ring $\hat{R} = \stackrel{\lim_{}}{\leftarrow_n} R/I^n$ where $R/I^{n+1} \to R/I^n$ is the natural projection.
+    Let $I \subset R$ be an ideal (in a ring $R$). The \textbf{$I$--adic completion of $R$} is the ring $\hat{R} = \underset{n}{\varprojlim} R/I^n$ where $R/I^{n+1} \to R/I^n$ is the natural projection.
 \end{defn}
 Note that there exists a natural map $i : R \to \hat{R}$ by the universal property (since there exist maps $R \to R/I^n$).
 \begin{defn}
@@ -385,23 +393,22 @@ Let $(K, |\cdot|)$ be a non--archimedean valued field and $\pi \in \mathcal{O}_K
 \begin{prop}
     Assume $K$ is complete with respect to $|\cdot|$. Then:
     \begin{enumerate}[(i)]
-        \item $\mathcal{O}_K \stackrel{i}{\cong} \stackrel{\lim}{\leftarrow_n}  \mathcal{O}_K/\pi^n \mathcal{O}_K$ (i.e. $\mathcal{O}_K$ is $\pi$--adically complete).
+        \item $\mathcal{O}_K \stackrel{i}{\cong} \underset{n}{\varprojlim} \mathcal{O}_K/\pi^n \mathcal{O}_K$ (i.e. $\mathcal{O}_K$ is $\pi$--adically complete)\footnote{There a bit of abuse of notation here -- really, $\mathcal{O}_K$ is $(\pi)$--adically complete.}.
         \item Every $x \in \mathcal{O}_K$ can be written uniquely as $x = \sum_{i=0}^{\infty} a_i \pi^i$ with $a_i \in A$, where $A \subset \mathcal{O}_K$ is a set of coset representatives for $\mathcal{O}_K/\pi \mathcal{O}_K$. Moreover, any such power series converges (in $\mathcal{O}_K$).
     \end{enumerate}
 \end{prop} 
 \begin{proof}
     \begin{enumerate}[(i)]
-        \item $K$ is complete and $\mathcal{O}_K \subset K$ is closed, so $\mathcal{O}_K$ is complete. If $x \in \bigcap_{n=1}^{\infty} \pi^n \mathcal{O}_K$, then $v(x) \ge n v(\pi) ~\forall n \implies x = 0$, hence the natural map $\mathcal{O}_K \to \stackrel{\lim}{\leftarrow_n} \mathcal{O}_K/\pi^n \mathcal{O}_K$ is injective.
-        \vspace{1mm}
-         
-        Let $(x_n)_{n=1}^{\infty} \in \stackrel{\lim}{\leftarrow_n} \mathcal{O}_K/ \pi^n \mathcal{O}_K$ and for each $n$, let $y_n \in \mathcal{O}_K$ be a lifting of $x_n \in \mathcal{O}_K/\pi^n \mathcal{O}_K$. Then $y_n - y_{n+1}  \in \pi^n \mathcal{O}_K$, thus $(y_n)_{n=1}^{\infty}$ is Cauchy as a sequence in $\mathcal{O}_K$. Let $y_n \to y \in \mathcal{O}_K$. Then $y$ maps to $(x_n)_{n=1}^\infty$ in $\stackrel{\lim}{\leftarrow_n} \mathcal{O}_K/\pi^n \mathcal{O}_K$, giving surjectivity.
+        \item $K$ is complete and $\mathcal{O}_K \subset K$ is closed, so $\mathcal{O}_K$ is complete. If $x \in \bigcap_{n=1}^{\infty} \pi^n \mathcal{O}_K$, then $v(x) \ge n v(\pi) ~\forall n \implies x = 0$, hence the natural map $\mathcal{O}_K \to \underset{n}{\varprojlim} \mathcal{O}_K/\pi^n \mathcal{O}_K$ is injective.
+        
+        For surjectivity, let $(x_n)_{n=1}^{\infty} \in \underset{n}{\varprojlim}\mathcal{O}_K/ \pi^n \mathcal{O}_K$ and for each $n$, let $y_n \in \mathcal{O}_K$ be a lifting\footnote{Given a surjective map $G \to G'$, a lift of an element $x \in G'$ is a choice of $y \in G$ such that $y \mapsto x$ under this map.} of $x_n \in \mathcal{O}_K/\pi^n \mathcal{O}_K$. Then $y_n - y_{n+1}  \in \pi^n \mathcal{O}_K$, thus $(y_n)_{n=1}^{\infty}$ is a Cauchy sequence in $\mathcal{O}_K$. Let $y_n \to y \in \mathcal{O}_K$. Then $y$ maps to $(x_n)_{n=1}^\infty$ in $\underset{n}{\varprojlim} \mathcal{O}_K/\pi^n \mathcal{O}_K$.
         \item Left as exercise on example sheet 1.
     \end{enumerate}
 \end{proof}
 \begin{cor}
     \begin{enumerate}[(i)]
-        \item $\mathbb{Z}_p \cong \stackrel{\lim}{\leftarrow_n} \mathbb{Z}/p^n \mathbb{Z}$.
-        \item Every element in $\mathbb{Q}_p$ can be written uniquely as $x = \sum_{i=n}^{\infty} a_i p^i$ with $a_i \in \{0,1,\ldots,p-1\}$.
+        \item $\mathbb{Z}_p \cong \underset{n}{\varprojlim} \mathbb{Z}/p^n \mathbb{Z}$.
+        \item Every element in $\mathbb{Q}_p$ can be written uniquely as $x = \sum_{i=n}^{\infty} a_i p^i$ where we have $a_i \in \{0,1,\ldots,p-1\}$.
     \end{enumerate}
 \end{cor}
 
