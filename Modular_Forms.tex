@@ -383,6 +383,60 @@ Introduce $T = \begin{pmatrix} 1&1\\0&1 \end{pmatrix}$ and $S = \begin{pmatrix} 
     We have now shown the first three parts of the proposition. It remains to show the last part, i.e. $\Gamma(1) = \langle S,T \rangle$. Since $S^2 = -I$, it is enough to show that $H = G$. Choose $\tau \in \text{Int}(f)$, so $\text{Stab}_G(\tau) = \{I\}$. Let $g \in G$. By our claim proving (i), $\exists h \in H$ such that $hg \tau  \in \mathfrak{f}'$. We must therefore have $hg \tau = \tau$, hence $h g  \in \text{Stab}_G(\tau) = \{I\}$, so $g = h^{-1} \in H$.
 \end{proof}
 
+\marginpar{13 Oct 2022, Lecture 4}
+
+\textbf{Notation.} We write $e_{\tau} = |\text{Stab}_G(\tau)|$.
+\vspace{1mm}
+ 
+Let $f$ be a nonzero modular function of weight $k$, level $\Gamma(1)$. If $\tau \in \mathfrak{h}$, then $v_{\tau}(f)$ is the order of $f$ at $\tau$ (the unique $n \in \mathbb{Z}$ such that $f(z) = (z-\tau)^n g(z)$ for some meromorphic $g$ that is holomorphic and non--vanishing at $\tau$). We define $v_{\infty}(f)$ to be the order of $f$ at infinity, i.e. $v_{\infty}(f)=v_0(\tilde{f})$ for $\tilde{f}$ the meromorphic function in $D(0,1)$ with $f(\tau) = \tilde{f}(e^{2\pi i \tau})$.
+
+\begin{prop}
+    Let $f$ be a nonzero modular function of weight $k$, level $\Gamma(1)$. Then 
+    \begin{align*}
+        \sum_{ \tau \in \Gamma(1)\setminus \mathfrak{h}}^{} \frac{1}{e_{\tau}}v_\tau(f) + v_\infty(f) = \frac{k}{12}.
+    \end{align*}
+\end{prop}
+\begin{proof}
+    We first check that the sum is well--defined: 
+    \begin{itemize}
+        \item If $\tau \in \mathfrak{h}$, then $e_\tau, v_{\tau}(f)$ only depend on the $\Gamma(1)$--orbit of $\tau$. This is because if $\gamma \in \Gamma(1)$ and $\tau \in \mathfrak{h}$, then $\text{Stab}_{\Gamma(1)}(\tau)$ and $\text{Stab}_{\Gamma(1)}(\gamma \tau)$ are conjugate subgroups of $\Gamma(1) \implies e_{\tau} = e_{\gamma \tau}$. On the other hand, $f(\gamma \tau) = f(\tau) j(\gamma, \tau)^k$ and $j(\gamma, \tau)$ is holomorphic and non--vanishing on $\mathfrak{h}$, so $v_{\gamma \tau}(f) = v_{\tau(f)}$.
+        \item The sum only has a finite number of nonzero terms, since if $f$ is a modular function and $\tilde{f}$ is a meromorphic function on $D(0,1)$, then $\exists \delta > 0$ such that $\tilde{f}$ is holomorphic and non--vanishing in $D^*(0,\delta)$. Thus $\exists R > 0$ such that $f$ is holomorphic and non--vanishing in $\{\tau \in \mathfrak{h} \mid \text{Im}(\tau)>R\}$. Hence to show the sum is finite, it suffices to show that $f$ only has a finite number of zeroes and poles in $\mathfrak{f}$ (as $f$ intersects every $\Gamma(1)$--orbit), for which it suffices to show that $f$ has a finite number of zeroes and poles in $\mathfrak{f} \cap \{\tau \in \mathfrak{h} \mid  \text{Im}(\tau)\le R\}$, which is true as the set is compact (closed and bounded) and the zeroes and poles of $f$ are discrete.
+    \end{itemize}
+    To prove the identity, we use contour integration. Setup: if $U \subset \mathbb{C}$ is an open subset, $f : U \to \mathbb{C}$ is holomorphic and $\gamma:[0,1] \to U$ is a path, then $\int_{\gamma}^{} f(z)\mathrm{d}z = \int_{t=0}^{1} f(\gamma(t))\gamma'(t)\mathrm{d}t$. We have the pullback formula: if $u : U \to V$ is a holomorphic map between open subsets of $\mathbb{C}$, $g : V \to \mathbb{C}$ is holomorphic and $\gamma$ is a path in $U$, then $\int_{u \circ \gamma}^{} g(z)\mathrm{d}z = \int_{\gamma}^{} u^*(g(z)\mathrm{d}z) = \int_{\gamma}^{} g(u(z))u'(z)\mathrm{d}z$. A particularly nice case: if $g(z)=h'(z)/h(z)$, then $g(z)\mathrm{d}z = d \log h$, so $\int_{u \circ \gamma}^{}d \log h = \int_{\gamma}^{} u^*(d \log h) = \int_{\gamma}^{} d(\log h \circ u) = \int_{\gamma}^{} \frac{(h \circ u)'(z)}{(h \circ u)(z)}\mathrm{d}z$.
+    \vspace{1mm}
+     
+    We also have (Cauchy') argument principle: if $U \subset \mathbb{C}$ is a simply connected open subset, $\gamma \subset U$ is a simple positvely oriented closed path and $g$ a meromorphic function in $U$ with no zeroes or poles on $\gamma$, then $$\frac{1}{2\pi i} \oint_{\gamma} d \log g = \frac{1}{2\pi i} \oint_{\gamma} \frac{g'(z)}{g(z)}\mathrm{d}z = \sum_{a \in \text{Int}(\gamma)}^{} v_a(g).$$
+    \vspace{1mm}
+     
+    We now apply this to our modular function $f$. Choose $R>0$ such that $f$ has no zeroes or poles in $\{\tau \in \mathfrak{h} \mid \text{Im}(\tau)\ge R\}$. We consider $\frac{1}{2\pi i}\oint_{\gamma} d \log f$, where $\gamma$ is the contour *draw picture*. By choice of $R$, tere ar eno zeroes or poles of $f$ on $AE$. We first consider the case where $f$ has no zeroes or poles at all on $\gamma$. Then the argument principle gives $$\frac{1}{2\pi i}\oint_{\gamma} d \log f = \frac{1}{2\pi i} \int_{AB}^{} +\int_{BC}^{} +\int_{CD}^{} +\int_{DE}^{} +\int_{EA}^{} d \log f = \sum_{\tau \in \Gamma(1)\setminus \mathfrak{h}}^{} \frac{1}{e_{\tau}}v_\tau(f) $$
+    (as $v_\tau(f) \neq 0$, $e_{\tau} = 1$ under our assumptions).
+    \vspace{1mm}
+     
+    Apply the pullback formula with $u(\tau) = \tau+1$. Then $u(AB) = ED$, $f \circ u = f$, so $$\int_{u(AB)}^{} d \log f = \int_{AB}^{} d \log f \circ u = \int_{AB}^{} d \log f = \int_{ED}^{} d \log f = - \int_{DE}^{} d \log f.$$
+    Hence $\int_{AB}^{} + \int_{DE}^{} d \log f = 0$.
+    \vspace{1mm}
+     
+    Now take $q = e^{2\pi i \tau}$, so $f = \tilde{f} \circ q$ and $q(AE)$ is a positively oriented circle around 0 in $D(0,1)$. So $$\frac{1}{2\pi i} \int_{q(AE)}^{} d \log \tilde{f} = v_{\infty}(f) = \frac{1}{2\pi i} \int_{AE}^{} d \log \tilde{f} \circ q = \frac{1}{2\pi i}\int_{AE}^{} d \log f.$$ 
+    \vspace{1mm}
+     
+    Now take $v(\tau) = S(\tau) = -\frac{1}{\tau}$. Then $v(BC) = DC$ and we know $f|_k[S](\tau) = f\left(-\frac{1}{\tau}\right)\tau^{-k} = f(\tau)$, so $f \circ v = f(\tau)\tau^k$. Hence 
+    \begin{align*}
+        &\int_{DC}^{} d \log f = \int_{v(BC)}^{} d \log f = \int_{BC}^{} d \log (f \circ v) = \int_{BC}^{} d \log(f(\tau)\tau^k) \\ =& \int_{BC}^{} d \log f + k d \log \tau = \int_{BC}^{} d \log f + k(\log C - \log B)
+    \end{align*}
+    where here $\log$ is any branch of the logarithm defined on $BC$. But $B = \rho, C = i$, so $\log B = i \frac{2\pi}{3}$ and $\log C = i \frac{\pi}{2}$. Hence \[
+    \int_{CD}^{} d \log f = - \int_{DC}^{} d \log f + k\left(\frac{2\pi i }{3} - \frac{2 \pi i }{4}\right),
+    \]
+    giving \[
+    \int_{BC}^{} +\int_{CD}^{} d \log f = 2\pi i k \frac{1}{12}.
+    \]
+    We have 
+    \begin{align*}
+        \sum_{\Gamma(1)\setminus \mathfrak{h}}^{} \frac{1}{e^{\tau}} v_\tau(f) =& \frac{1}{2\pi i } \left(\int_{AB}^{} +\int_{BC}^{} +\int_{CD}^{} +\int_{DE}^{} +\int_{EA}^{} d \log f \right) \\
+        =& \frac{1}{2\pi i} \left( 0 + \frac{k}{12} + 0 - v_{\infty}(f) \right) \\
+        &\implies \sum_{ \tau \in \Gamma(1)\setminus \mathfrak{h}}^{} \frac{1}{e_{\tau}}v_\tau(f) + v_\infty(f) = \frac{k}{12}.
+    \end{align*}
+    This finishes the proof in the case where there are no zeroes or poles. If there are zeroes or poles on $\gamma$, we need to modify the contour. For example, if there's a zero or a pole at a point $P$ on $AB$, then consider *draw another picture* $\gamma'$, which satisfies the property that $f$ has no zeroes or poles on $\gamma'$. The trickiest case is when there is a zero or pole at $B = \rho$ or $C = i$. This is Q3 on example sheet 1. 
+\end{proof}
 
 
 \end{document}
