@@ -220,7 +220,62 @@ A bit of commutative algebra:
     Given $f \in A$, the \textbf{localization of $A$ at $f$} is $A_f = A[x]/(xf-1)$, which we can informally think of as $A_f = A[\frac{1}{f}]$.
 \end{defn}
 \begin{lemma}
-    The distinguished open $\mathcal{U}_f \subset \text{Spec }A$ is naturally homeomorphic to $\text{Spec }A_f$.
+    The distinguished open $\mathcal{U}_f \subset \text{Spec }A$ is naturally homeomorphic to $\text{Spec }A_f$ via the ring homomorphism $A \stackrel{j}{\to} A_f$, which produces the inverse $j^{-1}: \text{Spec }A_f \to \text{Spec }A$.
 \end{lemma}
+\marginpar{13 Oct 2022, Lecture 4}
+\begin{proof}
+    Primes in the ring $A_f$ are in bijection with primes of $A$ that miss $f$ via $j^{-1}$. We exhibit this bijection: 
+    \begin{itemize}
+        \item Given $q \subset A_f$ prime, take $j^{-1}(q) \subset A$, which is prime. 
+        \item Given $p \subset A$ a prime ideal, take $p_f = j(p) A_f$. We claim $p_f$ is a prime exactly when $f \not\in p$.
+        \begin{itemize}
+            \item If $f \in p$, then $p_f$ contains $f$, which is a unit, so $p_f = (1)$ is not prime.
+            \item If $f \not\in p$, then $\left( A_f/p_f \right) \cong \left( A/p\right)_{\overline{f}}$, where $\overline{f}$ is $f + p$, a coset (exercise: check this formally). Hence $\left(A/p \right)_{\overline{f}} \subset FF \left(A/p \right)$ (FF stands for fraction field), so it is an integral domain, so $p_f$ is prime.
+        \end{itemize}
+    \end{itemize}
+    Finally we need to check that these maps are inverses. This is left as an exercise.
+\end{proof}
 
+Facts about distinguished opens:
+\begin{itemize}
+    \item $U_f \cap U_g = U_{fg}$ (easy fact).
+    \item $U_{f^n} = U_f$ for all $n \ge 1$ (easy fact).
+    \item The rings $A_f$ and $A_{f^n}$ for $n\ge 1$ are isomorphic. Why? Since $A_f = A[x]/(xf-1)$ and $A_{f^n} = A[y]/(yf^n-1)$, the isomorphism is given by $A_f \to A_{f^n}$ by $x \mapsto f^{n-1}y$ and $A_{f^n} \to A_f$ by $y \mapsto x^n$ (check these are inverses).
+    \item Containment. $U_{f} \subset U_{g} \iff f^n$ is a multiple of $g$ for some $n\ge 1$. To orient ourselves: if $f = g f'$, then $U_f \subset U_g$.
+    \begin{proof}
+        The $(\implies )$ direction is clear by the orientation above. Conversely, suppose $U_f \subset U_g$, so $\mathbb{V}(f) \supset \mathbb{V}(g)$. The set $\mathbb{V}(f)$ is the set of all primes containing $(f)$. We claim that $\sqrt{(f)} \subset \sqrt{(g)}$. But what is the radical of $I$? It is the intersection of all primes containing the ideal $I$.
+    \end{proof}
+\end{itemize}
+
+Foreshadowing: fix $A$. We've made an assignment from distinguished opens in $\text{Spec }A$ to rings by mapping $U_f \mapsto A_f$. The association is ''functorial'', i.e. if $U_{f_1} \subset U_{f_2}$, then we can assume that $f_1^n = f_2 f_3$, so $U_{f_1} = U_{f_1^n} = U_{f_2f_3} \subset U_{f_2}$, so there is a homomorphism $A_{f_2} \to A_{f_1}$. This is the restriction map.
+
+\vspace{1mm}
+ 
+Question: can we extend this association to all open sets? See notes for the answer (yes).
+
+\section{Sheaves}
+\subsection{Presheaves}
+Let $X$ be a topological space. 
+\begin{defn}
+    A \textbf{presheaf $\mathcal{F}$ on $X$ of abelian groups} is an association from the set of open sets in $X$ to abelian groups given by $U \mapsto \mathcal{F}(U)$ and for $U \subset V$ opens, a homomorphism $\text{res}_u^v : \mathcal{F}(V) \to \mathcal{F}(U)$ (a \textbf{restriction map}) such that $\text{res}_u^u = \text{id}$ and $\text{res}^v_u \circ \text{res}^w_v = \text{res}^w_u$ when $U \subset V \subset W$ are opens.
+\end{defn}
+\begin{example}
+    For any space $X$, take $\mathcal{F}(U) = \{f : U \to \mathbb{R} \mid f \text{ continuous}\}$ with the usual restriction.
+\end{example}
+Similarly we can get sheaves of rings, sets, modules over a fixed ring, etc.
+
+\begin{defn}
+    A \textbf{morphism} $\phi : \mathcal{F} \to \mathcal{G}$ of presheaves on $X$ is, for each $U \subset X$ open, a homomorphism $\phi(u) : \mathcal{F}(u) \to \mathcal{G}(u)$ compatible with restriction maps, i.e. if $V \subset U$, then the following diagram commutes. 
+    \[\begin{tikzcd}[row sep=large,column sep=large]
+        \mathcal{F}(u) & \mathcal{G}(u) \\
+        \mathcal{F}(v) & \mathcal{G}(v)
+        \arrow["\phi(u)", from=1-1, to=1-2]
+        \arrow["\text{res}^u_v",from=1-1, to=2-1]
+        \arrow["\text{res}^u_v", from=1-2, to=2-2]
+        \arrow["\phi(v)"', from=2-1, to=2-2]
+    \end{tikzcd}\]
+\end{defn}
+\begin{defn}
+    A morphism $\phi : \mathcal{F} \to \mathcal{G}$ of preshaves is injective (surjective) if $\phi(U) : \mathcal{F}(U) \to \mathcal{G}(U)$ is injective (surjective) for all $U \subset X$.
+\end{defn}
 \end{document}
