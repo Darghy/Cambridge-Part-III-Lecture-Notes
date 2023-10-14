@@ -411,5 +411,76 @@ Let $(K, |\cdot|)$ be a non--archimedean valued field and $\pi \in \mathcal{O}_K
         \item Every element in $\mathbb{Q}_p$ can be written uniquely as $x = \sum_{i=n}^{\infty} a_i p^i$ where we have $a_i \in \{0,1,\ldots,p-1\}$.
     \end{enumerate}
 \end{cor}
+\marginpar{14 Oct 2022, Lecture 4}
+\begin{proof}
+    \begin{enumerate}[(i)]
+        \item By the previous proposition, it suffices to show that $\mathbb{Z}/p^n\mathbb{Z} \cong \mathbb{Z}_p/p^n\mathbb{Z}$. Let $f_n : \mathbb{Z} \to \mathbb{Z}_p/p^n \mathbb{Z}_p$ be the natural map. Then $\text{ker}(f_n) =\{x \in \mathbb{Z} \mid |x|_p \le p^{-n}\} = p^n\mathbb{Z}$, thus the natural map $\mathbb{Z}/p^n\mathbb{Z} \to \mathbb{Z}_p/p^n \mathbb{Z}_p$ is injective. For surjectivity, take $\overline{z} \in \mathbb{Z}_p/p^n \mathbb{Z}_p$ and $c \in \mathbb{Z}_p$ a lift. Since $\mathbb{Z}$ is dense in $\mathbb{Z}_p$, there exists $x \in \mathbb{Z}$ such that $x \in c + p^n \mathbb{Z}_p$ ($p^n \mathbb{Z}_p$ is open in $\mathbb{Z}_p$). Then $f_n(x) = \overline{z}$, so $Z/p^n \mathbb{Z} \to \mathbb{Z}_p / p^n \mathbb{Z}_p$ is surjective.
+        \item Follows from the second part of the previous proposition applied to $p^{-n} x \in \mathbb{Z}_p$ for some $n \in \mathbb{Z}$.
+    \end{enumerate}
+\end{proof}
+
+\begin{example}
+    We have $\frac{1}{1-p} = 1 + p + p^2 + p^3 + \ldots$ in $\mathbb{Q}_p$.
+\end{example}
+
+\section{Complete valued fields}
+
+\subsection{Hensel's lemma}
+
+\begin{theorem}[Hensel's lemma, version 1]
+    Let $(K, |\cdot|)$ be a complete discretely valued field. Let $f(x) \in \mathcal{O}_K[x]$ and assume $\exists a \in \mathcal{O}_K$ such that $|f(a)| < |f'(a)|^2$ for $f'(a)$ the formal derivative. Then there exists a unique $x \in \mathcal{O}_K$ such that $f(x)=0$ and $|x-a|< |f'(a)|$.
+\end{theorem}
+\begin{proof}
+    Let $\pi \in \mathcal{O}_K$ be a uniformizer and let $r = v(f'(a))$ where $v$ is a normalized valuation, i.e. $v(\pi)=1$. We inductively construct a sequence $(x_n)$ in $\mathcal{O}_K$ such that
+    \begin{enumerate}[(i)]
+        \item $f(x_n) \equiv 0 \pmod{\pi^{n+2r}}$.
+        \item $x_{n+1} \equiv x_n \pmod{\pi^{n+r}}$.
+    \end{enumerate}
+    Take $x_1 = a$, so $f(x_1) \equiv 0 \pmod{\pi^{1+2r}}$. Now suppose we've constructed $x_1, \ldots, x_n$ satisfying the conditions. Then define $x_{n+1} = x_n - \frac{f(x_n)}{f'(x_n)}$. Since $x_n \equiv x_1 \pmod{\pi^{r+1}}$, $v(f'(x_n)) = v(f'(x_1)) = r$ and hence $\frac{f(x_n)}{f'(x_n)} \equiv 0 \pmod{\pi^{n+r}}$ by (i). It follows that $x_{n+1} \equiv x_n \pmod{\pi^{n+r}}$, so (ii) holds.
+    \vspace{1mm}
+     
+    Note that for $X, Y$ indeterminates, we can write $f(X+Y) = f_0(X) + f_1(X)Y + f_2(X)Y^2 + \ldots$, where $f_i \in \mathcal{O}_K[X]$ and $f_0(X) = f(X), f_1(X) = f'(X)$. Thus $f(x_{n+1}) = f(x_n) + f'(x_n)c + f_2(x_n)c^2 + \ldots$ for $c = - \frac{f(x_n)}{f'(x_n)}$. Since $c \equiv 0 \pmod{\pi^{n+r}}$ and $v(f_i(x_n)) \ge 0$, we have $f(x_{n+1}) \equiv f(x_n) + c f'(x_n) \pmod{\pi^{n+2r+1}}$ (since the other terms vanish), but this is $\equiv 0 \pmod{\pi^{n+2r+1}}$, so (i) holds.
+    \vspace{1mm}
+     
+    This gives the construction of $(x_n)$. Property (ii) implies that $(x_n)$ is Cauchy, so let $x \in \mathcal{O}_K$ be the limit, $x_n \to x$. Then $f(x) = \lim_{n \to \infty} f(x_n) = 0$ by property (i). Moreover, (ii) implies $a = x_1 \equiv x_n \pmod{\pi^{r+1}} ~\forall n$, so $a \equiv x \pmod{\pi^{r+1}}$, thus $|x-a| < |f'(a)|$.
+    \vspace{1mm}
+     
+    For uniqueness, suppose $x'$ also satisfies $f(x') = 0$ and $|x'-a|<|f'(a)|$. Set $\delta = x' - x \neq 0$. Then $|x'-a|<|f'(a)|$ and $|x-a|<|f'(a)|$, so the ultrametric inequality implies $|\delta| = |x'-x| < |f'(a)| = |f'(x)|$ (since $a \equiv x \pmod{\pi^{r+1}}$). But \[
+    0 = f(x') = f(x+\delta) = \underbrace{f(x)}_{=0} + f'(x)\delta + \underbrace{\delta^2 \ldots}_{|\cdot|\le |\delta|^2}.
+    \]
+    Hence $|f'(x) \delta|\le |\delta|^2 \implies |f'(x)| \le |\delta|$, a contradiction.
+\end{proof}
+\begin{cor}
+    Let $(K,|\cdot|)$ be a complete discretely valued field, let $f(x) \in \mathcal{O}_K[x]$ and let $\overline{c} \in k = \mathcal{O}_K/\mathfrak{m}$ be a simple root of $\overline{f}(x) = f(x) \pmod{\mathfrak{m}} \in k[x]$. Then there exists a unique $x \in \mathcal{O}_K$ such that $f(x) = 0$ and $x \equiv \overline{c} \pmod{\mathfrak{m}}$.
+\end{cor}
+\begin{proof}
+    Apply Hensel's lemma to a lift $c \in \mathcal{O}_K$ of $\overline{c}$. Then $|f(c)| < 1 = |f'(c)|^2$ since $f'(c)$ is a simple root.
+\end{proof}
+\begin{example}
+    Consider $f(x) = x^2-2$, which has a simple root mod 7. Thus $\sqrt{2} \in \mathbb{Z}_p \subset \mathbb{Q}_7$.
+\end{example}
+\begin{cor}
+    $\mathbb{Q}_p^\times/(\mathbb{Q}_p^\times)^2 \cong \begin{cases}
+        (\mathbb{Z}/2\mathbb{Z})^2 \text{ if } p>2.\\
+        (\mathbb{Z}/2\mathbb{Z})^3 \text{ if } p=2.
+    \end{cases}$
+\end{cor}
+\begin{proof}
+    First consider $p>2$. Let $b \in \mathbb{Z}_p^\times$. Applying the previous corollary to $f(x) = x^2-b$, we find that $b \in (\mathbb{Z}_p^\times)^2$ if and only if $b \in (\mathbb{F}_p^\times)^2$. Thus $\mathbb{Z}_p^\times \to \mathbb{F}_p^\times/(\mathbb{F}_p^\times)^2$ has kernel $(\mathbb{Z}_p^\times)^2$, so induces an isomorphism $\mathbb{Z}_p^\times/(\mathbb{Z}_p^\times)^2 \to \mathbb{F}_p^\times/(\mathbb{F}_p^\times)^2 \cong (\mathbb{Z}/2\mathbb{Z})$ (since $\mathbb{F}_p^{\times} = \mathbb{Z}/(p-1)\mathbb{Z}$).
+    \vspace{1mm}
+     
+    We have an isomorphism $\mathbb{Z}_p^\times \times \mathbb{Z} \to \mathbb{Q}_p^{\times}$ given by $(u,n) \mapsto up^n$. Then $\mathbb{Q}_p^\times / (\mathbb{Q}_p^\times)^2 \cong (\mathbb{Z}/2\mathbb{Z})^2$.
+    \vspace{1mm}
+     
+    If $p=2$, let $b \in \mathbb{Z}_2^\times$. Consider $f(x) = x^2 - b$, so $f'(x) = 2x \equiv 0 \pmod{2}$. Instead now let $b \equiv 1 \pmod{8}$. Then $|f(1)|_2 \le 2^{-3} < 2^{-2} = |f'(1)|_2^2$. Hensel's lemma now implies that $b \in (\mathbb{Z}_2^\times)^2 \iff b \equiv 1 \pmod{8}$. Thus $\mathbb{Z}_2^\times / (\mathbb{Z}_2^\times)^2 \cong (\mathbb{Z}/8\mathbb{Z})^\times = (\mathbb{Z}/2\mathbb{Z})^2$. Again using $\mathbb{Q}_2^\times \cong \mathbb{Z}_2^\times \times \mathbb{Z}$, we obtain that $\mathbb{Q}_2^\times/(\mathbb{Q}_2^\times)^2 \cong (\mathbb{Z}/2\mathbb{Z})^3$. 
+\end{proof}
+\textbf{Remark.} The proof of Hensel's lemma uses the iteration $x_{n+1} = x_n - \frac{f(x_n)}{f'(x_n)}$. We can think of the proof as the non--archimedean analogue of the Newton-Raphson method.
+
+\begin{theorem}[Hensel's lemma, version 2]
+    Let $(K, |\cdot|)$ be a complete discretely valued field and $f(x) \in \mathcal{O}_K[x]$. Suppose $\overline{f}(x) = f(x) \pmod{\mathfrak{m}} \in k[x]$ factorizes as $\overline{f}(x) = \overline{g}(x)\overline{h}(x) \in k[x]$ with $\overline{g}(x), \overline{h}(x)$ coprime. Then there is a factorization $f(x) = g(x)h(x)$ in $\mathcal{O}_K[x]$ with $\overline{g}(x) \equiv g(x) \pmod{\mathfrak{m}}$, $\overline{f}(x) \equiv f(x) \pmod{\mathfrak{m}}$ and $\text{deg}(\overline{g}) = \text{deg}(g)$.
+\end{theorem}
+\begin{proof}
+    Left as an exercise on example sheet 1.
+\end{proof}
 
 \end{document}
