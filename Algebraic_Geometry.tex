@@ -278,4 +278,77 @@ Similarly we can get sheaves of rings, sets, modules over a fixed ring, etc.
 \begin{defn}
     A morphism $\phi : \mathcal{F} \to \mathcal{G}$ of preshaves is injective (surjective) if $\phi(U) : \mathcal{F}(U) \to \mathcal{G}(U)$ is injective (surjective) for all $U \subset X$.
 \end{defn}
+
+\subsection{Sheaves}
+
+\marginpar{16 Oct 2022, Lecture 5}
+
+\begin{defn}
+    A \textbf{sheaf} is a presheaf $\mathcal{F}$ such that 
+    \begin{enumerate}[(1)]
+        \item If $U \subset X$ is open and $\{U_i\}$ is an open cover of $U$, then for $s \in \mathcal{F}(U)$, if $s|_{U_i} = \text{res}^U_{U_i}(s) = 0$ for all $i$, then $s = 0$.
+        \item If $U$ and $\{U_i\}$ are as in (1), then given $s_i \in \mathcal{F}(U_i)$ with $s_i |_{U_i \cap U_j} = s_j |_{U_i \cap U_j}$ for all $i,j$, then there exists $s \in \mathcal{F}(U)$ with $s |_{U_i} = s_i$.
+    \end{enumerate}
+\end{defn}
+\textbf{Remark.} These axioms imply $\mathcal{F}(\varnothing) = 0$ (exercise).
+\vspace{1mm}
+ 
+A \textbf{morphism} of sheaves is a morphism of the underlying presheaves.
+
+\begin{example}
+    If $X$ is a topological space, $\mathcal{F}(U) = \{f : U \to \mathbb{R} \mid f \text{ continuous}\}$, then $f$ is a sheaf.
+\end{example}
+\textbf{Non--example.} Let $X = \mathbb{C}$ with the Euclidean topology and take $\mathcal{F}(U) = \{f: U \to \mathbb{C} \mid f \text{ holomorphic and bounded}\}$. Then $\mathcal{F}$ is not a sheaf, since bounded functions may glue to unbounded functions. For example, take $U = \mathbb{C}$ and $U_i = D(0,i)$. Then $f(z) = z$ is bounded on each $U_i$, but not on $U$. In general, the characterization of elements of a sheaf should be purely local, and being bounded is not a local condition.
+\vspace{1mm}
+ 
+\textbf{Non--example.} Fix a group $G$ and a set $\mathcal{F}(U)=G$ (the \textbf{constant presheaf}). If $U_1, U_2$ are disjoint, then $\mathcal{F}(U_1 \cup U_2) = G \times G$.
+
+\begin{example}
+    Give $G$ the discrete topology (every subset is open and closed) and define $$\mathcal{F}(U) = \{f : U \to G \text{ continuous}\} = \{f : U \to G \mid f \text{ is locally constant}\}.$$
+    This is the \textbf{constant sheaf}.
+\end{example}
+\begin{example}
+    If $V$ is an irreducible variety, then 
+    \begin{align*}
+        \mathcal{O}_V(v) = \{f \in k[V] \mid f \text{ is regular at }p ~\forall p \in U\}.
+    \end{align*}
+    Here regular at $p$ means that $f = \frac{g}{h}$ in a neighborhood of $p$ with $g,h$ polynomials and $h(p) \neq 0$. $\mathcal{O}_V$ is the \textbf{structure sheaf} of $V$.
+    \vspace{1mm}
+     
+    This is a sheaf, since we have a local condition.
+\end{example}
+
+\subsection{Basic constructions}
+
+\textbf{Terminology.} A \textbf{section} of $\mathcal{F}$ over $U$ is an element $s \in \mathcal{F}(U)$.
+
+\vspace{1mm}
+ 
+\textbf{Construction of stalks.} Fix $p \in X$ and $\mathcal{F}$ a presheaf on $X$. Then $\mathcal{F}_p$, the \textbf{stalk} of $\mathcal{F}$ at $p$, is defined to be $$\mathcal{F}_p = \{(U,s) \mid s \in \mathcal{F}(U), p \in U\}/\sim$$
+with $(U,s) \sim (V, s')$ if $\exists W \subset U \cap V$ with $p \in W$ such that $s|_W = s'|_W$. 
+\vspace{1mm}
+ 
+The elements of $\mathcal{F}_p$ are called \textbf{germs}.
+
+\begin{example}
+    Take $\mathbb{A}^1$, the affine line, then $\mathcal{O}_{\mathbb{A}^1,0} = \left\{\frac{f(t)}{g(t)} \mid g(0)\neq 0\right\} = k[t]_{(t)} \subset k(t) $.
+\end{example}
+\begin{prop}
+    If $f : \mathcal{F} \to \mathcal{G}$ is a morphism of sheaves on $X$ such that for all $p \in X$, the induced map $f_p :\mathcal{F}_p \to \mathcal{G}_p$ is an isomorphism, then $f$ is an isomorphism.
+    \vspace{1mm}
+     
+    Here $f_p((U,s)) = (U, f_U(s))$, which is well--defined.
+\end{prop}
+\begin{proof}
+    We will show $f_U : \mathcal{F}(U) \to \mathcal{G}(U)$ is an isomorphism for each $U$, and we can then define $f^{-1}$ by $(f^{-1})_U = (f_U)^{-1}$.
+    \vspace{1mm}
+     
+    $f_U$ is injective: suppose $s \in \mathcal{F}(U)$ with $f_U(s) = 0$. Since $f_p$ is injective, $(U,s) = 0$ in $\mathcal{F}_p$ for every $p \in U$. Thus for every $p \in U$, there exists an open neighborhood $U_p$ of $p$ such that $s|_{U_p} = 0$. But $\{U_p \mid p \in U\}$ is a cover of $U$, so $s = 0$ in $\mathcal{F}(U)$ by the first condition of being a sheaf.
+    \vspace{1mm}
+     
+    $f_U$ is surjective: take $t \in \mathcal{G}(U)$. For each $p \in U$, we have $(U_p, s_p) \in \mathcal{F}_p$ with $f_p(U_p, s_p) = (U,t) \in \mathcal{G}_p$. By shrinking $U_p$ if necessary, we can assume $f_{U_p}(s_p) = t|_{U_p}$. For points $p, p' \in U$, $$f(_{U_p \cap U_{p'}}) \left(s_p|_{U_p \cap U_{p'}} \setminus s_{p'}|_{U_p \cap U_{p'}}\right) = t|_{U_p \cap U_{p'}} - t |_{U_p \cap U_{p'}} = 0.$$
+    Thus $s_p |_{U_p \cap U_{p'}} - s_{p'}|_{U_p \cap U_{p'}} = 0$ by the injectivity of $f_{U_p \cap U_{p'}}$. Thus by the second sheaf axiom, $\exists s \in \mathcal{F}(U)$ with $s|_{U_p} = s_p$. Now $f_U(s)|_{U_p} = f_{U_p}(s|_{U_p}) = f_{U_p}(s_p) = t|_{U_p}$. Thus $f_U(s) = t$ by the first sheaf axiom.
+\end{proof}
+We emphasize that this proof is asymmetric in the sense that we need to first prove injectivity to be able to prove surjectivity.
+
 \end{document}
