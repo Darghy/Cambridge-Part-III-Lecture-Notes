@@ -247,7 +247,7 @@ We can construct more modular forms: if $f \in M_k(\Gamma(1))$ and $g \in M_l(\G
     \item $fg$ is invariant under the weight $k+l$ action of $\Gamma(1)$, which is true as $f,g$ are invariant under the weight $k$ and $l$ actions of $\Gamma(1)$ -- this is just a computation.
     \item $fg$ is holomorphic at $\infty$. This is true as the $q$--expansions multiply, so since $f, g$ have no negative terms, the same is true for $fg$.
 \end{itemize}
-Hence we get e.g. $E_4^3, E_6^2 \in M_{12}(\Gamma(1))$ and $E_4^3-E_6^2 \in S_{12}(\Gamma(1))$ (i.e. it is cuspidal since zero at infinity). This difference is Ramanujan's $\Delta$--function. We will show it is nonzero later. 
+Hence we get e.g. $E_4^3, E_6^2 \in M_{12}(\Gamma(1))$ and $\frac{E_4^3-E_6^2}{1728} \in S_{12}(\Gamma(1))$ (i.e. it is cuspidal since zero at infinity). This difference is Ramanujan's $\Delta$--function. We will show it is nonzero later. 
 \vspace{1mm}
  
 We now want to show that $M_k(\Gamma(1))$ is finite--dimensional. We first study $\Gamma(1)/\mathfrak{h}$. For this, introduce a fundamental set $\mathfrak{f}' \subset \mathfrak{h}$ for the $\Gamma(1)$--action. We define\footnote{Definitions in literature may vary, so we omit a formal definition.} a fundamental set to be a set that intersects each $\Gamma(1)$--orbit in exactly one element. Define 
@@ -408,7 +408,82 @@ Let $f$ be a nonzero modular function of weight $k$, level $\Gamma(1)$. If $\tau
     We also have (Cauchy') argument principle: if $U \subset \mathbb{C}$ is a simply connected open subset, $\gamma \subset U$ is a simple positvely oriented closed path and $g$ a meromorphic function in $U$ with no zeroes or poles on $\gamma$, then $$\frac{1}{2\pi i} \oint_{\gamma} d \log g = \frac{1}{2\pi i} \oint_{\gamma} \frac{g'(z)}{g(z)}\mathrm{d}z = \sum_{a \in \text{Int}(\gamma)}^{} v_a(g).$$
     \vspace{1mm}
      
-    We now apply this to our modular function $f$. Choose $R>0$ such that $f$ has no zeroes or poles in $\{\tau \in \mathfrak{h} \mid \text{Im}(\tau)\ge R\}$. We consider $\frac{1}{2\pi i}\oint_{\gamma} d \log f$, where $\gamma$ is the contour *draw picture*. By choice of $R$, tere ar eno zeroes or poles of $f$ on $AE$. We first consider the case where $f$ has no zeroes or poles at all on $\gamma$. Then the argument principle gives $$\frac{1}{2\pi i}\oint_{\gamma} d \log f = \frac{1}{2\pi i} \int_{AB}^{} +\int_{BC}^{} +\int_{CD}^{} +\int_{DE}^{} +\int_{EA}^{} d \log f = \sum_{\tau \in \Gamma(1)\setminus \mathfrak{h}}^{} \frac{1}{e_{\tau}}v_\tau(f) $$
+    We now apply this to our modular function $f$. Choose $R>0$ such that $f$ has no zeroes or poles in $\{\tau \in \mathfrak{h} \mid \text{Im}(\tau)\ge R\}$. We consider $\frac{1}{2\pi i}\oint_{\gamma} d \log f$, where $\gamma$ is the contour $ABCDE$.
+    
+    \begin{center}
+        \begin{tikzpicture}
+            \begin{axis}[
+                axis lines=center,
+                xlabel=$\text{Re}$,
+                ylabel=$\text{Im}$,
+                xmin=-1.5, xmax=1.5,
+                ymin=-0.2, ymax=3.5, % Adjusted ymax
+                axis equal,
+                legend pos=outer north east,
+                legend style={draw=none},
+                yticklabels={$0$, $0$, , ,$R$},
+                yticklabel style={below right},
+            ]
+        
+            % Draw x-axis and y-axis
+            \draw[-] (axis cs: -1.5,0) -- (axis cs: 1.5,0) node[below right] {};
+            
+            % Draw y-axis with cutoff
+            \ifnum\pdfstrcmp{\pgfkeysvalueof{/pgfplots/ymin}}{-0.2}>0
+                \draw[-] (axis cs: 0,-0.2) -- (axis cs: 0,3) node[above left] {$y$};
+            \fi
+        
+            % Draw semicircle
+            \addplot[domain=0:180, samples=100, black] ({cos(x)}, {sin(x)});
+            \node[black] at (axis cs: 0.9, 0.9) {};
+        
+            % Draw lines x=1/2 and x=-1/2 with cutoff
+            % \ifnum\pdfstrcmp{\pgfkeysvalueof{/pgfplots/xmin}}{-0.2}>0
+            %     \draw[dashed] (axis cs: 0.5,-0.2) -- (axis cs: 0.5,2.8) node[below right] {$\text{Re}(\tau)=\frac{1}{2}$};
+            %     \draw[dashed] (axis cs: -0.5,-0.2) -- (axis cs: -0.5,2.8) node[below left] {$\text{Re}(\tau)=-\frac{1}{2}$};
+            % \fi
+    
+            % Mark the point (0,1) and label it as i (changed coordinates)
+            \fill[blue] (axis cs:-0.5,3) circle[radius=2pt] node[above right,blue] {$A$};
+
+            \fill[blue] (axis cs:0.5,3) circle[radius=2pt] node[above right,blue] {$E$};
+            
+            \fill[blue] (axis cs:0,1) circle[radius=2pt] node[below left,blue] {$C$};
+    
+            % Mark the point (-1/2, sqrt(3)/2) and label it as \rho
+            \fill[blue] (axis cs:-0.5,{sqrt(3)/2}) circle[radius=2pt] node[above left,blue] {$B$};
+
+            \fill[blue] (axis cs:0.5,{sqrt(3)/2}) circle[radius=2pt] node[below left,blue] {$D$};
+        
+            \coordinate (A) at (axis cs:0.5, 0.866);
+            \coordinate (A2) at (axis cs:0.4, 0.916);
+            \coordinate (A3) at (axis cs:0.3, 0.953);
+            \coordinate (A4) at (axis cs:0.2, 0.9797);
+            \coordinate (A5) at (axis cs:0.1, 0.99498);
+            \coordinate (A6) at (axis cs:0, 1);
+            \coordinate (A10) at (axis cs:-0.4, 0.916);
+            \coordinate (A9) at (axis cs:-0.3, 0.953);
+            \coordinate (A8) at (axis cs:-0.2, 0.9797);
+            \coordinate (A7) at (axis cs:-0.1, 0.99498);
+            \coordinate (B) at (axis cs:-0.5, 0.866);
+            \coordinate (C) at (axis cs:-0.5, 3);
+            \coordinate (D) at (axis cs:0.5, 3);
+            \coordinate (E) at (axis cs:0.5, 3);
+    
+            % Draw the lines connecting the points
+            \draw[fill=blue, opacity=0.25, name path=ABCD] (A) -- (A2) -- (A3) -- (A4) -- (A5) -- (A6) -- (A7) -- (A8) -- (A9) -- (A10) -- (B) -- (C) -- (E) -- (D) -- cycle;
+    
+            \coordinate (B1) at (axis cs: -0.5, 0.866);
+            \coordinate (B2) at (axis cs: -0.5, 3);
+            \draw[blue, thick] (B1) -- (B2) -- (E) -- (A);
+                
+            
+            \addplot[domain=60:120, samples=100, blue, thick] ({cos(x)}, {sin(x)});    
+            \end{axis}
+        \end{tikzpicture}    
+    \end{center}
+
+    By choice of $R$, tere ar eno zeroes or poles of $f$ on $AE$. We first consider the case where $f$ has no zeroes or poles at all on $\gamma$. Then the argument principle gives $$\frac{1}{2\pi i}\oint_{\gamma} d \log f = \frac{1}{2\pi i} \int_{AB}^{} +\int_{BC}^{} +\int_{CD}^{} +\int_{DE}^{} +\int_{EA}^{} d \log f = \sum_{\tau \in \Gamma(1)\setminus \mathfrak{h}}^{} \frac{1}{e_{\tau}}v_\tau(f) $$
     (as $v_\tau(f) \neq 0$, $e_{\tau} = 1$ under our assumptions).
     \vspace{1mm}
      
@@ -435,8 +510,84 @@ Let $f$ be a nonzero modular function of weight $k$, level $\Gamma(1)$. If $\tau
         =& \frac{1}{2\pi i} \left( 0 + \frac{k}{12} + 0 - v_{\infty}(f) \right) \\
         &\implies \sum_{ \tau \in \Gamma(1)\setminus \mathfrak{h}}^{} \frac{1}{e_{\tau}}v_\tau(f) + v_\infty(f) = \frac{k}{12}.
     \end{align*}
-    This finishes the proof in the case where there are no zeroes or poles. If there are zeroes or poles on $\gamma$, we need to modify the contour. For example, if there's a zero or a pole at a point $P$ on $AB$, then consider *draw another picture* $\gamma'$, which satisfies the property that $f$ has no zeroes or poles on $\gamma'$. The trickiest case is when there is a zero or pole at $B = \rho$ or $C = i$. This is Q3 on example sheet 1. 
+    This finishes the proof in the case where there are no zeroes or poles. If there are zeroes or poles on $\gamma$, we need to modify the contour. For example, if there's a zero or a pole at a point $P$ on $AB$, then consider the contour $\gamma'$, which is just $\gamma$ but with a small semicircle around our (discrete) pole, which satisfies the property that $f$ has no zeroes or poles on $\gamma'$. The trickiest case is when there is a zero or pole at $B = \rho$ or $C = i$. This is Q3 on example sheet 1. 
 \end{proof}
 
+\marginpar{16 Oct 2022, Lecture 5}
+
+\begin{example}
+    Take $k=4$, $f = E_4 \in M_{4}(\Gamma(1))$. Hence $\forall \tau \in \mathfrak{h}, v_{\tau}(E_4)\ge 0$ (as it is holomorphic in $\mathfrak{h}$). We know $E_4(\tau) = 1 + \sum_{n\ge 1}^{} a_nq^n$, so $E_4(\infty) \neq 0$ and $v_{\infty}(E_4) = 0$. Hence our formula gives 
+    \begin{align*}
+        \sum_{\tau \in \Gamma(1)\setminus \mathfrak{h}}^{} \frac{1}{e_{\tau}}v_{}(E_4) = \frac{1}{3} v_{\rho}(E_4) + \frac{1}{2}v_i(E_4) + \sum_{\tau \in \Gamma(1)\setminus \mathfrak{h}, \tau \not\sim \rho,i}^{} v_{\tau}(E_4) = \frac{1}{3}.
+    \end{align*}
+    So we have $\frac{a}{3}+\frac{b}{2}+c = \frac{1}{3}$, where $a,b,c \in \mathbb{Z}_{\ge 0}$, which gives the only solution $a=1, b=c=0$, so $E_4(\rho)=0$ and $E_4(\tau) \neq 0$ if $\tau \not\in \Gamma(1)\rho$.
+    \vspace{1mm}
+     
+    If $k=6$, $f = E_6$, then we get \[
+    \frac{1}{3}v_{\rho}(E_6) + \frac{1}{2}v_i(E_6) + \sum_{\tau \not\sim \rho,i}^{} v_{\tau}(E_6) = \frac{6}{12} = \frac{1}{12},
+    \]
+    so this forces $v_{\rho}(E_6) = 0$, $v_{i}(E_6) = 1$, $v_{\tau}(E_6) \neq 0$ if $\tau \not\sim \rho, i$, so $E_6(1) = 0$, $E_6(\tau) \neq 0$ if $\tau \not\sim \rho,i$.
+\end{example}
+Recall $\Delta = \frac{E_4^3 - E_6^2}{1728} \in S_{12}(\Gamma(1))$. This is nonzero since $\Delta(\rho) = \frac{E_4(\rho)^3 - E_6(\rho)^2}{1728}  = -\frac{E_6(\rho)^2}{1728} \neq 0$. We also have $v_{\infty}(\Delta)\ge 1$ by construction, so plug in $\Delta$ to our formula to get 
+\begin{align*}
+    \sum_{\tau}^{} \frac{1}{e_{\tau}}v_{\tau}(\Delta) + v_{\infty}(\Delta) = 1,
+\end{align*}
+so $v_{\infty}(\Delta) = 1$, so $\Delta$ has a simple zero at $\infty$ and $\Delta$ is nonvanishing in $\mathfrak{h}$.
+
+\begin{theorem}
+    Let $k \in 2\mathbb{Z}$. Then:
+    \begin{enumerate}[(1)]
+        \item If $k<0$ or $k=2$, then $M_k(\Gamma(1)) = 0$, $M_0(\Gamma(1)) = \mathbb{C} \cdot 1$.
+        \item If $4\le k\le 10$, then $M_k(\Gamma(1)) = \mathbb{C} \cdot E_k$. 
+        \item For any $k$, multiplication by $\Delta$ gives an isomorphism $M_k(\Gamma(1)) \stackrel{\times \Delta}{\to}  S_{k+12}(\Gamma(1))$.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    \begin{enumerate}[(1)]
+        \item Let $f \in M_k(\Gamma(1))$ be nonzero. Then $\sum_{}^{} \frac{1}{e_{\tau}}v_{\tau}(f) + v_{\infty}(f) = \frac{k}{12}$. Note the LHS is $\ge 0$, but for $k<0$, the RHS is $<0$. If $k=2$, then we get the equation $\frac{a}{3}+\frac{b}{2}+c = \frac{1}{6}$ for $a,b,c \in \mathbb{Z}_{\ge 0}$, which has no solutions.
+        \vspace{1mm}
+         
+        Suppose $f \in M_0(\Gamma(1)) \setminus \mathbb{C}\cdot 1$. Then $f - f(\infty) \cdot 1  \in S_0(\Gamma(1))$ is a nonzero function (here 1 is the constant function 1). Then $\sum_{\tau}^{} \frac{1}{e_{\tau}}v_{\tau}(f-f(\infty)\cdot 1) + \underbrace{v_{\infty}(f-f(\infty)\cdot 1)}_{\ge 1} = 0$, a contradiction, so $M_0(\Gamma(1)) = \mathbb{C}\cdot 1$.
+        \item Let $4\le k\le 10$ and $f \in M_k(\Gamma(1))$. Consider $f - f(\infty)\cdot E_k \in S_k(\Gamma(1))$. If this is nonzero, then \[
+        \sum_{\tau}^{} \frac{1}{e_\tau}v_{\tau}(f-f(\infty)\cdot E_k) + \underbrace{v_{\infty}(f-f(\infty)\cdot E_k)}_{\ge 1} = \frac{k}{12}<1,
+        \]
+        a contradiction. So $f = f(\infty)\cdot E_k$.
+        \item Our map $\times \Delta : M_k(\Gamma(1)) \to S_{k+12}(\Gamma(1))$ is a well--defined $\mathbb{C}$--linear map. It is injective, since if $\Delta f = 0$, then $f = 0$ (as $\Delta$ is nonvanishing in $\mathfrak{h}$). For surjectivity, if $f \in S_{k+12}(\Gamma(1))$, then $\frac{f}{\Delta}$ is holomorphic in $\mathfrak{h}$ and invariant under the weight $k$ action of $\Gamma(1)$. 
+        \vspace{1mm}
+         
+        We need to show $\frac{f}{\Delta}$ is holomorphic at $\infty$, as then $\frac{f}{\Delta} \in M_k(\Gamma(1))$, so $f = \frac{f}{\Delta}f \in \text{Im}(\times \Delta)$. Hence we need $v_{\infty}\left(\frac{f}{\Delta}\right) \ge 0$. But $v_{\infty}\left(\frac{f}{\Delta}\right) = \underbrace{v_{\infty}(f)}_{\ge 1} - \underbrace{v_{\infty}(\Delta)}_{=1} \ge 0$, so we're done.
+    \end{enumerate}
+\end{proof}
+\begin{cor}
+    If $k \in 2\mathbb{Z}$, $k\ge 0$, then $M_k(\Gamma(1))$ is finite--dimensional and $$\text{dim}_{\mathbb{C}}M_k(\Gamma(1)) = \begin{cases}
+        \left\lfloor \frac{k}{12} \right\rfloor + 1 & k \not\equiv 2 \pmod{12}.\\
+        \left\lfloor \frac{k}{12} \right\rfloor & k \equiv 2 \pmod{12}.
+    \end{cases}$$
+\end{cor}
+\begin{proof}
+    We proved this for $0\le k \le 10$. In general, use induction on $k$: we need to show that for $k\ge 0$, $\text{dim}_{\mathbb{C}}M_{k+12}(\Gamma(1)) = \text{dim}_{\mathbb{C}}M_k(\Gamma(1)) + 1$.
+    \vspace{1mm}
+     
+    We know $E_{k+12} \in M_{k+12}(\Gamma(1))$, so $M_{k+12}(\Gamma(1)) = \mathbb{C} E_{k+12} \oplus S_{k+12}(\Gamma(1))$. But this equals $\mathbb{C} E_{k+12} \oplus \Delta M_k(\Gamma(1))$, so $\text{dim}_{\mathbb{C}} M_{k+12}(\Gamma(1)) = 1 + \text{dim}_{\mathbb{C}}M_k(\Gamma(1))$.
+\end{proof}
+\begin{example}
+    We have $E_4^2 \in M_8(\Gamma(1)) = \mathbb{C} E_8$. So there is a relation between $E_4^2$ and $E_8$, but $E_8(\infty) = 1 = E_4(\infty)^2 \implies E_4^2 = E_8$.
+    \vspace{1mm}
+     
+    Similarly, $E_4E_6 \in M_{10}(\Gamma(1)) = \mathbb{C} E_{10}$, so the same argument gives $E_4 E_6 = E_{10}$.
+\end{example}
+\begin{cor}
+    If $k \in 2\mathbb{N}$, then $M_k(\Gamma(1))$ is spanned as a $\mathbb{C}$--vector space by $\{E_4^a, E_6^b \mid a,b \in \mathbb{Z}_{\ge 0}, 4a+6b=k\}$. In other words, if $\mathcal{M} = \oplus_{k \in \mathbb{Z}}M_k(\Gamma(1))$, then $\mathcal{M}$ is a graded $\mathbb{C}$--algebra generated by $E_4$ and $E_6$.
+\end{cor}
+\begin{proof}
+    We proved this for $0\le k\le 10$. If $k\ge 12$, then $$M_k(\Gamma(1)) = \mathbb{C} E_k \oplus \Delta M_{k-12}(\Gamma(1)) = \mathbb{C} f \oplus \Delta M_{k-12}(\Gamma(1))$$ for any $f \in M_k(\Gamma(1))$ such that $f(\infty) \neq 0$ by the same argument. We can always find some $A,B \in \mathbb{Z}_{\ge 0}$ such that $4A+6B = k$, so $E_4^A E_6^B \in M_k(\Gamma(1))$ and $(E_4^A E_6^B)(\infty) \neq 0$. Now by induction, $M_{k-12}(\Gamma(1)) = \langle E_4^a E_6^b \mid 4a+6b = k-12 \rangle$, so $\Delta M_{k-12}(\Gamma(1)) = \langle \Delta E_4^a E_6^b \mid 4a+6b = k -12 \rangle$. But $\Delta \in \langle E_4^3, E_6^2 \rangle$, so \[
+    \Delta M_{k-12}(\Gamma(1)) = \langle E_4^a E_6^b \mid 4a+6b = k \rangle
+    \]
+    and $E_4^A E_6^B \in \langle E_4^a E_6^b \mid 4a+6b = k \rangle$, so $M_k(\Gamma(1)) = \langle E_4^a E_6^b \mid 4a+6b = k \rangle$.
+\end{proof}
+\begin{theorem}
+    Let $j(\tau) = \frac{E_4(t)^3}{\Delta(\tau)}$. Then $j$ is a modular function of weight $0$, level $\Gamma(1)$. It defines a bijection $\Gamma(1)\setminus \mathfrak{h} \to \mathbb{C}$ given by $\tau \to j (\tau)$. Moreover, every modular function of weight 0, level $\Gamma(1)$ is a rational function of $j$.\footnote{Remember that $\Gamma(1)\setminus \mathfrak{h}$ is the set of orbits of $\Gamma(1)$ under $\mathfrak{h}$.}
+\end{theorem}
+The interpretation of this is that it is possible to define a Riemann surface structure on $\Gamma(1)\setminus \mathfrak{h} \sqcup \{\infty\}$ such that we get a compact Riemann surface whose meromorphic functions are exactly the modular functions of weight 0. So the theorem says that this Riemann surface, called $X(1)$, is isomorphic to the Riemann sphere, and our formula says that if $\mathcal{L}$ is an invertible sheaf on a compact Riemann surface and $S$ is a meromorphic section, then $\sum_{a}^{} v_a(S) = \text{deg}(\mathcal{L})$. This is useful if we are also taking algebraic geometry.
 
 \end{document}
