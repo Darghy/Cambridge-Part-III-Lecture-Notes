@@ -483,4 +483,100 @@ Let $(K, |\cdot|)$ be a non--archimedean valued field and $\pi \in \mathcal{O}_K
     Left as an exercise on example sheet 1.
 \end{proof}
 
+\marginpar{17 Oct 2022, Lecture 5}
+
+\begin{cor}
+    Let $f(x) = a_nx^n + \ldots + a_0 \in k[x]$ with $a_0 \ldots a_n \neq 0$. If $f(x)$ is irreducible, then $|a_i|\le \max(|a_0|,|a_n|)$ for all $i$.
+\end{cor}
+\begin{proof}
+    By scaling, assume $f(x) \in \mathcal{O}_K[x]$ with $\max(|a_i|) = 1$. Then we need to show that $\max(|a_0|,|a_n|)=1$. If not, let $r$ be minimal such that $|a_r|=1$, so $0<r<n$. Then $$\overline{f}(x) = x^r(a_r + \ldots a_n x^{n-r}) \pmod{\mathfrak{m}}.$$
+    By Hensel's lemma version 2, $f(x)=g(x)h(x)$ with $\text{deg}(g)=r$, contradicting irreducibility.
+\end{proof}
+
+\section{Teichmüller lifts}
+\begin{defn}
+    A ring $R$ of characteristic $p>0$ is \textbf{perfect} if the Frobenius map $x \mapsto x^p$ is a bijection.
+    \vspace{1mm}
+     
+    A field of characteristic $p$ is \textbf{perfect} if it is perfect as a ring.
+\end{defn}
+\textbf{Remark.} Since $\text{char }R = p$, $(x+y)^p = x^p + y^p$, so the Frobenius map is a ring homomorphism.
+
+\begin{example}
+    \begin{enumerate}[(i)]
+        \item $\mathbb{F}_{p^n}$ is perfect and $\overline{\mathbb{F}_p}$ is perfect.
+        \item Non--example. $\mathbb{F}_p[t]$ is not perfect since $t \not\in \text{Im}(\text{Frob})$.
+        \item $\mathbb{F}_p(t^{\frac{1}{p^{\infty}}}) = \mathbb{F}_p\left(t,t^{\frac{1}{p}},t^{\frac{1}{p^2}},\ldots \right)$ is a perfect field, known as the \textbf{perfection} of $\mathbb{F}_p(t)$.
+    \end{enumerate}
+\end{example}
+\textbf{Fact.} A field $k$ of characteristic $p>0$ is perfect if and only if any finite extension of $k$ is separable.
+
+\begin{theorem}
+    Let $(K,|\cdot|)$ be a complete discretely valued field such that the residue field $k = \mathcal{O}_K/\mathfrak{m}$ is a perfect field of characteristic $p>0$. Then there exists a unique map $[]: k \to \mathcal{O}_K$ such that 
+    \begin{enumerate}[(i)]
+        \item $a \equiv [a] \pmod{\mathfrak{m}} ~\forall a \in k$,
+        \item $[ab] = [a][b] ~\forall a,b \in k$.
+    \end{enumerate}
+    Moreover, if $\text{char }\mathcal{O}_K = p$, then $[]$ is a ring homomorphism (i.e. it also preserves addition).
+\end{theorem}
+\begin{defn}
+    The element $[a] \in \mathcal{O}_K$ is called the \textbf{Teichmüller lift} of $a$.
+\end{defn}
+\begin{lemma}
+    Let $(K,|\cdot|)$ be a complete discretely valued field\footnote{(do we need the residue field to be perfect here? lectures said let $(K,|\cdot|)$ be as in above theorem).} and fix $\pi \in \mathcal{O}_K$ a uniformizer. Let $x,y \in \mathcal{O}_K$ be such that $x \equiv y \pmod{\pi^k}$ for $k\ge 1$. Then $x^p \equiv y^p \pmod{\pi^{k+1}}$. 
+\end{lemma}
+\begin{proof}
+    Let $x = y + u\cdot \pi^k$ for some $u \in \mathcal{O}_K$. Then \begin{align*}
+        x^p = \sum_{i=0}^{p} {p\choose i}y^{p-i}(u \pi^k)^{i} = y^p +\sum_{i=1}^{p} {p \choose i}y^{p-i}(u \pi^k)^{i}.
+    \end{align*}
+    Since $\text{char }\mathcal{O}_K/\pi \mathcal{O}_K = p$, we have $p \in \pi \mathcal{O}_K$. Thus ${p\choose i}y^{p-i}(u \pi^k)^i \in \pi^{k+1}\mathcal{O}_K ~\forall i\ge 1$, so $x^p \equiv y^p \pmod{\pi^{k+1}}$.
+\end{proof}
+\begin{proof}[Proof of Theorem 5.1]
+    Let $a \in k$. For each $i>0$, we choose a lift $y_i \in \mathcal{O}_K$ of $a^{\frac{1}{p^i}}$ and define $x_i = y_i^{p^i}$. We claim that $(x_i)$ is a Cauchy sequence and its limit $x_i \to x$ is independent of the choice of $y_i$.
+    \vspace{1mm}
+     
+    By construction, $y_i  \equiv  y_{i+1}^p \pmod{\pi}$. By our previous lemma and induction on $k$, we have that $y_i^{p^k} \equiv y_{i+1}^{p^{k+1}}\pmod{\pi^{k+1}}$ and hence $x_i \equiv x_{i+1} \pmod{\pi^{i+1}}$ (by taking $k=i$) and hence $(x_i)$ is Cauchy, so $x_i \to x \in \mathcal{O}_K$. \vspace{1mm}
+     
+    Suppose $(x_i')$ arises from another choice of $y_i'$ lifting $a_i^{\frac{1}{p^i}}$. Then $(x_i')$ is Cauchy and $x_i' \to x'$. Let \[
+    x'' = \begin{cases}
+        x_i &i \text{ even.}\\
+        x_i' &i \text{ odd}.
+    \end{cases}
+    \]
+    Then $x_i''$ arises from the lifting $y'' = \begin{cases}
+        y_i &i \text{ even.}\\
+    y_i' &i \text{ odd}.\end{cases}$. Then $x_i''$ is Cauchy with subsequences converging to both $x$ and $x'$, so $x = x'$, so our limit is independent of the choice of liftings $(y_i)$.
+    \vspace{1mm}
+    We define $[a] = x$. Then $x_i \equiv y_i^{p^i} \equiv \left(a^{\frac{1}{p^i}}\right)^{p^i} \equiv a \pmod{\pi}$, so $x \equiv a \pmod{\pi}$, giving us the first property.
+    \vspace{1mm}
+     
+    Now let $b \in k$ and choose $u_i \in \mathcal{O}_K$ a lift of $b^{\frac{1}{p^i}}$ and let $z_i = u_i^{p^i}$. Then $[b] = \lim_{i \to \infty}z_i$. Now $u_iy_i$ is a lift of $(ab)^{\frac{1}{p^i}}$, hence $$[ab] = \lim_{i \to \infty} (u_iy_i)^{p^i} = \lim_{i \to \infty} x_i z_i = \lim_{i \to \infty} x_i \lim_{i \to \infty}z_i = [a][b],$$
+    giving us the second property.
+    \vspace{1mm}
+    
+    If $\text{char }K = p$, then $u_i+y_i$ is a lift of $a^{\frac{1}{p^i}}+b^{\frac{1}{p^i}} = \left(a+b \right)^{\frac{1}{p^i}}$. Then \[
+    [a+b] = \lim_{i \to \infty} (y_i+u_i)^{p^i} = \lim_{i \to \infty}y_i^{p^i} + u_i^{p_i} = \lim_{i \to \infty}x_i + z_i = [a] + [b].
+    \]
+    Finally, it is easy to check that $[0] = 0$ and $[1] = 1$ (take $y_i=0$ and $y_i=1$). So $[]$ is a ring homomorphism.
+    \vspace{1mm}
+     
+    For uniqueness, let $\phi: K \to \mathcal{O}_K$ be another map of the desired form. Then for $a \in k$, $\phi\left(a^{\frac{1}{p^i}}\right)$ is a lift of $a^{\frac{1}{p^i}}$. It follows that $$[a] = \lim_{i \to \infty} \phi\left(a^{\frac{1}{p^i}}\right)^{p^i} = \lim_{i \to \infty} \phi(a) = \phi(a).$$
+\end{proof}
+\begin{example}
+    For $K=\mathbb{Q}_p$, what does $[]: \mathbb{F}_p \to \mathbb{Z}_p$ look like? Take $a \in \mathbb{F}_p^\times$, so $[a]^{p-1}=[a^{p-1}] = [1] = 1$. Hence $[a]$ is a $(p-1)^{\text{th}}$ root of unity.
+\end{example}
+More generally:
+\begin{lemma}
+    Let $(K,|\cdot|)$ be a complete discretely valued field. If $k = \mathcal{O}_K/\mathfrak{m} \subset \overline{\mathbb{F}_p}$ (which implies that $k$ is perfect), then $[a] \in \mathcal{O}_K$ is a root of unity $\forall a \in k^\times$.
+\end{lemma}
+\begin{proof}
+    $a \in k^\times \implies a \in \mathbb{F}_{p^n}$ for some $n \implies [a]^{p^n-1}=[a^{p^n-1}] = [1] = 1$.
+\end{proof}
+\begin{theorem}
+    Let $(K, |\cdot|)$ be a complete discretely valued field of characteristic $p > 0$. Assume $k = \mathcal{O}_K/\mathfrak{m}$ is perfect. Then $K \cong k((t))$.
+\end{theorem}
+\begin{proof}
+    Since $K = \text{Frac}(\mathcal{O}_K)$, it suffices to show that $\mathcal{O}_K \cong k[[t]]$. For this, fix $\pi \in \mathcal{O}_K$ a uniformizer and let $[]: k \to \mathcal{O}_K$ be the Teichmüller map. Define $\phi : k[[t]] \to \mathcal{O}_K$ by $\phi\left(\sum_{i=0}^{\infty} a_i t^i \right) = \sum_{i=0}^{\infty} a_i \pi^i$. Then $\phi$ is a ring homomorphism since $[]$ is a ring homomorphism, but it is also a bijection by Proposition 3.3.
+\end{proof}
+
 \end{document}
