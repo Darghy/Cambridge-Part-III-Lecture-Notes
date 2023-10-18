@@ -351,4 +351,92 @@ The elements of $\mathcal{F}_p$ are called \textbf{germs}.
 \end{proof}
 We emphasize that this proof is asymmetric in the sense that we need to first prove injectivity to be able to prove surjectivity.
 
+\marginpar{18 Oct 2022, Lecture 6}
+\vspace{1mm}
+ 
+\textbf{Exercises.}
+\begin{enumerate}[(i)]
+    \item There is a map $\mathcal{F}(U) \to \prod_{p \in U}^{} \mathcal{F}_p$ mapping $s \mapsto ((U,s))_{p \in U}$. The claim is that this map is injective (by sheaf axiom 1).
+    \item Given two maps $\phi, \psi : \mathcal{F} \to \mathcal{G}$ with $\phi_p = \psi_p ~\forall p \in X$, we have $\phi = \psi$.
+\end{enumerate} 
+
+\begin{defn}[Sheafification]
+    If $\mathcal{F}$ is a presheaf on $X$, then a morphism $\text{sh}: \mathcal{F} \to \mathcal{F}^{\text{sh}}$ to the sheaf $\mathcal{F}^{\text{sh}}$ is a \textbf{sheafification} if for any morphism of presheaves $\phi : \mathcal{F} \to \mathcal{G}$ for $\mathcal{G}$ a sheaf there is a unique commutative diagram of the following form:
+    \[\begin{tikzcd}[row sep=large,column sep=large]
+        \mathcal{F} & \mathcal{F}^{\text{sh}} \\
+         & \mathcal{G}
+        \arrow["\text{sh}", from=1-1, to=1-2]
+        \arrow["\exists !", from=1-2, to=2-2]
+        \arrow["\phi", from=1-1, to=2-2]
+    \end{tikzcd}\]
+\end{defn}
+\textbf{Remark.} Since this is a definition by universal property, $\mathcal{F}^{\text{sh}}$ and the map $\mathcal{F} \to \mathcal{F}^{\text{sh}}$ are unique (up to unique isomorphism).
+\vspace{1mm}
+ 
+A morphism of presheaves $\mathcal{F} \to \mathcal{G}$ induces a morphism of sheaves $\mathcal{F}^{\text{sh}} \to \mathcal{G}^{\text{sh}}$.
+
+\begin{prop}
+    Sheafification exists.
+\end{prop}
+\begin{proof}
+    Given a presheaf $\mathcal{F}$ on $X$, define 
+    \begin{align*}
+        \mathcal{F}^{\text{sh}}(U) = \{f : U \to \bigsqcup_{p \in U}^{} \mathcal{F}_p \mid& f(p) \in \mathcal{F}_p \text{ and for all } p \in U, \text{ there exists an open neighborhood }\\&V_p \subset U \text{ and }s \in \mathcal{F}(V_p) \text{ such that } (V_p, q) = f(q) \in \mathcal{F}_q ~\forall q \in V_p\}.
+    \end{align*}
+    This is clearly a sheaf. Verifying the universal property is left as an exercise.
+\end{proof}
+\begin{cor}
+    The stalks of $\mathcal{F}$ and $\mathcal{F}^{\text{sh}}$ coincide.
+\end{cor}
+\begin{proof}
+    Easy exercise from the definitions.
+\end{proof}
+\textbf{Exercise.} Find a nonzero presheaf $\mathcal{F}$ with $\mathcal{F}^{\text{sh}} = 0$. (Comment by Dhruv: this is rather stupid). 
+
+\subsection{Kernels, cokernels, etc.}
+
+Let $\phi : \mathcal{F} \to \mathcal{G}$ be a morphism of presheaves. Then we can define presheaves $\text{ker } \phi$, $\text{coker } \phi$, $\text{im } \phi$ by \begin{align*}
+    &(\text{ker }\phi)(u) = \text{ker }\phi_u : \mathcal{F}(U) \to \mathcal{G}(U)\\
+    &(\text{coker }\phi)(u) = \text{coker }\phi_u\\
+    &(\text{im }\phi)(u) = \text{im }\phi_u.
+\end{align*}
+These are all presheaves.
+
+\textbf{Exercise.} The presheaf kernel for a morphism of sheaves $\phi: \mathcal{F} \to \mathcal{G}$ is also a sheaf.
+\vspace{1mm}
+ 
+This is not true for $\text{coker }\phi$ in general!
+\begin{example}
+    Take $X = \mathbb{C}$ with the Euclidean topology, and let $\mathcal{O}_X$ be the sheaf of holomorphic functions on $X$ (with addition as its group operation). Let $\mathcal{O}_X^*$ be the sheaf of nowhere vanishing holomorphic functions (with multiplication as its group operation). 
+    \vspace{1mm}
+     
+    We have a morphism of sheaves $\text{exp}: \mathcal{O}_X \to \mathcal{O}_X^*$ by $f \in \mathcal{O}_X(U) \mapsto \text{exp}(f) \in\mathcal{O}_X^*(U)$. Thus $\text{ker}(\text{exp}) = 2 \pi i \mathbb{Z}$ with $\mathbb{Z}$ the constant sheaf, but $\text{coker}(\text{exp})$ is not a sheaf: if we let $U_1 = \mathbb{C}\setminus [0,\infty)$, $U_2 = \mathbb{C}\setminus (-\infty,0]$ and $U = U_1 \cup U_2 = \mathbb{C}\setminus \{\infty\}$ and we let $f(z)=z \in \mathcal{O}_X^*(U)$, then it is not in the image of $\text{exp}:\mathcal{O}_X(U) \to \mathcal{O}_X^*(U)$ since $\log z$ is not single--valued on $U$. Thus $f$ defines a nonzero section of $(\text{coker exp})(U)$. But $f|_{U_i}$ is in the image of $\text{exp}_{U_i}$, since we just choose some branch of $\log z$. Thus $f|_{U_i} = 1$ in $\text{coker exp}$, so sheaf axiom 1 fails.
+\end{example}
+\begin{defn}
+    For a morphism $\phi : \mathcal{F} \to \mathcal{G}$ of sheaves, we define the \textbf{sheaf cokernel} and the \textbf{sheaf image} to be the sheafification of the presheaf cokernel and the presheaf image.
+\end{defn}
+\textbf{Remark.} Crucial fact: there is an exact sequence of sheaves \[
+0 \to 2\pi i \mathbb{Z} \to \mathcal{O}_X \stackrel{\text{exp}}{\to} \mathcal{O}_X^* \to 1.
+\]
+In other words, $2\pi i \mathbb{Z} = \text{ker}(\text{exp})$ and $\text{coker}(\text{exp}) = 1$ (the first of these we showed, the second of this we will show once we've developed the necessary theory). 
+\vspace{1mm}
+ 
+\textbf{Remark.} $\text{ker }\phi, \text{coker }\phi$ satisfy the category theoretic definitions of kernels and cokernels, i.e. they are universal in the appropriate sense. For example, for the kernel, if $\text{ker }\phi : \mathcal{F} \to \mathcal{G}$, then for any other sheaf $\mathcal{L}$ with a map  $\psi $ to $\mathcal{F}$ such that $\phi \circ \psi = 0$, this map factors uniquely through the kernel. This is easy to check and left as an exercise.
+\[\begin{tikzcd}[row sep=large,column sep=large]
+    & \mathcal{L} & \\
+    \text{ker }\phi & \mathcal{F} & \mathcal{G}
+    \arrow["\psi", from=1-2, to=2-2]
+    \arrow["\phi", from=2-2, to=2-3]
+    \arrow["\phi \circ \psi = 0", from=1-2, to=2-3]
+    \arrow[,from = 2-1, to = 2-2]
+    \arrow["\exists !", from=1-2, to=2-1, dashed]
+    \arrow["0", from = 2-1, to = 2-3, bend right = 23]
+\end{tikzcd}\]
+For the cokernel, reverse all the arrows and check that $\text{coker }\phi$ satisfies the universal property (exercise).
+
+\textbf{Adjacent notions.}
+\begin{enumerate}[(i)]
+    \item \textbf{Subsheaves}. $\mathcal{F} \subset \mathcal{G}$ is there exist inclusions $\mathcal{F}(U) \subset \mathcal{G}(U)$ compatible with restrictions. For example, $\text{ker}(\phi : \mathcal{F} \to \mathcal{G}) \subset \mathcal{F}$.
+\end{enumerate} 
+
 \end{document}
