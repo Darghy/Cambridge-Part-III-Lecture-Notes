@@ -586,8 +586,93 @@ so $v_{\infty}(\Delta) = 1$, so $\Delta$ has a simple zero at $\infty$ and $\Del
     and $E_4^A E_6^B \in \langle E_4^a E_6^b \mid 4a+6b = k \rangle$, so $M_k(\Gamma(1)) = \langle E_4^a E_6^b \mid 4a+6b = k \rangle$.
 \end{proof}
 \begin{theorem}
-    Let $j(\tau) = \frac{E_4(t)^3}{\Delta(\tau)}$. Then $j$ is a modular function of weight $0$, level $\Gamma(1)$. It defines a bijection $\Gamma(1)\setminus \mathfrak{h} \to \mathbb{C}$ given by $\tau \to j (\tau)$. Moreover, every modular function of weight 0, level $\Gamma(1)$ is a rational function of $j$.\footnote{Remember that $\Gamma(1)\setminus \mathfrak{h}$ is the set of orbits of $\Gamma(1)$ under $\mathfrak{h}$.}
+    Let $j(\tau) = \frac{E_4(t)^3}{\Delta}$. Then $j$ is a modular function of weight $0$, level $\Gamma(1)$ which is holomorphic on $\mathfrak{h}$ and has a simple pole at $\infty$. It defines a bijection $\Gamma(1)\setminus \mathfrak{h} \to \mathbb{C}$ given by $\tau \to j (\tau)$. Moreover, every modular function of weight 0, level $\Gamma(1)$ is a rational function of $j$.\footnote{Remember that $\Gamma(1)\setminus \mathfrak{h}$ is the set of orbits of $\Gamma(1)$ under $\mathfrak{h}$.}
 \end{theorem}
 The interpretation of this is that it is possible to define a Riemann surface structure on $\Gamma(1)\setminus \mathfrak{h} \sqcup \{\infty\}$ such that we get a compact Riemann surface whose meromorphic functions are exactly the modular functions of weight 0. So the theorem says that this Riemann surface, called $X(1)$, is isomorphic to the Riemann sphere, and our formula says that if $\mathcal{L}$ is an invertible sheaf on a compact Riemann surface and $S$ is a meromorphic section, then $\sum_{a}^{} v_a(S) = \text{deg}(\mathcal{L})$. This is useful if we are also taking algebraic geometry.
+
+\marginpar{18 Oct 2022, Lecture 6}
+
+\begin{proof}
+    We showed that $\Delta$ is nonvanishing in $\mathfrak{h}$ and has a simple zero at $\infty$. Hence $j$ is holomorphic in $\mathfrak{h}$ and $v_{\infty}(j)=3v_{\infty}(E_4)-v_{\infty}(\Delta) = -1$. Note that if $\gamma \in \Gamma(1)$, then $j|_0[\gamma](\tau) = j(\gamma \tau) = j(\tau)$. To show $\Gamma(1)\setminus \mathfrak{h}$ is a bijection, we need to show that $\forall z \in \mathbb{C}$, there exists a unique orbit $\Gamma(1)\cdot \tau$ such that $j(\tau)=z$, i.e. $v_\tau(j-z)>0$. \vspace{1mm}
+     
+    We know \[
+    \sum_{\tau \in \Gamma(1)\setminus \mathfrak{h}}^{} \frac{1}{e_{\tau}} \underbrace{v_{\tau}(j-z)}_{\ge 0, \text{ as }j-z \text{ is holomorphic in }\mathfrak{h}.} = 1,
+    \]
+    (since $v_{\infty}(j-z) = -1$ and $\frac{k}{12}= 0$) again giving $a +\frac{b}{2}+\frac{c}{3} = 1$ for $a,b,c \in \mathbb{Z}_{\ge 0}$, $ a = v_{\rho}(j-z), b = v_{i}(j-z), c = \sum_{\tau \not\sim \rho,i}^{} v_\tau(j-z)$. This gives the solutions 
+    \begin{itemize}
+        \item $(a,b,c) = (0,0,1)$, so $j-z$ vanishes at a unique $\Gamma(1)\cdot \tau$.
+        \item $(a,b,c) = (0,2,0)$, so $j-z$ vanishes at $i$.
+        \item $(a,b,c) = (3,0,0)$, so $j-z$ vanishes at $\rho$.
+    \end{itemize}
+    Hence our map is bijective. Consider a nonzero modular function $f$ of weight 0. We can consider a product $f \cdot \prod_{i=0}^{n} \left(j(\tau)-j(a_i)\right)^{b_i}$ for $a_i \in \mathfrak{h}$, $b_i \in \mathbb{Z}_{\ge 0}$, where the $a_i$ are among the poles of $f$ in $\mathfrak{h}$. Hence to show $f$ is a rational function of $j$, it is enough to consider the case where $f$ is holomorphic in $\mathfrak{h}$. Then there exists $m\ge 0$ such that $\Delta^m f$ is holomorphic at $\infty$, so $\Delta^m f$ is holomorphic in $\mathfrak{h}$ and at $\infty$, so $\Delta^m f \in M_{12m}(\Gamma(1))$. We showed that $M_{12m}(\Gamma(1)) = \langle E_4^a E_6^b \mid 4a+6b=12m \rangle$, so $f$ is a linear combination of functions of the form $\frac{E_4^aE_6^b}{\Delta^m}$, where $4a+6b=12m$. 
+    \vspace{1mm}
+     
+    Hence it is enough to show that $\frac{E_4^aE_6^b}{\Delta^m}$ is a rational function of $j$ where $4a+6b=12m$, $a,b \in \mathbb{Z}_{\ge 0}$. But then $2a+3b=6m$, which gives $p,q \in \mathbb{\mathbb{Z}}_{\ge 0}$ such that $a =3p, b = 2q$, so $p+q=m$. Then $$\frac{E_4^aE_6^b}{\Delta^m} = \left(\frac{E_4^3}{\Delta}\right)^p \left(\frac{E_6^2}{\Delta}\right)^q = j^p \left(\frac{E_6^2}{\Delta}\right)^q.$$ 
+    As $E_4^3 - E_6^2 = 1728\Delta$, we get $j = \frac{E_6^2}{\Delta} + 1728$. So this is a rational function of $j$.
+\end{proof}
+\begin{prop}
+    Let $k\ge 4$ be an even integer. Then $$G_k(\tau) = 2\zeta(k) + 2\frac{(2\pi i)^k}{(k-1)!} \cdot \sum_{n\ge 1}^{} \sigma_{k-1}(n)q^n$$
+    where $q = e^{2\pi i \tau}$ and $\sigma_{k-1}(n) = \sum_{d \mid n}^{} d^{k-1}$.
+\end{prop}
+\begin{proof}
+    We start from the identity $$\pi \cot (\pi \tau) = \frac{1}{\tau} + \sum_{n\ge 1}^{} \left(\frac{1}{\tau+n} + \frac{1}{\tau-n}\right).$$
+    This is true for $\tau \in \mathfrak{h}$ and it is even locally uniformly convergent in $\mathfrak{h}$. We can write \[
+    \pi \cot(\pi \tau) = i\pi \frac{e^{\pi i \tau} + e^{-\pi i \tau}}{e^{\pi i \tau}-e^{- \pi i \tau}} = \pi i \frac{q+1}{q-1} = -\pi i (1+q)(1-q)^{-1} = -\pi i \left(1+2\sum_{n\ge 1}^{} q^n\right).
+    \]
+    Differentiate term--by--term $k-1$ times. The LHS is \[
+    -2\pi i \left(\frac{\mathrm{d}}{\mathrm{d}\tau}\right)^{k-1}\left(\sum_{n\ge 1}^{} q^n \right) = -\left(2\pi i\right)^k \sum_{n\ge 1}^{} n^{k-1}q^n,
+    \]
+    while the RHS is \[
+    (-1)^{k-1}(k-1)! \left(\tau^{-k} + \sum_{n\ge 1}^{} (\tau+n)^{-k} + (\tau-n)^{-k} \right) = (-1)^{k-1}(k-1)! \sum_{n \in \mathbb{Z}}^{} (\tau+n)^{-k}.   
+    \]
+    Rearranging and using the fact that $k$ is even (to make the sign go away) gives \[
+    \sum_{n \in \mathbb{Z}}^{} (\tau+n)^{-k} = \frac{(2\pi i)^k}{(k-1)!} \sum_{n\ge 1}^{} n^{k-1}q^n, \tau \in \mathfrak{h}.
+    \]
+    Then \[
+    G_k(\tau) = \sum_{(m,n) \in \mathbb{Z}^2\setminus 0}^{} (m \tau + n)^{-k} = 2 \zeta(k) + \sum_{\substack{(m,n) \in \mathbb{Z}^2\setminus 0, \\m \neq 0}}^{} (m \tau + n)^{-k} = 2 \zeta(k) + 2 \sum_{m\ge 1}^{} \sum_{n \in \mathbb{Z}}^{} (m \tau + n)^{-k}.
+    \]
+    Plug in our identity to get 
+    \begin{align*}
+        G_k(\tau) =& 2 \zeta(k) + \sum_{m\ge 1}^{} \frac{(2\pi i )^k}{(k-1)!} \sum_{n\ge 1}^{} n^{k-1}q^{mn} = 2\zeta(k) + \frac{2 (2\pi i)^k}{(k-1)!} \sum_{N\ge 1}^{} \underbrace{\left(\sum_{n \mid N}^{} n^{k-1}\right)}_{=\sigma_{k-1}(N)}q^N.
+    \end{align*}
+\end{proof}
+\begin{cor}
+    $E_k(\tau) = \frac{G_k(\tau)}{2\zeta(k)} = 1 + \sum_{n\ge 1}^{} a_nq^n$ has all $a_n \in \mathbb{Q}$. Moreover, if $k=4$ or $k=6$, then $a_n \in \mathbb{Z}$.
+\end{cor}
+\begin{proof}
+    We have $$E_k(\tau) = 1 + \frac{(2\pi i)^k}{\zeta(k)(k-1)!}\sum_{n\ge 1}^{} \sigma_{k-1}(n)q^n.$$
+    Hence we need to show that $\frac{\zeta(k)}{\pi^k}$ is rational. This is on example sheet 1 (when $k$ is even). One can show that $\zeta(4) = \frac{\pi^4}{90}$ and $\zeta(6) = \frac{\pi^6}{945}$, so 
+    \begin{align*}
+        &E_4(\tau) = 1 + \frac{2^4 \pi^4 \cdot 90}{\pi^4 \cdot 6}\sum_{n\ge 1}^{} \sigma_3(n)q^n = 1 + 240\sum_{n\ge 1}^{} \sigma_3(n)q^n\\
+        &E_6(\tau) = 1 -\frac{2^6 \pi^6 \cdot 3^3 \cdot 5 \cdot 7}{\pi^6 \cdot 5!}\sum_{n\ge 1}^{} \sigma_5(n)q^n = 1 - 504 \sum_{n\ge 1}^{} \sigma_5(n)q^n.
+    \end{align*}
+\end{proof}
+\begin{cor}
+    If $\Delta = \sum_{n\ge 1}^{} \tau(n)q^n$ is the $q$--expansion of $\Delta$, then $\tau(n) \in \mathbb{Z} ~\forall n\ge 1$ and $\tau(1)=1$.
+\end{cor}
+\begin{proof}
+    Write $E_4 = 1 + 240U$ and $E_6 = 1 -504V$ for $U,V = q + \ldots \in \mathbb{Z}[[q]]$. Then 
+    \begin{align*}
+        \Delta &= \frac{E_4^3-E_6^2}{1728} = \frac{(1+240U)^3-(1-504V)^2}{1728} \\
+        &= \frac{3\cdot 240U + 3\cdot 240^2 U^2 + 240^3 U^3 + 2\cdot 504V - 504^2V^2}{1728}\\
+        &= \frac{(3\cdot 240 U + 2\cdot 504 V)}{1728} + R,
+    \end{align*}
+    where we claim $R \in q^2\mathbb{Z}[[q]]$, but for this we just need to check that $1728 \mid 3\cdot 240^2, 1728 \mid240^3, 1728 \mid504^2$.
+    \vspace{1mm}
+     
+    We need to check that $$\frac{(3\cdot 240 U + 2\cdot 504 V)}{1728} = \frac{2^4 \cdot 3^2\cdot 5\cdot U + 2^4 \cdot 3^2\cdot 7\cdot V}{2^6\cdot 3^3} \in \mathbb{Z}[[q]].$$ But this equals \[
+    \frac{5U+7V}{12} = \frac{5(U-V)}{12} + V.
+    \]
+    Hence we need to check that \[
+    \frac{5}{12}(\sigma_3(n)-\sigma_5(n)) \in \mathbb{Z} ~\forall n\ge 1,
+    \]
+    i.e. we need to check that \[
+    \sigma_3(n) \equiv \sigma_5(n) \pmod{12} ~\forall n\ge 1.
+    \]
+    But this is true as $d^3 \equiv d^5 \pmod{12} ~\forall d \in \mathbb{N}$.
+    \vspace{1mm}
+     
+    Finally, we compute $\tau(1) =\frac{3\cdot 240 + 2\cdot 504}{1728} = 1$. 
+\end{proof}
 
 \end{document}
