@@ -579,4 +579,106 @@ More generally:
     Since $K = \text{Frac}(\mathcal{O}_K)$, it suffices to show that $\mathcal{O}_K \cong k[[t]]$. For this, fix $\pi \in \mathcal{O}_K$ a uniformizer and let $[]: k \to \mathcal{O}_K$ be the Teichmüller map. Define $\phi : k[[t]] \to \mathcal{O}_K$ by $\phi\left(\sum_{i=0}^{\infty} a_i t^i \right) = \sum_{i=0}^{\infty} a_i \pi^i$. Then $\phi$ is a ring homomorphism since $[]$ is a ring homomorphism, but it is also a bijection by Proposition 3.3.
 \end{proof}
 
+\section{Extensions of complete valued fields}
+
+\marginpar{19 Oct 2022, Lecture 6}
+
+\begin{theorem}
+    Let $(K,|\cdot|)$ be a complete discretely valued field and let $L/K$ be a finite extension of degree $n$. Then:
+    \begin{enumerate}[(i)]
+        \item $|\cdot|$ extends uniquely to an absolute value $|\cdot|_L$ on $L$ defined by $$|y|_L = |N_{L/K}(y)|^{1/n}.$$
+        \item $L$ is complete with respect to $|\cdot|_L$.
+    \end{enumerate}
+\end{theorem}
+\textbf{Recall.} If $L/K$ is a finite extension, then $N_{L/K}: L \to K$ is defined by $N_{L/K}(y) = \det_K(\text{mult}(y))$ where $\text{mult}(y): L \to L$ is the $K$--linear map given by multiplication by $y$.
+\vspace{1mm}
+ 
+\textbf{Facts:} 
+\begin{itemize}
+    \item The norm is multiplicative, i.e. $N_{L/K}(xy) = N_{L/K}(x)N_{L/K}(y)$.
+    \item Let $X^n + a_{n-1}X^{n-1}+\ldots+a_0 \in K[X]$ be the minimal polynomial of $y \in L$. Then $N_{L/K}(y) = \pm a_0^m$ for some $m\ge 1$. In particular, $N_{L/K}(x)=0 \iff x = 0$.
+\end{itemize} 
+\begin{defn}
+    Let $(K,|\cdot|)$ be a nonarchimedean valued field and $V$ a vector spce over $K$. Then a \textbf{norm} on $V$ is a function $||\cdot || : V \to \mathbb{R}_{\ge 0}$ satisfying
+    \begin{itemize}
+        \item $||x|| = 0 \iff x = 0$.
+        \item $||\lambda x|| = |\lambda| \cdot ||x|| ~\forall x \in V, \lambda \in K$.
+        \item $||x+y|| \le \max(||x||,||y||) ~\forall x,y \in V$. 
+    \end{itemize}
+\end{defn}
+\begin{example}
+    If $V$ is finite--dimensional and $e_1,\ldots,e_n$ is a basis for $V$, then the \textbf{sup norm} $||\cdot ||_{\text{sup}}$ on $V$ is defined by $||x||_{\text{sup}} = \max_i |x_i|$, where $x = \sum_{i=1}^{n} x_ie_i$.
+\end{example}
+\textbf{Exercise}: $||\cdot ||_{\text{sup}}$ is a norm.
+\begin{defn}
+    Two norms $||\cdot ||_1, ||\cdot ||_2$ on $V$ are \textbf{equivalent} if there exist constants $C, D \in \mathbb{R}_{>0}$ such that \[
+    C ||x||_1 \le ||x||_2 \le D ||x||_1 ~\forall x \in V.
+    \]
+\end{defn}
+\textbf{Fact.} A norm defines a topology on $V$ and equivalent norms induce the same topology (since an open ball in one topology is both contained in and contains an open ball in the other topology).
+
+\begin{prop}
+    Let $(K,|\cdot|)$ be complete and nonarchimedean and let $V$ be a finite dimensional vector space over $K$. Then $V$ is complete with respect to $||\cdot ||_{\text{sup}}$.
+\end{prop}
+\begin{proof}
+    Let $(v_i)$ be a Cauchy sequence in $V$ and let $e_1,\ldots,e_n$ be a basis for $V$. Write $V_i = \sum_{j=1}^{n} x_j^i e_j$, then $(x^i_j)_{i=1}^{\infty}$ is a Cauchy sequence in $K$. Let $x_j^i \to x_j \in K$, then we can check that $v_i \to v = \sum_{j=1}^{n} x_je_j$.
+\end{proof}
+\begin{theorem}
+    Let $(K,|\cdot|)$ be complete and nonarchimedean and let $V$ be a finite dimensional vector space over $K$. Then any two norms on $V$ are equivalent. In particular, $V$ is complete with respect to any norm.
+\end{theorem}
+\begin{proof}
+    Since equivalence defines an equivalence relation on the set of norms, it suffices to show that any norm $||\cdot ||$ is equivalent to the sup norm $||\cdot ||_{\text{sup}}$ with respect to some basis. Let $e_1,\ldots,e_n$ be a basis for $V$.
+    \vspace{1mm}
+     
+    For the upper bound, set $D = \max ||e_i||$. Then if $x = \sum_{i=1}^{n} x_i e_i$, then $||x|| = \max_i ||x_i e_i|| = \max_i |x_i|||e_i|| \le D \max_i |x_i| = D ||x||_{\text{sup}}$.
+    \vspace{1mm}
+     
+    To find $C$ such that $C ||\cdot ||_{\text{sup}} \le ||\cdot ||$, we induct on $n = \text{dim }V$. If $n=1$, then $||x|| = ||x_1 e_1|| = |x_1|||e_1|| = ||x||_{\text{sup}}||e_1||$, so take $C = ||e_1||$.
+    \vspace{1mm}
+     
+    For $n>1$, set $V_i = \langle e_1,\ldots,e_{i-1}, e_{i+1},\ldots,e_n \rangle$. By induction, the norm on $V_i$ is equivalent to the sup norm, so $V_i$ is complete with respect to $||\cdot||$, hence closed. Then the translate $e_i + V_i$ is also closed for all $i$, hence \[
+    S = \bigcup_{i=1}^n e_i + V_i
+    \]
+    is a closed subset not containing zero. Hence $\exists C > 0$ such that $S \cap B(0,C) = \varnothing$, where $B(0,c) = \{x \in V \mid ||x||<C\}$. We claim this $C$ works. To see this, let $0 \neq x = \sum_{i=1}^{n} x_ie_i$ and suppose $|x_j| = \max_i |x_i|$. Then $||x||_{\text{sup}} = |x_j|$ and $\frac{1}{x_j}x \in S$ (since the $j^{\text{th}}$ coefficient will be equal to 1). Thus $||\frac{1}{x_j}x||\ge C$, so $||x||\ge C |x_j| = C ||x||_{\text{sup}}$.
+    \vspace{1mm}
+     
+    Finally, $V$ is complete since it is complete with respect to $||\cdot||_{\text{sup}}$.
+\end{proof}
+\begin{proof}[Proof of Theorem 6.1]
+    We first show that $|\cdot|_L = |N_{L/K}(\cdot )|^{1/n}$ satisfies the three absolute value axioms.
+    \begin{enumerate}[(i)]
+        \item $|y|_L = 0 \iff |N_{L/K}(y)|^{1/n} = 0 \iff N_{L/K}(y) = 0 \iff y = 0$.
+        \item $|y_1y_2|_L = |N_{L/K}(y_1y_2)|^{1/n} = |N_{L/K}(y_1)|^{1/n}|N_{L/K}(y_2)|^{1/n} = |y_1|_L|y_2|_L$.
+        \item For this, we need some preparation:
+    \end{enumerate}
+    \begin{defn}
+        Let $R \subset S$ be a subring. We say $s \in S$ is \textbf{integral} over $R$ if $s$ is a root of a monic polynomial with coefficients in $R$, i.e. monic $f \in R[X]$ such that $f(s)=0$.
+        \vspace{1mm}
+         
+        The \textbf{integral closure} $R^{\text{int}(S)}$ of $R$ in $S$ is the set of elements of $S$ that are integral over $R$, i.e. \[
+        R \subset R^{\text{int}(S)} = \{s \in S \mid s \text{ is integral over }R\}.
+        \]
+        We say $R$ is \textbf{integrally closed} in $S$ if $R^{\text{int}(S)} = R$.
+    \end{defn}
+    \begin{prop}
+        $R^{\text{int}(S)}$ is a subring of $S$. Moreover, $R^{\text{int}(S)}$ is integrally closed in $S$.
+    \end{prop}
+    \begin{proof}
+        Exercise on example sheet 2.
+    \end{proof}
+    \begin{lemma}
+        Let $(K,|\cdot|)$ be a nonarchimedean valued field. Then $\mathcal{O}_K$ is integrally closed in $K$.
+    \end{lemma}
+    \begin{proof}
+        Let $x \in K$ be integral over $\mathcal{O}_K$. WLOG assume $x \neq 0$. Let $f(X) = X^n + a_{n-1}X^{n-1}+\ldots+a_0 \in \mathcal{O}_K[X]$ such that $f(x)=0$. Then \[
+        x = -a_{n-1} - \ldots - a_0 \frac{1}{x^{n-1}}.
+        \] 
+        If $|x|>1$, then we have that $\left|-a_{n-1}- \ldots - a_0\frac{1}{x^{n-1}}\right|\le 1$ by the ultrametric inequality, contradiction. Thus $|x| \le 1$, so $x \in \mathcal{O}_K$.
+    \end{proof}
+    Now we show (iii): Set $\mathcal{O}_L = \{y \in L \mid |y|_L \le 1\}$. We claim that $\mathcal{O}_L$ is the integral closure of $\mathcal{O}_K$ inside $L$. In particular, $\mathcal{O}_L$ is a subring of $L$. 
+    \vspace{1mm}
+     
+    Assuming this, let $x, y \in L$ and WLOG assume $|x|_L \le |y|_L$. Then we he $\left|\frac{x}{y}\right|_L\le 1 \implies \frac{x}{y} \in \mathcal{O}_L$. Since $\mathcal{O}_L$ is a ring, $1 \in \mathcal{O}_L$, so $1 + \frac{x}{y} \in \mathcal{O}_L$ and hence $\left |1 +\frac{x}{y}\right|_L \le 1$, so $|x+y|_L \le |y|_L = \max (|x|_L, |y|_L)$, giving the ultrametric inequality property.
+\end{proof}
+
 \end{document}
