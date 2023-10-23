@@ -7,6 +7,7 @@
 \pagestyle{fancy}
 
 \usepackage{tcolorbox}
+\usepackage{ stmaryrd }
 \tcbuselibrary{theorems}
 \usepackage{babel}
 \usepackage{enumerate}
@@ -738,7 +739,7 @@ Hecke operators are just symmetries (linear endomorphisms) of spaces of modular 
 We study $\mathcal{L} = \{\Lambda \le \mathbb{C} \text{ a lattice}\}$ with its action by $\mathbb{C}^\times$, i.e. $z \Lambda = \{z \lambda \mid \lambda \in \Lambda\}$ for $z \in \mathbb{C}^\times, \Lambda \in \mathcal{L}$.
 
 \begin{prop}
-    The map $\tau \mapsto \Lambda \tau = \mathbb{Z} \tau \oplus \mathbb{Z}$ induces a bijection between $$\Gamma(1)\setminus \mathfrak{h} \leftrightarrow \mathcal{L}\setminus \mathbb{C}^\times$$ (orbits of $\Gamma(1)$ in $\mathfrak{h}$ and the set of lattices in $\mathbb{C}$ modulo scalar multiplication).
+    The map $\tau \mapsto \Lambda \tau = \mathbb{Z} \tau \oplus \mathbb{Z}$ induces a bijection between $$\Gamma(1)\setminus \mathfrak{h} \leftrightarrow \mathbb{C}^\times\setminus \mathcal{L}$$ (orbits of $\Gamma(1)$ in $\mathfrak{h}$ and the set of lattices in $\mathbb{C}$ modulo scalar multiplication).
 \end{prop}
 \begin{proof}
     This map is well--defined, since if $\gamma = \begin{pmatrix} a & b\\ c&d \end{pmatrix} \in \Gamma(1)$, $\tau \in \mathfrak{h}$, then \[
@@ -750,7 +751,7 @@ We study $\mathcal{L} = \{\Lambda \le \mathbb{C} \text{ a lattice}\}$ with its a
     For injectivity, if $\tau,\tau'$ have the same image, then $\exists z \in \mathbb{C}^\times$ such that $\mathbb{Z}\Lambda_\tau = \Lambda_{\tau'}$, i.e. $\exists  \gamma = \begin{pmatrix} a&b\\c&d \end{pmatrix} \in GL_2(\mathbb{Z})$ such that $\tau' = az\tau + bz, 1 = cz \tau + dz$. Then $\tau' =\frac{az \tau + bz}{c z \tau + dz} = \frac{a \tau + b}{c \tau + d}$. But $\text{Im}(\tau') = \text{Im}(\gamma \tau) = \det(\gamma)\frac{\text{Im}(\tau)}{|c \tau + d|^2}$ and $\text{Im}(\tau)>0, \text{Im}(\tau')>0$, hence $\det(\gamma)>0$, so $\det(\gamma)=1$ and so $\gamma \in \Gamma(1)$. 
 \end{proof}
 \begin{defn}
-If $k \in \mathbb{Z}$, say a function $F: \mathcal{\Lambda} \to \mathbb{C}$ is \textbf{of weight} $k$ if $\forall  z \in \mathbb{C}^\times, \Lambda \in \mathcal{L}$, $F(z \Lambda) = z^{-k}F(\Lambda)$.
+If $k \in \mathbb{Z}$, say a function $F: \mathcal{L} \to \mathbb{C}$ is \textbf{of weight} $k$ if $\forall  z \in \mathbb{C}^\times, \Lambda \in \mathcal{L}$, $F(z \Lambda) = z^{-k}F(\Lambda)$.
 \end{defn}
 \begin{prop}
     Let 
@@ -758,7 +759,7 @@ If $k \in \mathbb{Z}$, say a function $F: \mathcal{\Lambda} \to \mathbb{C}$ is \
         &V_k = \{F : \mathcal{L} \to \mathbb{C} \text{ of weight }k\}.\\
         &W_k = \{f : \mathfrak{h} \to \mathbb{C} \mid \forall \gamma \in \Gamma(1), f|_k[\gamma] = f\}.
     \end{align*}
-    Then the map $F \mapsto f$ by $f(\tau) = F(\Lambda \tau)$ induces a $\mathbb{C}$-vector space isomorphism $V_k \to W_k$.
+    Then the map $F \mapsto (f : \tau \mapsto F(\Lambda \tau))$ induces a $\mathbb{C}$-vector space isomorphism $V_k \to W_k$.
 \end{prop}
 \begin{proof}
     We first check that if $F \in V_k$, $f(\tau) = F(\Lambda \tau)$, then $f \in W_k$. If $\gamma \in \Gamma(1)$, $$f|_k[g](\tau) = f(\gamma \tau)j(\gamma,\tau)^{-k} = F(\lambda \gamma \tau)j(\gamma,\tau)^{-k} = F(j(\gamma,\tau)\Lambda_{\gamma \tau}) = F(\Lambda \tau) = f(\tau),$$
@@ -771,4 +772,92 @@ If $k \in \mathbb{Z}$, say a function $F: \mathcal{\Lambda} \to \mathbb{C}$ is \
     \end{align*}
     Exercise: check that the two maps are inverse to each other.
 \end{proof}
+
+\marginpar{23 Oct 2022, Lecture 8}
+
+\begin{defn}
+    Let $n \in \mathbb{N}$. The $n^{\text{th}}$ Hecke operator $T_n: V_k \to V_k$ is defined by the formula \[
+    (T_n F)(\Lambda) = n^{k-1}\sum_{\Lambda' \substack{\le \\ n} \Lambda}^{} F(\Lambda').
+    \]
+    Here $\sum_{\Lambda' \substack{\le \\ n} \Lambda}^{}$ means summing over all subgroups $\Lambda'$ of $\Lambda$ of index $n$.
+    \vspace{1mm}
+     
+    We also write $T_n : W_k \to W_k$ for the endomorphism arising from the isomorphism $V_k \stackrel{\sim}{\to}  W_k$.
+\end{defn}
+Why is $T_n$ a well--defined endomorphism of $V_k$? First of all, the sum is finite since there's a bijection 
+\begin{align*}
+    \{\Lambda' \le \Lambda\} &\leftrightarrow \{H \le \Lambda/n \Lambda \text{ of index }n\}\\
+    \Lambda' &\mapsto \Lambda'/n \Lambda\\
+    H + n \Lambda &\mapsfrom H
+\end{align*}
+This is well--defined, since Lagrange's theorem implies that $$\Lambda' \substack{\le \\n} \Lambda \implies n(\Lambda/\Lambda') = 0 \implies n \Lambda \le \Lambda'.$$ But $\Lambda/n \Lambda \cong \mathbb{Z}/n\mathbb{Z} \times \mathbb{Z}/n\mathbb{Z}$ is finite, so it has finitely many subgroups of index $n$.
+\vspace{1mm}
+ 
+If $\Lambda' \substack{\le  \\ n} \Lambda$, then $n \Lambda \le  \Lambda' \le \Lambda$, so $\Lambda'$ is also discrete and cocompact in $\mathbb{C}$.
+\vspace{1mm}
+ 
+We next check that $T_nF$ is of weight $k$, i.e. that $(T_nF)(z \Lambda) = z^{-k}(T_nF)(\Lambda)$. We have an isomorphism $\{\Lambda' \substack{\le \\ n} z\Lambda\} \leftrightarrow \{\Lambda' \substack{\le \\n} \Lambda\}$ given by $\Lambda' \mapsto z^{-1} \Lambda'$, so
+\begin{align*}
+    (T_nF)(z \Lambda) = n^{k-1}\sum_{\Lambda' \substack{\le \\ n} z\Lambda}^{} F(\Lambda') = n^{k-1} \sum_{\Lambda' \substack{\le  \\ n} \Lambda}^{} F(z \Lambda') = n^{k-1}\sum_{\Lambda' \substack{\le  \\ n} \Lambda} z^{-k}F(\Lambda') = z^{-k}(T_nF)(\Lambda).
+\end{align*}
+\begin{prop}
+    \begin{enumerate}[(1)]
+        \item If $m,n \in \mathbb{N}$ with $(m,n) = 1$, then $T_mT_n = T_{mn}$.
+        \item If $p$ is a prime number and $n \in \mathbb{N}$, then $T_{p^n}T_p = T_{p^{n+1}}+p^{k-1}T_{p^{k-1}}$ (acting on $V_k$). 
+    \end{enumerate}
+\end{prop}
+\begin{proof}
+    Let $m,n \in \mathbb{N}$, not necessarily coprime. Then 
+    \begin{align*}
+        (T_m(T_nF))(\Lambda) &= m^{k-1}\sum_{\Lambda' \substack{\le  \\ m} \Lambda}(T_nF)(\Lambda') = (mn)^{k-1}\sum_{\Lambda' \substack{\le  \\ m} \Lambda}\sum_{\Lambda'' \substack{\le  \\ n} \Lambda'} F(\Lambda'') \\
+        &=(mn)^{k-1} \sum_{\Lambda'' \substack{\le  \\ mn} \Lambda}a(\Lambda,\Lambda'')F(\Lambda''),
+    \end{align*}
+    where $a(\Lambda, \Lambda'') = |\{\Lambda \substack{\ge \\ m} \Lambda' \substack{\ge \\ n} \Lambda''\}| = |H \le \Lambda/\Lambda'' \mid |H| = n|$ is the number of ways to express $\Lambda'$ as an intermediate subgroup. If $(m,n) = 1$, then $a(\Lambda,\Lambda'') = 1$ for all $\Lambda'' \le \Lambda$ as any finite abelian group of order $mn$ has a unique subgroup of order $n$.
+    \begin{enumerate}[(1)]
+        \item In this case, we find 
+        \begin{align*}
+            T_m T_nF(\Lambda) = (mn)^{k-1} \sum_{\Lambda'' \substack{\le  \\ mn} \Lambda} F(\Lambda'') = (T_{mn}F)(\Lambda) \implies T_mT_n = T_{mn}.
+        \end{align*}
+        \item The same computation gives (for $p$ prime, $n \in \mathbb{N}$)
+        \begin{align*}
+            (T_{p^n}(T_p F))(\Lambda) = p^{(n+1)(k-1)} \sum_{\Lambda'' \substack{\le  \\ p^{n+1}} \Lambda} a(\Lambda,\Lambda'')F(\Lambda''),
+        \end{align*}
+        where $a(\Lambda,\Lambda') = |\{H \subset \Lambda/\Lambda'' \mid |H| = p\}|$. But if $\Lambda'' \substack{\le \\ p^{n+1}} \Lambda$, then $\Lambda/\Lambda''$ need not have a unique subgroup of order $p$, as $\Lambda \cong \mathbb{Z}^2$, so $\Lambda/\Lambda''$ is a finite abelian group of order $p^{n+1}$ that can be generated by 2 elements. But any such group is isomorphic to $\mathbb{Z}/p^a\mathbb{Z} \oplus \mathbb{Z}/p^b \mathbb{Z}$, where $a\ge b\ge 0$ are integers such that $a + b = n + 1$. We now split into two cases:
+        \begin{itemize}
+            \item $b = 0$, so $a = n+1$ and $\Lambda/\Lambda'' \cong \mathbb{Z}/p^{n+1}\mathbb{Z}$. This group is cyclic and has a unique subgroup of order $p$, so $a(\Lambda,\Lambda'') = 1$.
+            \item $b>0$, so $\Lambda/\Lambda'' \cong \mathbb{Z}/p^a \mathbb{Z} \oplus \mathbb{Z}/p^b \mathbb{Z}$. Let $\Lambda/\Lambda''[p] = \{x \in \Lambda/\Lambda'' \mid px = 0\}$. This is a subgroup of $\Lambda/\Lambda''$, and \[
+            \{H \le \Lambda/\Lambda'' \mid |H| = p\}  = \{H \le \Lambda/\Lambda''[p] \mid  |H| = p\}.
+            \]
+            Hence $\Lambda/\Lambda''[p] \cong \mathbb{Z}/p\mathbb{Z} \oplus \mathbb{Z}/p\mathbb{Z}$ from our above isomorphism. So in this case, $a(\Lambda,\Lambda'')  = |\{H \le \mathbb{Z}/p\mathbb{Z} \oplus \mathbb{Z}/p\mathbb{Z} \mid |H|= p\}|$. In other words, \[
+            a(\Lambda,\Lambda') = |\mathbb{P}^1(\mathbb{F}_p)| = |\mathbb{A}^1(\mathbb{F}_p) \cup \{\infty\}| = p+1.
+            \]
+        \end{itemize} 
+        How do we distinguish between these two cases? We will show on example sheet 2 that if $\Lambda'' \substack{\le \\ p^{n+1}}\Lambda$, then there exists a $\mathbb{Z}$--basis $e_1, e_2$ for $\Lambda$ such that $\Lambda'' = \mathbb{Z}p^a e_1 \oplus \mathbb{Z} p^b e_2$ for the same $a,b$ satisfying $a\ge b\ge 0, a+b = n+1$ as before (this is a consequence of Smith normal form).
+        \vspace{1mm}
+         
+        Hence we see that we are in case 2 if and only if $\Lambda'' \le p \Lambda$. Thus we find
+        \begin{align*}
+            (T_{p^n}(T_pF)(\Lambda)) = p^{(n+1)(k-1)}\sum_{\Lambda'' \substack{\le \\ p^{n+1}}\Lambda} F(\Lambda'') + p^{(n+1)(k-1)} \sum_{\substack{ \Lambda''\le p \Lambda\\p^{n-1} } }^{} pF(\Lambda'').
+        \end{align*}
+        Here each $\Lambda''$ in case 1 goes into the first sum and each $\Lambda''$ in case 2 goes once into the first sum and $p$ times into the second sum. We have 
+        \begin{align*}
+            &p^{(n+1)(k-1)} \sum_{\Lambda'' \substack{\le \\p^{n+1}} p \Lambda} p F(\Lambda'') = p^{(n-1)(k-1)}p^{2(k-1)}\sum_{\Lambda'' \substack{\le \\ p^{n-1}}\Lambda} p F(p \Lambda'') \\
+            =& p^{(n-1)(k-1)}p^{2(k-1)}p^{1-k}\sum_{\Lambda'' \substack{\le \\ p^{n-1}}\Lambda} F(\Lambda'') = p^{k-1}T_{p^{n+1}}F(\Lambda).
+        \end{align*}
+        Hence $T_{p^n}T_p F(\Lambda) = T_{p^{n+1}}F(\Lambda) + p^{k-1} T_{p^{n-1}}F(\Lambda)$.
+    \end{enumerate}
+\end{proof}
+\begin{cor}
+    $\forall m,n \in \mathbb{N}$, $T_m T_n = T_n T_m$ as endomorphisms of $V_k$, i.e. all Hecke operators commute.
+\end{cor}
+\begin{proof}
+    If we write $m = \prod_{i=1}^{r} p_i^{a_i}$ for $a_i\ge 1$, $p_i$ distinct, then $T_m = T_{p_1^{a_1}}\ldots T_{p_r^{a_r}}$. We've shown that if $p,q$ are distinct primes, then $T_{p^a}, T_{q^b}$ commute $\forall a,b\ge 1$.
+    \vspace{1mm}
+     
+    We need to show that if $p$ is a prime and $a,b \in \mathbb{N}$, then $T_{p^a}$ and $T_{p^b}$ commute. But we have a stronger claim that $\forall a \in \mathbb{N}$, $T_{p^a}$ is a polynomial in $T_p$. We prove this by induction on $a$, the case $a=1$ being trivial.
+    \vspace{1mm}
+     
+    In general, $T_{p^{a+1}} = T_{p^a} T_p - p^{k-1}T_{p^{a-1}}$, which proves the claim.
+\end{proof}
+ 
 \end{document}
