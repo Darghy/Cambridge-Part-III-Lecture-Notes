@@ -400,15 +400,13 @@ Let $f$ be a nonzero modular function of weight $k$, level $\Gamma(1)$. If $\tau
 \begin{proof}
     We first check that the sum is well--defined: 
     \begin{itemize}
-        \item If $\tau \in \mathfrak{h}$, then $e_\tau, v_{\tau}(f)$ only depend on the $\Gamma(1)$--orbit of $\tau$. This is because if $\gamma \in \Gamma(1)$ and $\tau \in \mathfrak{h}$, then $\text{Stab}_{\Gamma(1)}(\tau)$ and $\text{Stab}_{\Gamma(1)}(\gamma \tau)$ are conjugate subgroups of $\Gamma(1) \implies e_{\tau} = e_{\gamma \tau}$. On the other hand, $f(\gamma \tau) = f(\tau) j(\gamma, \tau)^k$ and $j(\gamma, \tau)$ is holomorphic and non--vanishing on $\mathfrak{h}$, so $v_{\gamma \tau}(f) = v_{\tau(f)}$.
-        \item The sum only has a finite number of nonzero terms, since if $f$ is a modular function and $\tilde{f}$ is a meromorphic function on $D(0,1)$, then $\exists \delta > 0$ such that $\tilde{f}$ is holomorphic and non--vanishing in $D^*(0,\delta)$. Thus $\exists R > 0$ such that $f$ is holomorphic and non--vanishing in $\{\tau \in \mathfrak{h} \mid \text{Im}(\tau)>R\}$. Hence to show the sum is finite, it suffices to show that $f$ only has a finite number of zeroes and poles in $\mathfrak{f}$ (as $f$ intersects every $\Gamma(1)$--orbit), for which it suffices to show that $f$ has a finite number of zeroes and poles in $\mathfrak{f} \cap \{\tau \in \mathfrak{h} \mid  \text{Im}(\tau)\le R\}$, which is true as the set is compact (closed and bounded) and the zeroes and poles of $f$ are discrete.
+        \item If $\tau \in \mathfrak{h}$, then $e_\tau, v_{\tau}(f)$ only depend on the $\Gamma(1)$--orbit of $\tau$. This is because if $\gamma \in \Gamma(1)$ and $\tau \in \mathfrak{h}$, then $\text{Stab}_{\Gamma(1)}(\tau)$ and $\text{Stab}_{\Gamma(1)}(\gamma \tau)$ are conjugate subgroups of $\Gamma(1)$, so $e_{\tau} = e_{\gamma \tau}$. On the other hand, $f(\gamma \tau) = f(\tau) j(\gamma, \tau)^k$ and $j(\gamma, \tau)$ is holomorphic and non--vanishing on $\mathfrak{h}$, so $v_{\gamma \tau}(f) = v_{\tau}(f)$.
+        \item The sum only has a finite number of nonzero terms, since if $f$ is a modular function and $\tilde{f}$ is a meromorphic function on $D(0,1)$, then $\exists \delta > 0$ such that $\tilde{f}$ is holomorphic and non--vanishing in $D^*(0,\delta)$. Thus $\exists R > 0$ such that $f$ is holomorphic and non--vanishing in $\{\tau \in \mathfrak{h} \mid \text{Im}(\tau)>R\}$. Hence to show the sum is finite, it suffices to show that $f$ only has a finite number of zeroes and poles in $\mathfrak{f}$ (as $\mathfrak{f}$ intersects every $\Gamma(1)$--orbit), for which it suffices to show that $f$ has a finite number of zeroes and poles in $\mathfrak{f} \cap \{\tau \in \mathfrak{h} \mid  \text{Im}(\tau)\le R\}$, which is true as the set is compact (closed and bounded) and the zeroes and poles of $f$ are discrete.
     \end{itemize}
-    To prove the identity, we use contour integration. Setup: if $U \subset \mathbb{C}$ is an open subset, $f : U \to \mathbb{C}$ is holomorphic and $\gamma:[0,1] \to U$ is a path, then $\int_{\gamma}^{} f(z)\mathrm{d}z = \int_{t=0}^{1} f(\gamma(t))\gamma'(t)\mathrm{d}t$. We have the pullback formula: if $u : U \to V$ is a holomorphic map between open subsets of $\mathbb{C}$, $g : V \to \mathbb{C}$ is holomorphic and $\gamma$ is a path in $U$, then $\int_{u \circ \gamma}^{} g(z)\mathrm{d}z = \int_{\gamma}^{} u^*(g(z)\mathrm{d}z) = \int_{\gamma}^{} g(u(z))u'(z)\mathrm{d}z$. A particularly nice case: if $g(z)=h'(z)/h(z)$, then $g(z)\mathrm{d}z = d \log h$, so $\int_{u \circ \gamma}^{}d \log h = \int_{\gamma}^{} u^*(d \log h) = \int_{\gamma}^{} d(\log h \circ u) = \int_{\gamma}^{} \frac{(h \circ u)'(z)}{(h \circ u)(z)}\mathrm{d}z$.
+    To prove the identity, we use contour integration. Setup: if $U \subset \mathbb{C}$ is an open subset, $f : U \to \mathbb{C}$ is holomorphic and $\gamma:[0,1] \to U$ is a path, then $$\int_{\gamma}^{} f(z)\mathrm{d}z = \int_{t=0}^{1} f(\gamma(t))\gamma'(t)\mathrm{d}t.$$ We have the pullback formula: if $u : U \to V$ is a holomorphic map between open subsets of $\mathbb{C}$, $g : V \to \mathbb{C}$ is holomorphic and $\gamma$ is a path in $U$, then $$\int_{u \circ \gamma}^{} g(z)\mathrm{d}z = \int_{\gamma}^{} u^*(g(z)\mathrm{d}z) = \int_{\gamma}^{} g(u(z))u'(z)\mathrm{d}z.$$ A particularly nice case: if $g(z)=h'(z)/h(z)$, then $g(z)\mathrm{d}z = d \log h$, so $\int_{u \circ \gamma}^{}d \log h = \int_{\gamma}^{} u^*(d \log h) = \int_{\gamma}^{} d(\log h \circ u) = \int_{\gamma}^{} \frac{(h \circ u)'(z)}{(h \circ u)(z)}\mathrm{d}z$.
     \vspace{1mm}
      
-    We also have (Cauchy') argument principle: if $U \subset \mathbb{C}$ is a simply connected open subset, $\gamma \subset U$ is a simple positvely oriented closed path and $g$ a meromorphic function in $U$ with no zeroes or poles on $\gamma$, then $$\frac{1}{2\pi i} \oint_{\gamma} d \log g = \frac{1}{2\pi i} \oint_{\gamma} \frac{g'(z)}{g(z)}\mathrm{d}z = \sum_{a \in \text{Int}(\gamma)}^{} v_a(g).$$
-    \vspace{1mm}
-     
+    We also have (Cauchy's) argument principle: if $U \subset \mathbb{C}$ is a simply connected open subset, $\gamma \subset U$ is a simple positvely oriented closed path and $g$ is a meromorphic function in $U$ with no zeroes or poles on $\gamma$, then $$\frac{1}{2\pi i} \oint_{\gamma} d \log g = \frac{1}{2\pi i} \oint_{\gamma} \frac{g'(z)}{g(z)}\mathrm{d}z = \sum_{a \in \text{Int}(\gamma)}^{} v_a(g).$$
     We now apply this to our modular function $f$. Choose $R>0$ such that $f$ has no zeroes or poles in $\{\tau \in \mathfrak{h} \mid \text{Im}(\tau)\ge R\}$. We consider $\frac{1}{2\pi i}\oint_{\gamma} d \log f$, where $\gamma$ is the contour $ABCDE$.
     
     \begin{center}
@@ -484,7 +482,7 @@ Let $f$ be a nonzero modular function of weight $k$, level $\Gamma(1)$. If $\tau
         \end{tikzpicture}    
     \end{center}
 
-    By choice of $R$, tere ar eno zeroes or poles of $f$ on $AE$. We first consider the case where $f$ has no zeroes or poles at all on $\gamma$. Then the argument principle gives $$\frac{1}{2\pi i}\oint_{\gamma} d \log f = \frac{1}{2\pi i} \int_{AB}^{} +\int_{BC}^{} +\int_{CD}^{} +\int_{DE}^{} +\int_{EA}^{} d \log f = \sum_{\tau \in \Gamma(1)\setminus \mathfrak{h}}^{} \frac{1}{e_{\tau}}v_\tau(f) $$
+    By choice of $R$, there are no zeroes or poles of $f$ on $AE$. We first consider the case where $f$ has no zeroes or poles at all on $\gamma$. Then the argument principle gives $$\frac{1}{2\pi i}\oint_{\gamma} d \log f = \frac{1}{2\pi i} \int_{AB}^{} +\int_{BC}^{} +\int_{CD}^{} +\int_{DE}^{} +\int_{EA}^{} d \log f = \sum_{\tau \in \Gamma(1)\setminus \mathfrak{h}}^{} \frac{1}{e_{\tau}}v_\tau(f) $$
     (as $v_\tau(f) \neq 0$, $e_{\tau} = 1$ under our assumptions).
     \vspace{1mm}
      
@@ -527,7 +525,7 @@ Let $f$ be a nonzero modular function of weight $k$, level $\Gamma(1)$. If $\tau
     If $k=6$, $f = E_6$, then we get \[
     \frac{1}{3}v_{\rho}(E_6) + \frac{1}{2}v_i(E_6) + \sum_{\tau \not\sim \rho,i}^{} v_{\tau}(E_6) = \frac{6}{12} = \frac{1}{12},
     \]
-    so this forces $v_{\rho}(E_6) = 0$, $v_{i}(E_6) = 1$, $v_{\tau}(E_6) \neq 0$ if $\tau \not\sim \rho, i$, so $E_6(1) = 0$, $E_6(\tau) \neq 0$ if $\tau \not\sim \rho,i$.
+    so this forces $v_{\rho}(E_6) = 0$, $v_{i}(E_6) = 1$, $v_{\tau}(E_6) \neq 0$ if $\tau \not\sim \rho$ and $\tau \not\sim i$, so $E_6(i) = 0$, $E_6(\tau) \neq 0$ if $\tau \not\sim \rho,i$.
 \end{example}
 Recall $\Delta = \frac{E_4^3 - E_6^2}{1728} \in S_{12}(\Gamma(1))$. This is nonzero since $\Delta(\rho) = \frac{E_4(\rho)^3 - E_6(\rho)^2}{1728}  = -\frac{E_6(\rho)^2}{1728} \neq 0$. We also have $v_{\infty}(\Delta)\ge 1$ by construction, so plug in $\Delta$ to our formula to get 
 \begin{align*}
@@ -538,7 +536,7 @@ so $v_{\infty}(\Delta) = 1$, so $\Delta$ has a simple zero at $\infty$ and $\Del
 \begin{theorem}
     Let $k \in 2\mathbb{Z}$. Then:
     \begin{enumerate}[(1)]
-        \item If $k<0$ or $k=2$, then $M_k(\Gamma(1)) = 0$, $M_0(\Gamma(1)) = \mathbb{C} \cdot 1$.
+        \item If $k<0$ or $k=2$, then $M_k(\Gamma(1)) = 0$; and $M_0(\Gamma(1)) = \mathbb{C} \cdot 1$.
         \item If $4\le k\le 10$, then $M_k(\Gamma(1)) = \mathbb{C} \cdot E_k$. 
         \item For any $k$, multiplication by $\Delta$ gives an isomorphism $M_k(\Gamma(1)) \stackrel{\times \Delta}{\to}  S_{k+12}(\Gamma(1))$.
     \end{enumerate}
@@ -572,13 +570,13 @@ so $v_{\infty}(\Delta) = 1$, so $\Delta$ has a simple zero at $\infty$ and $\Del
     We know $E_{k+12} \in M_{k+12}(\Gamma(1))$, so $M_{k+12}(\Gamma(1)) = \mathbb{C} E_{k+12} \oplus S_{k+12}(\Gamma(1))$. But this equals $\mathbb{C} E_{k+12} \oplus \Delta M_k(\Gamma(1))$, so $\text{dim}_{\mathbb{C}} M_{k+12}(\Gamma(1)) = 1 + \text{dim}_{\mathbb{C}}M_k(\Gamma(1))$.
 \end{proof}
 \begin{example}
-    We have $E_4^2 \in M_8(\Gamma(1)) = \mathbb{C} E_8$. So there is a relation between $E_4^2$ and $E_8$, but $E_8(\infty) = 1 = E_4(\infty)^2 \implies E_4^2 = E_8$.
+    We have $E_4^2 \in M_8(\Gamma(1)) = \mathbb{C} E_8$. So there is a relation between $E_4^2$ and $E_8$ (in this case, one is a scalar multiple of the other), but we have $E_8(\infty) = 1 = E_4(\infty)^2 \implies E_4^2 = E_8$.
     \vspace{1mm}
      
-    Similarly, $E_4E_6 \in M_{10}(\Gamma(1)) = \mathbb{C} E_{10}$, so the same argument gives $E_4 E_6 = E_{10}$.
+    Similarly, $E_4E_6 \in M_{10}(\Gamma(1)) = \mathbb{C} E_{10}$, so we find  $E_4 E_6 = E_{10}$.
 \end{example}
 \begin{cor}
-    If $k \in 2\mathbb{N}$, then $M_k(\Gamma(1))$ is spanned as a $\mathbb{C}$--vector space by $\{E_4^a, E_6^b \mid a,b \in \mathbb{Z}_{\ge 0}, 4a+6b=k\}$. In other words, if $\mathcal{M} = \oplus_{k \in \mathbb{Z}}M_k(\Gamma(1))$, then $\mathcal{M}$ is a graded $\mathbb{C}$--algebra generated by $E_4$ and $E_6$.
+    If $k \in 2\mathbb{N}$, then $M_k(\Gamma(1))$ is spanned as a $\mathbb{C}$--vector space by $\{E_4^aE_6^b \mid a,b \in \mathbb{Z}_{\ge 0}, 4a+6b=k\}$. In other words, if $\mathcal{M} = \oplus_{k \in \mathbb{Z}}M_k(\Gamma(1))$, then $\mathcal{M}$ is a graded $\mathbb{C}$--algebra generated by $E_4$ and $E_6$.
 \end{cor}
 \begin{proof}
     We proved this for $0\le k\le 10$. If $k\ge 12$, then $$M_k(\Gamma(1)) = \mathbb{C} E_k \oplus \Delta M_{k-12}(\Gamma(1)) = \mathbb{C} f \oplus \Delta M_{k-12}(\Gamma(1))$$ for any $f \in M_k(\Gamma(1))$ such that $f(\infty) \neq 0$ by the same argument. We can always find some $A,B \in \mathbb{Z}_{\ge 0}$ such that $4A+6B = k$, so $E_4^A E_6^B \in M_k(\Gamma(1))$ and $(E_4^A E_6^B)(\infty) \neq 0$. Now by induction, $M_{k-12}(\Gamma(1)) = \langle E_4^a E_6^b \mid 4a+6b = k-12 \rangle$, so $\Delta M_{k-12}(\Gamma(1)) = \langle \Delta E_4^a E_6^b \mid 4a+6b = k -12 \rangle$. But $\Delta \in \langle E_4^3, E_6^2 \rangle$, so \[
@@ -587,32 +585,32 @@ so $v_{\infty}(\Delta) = 1$, so $\Delta$ has a simple zero at $\infty$ and $\Del
     and $E_4^A E_6^B \in \langle E_4^a E_6^b \mid 4a+6b = k \rangle$, so $M_k(\Gamma(1)) = \langle E_4^a E_6^b \mid 4a+6b = k \rangle$.
 \end{proof}
 \begin{theorem}
-    Let $j(\tau) = \frac{E_4(t)^3}{\Delta}$. Then $j$ is a modular function of weight $0$, level $\Gamma(1)$ which is holomorphic on $\mathfrak{h}$ and has a simple pole at $\infty$. It defines a bijection $\Gamma(1)\setminus \mathfrak{h} \to \mathbb{C}$ given by $\tau \to j (\tau)$. Moreover, every modular function of weight 0, level $\Gamma(1)$ is a rational function of $j$.\footnote{Remember that $\Gamma(1)\setminus \mathfrak{h}$ is the set of orbits of $\Gamma(1)$ under $\mathfrak{h}$.}
+    Let $j(\tau) = \frac{E_4(\tau)^3}{\Delta}$. Then $j$ is a modular function of weight $0$, level $\Gamma(1)$ which is holomorphic on $\mathfrak{h}$ and has a simple pole at $\infty$. It defines a bijection $\Gamma(1)\setminus \mathfrak{h} \to \mathbb{C}$ given by $\tau \to j (\tau)$. Moreover, every modular function of weight 0, level $\Gamma(1)$ is a rational function of $j$.\footnote{Remember that $\Gamma(1)\setminus \mathfrak{h}$ is the set of orbits of $\Gamma(1)$ under $\mathfrak{h}$.}
 \end{theorem}
 The interpretation of this is that it is possible to define a Riemann surface structure on $\Gamma(1)\setminus \mathfrak{h} \sqcup \{\infty\}$ such that we get a compact Riemann surface whose meromorphic functions are exactly the modular functions of weight 0. So the theorem says that this Riemann surface, called $X(1)$, is isomorphic to the Riemann sphere, and our formula says that if $\mathcal{L}$ is an invertible sheaf on a compact Riemann surface and $S$ is a meromorphic section, then $\sum_{a}^{} v_a(S) = \text{deg}(\mathcal{L})$. This is useful if we are also taking algebraic geometry.
 
 \marginpar{18 Oct 2022, Lecture 6}
 
 \begin{proof}
-    We showed that $\Delta$ is nonvanishing in $\mathfrak{h}$ and has a simple zero at $\infty$. Hence $j$ is holomorphic in $\mathfrak{h}$ and $v_{\infty}(j)=3v_{\infty}(E_4)-v_{\infty}(\Delta) = -1$. Note that if $\gamma \in \Gamma(1)$, then $j|_0[\gamma](\tau) = j(\gamma \tau) = j(\tau)$. To show $\Gamma(1)\setminus \mathfrak{h}$ is a bijection, we need to show that $\forall z \in \mathbb{C}$, there exists a unique orbit $\Gamma(1)\cdot \tau$ such that $j(\tau)=z$, i.e. $v_\tau(j-z)>0$. \vspace{1mm}
+    We showed that $\Delta$ is nonvanishing in $\mathfrak{h}$ and has a simple zero at $\infty$. Hence $j$ is holomorphic in $\mathfrak{h}$ and $v_{\infty}(j)=3v_{\infty}(E_4)-v_{\infty}(\Delta) = -1$. Note that if $\gamma \in \Gamma(1)$, then $j|_0[\gamma](\tau) = j(\gamma \tau) = j(\tau)$ since the map is constant on $\Gamma(1)$--orbits. To show the map is a bijection, we need to show that $\forall z \in \mathbb{C}$, there exists a unique orbit $\Gamma(1)\cdot \tau$ such that $j(\tau)=z$, i.e. $v_\tau(j-z)>0$. \vspace{1mm}
      
     We know \[
     \sum_{\tau \in \Gamma(1)\setminus \mathfrak{h}}^{} \frac{1}{e_{\tau}} \underbrace{v_{\tau}(j-z)}_{\ge 0, \text{ as }j-z \text{ is holomorphic in }\mathfrak{h}.} = 1,
     \]
-    (since $v_{\infty}(j-z) = -1$ and $\frac{k}{12}= 0$) again giving $a +\frac{b}{2}+\frac{c}{3} = 1$ for $a,b,c \in \mathbb{Z}_{\ge 0}$, $ a = v_{\rho}(j-z), b = v_{i}(j-z), c = \sum_{\tau \not\sim \rho,i}^{} v_\tau(j-z)$. This gives the solutions 
+    (since $v_{\infty}(j-z) = -1$ and $\frac{k}{12}= 0$) again giving $\frac{a}{3} +\frac{b}{2}+c= 1$ for $a,b,c \in \mathbb{Z}_{\ge 0}$, $ a = v_{\rho}(j-z), b = v_{i}(j-z), c = \sum_{\tau \not\sim \rho,i}^{} v_\tau(j-z)$. This gives the solutions 
     \begin{itemize}
         \item $(a,b,c) = (0,0,1)$, so $j-z$ vanishes at a unique $\Gamma(1)\cdot \tau$.
         \item $(a,b,c) = (0,2,0)$, so $j-z$ vanishes at $i$.
         \item $(a,b,c) = (3,0,0)$, so $j-z$ vanishes at $\rho$.
     \end{itemize}
-    Hence our map is bijective. Consider a nonzero modular function $f$ of weight 0. We can consider a product $f \cdot \prod_{i=0}^{n} \left(j(\tau)-j(a_i)\right)^{b_i}$ for $a_i \in \mathfrak{h}$, $b_i \in \mathbb{Z}_{\ge 0}$, where the $a_i$ are among the poles of $f$ in $\mathfrak{h}$. Hence to show $f$ is a rational function of $j$, it is enough to consider the case where $f$ is holomorphic in $\mathfrak{h}$. Then there exists $m\ge 0$ such that $\Delta^m f$ is holomorphic at $\infty$, so $\Delta^m f$ is holomorphic in $\mathfrak{h}$ and at $\infty$, so $\Delta^m f \in M_{12m}(\Gamma(1))$. We showed that $M_{12m}(\Gamma(1)) = \langle E_4^a E_6^b \mid 4a+6b=12m \rangle$, so $f$ is a linear combination of functions of the form $\frac{E_4^aE_6^b}{\Delta^m}$, where $4a+6b=12m$. 
+    Hence our map is bijective. Consider a nonzero modular function $f$ of weight 0. To get rid of all the poles, we can consider a product $f \cdot \prod_{i=0}^{n} \left(j(\tau)-j(a_i)\right)^{b_i}$ for $a_i \in \mathfrak{h}$, $b_i \in \mathbb{Z}_{\ge 0}$, where the $a_i$ are among the poles of $f$ in $\mathfrak{h}$. Hence to show $f$ is a rational function of $j$, it is enough to consider the case where $f$ is holomorphic in $\mathfrak{h}$. Then there exists $m\ge 0$ such that $\Delta^m f$ is holomorphic at $\infty$, so $\Delta^m f$ is holomorphic in $\mathfrak{h}$ and at $\infty$, so $\Delta^m f \in M_{12m}(\Gamma(1))$. We showed that $M_{12m}(\Gamma(1)) = \langle E_4^a E_6^b \mid 4a+6b=12m \rangle$, so $f$ is a linear combination of functions of the form $\frac{E_4^aE_6^b}{\Delta^m}$, where $4a+6b=12m$. 
     \vspace{1mm}
      
     Hence it is enough to show that $\frac{E_4^aE_6^b}{\Delta^m}$ is a rational function of $j$ where $4a+6b=12m$, $a,b \in \mathbb{Z}_{\ge 0}$. But then $2a+3b=6m$, which gives $p,q \in \mathbb{\mathbb{Z}}_{\ge 0}$ such that $a =3p, b = 2q$, so $p+q=m$. Then $$\frac{E_4^aE_6^b}{\Delta^m} = \left(\frac{E_4^3}{\Delta}\right)^p \left(\frac{E_6^2}{\Delta}\right)^q = j^p \left(\frac{E_6^2}{\Delta}\right)^q.$$ 
     As $E_4^3 - E_6^2 = 1728\Delta$, we get $j = \frac{E_6^2}{\Delta} + 1728$. So this is a rational function of $j$.
 \end{proof}
 \begin{prop}
-    Let $k\ge 4$ be an even integer. Then $$G_k(\tau) = 2\zeta(k) + 2\frac{(2\pi i)^k}{(k-1)!} \cdot \sum_{n\ge 1}^{} \sigma_{k-1}(n)q^n$$
+    Let $k\ge 4$ be an even integer. Then $$G_k(\tau) = 2\zeta(k) + 2\frac{(2\pi i)^k}{(k-1)!} \sum_{n\ge 1}^{} \sigma_{k-1}(n)q^n$$
     where $q = e^{2\pi i \tau}$ and $\sigma_{k-1}(n) = \sum_{d \mid n}^{} d^{k-1}$.
 \end{prop}
 \begin{proof}
@@ -620,10 +618,10 @@ The interpretation of this is that it is possible to define a Riemann surface st
     This is true for $\tau \in \mathfrak{h}$ and it is even locally uniformly convergent in $\mathfrak{h}$. We can write \[
     \pi \cot(\pi \tau) = i\pi \frac{e^{\pi i \tau} + e^{-\pi i \tau}}{e^{\pi i \tau}-e^{- \pi i \tau}} = \pi i \frac{q+1}{q-1} = -\pi i (1+q)(1-q)^{-1} = -\pi i \left(1+2\sum_{n\ge 1}^{} q^n\right).
     \]
-    Differentiate term--by--term $k-1$ times. The LHS is \[
+    Differentiate term--by--term $k-1$ times. The RHS of the bottom expression is \[
     -2\pi i \left(\frac{\mathrm{d}}{\mathrm{d}\tau}\right)^{k-1}\left(\sum_{n\ge 1}^{} q^n \right) = -\left(2\pi i\right)^k \sum_{n\ge 1}^{} n^{k-1}q^n,
     \]
-    while the RHS is \[
+    while the RHS of the top expression is \[
     (-1)^{k-1}(k-1)! \left(\tau^{-k} + \sum_{n\ge 1}^{} (\tau+n)^{-k} + (\tau-n)^{-k} \right) = (-1)^{k-1}(k-1)! \sum_{n \in \mathbb{Z}}^{} (\tau+n)^{-k}.   
     \]
     Rearranging and using the fact that $k$ is even (to make the sign go away) gives \[
@@ -649,7 +647,7 @@ The interpretation of this is that it is possible to define a Riemann surface st
     \end{align*}
 \end{proof}
 \begin{cor}
-    If $\Delta = \sum_{n\ge 1}^{} \tau(n)q^n$ is the $q$--expansion of $\Delta$, then $\tau(n) \in \mathbb{Z} ~\forall n\ge 1$ and $\tau(1)=1$.
+    If $\Delta(\tau) = \sum_{n\ge 1}^{} \tau(n)q^n$ is the $q$--expansion of $\Delta$, then $\tau(1)=1$ and $\tau(n) \in \mathbb{Z} ~\forall n\ge 1$.
 \end{cor}
 \begin{proof}
     Write $E_4 = 1 + 240U$ and $E_6 = 1 -504V$ for $U,V = q + \ldots \in \mathbb{Z}[[q]]$. Then 
@@ -658,7 +656,7 @@ The interpretation of this is that it is possible to define a Riemann surface st
         &= \frac{3\cdot 240U + 3\cdot 240^2 U^2 + 240^3 U^3 + 2\cdot 504V - 504^2V^2}{1728}\\
         &= \frac{(3\cdot 240 U + 2\cdot 504 V)}{1728} + R,
     \end{align*}
-    where we claim $R \in q^2\mathbb{Z}[[q]]$, but for this we just need to check that $1728 \mid 3\cdot 240^2, 1728 \mid240^3, 1728 \mid504^2$.
+    where we claim $R \in q^2\mathbb{Z}[[q]]$, but for this we just need to check that $1728 \mid 3\cdot 240^2, 1728 \mid240^3, 1728 \mid504^2$, which is true.
     \vspace{1mm}
      
     We need to check that $$\frac{(3\cdot 240 U + 2\cdot 504 V)}{1728} = \frac{2^4 \cdot 3^2\cdot 5\cdot U + 2^4 \cdot 3^2\cdot 7\cdot V}{2^6\cdot 3^3} \in \mathbb{Z}[[q]].$$ But this equals \[
@@ -712,15 +710,12 @@ So in other words, $f_i = q^i + O(q^{N+1})$. This is important because $M_k(\Gam
         g_{N-1} &= 0 + \ldots + q_{N-1} + a_N(g_{N-1})q^N + O(q^{N+1})\\
         g_N &= 0 + \ldots + 0 + q^N + O(q^{N+1})
     \end{align*}
-    We can carry out row reduction on the $g_i$ to obtain $f_0,\ldots,f_N$ satisfying (a) and (b).
-    \vspace{1mm}
-     
-    Consider the linear functionals 
+    We can now carry out row reduction on the $g_i$ to obtain $f_0,\ldots,f_N$ satisfying (a) and (b). For uniqueness, consider the linear functionals 
     \begin{align*}
         &a_0,\ldots,a_N : M_k(\Gamma(1)) \to \mathbb{C}\\
         &f \mapsto a_i(f), ~f = \sum_{n\ge 0}^{} a_n(f)q^n.
     \end{align*}
-    Then $a_i(f_j) = \delta_{ij}$, which forces $a_0,\ldots,a_n$ to be linearly independent. Hence they form a basis of the dual vector space $M_k(\Gamma(1))^{\cdot}$. So $f_0,\ldots,f_N$ is the dual basis of $M_k(\Gamma(1))$, and they form the unique basis with this property.
+    Then $a_i(f_j) = \delta_{ij}$, which forces $a_0,\ldots,a_n$ to be linearly independent. Hence they form a basis of the dual vector space $M_k(\Gamma(1))^{*}$. So $f_0,\ldots,f_N$ is the dual basis of $M_k(\Gamma(1))$, and they form the unique basis with this property.
 \end{proof}
 
 \section{Hecke operators}
