@@ -675,4 +675,100 @@ The interpretation of this is that it is possible to define a Riemann surface st
     Finally, we compute $\tau(1) =\frac{3\cdot 240 + 2\cdot 504}{1728} = 1$. 
 \end{proof}
 
+\marginpar{20 Oct 2022, Lecture 7}
+
+\begin{theorem}
+    Let $k\ge 4$ be even and $N = \text{dim}_{\mathbb{C}}~S_k(\Gamma(1))$. Then there exists a unique basis $f_0,\ldots,f_N$ for $M_k(\Gamma(1))$ as a $\mathbb{C}$--vector space such that
+    \begin{enumerate}[(a)]
+        \item $\forall 0\le i\le N$, $f_i = \sum_{n\ge 0}^{} a_n(f_i)q^n$ for $a_n(f_i) \in \mathbb{Z} ~\forall n\ge 0$.
+        \item If $0\le i,n\le N$, then $a_n(f_i)=\delta_{in}$.
+    \end{enumerate}
+\end{theorem}
+So in other words, $f_i = q^i + O(q^{N+1})$. This is important because $M_k(\Gamma(1))$ has a $\mathbb{Z}$--structure, i.e. we can realize it as a tensor product $M_k(\Gamma(1)) = M_k(\Gamma(1),\mathbb{Z})\oplus \mathbb{C}$, where $M_k(\Gamma(1),\mathbb{Z}) = \{f \in M_k(\Gamma(1)) \mid \forall n\ge 0, a_n(f) \in \mathbb{Z}\}$.
+
+\begin{proof}
+    We first construct $f_0,\ldots,f_N \in M_k(\Gamma(1))$ with properties (a) and (b). Write $k = 12a + d$, for $a, d \in \mathbb{Z}_{\ge 0}$ such that $d = 14$ if $k \equiv 2 \pmod{12}$, or $0\le d\le 10$ if $d \not\equiv 2 \pmod{12}$.
+    \vspace{1mm}
+     
+    Then $$\left\lfloor \frac{k}{12} \right\rfloor = \begin{cases}
+        a & k\not\equiv 2 \pmod{12}\\
+        a+1 & k \equiv 2 \pmod{12}
+    \end{cases} \implies \left\lfloor a\right\rfloor = \begin{cases}
+        \left\lfloor \frac{k}{12} \right\rfloor & k\not\equiv 2 \pmod{12}\\
+        \left\lfloor \frac{k}{12} \right\rfloor-1 & k \equiv 2 \pmod{12}.
+    \end{cases}$$
+    We have $\text{dim}_{\mathbb{C}}~M_k(\Gamma(1)) = N+1 = \begin{cases}
+        \left\lfloor \frac{k}{12} \right\rfloor+1 & k \not\equiv 2 \pmod{12}\\
+        \left\lfloor \frac{k}{12} \right\rfloor & k \equiv 2 \pmod{12},
+    \end{cases}$ 
+    so $a = N$, $k = 12N + d$.
+    \vspace{1mm}
+     
+    Now consider $A, B \in \mathbb{Z}_{\ge 0}$ such that $d = 4A + 6B$. Consider the modular forms $$g_i = \Delta^i E_4^A E_6^B E_6^{2(N-i)}$$ for $0\le i\le N$. Each $g_i$ has weight $12i + 4A + 6B + 12(N-i) = 12N + d = k$, so $g_i \in M_k(\Gamma(1))$. As $E_4, E_6, \Delta$ have $q$--expansions in $\mathbb{Z}[[q]]$, so does $g_i$. The leading term of $g_i$ is $q^i$, so the $q$--expansions look like 
+    \begin{align*}
+        g_0 &= 1 + a_1(g_0)q + \ldots + a_N(g_0)q^N + O(q^{N+1})\\
+        &\vdots\\
+        g_{N-1} &= 0 + \ldots + q_{N-1} + a_N(g_{N-1})q^N + O(q^{N+1})\\
+        g_N &= 0 + \ldots + 0 + q^N + O(q^{N+1})
+    \end{align*}
+    We can carry out row reduction on the $g_i$ to obtain $f_0,\ldots,f_N$ satisfying (a) and (b).
+    \vspace{1mm}
+     
+    Consider the linear functionals 
+    \begin{align*}
+        &a_0,\ldots,a_N : M_k(\Gamma(1)) \to \mathbb{C}\\
+        &f \mapsto a_i(f), ~f = \sum_{n\ge 0}^{} a_n(f)q^n.
+    \end{align*}
+    Then $a_i(f_j) = \delta_{ij}$, which forces $a_0,\ldots,a_n$ to be linearly independent. Hence they form a basis of the dual vector space $M_k(\Gamma(1))^{\cdot}$. So $f_0,\ldots,f_N$ is the dual basis of $M_k(\Gamma(1))$, and they form the unique basis with this property.
+\end{proof}
+
+\section{Hecke operators}
+
+Hecke operators are just symmetries (linear endomorphisms) of spaces of modular forms. They can arise from either representation theory: $\Gamma(1) \le GL_2(\mathbb{Q})^{+}$, which acts on $\{f : \mathfrak{h} \to \mathbb{C}\}$ by $f \mapsto f|_k[g]$. But $M_k(\Gamma(1)) \le \{f : \mathfrak{h} \to \mathbb{C}\}^{\Gamma(1)}$, and a general group theory fact says that under suitable conditions, there's an action by a big class of operators; or from geometry: we can think of modular forms as functions on the set of lattices $\mathcal{L}$ in $\mathbb{C}$. In this course, we will follow the second point of view.
+\vspace{1mm}
+ 
+\textbf{Recall.} If $V$ is a finite--dimensional $\mathbb{R}$--vector space, then a lattice $\Lambda$ in $V$ is a subgroup $\Lambda \subset V$ which is discrete and cocompact (i.e. $V/\Lambda$ is compact).
+
+\begin{lemma}
+    A subgroup $\Lambda \le V$ is a lattice if and only if there exists a basis $e_1,\ldots,e_n$ for $V$ as a $\mathbb{R}$--vector space such that $\Lambda = \mathbb{Z} e_1 \oplus \ldots\oplus \mathbb{Z}e_n$.
+\end{lemma}
+\begin{proof}
+    This is a question on example sheet 2.
+\end{proof}
+We study $\mathcal{L} = \{\Lambda \le \mathbb{C} \text{ a lattice}\}$ with its action by $\mathbb{C}^\times$, i.e. $z \Lambda = \{z \lambda \mid \lambda \in \Lambda\}$ for $z \in \mathbb{C}^\times, \Lambda \in \mathcal{L}$.
+
+\begin{prop}
+    The map $\tau \mapsto \Lambda \tau = \mathbb{Z} \tau \oplus \mathbb{Z}$ induces a bijection between $$\Gamma(1)\setminus \mathfrak{h} \leftrightarrow \mathcal{L}\setminus \mathbb{C}^\times$$ (orbits of $\Gamma(1)$ in $\mathfrak{h}$ and the set of lattices in $\mathbb{C}$ modulo scalar multiplication).
+\end{prop}
+\begin{proof}
+    This map is well--defined, since if $\gamma = \begin{pmatrix} a & b\\ c&d \end{pmatrix} \in \Gamma(1)$, $\tau \in \mathfrak{h}$, then \[
+    \Lambda_{\gamma \tau} = \mathbb{Z} \left(\frac{a \tau +b}{c \tau +d }\right) \oplus \mathbb{Z} = (c \tau + d)^{-1} \left(\mathbb{Z}(a \tau +b) \oplus \mathbb{Z}(c \tau + d)\right) = (c \tau + d)^{-1} \Lambda_{\tau}.
+    \]
+    For surjectivity, if $\Lambda$ is a lattice, then $\Lambda = \mathbb{Z}e_1 \oplus \mathbb{Z}e_2$ with $\text{Im}\left(\frac{e_1}{e_2}\right) \neq 0$. Swapping $e_1,e_2$ if necessary, we may assume that $\text{Im}\left(\frac{e_1}{e_2}\right)>0$. Then $\Lambda = e_2(\mathbb{Z}e_1/e_2 \oplus \mathbb{Z}) = e_1 \Lambda_\tau$ for $\tau = \frac{e_1}{e_2}$.
+    \vspace{1mm}
+     
+    For injectivity, if $\tau,\tau'$ have the same image, then $\exists z \in \mathbb{C}^\times$ such that $\mathbb{Z}\Lambda_\tau = \Lambda_{\tau'}$, i.e. $\exists  \gamma = \begin{pmatrix} a&b\\c&d \end{pmatrix} \in GL_2(\mathbb{Z})$ such that $\tau' = az\tau + bz, 1 = cz \tau + dz$. Then $\tau' =\frac{az \tau + bz}{c z \tau + dz} = \frac{a \tau + b}{c \tau + d}$. But $\text{Im}(\tau') = \text{Im}(\gamma \tau) = \det(\gamma)\frac{\text{Im}(\tau)}{|c \tau + d|^2}$ and $\text{Im}(\tau)>0, \text{Im}(\tau')>0$, hence $\det(\gamma)>0$, so $\det(\gamma)=1$ and so $\gamma \in \Gamma(1)$. 
+\end{proof}
+\begin{defn}
+If $k \in \mathbb{Z}$, say a function $F: \mathcal{\Lambda} \to \mathbb{C}$ is \textbf{of weight} $k$ if $\forall  z \in \mathbb{C}^\times, \Lambda \in \mathcal{L}$, $F(z \Lambda) = z^{-k}F(\Lambda)$.
+\end{defn}
+\begin{prop}
+    Let 
+    \begin{align*}
+        &V_k = \{F : \mathcal{L} \to \mathbb{C} \text{ of weight }k\}.\\
+        &W_k = \{f : \mathfrak{h} \to \mathbb{C} \mid \forall \gamma \in \Gamma(1), f|_k[\gamma] = f\}.
+    \end{align*}
+    Then the map $F \mapsto f$ by $f(\tau) = F(\Lambda \tau)$ induces a $\mathbb{C}$-vector space isomorphism $V_k \to W_k$.
+\end{prop}
+\begin{proof}
+    We first check that if $F \in V_k$, $f(\tau) = F(\Lambda \tau)$, then $f \in W_k$. If $\gamma \in \Gamma(1)$, $$f|_k[g](\tau) = f(\gamma \tau)j(\gamma,\tau)^{-k} = F(\lambda \gamma \tau)j(\gamma,\tau)^{-k} = F(j(\gamma,\tau)\Lambda_{\gamma \tau}) = F(\Lambda \tau) = f(\tau),$$
+    so $j(\gamma,\tau)\Lambda_{\gamma \tau}= \Lambda_\tau$.
+    \vspace{1mm}
+     
+    To show that the map is an isomorphism, we write down its inverse: define $\alpha:W_k \to V_k$ by $\alpha(f)(\Lambda) = e_2^{-k}f(e_1/e_2)$ if $\Lambda= \mathbb{Z}e_1 \oplus \mathbb{Z}e_2$ with $\text{Im}(e_1/e_2)>0$. This is well--defined, since if $e_1',e_2'$ is another basis with $\text{Im}(e_1'/e_2')>0$, then $\exists \gamma  = \begin{pmatrix} a&b \\c&d \end{pmatrix}\in \Gamma(1)$ such that $e_1' = ae_1 + be_2, e_2' = ce_1 + de_2$. Then 
+    \begin{align*}
+        e_2'^{-k} f(e_1'/e_2') &= (ce_1 + de_2)^{-k}f\left(\frac{ae_1 +be_2}{ce_1+de_2}\right) \\&= e_2^{-k}(ce_1/e_2 + d)^{-k} f \left(\frac{ae_1/e_2 + b}{ce_1/e_2+d}\right) = e_2^{-k}f\left(\frac{e_1}{e_2}\right).
+    \end{align*}
+    Exercise: check that the two maps are inverse to each other.
+\end{proof}
 \end{document}
