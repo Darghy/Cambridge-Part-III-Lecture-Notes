@@ -43,7 +43,7 @@
 }
  
 \author{Artur Avameri}
-\date{}
+\date{Michaelmas 2023}
  
 \setcounter{section}{-1}
  
@@ -770,6 +770,81 @@ More generally:
         \item The associated valuation $v$ is discrete and $k = \mathcal{O}_K/\mathfrak{m}$ is finite.
     \end{enumerate}
 \end{prop}
-
+\begin{proof}
+    \marginpar{24 Oct 2022, Lecture 8}
+    (i) $\implies $ (ii): Let $\mathcal{U} \ni 0$ be a compact neighborhood of 0 (i.e. $0 \in \mathcal{U} \subset K$ for $U$ open, $K$ compact). Then $\exists x \in \mathcal{O}_K$ such that $x \mathcal{O}_K \subset \mathcal{U}$. Since $x \mathcal{O}_K$ is closed, it is compact, so $\mathcal{O}_K$ is compact (as it is homeomorphic to $x \mathcal{O}_K$ by the homeomorphism $x \mathcal{O}_K \stackrel{\times x^{-1}}{\to} \mathcal{O}_K$).
+    \vspace{1mm}
+     
+    (ii) $\implies$ (i): $\mathcal{O}_K$ compact $\implies a + \mathcal{O}_K$ compact $\forall a \in K$, so $K$ is locally compact.
+    \vspace{1mm}
+     
+    (ii) $\implies $ (iii): Let $x \in \mathfrak{m}$ and let $A_x \subset \mathcal{O}_K$ be the set of coset representatives for $\mathcal{O}_K/x \mathcal{O}_K$. Then $\mathcal{O}_K = \bigcup_{y \in A_x} (y+ x\mathcal{O}_K)$, which is a disjoint open cover. By compactness, $A_x$ is finite. Hence $\mathcal{O}_K/x \mathcal{O}_K$ is finite and so $\mathcal{O}_K/\mathfrak{m}$ is finite. Now suppose $v$ is not discrete. Then let $x=x_1,x_2,x_3,\ldots$ be elements such that $v(x_1) > v(x_2) > \ldots > 0$. Then $x \mathcal{O}_K \subsetneq x_2 \mathcal{O}_K \subsetneq x_3 \mathcal{O}_K \subsetneq \ldots \subsetneq\mathcal{O}_K$. But $\mathcal{O}_K/x \mathcal{O}_K$ is finite, so it can only have finitely many subgroups, a contradiction.
+    \vspace{1mm}
+     
+    (iii) $\implies $ (ii): Since $\mathcal{O}_K$ is a metric space, it suffices to show that $\mathcal{O}_K$ is sequentially compact, i.e. that every sequence has a convergent subsequence. Let $(x_n)$ be a sequence in $\mathcal{O}_K$ and fix $\pi \in \mathcal{O}_K$ a uniformizer. Note that $\pi^i \mathcal{O}_K/\pi^{i+1}\mathcal{O}_K \cong k$, so $\mathcal{O}_K/\pi^i \mathcal{O}_K$ is finite $\forall i$ (as $\mathcal{O}_K \supset \pi \mathcal{O}_K \supset \ldots \supset \pi^i \mathcal{O}_K$ are all finite). Since $\mathcal{O}_K/\pi \mathcal{O}_K$ is finite, $\exists a_1 \in \mathcal{O}_K / \pi \mathcal{O}_K$ and a subsequence $(x_{1,n})_{n=1}^{\infty}$ such that $x_{1,n} \equiv a_1 \pmod{\pi}$. Since $\mathcal{O}_K/ \pi^2 \mathcal{O}_K$ is finite, $\exists a_2 \in \mathcal{O}_K/ \pi^2 \mathcal{O}_K$ and a subsequence $(x_{2,n})_{n=1}^{\infty}$ of $(x_{1,n})$ such that $x_{2,n} \equiv a_2 \pmod{\pi^2}$. Continuing in this fashion, we obtain sequences $(x_{i,n})_{n=1}^{\infty}$ for $i = 1,2,3,\ldots $ such that 
+    \begin{enumerate}[(i)]
+        \item $(x_{i+1,n})$ is a subsequence of $(x_{i,n})$ for all $i$.
+        \item For any $i$, $\exists a_i \in \mathcal{O}_K/\pi^i \mathcal{O}_K$ such that $x_{i,n} \equiv a_i \pmod{\pi^i}$ for all $n$.
+    \end{enumerate}
+    Then $a_i \equiv a_{i+1} \pmod{\pi^i}$. Now choose $y_i = x_{i,i}$. This defines a subsequence of $(x_n)$ with $y_i \equiv a_i \equiv a_{i+1} \equiv y_{i+1} \pmod{ \pi^i}$. Thus $(y_i)$ is Cauchy, hence converges by completeness.
+\end{proof}
+\begin{example}
+    \begin{enumerate}[(i)]
+        \item $\mathbb{Q}_p$ is a local field, as it is discretely valued and has finite residue field $\mathbb{F}_p$.
+        \item $\mathbb{F}_p((t))$ is a local field.
+    \end{enumerate}
+\end{example}
+More on inverse limits: Again let $(A_n)_{n=1}^{\infty}$ be a sequence of sets/groups/rings and let $\phi_n : A_{n+1} \to A_n$ be homomorphisms (transition maps).
+\begin{defn}
+    Assume each $A_n$ is finite. Then the \textbf{profinite topology} on $A = \underset{n}{\varprojlim} A_n $ is the weakest topology on $A$ such that the projection maps $\theta_n : A \to A_n$ are continuous for all $n$, where all $A_n$ are equipped with the discrete topology.
+\end{defn}
+\textbf{Fact.} $A = \underset{n}{\varprojlim} A_n $ with the profinite topology is compact, totally disconnected and Hausdorff.
+\begin{prop}
+    Let $K$ be a nonarchimedean local field. Under the isomorphism $\mathcal{O}_K \cong \underset{n}{\varprojlim} \mathcal{O}_K/\pi^n \mathcal{O}_K$ (for $\pi \in \mathcal{O}_K$ a uniformizer), the topology on $\mathcal{O}_K$ coincides with the profinite topology.
+\end{prop}
+\begin{proof}[Proof sketch:]
+    Check that the sets $B = \{a + \pi^n \mathcal{O}_K \mid n \in \mathbb{Z}_{\ge 1}, a \in \mathcal{O}_K\}$ are a basis of open sets in both topologies. 
+    \vspace{1mm}
+    
+    For the topology arising from $|\cdot|$, this is clear (for any open ball, we can find a closed ball of smaller radius contained inside it). 
+    \vspace{1mm}
+    
+    For the profinite topology, $\mathcal{O}_K \to \mathcal{O}_K/\pi^n \mathcal{O}_K$ is continuous if and only if $a + \pi^n \mathcal{O}_K$ is open $\forall a \in \mathcal{O}_K$.
+\end{proof}
+\begin{lemma}
+    Let $K$ be a nonarchimedean local field and $L/K$ a finite extension. Then $L$ is a local field.
+\end{lemma}
+\begin{proof}
+    Theorem 6.1 shows that $L$ is complete and discretely valued, so it suffices to show that $k_L = \mathcal{O}_L/\mathfrak{m}_L$ is finite. Let $\alpha_1,\ldots,\alpha_n \in L$ be a basis for $L$ as a $K$--vector space. Then $||\cdot||_{\text{sup}}$, the sup norm, is equivalent to $|\cdot|_L$, so there exists $r>0$ such that $\mathcal{O}_L \subset \{x \in L \mid ||x||_{\text{sup}} \le r\}$. Then take $a \in K$ such that $|a|\ge r$, then $\mathcal{O}_L \subset \bigoplus_{i=1}^n a \alpha_i \mathcal{O}_K \subset L$. But this is a finitely generated module over a PID, hence noetherian, so $\mathcal{O}_L$ is finitely generated as an $\mathcal{O}_K$--module, so $k_L$ is finitely generated over $k$.
+\end{proof}
+\begin{defn}
+    A nonarchimedean valued field $(K, |\cdot|)$ has \textbf{equal characteristic} if $\text{char}(K) = \text{char}(k)$. Otherwise, $K$ has \textbf{mixed characteristic}.
+\end{defn}
+\begin{example}
+    $\mathbb{Q}_p$ has mixed characteristic, whereas $\mathbb{F}_p((t))$ has equal characteristic $p>0$.
+\end{example}
+It turns out equal characteristic local fields are very easy to classify:
+\begin{theorem}
+    Let $K$ be a nonarchimedean local field of equal characteristic $p>0$.\footnote{Note the residue field of an an equal characteristic nonarchimedean local field is finite, so the characteristic must be positive.} Then \[
+    K \cong \mathbb{F}_{p^n}((t))
+    \]
+    for some $n\ge 1$.
+\end{theorem}
+\begin{proof}
+    $K$ is complete and discretely valued with $\text{char}(K)>0$. Moreover, $k$ is finite, so $k \cong \mathbb{F}_{p^n}$ for some $n$, so $k$ is perfect. Now by Theorem 5.4, $K \cong \mathbb{F}_{p^n}((t))$.
+\end{proof}
+\begin{lemma}
+    An absolute value $|\cdot|$ on a field $K$ is nonarchimedean $\iff$ $|n|$ is bounded $\forall n \in \mathbb{Z}$.
+\end{lemma}
+\begin{proof}
+    ($\implies $): Since $|-1|=|1|$, $|-n|=|n|$. Thus it suffices to show that $|n|$ is bounded for $n\ge 1$, but $|n| = |1| + \ldots |1| \le |1| = 1$ by the ultrametric inequality.
+    \vspace{1mm}
+     
+    ($\impliedby$): Suppose $|n|\le B~\forall n \in \mathbb{Z}$. Take $x,y \in K$ with $|x|\le |y|$. Then we have 
+    \begin{align*}
+        |x+y|^m = \left|\sum_{i=0}^{m} {m\choose i}x^i y^{m-i}\right| \le \sum_{i=0}^{m} \left|{m\choose i}x^i y^{m-i}\right| \le |y|^m B (m+1).
+    \end{align*}
+    Take $n^{\text{th}}$ roots to get $|x+y|\le |y|\sqrt[n]{B(m+1)} \stackrel{n \to \infty}{\to} |y| = \max(|x|,|y|)$.
+\end{proof}
 
 \end{document}
