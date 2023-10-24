@@ -678,7 +678,98 @@ More generally:
     Now we show (iii): Set $\mathcal{O}_L = \{y \in L \mid |y|_L \le 1\}$. We claim that $\mathcal{O}_L$ is the integral closure of $\mathcal{O}_K$ inside $L$. In particular, $\mathcal{O}_L$ is a subring of $L$. 
     \vspace{1mm}
      
-    Assuming this, let $x, y \in L$ and WLOG assume $|x|_L \le |y|_L$. Then we he $\left|\frac{x}{y}\right|_L\le 1 \implies \frac{x}{y} \in \mathcal{O}_L$. Since $\mathcal{O}_L$ is a ring, $1 \in \mathcal{O}_L$, so $1 + \frac{x}{y} \in \mathcal{O}_L$ and hence $\left |1 +\frac{x}{y}\right|_L \le 1$, so $|x+y|_L \le |y|_L = \max (|x|_L, |y|_L)$, giving the ultrametric inequality property.
+    Assuming this, let $x, y \in L$ and WLOG assume $|x|_L \le |y|_L$. Then we he $\left|\frac{x}{y}\right|_L\le 1 \implies \frac{x}{y} \in \mathcal{O}_L$. Since $\mathcal{O}_L$ is a ring, $1 \in \mathcal{O}_L$, so $1 + \frac{x}{y} \in \mathcal{O}_L$ and hence $\left|1 +\frac{x}{y}\right|_L \le 1$, so $|x+y|_L \le |y|_L = \max (|x|_L, |y|_L)$, giving the ultrametric inequality property.
+
+    \marginpar{21 Oct 2022, Lecture 7}
+    
+    To prove the claim, take $0 \neq y \in L$ and let $f(X) = X^d + a_{d-1}X^{d-1} + \ldots + a_0 \in K[X]$ be the minimal monic polynomial for $y$. We claim $y$ is integral over $\mathcal{O}_K \iff f(X) \in \mathcal{O}_K[X]$.
+    \vspace{1mm}
+     
+    $(\impliedby)$: This direction is clear.
+    \vspace{1mm}
+     
+    $(\implies )$: Let $g(x) \in \mathcal{O}_K[X]$ be monic such that $g(y)=0$. Then $f \mid g$ in $K[X]$ and hence every root of $f$ is a root of $g$. Hence every root of $f$ considered in $\overline{K}$ is integral over $\mathcal{O}_K$. Hence the $a_i$ are integral over $\mathcal{O}_K$ for $0\le i \le d-1$. Hence $a_i \in \mathcal{O}_K$ by a lemma from last time.
+    \vspace{1mm}
+     
+    By the corollary of the second version of Hensel's lemma, $|a_i|\le \max(|a_0|,1)$. By a property of the norm $N_{L/K}$, we have $N_{L/K}(y) = \pm a_0^m \in \mathcal{O}_K$. Hence $y \in \mathcal{O}_L \iff |N_{L/K}(y)|\le 1 \iff |a_0|\le 1$, so by our corollary this happens $\iff |a_i|\le 1~\forall i$, i.e. $a_i \in \mathcal{O}_K ~\forall i$, so $y$ is integral.
+    \vspace{1mm}
+     
+    Since $N_{L/K}(x)=x^n$ for $x \in K$, $|x|_L$ extends $|\cdot|$ on $K$. If $|\cdot|_L'$ is another absolute value on $L$ extending $|\cdot|$, then $|\cdot|_L, |\cdot|_L'$ are norms on $L$, which are equivalent and hence induce the same topology on $L$, so $|\cdot|_L' = |\cdot|_L^c$ for some $c>0$. But since they both extend $|\cdot|$ on $K$, we must have $c=1$.
+    \vspace{1mm}
+     
+    (ii): Theorem 6.3 implies the result, as $L$ is complete with respect to the sup norm.
 \end{proof}
+\begin{cor}
+    Let $(K,|\cdot|)$ be a complete, nonarchimedean discretely valued field and $L/K$ a finite extension. Then
+    \begin{enumerate}[(i)]
+        \item $L$ is discretely valued with respect to $|\cdot|_L$.
+        \item $\mathcal{O}_L$ is the integral closure of $\mathcal{O}_K$ in $L$.
+    \end{enumerate}
+\end{cor}
+\begin{proof}
+    \begin{enumerate}[(i)]
+        \item Fix $v$, the valuation on $K$ responding to our absolute value, and let $v_L$ be the valuation on $L$ extending $v$. Let $n = [L:K]$. For $y \in L^\times$, $|y|_L = |N_{L/K}(y)|^{1/n}$, so $v_L(y)=\frac{1}{n}v(N_{L/K}(y))$, so $v_L(L^\times) \subset \frac{1}{n}v(K^{\times})$. Since $v(K^\times)$ is discrete, so is $v_L$.
+        \item This was proved in the proof of the previous theorem.
+    \end{enumerate}
+\end{proof}
+\begin{cor}
+    Let $(K, |\cdot|)$ be complete, nonarchimedean, and discretely valued and let $\overline{K}/K$ be the algebraic closure of $K$. Then $|\cdot|$ extends uniquely to an absolute value $|\cdot|_{\overline{K}}$ on $\overline{K}$.
+\end{cor}
+\begin{proof}
+    Let $x \in \overline{K}$, then $x \in L$ for some finite extension $L/K$. Define $|\cdot|_{\overline{K}} = |x|_L$. This is well--defined (i.e. independent of $L$) by uniqueness in Theorem 6.1 (for any $L,L'$, consider an extension containing both).
+    \vspace{1mm}
+     
+    The axioms for $|x|_{\overline{K}}$ to be an absolute value can be checked over finite extensions.
+    \vspace{1mm}
+     
+    Uniqueness again follows from the finite case: if two absolute values disagree on some value, then consider a finite extension containing that value.
+\end{proof}
+\textbf{Remark.} $|\cdot|_{\overline{K}}$ on $\overline{K}$ is never discrete. For example, if $K = \mathbb{Q}_p$, then $\sqrt[n]{p} \in \overline{\mathbb{Q}_p}$ and $\forall n\ge 0$, $v_p(\sqrt[n]{p}) = \frac{1}{n}v_p(n) = \frac{1}{n}$, giving a non--discrete valuation. Furthermore, $\overline{\mathbb{Q}_p}$ is not complete with respect to $|\cdot |_{\overline{\mathbb{Q}}_p}$. Showing this is an exercise on example sheet 2. On the sheet we also show that if we take $\mathbb{C}_p$, the completion of $\overline{\mathbb{Q}_p}$ with respect to $|\cdot|_{\overline{\mathbb{Q}_p}}$, then $\mathbb{C}_p$ is algebraically closed.
+
+\begin{prop}
+    Let $L/K$ is a finite extension of complete discretely valued fields with $n = [L:K]$. Assume that
+    \begin{enumerate}[(i)]
+        \item $\mathcal{O}_K$ is compact.
+        \item The extension $k_{L}/k$ of residue fields is finite and separable.
+    \end{enumerate}
+    Then there exists $\alpha \in \mathcal{O}_L$ such that $\mathcal{O}_L = \mathcal{O}_K[\alpha]$.
+\end{prop}
+\textbf{Remark.} We will later see that (i) implies (ii).
+\begin{proof}
+    We'll choose $\alpha \in \mathcal{O}_L$ such that:
+    \begin{enumerate}[(i)]
+        \item $\exists \beta \in \mathcal{O}_K[\alpha]$ a uniformizer for $\mathcal{O}_L$.
+        \item $\mathcal{O}_K[\alpha] \to k_L$ is surjective.
+    \end{enumerate}
+    First note that $k_L/k$ is separable, so $\exists \overline{\alpha} \in k$ such that $k_L = k(\overline{\alpha})$. Let $\alpha \in \mathcal{O}_L$ be a lift of $\overline{\alpha}$ and $g(X) \in \mathcal{O}_K[X]$ a monic lift of the minimal polynomial of $\overline{\alpha}$. Also fix $\pi_L \in \mathcal{O}_L$ a uniformizer. Then $\overline{g}(X) \in k[X]$ is irreducible and separable, so $\overline{\alpha}$ is a simple root of $\overline{g}$, so $g(\alpha) \equiv 0 \pmod{\pi_L}$ and $g'(\alpha) \not\equiv 0 \pmod{\pi_L}$.
+    \vspace{1mm}
+     
+    If $g(\alpha) \equiv  0 \pmod{\pi_L^2}$, then \[
+    g(\alpha + \pi_L) \equiv  g(\alpha) + \pi_L g'(\alpha) \pmod{\pi_L^2}.
+    \]
+    Thus $v_L(g(\alpha+\pi_L)) = v_L(\pi_Lg'(\alpha)) = v_L(\pi) = 1$ for $v_L$ the normalized valuation on $L$. Hence either $v_L(g(\alpha))= 1$ or $v_L(\gamma(\alpha+\pi_L)) = 1$. Possibly replacing $\alpha$ by $\alpha + \pi_L$, we may assume that $g(\alpha)$ is a uniformizer, i.e. $v_L(g(\alpha)) = 1$.
+    \vspace{1mm}
+     
+    Now set $\beta = g(\alpha) \in \mathcal{O}_K[\alpha]$, a uniformizer. Then $\mathcal{O}_K[\alpha] \subset L$ is the image of a continuous map $\mathcal{O}_K^n \to L$ given by $(x_0,\ldots,x_{n-1}) \mapsto \sum_{i=0}^{n-1} x_i \alpha^i$. Since $\mathcal{O}_K$ is compact, $\mathcal{O}_K[\alpha]$ is compact, hence closed.
+    \vspace{1mm}
+     
+    We have a closed subring of $\mathcal{O}_L$, so to show it is $\mathcal{O}_L$, it is enough to show it is dense. Since $k_L = k(\overline{\alpha})$, $\mathcal{O}_K[\alpha]$ contains a set of coset representatives for the residue field $k_L = \mathcal{O}_L/\beta \mathcal{O}_L$. Take $y \in \mathcal{O}_L$. By Proposition 3.3, we can write $y = \sum_{i=0}^{\infty} \lambda_i \beta^i$ with $\lambda_i \in \mathcal{O}_K[\alpha]$. Then $y_m = \sum_{i=0}^{m} \lambda_i \beta^i \in \mathcal{O}_K[\alpha]$ gives a Cauchy sequence converging to $y$. Then $y \in \mathcal{O}_K[\alpha]$ since $\mathcal{O}_K[\alpha]$ is closed.
+\end{proof}
+\section{Local fields}
+\begin{defn}
+    Let $(K,|\cdot|)$ be a valued field. We say $K$ is a \textbf{local field} if it is complete and locally compact (i.e. every point contains a compact neighborhood).
+\end{defn}
+\begin{example}
+    $\mathbb{R}$ and $\mathbb{C}$ are local fields.
+\end{example}
+\begin{prop}
+    Let $(K,|\cdot|)$ be a nonarchimedean complete valued field. Then the following are equivalent:
+    \begin{enumerate}[(i)]
+        \item $K$ is locally compact (so $K$ is a nonarchimedean local field).
+        \item $\mathcal{O}_K$ is compact.
+        \item The associated valuation $v$ is discrete and $k = \mathcal{O}_K/\mathfrak{m}$ is finite.
+    \end{enumerate}
+\end{prop}
+
 
 \end{document}
