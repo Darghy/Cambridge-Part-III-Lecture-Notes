@@ -437,6 +437,82 @@ For the cokernel, reverse all the arrows and check that $\text{coker }\phi$ sati
 \textbf{Adjacent notions.}
 \begin{enumerate}[(i)]
     \item \textbf{Subsheaves}. $\mathcal{F} \subset \mathcal{G}$ is there exist inclusions $\mathcal{F}(U) \subset \mathcal{G}(U)$ compatible with restrictions. For example, $\text{ker}(\phi : \mathcal{F} \to \mathcal{G}) \subset \mathcal{F}$.
+    \item \textbf{Quotient sheaves}. To be added at a later date.
 \end{enumerate} 
+
+\subsection{Moving between spaces}
+
+\marginpar{20 Oct 2022, Lecture 7}
+
+
+\begin{defn}
+    Given $f: X \to Y$ continuous with sheaves $\mathcal{F}$ on $X$ and $\mathcal{G}$ on $Y$, the \textbf{presheaf pushforward} $f_{\star}\mathcal{F}$ is defined by \[
+    \mathcal{U} \mapsto \mathcal{F}(f^{-1}(\mathcal{U}))
+    \]
+    for an open set $\mathcal{U} \subset \mathcal{Y}$. 
+\end{defn}
+\begin{prop}
+    The presheaf pushforward of a sheaf is a sheaf.
+\end{prop}
+\begin{proof}
+    Trivial.
+\end{proof}
+\begin{defn}
+    Given $f: X \to Y$ continuous with sheaves $\mathcal{F}$ on $X$ and $\mathcal{G}$ on $Y$, the \textbf{inverse image presheaf} $(f^{-1}\mathcal{G})^{\text{pre}}$ is defined by (for $V$ open in $X$) \[
+    (f^{-1}\mathcal{G})^{\text{pre}}(V) = \{(s_U,U) \mid U \text{ is an open set containing }V, s_U \in \mathcal{G}(U)\}/\sim
+    \]
+    where $\sim$ is an equivalence relation that identifies pairs that agree on a smaller open set containing $V$.
+    \vspace{1mm}
+     
+    The \textbf{inverse image sheaf} is given by $f^{-1}\mathcal{G} = ((f^{-1}\mathcal{G})^{\text{pre}})^{\text{sh}}$.
+\end{defn}
+\begin{example}
+    Take $Y$ a topological space and set $X = Y \sqcup Y$. Take $\mathcal{G} = \mathbb{Z}$ to be the constant sheaf and $\mathcal{F} = (f^{-1} \mathcal{G})^{\text{pre}}$. Fix $U \subset Y$ open and $V = f^{-1}(U)$. Then $\mathcal{F}(V) = \mathcal{G}(U) = \mathbb{Z}$, constant (assuming $U$ is connected). But $V = U \sqcup U$, so $\mathcal{F}^{\text{sh}}(V) = \mathcal{G}(U) \times \mathcal{G}(U) = \mathbb{Z}^2$. This happens because this isn't a local condition.
+\end{example}
+\begin{example}
+    Let $\mathcal{F}$ be a sheaf of $X$ and $\pi : X \to \text{point}$. Then $\pi_{\star}\mathcal{F}$ is a sheaf on a point, i.e. an abelian group, specifically $\mathcal{F}(\pi^{-1}(\text{point})) = \mathcal{F}(X)$.
+    \vspace{1mm}
+     
+    \textbf{Notation.} We write $\mathcal{F}(X) = \Gamma(X,\mathcal{F})$, called the global section, and $\mathcal{F}(X)=H^0(X,\mathcal{F})$, the $0^{\text{th}}$ cohomology of coefficients in $\mathcal{F}$.
+    \vspace{1mm}
+     
+    For $p \in X$, $i : \{p\} \to X$, $\mathcal{G}$ a sheaf on the point, i.e. an abelian group $A$, we can consider $i_{\star}\mathcal{G}$. This is the sheaf on $X$ such that $i_{\star}(\mathcal{G})(U) = \begin{cases}
+        0 & p \not\in U.\\
+        A & p \in U.
+    \end{cases}$ This is called the skyscraper at $p$ with value $A$.
+\end{example}
+
+\section{Schemes}
+The summary: $\text{Spec}(A)$ has a sheaf $\mathcal{O}_{\text{Spec}(A)}$ such that the value on a distinguished open $\mathcal{U}_f = A_f$, and then globalize this to get a scheme. We now spell this out in detail.
+
+\begin{defn}
+    Let $A$ be a ring and $S \subset A$ a set that is closed under multiplication. The two examples we should keep in mind are $S = \{1,f,f^2,f^3,\ldots\}$ or $S = A\setminus \mathfrak{p}$ for $\mathfrak{p}$ a prime ideal. The \textbf{localization} of $A$ at $S$ is \[
+    S^{-1}A = \{(a,s) \mid a \in A, s \in S\}/\sim
+    \]
+    where $(a,s) \sim (a',s') \iff \exists s'' \in S$ such that $s''(as'-a's) = 0 \in A$. We read $\frac{a}{s}$ for the equivalence class of $(a,s)$.
+\end{defn}
+
+\textbf{Warning.} The map $A \to S^{-1}A$ need not be injective, e.g. if $S$ contains a zero divisor.
+\vspace{1mm}
+ 
+What's going to happen now? We will define a sheaf $\mathcal{O}_{\text{Spec}(A)}$ on the topological space $\text{Spec}(A)$ with two features: 
+\begin{itemize}
+    \item The stalk at a prime $\mathfrak{p}$ will be $(A\setminus \mathfrak{p})^{-1}A$.
+    \item If $\mathcal{U}_f$ is a distinguished open, then $\mathcal{O}_{\text{Spec}(A)}(\mathcal{U}_f) = A_f$.
+\end{itemize}
+\vspace{1mm}
+ 
+\textbf{A sheaf on a base.} Fix a topological space $X$ and $\mathcal{B}$ a basis for the topology. A \textbf{sheaf on the base $\mathcal{B}$}, $\mathfrak{F}$, consists of assignments $B_i \mapsto \mathfrak{F}(B_i)$ on abelian groups/rings/some objects with restriction maps $\mathfrak{F}(B_i) \to \mathfrak{F}(B_j)$ whenever $B_j \subset B_i$. These satisfy the usual commutativity and the identities when $B_i \subset B_j \subset B_k$ or $B_i = B_j$, as well as the following two conditions:
+\begin{enumerate}[(1)]
+    \item If $B = \cup B_i$ with $B, B_i \in \mathcal{B}$ and $f, g \in \mathfrak{F}(B)$ such that $f|_{B_i} = g|_{B_i} ~\forall i$, then $f = g$. 
+    \item If $B = \cup B_i$ as above with $f_i \in \mathfrak{F}(B_i)$ such that they agree where assigned (i.e. $\forall i,j$, if $B' = B_i \cap B_j$, then $f_i|_{B'} = f_j|_{B'}$), then $\exists f \in \mathfrak{F}(B)$ with $f|_{B_i} = f_i$.
+\end{enumerate}
+\begin{prop}
+    Let $F$ be a sheaf on a base $\mathcal{B}$ of a topological space $X$. Then this uniquely (up to unique isomorphism) determines a sheaf $\mathfrak{F}$ by $\mathfrak{F}(B_i) = F(B_i)$ agreeing with restriction maps.
+\end{prop}
+\begin{proof}
+    Define the stalks of $\mathfrak{F}$ first, i.e. $\mathfrak{F}_\mathfrak{p} = \{(S_B,B) \mid B \text{ is a basic open containing }\mathfrak{p}\}/\sim$. Now use the sheafification trick to define $$\mathfrak{F}(U) = \{(f_p \in \mathfrak{F}_p)_{p \in U} \mid ~\forall p \in U, \exists \text{ basic open }B \text{ containing }p \text{ and } s \in F(B) \text{ with }s_q = f_q \text{ in }\mathcal{F}_q ~\forall q \in B\}.$$
+    Thirdly, the natural maps $F(B) \to \mathfrak{F}(B)$ are isomorphic by sheaf axioms. The final fact that this is unique (up to unique isomorphism) is left as an exercise.
+\end{proof}
 
 \end{document}
