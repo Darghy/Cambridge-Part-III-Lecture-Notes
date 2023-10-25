@@ -855,4 +855,96 @@ We next check that $T_nF$ is of weight $k$, i.e. that $(T_nF)(z \Lambda) = z^{-k
     In general, $T_{p^{a+1}} = T_{p^a} T_p - p^{k-1}T_{p^{a-1}}$, which proves the claim.
 \end{proof}
  
+\marginpar{25 Oct 2022, Lecture 9}
+
+\begin{lemma}
+    Let $n \in \mathbb{N}$ and $\Lambda = \mathbb{Z}e_1 \oplus \mathbb{Z}e_2 \le \mathbb{C}$ a lattice. Then $\{\Lambda' \substack{\le \\ n}\Lambda\} = \{\mathbb{Z}(ae_1 + be_2)\oplus \mathbb{Z}de_2 \mid a,b,d \in \mathbb{Z}_{\ge 0}, ad = n, b < d\}$, where this is isomorphic to the set $\{a,b,d \in \mathbb{Z}_{\ge 0} \mid ad=n, 0\le b<d\}$.
+\end{lemma}
+\begin{proof}
+    Consider the short exact sequence \[
+    0 \to \mathbb{Z}e_2/\mathbb{Z}e_2 \cap \Lambda' \to \Lambda/\Lambda' \to \underbrace{\Lambda/\mathbb{Z}e_2 + \Lambda'}_{\cong \mathbb{Z}e_1/\mathbb{Z}e_1 \cap (\mathbb{Z}e_2 + \Lambda)} \to 0.
+    \]
+    Then $|\Lambda/\Lambda'| = n$. We let $d = |\mathbb{Z}e_2/\mathbb{Z}e_2 \cap \Lambda'| = \inf \{d \ge 1 \mid de_2 \in \Lambda'\}$ and $a = |\Lambda/\mathbb{Z}e_2 + \Lambda'| =\inf\{a\ge 1 \mid \exists b \in \mathbb{Z} \text{ s.t. }ae_1+be_2 \in \Lambda'\}$. Then $n = ad$ and there exists a unique $0\le b<d$ such that $ae_1 + be_2 \in \Lambda'$.
+    \vspace{1mm}
+     
+    We now claim that $\Lambda' = \mathbb{Z}(ae_1 + be_2) \oplus \mathbb{Z}de_2$. The inclusion $\ge $ is clear. On the other hand, if $\begin{pmatrix} \alpha & \beta \\ \gamma & \delta \end{pmatrix} \in M_2(\mathbb{Z})$, $\alpha \delta - \beta \gamma = N \in \mathbb{Z}$ is nonzero, then $[\Lambda : \mathbb{Z}(\alpha e_1 + \beta e_2) \oplus \mathbb{Z}(\gamma e_1 + \delta e_2)] = |N|$. So $[\Lambda : \mathbb{Z}(\alpha e_1 + \beta e_2) \oplus \mathbb{Z}(\gamma e_1 + \delta e_2)] = \det \begin{pmatrix} a & b \\ 0 & d \end{pmatrix} = n = [\Lambda : \Lambda']$, so $[\Lambda': \mathbb{Z}(ae_1 + be_2) \oplus \mathbb{Z}de_2] = 1$, so they're equal.
+    \vspace{1mm}
+     
+    We've defined a map $\{\Lambda' \substack{\le \\ n}\Lambda\} \to \{(a,b,d) \in \mathbb{Z}_{\ge 0} \mid ad=n, 0 \le b <d\}$. This map has an inverse, given by $(a,b,d) \mapsto \mathbb{Z}(a e_1 + be_2) \oplus \mathbb{Z} de_2$, so it's a bijection.
+\end{proof}
+\begin{lemma}
+    Let $f \in W_k$. Then we have the two formulas
+    \begin{align*}
+        (T_n f)(\tau) = n^{k-1}\sum_{\substack{ad=n \\0\le b<d}} d^{-k} f\left(\frac{a \tau + b}{d}\right) = \sum_{\substack{ad=n \\0\le b<d}} f|_k\left[\begin{pmatrix} a & b\\0 &d \end{pmatrix}\right].
+    \end{align*}
+\end{lemma}
+\begin{proof}
+    $f \leftrightarrow F \in V_k$ with $f(\tau) = F(\Lambda_\tau)$. By definition, 
+    \begin{align*}
+        (T_n f)(\tau) = (T_n F)(\Lambda_\tau) = n^{k-1} \sum_{\Lambda' \substack{\le \\ n}\Lambda_{\tau}}^{} F(\Lambda') = n^{k-1} \sum_{\substack{ad=n \\ 0\le b<d}} F(\mathbb{Z}(a \tau + b)\oplus \mathbb{Z} d).
+    \end{align*}
+    This equals 
+    \begin{align*}
+        n^{k-1}\sum_{a,b,d}^{} F(d (\mathbb{Z}(\frac{a \tau + b}{d} \oplus \mathbb{Z}))) = n^{k-1}\sum_{a,b,d}^{} d^{-k}F(\Lambda_{\frac{a \tau + b}{d}}) = n^{k-1} \sum_{a,b,d}^{} d^{-k}f(\frac{a \tau +b}{d}).
+    \end{align*}
+    For the second formula, recall that if $g \in GL_2(\mathbb{R})^+$, then $f|_k[g] = \det(g)^{k-1}f(g \tau)j(g,\tau)^{k-1}$, so
+    \begin{align*}
+        f|_k[\begin{pmatrix} a&b\\0&d \end{pmatrix}](\tau) = n^{k-1} f(\frac{a \tau + b}{d})d^{-k}.
+    \end{align*}
+    Hence $(T_n f)(\tau) = \sum_{a,b,d}^{} f|_k [\begin{pmatrix} a & b \\ 0 &d \end{pmatrix}]$.
+\end{proof}
+\begin{cor}
+    If $f \in W_k$ and $f$ is holomorphic, then $T_n f$ is also holomorphic.
+\end{cor}
+\begin{proof}
+    Look at the formula above: $T_n f$ is a finite sum of holomorphic functions.
+\end{proof}
+\begin{prop}
+    Let $f \in W_k$ be holomorphic in $\mathfrak{h}$ with $q$--expansion $f(\tau) = \sum_{m \in \mathbb{Z}}^{} b_m q^m$. Then $T_n f$ has $q$--expansion $T_n f = \sum_{m \in \mathbb{Z}}^{} c_m q^m$, where $$c_m = \sum_{\substack{a \in \mathbb{N} \\ a \mid (m,n)}}^{} a^{k-1}b_{(mn/a^2)}.$$
+\end{prop}
+\begin{proof}
+    \begin{align*}
+        T_n f =& n^{k-1} \sum_{\substack{ad = n \\ 0\le b<d}}^{} d^{-k} f(\frac{a \tau + b}{d}) = n^{k-1} \sum_{\substack{ad = n\\ 0\le b<d}}^{} \sum_{ m \in \mathbb{Z}}^{} b_m e^{2 \pi i m a \tau/d}e^{2\pi i m b \tau/d} \\
+        =& n^{k-1}\sum_{ad = n}^{} d^{-k}\sum_{ m \in \mathbb{Z}}^{} b_m e^{2\pi i m a \tau/d} \left(\sum_{0\le b<d}^{} e^{2\pi i m b /d}\right).
+    \end{align*}
+    Note that $\sum_{0\le b<d}^{} e^{2\pi i m b /d} = \begin{cases}
+        d & d \mid m\\
+        0 & \text{otherwise}
+    \end{cases}$. Hence 
+    \begin{align*}
+        T_n f = n^{k-1}\sum_{ad=n}^{} d^{1-k}\sum_{m \in \mathbb{Z}}^{} b_{dm}e^{2\pi i a m \tau}.
+    \end{align*}
+    This gives 
+    \begin{align*}
+        T_n f = \sum_{ad = n}^{} \left(\frac{n}{d}\right)^{k-1}\sum_{ m \in \mathbb{Z}}^{} b_{dm}q^{am} = \sum_{a \mid n}^{} a^{k-1}\sum_{ m \in \mathbb{Z}}^{} b_{nm/a}q^{am}.
+    \end{align*}
+    This equals $\sum_{N \in \mathbb{Z}}^{} c_N q^N$, where $c_N = \sum_{\substack{a \mid m \\ a \mid n}}^{} a^{k-1}b_{nN/a^2}$.
+\end{proof}
+\begin{theorem}
+    $T_n$ preserves the subspaces $S_k(\Gamma(1)) \le M_k(\Gamma(1)) \le W_k \forall n\ge 1$. Moreover, if $f \in M_k(\Gamma(1))$, then $a_0(T_n f) = \sigma_{k-1}(n) a_0(f)$ and $a_1(T_n f) = a_n (f)$. 
+\end{theorem}
+\begin{proof}
+    To show that $T_n$ preserves $M_k(\Gamma(1))$, we need to show that if $f \in M_k(\Gamma(1))$, then $T_n f$ is holomorphic in $\mathfrak{h}$ (then we're done by the previous corollary) and at $\infty$, i.e. $a_N(T_n f) = 0$ if $N<0$.
+    \vspace{1mm}
+     
+    But $a_N(T_n f)= \sum_{a \mid (m,n)}^{} a^{k-1}a_{Nn/a^2}(f)$. Since $Nn/a^2<0$ and $f$ is holomorphic at $\infty$, all summands are 0, so $T_n f$ is holomorphic at in $\infty$.
+    \vspace{1mm}
+     
+    We have $a_0(T_n f) = \sum_{a \mid (n,0)}^{} a^{k-1}a_{n\cdot 0/a^2}(f) = \sum_{a \mid n}^{} a^{k-1}a_0(f) = \sigma_{k-1}(n)a_0(f)$.
+    \vspace{1mm}
+     
+    Also $a_1(T_n f) = \sum_{a \mid (n,1)}^{} a^{k-1}a_{n\cdot 1/a^2}(f) = a_n(f)$.
+    \vspace{1mm}
+     
+    Finally, if $f \in S_k(\Gamma(1))$, then $a_0(f) = 0$, and then $T_n f \in M_k(\Gamma(1))$ and $a_0(T_n f) = \sigma_{k-1}(n)a_0(f) = 0 \implies T_n f \in S_k(\Gamma(1))$. 
+\end{proof}
+
+Our next goal is to study the spectral decomposition of Hecke operators on $M_k(\Gamma(1))$, i.e. the decomposition of $M_k(\Gamma(1))$ as a sum of (simultaneous) generalized eigenspaces for the $T_n$.
+\vspace{1mm}
+ 
+The simplest case is when $M_k(\Gamma(1))$ or $S_k(\Gamma(1))$ is 1--dimensional (as then every nonzero element is an eigenvector). For example, $S_{12}(\Gamma(1))$ is 1--dimensional, spanned by $\Delta(\tau) = \sum_{n\ge 1}^{} \tau(n)q^n$. So $\Delta$ is a $T_n$--eigenvector for all $n\ge 1$. If $T_n \Delta = \alpha_n \Delta$ for some $\alpha_n \in \mathbb{C}$, then $a_1(T_n \Delta) = a_1(\alpha_n \Delta) = \alpha_n a_1(\Delta) = \alpha_n$ (as we proved $a_1(\Delta) = 1$). But we also have $a_1(T_n \Delta) = a_n(\Delta) = \tau(n)$. Hence $\alpha_n = \text{Hecke eigenvalue} = \tau(n) = \text{coefficient of }q^n$.
+\vspace{1mm}
+ 
+Ramanujan conjectured in 1916 that $\tau$ is multiplicative and $\tau(p^{n+1}) = \tau(p)\tau(p^{n}) - p^{11}\tau(p^{n-1})$ for $p$ prime, $n \in \mathbb{N}$. These identities are true for Hecke operators (i.e. $T_{mn}= T_m T_n$ and $T_{p^{n+1}} = T_p T_{p^n}-p^{k-1}T_{p^{n-1}}$), hence also for the eigenvalues $\alpha_n$, hence for the numbers $\tau(n)$.
+
 \end{document}
