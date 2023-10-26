@@ -847,4 +847,82 @@ It turns out equal characteristic local fields are very easy to classify:
     Take $n^{\text{th}}$ roots to get $|x+y|\le |y|\sqrt[n]{B(m+1)} \stackrel{n \to \infty}{\to} |y| = \max(|x|,|y|)$.
 \end{proof}
 
-\end{document}
+\marginpar{26 Oct 2022, Lecture 9}
+
+\begin{theorem}[Ostrowski's Theorem]
+    Any nontrivial absolute value on $\mathbb{Q}$ is equivalent to either $|\cdot|_{\infty}$ or the $p$--adic absolute value $|\cdot|_{p}$ for some prime $p$.
+\end{theorem}
+\begin{proof}
+    Case 1: $|\cdot|$ is archimedean. Then fix $b>1$ such that $|b|>1$, where such a $b$ exists by the previous lemma. Take $a>1$ another integer and write $b^n$ in base $a$, i.e. $b^n = c_ma^m + c_{m-1}a^{m-1} + \ldots + c_0$ for $0\le c_i<a$ and $c_m \neq 0$. 
+    \vspace{1mm}
+     
+    Let $B = \max_{0\le c<a}(|c|)$, then $|b^n| \le (m+1)B \max(|a|^m,1)$. Hence 
+    \begin{align*}
+        |b| =& \underbrace{\left[(n \log_{a}b+1)B\right]^{1/n}}_{\to 1 \text{ as }n \to \infty}\max(|a|^{\log_a(b)},1) \\
+        \implies & |b|\le \max(|a|^{\log_a(b)},1).
+    \end{align*}
+    Then $|a|>1$ and $|b|\le |a|^{\log_a(b)}$ ($\dagger$). Switching the roles of $a$ and $b$ we also find $|a|\le |b|^{\log_b(a)}$ ($\ddagger$). Then $(\dagger)$ and $(\ddagger)$ imply $\frac{\log|a|}{\log a} = \frac{\log |b|}{\log b} = \lambda \in \mathbb{R}_{> 0}$. Hence $|a| = a^{\lambda} ~\forall a \in \mathbb{Z}_{\ge 1}$, so $|x|=|x|_{\infty}^{\lambda}~\forall x \in \mathbb{Q}$, so $|\cdot|$ is equivalent to $|\cdot|_{\infty}$.
+    \vspace{1mm}
+     
+    Case 2: $|\cdot|$ is non--archimedean. As in the previous inequality, we have $|n|\le 1 ~\forall n \in \mathbb{Z}$. Since this absolute value is nontrivial, $\exists n \in \mathbb{Z}_{\ge 1}$ such that $|n|<1$. Write $n = p_1^{e_1}\ldots p_r^{e_r}$. Then $|p|<1$ for some $p \in \{p_1,\ldots,p_r\}$. Now suppose $|q|<1$ for some prime $q \neq p$. Then write $1 = rp+sq$ for some $r,s \in \mathbb{Z}$. Then $1 = |rp+sq|\le \max(|rp|, |sq|) < 1$, a contradiction. Thus $|p| = \alpha<1$ and $|q| = 1$ for all primes $q \neq p$. Hence $|\cdot|$ is equivalent to $|\cdot|_p$.
+\end{proof}
+\begin{theorem}
+    Let $(K,|\cdot|)$ be a nonarchimedean local field of mixed characteristic. Then $K$ is a finite extension of $\mathbb{Q}_p$.
+\end{theorem}
+\begin{proof}
+    $K$ has mixed characteristic $\implies \text{char}(K) = 0 \implies \mathbb{Q} \subset K$. Also, $K$ is nonarchimedean $\implies |\cdot| |_{\mathbb{Q}} \sim |\cdot|_p$ for some $p$. Since $K$ is complete, $\mathbb{Q}_p \subset K$. Hence it suffices to show that $\mathcal{O}_K$ is finite as a $\mathbb{Z}_p$--module.
+    \vspace{1mm}
+     
+    Let $\pi \in \mathcal{O}_K$ be a uniformizer and $v$ a normalized valuation on $K$. Set $v(p) = e$. Then $\mathcal{O}_K/p \mathcal{O}_K \cong \mathcal{O}_K/\pi^e \mathcal{O}_K$, which is finite (since $\pi^i \mathcal{O}_K/\pi^{i+1}\mathcal{O}_K \cong k$ is finite). $\mathbb{F}_p = \mathbb{Z}_p/ \mathbb{Z}_p \hookrightarrow \mathcal{O}_K/p\mathcal{O}_K$, so $\mathcal{O}_K/p \mathcal{O}_K$ is a finite--dimensional vector space over $\mathbb{F}_p$. Let $x_1,\ldots,x_n \in \mathcal{O}_K$ be coset representatives for the $\mathbb{F}_p$--basis of $\mathcal{O}_K/p \mathcal{O}_K$. Then \[
+    \left\{\sum_{i=1}^{n} a_j x_j \mid a_j \in \{0,\ldots,p-1\}\right\}
+    \] gives a set of coset representatives for $\mathcal{O}_K/p\mathcal{O}_K$.
+    \vspace{1mm}
+     
+    Now apply Proposition 3.3 (ii) to write (for $a_{ij} \in \{0,\ldots,p-1\}$)
+    \begin{align*}
+        y = \sum_{i=0}^{\infty} \left(\sum_{j=1}^{n} a_{ij}x_j \right)p^i = \sum_{j=1}^{n} \underbrace{\left(\sum_{i=0}^{\infty} a_{ij}p^i \right)}_{\in \mathbb{Z}_p} x_j.
+    \end{align*}
+    Hence $\mathcal{O}_K$ is finite over $\mathbb{Z}_p$.
+\end{proof}
+On example sheet 2, we show that if $K$ is a complete archimedean field, then $K \cong \mathbb{R}$ or $K \cong \mathbb{C}$.
+\vspace{1mm}
+ 
+In summary, if $K$ is a local field, then either:
+\begin{enumerate}[(i)]
+    \item $K$ is archimedean, so $K \cong \mathbb{R}$ or $K \cong \mathbb{C}$.
+    \item $K$ is nonarchimedean of equal characteristic, so $K \cong \mathbb{F}_{p^n}((t))$.
+    \item $K$ is nonarchimedean of mixed characteristic, so $K$ is a finite extension of $\mathbb{Q}_p$.
+\end{enumerate}
+
+\section{Global fields}
+\begin{defn}
+    A \textbf{global field} is a field which is either 
+    \begin{enumerate}[(i)]
+        \item an algebraic number field.
+        \item a global function field, i.e. a finite extension of $\mathbb{F}_p(t)$.
+    \end{enumerate}
+\end{defn}
+\begin{lemma}
+    Let $(K,|\cdot|)$ be a complete discretely valued field and $L/K$ a finite Galois extension with absolute value $|\cdot|_L$ extending $|\cdot|_K$. Then for $x \in L$ and $\sigma \in \text{Gal}(L/K)$, we have $|\sigma(x)|_L = |x|_L$.
+\end{lemma}
+\begin{proof}
+    Since $x \mapsto |\sigma(x)|_L$ is an absolute value on $L$ (as we can check) extending $|\cdot|_K$, our result follows from uniqueness of extensions of absolute values.
+\end{proof}
+\begin{lemma}[Krasner's lemma]
+    Let $(K,|\cdot|)$ be discretely valued and let $f(X) \in K[X]$ be a separable irreducible polynomial with roots $\alpha_1,\ldots,\alpha_n \in \overline{K}$, the separable closure of $K$. Suppose $\beta \in \overline{K}$ is such that \[
+    |\beta-\alpha_1|< |\beta-\alpha_i| ~\forall 2\le i\le n.
+    \]
+    Then $\alpha_1 \in K(\beta)$.
+\end{lemma}
+\begin{proof}
+    Let $L = K(\beta)$ and $L' = L(\alpha_1,\ldots,\alpha_n)$. Then $L'/L$ is a Galois extension. Let $\sigma \in \text{Gal}(L'/L)$. We have $|\beta - \sigma(\alpha_1)| = |\sigma(\beta-\alpha_1)| = |\beta-a_1|$ by the previous lemma and hence $\sigma(\alpha_1)=\alpha_1$, so $\alpha_1 \in K(\beta)$.
+\end{proof}
+\begin{prop}
+    Let $(K,|\cdot|)$ be a complete discretely valued field and let $f(X) = \sum_{i=0}^{n} a_iX^i \in \mathcal{O}_K[X]$ be a separable irreducible monic polynomial. Let $\alpha \in \overline{K}$ be a root of $f$. Then $\exists \epsilon>0$ such that for any other polynomial $g(x) = \sum_{i=0}^{n} b_iX^i \in \mathcal{O}_K[X]$ monic with $|a_i-b_i|<\epsilon ~\forall i$, there exists a root $\beta$ of $g(x)$ such that $K(\alpha)=K(\beta)$.
+\end{prop}
+Informally, ''nearby'' polynomials define the same extension.
+\begin{proof}
+    Let $\alpha=\alpha_1,\alpha_2,\ldots,a_n \in \overline{K}$ be the roots of $f$, which are distinct. Then $f'(\alpha_1) \neq 0$. We choose $\epsilon$ such that $|g(\alpha_1)|<|f'(\alpha_1)|^2$ and $|f'(\alpha_1) - g'(\alpha_1)| < |f'(\alpha_1)|$. Then  $|g(\alpha_1)| < |f'(\alpha_1)^2| = |g'(\alpha_1)^2|$ (as all triangles are isosceles). By Hensel's lemma applied to the field $K(\alpha_1)$, there exists $\beta \in K(\alpha_1)$ such that $g(\beta)=0$ and $|\beta-\alpha_1|<|g'(\alpha_1)|$. But $|g'(\alpha_1)| = |f'(\alpha_1)| = \prod_{i=2}^{n} |\alpha_1-\alpha_i| \le |\alpha_1 - \alpha_i|$ for $2\le i\le n$ (using $|\alpha_1-\alpha_i|\le 1$ since $\alpha_i$ is integral as $f$ is monic). Since $|\beta-\alpha_1|<|\alpha_1-\alpha_i| = |\beta-\alpha_i|$ (again by isosceles condition), Krasner's lemma tells us that $\alpha \in K(\beta)$ and so $K(\alpha)=K(\beta)$.
+\end{proof}
+
+\end{document} 
