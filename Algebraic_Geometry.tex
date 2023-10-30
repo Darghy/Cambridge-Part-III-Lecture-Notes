@@ -515,4 +515,57 @@ What's going to happen now? We will define a sheaf $\mathcal{O}_{\text{Spec}(A)}
     Thirdly, the natural maps $F(B) \to \mathfrak{F}(B)$ are isomorphic by sheaf axioms. The final fact that this is unique (up to unique isomorphism) is left as an exercise.
 \end{proof}
 
+\marginpar{23 Oct 2022, Lecture 8}
+
+Setup so far: $\text{Spec }A$ is a topological space with base $\{U_f\}$ for $U_f =\mathbb{V}(f)^C$ over $f \in A$. Recall also that $U_f = U_g$ if and only if $f$ and $g$ are both powers of some $h \in A$. Also, if $U_f = U_g$, then the localizations $A_f \cong A_g$ are isomorphic. Therefore, the assignment $U_f \mapsto A_f$ is well--defined.
+
+\begin{prop}
+    The assignment $U_f \to A_f$ defines a sheaf (of rings) on the base of the topology of $\text{Spec }A$ given by distinguished opens.
+    \vspace{1mm}
+     
+    As a consequence, $\text{Spec }A$ inherits a sheaf of rings, denoted $\mathcal{O}_{\text{Spec }A}$ and called \textbf{the structure sheaf}.
+\end{prop}
+\textbf{Prelude.} Suppose $\{U_{f_i}\}_{i \in I}$ covers $\text{Spec }A$. Then there exists a finite subcover. In other words, $\text{Spec }A$ is quasi--compact. Why? Since the $U_{f_i}$ cover, there exists no prime ideal $\mathfrak{p} \subset A$ containing all $(f_i) \iff \sum_{i \in I}^{} (f_i) = (1)$. Hence $ 1 = \sum_{i}^{} a_i f_i$, where all but finitely many $a_i=0$. So if $J \subset I$ are the indices with nonzero coefficient, then $\{U_{f_i}\}_{i \in J}$ cover. 
+\begin{proof}
+    We need to check that axioms 1 and 2 of a sheaf hold. We will check these for a the basic open $B = \text{Spec }A$ itself (the general case is similar, restrict to a basic open and repeat the proof).
+    \vspace{1mm}
+     
+    Axiom 1: Suppose $\text{Spec }A = \bigcup_{i=1}^n U_{f_i}$ (finite by the prelude). Given $s \in A$ such that $s|_{U_{f_i}} = 0 ~\forall i$, by the definition of localization $f_i^m s = 0$ for some $m$ large enough. But $(1) = (f_i^m)_{i=1}^n$ for any $m>0$ because $\{U_{f_i}\}$ cover $\text{Spec }A$, so hence so do $\{U_{f_i^m}\}$. Hence $1 = \left(\sum_{}^{} r_i f_i^m \right)$ and multiplying by $s$ on both sides gives us $s = 0$.
+    \vspace{1mm}
+     
+    Axiom 2: Say $\text{Spec }A = \bigcup_{i \in I} U_{f_i}$ and choose elements in each $A_{f_i}$ that agree in $A_{f_i f_j}$, i.e. if $s_i \in A_{f_i}$, then the images of $s_i$ and $s_j$ in $A_{f_i f_j}$ coincide. We need to build an element in $A$ with these restrictions. 
+    \vspace{1mm}
+     
+    First suppose $I$ is finite. On $U_{f_i}$, we've chosen an element $\frac{a_i}{f_i^{l_i}} \in A_{f_i}$. Write $g_i = f_i^{l_i}$, noting $U_{f_i} = U_{g_i}$. On overlaps, restrict to $A_{g_ig_j}$. The condition for the second axiom is $(g_i g_j)^{m_j}(a_i g_j - a_j g_i) = 0$. Rewriting this using algebra and $U_f = U_{f^k} ~\forall k\ge 1$, we may assume $m = m_{ij}$ by taking the largest. Write $b_i = a_i g_i^m$ and $h_i = g_i^{m+1}$, so on each $U_{h_i}$ we've chosen an element $\frac{b_i}{h_i}$. \footnote{So far, this is just rewriting everything symbolically with no actual content.} But $U_{h_i}$ cover $\text{Spec }A$, so $1 = \sum_{i}^{} r_i h_i$ for $r_i \in A$. Now we construct $r = \sum_{}^{} r_i b_i$ with $r_i$ as above. This restricts correctly to $\frac{b_i}{h_i}$ on $U_{h_i}$ (i.e. in the localization $A_{h_i}$).
+    \vspace{1mm}
+     
+    When $I$ is infinite, pick a finite subcover $(f_1,\ldots,f_n) = A$ such that $U_{f_i}$ form a cover and use the above to build $r$. But given $(f_1,\ldots,f_n, f_{\alpha}) = A$, the same construction gives a ''new'' $r'$. But $r' = r$ by the first axiom. 
+\end{proof}
+\begin{defn}
+    The structure sheaf on $\text{Spec }A$ is the sheaf associated to the sheaf on the base sending $U_f \mapsto A_f$, denoted $\mathcal{O}_{\text{Spec }A}$.
+\end{defn}
+\textbf{Observation.} The stalk $\mathcal{O}_{\text{Spec }A, \mathfrak{p}} = A_{\mathfrak{p}}$.
+\vspace{1mm}
+ 
+\textbf{Terminology.} A \textbf{ringed space} $(X, \mathcal{O}_X)$ is a topological space $X$ with a sheaf of rings $\mathcal{O}_X$. An isomorphism of ringed spaces $(X, \mathcal{O}_X) \to (Y, \mathcal{O}_Y)$ is the combination of a homomorphism $\pi : X \to Y$ and an isomorphism of sheaves on $Y$, $\mathcal{O}_Y \stackrel{\sim}{\to} \pi_{\star}\mathcal{O}_X$.
+
+\begin{defn}
+    An \textbf{affine scheme} is a ringed space $(X, \mathcal{O}_X)$ that is isomorphic (as a ringed space) to $(\text{Spec }A, \mathcal{O}_{\text{Spec }A})$.
+\end{defn}
+\begin{defn}
+    A \textbf{scheme} is a ringed space $(X, \mathcal{O}_X)$ that is locally isomorphic to an affine scheme.
+\end{defn}
+Intuitively, every point $p \in X$ has a neighborhood $U_p$ such that the ringed space $(U_p, \mathcal{O}_{U_p})$ is isomorphic to some affine scheme (possibly depending on $p$).
+Note that if $U \subset X$ is open, then $U$ is naturally a ringed space with $\mathcal{O}_U(V) = \mathcal{O}_X(V)$.
+
+\begin{example}
+    $\text{Spec }A$ for various rings $A$.
+\end{example}
+\begin{example}
+    Open subschemes. Let $X$ be a scheme and $U \subset X$ be open.\footnote{From now on, whenever we say ''let $X$ be a scheme'', we silently take that to mean $(X, \mathcal{O}_X)$.} Take $\mathcal{O}_U = \mathcal{O}_X |_U$ to be the structure sheaf of $U$. This is a scheme, because the $U_f$ form a basis.
+\end{example}
+\begin{example}
+    Take $X = \text{Spec }\mathbb{C}[x,y]$ and $U = \{(x,y)\}^C$. Then the scheme $U$ is not an affine scheme.
+\end{example}
+
 \end{document}
