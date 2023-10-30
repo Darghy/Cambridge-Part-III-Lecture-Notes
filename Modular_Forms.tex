@@ -47,7 +47,7 @@
 }
  
 \author{Artur Avameri}
-\date{}
+\date{Michaelmas 2023}
  
 \setcounter{section}{0}
  
@@ -946,7 +946,92 @@ The simplest case is when $M_k(\Gamma(1))$ or $S_k(\Gamma(1))$ is 1--dimensional
 \vspace{1mm}
  
 Ramanujan conjectured in 1916 that $\tau$ is multiplicative and $\tau(p^{n+1}) = \tau(p)\tau(p^{n}) - p^{11}\tau(p^{n-1})$ for $p$ prime, $n \in \mathbb{N}$. These identities are true for Hecke operators (i.e. $T_{mn}= T_m T_n$ and $T_{p^{n+1}} = T_p T_{p^n}-p^{k-1}T_{p^{n-1}}$), hence also for the eigenvalues $\alpha_n$, hence for the numbers $\tau(n)$.
+\vspace{1mm}
+ 
+\marginpar{27 Oct 2022, Lecture 10}
 
+Our goal now is to study the spectral decomposition of $M_k(\Gamma(1))$ and the arithmetic properties of Hecke eigenvalues.
+ 
+\begin{defn}
+    If $f \in M_k(\Gamma(1))$, we say $f$ is an \textbf{eigenform} is $f$ is a $T_n$--eigenvector $\forall n\ge 1$.
+    \vspace{1mm}
+     
+    We say $f$ is a \textbf{normalized eigenform} if $a_1(f) = 1$.
+\end{defn}
+\begin{lemma}
+    Suppose $k>0$. Then any eigenform $f \in M_k(\Gamma(1))$ is a scalar multiple of a unique normalized eigenform. Moreover, if $f$ is normalized, then $T_n(f) = a_n(f)f ~\forall n\ge 1$. (In other words, the $n^{\text{th}}$ Hecke eigenvalue $=$ the $n^{\text{th}}$ $q$--expansion coefficient).
+\end{lemma}
+For example, $\Delta$ is a normalized eigenform and $\tau(n)\Delta = T_n \Delta$.
+\begin{proof}
+    We know $a_1(T_n f) = a_n(f)$. We need to show that if $f$ is an eigenform, then $a_1(f) \neq 0$ (as then $f/a_1(f)$ is normalized). But if $a_1 = 0$ and $\alpha_n$ is the eigenvalue of $T_n$ on $f$, then $a_n(f) = a_1(T_n f) = a_1 (\alpha_n f) = \alpha_n a_1(f) = 0~\forall n\ge 1$. Then $f = \sum_{n\ge 0}^{} a_n(f) q^n = a_0(f)$, which is a contradiction as constants are not modular forms of weights $k>0$.
+    \vspace{1mm}
+     
+    If $f$ is normalized, then $a_n(f) = a_1(T_n f) = a_1(\alpha_n f) = \alpha_n a_1(f) = \alpha_n$.
+\end{proof}
+\begin{prop}
+    Let $k\ge 4$ be even. Then $G_k(\tau)$ is an eigenform.
+\end{prop}
+\begin{proof}
+    We need to show that $G_k$ is a $T_n$--eigenvector $\forall n\ge 1$. We know $T_n$ is a polynomial in $T_p$ for $p$ ranging over $p \mid n$ for $p$ prime. Hence it is enough to show that $G_k$ is a $T_p$--eigenvector $~\forall p$ prime.
+    \vspace{1mm}
+     
+    $G_k(\tau) = G_k(\Lambda_{\tau})$ for $\Lambda_\tau = \mathbb{Z} \tau \oplus \mathbb{Z}$. Then 
+    \begin{align*}
+        (T_p G_k)(\Lambda) = p^{k-1}\sum_{\Lambda' \substack{\le  \\ p} \Lambda} G_k(\Lambda') = p^{k-1} \sum_{\Lambda' \substack{\le  \\ p} \Lambda} \sum_{\lambda \in \Lambda' \setminus 0}^{} \lambda^{-k} = p^{k-1}\sum_{\lambda \in \Lambda\setminus 0}^{} a(\Lambda,\lambda)\lambda^{-k}
+    \end{align*}
+    where $a(\Lambda,\lambda) = |\{\Lambda' \substack{\le \\ p}\Lambda \mid  \lambda \in \Lambda'\}|$. We know that if $\Lambda' \substack{\le  \\p} \Lambda$, then $p \Lambda \le  \Lambda' \le \Lambda$ and we have a bijection $\{\Lambda' \substack{\le  \\ p} \Lambda\} \leftrightarrow \{H \le \Lambda/p \Lambda \mid |H| = p\}$.
+    \vspace{1mm}
+     
+    If $\lambda \in p \Lambda$, then $\{\Lambda' \substack{\le \\ p} \Lambda \mid \lambda \in \Lambda'\} = \{\Lambda' \substack{\le  \\ p}\Lambda\}$, so $a(\Lambda,\lambda) = p + 1$.
+    \vspace{1mm}
+     
+    If $\lambda \not\in p \Lambda$, then $\lambda \neq 0$ modulo $p \Lambda$ and there exists a unique subgroup $H \le \Lambda/p \Lambda$ of order $p$ such that $\lambda \in H$. Hence in this case, $\{\Lambda' \substack{\le  \\p}\Lambda\} = \{\mathbb{Z} \lambda + p \Lambda\}$ and $a(\Lambda,\lambda) = 1$. Hence
+    \begin{align*}
+        (T_p G_k)(\Lambda) = p^{k-1}\sum_{\lambda \in \Lambda\setminus 0} \lambda^{-k} + p^{k-1} \sum_{\lambda \in p \Lambda \setminus 0}^{} p \lambda^{-k}.
+    \end{align*}
+    We get 
+    \begin{align*}
+        (T_p G_k)(\Lambda) = p^{k-1}\sum_{\lambda \in \Lambda \setminus 0}^{} \lambda^{-k} + p^{k-1}\sum_{\lambda \in \Lambda\setminus 0}^{} p(p \lambda)^{-k} = p^{k-1}G_k(\Lambda) + G_k(\Lambda) = \sigma_{k-1}(p)G_k(\Lambda).
+    \end{align*} 
+\end{proof}
+We can compute the $T_n$--eigenvalues on $G_k$ for all $n$ now using $a_0(T_n f) = \sigma_{k-1}(n)a_0(f)$. So if $f$ is an eigenform and $a_0(f) \neq 0$, then this forces the eigenvalue to be equal to $\sigma_{k-1}(n)$. So $T_n G_k = \sigma_{k-1}(n)G_k ~\forall n\ge 1$. The $q$--expansion of $G_k$ is $2\zeta(k) + \frac{2(2\pi i)^k}{(k-1)!}\sum_{n\ge 1}^{} \sigma_{k-1}(n)q^n$ and we also defined $E_k(\tau) = 1 + \frac{(2\pi i)^k}{\zeta(k)(k-1)!} \sum_{n\ge 1}^{} \sigma_{k-1}(n)q^n$. Hence $a_0(E_k) = 1$, but $E_k$ is not a normalized eigenform. Hence the associated normalized eigenform is 
+    \begin{align*}
+        F_k(\tau) = \frac{\zeta(k)(k-1)!}{(2\pi i)^k} + \sum_{n\ge 1}^{} \sigma_{k-1}(n)q^n = \frac{-B_k}{2k} + \sum_{n\ge 1}^{} \sigma_{k-1}(n)q^n = \frac{\zeta(1-k)}{2} + \sum_{n\ge 1}^{} \sigma_{k-1}(n)q^n
+    \end{align*}
+(here we gave multiple equivalent expressions).
+\vspace{1mm}
+    
+We have a decomposition $M_k(\Gamma(1)) = \mathbb{C} F_k \oplus S_k(\Gamma(1))$ (for $k\ge 4$). Both summands are $T_n$--invariant, so it's enough to study the action of $T_n$ on $S_k$.
+\vspace{1mm}
+ 
+\textbf{Remark.} $T_n$ do not usually respect multiplication. In particular, the product of eigenforms is not usually an eigenform. For example, $E_4^2 = E_8$, but $E_4^3 \in M_{12}(\Gamma(1)) = \mathbb{C}E_{12} \oplus \mathbb{C} \Delta$ requires both $E_{12}$ and $\mathbb{C}$ to be expressed and hence is not an eigenform.
 
+\begin{prop}
+    If $f \in S_k(\Gamma(1))$ is a cuspidal eigenform, then all of the $T_n$--eigenvalues on $f$ are algebraic integers. If $f$ is normalized, then $\mathbb{Q}(\{a_n(f)\}_{n=1}^{\infty})$ has finite degree over $\mathbb{Q}$ (i.e. it is a number field).
+\end{prop}
+\begin{proof}
+    We will show that for all $n\ge 1$, all eigenvalues of $T_n$ on $S_k(\Gamma(1))$ are algebraic integers. We will do this by showing that the characteristic polynomial of $T_n$ acting on $S_k$ has integer coefficients (and it is of course monic).
+    \vspace{1mm}
+     
+    We consider the basis $f_1,\ldots,f_N$ for $S_k(SL_{2}(\mathbb{Z}))$ characterized by:
+    \begin{itemize}
+        \item $\forall 1\le i \le N$ and $\forall  n\ge 1$, $a_n(f_i) \in \mathbb{Z}$.
+        \item $~\forall 1\le i, n \le N$, $a_n(f_i) = \delta_{in}$.
+    \end{itemize}
+    Recall that this meant that $f_1,\ldots,f_N$ was the dual basis to the basis of functionals $a_1,\ldots,a_N$ of $S_k(\Gamma(1))^{*}$. Hence $\forall f \in S_k(\Gamma(1))$, $f = \sum_{i=1}^{N} a_i(f)f_i$ (this identity holds for any elements of a finite dimensional vector space with its basis and dual basis)
+    \vspace{1mm}
+     
+    The claim is that if $A$ denotes the matrix of $T_n$ in the basis of $f_1,\ldots,f_N$, then $A$ has integer entries. As the characteristic polynomial of $T_n$ is $\det(X\cdot I - A)$, this will show that the characteristic polynomial has coefficients in $\mathbb{Z}$.
+    \vspace{1mm}
+     
+    By definition, $T_n(j) = \sum_{i=1}^{N} A_{ij}f_i$. Then for $1\le m\le N$, 
+    \begin{align*}
+        a_m (T_n f_j) = \sum_{i=1}^{N} A_{ij} a_m(f_j) = \sum_{i=1}^{N} A_{ij}\delta_{im} = A_{mj}.
+    \end{align*}
+    But $a_m(T_n f_j) = \sum_{a \mid (m,n)}^{} a^{k-1}a_{mn/a^2}(f_j)$ by the formula from the last lecture. Note that each $a_{mn/a^2}(f_j)$ is in $\mathbb{Z}$ by the definition of $f_j$, so $\forall m, j$, $A_{mj} \in \mathbb{Z}$.
+    \vspace{1mm}
+     
+    If $f$ is a normalized eigenform, $f = \sum_{i=1}^{N} a_i(f)f_i$, then $\forall n\ge1$, $a_n(f) = \sum_{i=1}^{N} a_i(f)\underbrace{a_{n}(f_i)}_{\in \mathbb{Z}}$. Hence $\mathbb{Q}(\{a_n(f)\}_{n\ge 1}) = \mathbb{Q}(\{a_n(f)\}_{n=1}^N)$ has finite degree over $\mathbb{Q}$.
+\end{proof}
 
 \end{document}
