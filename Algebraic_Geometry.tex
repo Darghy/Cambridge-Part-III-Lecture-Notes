@@ -517,7 +517,7 @@ What's going to happen now? We will define a sheaf $\mathcal{O}_{\text{Spec}(A)}
 
 \marginpar{23 Oct 2022, Lecture 8}
 
-Setup so far: $\text{Spec }A$ is a topological space with base $\{U_f\}$ for $U_f =\mathbb{V}(f)^C$ over $f \in A$. Recall also that $U_f = U_g$ if and only if $f$ and $g$ are both powers of some $h \in A$. Also, if $U_f = U_g$, then the localizations $A_f \cong A_g$ are isomorphic. Therefore, the assignment $U_f \mapsto A_f$ is well--defined.
+Setup so far: $\text{Spec }A$ is a topological space with base $\{U_f\}$ for $U_f =\mathbb{V}(f)^C$ over $f \in A$. Recall also that $U_f = U_g$ if and only if $\sqrt{(f)} = \sqrt{(g)}$. Also, if $U_f = U_g$, then the localizations $A_f \cong A_g$ are isomorphic. Therefore, the assignment $U_f \mapsto A_f$ is well--defined.
 
 \begin{prop}
     The assignment $U_f \to A_f$ defines a sheaf (of rings) on the base of the topology of $\text{Spec }A$ given by distinguished opens.
@@ -562,10 +562,105 @@ Note that if $U \subset X$ is open, then $U$ is naturally a ringed space with $\
     $\text{Spec }A$ for various rings $A$.
 \end{example}
 \begin{example}
-    Open subschemes. Let $X$ be a scheme and $U \subset X$ be open.\footnote{From now on, whenever we say ''let $X$ be a scheme'', we silently take that to mean $(X, \mathcal{O}_X)$.} Take $\mathcal{O}_U = \mathcal{O}_X |_U$ to be the structure sheaf of $U$. This is a scheme, because the $U_f$ form a basis.
-\end{example}
-\begin{example}
     Take $X = \text{Spec }\mathbb{C}[x,y]$ and $U = \{(x,y)\}^C$. Then the scheme $U$ is not an affine scheme.
 \end{example}
+\marginpar{25 Oct 2022, Lecture 9}
+
+\begin{example}
+    Open subschemes. Let $X$ be a scheme and $U \subset X$ be open.\footnote{From now on, whenever we say ''let $X$ be a scheme'', we silently take that to mean $(X, \mathcal{O}_X)$.} Write $i : U \to X$ for the inclusion map. Take $\mathcal{O}_U = \mathcal{O}_X |_U = i^{-1} \mathcal{O}_X$ to be the structure sheaf of $U$.
+\end{example}
+\begin{prop}
+    The ringed space $(U, \mathcal{O}_U)$ is a scheme.
+\end{prop}
+Simple case: take $X = \text{Spec }A$, $U = U_f$ for $f \in A$. Then $(U, \mathcal{O}_U) \cong (\text{Spec }A_f, \mathcal{O}_{\text{Spec }A_f})$.
+\begin{proof}
+    Let $p \in U \subset X$ be a point. Since $X$ is a scheme, we can find some $(V_p, \mathcal{O}_X |_{V_p})$ inside $X$ with $p \in V$ such that $V_p$ is isomorphic to an affine scheme. Take $V_p \cap U \subset U$ with the structure sheaf via restriction. However, this may not be affine. But $V_p$ is affine, say $V \cong \text{Spec }B$, and the distinguished opens in $\text{Spec }B$ form a basis for the topology. Hence we've reduced to the ''simple case'' and we're done.
+\end{proof}
+\begin{example}
+    Define $\mathbb{A}_k^n = \text{Spec }k[x_1,\ldots,x_n]$. Take $U = \mathbb{A}^{n^2} - \{\det(x_{ij}) = 0\}$, i.e. ''$U = GL_2(k)$''.
+\end{example}
+\begin{example}
+    A non--affine scheme. Take $X = \mathbb{A}_k^2 = \text{Spec }k[x,y]$ and $U = \mathbb{A}_k^2 \setminus \{(x,y)\}$.\footnote{Illegally, we are allowed to think of this as $\mathbb{R}^2 \setminus \{(0,0)\}$.} Then the claim is that $U$ is not affine. We will calculate $\mathcal{O}_U(U)$. Write $U_x = \mathbb{V}(x)^{C} \subset \mathbb{A}^2$ and $U_y = \mathbb{V}(y)^{C} \subset \mathbb{A}^2$. Note that $U = U_x \cup U_y$ and $U_x \cap U_y = \mathbb{A}^2 \setminus \mathbb{V}(xy)$. \vspace{1mm}
+     
+    We have $\mathcal{O}_U(U_x) = k[x,x^{-1}, y]$, $\mathcal{O}_U(U_y) = k[x,y,y^{-1}]$, and $\mathcal{O}_U(U_x \cap U_y) = k[x,x^{-1},y,y^{-1}]$. Also, the restriction maps $\mathcal{O}_U(U_x) \to \mathcal{O}_U(U_{xy})$ are the obvious ones.
+    \vspace{1mm}
+     
+    By sheaf axioms, $\mathcal{O}_U(U) = k[x,x^{-1},y] \cap k[x,y,y^{-1}]$ (inside $k[x,x^{-1},y,y^{-1}]$). Hence $\mathcal{O}_U(U) = k[x,y]$. This is a contradiction. Why? One way: there exists (in $(U, \mathcal{O}_U)$) a maximal ideal in the global sections ring with empty vanishing locus, namely $(x,y) \subset k[x,y]$. On the other hand, there is no maximal ideal in $\text{Spec }k[x,y]$ with empty vanishing locus. 
+    \vspace{1mm}
+     
+    This is a bit of a hack and there is a better conceptual approach that we will discover soon.
+    \vspace{1mm}
+     
+    A little more on $U = \mathbb{A}_k^2 \setminus  \{(x,y)\}$ not being affine (this was talked about at the beginning of the following lecture). Let $X$ be a scheme and $f \in \Gamma(X,\mathcal{O}_X) = \mathcal{O}_X(X)$. Fix $p \in X$. Then there's a well--defined stalk $\mathcal{O}_{X,p}$ of $\mathcal{O}_X$ at $p$.
+    The stalk is of the form $A_\mathfrak{p}$, where $A$ is a ring and $\mathfrak{p}\subset A$ is a prime ideal. In particular, $A_\mathfrak{p}$ has a unique maximal ideal, namely $\mathfrak{p} A_\mathfrak{p}$. Say $f$ vanishes at $\mathfrak{p}$ if its image in $A_\mathfrak{p}/\mathfrak{p}A_\mathfrak{p}$ is 0 (i.e $f \in \mathfrak{p}A_{\mathfrak{p}}$). (Here we're using an isomorphism $p \ni V_p$ open to $\text{Spec }A$). For $f \in \Gamma(X,\mathcal{O}_X)$, $\mathbb{V}(f)$, the vanishing locus of $f \subset X$ is well--defined.
+\end{example}
+\subsection{Interlude: gluing sheaves}
+Let $X$ be a topological space with cover $\{U_{\alpha}\}$, sheaves $\{\mathcal{F}_{\alpha}\}$ on $\{U_\alpha\}$ and isomorphisms (of sheaves) $\phi_{\alpha,\beta} : \mathcal{F}_{\alpha}|_{U_\alpha \cap U_{\beta}} \to \mathcal{F}_\beta |_{U_\alpha \cap U_\beta}$ such that $\phi_{\alpha,\alpha} = \text{id}$, $\phi_{\alpha \beta} = \phi_{\beta \alpha}^{-1}$ and $\phi_{\beta \gamma} \circ \phi_{\alpha \beta} = \phi_{\alpha \gamma}$ on $U_{\alpha} \cap U_\beta \cap U_\gamma$ (the \textbf{cocycle condition}).
+\vspace{1mm}
+ 
+\textbf{Construction.} We will build a sheaf $\mathcal{F}$ on $X$. Given $V \subset X$ open, define 
+\begin{align*}
+    \mathcal{F}(V) = \{(S_\alpha)_{\alpha}, S_\alpha \in \mathcal{F}_{\alpha}(U_\alpha \cap V)\mid \phi_{\alpha,\beta}(S_\alpha |_{V \cap U_\alpha \cap U_\beta}) = S_\beta|_{V \cap U_\alpha \cap U_\beta}\}.
+\end{align*} 
+$\mathcal{F}$ is a presheaf, since given $(S_\alpha) \in \mathcal{F}(V)$ and $W \subset V$ open, we can take $(S_a)|_W = \left(\text{res}^{V \cap U_\alpha}_{W \cap U_\alpha}(S_\alpha)\right)_\alpha$. This lies in $\mathcal{F}(W)$ by sheaf axioms.
+\begin{prop}
+    $\mathcal{F}$ is a sheaf and $\mathcal{F}|_{U_\alpha} = \mathcal{F}_\alpha$ on $U_\alpha$.
+\end{prop}
+\begin{proof}
+    It is a presheaf, and both sheaf axioms are clear (exercise: check this). But we need to check/build an isomorphism $\mathcal{F}|_{U_\gamma} \to \mathcal{F}_\gamma$. Given $V \subset U_\gamma$ and $S \in \mathcal{F}_{\gamma}(V)$, define its image in $\mathcal{F}_{U_\gamma}$ to be $(\phi_{\gamma, \alpha}(S|_{V \cap U_\alpha}))_\alpha$. We need to check that this lies in $\mathcal{F}|_{U_\gamma}(V)= \mathcal{F}(V)$, but this follows from the cocycle condition: $\phi_{\alpha,\beta} \circ \phi_{\gamma,\alpha} (S |_{V \cap U_\alpha \cap U_\beta}) = \phi_{\gamma, \beta}(S|_{V \cap U_\alpha \cap U_\beta})$.
+\end{proof}
+\subsection{More schemes}
+Take schemes $(X, \mathcal{O}_X)$ and $(Y, \mathcal{O}_Y)$ with opens $U \subset X, V \subset Y$ and an isomorphism $(U, \mathcal{O}_X|_U) \stackrel{\sim}{\to} (V, \mathcal{O}_Y|_V)$. We can glue both the topological spaces and the schemes: $X \sqcup Y / (U \sim V)$ with the sheaf glued as in the previous construction.
+\vspace{1mm}
+ 
+\marginpar{27 Oct 2022, Lecture 10}
+
+How to glue: Take $(X \sqcup Y)/(U \sim V)$. By definition of the quotient topology, the image of $X,Y$ in $S$ form an open cover and their intersection is the image of $U$ (or $V$). Now glue the structure sheaves on these opens as in the previous lecture (to get $(S, \mathcal{O}_S)$). Note that there is no cocycle condition, since we only have the intersection of two and not three opens.
+
+\begin{example}
+    The bug--eyed line, i.e. the line with two origins. Let $k$ be a field and $U \subset X = \text{Spec }k[t]$, $V \subset Y = \text{Spec }k[u]$, $U = \text{Spec }k[t,t^{-1}]$, $V = \text{Spec }k[u,u^{-1}]$. We have the isomorphism $U \to V$ by $t \mapsto u$. (Really, this is an isomorphism of rings $k[u,u^{-1}] \to k[t,t^{-1}]$ with $u \mapsto t$ and now take Spec).
+    \vspace{1mm}
+     
+    On the level of topological spaces, $X = \mathbb{A}_k^1$ and $Y = \mathbb{A}_k^1$ with $U = \mathbb{A}^1\setminus \{(t)\}$ (i.e. ''$U$ minus a point'', similarly for $V$). Hence $X \sqcup Y/\sim$ gives the line with two origins.
+    \vspace{1mm}
+     
+    What are the types of opens in this scheme? 
+    \begin{itemize}
+        \item $W$ could be contained inside $X$ or $Y$ (inside $S$). There are nice, easy open sets.
+        \item $W = S \setminus \{p_1,\ldots,p_r\}$ where $p_i \in U$ or $p_i \in V$. The simplest of these is when $W = S$. 
+    \end{itemize}
+    What is $\mathcal{O}_S(S)$? Use sheaf axioms to find that $\mathcal{O}_S(S) \cong k[t]$. Conclusion: $S$ is not affine.
+\end{example}
+\begin{example}
+    $\mathbb{P}_k^1$. Same setup: $X = \text{Spec }k[t], Y = \text{Spec }k[s]$, $U = \text{Spec }k[t,t^{-1}]$, $V = \text{Spec }k[s,s^{-1}]$. We glue via the isomorphism $s \mapsto t^{-1}$. Then $\mathbb{P}_k^1$ is the result of the gluing (we can consider this as a definition for now).
+\end{example}
+\begin{prop}
+    $\mathcal{O}_{\mathbb{P}^1}(\mathbb{P}^1) \cong k$. 
+\end{prop}
+\begin{proof}
+    Important exercise: the only elements of $k[t,t^{-1}]$ that are both polynomials in $t$ and $t^{-1}$ are the constants. (Do this!). In particular, $\mathbb{P}^1$ is not affine.
+\end{proof}
+\begin{example}
+    Similarly we can build $S =$ ''$\mathbb{A}_k^2$ with doubled origin'' -- this has the interseting property that there exist affine open subschemes $U_1, U_2 \subset S$ such that $U_1 \cap U_2$ is not affine. We flag this example for later.
+\end{example}
+
+\textbf{Gluing schemes}. (Example sheet 1). Given schemes $X_i$ for $i \in I$, open subschemes $X_{ij} \subset X_i$ with $X_{ii} = X_i$, isomorphisms $f_{ij}: X_{ij} \stackrel{\sim}{\to} X_{ji}$ with $f_{ii} = \text{id}_{X_i}$, and the cocycle condition $f_{ik}|_{X_{ij} \cap X_{ik}} = f_{jk}|_{X_{ji} \cap X_{jk}} \circ f_{ij}|_{X_{ij} \cap X_{ik}}$, there is a unique scheme $X$ with an open cover given by $X_i$, glued along $X_{ij} \cong X_{ji}$.
+
+\begin{example}[Key example]
+    Take $A$ any ring, $X_i = \text{Spec }A\left[\frac{x_0}{x_i},\ldots,\frac{x_n}{x_i}\right]$, $X_{ij} = \mathbb{V}\left(\frac{x_j}{x_i}\right)^C \subset X_i$, and isomorphisms $X_{ij} \to X_{ji}$ by $\frac{x_k}{x_i}\mapsto \frac{x_k}{x_j}\left(\frac{x_i}{x_j}\right)^{-1}$. The resulting glued scheme is called the \textbf{projective $n$--space}, denoted $\mathbb{P}_A^n$.
+\end{example}
+\textbf{Exercise/calculation.} $\Gamma(\mathbb{P}_A^n, \mathcal{O}_{\mathbb{P}_A^n}) = A$.
+
+\subsection{Proj construction}
+\begin{defn}
+    A \textbf{$\mathbb{Z}$--grading} on a ring $A$ is a decomposition $A = \bigoplus_{i \in \mathbb{Z}}A_i$ as abelian groups such that $A_i A_j \subset A_{i+j}$.
+\end{defn}
+\begin{example}
+    Take $A = k[x_0,\ldots,x_n]$ and write $A_d = \{\text{degree }d \text{ homogeneous polynomials}\} \cup \{0\}$.
+    \vspace{1mm}
+     
+    Also: Let $I \subset k[x_0,\ldots,x_n]$ be a homogeneous ideal (i.e. generated by homogeneous elements of possibly different degree). Then $k[x_0,\ldots,x_n]/I$ is also naturally graded. (Exercise: think about how).
+\end{example}
+\textbf{Assumption.} $A_0$ is always a subring, and from now on we will assume that the degree 1 elements generate $A$ as an algebra over $A_0$.
 
 \end{document}
