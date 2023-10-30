@@ -16,6 +16,7 @@
 \usepackage{float}
 \usepackage{tikz-cd}
 \usepackage{tikz}
+\usepackage{stmaryrd}
 \usepackage{graphicx}
 \usepackage{caption}
 \usepackage{wrapfig}
@@ -141,7 +142,7 @@ In this course, we will mainly be interested in the following:
     \end{itemize}
 \end{example}
 
-\begin{lemma}
+\begin{lemma}[All triangles are isosceles]
     Let $(K, |\cdot|)$ be non--archimedean and $x,y \in K$. If $|x|<|y|$, then $|x-y|= |y|$.
 \end{lemma}
 \begin{proof}
@@ -266,7 +267,7 @@ determines a non--archimedean absolute value on $K$. Conversely, a non--archimed
     \end{enumerate}
 \end{proof}
 
-\textbf{Notation.} Let $\mathfrak{m} = \{x \in \mathcal{O}_K \mid |x|<1\}$. It turns out this is a maximal ideal in $\mathcal{O}_K$. Also let $\mathfrak{k} = \mathcal{O}_K/\mathfrak{m}$, the residue field. 
+\textbf{Notation.} Let $\mathfrak{m} = \{x \in \mathcal{O}_K \mid |x|<1\}$. It turns out this is a maximal ideal in $\mathcal{O}_K$. Also let $k = \mathcal{O}_K/\mathfrak{m}$, the residue field. 
 
 \begin{cor}
     $\mathcal{O}_K$ is a \textbf{local ring} (i.e. a ring with a unique maximal ideal) with unique maximal ideal $\mathfrak{m}$.
@@ -276,7 +277,7 @@ determines a non--archimedean absolute value on $K$. Conversely, a non--archimed
 \end{proof}
 
 \begin{example}
-    $K=\mathbb{Q}$ with $|\cdot|_p$. Then $\mathcal{O}_K = \mathbb{Z}_{(p)} = \{\frac{a}{b} \in \mathbb{Q} \mid p \nmid b\}$. In this case, $\mathfrak{m} = p\mathbb{Z}_{(p)}$ and $\mathfrak{k} = \mathbb{F}_p$.
+    $K=\mathbb{Q}$ with $|\cdot|_p$. Then $\mathcal{O}_K = \mathbb{Z}_{(p)} = \{\frac{a}{b} \in \mathbb{Q} \mid p \nmid b\}$. In this case, $\mathfrak{m} = p\mathbb{Z}_{(p)}$ and $k = \mathbb{F}_p$.
 \end{example}
 
 \begin{defn}
@@ -331,7 +332,7 @@ determines a non--archimedean absolute value on $K$. Conversely, a non--archimed
 \begin{proof}
     \begin{enumerate}[(i)]
         \item $\mathcal{O}_K$ is a PID by the previous lemma, hence any nonzero prime ideal is maximal. Since $\mathcal{O}_K$ is a local ring, it is a DVR.
-        \item Let $R$ be a DVR with maximal ideal $\mathfrak{m}$. Then $\mathfrak{m} = (\pi)$ for $\pi \in R$. Since PIDs are UFDs, we can write any nonzero $x \in R$ uniquely as $\pi^n u$ for some $n \ge 0$, $u$ a unit (since $\pi$ is the only prime). Then any $y \in K^{\times}$ can be written uniquely as $\pi^m u$, $m \in \mathbb{Z}$. Define $v(\pi^m u) = m$. Exercise: check that this is a valuation and $R = \mathcal{O}_K$.
+        \item Let $R$ be a DVR with maximal ideal $\mathfrak{m}$. Then $\mathfrak{m} = (\pi)$ for $\pi \in R$. Since PIDs are UFDs, we can write any nonzero $x \in R$ uniquely as $\pi^n u$ for some $n \ge 0$, $u$ a unit (since $\pi$ is the only prime). Then any $y \in K^{\times}$ can be written uniquely as $\pi^m u$, $m \in \mathbb{Z}$. Define $v(\pi^m u) = m$. We can check that this is a valuation with $R = \mathcal{O}_K$.
     \end{enumerate}
 \end{proof}
 \begin{example}
@@ -405,7 +406,7 @@ Let $(K, |\cdot|)$ be a non--archimedean valued field and $\pi \in \mathcal{O}_K
         \item Left as exercise on example sheet 1.
     \end{enumerate}
 \end{proof}
-\begin{cor}
+\begin{cor}\label{cor3.4}
     \begin{enumerate}[(i)]
         \item $\mathbb{Z}_p \cong \underset{n}{\varprojlim} \mathbb{Z}/p^n \mathbb{Z}$.
         \item Every element in $\mathbb{Q}_p$ can be written uniquely as $x = \sum_{i=n}^{\infty} a_i p^i$ where we have $a_i \in \{0,1,\ldots,p-1\}$.
@@ -414,8 +415,11 @@ Let $(K, |\cdot|)$ be a non--archimedean valued field and $\pi \in \mathcal{O}_K
 \marginpar{14 Oct 2022, Lecture 4}
 \begin{proof}
     \begin{enumerate}[(i)]
-        \item By the previous proposition, it suffices to show that $\mathbb{Z}/p^n\mathbb{Z} \cong \mathbb{Z}_p/p^n\mathbb{Z}$. Let $f_n : \mathbb{Z} \to \mathbb{Z}_p/p^n \mathbb{Z}_p$ be the natural map. Then $\text{ker}(f_n) =\{x \in \mathbb{Z} \mid |x|_p \le p^{-n}\} = p^n\mathbb{Z}$, thus the natural map $\mathbb{Z}/p^n\mathbb{Z} \to \mathbb{Z}_p/p^n \mathbb{Z}_p$ is injective. For surjectivity, take $\overline{z} \in \mathbb{Z}_p/p^n \mathbb{Z}_p$ and $c \in \mathbb{Z}_p$ a lift. Since $\mathbb{Z}$ is dense in $\mathbb{Z}_p$, there exists $x \in \mathbb{Z}$ such that $x \in c + p^n \mathbb{Z}_p$ ($p^n \mathbb{Z}_p$ is open in $\mathbb{Z}_p$). Then $f_n(x) = \overline{z}$, so $Z/p^n \mathbb{Z} \to \mathbb{Z}_p / p^n \mathbb{Z}_p$ is surjective.
-        \item Follows from the second part of the previous proposition applied to $p^{-n} x \in \mathbb{Z}_p$ for some $n \in \mathbb{Z}$.
+        \item By the previous proposition we just need to show $\mathbb{Z}/p^n\mathbb{Z} \cong \mathbb{Z}_p/p^n\mathbb{Z}_p$. Let $f_n : \mathbb{Z} \to \mathbb{Z}_p/p^n \mathbb{Z}_p$ be the natural map. Then $$\text{ker}(f_n) =\{x \in \mathbb{Z} \mid |x|_p \le p^{-n}\} = p^n\mathbb{Z},$$ thus the natural map $\mathbb{Z}/p^n\mathbb{Z} \to \mathbb{Z}_p/p^n \mathbb{Z}_p$ is injective. 
+        \vspace{1mm}
+         
+        For surjectivity, take $\overline{z} \in \mathbb{Z}_p/p^n \mathbb{Z}_p$ and $c \in \mathbb{Z}_p$ a lift. Since $\mathbb{Z}$ is dense in $\mathbb{Z}_p$, there exists $x \in \mathbb{Z}$ such that $x \in c + p^n \mathbb{Z}_p$ ($p^n \mathbb{Z}_p$ is open in $\mathbb{Z}_p$). Then $f_n(x) = \overline{z}$, so $\mathbb{Z}/p^n \mathbb{Z} \to \mathbb{Z}_p / p^n \mathbb{Z}_p$ is surjective.
+        \item Follows from Corollary \ref{cor3.4} (ii) applied to $p^{-n} x \in \mathbb{Z}_p$ for some $n \in \mathbb{Z}$.
     \end{enumerate}
 \end{proof}
 
@@ -431,7 +435,7 @@ Let $(K, |\cdot|)$ be a non--archimedean valued field and $\pi \in \mathcal{O}_K
     Let $(K, |\cdot|)$ be a complete discretely valued field. Let $f(x) \in \mathcal{O}_K[x]$ and assume $\exists a \in \mathcal{O}_K$ such that $|f(a)| < |f'(a)|^2$ for $f'(a)$ the formal derivative. Then there exists a unique $x \in \mathcal{O}_K$ such that $f(x)=0$ and $|x-a|< |f'(a)|$.
 \end{theorem}
 \begin{proof}
-    Let $\pi \in \mathcal{O}_K$ be a uniformizer and let $r = v(f'(a))$ where $v$ is a normalized valuation, i.e. $v(\pi)=1$. We inductively construct a sequence $(x_n)$ in $\mathcal{O}_K$ such that
+    Let $\pi \in \mathcal{O}_K$ be a uniformizer and let $r = v(f'(a))$ for $v$ a normalized valuation, i.e. $v(\pi)=1$. We inductively construct a sequence $(x_n)$ in $\mathcal{O}_K$ such that
     \begin{enumerate}[(i)]
         \item $f(x_n) \equiv 0 \pmod{\pi^{n+2r}}$.
         \item $x_{n+1} \equiv x_n \pmod{\pi^{n+r}}$.
@@ -457,7 +461,7 @@ Let $(K, |\cdot|)$ be a non--archimedean valued field and $\pi \in \mathcal{O}_K
     Apply Hensel's lemma to a lift $c \in \mathcal{O}_K$ of $\overline{c}$. Then $|f(c)| < 1 = |f'(c)|^2$ since $f'(c)$ is a simple root.
 \end{proof}
 \begin{example}
-    Consider $f(x) = x^2-2$, which has a simple root mod 7. Thus $\sqrt{2} \in \mathbb{Z}_p \subset \mathbb{Q}_7$.
+    Consider $f(x) = x^2-2$, which has a simple root mod 7. Thus $\sqrt{2} \in \mathbb{Z}_7 \subset \mathbb{Q}_7$.
 \end{example}
 \begin{cor}
     $\mathbb{Q}_p^\times/(\mathbb{Q}_p^\times)^2 \cong \begin{cases}
@@ -917,12 +921,97 @@ In summary, if $K$ is a local field, then either:
 \begin{proof}
     Let $L = K(\beta)$ and $L' = L(\alpha_1,\ldots,\alpha_n)$. Then $L'/L$ is a Galois extension. Let $\sigma \in \text{Gal}(L'/L)$. We have $|\beta - \sigma(\alpha_1)| = |\sigma(\beta-\alpha_1)| = |\beta-a_1|$ by the previous lemma and hence $\sigma(\alpha_1)=\alpha_1$, so $\alpha_1 \in K(\beta)$.
 \end{proof}
-\begin{prop}
+\begin{prop}\label{prop8.3}
     Let $(K,|\cdot|)$ be a complete discretely valued field and let $f(X) = \sum_{i=0}^{n} a_iX^i \in \mathcal{O}_K[X]$ be a separable irreducible monic polynomial. Let $\alpha \in \overline{K}$ be a root of $f$. Then $\exists \epsilon>0$ such that for any other polynomial $g(x) = \sum_{i=0}^{n} b_iX^i \in \mathcal{O}_K[X]$ monic with $|a_i-b_i|<\epsilon ~\forall i$, there exists a root $\beta$ of $g(x)$ such that $K(\alpha)=K(\beta)$.
 \end{prop}
 Informally, ''nearby'' polynomials define the same extension.
 \begin{proof}
     Let $\alpha=\alpha_1,\alpha_2,\ldots,a_n \in \overline{K}$ be the roots of $f$, which are distinct. Then $f'(\alpha_1) \neq 0$. We choose $\epsilon$ such that $|g(\alpha_1)|<|f'(\alpha_1)|^2$ and $|f'(\alpha_1) - g'(\alpha_1)| < |f'(\alpha_1)|$. Then  $|g(\alpha_1)| < |f'(\alpha_1)^2| = |g'(\alpha_1)^2|$ (as all triangles are isosceles). By Hensel's lemma applied to the field $K(\alpha_1)$, there exists $\beta \in K(\alpha_1)$ such that $g(\beta)=0$ and $|\beta-\alpha_1|<|g'(\alpha_1)|$. But $|g'(\alpha_1)| = |f'(\alpha_1)| = \prod_{i=2}^{n} |\alpha_1-\alpha_i| \le |\alpha_1 - \alpha_i|$ for $2\le i\le n$ (using $|\alpha_1-\alpha_i|\le 1$ since $\alpha_i$ is integral as $f$ is monic). Since $|\beta-\alpha_1|<|\alpha_1-\alpha_i| = |\beta-\alpha_i|$ (again by isosceles condition), Krasner's lemma tells us that $\alpha \in K(\beta)$ and so $K(\alpha)=K(\beta)$.
+\end{proof}
+\marginpar{29 Oct 2022, Lecture 10}
+\begin{theorem}
+    Let $K$ be a local field. Then $K$ is the completion of a global field.
+\end{theorem}
+\begin{proof}
+    Case 1: $|\cdot|$ is archimedean. Then $\mathbb{R}, \mathbb{C}$ are the completions of $\mathbb{Q},\mathbb{Q}(i)$, respectively, with respect to $|\cdot|_{\infty}$.
+    \vspace{1mm}
+     
+    Case 2: $|\cdot|$ is non--archimedean and of equal characteristic. Then $K \cong \mathbb{F}_p((t))$, and so $K$ is the completion of $\mathbb{F}_p(t)$ with respect to the $t$--adic absolute value.
+    \vspace{1mm}
+     
+    Case 3: $|\cdot|$ is non--archimedean and of mixed characteristic. Then $K = \mathbb{Q}_p(\alpha)$ for $\alpha$ a root of a monic irreducible polynomial $f(X) \in \mathbb{Z}_p[X]$ (primitive element theorem). Since $\mathbb{Z}$ is dense in $\mathbb{Z}_p$, we choose $g(X) \in \mathbb{Z}[X]$ as in Proposition \ref{prop8.3}. Then $K = \mathbb{Q}_p(\beta)$ for $\beta$ a root of $g(X)$. Since $\mathbb{Q}(\beta)$ is dense in $\mathbb{Q}_p(\beta) =K$, $K$ is the completion of $\mathbb{Q}(\beta)$.
+\end{proof}
+\section{Dedekind domains}
+\begin{defn}
+    A Dedekind domain is a ring $R$ such that 
+    \begin{enumerate}[(i)]
+        \item $R$ is a Noetherian integral domain.
+        \item $R$ is integrally closed in $\text{Frac}(R)$.
+        \item Every nonzero prime ideal of $R$ is maximal.
+    \end{enumerate}
+\end{defn}
+\begin{example}
+    The ring of integers in a number field is a Dedekind domain (we will show this later). This is the prototypical example. Also, any PID (hence DVR) is a Dedekind domain.
+\end{example}
+\begin{theorem}\label{theorem9.1}
+    A ring is a DVR $\iff$ $R$ is a Dedekind domain with exactly one nonzero prime ideal.
+\end{theorem}
+We start with two lemmas.
+\begin{lemma}\label{lemma9.2}
+    Let $R$ be a Noetherian ring and $I \subset R$ a nonzero ideal. Then there exist nonzero prime ideals $\mathfrak{p}_1,\ldots,\mathfrak{p}_r$ such that $\mathfrak{p}_1\ldots \mathfrak{p}_r \subset I$.
+\end{lemma}
+\begin{proof}
+    Suppose not. Since $R$ is Noetherian, we can choose $I$ maximal with this property. Then $I$ is not prime, so $\exists x,y \in R\setminus I$ such that $xy \in I$. Let $I_1 = I + (x)$ and $I_2 = I + (y)$. Then by the maximality of $I$, $\exists \mathfrak{p}_1,\ldots,\mathfrak{p}_r$ and $\mathfrak{q}_1,\ldots,\mathfrak{q}_s$ such that $\mathfrak{p}_1\ldots \mathfrak{p}_r \subset I_1$ and $\mathfrak{q_1}\ldots \mathfrak{q}_s \subset I_2$, so $\mathfrak{p}_1 \ldots \mathfrak{p}_r \mathfrak{q}_1 \ldots \mathfrak{q}_s \subset I_1 I_2 \subset I$, a contradiction.
+\end{proof}
+\begin{lemma}\label{lemma9.3}
+    Let $R$ be an integral domain which is integrally closed in $K =\text{Frac}(R)$. Let $0 \neq I \subset R$ be finitely generated and let $x \in K$. If $x I \subset I$, then $x \in R$.
+\end{lemma}
+\begin{proof}
+    Let $I = (c_1,\ldots,c_n)$. We write $xc_i = \sum_{j=1}^{n} a_{ij}c_j$ for $a_{ij} \in R$. Let $A = (a_{ij})$ be the matrix given by the $a_{ij}$ and set $B = xI - A \in M_{n \times n}(K)$. Let $\text{Adj}(B)$ be the adjugate matrix for $B$. Then $B \begin{pmatrix} c_1 \\ \vdots \\ c_n \end{pmatrix} = 0$ in $K^n$, so multiplying by the adjugate gives $\det(B) I \begin{pmatrix} c_1 \\ \vdots \\ c_n \end{pmatrix} = 0 \implies \det(B) = 0$. But $\det(B)$ is just a monic polynomial in $x$ with coefficients in $R$. Thus $x$ is integral over $R$, so $x \in R$ as $R$ is integrally closed.
+\end{proof}
+\begin{proof}[Proof of Theorem 9.1]
+    $(\implies )$: This is clear, as any PID, so any DVR, is a Dedekind domain.
+    \vspace{1mm}
+     
+    $(\impliedby)$: We need to show that $R$ is a PID. The assumption implies that $R$ is a local ring with unique maximal ideal $\mathfrak{m}$. 
+    \vspace{1mm}
+     
+    Step 1: $\mathfrak{m}$ is principal. Let $0 \neq x \in \mathfrak{m}$. By Lemma \ref{lemma9.2}, $(x) \supset \mathfrak{m}^n$ for some $n\ge 1$. Let $n$ be minimal such that $(x) \supset \mathfrak{m}^n$. Then we may choose $y \in \mathfrak{m}^{n-1} \setminus (x)$. Set $\pi = \frac{x}{y}$. Then we have $y \mathfrak{m} \subset \mathfrak{m}^n \subset (x) \implies p^{-1}\mathfrak{m} \subset R$. If $\pi$ is a proper ideal and not the whole ring, then $\pi^{-1} \mathfrak{m} \subset \mathfrak{m}$, so $\pi^{-1} \in R$ by Lemma \ref{lemma9.3}. Thus $y \in (x)$, a contradiction. Hence $\pi^{-1} \mathfrak{m} = R \implies \mathfrak{m} = \pi R$ is principal.
+    \vspace{1mm}
+     
+    Step 2: $R$ is a PID. Let $I \subset R$ be a nonzero ideal. Consider the sequence of fractional ideals $I \subset \pi^{-1} I \subset \pi^{-2} I  \subset \ldots$ in $K$. Since $\pi^{-1} \not\in R$, we have $\pi^{-k}I \neq \pi^{-k+1}I ~\forall k$ by Lemma \ref{lemma9.3}. Since $R$ is Noetherian, we may choose $n$ maximal such that $\pi^{-n} I \subset R$. If $\pi^{-n}I \subset \mathfrak{m} = (\pi)$, then $\pi^{-(n+1)}I \subset R$, contradicting the maximality of $R$. Hence $\pi^{-n} I = R \implies I = \pi^n R$.
+\end{proof}
+
+\begin{defn}
+    Let $R$ be an integral domain and let $S \subset R$ be a multiplicatively closed subset (i.e. $1 \in S$ and $x,y \in S \implies xy \in S$). The \textbf{localization} $S^{-1}R$ of $R$ with respect to $S$ is the ring \[
+S^{-1}R = \left\{\frac{r}{s} \mid r \in R, s \in S\right\} \subset \text{Frac}(R).
+\]
+\end{defn}
+If $\mathfrak{p}$ is a prime ideal in $R$, we write $R_{(\mathfrak{p})}$ for the localization with respect to $S = R \setminus \mathfrak{p}$.
+\begin{example}
+    \begin{itemize}
+        \item If $\mathfrak{p} = 0$, then $R_{(\mathfrak{p})} = \text{Frac}(R)$.
+        \item If $R = \mathbb{Z}$, then $\mathbb{Z}_{(p)} = \left\{\frac{a}{b} \mid a, b \in \mathbb{Z}, (b,p)=1\right\}$ (as seen before as a valuation ring).
+    \end{itemize}
+\end{example}
+\textbf{Fact.} $R$ Noetherian $\implies $ $S^{-1}R$ Noetherian.
+\vspace{1mm}
+ 
+\textbf{Fact.} There exists a bijection between
+\begin{align*}
+    \{\text{prime ideals in }S^{-1}R\} \leftrightarrow& \{\text{prime ideals } \mathfrak{p} \text{ in }R\text{ with }\mathfrak{p} \cap S = \varnothing\}.\\
+    \mathfrak{p}S^{-1}R \mapsfrom & ~\mathfrak{p}.
+\end{align*}
+\begin{cor}
+    Let $R$ be a Dedekind domain and $\mathfrak{p} \subset R$ a nonzero prime ideal. Then $R_{(\mathfrak{p})}$ is a DVR. \footnote{This is the correct way to think about Dedekind domains.}
+\end{cor}
+\begin{proof}
+    By properties of localization, $R_{(\mathfrak{p})}$ is a Noetherian integral domain with a unique nonzero prime ideal $\mathfrak{p}R_{(\mathfrak{p})}$. It suffices to show that $R_{(\mathfrak{p})}$ is integrally closed in $\text{Frac}(R_{(\mathfrak{p})}) = \text{Frac}(R)$, since then the localization of $\mathfrak{p}$ is a Dedekind domain by Theorem \ref{theorem9.1}. \vspace{1mm}
+     
+    Let $x \in \text{Frac}(R)$ be integral over $R_{(\mathfrak{p})}$. Multiplying out by the denominators of a monic polynomial satisfied by $x$, we obtain \[
+    sx^n + a_{n-1}x^{n-1} + \ldots + a_0  = 0
+    \]
+    where $a_i \in R, s \in S$. Multiply this by $s^{-1}$ to get that $xs$ is integral over $R$ and hence $xs \in R$, thus $x \in R_{(\mathfrak{p})}$.
 \end{proof}
 
 \end{document} 
