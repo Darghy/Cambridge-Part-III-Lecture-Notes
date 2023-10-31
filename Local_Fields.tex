@@ -1002,7 +1002,7 @@ If $\mathfrak{p}$ is a prime ideal in $R$, we write $R_{(\mathfrak{p})}$ for the
     \{\text{prime ideals in }S^{-1}R\} \leftrightarrow& \{\text{prime ideals } \mathfrak{p} \text{ in }R\text{ with }\mathfrak{p} \cap S = \varnothing\}.\\
     \mathfrak{p}S^{-1}R \mapsfrom & ~\mathfrak{p}.
 \end{align*}
-\begin{cor}
+\begin{cor}\label{cor9.4}
     Let $R$ be a Dedekind domain and $\mathfrak{p} \subset R$ a nonzero prime ideal. Then $R_{(\mathfrak{p})}$ is a DVR. \footnote{This is the correct way to think about Dedekind domains.}
 \end{cor}
 \begin{proof}
@@ -1013,5 +1013,76 @@ If $\mathfrak{p}$ is a prime ideal in $R$, we write $R_{(\mathfrak{p})}$ for the
     \]
     where $a_i \in R, s \in S$. Multiply this by $s^{-1}$ to get that $xs$ is integral over $R$ and hence $xs \in R$, thus $x \in R_{(\mathfrak{p})}$.
 \end{proof}
+
+\marginpar{31 Oct 2022, Lecture 11}
+
+\begin{defn}
+    If $R$ is a Dedekind domain and $\mathfrak{p} \subset R$ is a nonzero prime ideal, we write $v_{\mathfrak{p}}$ for the normalized valuation on $\text{Frac}(R) = \text{Frac}(R_{(\mathfrak{p})})$ corresponding to the DVR $R_{(\mathfrak{p})}$.
+\end{defn}
+\begin{example}
+    If $R = \mathbb{Z}$ and $\mathfrak{p} = (p)$, then $v_p$ is the $p$--adic valuation.
+\end{example}
+\begin{theorem}
+    Let $R$ be a Dedekind domain. Then every nonzero prime ideal $R$ can be written uniquely as a product of prime ideals.
+\end{theorem}
+\textbf{Remark.} This is clear for PIDs (as PID $\implies $ UFD).
+\begin{proof}[Sketch of proof.]
+    We quote the following properties of localization:
+    \begin{enumerate}[(i)]
+        \item $I=J \iff IR_{(\mathfrak{p})} = JR_{(\mathfrak{p})} ~\forall \mathfrak{p}$ prime ideals (and $I, J \subset R$ ideals).
+        \item If $R$ is a Dedekind domain and $\mathfrak{p}_1, \mathfrak{p}_2$ are nonzero prime ideals, then $\mathfrak{p}_1 R_{(\mathfrak{p}_2)} = \begin{cases}
+            R_{(\mathfrak{p}_2)} & \mathfrak{p}_1 \neq \mathfrak{p}_2.\\
+            \mathfrak{p}_2 R_{(\mathfrak{p}_2)} & \mathfrak{p}_1 = \mathfrak{p}_2.
+        \end{cases}$
+    \end{enumerate}
+    Let $I \subset R$ be a nonzero ideal. Then by Lemma \ref{lemma9.2} there exist distinct prime ideals $\mathfrak{p}_1,\ldots,\mathfrak{p}_r$ such that $\mathfrak{p}_1^{\beta_1}\ldots \mathfrak{p}_r^{\beta_r} \subset I$, where $\beta_i > 0$. Let $0 \neq \mathfrak{p}$ be a prime ideal, $\mathfrak{p} \not\in \{\mathfrak{p_1},\ldots,\mathfrak{p}_r\}$. Then by (ii), $\mathfrak{p}_i R_{(\mathfrak{p})} = R_{(\mathfrak{p})}$ and hence $IR_{(\mathfrak{p})} = IR_{(\mathfrak{p})}$.
+    \vspace{1mm}
+     
+    By Corollary \ref{cor9.4}, $I R_{(\mathfrak{p}_i)} = (\mathfrak{p}_i R_{(\mathfrak{p}_i)})^{\alpha_i} = \mathfrak{p}_i^{\alpha_i}R_{(\mathfrak{p}_i)}$ for some $0\le \alpha_i \le \beta_i$. Thus $I = \mathfrak{p}_1^{\alpha_1} \ldots \mathfrak{p}_r^{\alpha_r}$ by (i).
+    \vspace{1mm}
+     
+    For uniqueness, if $I = \mathfrak{p}_1^{\alpha_1}\ldots \mathfrak{p}_r^{\alpha_r} = \mathfrak{p}_1^{\gamma_1} \ldots \mathfrak{p}_r^{\gamma_r}$, then $\mathfrak{p}_i^{\alpha_i}R_{(p_i)} = \mathfrak{p}_i^{\gamma_i}R_{(\mathfrak{p}_i)} \implies \alpha_i = \gamma_i$ by unique factorization in DVRs.
+\end{proof}
+
+\section{Dedekind domains and extensions}
+
+Let $L/K$ be a finite extension. For $x \in L$, we write $\text{Tr}_{L/K}(x)$ for the trace of the $K$--linear map $L \to L$ mapping $y \mapsto xy$. If $L/K$ is separable of degree $n$ and $\sigma_1,\ldots,\sigma_n : L \to \overline{K}$ are the set of embeddings of $L$ into an algebraic closure $\overline{K}$ of $K$, then $\text{Tr}_{L/K}(x)=\sum_{i=1}^{n} \sigma_i(x) \in K$.
+
+\begin{lemma}
+    Let $L/K$ be a finite separable extension of fields. Then the symmetric bilinear pairing $(\cdot ,\cdot ) : L \times L \to K$ by $(x,y) \mapsto \text{Tr}_{L/K}(xy)$ is non--degenerate.
+\end{lemma}
+\begin{proof}
+    $L/K$ is separable, so $L=K(\alpha)$ for some $\alpha \in L$. Consider the matrix $A$ for $(\cdot ,\cdot )$ in the $K$--basis for $L$ given by $\{1,\alpha,\alpha^2,\ldots,\alpha^{n-1}\}$. Then $A_{ij} = \text{Tr}_{L/K}(\alpha^{i+j}) = [BB^T]_{ij}$ for $B = \begin{pmatrix} 1 & 1 & \ldots & 1 \\
+    \sigma_1(\alpha) & \sigma_2(\alpha) & \ldots & \sigma_n(\alpha) \\
+\vdots & & \\
+\sigma_1(\alpha^{n-1}) & \sigma_2(\alpha^{n-1}) & \ldots & \sigma_n(\alpha^{n-1}) \end{pmatrix}$. Then $\det A =(\det B)^2$, but $\det B = \prod_{1\le i < j\le n}^{} (\sigma_i(\alpha)-\sigma_j(\alpha))$, the Vandermonde determinant. Hence $\det A$ is nonzero since $\sigma_i(\alpha) \neq \sigma_j(\alpha)$ for $i \neq j$ by separabalility.
+\end{proof}
+The converse is also true and is left as an exercise on example sheet 3: A finite extension $L/K$ is separable if and only if the trace form is nondegenerate.
+
+\begin{theorem}
+    Let $\mathcal{O}_K$ be a Dedekind domain and $L$ a finite separable extension of $K = \text{Frac}(\mathcal{O}_K)$. Then the integral closure $\mathcal{O}_L$ of $\mathcal{O}_K$ in $L$ is a Dedekind domain. 
+\end{theorem}
+\begin{proof}
+    $\mathcal{O}_L$ is the subring of $L$, so $\mathcal{O}_L$ is an integral domain. Hence we need to show:
+    \begin{enumerate}[(i)]
+        \item $\mathcal{O}_L$ is Noetherian.
+        \item $\mathcal{O}_L$ is integrally closed in $L$.
+        \item Every nonzero prime ideal $\mathfrak{p}$ in $\mathcal{O}_L$ is maximal.  
+    \end{enumerate}
+    We prove:
+    \begin{enumerate}[(i)]
+        \item Let $e_1,\ldots,e_n \in L$ be a $K$--basis for $L$. Upon scaling by $K$, we may assume $e_i \in \mathcal{O}_L ~\forall i$. Let $f_i \in L$ be the dual basis with respect to the trace form $(\cdot ,\cdot )$. Let $x \in \mathcal{O}_L$ and write $x = \sum_{i=1}^{n} \lambda_i f_i$ for $\lambda_i \in K$. Then $\lambda_i = \text{Tr}_{L/K}(x e_i) \in \mathcal{O}_K$. Hence for any $z \in \mathcal{O}_L$, $\text{Tr}_{L/K}(z)$ is a sum of elements in $\overline{K}$ which are integral over $\mathcal{O}_K \implies \text{Tr}_{L/K}(z) \in K$ is integral over $\mathcal{O}_K$, so $\text{Tr}_{L/K}(z) \in \mathcal{O}_K$. Thus $\mathcal{O}_L \subset \mathcal{O}_Kf_1 + \ldots + \mathcal{O}_Kf_n$. Since $\mathcal{O}_K$ is Noetherian, $\mathcal{O}_L$ is finitely generated as an $\mathcal{O}_K$--module, hence $\mathcal{O}_L$ is Noetherian.
+        \item Left as an exercise on example sheet 2.
+        \item Let $P$ be a nonzero prime ideal in $\mathcal{O}_L$ and define $\mathfrak{p} = P \cap \mathcal{O}_K$, a prime ideal of $\mathcal{O}_K$. Let $0 \neq x \in P$, then $x$ satisfies the equation $x^n + a_{n-1}x^{n-1}+ \ldots + a_0$, where $a_i \in \mathcal{O}_K$ and $a_0 \neq 0$. Then $0 \neq a_0 \in \mathcal{O}_K \cap P = \mathfrak{p}$, so $\mathfrak{p}$ is nonzero and hence maximal.
+        \vspace{1mm}
+         
+        We have an injection $\mathcal{O}_K/\mathfrak{p} \to \mathcal{O}_L/P$ and $\mathcal{O}_L/P$ is a finite--dimensional vector space over $\mathcal{O}_K/\mathfrak{p}$. Since $\mathcal{O}_L/P$ is an integral domain, it is a field (e.g. by applying rank--nullity to the multiplication map $y \mapsto zy$). Hence $P$ is maximal.
+    \end{enumerate}
+\end{proof}
+\textbf{Remark.} This theorem holds even without the assumption that $L/K$ is separable.
+\begin{cor}
+    The ring of algebraic integers in a number field is a Dedekind domain.
+\end{cor}
+\textbf{Convention.} For $\mathcal{O}_K$ the ring of integers of a number field and $\mathfrak{p} \subset \mathcal{O}_K$ a nonzero prime ideal, we normalize $|\cdot|_{\mathfrak{p}}$ (the absolute value associated to $v_\mathfrak{p}$) by $|x|_{\mathfrak{p}} = N_{\mathfrak{p}}^{-v_\mathfrak{p}(x)}$ for $N_{\mathfrak{p}} = |\mathcal{O}_K/\mathfrak{p}|$.
 
 \end{document} 
