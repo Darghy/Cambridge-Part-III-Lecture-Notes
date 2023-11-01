@@ -3,6 +3,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{textcomp}
+
 \usepackage{fancyhdr}
 \pagestyle{fancy}
 
@@ -1095,7 +1096,7 @@ The motivation for this is that the area form $\frac{\mathrm{d}x \wedge \mathrm{
 \end{defn}
 This is an inner product as $\langle f,f \rangle = \int_{\Gamma(1)\setminus \mathfrak{h}}^{} |f(\tau)|^2 \text{Im}(\tau)^{k} \frac{\mathrm{d}x\mathrm{d}y}{y^2}$. So if $\langle f,f \rangle = 0$, then $|f|^2 y^k = 0$, hence $f = 0$.
 
-\begin{theorem}
+\begin{theorem}\label{theorem3.15}
     For all $n\ge 1$, $T_n$ is Hermitian with respect to the Peterson inner product, i.e. $\forall f,g \in S_k(\Gamma(1))$, $\langle T_n f, g \rangle = \langle f, T_n g \rangle$.
 \end{theorem}
 We will give a sketch proof of this next time.
@@ -1106,5 +1107,82 @@ We will give a sketch proof of this next time.
 \begin{proof}
     We know from linear algebra that if $(V, (\cdot ,\cdot ))$ is an inner product space over $\mathbb{C}$, and $T: V \to V$ is a Hermitian endomorphism, then all eigenvalues of $T$ are real and $T$ is diagonalizable. We also know that if $A_1,A_2,A_3,\ldots$ is an infinite family of commuting Hermitian endomorphisms, then they can be diagonalized simultaneously. So in our case, we find a basis $f_1,\ldots,f_N$ of $S_k(\Gamma(1))$ of eigenforms, which we may assume are normalized. We only need to show that this basis is unique up to reordering , i.e. that all simultaneous eigenspaces are 1--dimensional. But if $f,g \in S_k(\Gamma(1))$ are normalized eigenforms with the same $T_n$--eigenvalues $\forall n\ge 1$, then $a_n(f)=a_n(g) ~\forall n\ge 1 \implies f = g$.
 \end{proof}
+
+\marginpar{01 Nov 2022, Lecture 12}
+
+These sequences $(a_1(f), a_2(f),\ldots)_{n\ge 1}$ of eigenvalues of Hecke operators on normalized eigenforms $f$ are among the most interesting objects in number theory. One reason for this is that the sequences $(a_p(f))_{p \text{ prime}}$ are exactly what we need in order to formulate the main conjectures of the Langlands program.
+\vspace{1mm}
+ 
+Ramanujan made conjectures concerning $\tau(n)=a_n(\Delta)$. One of them was $\tau(mn)=\tau(m)\tau(n)$ for $(m,n)=1$ and another was $\tau(p)\tau(p^{n}) = t(p^{n+1}) + p^{11} \tau(p^{n-1})$. These properties follow from basic properties of Hecke operators (and these properties also hold for general $a_n(f)$) for $f$ a normalized eigenform.
+\vspace{1mm}
+ 
+While these two conjectures were proved the year after Ramanujan stated them, there is also a third conjecture that was only proved in the 1970s and Deligne won a Fields medal for it. To motivate this, let us prove:
+\begin{lemma}
+    If $p$ is prime, then $$\sum_{n\ge 0}^{} \tau(p^n)X^n =  \frac{1}{(1-\tau(p)X+p^{11} X^2)}.$$
+\end{lemma}
+\begin{proof}
+    We compute 
+    \begin{align*}
+        &(1-\tau(p)X+p^{11}X^2)\sum_{n\ge 0}^{} \tau(p^n)X^n \\
+        =&  1 + \sum_{n\ge 2}^{} \left(\tau(p^n)X^n -\tau(p)X \tau(p^{n-1})X^{n-1} + p^{11}X^2\tau(p^{n-2})X^{n-2}\right) \\
+        =&  1 + \sum_{n\ge 2}^{} \left(\tau(p^n)-\tau(p)\tau(p^{n-1})+p^{11}\tau(p^{n-2}\right)X^n = 1.
+    \end{align*}
+\end{proof}
+Let us factor $1 - \tau(p)X + p^{11}X^2 = (1-\alpha_pX)(1-\beta_pX)$ for $\alpha_p, \beta_p \in \mathbb{C}$. There are two possibilities:
+\begin{itemize}
+    \item If $\tau(p)^2-4p^{11}>0$, then $\alpha_p,\beta_p$ are distinct real numbers which hence have distinct absolute values.
+    \item If $\tau(p)^2-4p^{11}\le 0$, then $\alpha_p, \beta_p$ are conjugate complex numbers of the same absolute value $\sqrt{p^{11}}$.
+\end{itemize}
+Ramanujan conjectured that we always have the second case, i.e. $|\tau(p)|\le 2 p^{11/2}$ for any prime number $p$. The general form of this conjecture is:
+
+\textbf{Conjecture.} Let $f \in S_k(\Gamma(1))$ be a normalized eigenform. Then $\forall p$ prime, $$|a_p(f)|\le 2p^{\frac{k-1}{2}}.$$ 
+This is what Deligne proved in the 1970s.
+\vspace{1mm}
+ 
+Ramanujan proved the formula (for all $p$ an odd prime)
+\begin{align*}
+    r_{24}(p) = \left|\left\{(x_1,\ldots,x_{24}) \in \mathbb{Z}^{24} \mid \sum_{i=1}^{24} x_i^2 = p\right\}\right| = \frac{16}{691}(1+p^{11}) + \frac{33152}{691}\tau(p).
+\end{align*}
+A consequence of the Ramanujan conjecture is that 
+\begin{align*}
+    r_{24}(p) = \frac{16}{691}p^{11} + O(p^{11/2}).
+\end{align*}
+
+We will now present a \textbf{non--examinable} sketch proof of Theorem \ref{theorem3.15}. In particular, everything from now until the end of the lecture is non--examinable.
+\begin{proof}[Sketch of proof, non--examinable]
+    Recall $\langle f,g \rangle = \int_{\Gamma(1)\setminus \mathfrak{h}}^{} f(\tau)\overline{g(\tau)}\text{Im}(\tau)^k\frac{\mathrm{d}x\mathrm{d}y}{y^2}$. Hence we want to show that 
+    \begin{align*}
+        \int_{\Gamma(1)\setminus \mathfrak{h}}^{} (T_n f)~\overline{g}\text{Im}(\tau)^k\frac{\mathrm{d}x\mathrm{d}y}{y^2} = \int_{\Gamma(1)\setminus \mathfrak{h}}^{} f (\overline{T_n g})\text{Im}(\tau)^k\frac{\mathrm{d}x\mathrm{d}y}{y^2}
+    \end{align*}
+    Initial reduction: it is enough to prove the theorem for $n=p$ a prime, since any $T_n$ is a polynomial in $T_p$ for $p \mid n$ with coefficients in $\mathbb{Z}$. We proved last time that the function $f(\tau)\overline{g(\tau)}\text{Im}(\tau)^k$ is invariant under the weight 0 action of $\Gamma(1)$, so it therefore corresponds to a function $\mathcal{L} \to \mathbb{C}$ invariant under $\mathbb{C}^\times$. We claim that this function is $\Lambda \mapsto F(\Lambda)\overline{G(\Lambda)}\text{covol}(\Lambda)^k$, where $F(\Lambda_\tau)=f(\tau), G(\Lambda_\tau) = g(\tau)$, and $\text{covol}(\Lambda)=\int_{\mathbb{C}/\Lambda}^{} \mathrm{d}x\mathrm{d}y = \left|\det \begin{pmatrix} x_1 & y_1\\x_2 & y_2 \end{pmatrix}\right|$ where $\Lambda = \mathbb{Z}e_1 \oplus \mathbb{Z}e_2$ and $e_j = x_j + i y_j$.
+    \vspace{1mm}
+     
+    Indeed, we can check that $\Lambda_\tau \mapsto F(\Lambda_\tau)\overline{G(\Lambda_\tau)}\text{covol}(\Lambda_\tau)^k$ and $\Lambda_{\tau} = \mathbb{Z}_\tau \oplus \mathbb{Z}$, so $\text{covol}\Lambda_\tau = y = \text{Im}(\tau)$. Now, if $A : \mathbb{C}^\times/\mathcal{L} \to \mathbb{C}$ is a continuous function, we define $\int_{\mathbb{C}^\times/\mathcal{L}}^{} A(\Lambda)\mathrm{d}\Lambda = \int_{\Gamma(1)/ \mathfrak{h}}^{} a(\tau)\frac{\mathrm{d}x\mathrm{d}xy}{y^2}$, where $a(\tau)=a(\Lambda \tau)$. Hence 
+    \begin{align*}
+        \langle f,g \rangle &= \int_{\mathbb{C}^x / \mathcal{L}}^{} F(\Lambda)\overline{G(\Lambda)}\text{covol}(\Lambda)^k \mathrm{d}\Lambda \\
+        \langle T_p f, g \rangle &= p^{k-1} \int_{\mathbb{C}^x / \mathcal{L}}^{} \sum_{\Lambda' \substack{\le \\ p} \Lambda}^{} F(\Lambda')\overline{G(\Lambda )}\text{covol}(\Lambda)^k\mathrm{d}\Lambda \\
+        &\stackrel{?}{=} p^{k-1} \int_{\mathbb{C}^x / \mathcal{L}}^{} \sum_{\Lambda' \substack{\le \\ p} \Lambda}^{} F(\Lambda)\overline{G(\Lambda')}\text{covol}(\Lambda)^k\mathrm{d}\Lambda = \langle f, T_p g \rangle.
+    \end{align*}
+    Define $\mathcal{L}_p = \{(\Lambda',\Lambda) \mid  \Lambda \in \mathcal{L}, \Lambda' \substack{\le \\ p} \Lambda\} \to \Lambda$ by $(\Lambda',\Lambda) \mapsto \Lambda$.
+    \vspace{1mm}
+     
+    \textbf{Fact.} There is a bijection $\mathfrak{h}/\Gamma_0(p) \to \mathbb{C}^\times/\mathcal{L}_p$ where $\Gamma_0(p) = \{\begin{pmatrix} a &b\\c&d \end{pmatrix} \in \Gamma(1)\mid c \equiv 0 \pmod{p}\}$ given by $\tau \mapsto (\mathbb{Z}p_\tau \oplus \mathbb{Z} \substack{\le  \\p} \mathbb{Z}\tau \oplus \mathbb{Z})$. (proving this fact is left as an exercise for the especially motivated).
+    \vspace{1mm}
+     
+    If $A : C^\times / \mathcal{L}_p \to \mathbb{C}$ is a continuous function, then we define \[
+    \int_{\mathbb{C}^\times/\mathcal{L}_p}^{} A(\Lambda',\Lambda)d(\Lambda',\Lambda) = \int_{\Gamma_0(p)/\mathfrak{h}}^{} a(\tau) \frac{\mathrm{d}x\mathrm{d}y}{y^2}.
+    \]
+    We can rewrite 
+    \begin{align*}
+        \langle T_p f, g \rangle &= p^{k-1} \int_{\mathbb{C}^x / \mathcal{L}}^{} \sum_{\Lambda' \substack{\le \\ p} \Lambda}^{} F(\Lambda')\overline{G(\Lambda )}\text{covol}(\Lambda)^k\mathrm{d}\Lambda \\
+        &= p^{k-1} \int_{\mathbb{C}^\times/\mathcal{L}_p}^{} F(\Lambda')\overline{G(\Lambda)}\text{covol}(\Lambda)^k d(\Lambda',\Lambda) \\
+        &\stackrel{?}{=} p^{k-1} \int_{\mathbb{C}^\times/\mathcal{L}_p}^{} F(\Lambda)\overline{G(\Lambda')}\text{covol}(\Lambda)^k d(\Lambda',\Lambda) = \langle f, T_p g \rangle.
+    \end{align*}
+    Observe that if $\Lambda' \substack{\le  \\ p}\Lambda$, then $p \Lambda \substack{\le \\ p}\Lambda'$, so there's a map $\iota  : \mathcal{L}_p \to \mathcal{L}_p$ by $(\Lambda',\Lambda)\mapsto (p \Lambda, \Lambda')$, so $\iota^2(\Lambda',\Lambda)=(p \Lambda', p \Lambda)$, so $\iota$ descends to a map $\overline{\iota} \colon \mathbb{C}^\times / \mathcal{L}_p \to \mathbb{C}^\times / \mathcal{L}_p$. The key point is that this map $\overline{\iota}$ is measure--preserving and transforms $\langle T_p f, g \rangle$ into $\langle f, T_p g \rangle$ (exercise).
+    \vspace{1mm}
+     
+    Why is $\overline{\iota}$ measure--preserving? Under the bijection $\mathbb{C}^\times / \mathcal{L}_p \stackrel{\sim}{\to} \Gamma_0(p)/\mathfrak{h}$, it corresponds to the action of $\begin{pmatrix} 0 & -1 \\ p & 0 \end{pmatrix} \in GL_2(\mathbb{Q})^+$. We defined integration on $\mathfrak{h}$ using $\omega = \frac{\mathrm{d}x\mathrm{d}y}{y^2}$, which is invariant even in $GL_2(\mathbb{R})^+$.
+\end{proof}
+
 
 \end{document}
