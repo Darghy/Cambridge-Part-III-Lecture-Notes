@@ -732,12 +732,78 @@ We have already seen a few ''examples''. For example, we have a morphism given b
 Given a scheme $(X, \mathcal{O}_X)$, the stalks $\mathcal{O}_{X,p}$ are \textbf{local rings} (i.e. they have a unique maximal ideal). Given a function $f \in \mathcal{O}_X(U)$ with $p \in U$, we can ask whether $f$ vanishes at $p$, i.e. is the image of $f$ in $\mathcal{O}_{X,p}$ contained in the maximal ideal?
 
 \begin{defn}
-    A morphism of \textbf{ringed spaces} (i.e. a topological space and a sheaf of rings) is:
+    A morphism of \textbf{ringed spaces} (i.e. a topological space and a sheaf of rings) is $(f,f^\#)$ such that:
     \begin{itemize}
         \item $f: (X, \mathcal{O}_X) \to (Y, \mathcal{O}_Y)$
         \item $f : X \to Y$ is continuous.
         \item $f^\# : \mathcal{O}_Y \to \mathcal{O}_X$, a morphism of sheaves of rings on $Y$.
     \end{itemize}
 \end{defn}
+
+\marginpar{01 Nov 2022, Lecture 12}
+
+\textbf{Warning.} It is possible to find $(f,f^\#)$ from $(X, \mathcal{O}_X)$ to $(Y, \mathcal{O}_Y)$ of schemes such that there exists $U \subset Y$ open with $q \in U$ and $h \in \mathcal{O}_Y(U)$ such that $h$ vanishes at $q$, but $f^\#(h) \in \mathcal{O}_X(f^{-1}(U))$ does not vanish at $p \in X$ such that $f(p) = q$.
+\vspace{1mm}
+ 
+\textbf{Observation.} Given $f : X \to Y$ a ringed space morphism and $p \in X$, there is an induced map $f^\# : \mathcal{O}_{Y,f(p)} \to \mathcal{O}_{X,p}$. To spell this out, given $s \in \mathcal{O}_{Y,f(p)}$, we can represent it by $(S_U,U)$ for $U$ open, $f(p) \in U$ and $S_U \in \mathcal{O}_Y(U)$. Therefore $f^\#(S_U) \in \mathcal{O}_X(f^{-1}(U))$, so the pair $(f^\#(S_U), f^{-1}(U))$ defines an element in $\mathcal{O}_{X,p}$.
+
+\begin{defn}
+    $(X,\mathcal{O}_X)$, a ringed space, is called \textbf{locally ringed} if $\forall p \in X$, $\mathcal{O}_{X,p}$ is a local ring (i.e. has a unique maximal ideal). A morphism of locally ringed spaces $(f,f^\#) : (X, \mathcal{O}_X) \to (Y, \mathcal{O}_Y)$ is a morphism as ringed spaces such that if $\mathfrak{m}_p$ denotes the maximal ideal in $\mathcal{O}_{X,p}$, then $f^\#(\mathfrak{m}_{f(p)}) \subset \mathfrak{m}_{p}$ (in the stalks). 
+\end{defn}
+\begin{defn}
+    A \textbf{morphism of schemes} $X \to Y$ is a morphism as locally ringed spaces.
+\end{defn}
+\begin{theorem}
+    There is a natural bijection between 
+    \begin{align*}
+        \{\text{Scheme theoretic morphisms }\text{Spec }B \to \text{Spec }A\} \leftrightarrow \{\text{Ring homomorphisms }A \to B\}.
+    \end{align*}
+\end{theorem}
+\textbf{Prologue.} Recall that section of a sheaf $\mathcal{F}$ on $U$, i.e. $s \in \mathcal{F}(U)$, is a coherent collection of elements $s(p) \in \mathcal{F}_p$ (the stalk) for all $p \in U$.
+\begin{proof}
+    We will first show that every ring map $A \to B$ induces a scheme map (we will construct it), and then conversely we will show that every scheme map $\text{Spec }B \to \text{Spec }A$ arises via our construction.
+    \vspace{1mm}
+     
+    Given $\phi : A \to B$, we can take $\phi^{-1} : \text{Spec }B \to \text{Spec }A$ as the topological part (continuity is formal). Now we build $\phi^\# : \mathcal{O}_{\text{Spec }A} \to \phi^{-1}_{\star}\mathcal{O}_{\text{Spec }B}$. First, at the stalk level, take $A_{\phi^{-1}(p)} \to B_p$ sending $\frac{a}{s} \mapsto \frac{\phi(a)}{\phi(s)}$ induced by $\phi$. This makes sense because if $s \not\in \phi^{-1}(p)$, then $\phi(s) \not\in p$ (we're treating $p$ as a prime ideal here). Observe that this is automatically a local homomorphism of local rings.
+    \vspace{1mm}
+     
+    Secondly, on the open set level, given $U \subset \text{Spec }A$, we need to define $\phi^\# : \mathcal{O}_{\text{Spec }A}(U) \to \mathcal{O}_{\text{Spec }B}((\phi^{-1})^{-1}(U))$ (this just means take the preimage of $U$ inside $\text{Spec } B$). An element $s \in \mathcal{O}_{\text{Spec }A}(U)$ is a collection of assignments $[p \mapsto s(p)]_{p \in U}$ with $p \in U$, $s(p) \in A_p$. We define $\phi^\#$ by sending $[p \mapsto s(p)]_{p \in U} \mapsto [q \mapsto \phi_q(s(\phi^{-1}(q)))]_{q \in (\phi^{-1})^{-1}(U)}$, where $\phi_q$ is the map on stalks at $q$. We can check that this glues (see official notes if we're still in disbelief).
+    \vspace{1mm}
+     
+    Conversely, suppose we're given $(f,f^\#) \colon \text{Spec }B \to \text{Spec }A$. Using $\mathcal{O}_{\text{Spec }A}(\text{Spec }A) \to \mathcal{O}_{\text{Spec }B}(\text{Spec }B)$, we get $g: A \to B$ a ring homomorphism. We need to check that $g^{-1}$ gives the right topological map and that the construction from the first part gives the right map on sheaves.
+    \vspace{1mm}
+     
+    For the first part, the maps on stalks are compatible with restriction. For instance, $\Gamma(\text{Spec }A, \mathcal{O}_{\text{Spec }A}) \to \Gamma(\text{Spec }B, \mathcal{O}_{\text{Spec }B})$ is compatible with restricting to the stalks: $\mathcal{O}_{\text{Spec }A,f(p)} \to \mathcal{O}_{\text{Spec }B,p}$ for all $p \in \text{Spec }B$. Hence the following map commutes.
+    \[\begin{tikzcd}[]
+        \Gamma(\text{Spec }A, \mathcal{O}_{\text{Spec }A}) & \Gamma(\text{Spec }B, \mathcal{O}_{\text{Spec }B})\\
+        \mathcal{O}_{\text{Spec }A,f(p)} & \mathcal{O}_{\text{Spec }B,p}
+        \arrow["", from=1-1, to=1-2]
+        \arrow["",from=1-1, to=2-1]
+        \arrow["", from=1-2, to=2-2]
+        \arrow["", from=2-1, to=2-2]
+    \end{tikzcd}\]
+    Equivalently, the following map commutes for all $p \in \text{Spec }B$.
+    \[\begin{tikzcd}[]
+        A & B \\
+        A_{f(p)} & B_p
+        \arrow["g", from=1-1, to=1-2]
+        \arrow["",from=1-1, to=2-1]
+        \arrow["", from=1-2, to=2-2]
+        \arrow["f^\#", from=2-1, to=2-2]
+    \end{tikzcd}\]
+    Since the morphism is local: $(f^\#)^{-1} p B_p = f(p) A_{f(p)}$. By commutativity, $g^{-1} = f$ topologically. The structure sheaf maps agree at the stalk level by construction, so we're done.
+\end{proof}
+
+\textbf{Housekeeping.} 
+
+\begin{defn}
+    Let $X,Y$ be schemes. A morphism $f : X \to Y$ is an \textbf{open immersion} if $f$ induces an isomorphism of $X$ onto an open subscheme of $Y$ (i.e. $(U, \mathcal{O_Y}|_U)$ for $U \subset Y$ open).
+    \vspace{1mm}
+     
+    $g : X \to Y$ is a \textbf{closed immersion} if the topological map is a homeomorphism onto a closed subset of $Y$ and the map $g^\# : \mathcal{O}_Y \to g_{\star}\mathcal{O}_X$ is surjective.
+\end{defn}
+\begin{example}
+    Take $k[t] \to k[t]/t^2$ and take $\text{Spec}$. This is a closed immersion.
+\end{example}
 
 \end{document}
