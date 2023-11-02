@@ -587,7 +587,7 @@ More generally:
 
 \marginpar{19 Oct 2022, Lecture 6}
 
-\begin{theorem}
+\begin{theorem}\label{theorem6.1}
     Let $(K,|\cdot|)$ be a complete discretely valued field and let $L/K$ be a finite extension of degree $n$. Then:
     \begin{enumerate}[(i)]
         \item $|\cdot|$ extends uniquely to an absolute value $|\cdot|_L$ on $L$ defined by $$|y|_L = |N_{L/K}(y)|^{1/n}.$$
@@ -670,7 +670,7 @@ More generally:
     \begin{proof}
         Exercise on example sheet 2.
     \end{proof}
-    \begin{lemma}
+    \begin{lemma}\label{lemma6.5}
         Let $(K,|\cdot|)$ be a nonarchimedean valued field. Then $\mathcal{O}_K$ is integrally closed in $K$.
     \end{lemma}
     \begin{proof}
@@ -853,7 +853,7 @@ It turns out equal characteristic local fields are very easy to classify:
 
 \marginpar{26 Oct 2022, Lecture 9}
 
-\begin{theorem}[Ostrowski's Theorem]
+\begin{theorem}[Ostrowski's Theorem]\label{theorem7.6}
     Any nontrivial absolute value on $\mathbb{Q}$ is equivalent to either $|\cdot|_{\infty}$ or the $p$--adic absolute value $|\cdot|_{p}$ for some prime $p$.
 \end{theorem}
 \begin{proof}
@@ -1059,7 +1059,7 @@ Let $L/K$ be a finite extension. For $x \in L$, we write $\text{Tr}_{L/K}(x)$ fo
 \end{proof}
 The converse is also true and is left as an exercise on example sheet 3: A finite extension $L/K$ is separable if and only if the trace form is nondegenerate.
 
-\begin{theorem}
+\begin{theorem}\label{theorem10.2}
     Let $\mathcal{O}_K$ be a Dedekind domain and $L$ a finite separable extension of $K = \text{Frac}(\mathcal{O}_K)$. Then the integral closure $\mathcal{O}_L$ of $\mathcal{O}_K$ in $L$ is a Dedekind domain. 
 \end{theorem}
 \begin{proof}
@@ -1085,4 +1085,85 @@ The converse is also true and is left as an exercise on example sheet 3: A finit
 \end{cor}
 \textbf{Convention.} For $\mathcal{O}_K$ the ring of integers of a number field and $\mathfrak{p} \subset \mathcal{O}_K$ a nonzero prime ideal, we normalize $|\cdot|_{\mathfrak{p}}$ (the absolute value associated to $v_\mathfrak{p}$) by $|x|_{\mathfrak{p}} = N_{\mathfrak{p}}^{-v_\mathfrak{p}(x)}$ for $N_{\mathfrak{p}} = |\mathcal{O}_K/\mathfrak{p}|$.
 
-\end{document} 
+\marginpar{02 Nov 2022, Lecture 12}
+
+Let us fix $\mathcal{O}_K$ to be a Dedekind domain with fraction field $K = \text{Frac}(\mathcal{O}_K)$. Let $L/K$ be a finite separable extension and $\mathcal{O}_L$ the integral closure of $\mathcal{O}_K$ inside $L$ (which is a Dedekind domain by Theorem \ref{theorem10.2}).
+
+\begin{lemma}\label{lemma10.4}
+    Let $0 \neq x \in \mathcal{O}_K$. Then $$(x) = \prod_{p \neq 0 \text{ prime}}^{} p^{v_p(x)}.$$
+\end{lemma}
+\begin{proof}
+    $x \mathcal{O}_{K,(p)} = (p \mathcal{O}_{K,(p)})^{v_p(x)}$ by definition of $v_p(x)$. In particular, $\{p \neq 0 \mid v_p(x) \neq 0\}$ is finite. Then the lemma follows from properties of localization stated last time: $I = J \iff I \mathcal{O}_{K,(p)} = J \mathcal{O}_{K,(p)} ~\forall $ prime ideals $p$.
+\end{proof}
+\textbf{Notation.} $\mathcal{P} \subset \mathcal{O}_L$ and $\mathfrak{p} \subset \mathcal{O}_K$ will always denote prime ideals. We write $\mathcal{P} \mid \mathfrak{p}$ if $\mathfrak{p}\mathcal{O}_L = \mathcal{P}_1^{e_1}\ldots \mathcal{P}_r^{e_r}$ and $\mathcal{P} \in \{\mathcal{P}_1,\ldots,\mathcal{P}_r\}$ for $e_i>0$ and $\mathcal{P}_i$ distinct prime ideals. 
+
+\begin{theorem}\label{theorem10.5}
+    Let $\mathcal{O}_K, \mathcal{O}_L, K, L$ be as above. For $\mathfrak{p}$ a nonzero prime ideal of $\mathcal{O}_K$, write $\mathfrak{p}\mathcal{O}_L = \mathcal{P}_1^{e_1}\ldots \mathcal{P}_r^{e_r}$. Then the absolute values on $L$ extending $|\cdot|_{\mathfrak{p}}$ (up to equivalence) are precisely $|\cdot|_{\mathcal{P}_1},\ldots,|\cdot|_{\mathcal{P}_r}$.
+\end{theorem}
+\begin{proof}
+    By Lemma \ref{lemma10.4}, for any $0 \neq x \in \mathcal{O}_K$ and $1\le i\le r$, we have $v_{\mathcal{P}_i}(x) = e_i v_{\mathfrak{p}}(x)$. Hence up to equivalence, $|\cdot|_{\mathcal{P}_i}$ does extend $|\cdot|_{\mathfrak{p}}$.
+    \vspace{1mm}
+     
+    Conversely, suppose $|\cdot|$ is an absolute value on $L$ which extends $|\cdot|_{\mathfrak{p}}$. Then $|\cdot|_{\mathfrak{p}}$ is bounded on $\mathbb{Z}$ and hence $|\cdot|$ is non--archimedean. Now let $$R = \{ x \in L \mid |x|\le 1\} \subset L$$ be the valuation for $L$ with respect to $|\cdot|$. Then $\mathcal{O}_K \subset R$ and since $R$ is integrally closed in $L$ (by Lemma \ref{lemma6.5}), we have $\mathcal{O}_L \subset R$. Set $\mathcal{P} = \{ x \in \mathcal{O}_L \mid  |x|<1\} = \mathfrak{m}_R \cap \mathcal{O}_L$. Then $\mathcal{P}$ is a prime ideal in $R$ and it is nonzero as it contains $\mathfrak{p}$. Then $\mathcal{O}_{L,(\mathcal{P})} \subset R$ because $s \in \mathcal{O}_L\setminus \mathcal{P} \implies |s| = 1$. But $\mathcal{O}_{L,(\mathcal{P})}$ is a DVR, hence a maximal subring of $L \implies \mathcal{O}_{L,(\mathcal{P})} = R$. Hence $|\cdot|$ is equivalent to $|\cdot|_{\mathcal{P}}$. Since $|\cdot|$ extends to $|\cdot|_{\mathfrak{p}}$, $\mathcal{P} \cap \mathcal{O}_K = \mathfrak{p}$, so $\mathcal{P}_1^{e_1}\ldots \mathcal{P}_r^{e_r} \subset \mathcal{P} \implies \mathcal{P} = \mathcal{P}_i$ for some $i$.
+\end{proof}
+Let $K$ be a number field. If $\sigma : K \twoheadrightarrow \mathbb{R}, \mathbb{C}$ is a real or complex embedding, then $x \mapsto |\sigma(x)|_{\infty}$ defines an absolute value on $K$, denoted by $|\cdot|_{\sigma}$. (This is on example sheet 2).
+
+\begin{cor}
+    Let $K$ be a number field with ring of integers $\mathcal{O}_K$. Then any absolute value on $K$ is equivalent to either 
+    \begin{enumerate}[(i)]
+        \item $|\cdot|_{\mathfrak{p}}$ for some nonzero prime ideal $\mathfrak{p} \subset \mathcal{O}_K$.
+        \item $|\cdot|_{\sigma}$ for some embedding $\sigma : K \twoheadrightarrow \mathbb{R}, \mathbb{C}$.
+    \end{enumerate}
+\end{cor}
+\begin{proof}
+    Case 1: $|\cdot|$ is non--archimedean. Then $|\cdot|_{\mathbb{Q}}$ is equivalent to $|\cdot|_{p}$ for some prime $p$ by Ostrowski's theorem (Theorem \ref{theorem7.6}). Then by Theorem \ref{theorem10.5}, $|\cdot|$ is equivalent to $|\cdot|_{\mathfrak{p}}$ for some $\mathfrak{p} \mid p$ a prime ideal in $\mathcal{O}_K$.
+    \vspace{1mm}
+     
+    Case 2: $|\cdot|$ is archimedean. This is an exercise on example sheet 2.
+\end{proof}
+\subsection{Completions}
+Let $\mathcal{O}_K$ be a Dedekind domain and $L/K$ a finite separable extension.Let $\mathfrak{p} \subset \mathcal{O}_K, \mathcal{P} \subset \mathcal{O}_L$ be nonzero prime ideals with $\mathcal{P} \mid  \mathfrak{p}$. We write $K_{\mathfrak{p}}$ and $L_{\mathcal{P}}$ for the completions of $K$ and $L$ with respect to the absolute values $|\cdot|_{\mathfrak{p}}$ and $|\cdot|_{\mathcal{P}}$ respectively.
+
+\begin{lemma}\label{lemma10.7}
+    \begin{enumerate}[(i)]
+        \item The natural map $\Pi_p : L \otimes_K K_{\mathfrak{p}} \to L_{\mathcal{P}}$ is surjective.
+        \item $[L_{\mathcal{P}}:K_{\mathfrak{p}}]\le [L:K]$.
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+    Let $M = \text{Im}(\Pi_p) = LK_{\mathfrak{P}} \subset L_\mathcal{P}$. Write $L = K(\alpha)$, so $M = K_{\mathfrak{p}}(\alpha)$. Hence $M$ is a finite extension of $K_{\mathfrak{p}}$ and $[M:K_{\mathfrak{p}}]\le [L:K]$. Moreover, $M$ is complete (by Theorem \ref{theorem6.1}) and $L \subset M \subset L_{\mathcal{P}}$, hence $M = L_{\mathcal{P}}$, so both results follow.
+\end{proof}
+\begin{lemma}[CRT for commutative rings]
+    Let $R$ be a ring and $I_1,\ldots,I_n \subset R$ be ideals such that $I_i + I_j = R ~\forall i \neq j$ (i.e. the ideals are pairwise coprime). Then:
+    \begin{enumerate}[(i)]
+        \item $\bigcap_{i=1}^n I_i = \prod_{i=1}^{n} I_i$ (call this product $I$).
+        \item $R/I \cong \prod_{i=1}^{n} (R/I_i)$.
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+    Exercise on example sheet 2.
+\end{proof}
+\begin{theorem}
+    The natural map $L \otimes_K K_{\mathfrak{p}} \to \prod_{\mathcal{P} \mid \mathfrak{p}}^{} L_{\mathcal{P}}$ is an isomorphism.
+\end{theorem}
+\begin{proof}
+    Write $L = K(\alpha)$ and let $f(X) \in K[X]$ be the minimal polynomial of $\alpha$. Then we have $f(X) = f_1(X)\ldots f_r(X)$ in $K_{\mathfrak{p}}[X]$ for $f_i(X) \in K_{\mathfrak{p}}[X]$ distinct and irreducible (also separable). Since $L = K[X]/f(X)$, 
+    \begin{align*}
+        L \otimes_K K_{\mathfrak{p}} \cong K_{\mathfrak{p}}[X]/f(X) \stackrel{\text{CRT}}{=} \prod_{i=1}^{r} K_{\mathfrak{p}}[X]/f_i(X). 
+    \end{align*}
+    Set $L_i = K_{\mathfrak{p}}[X]/f_i(X)$, a finite extension of $K$. Then $L_i$ contains both $L$ and $K_{\mathfrak{p}}$ (using the fact that $K[X]/f(X) \to K_{\mathfrak{p}}[X]/f_i(X)$ is injective, since it is a morphism of fields). Moreover, $L$ is dense inside $L_i$ (since we can approximate coefficients of $K_{\mathfrak{p}}[X]/f_i(X)$ with an element $K[X]/f(X)$ and all norms on this finite--dimensional vector space are equivalent). The theorem now follows from the following three claims:
+    \begin{enumerate}[(i)]
+        \item $L_i \cong L_{\mathcal{P}}$ for some prime $\mathcal{P} \subset \mathcal{O}_L$ with $\mathcal{P} \mid \mathfrak{p}$.
+        \item Each $\mathcal{P}$ appears at most once.
+        \item Each $\mathcal{P}$ appears at least once.
+    \end{enumerate}
+    To prove these:
+    \begin{enumerate}[(i)]
+        \item Since $[L_i : K_{\mathfrak{p}}]<\infty$, there is a unique absolute value $|\cdot|$ on $L_i$ extending $|\cdot|_{\mathfrak{p}}$ on $K_{\mathfrak{p}}$. Then Theorem \ref{theorem10.5} implies that $|\cdot| |_{L}$ is equivalent to $|\cdot|_{\mathcal{P}}$ for some $\mathcal{P} \mid \mathfrak{p}$. Since $L$ is dense in $L_i$ and $L_i$ is complete, we must have $L = L_{\mathcal{P}}$.
+        \item Suppose $\phi : L_i \to L_j$ is an isomorphism preserving $L$ and $K_{\mathfrak{p}}$. Then $\phi: K_{\mathfrak{p}}[X]/f_i(X) \to K_{\mathfrak{p}}[X]/f_j(X)$ takes $X$ to $X$ and hence $f_i(X) = f_j(X) \implies i = j$.
+        \item By Lemma \ref{lemma10.7}, the natural map $\Pi_p : L \otimes_K K_{\mathfrak{p}} \to L_\mathcal{P}$ is surjective for any $\mathcal{P} \mid  \mathfrak{p}$. Since $L_\mathcal{P}$ is a field, $\Pi_p$ factors through $L_i$ for some $i$ and hence $L_i \cong L_{\mathcal{P}}$ by surjectivity.
+    \end{enumerate}
+\end{proof}
+
+
+\end{document}  
