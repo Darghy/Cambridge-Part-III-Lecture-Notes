@@ -1184,5 +1184,81 @@ We will now present a \textbf{non--examinable} sketch proof of Theorem \ref{theo
     Why is $\overline{\iota}$ measure--preserving? Under the bijection $\mathbb{C}^\times / \mathcal{L}_p \stackrel{\sim}{\to} \Gamma_0(p)/\mathfrak{h}$, it corresponds to the action of $\begin{pmatrix} 0 & -1 \\ p & 0 \end{pmatrix} \in GL_2(\mathbb{Q})^+$. We defined integration on $\mathfrak{h}$ using $\omega = \frac{\mathrm{d}x\mathrm{d}y}{y^2}$, which is invariant even in $GL_2(\mathbb{R})^+$.
 \end{proof}
 
+\marginpar{03 Nov 2022, Lecture 13}
 
+\begin{prop}
+    Let $f : \mathfrak{h} \to \mathbb{C}$ be continuous and $\Gamma_{\infty}$--invariant, where $\Gamma_{\infty} = \left\{\begin{pmatrix} a & b \\ c & d  \end{pmatrix} \in \Gamma(1) \mid c = 0\right\}$, i.e. $f(\tau)=f(\tau+1)$. Suppose that $\forall \tau \in \mathfrak{h}$, $$\sum_{\gamma \in \Gamma_\infty \setminus \Gamma(1)} |f(\gamma \tau)| < \infty.$$
+    Also suppose that $$\int_{x=-\frac{1}{2}}^{\frac{1}{2}} \int_{y=0}^{\infty} |f(x+iy)|\frac{\mathrm{d}x\mathrm{d}y}{y^2} < \infty.$$
+    Then $\sum_{\gamma \in \Gamma_0\setminus \Gamma(1)}^{} f(\gamma \tau)$ is a measurable function, $\Gamma(1)$--invariant and 
+    \begin{align*}
+        \int_{\Gamma(1)\setminus \mathfrak{h}}^{} \sum_{\gamma \in \Gamma_\infty \setminus \Gamma(1)}^{} f(\gamma \tau)\frac{\mathrm{d}x\mathrm{d}y}{y^2} = \int_{x=-\frac{1}{2}}^{\frac{1}{2}} \int_{y=0}^{\infty} |f(x+iy)|\frac{\mathrm{d}x\mathrm{d}y}{y^2}.
+    \end{align*}
+\end{prop}
+An application of this proposition is called ''unfolding''. This is because $\{\tau \in \mathfrak{h}\mid \text{Re}(\tau) \in [-\frac{1}{2},\frac{1}{2}]\}$ is a fundamental set for $\Gamma_{\infty}\setminus \{\pm I\}$, so \[
+\int_{\Gamma(1)\setminus \mathfrak{h}}^{} \sum_{\gamma \in \Gamma_{\infty}\setminus \Gamma(1)}^{} f(\gamma \tau) \frac{\mathrm{d}x\mathrm{d}y}{y^2} = \int_{\Gamma_{\infty}\setminus \mathfrak{h}}^{} f(\tau)\frac{\mathrm{d}x\mathrm{d}y}{y^2} = \text{RHS of the prop above}.
+\]
+\begin{proof}
+    We want to show that $\sum_{\gamma \in \Gamma_{\infty}\setminus \Gamma(1)}^{} f(\gamma \tau)$ is measurable on $f$ and the equality \[
+    \int_{\mathfrak{f}}^{} \sum_{\gamma \in \Gamma_{\infty}\setminus \Gamma(1)}^{} f(\gamma \tau)\frac{\mathrm{d}x\mathrm{d}y}{y^2} = \int_{x = -\frac{1}{2}}^{\frac{1}{2}} \int_{y=0}^{\infty} f(x+iy)\frac{\mathrm{d}x\mathrm{d}y}{y^2}.
+    \]
+    Fubini's theorem says: Suppose $\sum_{\gamma \in \Gamma_{\infty}\setminus \Gamma(1)}^{} \int_{\mathfrak{f}}^{} |f(\gamma \tau)| \frac{\mathrm{d}x\mathrm{d}y}{y^2} < \infty$. Then $\sum_{\gamma \in \Gamma_{\infty}\setminus \Gamma(1)}^{} f(\gamma \tau)$ is measurable and absolutely integrable in $\mathfrak{f}$ and \[
+    \sum_{\gamma \in \Gamma_{\infty}\setminus \Gamma(1)} \int_{\mathfrak{f}}^{} f(\gamma \tau) \frac{\mathrm{d}x\mathrm{d}y}{y^2} = \int_{\mathfrak{f}} \sum_{ \gamma \in \Gamma_{\infty}\setminus \Gamma(1)}^{} f(\gamma \tau) \frac{\mathrm{d}x\mathrm{d}y}{y^2}. 
+    \]
+    We'll be done if we can show \[
+    \sum_{ \gamma \in \Gamma_{\infty}\setminus \Gamma(1)}^{} \int_{\mathfrak{f}}^{} f(\gamma \tau) \frac{\mathrm{d}x\mathrm{d}y}{y^2} = \int_{x = - \frac{1}{2}}^{\frac{1}{2}}  \int_{y=0}^{\infty} f(x+iy)\frac{\mathrm{d}x\mathrm{d}y}{y^2}.
+    \]
+    But the LHS is equal to \[
+    \sum_{\gamma \in \Gamma_{\infty}\setminus \Gamma(1)}^{} \int_{\gamma \mathfrak{f}}^{} f(\tau)\frac{\mathrm{d}x\mathrm{d}y}{y^2}
+    \]
+    by using the change of variable $\mathfrak{f} \mapsto \gamma \mathfrak{f}$ and invariance of $\frac{\mathrm{d}x\mathrm{d}y}{y^2}$ under the pullback by $\gamma$. Recall from the first example sheet that if $\mathfrak{f}^0 = \text{Int}(\mathfrak{f})$, then $\forall \gamma \in \Gamma(1)$, $\gamma \mathfrak{f}^0 \cap \{\tau \in \mathfrak{h}\mid \text{Re}(\tau) \in \frac{1}{2} + \mathbb{Z}\} = \varnothing$. Hence for $\gamma \in \Gamma(1)$, $\gamma \mathfrak{f}^0$ is contained in $\{\tau \in \mathfrak{h} \mid \text{Re}(\tau) \in (-\frac{1}{2},\frac{1}{2}) + a\}$ for some $a \in \mathbb{Z}$. Also, there's a unique $\delta \in \Gamma_{\infty}\setminus \{\pm I\}$ such that $\delta \gamma \mathfrak{f}^0 \subset \{\tau \in \mathfrak{h}\mid \text{Re}(\tau)\in(-\frac{1}{2},\frac{1}{2})\} = U$. Hence the set $\{\gamma \in \Gamma(1)\setminus \{\pm I\}\mid \gamma \mathfrak{f}^0 \subset U\}$ is a set of coset representatives for $\Gamma_{\infty}\setminus \Gamma(1)$. Thus 
+    \begin{align*}
+        \sum_{ \gamma \in \Gamma_{\infty}\setminus \Gamma(1)}^{} \int_{\gamma \mathfrak{f}}^{} f(\tau) \frac{\mathrm{d}x\mathrm{d}y}{y^2} = \sum_{\substack{\gamma \in \Gamma(1)\setminus \{\pm I\} \\ \gamma \mathfrak{f}^0 \subset U}}\int_{\gamma \mathfrak{f}}^{} f(\tau)\frac{\mathrm{d}x\mathrm{d}y}{y^2} \stackrel{?}{=} \int_{U}^{} f(\tau)\frac{\mathrm{d}x\mathrm{d}y}{y^2}. 
+    \end{align*}
+    But we know that $\mathfrak{h} = \left(\bigsqcup_{\gamma \in \Gamma(1)\setminus \{\pm  I\}} \gamma \mathfrak{f}^0\right) \sqcup W$ for $W$ of measure zero, e.g. the union of all the $\Gamma(1)$--translates of the vertical line $\text{Re}(\tau)=\frac{1}{2}$. Hence $$U = \bigsqcup_{\gamma \in \Gamma(1)\setminus \{\pm I\}}(\gamma \mathfrak{f}^0 \cap U) \sqcup (W \cap U) = \bigsqcup_{\substack{\gamma \in \Gamma(1)\setminus \{\pm I\}\\ \gamma \mathfrak{f}^0 \subset U}} (\gamma \mathfrak{f}^0) \sqcup (W \cap U)$$
+    for $W \cap U$ of measure zero. Hence 
+    \begin{align*}
+        \int_{U}^{} f(\tau)\frac{\mathrm{d}x\mathrm{d}y}{y^2} = \sum_{\gamma \in \Gamma_{\infty}\setminus \Gamma(1)}^{} \int_{\gamma \mathfrak{f}^0}^{} f(\tau) \frac{\mathrm{d}x\mathrm{d}y}{y^2}
+    \end{align*}
+    which concludes the proof.
+\end{proof}
+
+\section{$L$--functions}
+
+Normalized eigenforms can be used to construct $L$--functions. What is an $L$--function? Motivation: the Riemann zeta function, $\zeta(s) = \sum_{n \ge 1}^{} n^{-s}$. This converges absolutely in $\{s \mid \text{Re}(s)>1\}$ and defines a holomorphic function in that region. Key properties:
+\begin{itemize}
+    \item The Euler product: $\zeta(s) = \prod_{p \text{ prime}}^{} (1-p^{-s})^{-1}$ (converges absolutely when $\text{Re}(s)>1$).
+    \item Meromorphic continuation: $\zeta(s)$ extends to a meromorphic function on $\mathbb{C}$ with a simple pole at $s=1$ and no other pole.
+    \item Functional equation: Define $\xi(s) = \pi^{-s/2}\Gamma\left(\frac{s}{2}\right)\zeta(s)$. Then $\xi(s) = \xi(1-s)$.
+    \item Special values of $\zeta(s)$ at $s \in \mathbb{Z}$ shall have arithmetic meaning.
+\end{itemize}
+Other examples of functions of similar properties: 
+\begin{itemize}
+    \item Dirichlet $L$--functions $L(\chi, s) = \sum_{\substack{n \in \mathbb{N} \\ (n,N)=1}}^{} \chi(n \pmod{N})n^{-s}$ associated to $\chi : (\mathbb{Z}/N\mathbb{Z})^\times \to \mathbb{C}^\times$.
+    \item If $E/\mathbb{Q}$ is an elliptic curve, then the Hasse--Weil $L$--function $L(E,s) = \sum_{n\ge 1}^{} a_n n^{-s}$.
+\end{itemize}
+In general, an $L$--function is a Dirichlet series $\sum_{n\ge 1}^{} a_n n^{-s}$, $a_n \in \mathbb{C}$ which either provably has or is expected to have properties analogous to $\zeta(s)$.
+
+\begin{defn}
+    Let $f(\tau) = \sum_{n=0}^{\infty} a_nq^n \in M_k(\Gamma(1))$. Then its associated Dirichlet series is  \[
+    L(f,s) = \sum_{n\ge 1}^{} a_n n^{-s}.
+    \]
+\end{defn}
+We will consider separately the case of Eisenstein series and the case of cuspidal modular forms. 
+\vspace{1mm}
+ 
+Let $F_k(\tau)$ be the normalized eigenform associated to $G_k$ (for $k\ge 4$ even). Then 
+\begin{align*}
+    L(F_k, s) &= \sum_{n\ge 1}^{} \sigma_{k-1}(n)n^{-s} = \sum_{n\ge 1}^{} \sum_{d \mid n}^{} d^{k-1}n^{-s} = \sum_{n\ge 1}^{} \sum_{ d \mid n}^{} d^{k-1}d^{-s}\left(\frac{n}{d}\right)^{-s} \\
+    &= \sum_{a,d \ge 1}^{} d^{k-1-s}a^{-s} = \zeta(s)\zeta(s+1-k).
+\end{align*}
+\begin{lemma}
+    Let $f \in S_k(\Gamma(1))$. Then $L(f,s)$ converges absolutely in the region $\{\text{Re}(s)> 1 + \frac{k}{2}\}$ and defines a holomorphic function there.
+\end{lemma}
+\begin{proof}
+    We use a fact from the second example sheet: $\exists C_f>0$ such that for all $n\ge 1, |a_n|\le C_f n^{k/2}$. We then claim that $\forall \delta>0, \sum_{n\ge 1}^{} a_n n^{-s}$ converges absolutely and uniformly in $\{\text{Re}(s)>1 + \frac{k}{2} + \delta\}$. To prove this, we use the Weierstrass $M$--test.
+    \vspace{1mm}
+     
+    Write $s = \sigma + it$ for $\sigma, t \in \mathbb{R}$. Then $n^{-s} = \exp(-s \log n) \implies |n^{-s}| = \exp(-\sigma \log n) = n^{-\sigma}$. If $\sigma > 1 +\frac{k}{2} + \delta$, then $$\sum_{n\ge 1}^{} |a_n n^{-s}| \le \sum_{n\ge 1}^{} C_f n^{k/2} n^{-(1+k/2+\delta)} = \sum_{n\ge 1}^{} C_f n^{-(1+\delta)}<\infty.$$
+\end{proof}
+ 
 \end{document}
