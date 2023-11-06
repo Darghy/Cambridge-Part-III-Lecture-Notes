@@ -1260,5 +1260,119 @@ Let $F_k(\tau)$ be the normalized eigenform associated to $G_k$ (for $k\ge 4$ ev
      
     Write $s = \sigma + it$ for $\sigma, t \in \mathbb{R}$. Then $n^{-s} = \exp(-s \log n) \implies |n^{-s}| = \exp(-\sigma \log n) = n^{-\sigma}$. If $\sigma > 1 +\frac{k}{2} + \delta$, then $$\sum_{n\ge 1}^{} |a_n n^{-s}| \le \sum_{n\ge 1}^{} C_f n^{k/2} n^{-(1+k/2+\delta)} = \sum_{n\ge 1}^{} C_f n^{-(1+\delta)}<\infty.$$
 \end{proof}
- 
+\textbf{Remark.} If we assume the Ramanujan--Petersson conjecture, we can get absolute convergence when $\text{Re}(s)>\frac{1+k}{2}$.
+\marginpar{06 Nov 2022, Lecture 14}
+\begin{theorem}\label{theorem4.2}
+    Let $f \in S_k(\Gamma(1))$ be a cuspidal modular form. Then:
+    \begin{enumerate}[(1)]
+        \item $L(f,s)$ admits an analytic continuation to $\mathbb{C}$.
+        \item If $\Lambda(f,s) = (2\pi)^{-s}\Gamma(s)L(f,s)$, then $\Lambda(f,s) = i^k \Lambda(f,k-s)$.
+    \end{enumerate}
+\end{theorem}
+To warm up, we consider the gamma function $$\Gamma(s) = \int_{y=0}^{\infty} e^{-y}y^s \frac{\mathrm{d}y}{y}$$ (when the integral converges absolutely).
+\begin{prop}
+    \begin{enumerate}[(i)]
+        \item $\Gamma(s)$ converges absolutely when $\text{Re}(s)>0$ and is a holomorphic function in $\{\text{Re}(s)>0\}$.
+        \item $\Gamma(s)$ admits a meromorphic continuation to $\mathbb{C}$ with simple poles at $s =0,-1,-2,\ldots$, and no other poles.
+    \end{enumerate}
+\end{prop}
+\begin{proof}
+    $\Gamma(s)$ converges absolutely when $\text{Re}(s)>0$, i.e. $\int_{y=0}^{\infty} |e^{-y}y^{s}|\frac{\mathrm{d}y}{y} < \infty$. Checking this is left as an easy exercise.
+    \vspace{1mm}
+     
+    Next we show $\Gamma(s)$ is continuous in $\{\text{Re}(s)>0\}$. If $N>1$, then define $\Gamma_N(s) = \int_{y=\frac{1}{N}}^{N} e^{-y}y^s \frac{\mathrm{d}y}{y}$. We claim that $\Gamma_N(s)$ is continuous in $\{\text{Re}(s)>0\}$. But if $\text{Re}(s)\ge 0$ and $\epsilon>0$, then $\exists \delta>0$ such that if $s' \in \mathbb{C}$ with $|s-s'|<\delta$ and $y \in \left[\frac{1}{N},N \right]$, then $|y^s-y^{s'}|<\epsilon$ (since $(y,s) \mapsto y^s : \left[\frac{1}{N},N \right] \times \mathbb{C} \to \mathbb{C}$ is continuous and $\left[,\frac{1}{N},N \right]$ is compact). Then $$|\Gamma_N(s)-\Gamma_N(s')|\le \int_{y=\frac{1}{N}}^{N} e^{-y}|y^s-y^{s'}|\frac{\mathrm{d}y}{y} \le \epsilon \int_{y=\frac{1}{N}}^{N} e^{-y} \frac{\mathrm{d}y}{y} = C_N \epsilon,$$
+    so $\Gamma_N(s)$ is continuous. 
+    \vspace{1mm}
+     
+    To show $\Gamma(s)$ is holomorphic, we recall Morera's theorem: If $U \subset \mathbb{C}$ is open, $f : U \to \mathbb{C}$ is continuous and $\oint_{\gamma} f(z) \mathrm{d}z = 0$ for all closed continuous paths $\gamma$ in $U$, then $f$ is holomorphic. We have
+    \begin{align*}
+        \oint_{\gamma}\Gamma_N(s) \mathrm{d}s = \oint_\gamma \int_{y=\frac{1}{N}}^{N} e^{-y}y^s\frac{\mathrm{d}y}{y}\mathrm{d}s = \int_{y=\frac{1}{N}}^{N} e^{-y} \underbrace{\oint_{\gamma} y^s \mathrm{d}s}_{0\text{, as }y^s \text{ is holomorphic}} \frac{\mathrm{d}y}{y} = 0.
+    \end{align*}
+    Hence $\Gamma_N(s)$ is holomorphic by Morera's theorem.
+    \vspace{1mm}
+     
+    To show $\Gamma$ is holomorphic, we show $\Gamma_N \to \Gamma$ locally uniformly. In fact, we show uniform convergence in $\{s \in \mathbb{C} \mid \text{Re}(s) \in [\sigma_0,\sigma_1]\} ~\forall 0<\sigma_0<\sigma_1$, i.e. ''uniform convergence in vertical strips''. If $s$ lies in this set, then 
+    \begin{align*}
+        &|\Gamma(s)-\Gamma_N(s)| \le \int_{y=0}^{\frac{1}{N}} |y^s e^{-y}| \frac{\mathrm{d}y}{y} + \int_{y=N}^{\infty} |y^s e^{-y}|\frac{\mathrm{d}y}{y} \\ \le& \int_{y=0}^{\frac{1}{N}} y^{\sigma_0-1}e^{-y}\mathrm{d}y   + \int_{y=N}^{\infty} y_1^{\sigma_1-1}e^{-y}\mathrm{d}y \stackrel{n \to \infty}{\to} 0
+    \end{align*}
+    at a rate independent of $s$, giving us uniform convergence and showing (i).
+    \vspace{1mm}
+
+    To prove (ii), we use the equation $s \Gamma(s) = \Gamma(s+1)$ (which we can prove from the definition by integrating by parts). This can be used to extend $\Gamma(s)$ into a meromorphic function on $\{s \in \mathbb{C} \mid \text{Re}(s)>-k\}$ for any $k \in \mathbb{N}$ by induction on $k$, and the description of the poles also follows.
+\end{proof}
+\begin{proof}[Proof of Theorem \ref{theorem4.2}]
+    Consider \[
+    F(s) = \int_{y=0}^{\infty} f(iy)y^s\frac{\mathrm{d}y}{y},
+    \]
+    called the Mellin transform of $f(iy)$. We claim that $F(s)$ converges for any $s \in \mathbb{C}$ and defines a holomorphic function. For absolute convergence, write
+    \begin{align*}
+        \int_{y=0}^{\infty} f(iy)y^s\frac{\mathrm{d}y}{y} = \int_{y=0}^{1} f(iy)y^s \frac{\mathrm{d}y}{y} + \int_{y=1}^{\infty} f(iy)y^s \frac{\mathrm{d}y}{y}.
+    \end{align*}
+    We know $|f(\tau)|\le C_f|e^{2\pi i \tau}|$, so $ |f(iy)| \le C_f e^{-2\pi y}$, so $\int_{y=1}^{\infty} |f(iy)y^s|\frac{\mathrm{d}y}{y} < \infty$ for any $s \in \mathbb{C}$. For the first integral we have 
+    \begin{align*}
+        \int_{y=0}^{1} f(iy)y^s \frac{\mathrm{d}y}{y} = \int_{y=1}^{\infty} f \left(\frac{1}{y}\right)y^{-s}\frac{\mathrm{d}y}{y}.
+    \end{align*}
+    But also $f(\tau) = f(-1/\tau)t^{-k}$, so $f(iy) = f\left(\frac{i}{y}\right) (iy)^{-k}$. Hence
+    \begin{align*}
+        \int_{y=1}^{\infty} \left|f \left(\frac{i}{y}\right) y^{-s}\right| \frac{\mathrm{d}y}{y} = \int_{y=1}^{\infty}  |f(iy)|y^{k-s} \frac{\mathrm{d}y}{y}<\infty
+    \end{align*}
+    for any $s \in \mathbb{C}$, since $f(iy)$ decays exponentially as $y \to \infty$.
+    \vspace{1mm}
+     
+    The fact that $F$ is holomorphic is left as an exercise: it is similar to the proof of holomorphicity of $\Gamma(s)$ above, but easier, since we don't have to worry about blowing up anywhere.
+    \vspace{1mm}
+     
+    What is $F(s)$? We have
+    \begin{align*}
+        F(s) = \int_{y=0}^{\infty} \sum_{n=1}^{\infty} a_n e^{-2\pi n y}y^s \frac{\mathrm{d}y}{y} \stackrel{(\star)}{=} \sum_{n=1}^{\infty} a_n \int_{y=0}^{\infty} e^{2\pi n y} y^s \frac{\mathrm{d}y}{y}.
+    \end{align*}
+    $(\star)$ is justified by Fubini's theorem provided that 
+    \begin{align*}
+        \sum_{n=1}^{\infty} |a_n| \int_{y=0}^{\infty} |e^{-2\pi n y}y^{s}| \frac{\mathrm{d}y}{y} < \infty.
+    \end{align*}
+    If we assume this holds, then we get
+    \begin{align*}
+        &\sum_{n=1}^{\infty} a_n \int_{y=0}^{\infty} e^{-2\pi n y}y^s \frac{\mathrm{d}y}{y} = \sum_{n=1}^{\infty} a_n \int_{y=0}^{\infty} e^{-y}y^s (2\pi n)^{-s}\frac{\mathrm{d}y}{y} \\
+        =& \sum_{n=1}^{\infty} (2\pi)^{-s} a_n n^{-s} \int_{y=0}^{\infty} e^{-y}y^s \frac{\mathrm{d}y}{y} = \Lambda(f,s).
+    \end{align*}
+    To justify $(\star)$, we have 
+    \begin{align*}
+        \sum_{n=1}^{\infty} |a_n| \int_{y=0}^{\infty} |e^{-2\pi n y}y^{s}| \frac{\mathrm{d}y}{y} = (2\pi)^{-\sigma}\Gamma(\sigma)\sum_{n=1}^{\infty} |a_n|n^{-\sigma},
+    \end{align*}
+    where $\sigma = \text{Re}(s)$ (so $|y|^s = |y|^{\sigma}$, $|n^{-s}|=n^{-\sigma}$), i.e. whenever $L(f,s)$ is absolutely convergent.
+    \vspace{1mm}
+     
+    We conclude that $F(s)$ is holomorphic in $\mathbb{C}$ and equals $\Lambda(f,s)$ when $\text{Re}(s)>1+\frac{k}{2}$, i.e. $\Lambda(f,s)$ has an analytic continuation to $\mathbb{C}$. We can write $L(f,s) = \frac{\Lambda(f,s)}{(2\pi)^{-s}\Gamma(s)}$, which is also analytic in $\mathbb{C}$, since $\frac{1}{\Gamma(s)}$ is entire.
+    \vspace{1mm}
+     
+    For the last part, we have 
+    \begin{align*}
+        \Lambda(f,s) = \int_{y=0}^{\infty} f(iy)y^s \frac{\mathrm{d}y}{y} = \int_{y=1}^{\infty} f\left(\frac{i}{y}\right)y^{-s}\frac{\mathrm{d}y}{y} + \int_{y=1}^{\infty} f(iy)y^s\frac{\mathrm{d}y}{y}.
+    \end{align*}
+    Use $f(i/y)=f(iy)(iy)^k$ to find that 
+    \begin{align*}
+        \Lambda(f,s) = \int_{y=1}^{\infty} f(iy) \left(i^k y^{k-s}+y^s \right)\frac{\mathrm{d}y}{y}
+    \end{align*}
+    If $f \neq 0$, then $k$ is even, so $i^k \in \{\pm 1\}$. Hence \[
+    \Lambda(f,k-s) = i^k \Lambda(f,s).
+    \]
+\end{proof}
+\begin{theorem}
+    Let $f \in S_k(\Gamma(1))$ be a normalized eigenform. Then 
+    \begin{align*}
+        L(f,s) = \sum_{n=1}^{\infty} a_n n^{-s} = \prod_{p \text{ prime}}^{} (1-a_p p^{-s} + p^{k-1-2s})^{-1}.
+    \end{align*}
+    We can interpret this as either an equality of formal Dirichlet series or as an equality of complex numbers when $\sum_{n=1}^{\infty} a_n n^{-s}$ is absolutely convergent.
+\end{theorem}
+\begin{proof}
+    By an exercise on the third example sheet, it is enough to consider the formal identity. But we know $a_{mn} = a_m a_n$ if $(m,n)=1$ (a property of Hecke operators inherited by their eigenvalues). Hence
+    \begin{align*}
+        \sum_{n=1}^{\infty} a_n n^{-s} = \prod_{p \text{ prime}}^{} (1 + a_p p^{-s} + a_{p^2}p^{-2s} + a_{p^3} p^{-3s} + \ldots).
+    \end{align*}
+    So we need to show \[
+        1 + a_p p^{-s} + a_{p^2}p^{-2s} + a_{p^3} p^{-3s} + \ldots = (1 - a_p p^{-s} + p^{k-1-2s})^{-1}.
+    \]
+    But this is equivalent to $a_{p^{n+1}} = a_p a_{p^n} - p^{k-1}a_{p^{n-1}}$, which we showed for Hecke operators.
+\end{proof}
+
 \end{document}
