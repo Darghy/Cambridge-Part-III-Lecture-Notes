@@ -907,5 +907,98 @@ This is Hartshorne chapter 2, Theorem 3.3, which we should read to understand al
         \item Let $C = \text{Spec }\mathbb{C}[x,y]/(y-x^2)$ and $L = \text{Spec }\mathbb{C}[x,y]/(y)$. We have natural morphisms $\mathbb{C} \to \mathbb{A}_{\mathbb{C}}^2, L \to \mathbb{A}_{\mathbb{C}}^2$. By algebra, $C \times_{\mathbb{A}^2} L = \text{Spec}(\mathbb{C}[x]/(x^2))$.
     \end{enumerate}
 \end{example}
+\marginpar{06 Nov 2022, Lecture 14}
+
+Example sheet 2 is now up, on which many basic definitions are defined for structure sheafs -- reduced, integral, irreducible, noetherian, etc. Have a look at the sheet, since we will use these definitions from now on.
+\vspace{1mm}
+ 
+\textbf{Language.} In scheme theory, we often fix a ''base scheme'' $S$ and consider all other schemes $X$ with a fixed morphism $X \to S$, which we often refer to as $\text{Sch}/S$, ''schemes over $S$''. A typical case to keep in mind is $S = \text{Spec }k$ or $S = \text{Spec }\mathbb{Z}$. The product in $\text{Sch}/S$ is the fibre product $X \times_S Y$.
+
+\subsection{Separated morphisms}
+\textbf{Motivation.} A topological space $X$ is Hausdorff if and only if the diagonal $\Delta_X = \{(x,x) \mid x \in X\} \subset X \times X$ is closed. 
+
+\begin{defn}
+    Let $X \to S$ be a morphism of schemes. Then the \textbf{diagonal} is the morphism $\Delta_{X/S} : X \to X \times_S X$ induced by the univeral property via:
+    \[
+        \begin{tikzcd}[]
+            X & &\\
+            &X \times_S X & X\\
+            & X & S
+            \arrow["", from=2-3, to=3-3]
+            \arrow["",from=2-2, to=3-2]
+            \arrow["", from=3-2, to=3-3]
+            \arrow["", from=2-2, to=2-3]
+            \arrow["\exists !", from=1-1, to=2-2, dotted]
+            \arrow["\text{id}_X",from=1-1, to=2-3, bend left=20]
+            \arrow["\text{id}_X",from=1-1, to=3-2, bend right=30]
+        \end{tikzcd}
+    \]
+    (We use $\Delta$ instead of $\Delta_{X/S}$ when $X$ and $S$ are clear).
+\end{defn}
+\textbf{Orientation.} If $U, V \subset X$ are opens and $S =\text{Spec }k$ for $k$ a field, then $\Delta^{-1}(U \times_S V) = U \cap V$.
+\begin{defn}
+    A morphism $X \to S$ is \textbf{separated} if $\Delta_{X/S} : X \to X \times_S X$ is a closed immersion.
+\end{defn}
+\begin{example}\label{example4.3}
+    Say $X = \text{Spec }\mathbb{C}[t]$ and $S = \text{Spec }\mathbb{C}$, $X \to S$ is induced by $\mathbb{C} \to \mathbb{C}[t]$. Then $X \times_S X = \text{Spec}(\mathbb{C}[t] \otimes_\mathbb{C} \mathbb{C}[t])$, the diagonal $\Delta$ applied to $\text{Spec}(\mathbb{C}[t]\otimes_{\mathbb{C}} \mathbb{C}[t] \to \mathbb{C}[t])$ via the multiplication map (i.e. $\Delta$ means take spec of the map of rings given by multiplication).
+    \vspace{1mm}
+     
+    $\Delta$ is closed because $\mathbb{C}[t]\otimes_\mathbb{C} \mathbb{C}[t] \to \mathbb{C}[t]$ is surjective.
+\end{example}
+\textbf{Clarificational category stuff.} There are two ways to describe fiber products, which look different, but are basically the same thing. These two are given by: $\begin{tikzcd}[]
+    A \times_C B & A\\
+    B & C
+    \arrow["", from=1-2, to=2-2]
+    \arrow["",from=1-1, to=2-1]
+    \arrow["", from=2-1, to=2-2]
+    \arrow["", from=1-1, to=1-2]
+\end{tikzcd}$ and $\begin{tikzcd}[]
+    A \times_C B & A \times B\\
+    C & C \times C
+    \arrow["", from=1-2, to=2-2]
+    \arrow["",from=1-1, to=2-1]
+    \arrow["\Delta", from=2-1, to=2-2]
+    \arrow["", from=1-1, to=1-2]
+\end{tikzcd}$.
+\begin{prop}\label{prop4.3}
+    Let $X \to S$ be a scheme morphism. Then there is a factorization of $\Delta_{X/S}$ given by $\begin{tikzcd}[]
+        X & U & X \times_s X\\
+        \arrow["", from=1-1, to=1-2]
+        \arrow["",from=1-2, to=1-3]
+        \arrow["\Delta_{X/S}", from=1-1, to=1-3, bend right=30]
+    \end{tikzcd}$ such that the first arrow is a closed immersion and the second arrow is an open immersion, i.e. a ''locally closed immersion''.
+\end{prop}
+\begin{proof}
+    Let $g : X \to S$. Say $S$ is covered by open affine schemes $\{V_i\}$ and suppose $X$ is covered by $\{U_{ij}\}$, where for fixed $i$, $\{U_{ij}\}$ cover $g^{-1}(V_i)$. We have morphisms $U_{ij} \to V_i$ induced by the fibre product $\begin{tikzcd}[]
+        U_{ij} & g^{-1}(V_i) & V_i\\
+        & X & S
+        \arrow["", from=1-1, to=1-2]
+        \arrow["", from=1-2, to=1-3]
+        \arrow["", from=1-2, to=2-2]
+        \arrow["", from=2-2, to=2-3]
+        \arrow["", from=1-3, to=2-3]
+    \end{tikzcd}$. 
+    Now observe $U_{ij} \times_{V_i} U_{ij}$ is affine open in $X \times_S X$ and their union contains the image of $\Delta_{X/S}$. Also, $\Delta^{-1}(U_{ij} \times_{V_i} U_{ij}) = U_{ij} \subset X$. Take $U$ in the statement to be the union of $(U_{ij} \times_{V_i} U_{ij})$ over all $i,j$. The second map is clearly an open immersion. To check that a map $T \to T'$ is a closed immersion, we can do it locally on the codomain. For $U_{ij}$ affine, the diagonal gives a map $U_{ij} \to U_{ij}\times_{V_i} U_{ij}$, which is clearly a closed immersion (if this is not clear, see Example \ref{example4.3}).
+\end{proof}
+\begin{prop}
+    If $X \to S$ is a morphism of affine schemes, then $\Delta_{X/S}$ is a closed immersion.
+\end{prop}
+\begin{proof}
+    If $X = \text{Spec }A$, $S = \text{Spec }B$, $X \to S = \text{Spec }(B \to A)$, then $A \otimes_B A \to A$ is surjective.
+\end{proof}
+\begin{example}
+    Recall the bug--eyed line $X = \mathbb{A}_k^1 \sqcup \mathbb{A}_k^1 / \sim$ with $\mathbb{A}_k^1 \setminus \{0\} = U \subset \mathbb{A}_k^1$ and $V$ similarly and the equivalence $V \stackrel{\sim}{\to} U$ given by $k[u,u^{-1}] \to k[t,t^{-1}]$ via $u \mapsto t$. We claim this is not separated over $\text{Spec }k$. What is $X \times_S X$? We can compute it via a gluing construction of the fibre product. Hence the output is a plane with doubled axes and four origins. But the diagonal only contains two out of the four origins (exercise), so it is not a closed subset.
+\end{example}
+\begin{example}
+    As we will be able to check/work out in a few lectures' time, open and closed immersions are always separated.
+\end{example}
+An easy consequence of Proposition \ref{prop4.3}: Let $X \to S$ be a morphism of schemes. If $\text{Im}(\Delta_{X/S})$ is closed as a topological subspace, then $X \to S$ is separated.
+\begin{prop}
+    Let $A$ be any ring. Then the morphism $\mathbb{P}_A^n \to \text{Spec }A$ is separated.
+\end{prop}
+\begin{prop}
+    Let $k$ be a field and $X \to \text{Spec }k$ a scheme morphism. Let $U, V \subset X$ be affine opens. Then if $X \to \text{Spec }k$ is separated, then $U \cap V$ is also affine.
+\end{prop}
+
 
 \end{document}
