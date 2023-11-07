@@ -906,7 +906,7 @@ In summary, if $K$ is a local field, then either:
         \item a global function field, i.e. a finite extension of $\mathbb{F}_p(t)$.
     \end{enumerate}
 \end{defn}
-\begin{lemma}
+\begin{lemma}\label{lemma8.1}
     Let $(K,|\cdot|)$ be a complete discretely valued field and $L/K$ a finite Galois extension with absolute value $|\cdot|_L$ extending $|\cdot|_K$. Then for $x \in L$ and $\sigma \in \text{Gal}(L/K)$, we have $|\sigma(x)|_L = |x|_L$.
 \end{lemma}
 \begin{proof}
@@ -1243,7 +1243,7 @@ Now assume $[L:K]$ is Galois. Then for any $\sigma \in \text{Gal}(L/K)$, $\sigma
     \end{align*}
     Since $\mathcal{P}_j$ is prime, there must exist some $\tau \in \text{Gal}(L/K)$ such that $\tau(x) \in \mathcal{P}_j \implies x \in \tau^{-1}(\mathcal{P}_j)$, so $x \equiv 0 \pmod{\tau^{-1}(\mathcal{P}_j)}$, a contradiction.
 \end{proof}
-\begin{cor}
+\begin{cor}\label{cor11.3}
     Suppose $L/K$ is Galois. Then $e_1 = e_2 = \ldots = e_r = e$, $f_1 = \ldots = f_r = f$ and hence $n = efr$.
 \end{cor}
 \begin{proof}
@@ -1255,7 +1255,7 @@ Now assume $[L:K]$ is Galois. Then for any $\sigma \in \text{Gal}(L/K)$, $\sigma
     The formula now follows from Theorem \ref{theorem11.1}.
 \end{proof}
 If $L/K$ is an extension of complete discretely valued fields with normalized valuations $v_L$ and $v_K$ with uniformizers $\pi_L$, $\pi_K$, then the ramification index is $e = e_{L/K} = v_L(\pi_K)$ (i.e. $\pi_K \mathcal{O}_L = \pi_L^e \mathcal{O}_L$). The residue class degree is $f = f_{L/K} = [k_L:k]$.
-\begin{cor}
+\begin{cor}\label{cor11.4}
     Let $L/K$ be finite and separable. Then $[L:K] = ef$.
 \end{cor}
 \textbf{Remark.} This corollary holds even if $L/K$ is not separable.
@@ -1269,5 +1269,98 @@ Now let $\mathcal{O}_K$ be a Dedekind domain again.
     \end{align*}
 \end{defn}
 By Proposition \ref{prop11.2}, for any $\mathcal{P}, \mathcal{P}'$ dividing $\mathfrak{p}$, $G_{\mathcal{P}}$ and $G_{\mathcal{P}'}$ are conjugate and hence have size $ef$ by the orbit--stabilizer theorem.
+
+\marginpar{07 Nov 2022, Lecture 14}
+
+\begin{prop}
+    Suppose $\mathcal{P} \mid \mathfrak{p} \subset \mathcal{O}_K$. Then 
+    \begin{enumerate}[(i)]
+        \item $L_{\mathcal{P}}/K_{\mathfrak{p}}$ is Galois.
+        \item There is a natural map $\text{res}: \text{Gal}(L_{\mathcal{P}}/K_{\mathfrak{p}}) \to \text{Gal}(L/K)$ which is injective and has image $G_{\mathcal{P}}$.
+    \end{enumerate} 
+\end{prop}
+\begin{proof}
+    \begin{enumerate}[(i)]
+        \item $L/K$ is Galois, so $L$ is the splitting field of a separable polynomial $f(X) \in K[X]$. Then $L_{\mathcal{P}}$ is the splitting field of $f(X)$ over $K_{\mathfrak{p}}[X]$. Hence $L_{\mathcal{P}}/\mathfrak{p}$ is Galois.
+        \item Let $\sigma \in \text{Gal}(L_{\mathcal{P}}/K_{\mathfrak{p}})$. Then $\sigma(L)=L$ since $L/K$ is normal. Hence we have a map $\text{res}: \text{Gal}(L_{\mathcal{P}}/K_{\mathfrak{p}}) \to \text{Gal}(L/K)$ by $\sigma \mapsto \sigma|_L$. Since $L$ is dense in $L_{\mathcal{P}}$, $\text{res}$ is injective. By Lemma \ref{lemma8.1}, $|\sigma(x)|_\mathcal{P}=|x|_{\mathcal{P}}~\forall \sigma \in \text{Gal}(L_{\mathcal{P}}/K_{\mathfrak{p}}), x \in L_{\mathcal{P}}$. Hence $\sigma(\mathcal{P}) = \mathcal{P} ~\forall \sigma \in \text{Gal}(L_{\mathcal{P}}/K_{\mathfrak{p}})$ and thus $\text{res}(\sigma) \in G_{\mathcal{P}}~\forall \sigma \in \text{Gal}(L_{\mathcal{P}}/K_{\mathfrak{p}})$. 
+        \vspace{1mm}
+         
+        To show injectivity, it suffices to show that $[L_{\mathcal{P}}: K_{\mathfrak{p}}] = ef = |G_{\mathcal{P}}|$.
+        \begin{itemize}
+            \item $|G_{\mathcal{P}}|=ef$ follows from Proposition \ref{prop11.2}, corollary \ref{cor11.3} and the orbit--stabilizer theorem.
+            \item $[L_{\mathcal{P}}:K_{\mathfrak{p}}]=ef$ follows from Corollary \ref{cor11.4}, noting that $e$ and $f$ don't change when we take completions.
+        \end{itemize}
+    \end{enumerate}
+\end{proof}
+
+\section{Ramification theory}
+\subsection{The different and discriminant}
+In this section, assume that $L/K$ is an extension of algebraic number fields with $[L:K] = n$ and $\mathcal{O}_K, \mathcal{O}_L$ are the rings of integers.
+\vspace{1mm}
+ 
+\textbf{Notation.} For $x_1,\ldots,x_n \in L$, set $\Delta(x_1,\ldots,x_n)= \det(\text{Tr}_{L/K}(x_ix_j)) \in K$. We can show that $\Delta(x_1,\ldots,x_n) = \det(\sigma_i(x_j))^2$ for $\sigma_i : L \to \overline{K}$ the embeddings.
+
+Note that if $y_i = \sum_{j=1}^{n} a_{ij}x_j$ for $a_{ij} \in K$, then \[
+\Delta(y_1,\ldots,y_n) = (\det A)^2\Delta(x_1,\ldots,x_n).
+\]
+If $x_1,\ldots,x_n \in \mathcal{O}_L$, then $\Delta(x_1,\ldots,x_n) \in \mathcal{O}_K$.
+\begin{lemma}\label{lemma12.1}
+    Let $k$ be a perfect field and $R$ a $k$--algebra which is finite--dimensional as a $k$--vector space. Then the trace form $(\cdot ,\cdot ) : R \times R \to R$ given by $(x,y) \mapsto \text{Tr}_{R/k}(xy) = \text{Tr}_k(\text{mult}(xy))$ is nondegenerate if and only if $R = k_1 \times \ldots \times k_n$ where $k_i/k$ are finite (hence separable) field extensions.
+\end{lemma}
+\begin{proof}
+    This is on example sheet 3.
+\end{proof}
+\begin{theorem}
+    Let $\mathfrak{p} \subset \mathcal{O}_K$ be a nonzero prime ideal.
+    \begin{itemize}
+        \item If $\mathfrak{p}$ ramifies in $L$, then $\forall x_1,\ldots,x_n \in \mathcal{O}_L$, $\Delta(x_1,\ldots,x_n) \equiv 0 \pmod{\mathfrak{p}}$.
+        \item If $\mathfrak{p}$ is unramified in $L$, then $\exists x_1,\ldots,x_n \in \mathcal{O}_L$ such that $\mathfrak{p} \nmid \Delta(x_1,\ldots,x_n)$.
+    \end{itemize}
+\end{theorem}
+\begin{proof}
+    \begin{enumerate}[(i)]
+        \item Let $\mathfrak{p}\mathcal{O}_L = \mathcal{P}_1^{e_1}\ldots \mathcal{P}_r^{e_r}$ with the $\mathcal{P}_i$ distinct and $e_i > 0$. CRT implies that \[
+        R = \mathcal{O_L}/\mathfrak{p}\mathcal{O}_L \cong \prod_{i=1}^{r} \mathcal{O}_L/\mathcal{P}_i^{e_i}.
+        \]
+        If $\mathfrak{p}$ ramifies in $L$, then $\mathcal{O}_L/\mathfrak{p}\mathcal{O}_L$ has nilpotent elements. By Lemma \ref{lemma12.1}, the trace form $\text{Tr}_{R/k}$ (for $k$ the residue field at $\mathfrak{p}$) is degenerate, so $\Delta(\overline{x_1},\ldots,\overline{x_n}) = 0 ~\forall \overline{x_i} \in \mathcal{O}_L/\mathfrak{p}\mathcal{O}_L$. Hence $\Delta(x_1,\ldots,x_n) \equiv 0 \pmod{\mathfrak{p}}$ for any $x_1,\ldots,x_n \in \mathcal{O}_L$ through the commutativity of the diagram 
+        $\begin{tikzcd}[]
+            \mathcal{O}_L & R\\
+            \mathcal{O}_K & k = \mathcal{O}_K/\mathfrak{p}
+            \arrow["", from=1-1, to=1-2]
+            \arrow["\text{Tr}_{R/k}", from=1-2, to=2-2]
+            \arrow["\text{Tr}_{L/K}", from=1-1, to=2-1]
+            \arrow["", from=2-1, to=2-2]
+        \end{tikzcd}$. 
+        \item If $\mathfrak{p}$ is unramified in $L$, then $\mathcal{O}_L/\mathfrak{p}\mathcal{O}_L$ is a product of finite extensions of $k$, so by Lemma \ref{lemma12.1} the trace form is nondegenerate. Hence we can pick a basis $\overline{x_1},\ldots,\overline{x_n}$ of $\mathcal{O}_L/\mathfrak{p}\mathcal{O}_L$ as a $k$--vector space, so $\Delta(\overline{x_1},\ldots,\overline{x_n}) \neq 0$. Hence $\exists x_1,\ldots,x_n \in \mathcal{O}_L$ such that $\Delta(x_1,\ldots,x_n) \neq 0 \pmod{\mathfrak{p}}$.
+    \end{enumerate}
+\end{proof}
+\begin{defn}
+    The \textbf{discriminant} is the ideal $d_{L/K} \subset \mathcal{O}_K$ generated by $\Delta(x_1,\ldots,x_n)$ for all choices $x_1,\ldots,x_n \in \mathcal{O}_L$.
+\end{defn}
+\begin{cor}
+    A prime ideal $\mathfrak{p}$ ramifies in $L \iff \mathfrak{p} \mid d_{L/K}$.
+    \vspace{1mm}
+     
+    In particular, only finitely many ideals ramify in $L$.
+\end{cor}
+\begin{defn}
+    The \textbf{inverse different} is $$D^{-1}_{L/K} = \{y \in L \mid \text{Tr}_{L/K}(xy) \in \mathcal{O}_K ~\forall x \in \mathcal{O}_L\}$$
+    which is an $\mathcal{O}_L$--submodule of $\mathcal{O}_L$.
+\end{defn}
+\begin{lemma}
+    $D^{-1}_{L/K}$ is a fractional ideal in $L$ containing $\mathcal{O}_L$.
+\end{lemma}
+\begin{proof}
+    Let $x_1,\ldots,x_n \in \mathcal{O}_L$ be a $K$--basis for $L/K$. Set $d = \Delta(x_1,\ldots,x_n) = \det(\text{Tr}(x_ix_j)) \neq 0$ (as an extension of number fields is separable). For $x \in D^{-1}_{L/K}$, write $x = \sum_{j=1}^{n} \lambda_j x_j$ for $\lambda_j \in K$. Then $\text{Tr}(xx_j)=\sum_{j=1}^{n} \lambda_j \text{Tr}(x_i,x_j) \in\mathcal{O}_K$. Set $A_{ij} = \text{Tr}_{L/K}(x_i x_j)$. Multiplying by $\text{Adj}(A) \in M_{n}(\mathcal{O}_K)$ gives \[
+    d \begin{pmatrix} \lambda_1 \\ \vdots \\ \lambda_n \end{pmatrix} = \text{Adj}(A) \begin{pmatrix} \text{Tr}_{L/K}(x x_1) \\ \vdots \\ \text{Tr}_{L/K}(x x_n) \end{pmatrix}.
+    \]
+    Hence $\lambda_i \in \frac{1}{d}\mathcal{O}_K$, so $x \in \frac{1}{_L} \mathcal{O}_L$, so $D^{-1}_{L/K} \subset \frac{1}{d}\mathcal{O}_L$, so $D^{-1}_{L/K}$ is a fractional ideal.
+    \vspace{1mm}
+     
+    Finally, $\text{Tr}(x) \in \mathcal{O}_K ~\forall \in \mathcal{O}_L$, so $\mathcal{O}_L \subset D^{-1}_{L/K}$.
+\end{proof}
+\begin{defn}
+    The inverse $D_{L/K} \subset \mathcal{O}_L$ of $D^{-1}_{L/K}$ is the \textbf{different ideal}.
+\end{defn}
 
 \end{document}
