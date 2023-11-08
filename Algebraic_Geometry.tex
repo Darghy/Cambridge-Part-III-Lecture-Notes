@@ -999,6 +999,78 @@ An easy consequence of Proposition \ref{prop4.3}: Let $X \to S$ be a morphism of
 \begin{prop}
     Let $k$ be a field and $X \to \text{Spec }k$ a scheme morphism. Let $U, V \subset X$ be affine opens. Then if $X \to \text{Spec }k$ is separated, then $U \cap V$ is also affine.
 \end{prop}
+\marginpar{08 Nov 2022, Lecture 15}
 
+\begin{example}
+    Another example: $\mathbb{A}_k^n \to \text{Spec }k$ is separated, so $\mathbb{A}_k^n \times_{\text{Spec }k}\mathbb{A}_k^n = \text{Spec }k[x]\otimes_k k[y]$ and the map $\Delta$ is induced by multiplication $k[\overline{x}]\otimes k[\overline{y}] \to k[\overline{x}]$ by $f(x)\otimes g(y) \mapsto f(x)g(x)$.  
+\end{example}    
+\textbf{Properties.} (All of these are on example sheet 3).
+\begin{itemize}
+    \item Open and closed immersions are always separated. For example, for closed immersions, the key observation is $A/J \otimes_A A/I \cong A/(I+J)$, so $\Delta$ is the identity and so closed (see example sheet 3).
+    \item Compositions of separated morphisms are separated.
+    \item Base extensions: suppose $X \to S$ is separated and $S' \to S$ is arbitrary. Then the natural map $X \times_S S' \to S'$ coming from $\begin{tikzcd}[]
+        X \times_S S' & X\\
+        S' & S
+        \arrow["", from=1-2, to=2-2]
+        \arrow["",from=1-1, to=2-1]
+        \arrow["", from=2-1, to=2-2]
+        \arrow["", from=1-1, to=1-2]
+    \end{tikzcd}$ through the fibre product is also separated.
+\end{itemize} 
+\begin{prop}
+    Let $R$ be any ring. Then $\mathbb{P}_R^n \to \text{Spec }R$ is always separated.
+\end{prop}
+\begin{proof}
+    We want to show that in our following fibre product $\Delta$ is closed.
+    $$\begin{tikzcd}[]
+        \mathbb{P}_R^n & \mathbb{P}_R^n \times_{R = \text{Spec }R} \mathbb{P}_R^n & \mathbb{P}_R^n\\
+        & \mathbb{P}_R^n & \text{Spec }R
+        \arrow["", from=1-1, to=1-2]
+        \arrow["", from=1-2, to=1-3]
+        \arrow["", from=1-2, to=2-2]
+        \arrow["", from=2-2, to=2-3]
+        \arrow["", from=1-3, to=2-3]
+    \end{tikzcd}$$ 
+    It suffices to check this on an open cover of $\mathbb{P}^n \times_R \mathbb{P}^n$ (note that here and before we abuse notation by writing $R$ instead of $\text{Spec }R$ as a subscript). Let $A = R[x_0,\ldots,x_n]$ with the usual grading. Let $U_i = \text{Spec} \left(A[\frac{1}{x_i}]\right)_0$. From our proj discussion, $\{U_i\}_{i=0}^n$ cover $\mathbb{P}_R^n$.
+    \vspace{1mm}
+     
+    Now $U_i \times_R U_j = \text{Spec }R\left[\frac{x_0}{x_i},\ldots,\frac{x_n}{x_i},\frac{y_0}{y_j},\ldots, \frac{y_n}{y_j}\right]$. Now observe (exercise) that the restriction of $\Delta$ to $\Delta^{-1}(U_i \times_R U_j)$ is $U_i \cap U_j \to U_i \times_R U_j$, given on rings by $R\left[\frac{x_0}{x_i},\ldots,\frac{x_n}{x_i}\right]\left[\frac{x_i}{x_j}\right] \leftarrow R\left[\frac{x_0}{x_i},\ldots,\frac{x_n}{x_i},\frac{y_0}{y_j},\ldots, \frac{y_n}{y_j}\right]$ with the map ''change $y$ to $x$''. This map is clearly surjective and $U_i \times_R U_j$ cover $\mathbb{P}^n \times_R \mathbb{P}^n$, so $\Delta$ is closed.
+\end{proof}
 
+Let $k = \overline{k}$ be an algebraically closed field and let $X \to \text{Spec }k$ be a scheme over $\text{Spec }k$. Recall (from ES2) that $X$ is of finite type over $\text{Spec }k$ if there is a cover of $X$ by affines $\{U_\alpha\}_{\alpha}$ such that $\mathcal{O}_{X}(U_{\alpha})$ is a finitely generated $k$--algebra (i.e. a quotient of a polynomial ring by an ideal in finitely many variables). Also from ES2, $X$ is reduced if and only if for all opens $U \subset X$, $\mathcal{O}_{X}(U)$ has no nilpotent elements.
+
+\begin{defn}
+    $X \to \text{Spec }k$ is a \textbf{variety} if it is reduced, of finite type, and separated.
+\end{defn}
+\begin{example}
+    For many examples, see the Part II Algebraic Geometry course or Chapter 1 of Hartshorne.
+\end{example}
+\subsection{Properness}
+Let $f:X \to S$ be a morphism of schemes. Then $f$ is of \textbf{finite type} if there exists an affine cover of $S$ by opens $\{V_{\alpha}\}$ with each $V_{\alpha} = \text{Spec}(A_\alpha)$ and corresponding covers $\{U_{\alpha,\beta}\}_{\beta}$ of $f^{-1}(V_{\alpha})$ by open affines such that $U_{\alpha,\beta} = \text{Spec}(B_{\alpha,\beta})$ such that $B_{\alpha,\beta}$ is a finitely generated $A_{\alpha}$--module and $\{U_{\alpha,\beta}\}_{\beta}$ can be chosen to be finite.
+
+\begin{defn}
+    $f:X \to S$ is \textbf{closed} if it is a closed topological map. It is \textbf{universally closed} if for any $S' \to S$, the induced $X \times_S S' \to S'$ is also closed.
+\end{defn}
+\begin{defn}
+    $f: X \to S$ is \textbf{proper} if it is separated, of finite type, and universally closed.
+\end{defn}
+\begin{example}
+    Closed immersions are proper (check or wait to find out why this is the case later).
+\end{example}
+\textbf{Non--example.} The obvious map $\mathbb{A}_k^1 \to \text{Spec }k$ is not proper.
+\begin{proof}
+    It is separated and of finite type, but we show it's not universally closed. $\mathbb{A}_k^1 \to \text{Spec }k$ is closed (as it consists of one point). Consider the fibre product $$\begin{tikzcd}[]
+        \mathbb{A}_k^2 & \mathbb{A}_k^1\\
+        \mathbb{A}_k^1 & \text{Spec }k
+        \arrow["f", from=1-2, to=2-2]
+        \arrow["f'",from=1-1, to=2-1]
+        \arrow["", from=2-1, to=2-2]
+        \arrow["", from=1-1, to=1-2]
+    \end{tikzcd}$$
+    Take $\mathbb{V}(xy-1) =Z \subset \mathbb{A}_k^2 = \text{Spec }k[x,y]$. Then $f'(Z)$ is not Zariski closed.
+\end{proof}
+\textbf{Observation.} If $X \to S$ is proper, then any base extension $X \times_S S' \to S'$ is also proper.
+\begin{prop}
+    Let $R$ be any ring. Then $\mathbb{P}_R^n \to \text{Spec }R$ is proper.
+\end{prop} 
 \end{document}
