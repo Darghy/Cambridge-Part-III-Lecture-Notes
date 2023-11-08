@@ -1374,5 +1374,101 @@ To warm up, we consider the gamma function $$\Gamma(s) = \int_{y=0}^{\infty} e^{
     \]
     But this is equivalent to $a_{p^{n+1}} = a_p a_{p^n} - p^{k-1}a_{p^{n-1}}$, which we showed for Hecke operators.
 \end{proof}
+\marginpar{08 Nov 2022, Lecture 15}
+We will now use the following theorem as a black box result. For a proof, see Lang's \textit{Algebraic Number Theory}.
+\begin{theorem}[Wiener--Ikehara Tauberian theorem]
+    Consider a Dirichlet series $\sum_{n=1}^{\infty} a_n n^{-s} = f(s)$, absolutely convergent when $\text{Re}(s)>1$ (so $f$ is holomorphic in this region). Suppose $f$ admits a meromorphic continuation to an open neighborhood of $\{s \in \mathbb{C} \mid \text{Re}(s)\ge 1\}$ which is holomorphic on the line $\text{Re}(s)=1$, except possibly for a simple pole at $s = 1$ of residue $\alpha$. Then \[
+    \sum_{1\le n\le X}^{} a_n = \alpha X + o(X) \text{ as }X \to \infty.
+    \]
+\end{theorem}
+Here $o(X)$ denotes any function $g(x)$ such that $g(X)/X \to 0$ as $X \to \infty$, and $O(X)$ denotes any function $h(X)$ such that $h(X)/X$ is bounded as $X \to \infty$.
+\vspace{1mm}
+ 
+As an illustration, we prove:
+\begin{prop}
+    Suppose that the zeta function $\zeta(s) = \sum_{n=1}^{\infty} n^{-s}$ admits a meromorphic continuation to an open neighborhood of $\{\text{Re}(s)\ge 1\}$ which is holomorphic and non--vanishing on the line $\text{Re}(s)=1$ except for a simple pole at $s = 1$. Then the Prime Number Theorem holds, i.e. \[
+    \pi(X) = \sum_{\substack{p \text{ prime}\\p\le X}}^{} 1 = \frac{X}{\log X}+ o \left(\frac{X}{\log X}\right)
+    \]
+    as $X \to \infty.$
+\end{prop}
+\begin{proof}
+    Note that we have the Taylor series $\sum_{k=1}^{\infty} \frac{z^k}{k}$ for $-\log(1-z)$ valid for $|z|<1$. A branch of $\log \zeta(s) = \log \prod_{p}^{} (1-p^{-s})^{-1}$ is given by $$\sum_{p}^{} \log(1-p^{-s})^{-1} = \sum_{p}^{} \sum_{k = 1}^{\infty} \frac{p^{-ks}}{k}.$$
+    This Dirichlet series is absolutely convergent when $\text{Re}(s)>1$, hence locally uniformly convergent, so we can compute the derivative term--by--term to find
+    \begin{align*}
+        -\frac{\zeta'(s)}{\zeta(s)} =& - \sum_{p}^{} \sum_{k= 1}^{\infty} \frac{\mathrm{d}}{\mathrm{d}s} \left(\frac{p^{-ks}}{k}\right) = \sum_{p}^{} \sum_{k=1}^{\infty} (\log p)p^{-ks} \\
+        \implies& -\frac{\zeta'(s)}{\zeta(s)} = \sum_{p}^{} (\log p)p^{-s} + \sum_{p}^{} \sum_{k\ge 2}^{} (\log p)p^{-ks}.
+    \end{align*}
+    Note the second term is absolutely convergent when $\text{Re}(s)>\frac{1}{2}$. But $-\frac{\zeta'(s)}{\zeta(s)} = - \frac{\mathrm{d}}{\mathrm{d}s} \log \zeta(s)$, so if $\zeta(s)$ has a zero or a pole of order $k$ at $s_0$, then $-\frac{\zeta'(s)}{\zeta(s)}$ will have a simple pole at $s_0$ of residue $-k$. 
+    \vspace{1mm}
+     
+    We are assuming that $\zeta(s)$ has a meromorphic continuation which is holomorphic and non--vanishing on $\{\text{Re}(s)=1\}$ except for a simple pole at $s=1$. Hence $-\frac{\zeta'(s)}{\zeta(s)}$ has a meromorphic continuation defined where $\zeta$ is defined, holomorphic on $\{\text{Re}(s)=1\}$ except for a simple pole at $s=1$ of residue $1$.
+    \vspace{1mm}
+
+    We conclude that $\sum_{p}^{} (\log p) p^{-s}$ has a meromorphic continuation to a neighborhood of $\{\text{Re}(s)\ge 1\}$, holomorphic on the line $\{\text{Re}(s)=1\}$ except for a simple pole at $s=1$ of residue $1$. Hence applying the Wiener--Ikehara Tauberian theorem to $\sum_{p}^{} (\log p)p^{-s}$ gives
+    \begin{align*}
+        \theta(X) = \sum_{p\le X}^{} \log p  = X + o(X).
+    \end{align*}
+    To get back to $\pi(x)$, we use Lemma \ref{lemma4.7} (partial summation, to be proved after this proof). We take $a_n = \begin{cases}
+        0 & n \text{ not prime} \\
+        \log p & n = p \text{ prime}
+    \end{cases}$ and $f(t) = \frac{1}{\log t}$. By partial summation,
+    \begin{align*}
+        \pi(X) =~& 1 + \sum_{e<n\le x}^{} 1_{n \text{ is prime}} \\
+        =~& 1 + \sum_{e<n\le x}^{} a_nf(n) = A(X)f(X) - A(e)f(e) + \int_{t=e}^{X} \frac{A(t)}{t(\log t)^2}\mathrm{d}t.
+    \end{align*}
+    Note that $A(x) = \sum_{p\le x}^{} \log p = \theta(X) = X + o(X)$, so the above is 
+    \begin{align*}
+        =~& \frac{\theta(X)}{\log X} - A(e)f(e) + \int_{t=e}^{X} \frac{\theta(t)}{t(\log t)^2} \mathrm{d}t \\
+        =~& \frac{X}{\log X} + o \left(\frac{X}{\log X}\right) + \int_{t=e}^{X} \frac{\theta(t)}{t (\log t)^2}\mathrm{d}t.
+    \end{align*}
+    To finish, we need to show that the last term can be absorbed into the error term. But $\theta(X) = X +o(X)$, so $\theta(X) = O(X)$, so $\exists C>0$ such that $\theta(t)\le Ct ~\forall t>0$, so our integral is 
+    \begin{align*}
+        &\le C \int_{t= e}^{X} \frac{1}{(\log t)^2}\mathrm{d}t =  C \int_{t=e}^{\sqrt{X}} \frac{1}{(\log t)^2}\mathrm{d}t + C \int_{t=\sqrt{X}}^{X} \frac{1}{(\log t)^2}\mathrm{d}t \\
+        &\le C\sqrt{X} + C\frac{X}{(\log \sqrt{X})^2} \\
+        &= C\sqrt{X} + \frac{4CX}{(\log X)^2} = o \left(\frac{X}{\log X}\right)
+    \end{align*}
+    as desired.
+    
+\end{proof}
+\begin{lemma}[Partial summation]\label{lemma4.7}
+    Let $(a_n)_{n\ge 0}$ be a sequence of complex numbers. Let $0<X<Y$ be real numbers and let $f:[X,Y] \to \mathbb{R}$ be a continuously differentiable function. Let $A(t) = \sum_{0\le n\le t}^{} a_n$. Then 
+    \begin{align*}
+        \sum_{X<n\le Y}^{} a_n f(n) = A(Y)f(Y) - A(X)f(X) - \int_{t=X}^{Y} A(t)f'(t) \mathrm{d}t.
+    \end{align*}
+\end{lemma}
+\begin{proof}
+    Elementary exercise.
+\end{proof}
+We will establish all required properties of $\zeta(s)$ for the proof later in the course using modular forms.
+\begin{theorem}\label{theorem4.8}
+    Fix $n\ge 1$. Suppose we're given for all primes $p$ a matrix $\Phi_p \in M_n(\mathbb{C})$ which is either zero or whose eigenvalues have value 1. Define $$L(\{\Phi_p\},s) = \prod_{p}^{} \det(1_n - p^{-s}\Phi_p)^{-1}.$$
+    Then $L(\{\Phi_p\}, s)$ is absolutely convergent when $\text{Re}(s)>1$. Furthermore, suppose $L(\{\Phi_p\},s)$ admits a meromorphic continuation to an open neighborhood of $\{\text{Re}(s)\ge 1\}$ and is holomorphic and nonvanishing on the line $\{\text{Re}(s)=1\}$ except possibly for a pole at $s=1$ of order $\delta$. Then 
+    \begin{align*}
+        \sum_{\substack{p\le X\\p \text{ prime}}} \text{tr }\Phi_p = \frac{\delta X}{\log X} + o \left(\frac{X}{\log X}\right).
+    \end{align*}
+\end{theorem}
+\begin{proof}
+    Left as an exercise on the third example sheet. This is just a generalization of the case $n=1, \Phi_p = 1, L =\zeta$ that we just did.
+\end{proof}
+\begin{example}
+    Dirichlet's theorem on primes in arithmetic progressions. Fix $N \in \mathbb{N}, N\ge 1$. For any homomorphism $\chi : (\mathbb{Z}/N\mathbb{Z})^\times \to \mathbb{C}^\times$, consider 
+    \begin{align*}
+        L(\chi, s) = \sum_{\substack{(n,N)=1\\n \in \mathbb{N}}}^{} \chi(n \text{ mod }N)n^{-s} = \prod_{p \nmid N}^{} (1 - \chi(p \text{ mod }N)p^{-s})^{-1}.
+    \end{align*}
+    These are called the Dirichlet $L$--functions. It is a fact that the hypotheses of Theorem \ref{theorem4.8} apply to $L(\chi, s)$, so we conclude that for any $\chi$, 
+    \begin{align*}
+        \sum_{p \le X}^{} \chi(p \text{ mod }N) = \text{ord}_{s=1} L(\chi, s) \cdot \frac{X}{\log X} + o \left(\frac{X}{\log X}\right).
+    \end{align*}
+    One can show that $\text{ord}_{s=1}L(\chi,s) = \begin{cases}
+        -1 & \chi \text{ trivial}.\\
+        0 & \chi \text{ nontrivial}.
+    \end{cases}$ 
+    \vspace{1mm}
+     
+    If $a \in (\mathbb{Z}/N\mathbb{Z})^\times$, then $1_{a \text{ mod }N}(g) = \frac{1}{\phi(N)} = \sum_{\chi}^{} \overline{\chi(a)}\chi(g)$ for any $g \in (\mathbb{Z}/N\mathbb{Z})^\times$. Hence
+    \begin{align*}
+        \sum_{\substack{p\le x\\p \nmid N}}^{} 1_{a \text{ mod }N}(p) = \frac{1}{\phi(N)} \sum_{\chi}^{} \overline{\chi(n)} \sum_{p\le X}^{} \chi(p \text{ mod }N) = \frac{1}{\phi(N)} \frac{X}{\log X} + o \left(\frac{X}{\log X}\right).
+    \end{align*}
+\end{example}
 
 \end{document}
