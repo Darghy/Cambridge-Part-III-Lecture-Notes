@@ -1171,7 +1171,7 @@ Let $\mathcal{O}_K$ be a Dedekind domain and $L/K$ a finite separable extension.
 
 \marginpar{04 Nov 2022, Lecture 13}
 
-\begin{cor}
+\begin{cor}\label{cor10.10}
     Take $0 \neq \mathfrak{p} \subset \mathcal{O}_K$ a prime ideal. For $x \in L$, $$N_{L/K}(x) = \prod_{\mathcal{P} \mid  \mathfrak{p}}^{} N_{L_{\mathcal{P}/K_{\mathfrak{p}}}}(x).$$
 \end{cor}
 \begin{proof}
@@ -1363,4 +1363,89 @@ If $x_1,\ldots,x_n \in \mathcal{O}_L$, then $\Delta(x_1,\ldots,x_n) \in \mathcal
     The inverse $D_{L/K} \subset \mathcal{O}_L$ of $D^{-1}_{L/K}$ is the \textbf{different ideal}.
 \end{defn}
 
+\marginpar{09 Nov 2022, Lecture 15}
+
+Let $L/K$ be a degree $n$ extension of number fields, and let $I_L, I_K$ be the groups of fractional ideals. Then (todo: lectures said Proposition 9.7 -- I think that corresponds to Theorem 9.5 in my notes?) Proposition 9.7 gives us that 
+\begin{align*}
+    &I_L \cong \bigoplus_{\substack{0 \neq \mathfrak{p}\\\mathfrak{p} \text{ prime ideal in }\mathcal{O}_L}} \mathbb{Z} \\
+    &I_K \cong \bigoplus_{\substack{0 \neq \mathfrak{p}\\\mathfrak{p} \text{ prime ideal in }\mathcal{O}_K}} \mathbb{Z}.
+\end{align*}
+
+Define $N_{L/K}: I_L \to I_K$ induced by $\mathcal{P} \mapsto \mathfrak{p}^f$ for $\mathfrak{p} = \mathcal{P} \cap \mathcal{O}_K$ and $f = f(\mathcal{P}/\mathfrak{p})$. Then it is a fact that the following diagram commutes: $\begin{tikzcd}[]
+    L^{\times} & I_L\\
+    K^{\times} & I_K
+    \arrow["", from=1-1, to=1-2]
+    \arrow["N_{L/K}", from=1-2, to=2-2]
+    \arrow["N_{L/K}", from=1-1, to=2-1]
+    \arrow["", from=2-1, to=2-2]
+\end{tikzcd}$.
+One way to see this is to use Corollary \ref{cor10.10} and $v_{\mathfrak{p}}(N_{L_\mathcal{P}/K_{\mathfrak{p}}}(x)) = f_{\mathcal{P}/\mathfrak{p}} v_{\mathcal{P}}(x)$ for $x \in L_{\mathcal{P}}$ and $v_\mathfrak{p}, v_\mathcal{P}$ the normalized valuations on $L_{\mathcal{P}}$, $K_{\mathfrak{p}}$. (Remember that here $f = [\mathcal{O}_L/\mathcal{P} : \mathcal{O}_K/\mathfrak{p}]$).
+
+\begin{theorem}
+    $N_{L/K}(D_{L/K}) = d_{L/K}$.
+\end{theorem}
+\begin{proof}
+    First assume that $\mathcal{O}_K, \mathcal{O}_L$ are PIDs. Let $x_1,\ldots,x_n$ be a $\mathcal{O}_K$--basis for $\mathcal{O}_L$ and $y_1,\ldots,y_n$ the dual basis with respect to the trace form. Then $y_1,\ldots,y_n$ gives a basis for $D^{-1}_{L/K}$. Let $\sigma_1,\ldots,\sigma_n : L \to \overline{K}$ be the embeddings and consider $\sum_{i=1}^{n} \sigma_i(x_j)\sigma_i(y_k) = \text{Tr}_{L/K}(x_j y_k) = \delta_{jk}$.
+    \vspace{1mm}
+     
+    But $\Delta(x_1,\ldots,x_n) = \det(\sigma_i(x_j))^2$. Thus $\Delta(x_1,\ldots,x_n)\Delta(y_1,\ldots,y_n) = 1$. Write $D^{-1}_{L/K} = \beta \mathcal{O}_L$ for some $\beta \in \mathcal{O}_L$ (as $\mathcal{O}_L$ is assumed to be a PID). Then the change of basis matrix between $y_1,\ldots,y_n$ and $\beta x_1, \ldots, \beta x_n$ is invertible in $\mathcal{O}_K$, so
+    \begin{align*}
+        d^{-1}_{L/K} =& \Delta(x_1,\ldots,x_n)^{-1} = \Delta(y_1,\ldots,y_n) \\
+        =& \Delta(\beta x_1, \ldots, \beta x_n) = N_{L/K}(\beta)^2 \Delta(x_1,\ldots,x_n).
+    \end{align*}
+    Thus $d_{L/K}^{-1} = N_{L/K}(D_{L/K}^{-1})^2 d_{L/K}$, so $N_{L/K}(D_{L/K})=d_{L/K}$.
+    \vspace{1mm}
+     
+    In general, localize at $S = \mathcal{O}_K/\mathfrak{p}$ and note that localizing $\mathcal{O}_K$ gives a DVR (hence a PID), localizing $\mathcal{O}_L$ gives a Dedekind domain with finitely many prime ideals (hence a PID by example sheet 2) and that $S^{-1}D_{L/K} = D_{S^{-1}\mathcal{O}_L/S^{-1}\mathcal{O}_K}$ and $S^{-1} d_{L/K} = d_{S^{-1} \mathcal{O}_L/s^{-1} \mathcal{O}_K}$ (details left as exercise).
+\end{proof}
+
+\begin{theorem}
+    If $\mathcal{O}_{L} = \mathcal{O}_K[\alpha]$ and $\alpha$ has minimal polynomial $g(X) \in \mathcal{O}_K[X]$, then $D_{L/K} = (g'(\alpha))$.
+\end{theorem}
+\begin{proof}
+    Write $\frac{g(X)}{X-\alpha}=\beta_{n-1}X^{n-1}+ \ldots + \beta_1 X + \beta_0$ with $\beta_i \in \mathcal{O}_L$ and $\beta_{n-1} = 1$ and let $\alpha=\alpha_1,\ldots,\alpha_n$ be the roots of $g$. We claim that for $0\le r\le n-1$, 
+    \begin{align*}
+        \sum_{i=1}^{n} \frac{g(X)}{X-\alpha_i}\frac{\alpha_i^r}{g'(\alpha_i)} = X^r.
+    \end{align*}
+    Indeed, the difference is a polynomial in $X$ of degree $<n$ which vanishes for $X=\alpha_1,\ldots,\alpha_n$. Equating coefficients of $X^s$ on both sides gives $\delta_{rs} = \text{Tr}_{L/K}\left(\frac{\alpha^r \beta_s}{g'(\alpha)}\right)$. Hence $\mathcal{O}_L$ has $\mathcal{O}_K$--basis $1,\alpha,\ldots,\alpha^{n-1}$, $D^{-1}_{L/K}$ has $\mathcal{O}_K$--basis $\frac{\beta_0}{g'(\alpha)}, \frac{\beta_1}{g'(\alpha)}, \ldots, \frac{\beta_{n-1}}{g'(\alpha)}=\frac{1}{g'(\alpha)}$. Hence the last element generates all the others, so $D_{L/K}^{-1} = \left(\frac{1}{g'(\alpha)}\right)$, so $D_{L/K} = (g'(\alpha))$.
+\end{proof}
+
+Take $\mathcal{P}$ a nonzero prime ideal of $\mathcal{O}_L$ and $\mathfrak{p} = \mathcal{P} \cap \mathcal{O}_K$. We can define $D_{L_\mathcal{P}/K_\mathfrak{p}}$ using $\mathcal{O}_{L_\mathcal{P}}$ and $\mathcal{O}_{K_{\mathfrak{p}}}$. We can identify $D_{L_\mathcal{P}/K_\mathfrak{p}}$ with a power of $\mathcal{P}$. 
+
+\begin{theorem}
+    $D_{L/K} = \prod_{\mathcal{P}}^{} D_{L_\mathcal{P}/K_\mathfrak{p}}$. 
+\end{theorem}
+Note that we will later verify that the product is finite.
+\begin{proof}
+    Let $x \in L$ and $\mathfrak{p} \subset \mathcal{O}_K$ a prime ideal. Then $\text{Tr}_{L/K}(x) \stackrel{(\star)}{=} \sum_{\mathcal{P}\mid  \mathfrak{p}}^{} \text{Tr}_{L_\mathcal{P}/K_\mathfrak{p}}(x)$ (compare with Corollary \ref{cor10.10}). Let $r(\mathcal{P}) = v_{\mathfrak{p}}(D_{L/K})$ and $s(\mathcal{P}) = v_{\mathcal{P}}(D_{L_\mathcal{P}/K_\mathfrak{p}})$. We want to show that $r(\mathcal{P}) = s(\mathcal{P})$. 
+    \vspace{1mm}
+     
+    For $\subset$ (i.e. $r(\mathcal{P})\ge s(\mathcal{P})$), take $x \in L$ with $v_{\mathcal{P}}(x) \ge -s(\mathcal{P}) ~\forall \mathcal{P}$. Then $\text{Tr}_{L_\mathcal{P}/K_\mathfrak{p}}(xy) \in \mathcal{O}_{K_\mathfrak{p}} ~\forall y \in \mathcal{O}_L$ and $\forall \mathcal{P}$. Then $(\star)$ gives $\text{Tr}_{L/K}(xy) \in \mathcal{O}_{K_\mathfrak{p}} ~\forall y \in \mathcal{O}_L$ and $\forall \mathfrak{p}$. Hence $\text{Tr}_{L/K}(xy) \in \mathcal{O}_K ~\forall y \in \mathcal{O}_L$, i.e. $x \in D_{L/K}$. Thus $D_{L/K} \subset \prod_{\mathcal{P}}^{} D_{L_\mathcal{P}/K_\mathfrak{p}}$.
+    \vspace{1mm}
+     
+    For $\supset$, i.e. $r(\mathcal{P})\le s(\mathcal{P})$, fix $\mathcal{P}$ and let $x \in \mathcal{P}^{-r(\mathcal{P})}\setminus \mathcal{P}^{-r(\mathcal{P})+1}$. Then $v_{\mathcal{P}}(x) = -r(\mathcal{P})$, so $v_{\mathcal{P}'}(x) \ge 0 ~\forall \mathcal{P}' \neq \mathcal{P}$. By $(\star)$, $$\text{Tr}_{L_\mathcal{P}/K_{\mathfrak{p}}}(xy) = \underbrace{\text{Tr}_{L/K}(xy)}_{\mathcal{O}_K} - \sum_{\substack{\mathcal{P}' \mid \mathfrak{p}\\\mathcal{P}'\neq\mathcal{P}}}^{} \underbrace{\text{Tr}_{L_{\mathcal{P}'/K_\mathfrak{p}}}(xy)}_{\in \mathcal{O}_{K_\mathfrak{p}}} ~\forall y \in \mathcal{O}_L.$$
+    By continuity, $\text{Tr}_{L_\mathcal{P}/K_\mathfrak{p}}(xy) \in \mathcal{O}_{K_\mathfrak{p}} ~\forall y \in \mathcal{O}_{L_\mathcal{P}}$, so $x \in D^{-1}_{L_\mathcal{P}/K_\mathfrak{p}}$, i.e. $-v_{\mathcal{P}}(x) = r(\mathcal{P}) \le s(\mathcal{P})$. Hence $D_{L/K} \supset \prod_{\mathcal{P}}^{} D_{L_\mathcal{P}/K_\mathfrak{p}}$. 
+\end{proof}
+\begin{cor}
+    $d_{L/K} = \prod_{\mathcal{P}\mid \mathfrak{p}}^{} d_{L_\mathcal{P}/K_\mathfrak{p}}$.
+\end{cor}
+\begin{proof}
+    Apply $N_{L/K}$ to $D_{L/K} = \prod_{\mathcal{P}}^{} D_{L_\mathcal{P}/K_{\mathfrak{p}}}$.
+\end{proof}
+\section{Unramified and totally ramified extensions of local fields}
+In this section, let $L/K$ be a finite separable extension of non--archimedean local fields. By Corollary \ref{cor11.4}, $[L:K] = e_{L/K}f_{L/K}$.
+\begin{lemma}
+    Let $M/L/K$ be finite separable extensions of local fields. Then $f_{M/K} = f_{M/L}f_{L/K}$ and $e_{M/K} = e_{M/L}e_{L/K}$.
+\end{lemma}
+\begin{proof}
+    $f_{M/K} = [k_M:k] = [k_M : k_L][k_L : k]= f_{M/L}f_{L/K}$. The other result follows from this one and $\text{Tr}_{L/K}(x) = \sum_{\mathcal{P}\mid  \mathfrak{p}}^{} \text{Tr}_{L_\mathcal{P}/K_\mathfrak{p}}(x)$.
+\end{proof}
+\begin{defn}
+    The extension $L/K$ is said to be 
+    \begin{itemize}
+        \item \textbf{unramified} if $e_{L/K} = 1$, i.e. $f_{L/K}=[L:K]$.
+        \item \textbf{ramified} if $e_{L/K}>1$, i.e. $f_{L/K}< [L:K]$.
+        \item \textbf{totally ramified} if $e_{L/K} = [L:K]$, i.e. if $f_{L/K}=1$.
+    \end{itemize}
+\end{defn}
 \end{document}
