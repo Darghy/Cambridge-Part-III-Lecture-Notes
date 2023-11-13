@@ -1070,7 +1070,51 @@ Let $f:X \to S$ be a morphism of schemes. Then $f$ is of \textbf{finite type} if
     Take $\mathbb{V}(xy-1) =Z \subset \mathbb{A}_k^2 = \text{Spec }k[x,y]$. Then $f'(Z)$ is not Zariski closed.
 \end{proof}
 \textbf{Observation.} If $X \to S$ is proper, then any base extension $X \times_S S' \to S'$ is also proper.
+\marginpar{10 Nov 2022, Lecture 16}
+
+We have two notions ''separated'' and ''proper'' for morphisms. If $X \to \text{Spec }k$ is a morphism, then the terminology is to say ''$X$ is separated'' or ''$X$ is proper''.
+
+\begin{example}
+    \begin{itemize}
+        \item $\mathbb{A}_k^1$ is separated, but not proper.
+        \item The line with two origins is neither separated nor proper (as its not universally closed.)
+    \end{itemize}
+\end{example}
 \begin{prop}
-    Let $R$ be any ring. Then $\mathbb{P}_R^n \to \text{Spec }R$ is proper.
+    Let $R$ be a commutative ring. Then $\mathbb{P}_R^n \to \text{Spec }R$ is proper.
 \end{prop} 
+\begin{proof}
+    Universal closedness of $X \to S$ is stable under base extension, i.e. for $S' \to S$ universally closed, $X \times_S S' \to S'$ is also universally closed. Since we already checked that $\mathbb{P}^n_R \to \text{Spec }R$ is separated, and finite type is immediate by construction, it suffices to prove the case $R = \mathbb{Z}$ since $\mathbb{P}^n_R = \mathbb{P}^n_\mathbb{Z} \times_{\text{Spec }\mathbb{Z}} \text{Spec }R$.
+    \vspace{1mm}
+     
+    We must show that for any $Y \to \text{Spec }\mathbb{Z}$, the base extension $\mathbb{P}^n_\mathbb{Z} \times_{\text{Spec }\mathbb{Z}} Y \to Y$ is closed. But $Y$ is covered by affine schemes of the form $\text{Spec }R$, and closedness is local on the target, it suffices to show that $\mathbb{P}^n_R \to \text{Spec }R$ is closed.
+    
+    Let $Z \subset \mathbb{P}^n_R$ be Zariski closed, i.e. it is the vanishing locus of homogeneous polynomials $g_1,g_2,\ldots$. Our goal: if $\pi: \mathbb{P}^n_R \to \text{Spec }R$, then we need to show $\pi(Z)$ is closed. Let $K(p) = FF(R/p)$. We have a morphism $\text{Spec }K(p) \to \text{Spec }R$. We want to know for which $p$ is $Z_p = Z \times_{\text{Spec }R} K(p)$ nonempty. But $Z_p$ is nonempty $\iff \overline{g}_1, \overline{g}_2,\ldots$ cut out the origin in $\mathbb{A}^{n+1}_{K(p)}$ in $\mathbb{P}^n_{K(p)}$. Thus $Z_p$ is nonempty $\iff \sqrt{(\overline{g}_1,\overline{g}_2,\ldots)} \not\supset (x_0,\ldots,x_n)$ (where $\mathbb{P}^n_R = \text{Proj }R[x_0,\ldots,x_n]$). Equivalently, for all positive integers $d$, $(x_0,\ldots,x_n)^d \not\subset (\overline{g}_1,\overline{g}_2,\ldots)$. 
+    \vspace{1mm}
+     
+    Write $A = R[\overline{x}]$ with the usual grading. The non--containment is equivalent to the map $\bigoplus A_{d-\text{deg}(g_i)} \to A_d$ given by $f_i \mapsto f_i g_i$ in the $i^{\text{th}}$ factor to be non--surjective mod $p$ (or equivalently in $K(p)$) for all degrees $d$. This condition is given by the vanishing of maximal minors of the matrix associated to $\bigoplus A_{d-\text{deg}(g_i)} \to A_d$, which is infinitely many polynomials, each in the coefficients of the $g_i$.
+\end{proof}
+
+From this point onwards, we will assume that all schemes are Noetherian (i.e. they have a finite cover by Noetherian rings).
+
+\subsection{Valuative criteria (for separatedness and properness)}
+A discrete valuation ring is a local PID.
+\begin{example}
+    \begin{itemize}
+        \item $\mathbb{C}[[t]]$ is a DVR.
+        \item $\mathcal{O}_{\mathbb{A}^1,0} = \left\{\frac{f(t)}{g(t)} \mid g(0) \neq 0\right\}$ is a DVR.
+        \item $\mathbb{Z}_{(p)}$, $\mathbb{Z}_p$ for $p$--adic integers are DVRs.
+    \end{itemize}
+\end{example}
+
+\textbf{Terminology/observations.} Let $A$ be a valuation ring (it is a discrete valuation ring, since it is noetherian). Then $\text{Spec }A$ consists of two points $(0) \subset A$ and $\mathfrak{m} \subset A$, the unique maximal ideal.
+\vspace{1mm}
+ 
+The topology on $\text{Spec }A = \{(0), \mathfrak{m}\}$. $(0)$ is dense, and the closure of $\{(0)\} = \text{Spec }A$, and $\mathfrak{m}$ is closed.
+\vspace{1mm}
+ 
+Any generator $\pi$ for the maximal ideal $\mathfrak{m}$ is called a \textbf{uniformizer} or \textbf{uniformizing parameter}.
+\vspace{1mm}
+ 
+Any element $a \in A$ can be written as $u \pi^k$ where $u$ is a unit and $k$ is unique. The integer $k$ is called the \textbf{valuation} of $a$. This gives a map $\text{val}: A\setminus \{0\} \to \mathbb{N}$ by $a \mapsto \text{valuation of }a$ (independent of the choice of $\pi$).
 \end{document}
