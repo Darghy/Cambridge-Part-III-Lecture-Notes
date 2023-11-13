@@ -1092,7 +1092,7 @@ The motivation for this is that the area form $\frac{\mathrm{d}x \wedge \mathrm{
 \textbf{Remark.} The second part of the lemma does not hold if $f,g$ are not assumed to be cuspidal.
 
 \begin{defn}
-    The \textbf{Peterson inner product} on $S_k(\Gamma(1))$ is given by the formula $$\langle f,g \rangle = \int_{\Gamma(1)\setminus \mathfrak{h}}^{} f(\tau)\overline{g(\tau)}\text{Im}(\tau)^k \frac{\mathrm{d}x\mathrm{d}y}{y^2}.$$
+    The \textbf{Petersson inner product} on $S_k(\Gamma(1))$ is given by the formula $$\langle f,g \rangle = \int_{\Gamma(1)\setminus \mathfrak{h}}^{} f(\tau)\overline{g(\tau)}\text{Im}(\tau)^k \frac{\mathrm{d}x\mathrm{d}y}{y^2}.$$
 \end{defn}
 This is an inner product as $\langle f,f \rangle = \int_{\Gamma(1)\setminus \mathfrak{h}}^{} |f(\tau)|^2 \text{Im}(\tau)^{k} \frac{\mathrm{d}x\mathrm{d}y}{y^2}$. So if $\langle f,f \rangle = 0$, then $|f|^2 y^k = 0$, hence $f = 0$.
 
@@ -1441,7 +1441,7 @@ As an illustration, we prove:
 \end{proof}
 We will establish all required properties of $\zeta(s)$ for the proof later in the course using modular forms.
 \begin{theorem}\label{theorem4.8}
-    Fix $n\ge 1$. Suppose we're given for all primes $p$ a matrix $\Phi_p \in M_n(\mathbb{C})$ which is either zero or whose eigenvalues have value 1. Define $$L(\{\Phi_p\},s) = \prod_{p}^{} \det(1_n - p^{-s}\Phi_p)^{-1}.$$
+    Fix $n\ge 1$. Suppose we're given for all primes $p$ a matrix $\Phi_p \in M_n(\mathbb{C})$ which is either zero or whose eigenvalues have absolute value 1. Define $$L(\{\Phi_p\},s) = \prod_{p}^{} \det(1_n - p^{-s}\Phi_p)^{-1}.$$
     Then $L(\{\Phi_p\}, s)$ is absolutely convergent when $\text{Re}(s)>1$. Furthermore, suppose $L(\{\Phi_p\},s)$ admits a meromorphic continuation to an open neighborhood of $\{\text{Re}(s)\ge 1\}$ and is holomorphic and nonvanishing on the line $\{\text{Re}(s)=1\}$ except possibly for a pole at $s=1$ of order $\delta$. Then 
     \begin{align*}
         \sum_{\substack{p\le X\\p \text{ prime}}} \text{tr }\Phi_p = \frac{\delta X}{\log X} + o \left(\frac{X}{\log X}\right).
@@ -1470,5 +1470,89 @@ We will establish all required properties of $\zeta(s)$ for the proof later in t
         \sum_{\substack{p\le x\\p \nmid N}}^{} 1_{a \text{ mod }N}(p) = \frac{1}{\phi(N)} \sum_{\chi}^{} \overline{\chi(n)} \sum_{p\le X}^{} \chi(p \text{ mod }N) = \frac{1}{\phi(N)} \frac{X}{\log X} + o \left(\frac{X}{\log X}\right).
     \end{align*}
 \end{example}
+
+\marginpar{10 Nov 2022, Lecture 16}
+
+Let $f \in S_k(\Gamma(1))$ be a normalized eigenform. Then $$L(f,s) = \prod_{p}^{} (1-a_p p^{-s} p^{k-1-2s})^{-1}.$$ Factor $(1-a_p X + p^{k-1}X^2) = (1-\alpha_p X)(1- \beta_p X)$ for $\alpha_p,\beta_p \in \mathbb{C}$ and let $\Phi_p = \begin{pmatrix} \alpha_p & 0\\ 0 &\beta_p \end{pmatrix}$, sometimes called the Satake parameter of $f$ at $p$. We can factor
+\begin{align*}
+    L(\{\Phi_p\},s) &= \prod_{p}^{} \det \begin{pmatrix} 1-\alpha_p p^{-s} & 0 \\ 0 & 1 - \beta_p p^{-s} \end{pmatrix}^{-1} \\
+    &= \prod_{p}^{} ((1-\alpha_p p^{-s})(1-\beta_p p^{-s}))^{-1} = L(f,s).
+\end{align*}
+The Ramanujan conjecture says that $|\alpha_p|=|\beta_p|=p^{\frac{k-1}{2}}$. If this holds, then $L(\{p^{\frac{1-k}{2}}\Phi_p\},s)$ fits into our framework of our theorem. Here the above expression equals $$\prod_{p}^{} ((1 - \alpha_p p^{-s} p ^{-(k-1)/2})(1 - \beta_p p^{-s} p^{-(k-1)/2}))^{-1} = L\left(f,s+\frac{k-1}{2}\right).$$
+
+\begin{cor}\label{cor4.9}
+    Suppose $f \in S_k(\Gamma(1))$ is a normalized eigenform and that the Ramanujan--Petersson conjecture holds for $f$, and that $L(f,s)$ is nonvanishing on $\{\text{Re}(s)=\frac{k+1}{2}\}$. Then \[
+    \lim_{X \to \infty} \left(\sum_{p\le X}^{} \frac{a_p(f)}{p^{(k-1)/2}}\right)/\pi(X) = 0.
+    \]
+\end{cor}
+This says that the average value of $\frac{a_p}{p^{(k-1)/2}} \in [-2,2]$ is 0.
+\vspace{1mm}
+ 
+\textbf{Recall.} For $p$ an odd prime, $r_{24}(p) = \frac{16}{691}(1+p^{11})+\frac{33152}{691}\tau(p)$. If the hypotheses of Corollary \ref{cor4.9} hold (which they do), then the average of $$\frac{r_{24}(p)-\frac{16}{691}(1+p^{11})}{p^{11/2}}$$ is 0. 
+\vspace{1mm}
+ 
+In fact, we can go much farther. We can introduce a family of $L$--functions associated to the normalized eigenform $f$: 
+\begin{defn}
+    If $n\ge 1$, then 
+    \begin{align*}
+        L(f, \text{Sym}^n, s) = L(\{\text{Sym}^n \Phi_p\}, s) = \prod_{p}^{} \prod_{i=0}^{n} (1 - \alpha_p^i \beta_p^{n-i}p^{-s})^{-1},
+    \end{align*}
+    where $\text{Sym}^n : GL_2 \to GL_{n+1}$ is the $n^{\text{th}}$ symmetric power of the standard representation. A priori, we know these converge absolutely in some right half--plane. If $n=1$, $L(f, \text{Sym}^1, s) = L(f,s)$.
+\end{defn}
+
+\begin{prop}
+    \begin{enumerate}[(i)]
+        \item (Langlands, 1967). If $\forall n\ge 1$, $L(f, \text{Sym}^n, s)$ admits an analytic continuation to $\mathbb{C}$, then the Ramanujan--Petersson conjecture holds for $f$.
+        \item (Serre, 1967). If the Ramanujan-Petersson conjecture holds for $f$ and if $\forall n\ge 1$ $L(f, \text{Sym}^n, s)$ admits an analytic continuation which is non--vanishing on the line $\{\text{Re}(s)=1+\frac{n(k-1)}{2}\}$, then the Sato--Tate conjecture holds for $f$, i.e. the numbers $a_{p}(f)/2p^{(k-1)/2} \in [-1,1]$ are equidistributed with respect to the Sato--Tate density $\frac{2}{\pi}\sqrt{1-t^2}\mathrm{d}t$. This means that for any $g \in C([-1,1])$, \begin{align*}
+            \lim_{X \to \infty}\frac{1}{\pi(X)} \sum_{p\le X}^{} g(a_p/2p^{(k-1)/2}) = \int_{t = -1}^{1} g(t)\frac{2}{\pi}\sqrt{1-t^2}\mathrm{d}t.
+        \end{align*}
+        This says that
+        \begin{align*}
+            \frac{691}{66304} \left(r_{24}(p) - \frac{16}{691}(1+p^{11})\right) \frac{1}{p^{11/2}}
+        \end{align*}
+        are distributed according to the density $\frac{2}{\pi}\sqrt{1-t^2}\mathrm{d}t$.
+    \end{enumerate}
+\end{prop}
+We now know that $L(f,\text{Sym}^n,s)$ does have the required properties. There is a nice article \textit{Finding meaning in error terms} by Mazur uploaded on Moodle, which we can take a look at.
+
+\section{Modular forms on congruence subgroups of $\Gamma(1)$}
+
+\begin{defn}
+    A \textbf{congruence subgroup} $\Gamma\le \Gamma(1)$ is any subgroup containing $\text{ker}(SL_2(\mathbb{Z}) \to SL_2(\mathbb{Z}/N \mathbb{Z}))$ for some $N\ge 1$.
+\end{defn}
+The main examples are:
+\begin{itemize}
+    \item $\Gamma(N) = \text{ker}(SL_2(\mathbb{Z}) \to SL_2(\mathbb{Z}/N \mathbb{Z}))$.
+    \item $\Gamma_0(N) = \left\{\begin{pmatrix} a&b\\c&d \end{pmatrix} \in \Gamma(1) \mid c \equiv 0\pmod{N}\right\}$.
+    \item $\Gamma_1(N) = \left\{\begin{pmatrix} a&b\\c&d \end{pmatrix} \in \Gamma(1) \mid c \equiv 0\pmod{N}, a \equiv d \equiv 1 \pmod{N}\right\}$.
+\end{itemize}
+\textbf{Remark.} If $\Gamma\le \Gamma(1)$ is a congruence subgroup, then $[\Gamma(1):\Gamma]$ is finite, as $[\Gamma:\Gamma(N)]\le |SL_2(\mathbb{Z}/N\mathbb{Z})|$ is finite.
+\vspace{1mm}
+ 
+Many of the most interesting modular forms only exist at level $\Gamma<\Gamma(1)$ for $\Gamma$ a proper subgroup of $\Gamma(1)$. One example we will see is the $\theta$--function of a lattice $\Lambda$, and also the normalized eigenforms associated to elliptic curves over $\mathbb{Q}$ (defined on $\Gamma_0(N_E)$, where $N_E$ is the conductor of $E$).
+
+\begin{defn}
+    Let $k \in \mathbb{Z}$, $\Gamma\le \Gamma(1)$ a congruence subgroup. A \textbf{weakly modular function} of weight $k$, level $\Gamma$ is a meromorphic function $f$ in $\mathfrak{h}$ such that $\forall \gamma \in \Gamma, f|_k[\gamma] = f$.
+\end{defn}
+\textbf{Fact.} $\mathfrak{f}_0(2) = \{\tau \in \mathfrak{h} \mid \text{Re}(\tau) \in [0,1], |\tau-\frac{1}{2}|\ge \frac{1}{2}\}$ is (the closure of) a fundamental set for the action of $\Gamma_0(2)$ acting on $\mathfrak{h}$ (draw a picture!). 
+
+Note that there is more than one way to ''go to infinity'', and also note that $\begin{pmatrix} 1&1\\0&1 \end{pmatrix} \in \Gamma_0(2)$ sending $0$ to $1$, so the ''infinities'' at 0 and 1 are similar, but different to the one at $\text{Im}(\tau) 
+\to \infty$.
+
+\begin{defn}
+    Let $\Gamma\le \Gamma(1)$ be a congruence subgroup. A \textbf{cusp} of $\Gamma$ is a $\Gamma$--orbit in $\mathbb{P}^1(\mathbb{Q})$.
+\end{defn}
+Here $\mathbb{P}^1(\mathbb{Q})$ comes from 
+$$\begin{matrix} GL_2(\mathbb{C}) & \curvearrowright & \mathbb{P}^1(\mathbb{C}) & = & \mathbb{C} \cup \{\infty\} \\ \rotatebox[origin=c]{90}{$\leqslant $} & & &\\ GL_2(\mathbb{\mathbb{Q}}) & \curvearrowright & \mathbb{P}^1(\mathbb{\mathbb{Q}}) & = & \mathbb{Q} \cup \{\infty\} \\ \rotatebox[origin=c]{90}{$\leqslant $} & & & \\ \Gamma \end{matrix}.$$
+
+\begin{lemma}
+    $\Gamma(1)$ has a unique cusp.
+\end{lemma}
+\begin{proof}
+    We need to show that $\Gamma(1)$ acts transitively on $\mathbb{P}^1(\mathbb{Q})$. We will show that any $\frac{a}{c} \in \mathbb{Q}$ with $(a,c)=1$ is $\Gamma(1)$--conjugate to $\infty$. By Bezout, $\exists r,s \in \mathbb{Z}$ such that $ar+cs=1$. Let $\gamma = \begin{pmatrix} a & -s \\ c & r \end{pmatrix} \in \Gamma(1)$. Then \begin{align*}
+        \gamma \infty  = \frac{a \infty - s}{c \infty + r} = \frac{a}{c}.
+    \end{align*}
+\end{proof}
+
 
 \end{document}
