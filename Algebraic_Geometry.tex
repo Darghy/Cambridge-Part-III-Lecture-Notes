@@ -1113,8 +1113,80 @@ A discrete valuation ring is a local PID.
 The topology on $\text{Spec }A = \{(0), \mathfrak{m}\}$. $(0)$ is dense, and the closure of $\{(0)\} = \text{Spec }A$, and $\mathfrak{m}$ is closed.
 \vspace{1mm}
  
-Any generator $\pi$ for the maximal ideal $\mathfrak{m}$ is called a \textbf{uniformizer} or \textbf{uniformizing parameter}.
+Any generator $\pi$ for the maximal ideal $\mathfrak{m}$ is called either a \textbf{uniformizer} or \textbf{uniformizing parameter}.
 \vspace{1mm}
  
-Any element $a \in A$ can be written as $u \pi^k$ where $u$ is a unit and $k$ is unique. The integer $k$ is called the \textbf{valuation} of $a$. This gives a map $\text{val}: A\setminus \{0\} \to \mathbb{N}$ by $a \mapsto \text{valuation of }a$ (independent of the choice of $\pi$).
-\end{document}
+Any element $a \in A$ can be written as $u \pi^k$ where $u$ is a unit and $k$ is unique. The integer $k$ is called the \textbf{valuation} of $a$. This gives a map $\text{val}: A\setminus \{0\} \to \mathbb{N}$ by $a \mapsto k$ (independent of the choice of $\pi$). 
+
+\marginpar{13 Nov 2022, Lecture 17}
+
+This allows us to construct a \textbf{valued field} on $K = FF(A)$, where the valuation extends to $K\setminus \{0\} \to \mathbb{Z}$ by $\frac{a}{b} \to \text{val}(a)-\text{val}(b)$.
+
+\begin{example}
+    $A = K[[t]]$, so $FF(A)=K((t))$ and the valuation of $a = \alpha_k t^k + \ldots + \alpha_0$ is $k$.
+\end{example}
+\begin{theorem}
+    Let $f: X \to Y$ be a morphism of schemes. Then $f$ is separated if and only if for any (discrete) valuation ring $A$ with factor field $K$, given the diagram of solid arrows $\begin{tikzcd}[]
+        \text{Spec }K & X\\
+        \text{Spec }A & Y
+        \arrow["", from=1-2, to=2-2]
+        \arrow["",from=1-1, to=2-1]
+        \arrow["", from=2-1, to=2-2]
+        \arrow["", from=1-1, to=1-2]
+        \arrow["", from=2-1, to=1-2, dotted]
+    \end{tikzcd}$, there exists at most one choice of lift to fill in the dotted arrow.
+    \vspace{1mm}
+     
+    Similarly, $f$ is universally closed if and only if there exists at least one choice of lift for the dotted arrow.
+\end{theorem}
+\begin{proof}
+    Omitted and non--examinable.
+\end{proof}
+\begin{cor}
+    \begin{enumerate}[(i)]
+        \item $\mathbb{P}^n_R \to \text{Spec }R$ is proper.
+        \item $\mathbb{A}^n_R \to \text{Spec }R$ is not proper, but it is separated.
+        \item Closed immersions are proper, so in particular if $Z \to \mathbb{P}^n_R$ is closed, then $Z \to \text{Spec }R$ is proper.
+        \item Compositions of proper (or separated) morphisms remain so.
+        \item (Base extension) If $X \stackrel{f}{\to} Y$ is proper and $Y' \to Y$ is arbitrary, then $X \times_{Y} Y' \to Y'$ is also proper.
+    \end{enumerate}
+\end{cor}
+
+Some sample verifications: (i) $\mathbb{A}^1_k \to \text{Spec }k$ is not proper (not universally closed). Write $\mathbb{A}^1_k = \text{Spec }k[x]$ and consider $A=k[[t]], K=k((t))$. We have the diagram $\begin{tikzcd}[]
+    \text{Spec }k((t)) & \mathbb{A}^1_k\\
+    \text{Spec }k[[t]] & \text{Spec }k
+    \arrow["", from=1-2, to=2-2]
+    \arrow["",from=1-1, to=2-1]
+    \arrow["", from=2-1, to=2-2]
+    \arrow["\phi", from=1-1, to=1-2]
+\end{tikzcd}$ where we let $\phi$ be induced by $k[x] \to k((t))$ via $x \mapsto \frac{1}{t}$.
+
+\textbf{Exercise.} Use the valuative criterion to show that if $\text{Spec }A$ is proper, then $\text{Spec }A$ is finite as a topological space.
+\vspace{1mm}
+ 
+Observe that if $\mathbb{A}^1_k$ is replaced with $\mathbb{P}^1_k$, then this is always an affine chart in $\mathbb{P}^1$ such that the map above looks like $x \mapsto t$. 
+
+\section{Modules over $\mathcal{O}_X$}
+\begin{example}
+    Let $\mathbb{C} \mathbb{P}^n$ be the variety $C^{n+1}\setminus \{0\}/\sim \text{ modulo scaling}$. We have the structure sheaf: $\mathcal{O}_{\mathbb{C} \mathbb{P}^n}$, if $U \subset \mathbb{C} \mathbb{P}^n$ is Zariski open, then $\mathcal{O}_{\mathbb{C} \mathbb{P}^n}(U) = \left\{\frac{P(X)}{Q(X)} \mid P,Q \text{ homogeneous of same degree and the ratio is regular at all }p \in U\right\}$.
+    \vspace{1mm}
+     
+    Also, for $d \in \mathbb{Z}$, consider a sheaf $\mathcal{O}_{\mathbb{C} \mathbb{P}^n}(d)$ with $$\mathcal{O}_{\mathbb{C} \mathbb{P}^n}(d)(U) = \left\{\frac{P(X)}{Q(X)} \mid P,Q \text{ homogeneous with deg}(P) = \text{deg}(Q) =d  \text{ and regularity at all }p \in U\right\}.$$
+    Notice that $\mathcal{O}_{\mathbb{C} \mathbb{P}^n}(d)(U)$ is a $\mathcal{O}_{\mathbb{C} \mathbb{P}^n}(U)$--module.
+\end{example}
+\begin{example}
+    Let $A$ be a ring and $M$ an $A$--module. Define a sheaf $\mathcal{F}_M$ on $\text{Spec }A$: if $U \subset \text{Spec }A$ is a distinguished open $U= U_{f}$, then set $\mathcal{F}_M(U)=M_f$ (on general opens use sheaf on a base construction).
+\end{example}
+
+\subsection{Definition of $\mathcal{O}_X$--modules}
+Fix $(X, \mathcal{O}_X)$ a ringed space.
+\begin{defn}
+    A sheaf of $\mathcal{O}_X$--modules on $X$ is a sheaf $\mathcal{F}$ of groups together with a multiplication $\mathcal{F}(U) \times \mathcal{O}_X(U) \to \mathcal{F}(U)$ giving a module (compatible with restriction).
+\end{defn}
+Similarly we can build a sheaf of $\mathcal{O}_X$--algebras.
+
+\begin{defn}
+    A morphism between sheaves of modules $\phi : \mathcal{F} \to \mathcal{G}$ on $X$ is a homomorphism of sheaves of abelian groups compatible with multiplication.
+\end{defn}
+
+\end{document} 
