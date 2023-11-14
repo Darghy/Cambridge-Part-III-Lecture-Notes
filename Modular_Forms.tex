@@ -1554,5 +1554,87 @@ $$\begin{matrix} GL_2(\mathbb{C}) & \curvearrowright & \mathbb{P}^1(\mathbb{C}) 
     \end{align*}
 \end{proof}
 
+\begin{cor}
+    If $\Gamma$ is a congruence subgroup, then it has finitely many cusps.
+\end{cor}
+\marginpar{13 Nov 2022, Lecture 17}
+\begin{proof}
+    We know by the orbit--stabilizer theorem that there's a $\Gamma(1)$--equivalent bijection $\Gamma(1)/\Gamma_{\infty} \stackrel{\sim}{\to} \mathbb{P}^1(\mathbb{Q})$ by $\gamma \Gamma_{\infty} \mapsto \gamma \infty$, where $\Gamma_{\infty} = \text{Stab}_{\Gamma(1)}(\infty)= \left\{\begin{pmatrix} a&b\\0&d \end{pmatrix} \in \Gamma(1)\right\}$. If $\Gamma \le \Gamma(1)$ is a congruence, then there's an induced bijection $\Gamma\setminus  \Gamma(1) /\Gamma_{\infty} \stackrel{\sim}{\to} \Gamma \setminus \mathbb{P}^1(\mathbb{Q})$ (where $\Gamma\setminus  \Gamma(1) /\Gamma_{\infty}$ is a double coset, the set of $\Gamma$--$\Gamma_{\infty}$-double cosets, i.e. subsets of $\Gamma(1)$ of the form $\Gamma_{\gamma} \Gamma_{\infty} = \{g \gamma h \mid g \in \Gamma, h \in \Gamma_{\infty}\}$). $\Gamma\setminus  \Gamma(1) /\Gamma_{\infty}$ is finite as it's the set of right $\Gamma_{\infty}$--orbits on $\Gamma\setminus \Gamma(1)$, which is finite, as $[\Gamma(1):\Gamma]<\infty$.
+\end{proof}
+
+\textbf{Idea.} $Y(\Gamma) = \Gamma\setminus \mathfrak{h}$ is a non--compact Riemann surface, which we can compactify by adding finitely many points, one for each cusp in $\Gamma\setminus \mathbb{P}^1(\mathbb{Q})$. We know how to define cusps around $\infty$, and deal with the general case by transforming to this case (details to follow).
+\vspace{1mm}
+ 
+Let $f$ be a weakly modular function of weight $k$ and level $\Gamma\le \Gamma(1)$. The index $[\Gamma_{\infty}: \Gamma \cap \Gamma_{\infty}]$ is finite, since if $\Gamma(N)\le \Gamma$, then $\begin{pmatrix} 1&N\\0&1 \end{pmatrix} \in \Gamma_{\infty} \cap \Gamma$.  
+\begin{defn}
+    The \textbf{width} of $\infty$ (as a cusp of $\Gamma$) is $\min \left(h \in \mathbb{N} \mid \begin{pmatrix} 1&h\\0&1 \end{pmatrix} \in \Gamma \cap \Gamma_{\infty}\right)$.
+\end{defn}
+If $h$ is the width, then $f|_h\left[\begin{pmatrix} 1 & h\\0&1 \end{pmatrix}\right] = f(\tau+h) = f(\tau)$ (as $f$ has level $\Gamma$). The same argument as in the case of level $\Gamma(1)$ shows us that there exists a unique meromorphic function $\tilde{f}$ in $D^*(0,1)$ such that $f(\tau) = \tilde{f}(e^{2\pi i \tau/h})$. We say that $f$ is $\begin{cases}
+    \text{meromorphic at }\infty\\
+    \text{holomorphic at }\infty\\
+    \text{vanishes at }\infty
+\end{cases}$ if $\begin{cases}
+    \tilde{f}\text{ extends to a meromorphic function in }D(0,1).\\
+    f\text{ is meromorphic at }\infty, \tilde{f} \text{ has a removable singularity at 0}.\\
+    f\text{ is holomorphic at }\infty \text{ and }\tilde{f}(0)=0.
+\end{cases}$
+If $f$ is meromorphic at $\infty$, then it has a $q$--expansion $$f(\tau) = \sum_{n=-\infty}^{\infty} a_n q_h^n$$ for $q_h = e^{2\pi i \tau/h}$, derived from the Laurent expansion of $\tilde{f}$. Hence this is absolutely convergent in $\{\tau \mid \text{Im}(\tau)>R\}$ for some $R>0$, with only finitely many nonzero $a_n$ with $n<0$.
+\vspace{1mm}
+ 
+Now take a general cusp $\Gamma \cdot z$, $z \in \mathbb{P}^1(\mathbb{Q})$. Choose $\alpha \in \Gamma(1)$ such that $\alpha \infty = z$. We say that $f$ is $\begin{cases}
+    \text{meromorphic}\\
+    \text{holomorphic}\\
+    \text{vanishing}
+\end{cases}$ at $\Gamma \cdot z$ if $f|_k[\alpha]$ is $\begin{cases}
+    \text{meromorphic}\\
+    \text{holomorphic}\\
+    \text{vanishing}
+\end{cases}$ at $\infty$, when we consider $f|_k[\alpha]$ as a weakly modular function of weight $k$ and level $\alpha^{-1}\Gamma \alpha$. Note that $\alpha^{-1} \Gamma \alpha$ is a congruence subgroup, as $\Gamma(N)$ is a normal subgroup of $\Gamma(1)$, as it arises through a kernel. For the weight, we verify 
+\begin{align*}
+    f|_k[\alpha]|_h[\alpha^{-1} \gamma \alpha] = f|_k[\alpha \alpha^{-1} \gamma \alpha] = f|_k[ \gamma \alpha] = f|_k[\alpha].
+\end{align*}
+\begin{lemma}\label{lemma5.3}
+    The property of being holomorphic/meromorphic/vanishing at $\Gamma \cdot z$ is independent of the choice of $\alpha$ with $\alpha \infty = z$ and of the choice of $z$.
+\end{lemma}
+\begin{proof}
+    First we show that the choice of $\alpha$ doesn't matter. If $\alpha,\beta \in \Gamma(1)$ with $\alpha \infty = \beta \infty = z$, then $\beta = \alpha \delta$ for some $\delta \in \text{Stab}_{\Gamma(1)}\infty = \Gamma_{\infty}$. Then $\delta = \pm  \begin{pmatrix} 1 & m \\0 & 1 \end{pmatrix}$ for some $m \in \mathbb{Z}$ and $f|_k[\beta]=f|_k[\alpha]|_k[\delta]=f|_k[\alpha](\tau+m)(-1)^k$. We want to show that $f|_k[\alpha]$ is holomorphic at $\infty \iff f|_k[\beta]$ is holomorphic as $\infty$ (the left on the group $\alpha^{-1} \Gamma \alpha$ and the right on $\beta ^{-1} \Gamma \beta$).
+    \vspace{1mm}
+     
+    We claim that the width of the cusp at $\infty$ for $\alpha ^{-1} \Gamma \alpha$ is the width of the cusp at $\infty$ for $\beta ^{-1} \Gamma \beta$. The LHS is $\min \left(h \in \mathbb{N} \mid \begin{pmatrix} 1&h\\0&1 \end{pmatrix} \in \alpha ^{-1} \Gamma \alpha \cap \Gamma_{\infty}\right)$. We show this is the same as the corresponding object with $\beta$ instead of $\alpha$. Compute 
+    \begin{align*}
+        &\beta ^{-1} \Gamma \beta \cap \Gamma_\infty \\
+        =& \beta^{-1} ( \Gamma \cap \beta \Gamma_{\infty} \beta ^{-1})\beta \\
+        =& \delta^{-1} \alpha^{-1} (\Gamma \cap \alpha \delta \Gamma_{\infty}\delta ^{-1} \alpha ^{-1})\alpha \delta \\
+        \stackrel{\delta \in \Gamma_{\infty}}{=} & \delta ^{-1} \alpha^{-1}(\Gamma \cap \alpha \Gamma_\infty \alpha^{-1})\alpha \delta \\=& \delta^{-1} (\alpha^{-1} \Gamma \alpha \cap \Gamma_{\infty})\delta \\\stackrel{(\star)}{=}& \alpha^{-1}\Gamma \alpha \cap \Gamma_\infty,
+    \end{align*} 
+    where $(\star)$ follows as $\Gamma_{\infty}$ is abelian.
+    Now $\widetilde{f|_k[\alpha]}(e^{2 \pi i \tau/h}) = f|_k[\alpha](\tau)$ and $$\widetilde{f|_k[\beta]}(e^{2 \pi i \tau/h}) = f|_k[\beta](\tau) = f|_k[\alpha](\tau+m)(-1)^k = (-1)^k \widetilde{f|_k[\alpha]}(e^{2\pi i \tau/h} e^{2 \pi i m/h}).$$
+    In particular, $\widetilde{f|_k[\alpha]}$ is holomorphic at $0 \iff \widetilde{f|_k[\beta]}$ is holomorphic at 0, with the same holding for the other conditions. This shows the choice of $\alpha$ does not matter.
+    \vspace{1mm}
+     
+    Next we show the choice of $z$ does not matter. If $\Gamma\cdot z= \Gamma\cdot z'$ with $z, z' \in \mathbb{P}^1(\mathbb{Q})$, then $z' = \gamma z$ for $\gamma \in \Gamma$. If $\alpha \in \Gamma(1)$, $\alpha \infty = z$, then $\gamma \alpha \infty = \gamma z = z'$. We need to show that $f|_k[\alpha]$ is holomorphic at $\infty \iff f|_k[\gamma \alpha]$ is holomorphic at $\infty$. This is true as $f|_k[\gamma \alpha] = f|_k[\alpha]$ and $\alpha ^{-1} \Gamma \alpha = \alpha^{-1}\gamma^{-1}\Gamma \gamma \alpha$, as $\gamma \in \Gamma$. 
+\end{proof}
+We can define the width of a cusp $\Gamma \cdot z$ to be the width of $\infty$ as a cusp of $\alpha^{-1} \Gamma \alpha$. The proof of Lemma \ref{lemma5.3} shows that this is well--defined.
+\begin{defn}
+    Let $f$ be a weakly modular function of weight $k$ and level $\Gamma$. We say that:
+    \begin{itemize}
+        \item $f$ is a \textbf{modular function} if $f$ is meromorphic at every cusp of $\Gamma$.
+        \item $f$ is a \textbf{modular form} (of weight $k$ and level $\Gamma$) if $f$ is holomorphic in $\mathfrak{h}$ and at every cusp of $\Gamma$.
+        \item $f$ is a \textbf{cuspidal modular form} if it's a modular form vanishing at every cusp.
+    \end{itemize}
+\end{defn}
+\textbf{Notation.} $M_k(\Gamma)$ is the $\mathbb{C}$--vector space of modular forms of weight $k$ and level $\Gamma$. We write $S_k(\Gamma) \le M_k(\Gamma)$ for the $\mathbb{C}$--vector subspace of cuspidal modular forms.
+\vspace{1mm}
+ 
+\textbf{Exercise.} If $f$ is a weakly modular function holomorphic in $\mathfrak{h}$, then $f$ is a modular form $\iff \forall \alpha \in \Gamma(1), ~\exists R>0$ such that $f|_k[\alpha]$ is bounded in $\{\tau \in \mathfrak{h} \mid \text{Im}(\tau)>R\}$.
+
+\begin{lemma}
+    Let $k,l \in \mathbb{Z}$ and $\Gamma\le \Gamma(1)$ a congruence subgroup. Then 
+    \begin{enumerate}[(1)]
+        \item If $f \in M_k(\Gamma), g \in M_l(\Gamma)$, then $fg \in M_{k+l}(\Gamma)$.
+        \item If $\Gamma'\le \Gamma$ is another congruence subgroup and $f \in M_k(\Gamma)$, then $f \in M_k(\Gamma')$.
+        \item If $\Gamma'\le \Gamma(1)$ is a congruence subgroup, $\alpha \in GL_2(\mathbb{Q})^+$, $\Gamma' \le \alpha^{-1} \Gamma \alpha$, and $f \in M_k(\Gamma)$, then $f|_k[\alpha] \in M_k(\Gamma')$.
+    \end{enumerate}    
+\end{lemma}
 
 \end{document}
