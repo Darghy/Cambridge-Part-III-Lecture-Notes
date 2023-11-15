@@ -1496,7 +1496,7 @@ Note that:
     Let $f(X)=X^n + a_{n-1}X^{n-1} + \ldots + a_0 \in \mathcal{O}_K[X]$. We say $f$ is \textbf{Eisenstein} if $v_{K}(a_i)\ge 1$ and $v_K(a_0) = 1$ for $v_K$ the normalized evaluation on $K$.
 \end{defn}
 \textbf{Fact.} $f(x)$ Eisenstein $\implies f(x)$ irreducible.
-\begin{theorem}
+\begin{theorem}\label{theorem13.5}
     \begin{enumerate}[(i)]
         \item Let $L/K$ be a finite totally ramified extension and let $\pi_L \in \mathcal{O}_L$ be a uniformizer. Then the minimal polynomial of $\pi_L$ is Eisenstein and $\mathcal{O}_L = \mathcal{O}_K[\pi_L]$ (so $L = K(\pi_L)$).
         \item Conversely, if $f(X) \in \mathcal{O}_K[X]$ is Eisenstein and $\alpha$ is a root of $f$, then $K(\alpha)/K$ is totally ramified and $\alpha$ is a uniformizer in $\mathcal{O}_L$.
@@ -1524,5 +1524,121 @@ Note that:
      
     Similarly consider $\log(x) : 1 + \pi^r \mathcal{O}_K \to \pi^r \mathcal{O}_K$ by $\log(1+x) = \sum_{n=1}^{\infty} \frac{(-1)^{n-1}}{n}x^n$. We can check the convergence as before (exercise, this is easier than the previous case). Recall the identities in $\mathbb{Q}[[X,Y]]: \exp(X+Y) = \exp(X)\exp(Y)$ and $\exp(\log(1+X))=1+X$, so $\exp(\log(X))=X$. These identities together give the isomorphism.
 \end{proof}
+\marginpar{14 Nov 2022, Lecture 17}
+When $K$ is a local field, possibly of equal characteristic, write $U_K = \mathcal{O}_K^\times$ and let $\pi \in \mathcal{O}_K$ be a uniformizer.
+\begin{defn}
+    For $s \in \mathbb{Z}_{\ge 1}$, the $s^{\text{th}}$ unit group $U_K^{(s)}$ is defined by $$U_K^{(s)} = (1 + \pi^s \mathcal{O}_K, \times)$$ and $U_K^{(0)} = U_K$. Then we have $\ldots \subset U_{K}^{(s)} \subset \ldots \subset U_K^{(1)} \subset U_K^{(0)}$.
+\end{defn}
+\begin{prop}\label{prop14.2}
+    \begin{enumerate}[(i)]
+        \item $U_K^{(0)}/U_{K}^{(1)} \cong (k^{x}, \times)$ (for $k = \mathcal{O}_K/\mathfrak{m}$).
+        \item $U_K^{(s)}/U_{K}^{(s+1)} \cong (k,+)$ for $s\ge 1$.
+    \end{enumerate}
+\end{prop}
+\begin{proof}
+    \begin{enumerate}[(i)]
+        \item The natural map $\mathcal{O}_K^\times \to k^{\times}$ given by reduction mod $\pi$ is surjective with kernel $1 + \pi\mathcal{O}_K = U_{K}^{(1)}$.
+        \item Define $f : U_K^{(s)} \to k$ by $1 + \pi^s x \mapsto x \pmod{\pi}$. This is a homomorphism, as $(1 + \pi^s x)(1 + \pi^s y)= 1 + \pi^s(x+y+\pi^s xy)$ and $x+y+\pi^s xy \equiv x+y \pmod{\pi}$ as desired. $f$ is surjective with $\text{ker}(f) = U_K^{(s+1)}$.
+    \end{enumerate}
+\end{proof}
+\begin{cor}
+    Let $[K : \mathbb{Q}_p]<\infty$. Then there exists a finite index subgroup of $\mathcal{O}_K^\times$ isomorphic to $(\mathcal{O}_K,+)$.
+\end{cor}
+\begin{proof}
+    Take $r>\frac{e}{p-1}$, so $U_K^{(r)} \cong (\mathcal{O}_K,+)$, and $U_k^{(r)} \subset U_k$ has finite index by the previous proposition.
+\end{proof}
+\textbf{Remark.} This is not true for $K$ of equal characteristic, since $\exp$ is not defined.
+\begin{example}
+    Consider $\mathbb{Z}_p^\times$ for $p>2$, so $e=1$. Then we can take $r=1$, so $\mathbb{Z}_p^\times \cong (\mathbb{Z}/p \mathbb{Z})^\times \times (1 + p \mathbb{Z}_p)$ by $x \mapsto (x \pmod{p}, \frac{x}{[x \pmod{p}]})$. We can rewrite $\mathbb{Z}_p^\times \cong (\mathbb{Z}/p \mathbb{Z})^\times \times (1 + p \mathbb{Z}_p) \cong \mathbb{F}_p^\times \times \mathbb{Z}_p \cong \mathbb{Z}/(p-1)\mathbb{Z} \times \mathbb{Z}_p$.
+    \vspace{1mm}
+     
+    If $p=2$, take $r=2$ to get $\mathbb{Z}_2^{\times} \cong (\mathbb{Z}/4\mathbb{Z})^\times \times (1 + 4\mathbb{Z}_p)$ by $x \mapsto (x \pmod{4}, \frac{x}{\epsilon(x)})$ where $\epsilon(x) = \begin{cases}
+        1 & x \equiv 1\pmod{4}\\
+        -1 & x \equiv 3\pmod{4}
+    \end{cases}$. Again note $\mathbb{Z}_2^{\times} \cong (\mathbb{Z}/4\mathbb{Z})^\times \times (1 + 4\mathbb{Z}_p) \cong \mathbb{Z}/2\mathbb{Z} \times \mathbb{Z}_2$.
+\end{example}
+This gives another proof of $\mathbb{Z}_p^\times/(\mathbb{Z}_p^\times)^2 \equiv \begin{cases}
+    \mathbb{Z}/2\mathbb{Z} & p>2\\
+    (\mathbb{Z}/2\mathbb{Z})^2 & p=2
+\end{cases}$.
+\section{Higher ramification groups}
+Fix a finite Galois extension $L/K$ of local fields. From now on, assume a local field is non--archimedean. Fix $\pi_L \in \mathcal{O}_L$ a uniformizer.
+\begin{defn}
+    Let $v_L$ be the normalized valuation on $L$. For $s \in \mathbb{R}_{\ge -1}$, the $s^{\text{th}}$ \textbf{ramification group} is 
+    \begin{align*}
+        G_s(L/K) = \{\sigma \in \text{Gal}(L/K) \mid v_L(\sigma(x)-x)\ge s+1 ~\forall x \in \mathcal{O}_L\}.
+    \end{align*}
+\end{defn}
+\textbf{Remark.} $G_s$ only changes at the integers. $s \in R_{\ge -1}$ is used to define upper numbering (to be done later).
+\begin{example}
+    $G_{-1}(L/K) = \text{Gal}(L/K)$ and 
+    \begin{align*}
+        &G_0(L/K) = \{\sigma \in \text{Gal}(L/K) \mid \sigma(x) \equiv x \pmod{\pi} ~\forall x \in \mathcal{O}_L\} \\
+        =& \text{ker}(\text{Gal}(L/K) \to \text{Gal}(k_L/k)) = I_{L/K}
+    \end{align*}
+\end{example}
+\textbf{Note.} For $s \geq 0$, $G_s(L/K) = \text{ker}(\text{Gal}(L/K) \to \text{Aut}(\mathcal{O}_L/\pi_L^{s+1}\mathcal{O}_L))$, hence $G_s(L/K)$ are normal in $\text{Gal}(L/K)$. We have $$\ldots \subset G_s(L/K) \subset G_{s-1}(L/K) \subset \ldots \subset G_1(L/K) \subset \text{Gal}(L/K).$$
+\begin{theorem}\label{theorem15.1}
+    \begin{enumerate}[(i)]
+        \item For $s\ge 1$, $G_s = \{\sigma \in G_0 \mid v_L(\sigma(\pi_L)-\pi_L)\ge s+1\}$.
+        \item $\bigcap_{n=0}^{\infty} = \{1\}$.
+        \item Let $s \in \mathbb{Z}_{\ge 0}$. Then there exists an injective group homomorphism 
+        \begin{align*}
+            G_s/G_{s+1} &\hookrightarrow U_L^{(s)}/U_L^{(s+1)}\\
+            \sigma &\mapsto \frac{\sigma(\pi_L)}{\pi_L}.
+        \end{align*}
+        This map is independent of choice of $\pi_L$.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    Let $K_0 \subset L$ be the maximal unramified extension of $K$ in $L$. By replacing $K$ by $K_0$, we may assume that $L/K$ is totally ramified.
+    \begin{enumerate}[(i)]
+        \item By Theorem \ref{theorem13.5}, $\mathcal{O}_L = \mathcal{O}_K[\pi_L]$. Suppose $v_L(\sigma(\pi_L)-\pi_L)\ge s+1$. Let $x \in \mathcal{O}_L$, then $x = f(\pi_L)$, where $f(X) \in \mathcal{O}_K[X]$. Then compute 
+        \begin{align*}
+            \sigma(x)-x = \sigma(f(\pi_L))f(\pi_L) = f(\sigma(\pi_L)) - f(\pi_L) = (\sigma(\pi_L)-\pi_L)g(\pi_L)
+        \end{align*}
+        for $g(X) \in \mathcal{O}_K[X]$, since $X - Y \mid f(X) - f(Y)$. Thus 
+        \begin{align*}
+            v_L(\sigma(x)-x) = v_L(\sigma(\pi_L)-\pi_L) + v_L(g(\pi_L)) \ge (s+1) + 0 = s+1.
+        \end{align*}
+        \item Suppose $\sigma \in \text{Gal}(L/K)$ with $\sigma \neq 1$. Then $\sigma(\pi_L) \neq \pi_L$ as $L = K(\pi_L)$. Hence $v_L(\sigma(\pi_L)-\pi_L)<\infty$. Then $\sigma \not\in G_s$ for $s$ large enough by (i). 
+        \item Note that for $\sigma \in G_s$, $s \in \mathbb{Z}_{\ge 0}$, we have $\sigma(\pi_L) \in \pi_L + \pi_L^{s+1}\mathcal{O}_L$. This gives us that $\frac{\sigma(\pi_L)}{\pi_L} \in 1 + \pi_L^s \mathcal{O}_L = U_L^{(s)}$. We claim that $\phi : G_s \to U_L^{(s)}/U_L^{(s+1)}$ by $\sigma \mapsto \frac{\sigma(\pi_L)}{\pi_L}$ is a group homomorphism with kernel $G_{s+1}$.
+        \vspace{1mm}
+         
+        For $\sigma, \tau \in G_s$, let $\tau(\pi_L) = u \pi_L$ for $u \in \mathcal{O}_L^\times$. Then \begin{align*}
+            \frac{\sigma \tau(\pi_L)}{\pi_L} = \frac{\sigma(\tau(\pi_L))}{\tau(\pi_L)} \frac{\tau(\pi_L)}{\pi_L} = \frac{\sigma(u)}{u} \frac{\sigma(\pi_L)}{\pi_L}\frac{\tau(\pi_L)}{\pi_L}.
+        \end{align*}
+        But $\sigma(u) \in u + \pi_L^{s+1}\mathcal{O}_L$ since $\sigma \in G_s$, so $\frac{\sigma(u)}{u} \in 1 + \pi_L^{s+1}\mathcal{O}_L$ as $u$ is a unit. Hence $\frac{\sigma \tau (\pi_L)}{\pi_L} = \frac{\sigma(\pi_L)}{\pi_L} \frac{\tau(\pi_L)}{\pi_L} \pmod{U_L^{(s+1)}}$ is a group homomorphism.
+        \vspace{1mm}
+         
+        Moreover, the kernel is $\{\sigma \in G_s \mid \sigma(\pi_L) \equiv \pi_L \pmod{\pi_L^{s+2}}\} = G_{s+1}$.
+        \vspace{1mm}
+         
+        If $\pi_L' = a \pi_L$ is another uniformizer for $a \in \mathcal{O}_L^\times$, then \begin{align*}
+            \frac{\sigma(\pi_L')}{\pi_L'} = \frac{\sigma(a)}{a}\frac{\sigma(\pi_L)}{\pi_L} \equiv \frac{\sigma(\pi_L)}{\pi_L} \pmod{U_L^{(s+1)}}.
+        \end{align*}
+    \end{enumerate}
+\end{proof}
+\begin{cor}
+    $\text{Gal}(L/K)$ is solvable.
+\end{cor}
+\begin{proof}
+    By Proposition \ref{prop14.2} and Theorem \ref{theorem15.1}, for $s \in \mathbb{Z}_{s \ge -1}$, we have 
+    \begin{align*}
+        G_s/G_{s+1} \cong \text{a subgroup of } \begin{cases}
+            \text{Gal}(k_L/k) &\text{ if }s = -1\\
+            (k_L^\times,x) & \text{ if }s=0\\
+            (k_L, +) &\text{ if }s\ge 1
+        \end{cases}.
+    \end{align*}
+    Thus $G_s/G_{s+1}$ is solvable as all of the groups on the right are, as they are abelian. We conclude using Theorem \ref{theorem15.1} (ii), which says that the intersection of all of these groups is trivial.
+\end{proof}
+Suppose $\text{char }k = p$. Then $|G_0/G_1|$ is coprime to $p$ and $|G_1| = p^n$ for some $n\ge 0$. Thus $G_1$ is the unique (since normal) Sylow $p$--subgroup of $I_{L/K}$.
+\begin{defn}
+    The group $G_1$ is called the \textbf{wild inertia group}.
+\end{defn}
+\begin{defn}
+    The quotient $G_0/G_1$ is called the \textbf{tame inertia group}.
+\end{defn}
 
 \end{document}
