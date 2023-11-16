@@ -1188,5 +1188,56 @@ Similarly we can build a sheaf of $\mathcal{O}_X$--algebras.
 \begin{defn}
     A morphism between sheaves of modules $\phi : \mathcal{F} \to \mathcal{G}$ on $X$ is a homomorphism of sheaves of abelian groups compatible with multiplication.
 \end{defn}
+\marginpar{15 Nov 2022, Lecture 18}
+\begin{example}
+    Apparently this example is from last time. Let $X = \text{Spec }A$ and $M$ be a $A$--module, then $M^{\text{sh}}$ is sheaf on $X$ with $M^{\text{sh}}(U_f) = M;e[\frac{1}{f}]$. We refer to this as the sheaf associated to a module $M$.
+\end{example}
+
+Basic operations: given a morphism $f : \mathcal{F} \to \mathcal{G}$ of (sheaves of) $\mathcal{O}_X$--modules, we can define (for modules) the kernel, cokernel*, image*, direct sum, tensor product*, Hom, etc., and we can extend these to sheaves of modules. Note that everything with an asterisk requires sheafification.
+\begin{example}
+    The sheaf tensor product $\mathcal{F} \otimes_{\mathcal{O}_X} \mathcal{G}$ associated to open $U \subset X$ by $\mathcal{F}(U) \otimes_{\mathcal{O}_X(U)} \mathcal{G}(U)$ and then sheafify. 
+\end{example}
+$f : X \to Y$ is a morphism of ringed spaces/schemes. Given a $\mathcal{O}_X$--module $\mathcal{F}$, the push forward $f_{\star}(\mathcal{F})$ is a sheaf of abelian groups. But we have $f^{\#} : \mathcal{O}_Y \to f_{\star}\mathcal{O}_X$, so this gives $f_{\star}(\mathcal{F})$ an $\mathcal{O}_Y$--module structure. The module structure here: given $U \subset Y$ open and $a \in \mathcal{O}_Y(U)$ and $m \in f_{\star}(\mathcal{F}(U)) = \mathcal{F}(f^{-1}(U))$, we define $a\cdot m = \underbrace{f^{\#}(a)}_{\in \mathcal{O}_X(f^{-1}(U))} \cdot m$.
+\vspace{1mm}
+ 
+Conversely, if $\mathcal{G}$ is a sheaf of $\mathcal{O}_Y$--modules, then we define the pullback sheaf $f^{\star}(\mathfrak{G}) = f^{-1} \mathcal{G} \otimes_{\mathcal{F}^{-1}(\mathcal{O}_Y)} \mathcal{O}_X$, where the $(f^{-1}\mathcal{O}_Y)$--module structure on $\mathcal{O}_X$ is defined via the adjoint to $f^{\#}$ (by example sheet 1 Q14).
+
+\subsection{$\mathcal{O}_X$--modules on schemes and quasi--coherence}
+\begin{defn}
+    A \textbf{quasi--coherent} scheme $\mathcal{F}$ (on a scheme $X$) of $\mathcal{O}_X$--modules is a sheaf of $\mathcal{O}_X$--modules $\mathcal{F}$ such that there exists a cover of $X$ by affines $\{U_i\}$ such that $\mathcal{F}|_{U_i}$ is the sheaf associated to a module over the ring $\mathcal{O}_X(U_i)$.
+    \vspace{1mm}
+     
+    If the modules over these $\mathcal{O}_X(U_i)$ can be taken as finitely generated, then $\mathcal{F}$ is \textbf{coherent}.
+\end{defn}
+\begin{example}
+\begin{itemize}
+    \item On any scheme $X$, $\mathcal{O}_X$ is quasi--coherent (and coherent).
+    \item $\mathcal{O}_X^{\oplus n}$ is also quasi--coherent and coherent.
+    \item $\bigoplus_I \mathcal{O}_X$ for $|I|=\infty$ is quasi--coherent, but not coherent.
+    \item If $i:X \hookrightarrow Y$ is a closed immersion, then $i_{\star}\mathcal{O}_X$ is a quasicoherent $\mathcal{O}_X$--module. Why? Say $U \subset X$ is affine and $U=\text{Spec }A$, then $X \cap U \hookrightarrow U$ gives an ideal $I \subset A$, i.e. the kernel of $\mathcal{O}_Y(U) \twoheadrightarrow \mathcal{O}_X(X,U)$. On $U$, $i_{\star}\mathcal{O}_X |_U$ is the sheaf associated to the $A$--module $A/I$. 
+\end{itemize}    
+\end{example}
+\begin{prop}\label{prop5.1}
+    An $\mathcal{O}_X$--module $\mathcal{F}$ is quasi--coherent if and only if on any open $U \subset X$ with $U= \text{Spec }A$, $\mathcal{F}|_U$ is the sheaf associated to a module over $A$.
+    Similarly we have the claim for coherence with finitely generated modules.
+\end{prop}
+For this, we have a key lemma:
+\begin{lemma}\label{lemma5.2}
+    Suppose $X = \text{Spec }A, f \in A$ and $\mathcal{F}$ is a quasi--coherent $\mathcal{O}_X$--module. Let $s \in \Gamma(X,\mathcal{F})$. Then
+    \begin{enumerate}[(i)]
+        \item If $s$ restricts to $0$ on $U_f$, then $f^n s = 0$ for some $n\ge 1$.
+        \item If $t \in \mathcal{F}(U_f)$, then $f^m \cdot t$ is the restriction of a global section of $\mathcal{F}$ (on $X$) for some $m\ge 1$.
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+    There exists some cover of $X$ by schemes of the form $\text{Spec }B = V$ such that $\mathcal{F}|_V = \mathcal{M}^{\text{sh}}$ for $\mathcal{M}$ a $B$--module. Now we can cover $V$ by distinguished affines of the form $U_g$ for $g \in A$. But $\mathcal{F}|_{U_g} = (\mathcal{M} \otimes_B A_g)^{\text{sh}}$, since $\mathcal{F}|_V$ is already quasi--coherent. Recall $\text{Spec }A$ is ''quasi--compact'' (i.e. every open cover has a finite subcover), so finitely many $g_i, U_{g_i}$ and $\mathcal{M}_i$ will suffice to cover $X$ by opens such that $\mathcal{F}$ restricts to $\mathcal{M}_i^{\text{sh}}$ on $U_{g_i}$. Now the lemma follows from formal properties of localization (See Hartshorne II.5 for details).
+\end{proof}
+\begin{proof}[Proof of Proposition \ref{prop5.1}]
+    $\mathcal{F}$ is quasi--coherent on $X$, so given $U \subset X$, $\mathcal{F}|_U$ is also quasi--coherent by (ideals similar to) Lemma \ref{lemma5.2}. Hence we reduce to the case $X = \text{Spec }A$. Now take $\mathcal{M}= \Gamma(X,\mathcal{F})$ and let $\mathcal{M}^{\text{sh}}$ be the associated sheaf.
+    \vspace{1mm}
+     
+    We claim that $\mathcal{M}^{\text{sh}}$ and $\mathcal{F}$ are isomorphic. For this, let $\alpha : \mathcal{M}^{\text{sh}} \to\mathcal{F}$ given by restriction of global sections (e.g. via stalks). Then $\alpha$ is an isomorphism at the stalk level -- this is the content of Lemma \ref{lemma5.2}. Hence $\alpha$ is an isomorphism of sheaves.
+\end{proof}
+
 
 \end{document} 
