@@ -730,7 +730,7 @@ More generally:
 \end{proof}
 \textbf{Remark.} $|\cdot|_{\overline{K}}$ on $\overline{K}$ is never discrete. For example, if $K = \mathbb{Q}_p$, then $\sqrt[n]{p} \in \overline{\mathbb{Q}_p}$ and $\forall n\ge 0$, $v_p(\sqrt[n]{p}) = \frac{1}{n}v_p(n) = \frac{1}{n}$, giving a non--discrete valuation. Furthermore, $\overline{\mathbb{Q}_p}$ is not complete with respect to $|\cdot |_{\overline{\mathbb{Q}}_p}$. Showing this is an exercise on example sheet 2. On the sheet we also show that if we take $\mathbb{C}_p$, the completion of $\overline{\mathbb{Q}_p}$ with respect to $|\cdot|_{\overline{\mathbb{Q}_p}}$, then $\mathbb{C}_p$ is algebraically closed.
 
-\begin{prop}
+\begin{prop}\label{prop6.8}
     Let $L/K$ is a finite extension of complete discretely valued fields with $n = [L:K]$. Assume that
     \begin{enumerate}[(i)]
         \item $\mathcal{O}_K$ is compact.
@@ -1399,7 +1399,7 @@ One way to see this is to use Corollary \ref{cor10.10} and $v_{\mathfrak{p}}(N_{
     In general, localize at $S = \mathcal{O}_K/\mathfrak{p}$ and note that localizing $\mathcal{O}_K$ gives a DVR (hence a PID), localizing $\mathcal{O}_L$ gives a Dedekind domain with finitely many prime ideals (hence a PID by example sheet 2) and that $S^{-1}D_{L/K} = D_{S^{-1}\mathcal{O}_L/S^{-1}\mathcal{O}_K}$ and $S^{-1} d_{L/K} = d_{S^{-1} \mathcal{O}_L/s^{-1} \mathcal{O}_K}$ (details left as exercise).
 \end{proof}
 
-\begin{theorem}
+\begin{theorem}\label{theorem12.6}
     If $\mathcal{O}_{L} = \mathcal{O}_K[\alpha]$ and $\alpha$ has minimal polynomial $g(X) \in \mathcal{O}_K[X]$, then $D_{L/K} = (g'(\alpha))$.
 \end{theorem}
 \begin{proof}
@@ -1412,7 +1412,7 @@ One way to see this is to use Corollary \ref{cor10.10} and $v_{\mathfrak{p}}(N_{
 
 Take $\mathcal{P}$ a nonzero prime ideal of $\mathcal{O}_L$ and $\mathfrak{p} = \mathcal{P} \cap \mathcal{O}_K$. We can define $D_{L_\mathcal{P}/K_\mathfrak{p}}$ using $\mathcal{O}_{L_\mathcal{P}}$ and $\mathcal{O}_{K_{\mathfrak{p}}}$. We can identify $D_{L_\mathcal{P}/K_\mathfrak{p}}$ with a power of $\mathcal{P}$. 
 
-\begin{theorem}
+\begin{theorem}\label{theorem12.7}
     $D_{L/K} = \prod_{\mathcal{P}}^{} D_{L_\mathcal{P}/K_\mathfrak{p}}$. 
 \end{theorem}
 Note that we will later verify that the product is finite.
@@ -1640,5 +1640,111 @@ Suppose $\text{char }k = p$. Then $|G_0/G_1|$ is coprime to $p$ and $|G_1| = p^n
 \begin{defn}
     The quotient $G_0/G_1$ is called the \textbf{tame inertia group}.
 \end{defn}
+\marginpar{16 Nov 2022, Lecture 18}
+If $L/K$ is a finite separable extension of local fields, then we say $L/K$ is \textbf{tamely ramified} if $\text{char }k \nmid e_{L/K}$. Otherwise, we say $L/K$ is \textbf{wildly ramified}.
+\begin{theorem}\label{theorem15.3}
+    Assume $[K: \mathbb{Q}_p]<\infty$, so $L/K$ is finite, hence separable. Write $D_{L/K} = (\pi_L^{\delta(L/K)})$. Then $\delta(L/K)\ge e_{L/K}-1$ with equality if and only if $L/K$ is tamely ramified.
+    \vspace{1mm}
+     
+    In particular, $L/K$ is unramified $\iff D_{L/K} = \mathcal{O}_L$. 
+\end{theorem}
+\begin{proof}
+    In example sheet 3 we show $D_{L/K} = D_{L/K_0} D_{K_0/K}$, where $K_0$ is the subextension of $L$ such that $K_0/K$ is unramified and $L/K$ is totally ramified. Hence it suffices to consider the unramified and totally ramified case separately.
+    \begin{enumerate}[(i)]
+        \item $L/K$ is unramified. Then by Proposition \ref{prop6.8}, $\mathcal{O}_L = \mathcal{O}_K[\alpha]$ for some $\alpha \in \mathcal{O}_L$ with $k_L = k(\overline{\alpha})$. Let $g(X) \in \mathcal{O}_K[X]$ be the minimal polynomial of $\alpha$. $[L:K] = [k_L:k] \implies \overline{g}(X) \in k[X]$ is the minimal polynomial of $\overline{\alpha} \implies \overline{g}(X)$ is separable and hence $g'(\alpha) \not\equiv 0 \pmod{\pi_L}$. Now Theorem \ref{theorem12.6} says that $D_{L/K} = (g'(\alpha)) = \mathcal{O}_L$.
+        \item $L/K$ is totally ramified. Let $[L:K] = e$. Then $\mathcal{O}_L = \mathcal{O}_K[\pi_L]$ with $\pi_L$ a root of $g(X) = X^e +\sum_{i=1}^{e-1} a_i X^i \in \mathcal{O}_K[X]$, which is Eisenstein. Now compute $g'(\pi_L) = \underbrace{e \pi_L^{e-1}}_{v_L\ge e-1} + \underbrace{\sum_{i=0}^{e-1} i a_i \pi_L^{i-1}}_{v_L\ge e}$. Thus $v_L(g'(\pi_L))\ge e-1$ with equality if and only if $\text{char }k = p \nmid e$.
+    \end{enumerate}
+\end{proof}
+\begin{cor}
+    Let $L/K$ be an extension of number fields and $0 \neq \mathcal{P} \subset \mathcal{O}_L$ is a prime ideal with $\mathfrak{p} = \mathcal{P} \cap \mathcal{O}_K$. Then $e(\mathcal{P}/\mathfrak{p})>1$ if and only if $\mathcal{P} \mid  D_{L/K}$.
+\end{cor}
+\begin{proof}
+    Theorem \ref{theorem12.7} tells us that $D_{L/K} = \prod_{\mathcal{P}}^{} D_{L_\mathcal{P}/K_\mathfrak{p}}$. Then use $e(\mathcal{P}/\mathfrak{p}) = e_{L_\mathcal{P}/K_\mathfrak{p}}$ and Theorem \ref{theorem15.3}.
+\end{proof}
+\begin{example}
+    Take $K = \mathbb{Q}_p$, $\zeta_{p^n}$ a primitive $p^{n^{\text{th}}}$ root of unity and $L = \mathbb{Q}_p(\zeta_{p^n})$. The $p^{n^{\text{th}}}$ cyclotomic polynomial is \begin{align*}
+        \Phi_{p^n}(X) = \frac{X^{p^n}-1}{X^{p^{n-1}}-1} = X^{p^{n-1}(p-1)} + X^{p^{n-1}(p-2)} + \ldots + 1 \in \mathbb{Z}_p[X].
+    \end{align*}
+    An exercise on example sheet 3 will show that:
+    \begin{itemize}
+        \item $\Phi_{p^n}(X)$ is irreducible and hence the minimal polynomial of $\zeta_{p^n}$.
+        \item $L/\mathbb{Q}_p$ is Galois and totally ramified of degree $p^{n-1}(p-1)$.
+        \item If we define $\pi = \zeta_{p^n}-1$, then $\pi$ is a uniformizer of $\mathcal{O}_L$. Hence $\mathcal{O}_L = \mathbb{Z}_p[\zeta_{p^n}-1] = \mathbb{Z}_p[\zeta_{p^n}]$.
+        \item $\text{Gal}(L/\mathbb{Q}_p) \cong (\mathbb{Z}/p^n \mathbb{Z})^\times$ (abelian) by $\sigma_m \leftrightarrow m$ where $\sigma_m(\zeta_{p^n})=\zeta_{p^n}^m$.
+    \end{itemize}
+    To find the higher ramification group, we compute
+    \begin{align*}
+        V_L(\sigma_m(\pi)-\pi) = v_L(\zeta_{p^n}^m - \zeta_{p^n}) = v_L(\zeta_{p^n}^{m-1}-1).
+    \end{align*}
+    Let $k$ be maximal such that $p^k \mid m-1$. Then $\zeta_{p^n}^{m-1}$ is a primitive $p^{(n-k)^{\text{th}}}$ root of unity and hence $(\zeta_{p^n}^{m-1}-1)$ is a uniformizer in $L' = \mathbb{Q}_p(\zeta_{p^n}^{m-1})$. Hence $$v_L(\zeta_{p^n}^{m-1}-1) = e_{L/L'} = \frac{e_{L/\mathbb{Q}_p}}{e_{L'/\mathbb{Q}_p}} = \frac{[L:\mathbb{Q}_p]}{[L':\mathbb{Q}_p]} = \frac{p^{n-1}(p-1)}{p^{n-k-1}(p-1)}=p^k.$$
+    Now Theorem \ref{theorem15.1} (i) tells us that $\sigma \in G_i \iff p^k\ge i+1$. Thus $$G_i \cong \begin{cases}
+        (\mathbb{Z}/p^n \mathbb{Z})^\times & i\le 0\\
+        (1+p^k \mathbb{Z}/p^n\mathbb{Z}) & p^{k-1}-1\le i \le p^k-1 (\text{here }1\le k\le n-1)\\
+        \{1\} & i > p^{n-1}-1
+    \end{cases}.$$
+\end{example}
+\section{Local class field theory}
+\subsection{Infinite Galois theory}
+Let $L/K$ be an algebraic extension of fields.
+\begin{defn}
+    \begin{itemize}
+        \item $L/K$ is separable if $\forall \alpha \in L$, its minimal polynomial $f_\alpha(X) \in K[X]$ is separable.
+        \item $L/K$ is normal if $f_{\alpha}(X)$ splits in $L ~\forall \alpha \in L$.
+        \item $L/K$ is Galois if it is normal and separable.
+    \end{itemize}
+\end{defn}
+We write $\text{Gal}(L/K) = \text{Aut}_K(L)$ in this case.
+\vspace{1mm}
+ 
+If $L/K$ is finite and Galois, we have the Galois correspondence \begin{align*}
+    \{\text{subextensions }K\subset K' \subset L\} &\leftrightarrow \{\text{subgroups of }\text{Gal}(L/K)\}\\
+    K' &\mapsto \text{Gal}(L/K')
+\end{align*}
+In the infinite case, we have the following definition.
+\begin{defn}
+    Let $(I,\le )$ be a poset. We say $I$ is a \textbf{directed set} if for all $i, j \in I, \exists k \in I$ such that $i\le k$ and $j\le k$.
+\end{defn}
+\begin{example}
+    Any total order is a direct set, for example $(\mathbb{N},\le)$ or $(\mathbb{Z}_{\ge 1})$ ordered by divisibility.
+\end{example}
+\begin{defn}
+    Let $(I, \le )$ be a directed set and $(G_i)_{i \in I}$ a collection of groups together with group homomorphisms (transition maps) $\phi_{ij} : G_j \to G_i$ such that $\phi_{ik} = \phi_{ij} \circ \phi_{jk} ~\forall i\le j\le k$ and $\phi_{ii} = \text{id} ~\forall i$. We say $((G_i)_{i \in I}, \phi_{ij})$ is an \textbf{inverse system}. The \textbf{inverse limit} of this inverse system $((G_i)_{i \in I}, \phi_{ij})$ is 
+    \begin{align*}
+        \underset{i \in I}{\varprojlim}~ G_i = \{(g_i)_{i \in I} \in \prod_{i \in I}^{} G_i \mid \phi_{ij}(g_j) = g_i \}.
+    \end{align*}
+\end{defn}
+\textbf{Remarks.} 
+\begin{itemize}
+    \item Taking $(\mathbb{N}, \le )$ recovers our previous definition of an inverse limit.
+    \item There exist projection maps $\Psi_j : \underset{i \in I}{\varprojlim}~ G_i \to G_j$.
+    \item $\underset{i \in I}{\varprojlim} G_i$ satifies a universal property (defining left as exercise).
+\end{itemize}
+Assume $G_i$ is finite. Then the \textbf{profinite topology} on $\underset{i \in I}{\varprojlim}~ G_i$ is the weakest topology making these projection maps continuous, i.e. such that the maps $\Psi_j$ are continuous $\forall j \in I$.
+\begin{prop}\label{prop16.1}
+    Let $L/K$ be a (possibly infinite) Galois extension.
+    \begin{enumerate}[(i)]
+        \item The set $I = \{F/K \mid F \subset L, F/K \text{ is finite and Galois}\}$ is a directed set under inclusion.
+        \item For $F,F' \in I$ with $F \subset F'$, there is a restriction map $\text{res}_{F,F'}: \text{Gal}(F'/K) \twoheadrightarrow \text{Gal}(F/K)$ and the natural map $\text{Gal}(L/K) \to \underset{F \in I}{\varprojlim} ~ \text{Gal}(F/K)$ is an isomorphism.
+    \end{enumerate}
+\end{prop}
+\begin{proof}
+    Exercise on example sheet 4.
+\end{proof}
+\begin{theorem}[Fundamental theorem of Galois theory]
+    Let $L/K$ be Galois. By Proposition \ref{prop16.1}, we can endow $\text{Gal}(L/K)$ with the profinite topology (equal to the discrete topology is $L/K$ is finite). Then there exists a bijection 
+    \begin{align*}
+        \{F/K \text{ subextension of }L/K\} &\leftrightarrow \{\text{closed subgroups of }\text{Gal}(L/K)\}\\
+        F &\mapsto \text{Gal}(L/F)\\
+        L^H &\mapsfrom H
+    \end{align*}
+    Moreover:
+    \begin{itemize}
+        \item $F/K$ is finite $\iff$ $\text{Gal}(L/F)$ is open.
+        \item $F/K$ is Galois $\iff$ $\text{Gal}(L/F)$ is normal in $\text{Gal}(L/K)$.
+    \end{itemize}
+\end{theorem}
+\begin{proof}
+    Exercise on example sheet 4. The idea is to reduce everything to finite extensions.
+\end{proof}
 
 \end{document}
