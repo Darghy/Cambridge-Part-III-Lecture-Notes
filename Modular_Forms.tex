@@ -1804,7 +1804,72 @@ Another application of $\theta(\tau)$: the meromorphic continuation of $\zeta(s)
     Let $\xi(s) = \pi^{-s/2}\Gamma \left(\frac{s}{2}\right)\zeta(s)$. Then $\xi(s)$ has a meromorphic continuation to $\mathbb{C}$ with simple poles at $s=0,1$ with residues $-1,1$ and no other poles, and it satisfies the functional equation $\xi(s) = \xi(1-s)$.
 \end{theorem}
 Consider $\int_{y=0}^{\infty} \theta(iy)y^{s/2}\frac{\mathrm{d}y}{y}$. We have $\theta(iy) = 1 + O (e^{-\pi y})$ as $y \to \infty$, so we must slightly modify our argument for the Mellin transform. This is where the poles come from.
-
+\marginpar{20 Nov 2022, Lecture 20}
+\begin{proof}
+    We use $\theta(\tau) = \sum_{n \in \mathbb{Z}}^{} e^{\pi i n^2 \tau}$. Define $F(s) = \int_{y=0}^{\infty} (\theta(iy)-1) y^{s/2} \frac{\mathrm{d}y}{y}$. When is this integral absolutely convergent? We know $\theta(iy) = 1 + O (e^{-\pi y})$ as $y \to \infty$, so \begin{align*}
+        F(s) = \int_{y=1}^{\infty}  (\theta(iy)-1) y^{s/2} \frac{\mathrm{d}y}{y} + \int_{y=0}^{1}  (\theta(iy)-1) y^{s/2} \frac{\mathrm{d}y}{y}.
+    \end{align*}
+    The first term decays exponentially and so converges for all $s \in \mathbb{C}$ and defines a holomorphic function. For the second term, rewrite
+    \begin{align*}
+        \int_{y=1}^{\infty}  (\theta(iy)-1) y^{s/2} \frac{\mathrm{d}y}{y} + \int_{y=1}^{\infty} (\theta(iy)\sqrt{y}-1) y^{-s/2} \frac{\mathrm{d}y}{y}
+    \end{align*}
+    by replacing $y \mapsto \frac{1}{y}$ and using $\theta \left(\frac{i}{y}\right) = \theta(iy)\sqrt{y}$. We have $(\theta(iy)\sqrt{y}-1) = \sqrt{y} - 1 + O(e^{-\pi y/2})$ as $y \to \infty$, so the integral will converge, but only when $\frac{1-\sigma}{2}<0$, i.e. $\text{Re}(s) = \sigma>1$. Analogously to arguments written down previously, $F(s)$ is defined and holomorphic in $\{\sigma > 1\}$. In this region, we have 
+    \begin{align*}
+        F(s) &= \int_{y=1}^{\infty}  (\theta(iy)-1) y^{s/2} \frac{\mathrm{d}y}{y} + \int_{y=1}^{\infty} \left[(\theta(iy)-1)y^{(1-s)/2} + (y^{(1-s)/2}-y^{-s/2})\right]\frac{\mathrm{d}y}{y} \\
+        &= \underbrace{\int_{y=1}^{\infty}  (\theta(iy)-1) y^{s/2} \frac{\mathrm{d}y}{y}}_{\text{entire}} + \underbrace{\int_{y=1}^{\infty} (\theta(iy)-1)y^{(1-s)/2}\frac{\mathrm{d}y}{y}}_{\text{entire}} + \underbrace{\int_{y=1}^{\infty} y^{(1-s)/2}-y^{-s/2}\frac{\mathrm{d}y}{y}}_{=\frac{2}{s-1}-\frac{2}{s}}.
+    \end{align*}
+    We conclude that $F$ has a meromorphic continuation to $\mathbb{C}$ with simple poles at $s=0,1$ with residues $-2,2$ and no other poles. Moreover, $F(s)=F(1-s)$. We now compute 
+    \begin{align*}
+        &F(s) = \int_{y=0}^{\infty} 2 \sum_{n\ge 1}^{} e^{-\pi n^2 y}y^{s/2}\frac{\mathrm{d}y}{y} \stackrel{(\star)}{=} 2 \sum_{n\ge 1}^{} \int_{y=0}^{\infty} e^{- \pi n^2 y}y^{s/2}\frac{\mathrm{d}y}{y} \\
+        &\implies F(s) = 2\sum_{n\ge 1}^{} \int_{y=0}^{\infty} e^{-y}(\pi n^2)^{-s/2}y^{s/2}\frac{\mathrm{d}y}{y} = 2 \sum_{n\ge 1}^{} \pi^{-s/2}n^{-s}\Gamma \left(\frac{s}{2}\right) = 2 \zeta(s).
+    \end{align*}
+    $(\star)$ is justified when $\int_{y=0}^{\infty}2\sum_{n\ge 1}^{} e^{-\pi n^2 y}y^{\sigma/2}\frac{\mathrm{d}y}{y}<\infty$, but we know this holds provided $\sigma>1$.
+\end{proof}
+We now consider the $\theta$--function of a lattice $\Lambda \le \mathbb{R}^n$ (for $n\ge 1$). We define \[
+\theta_{\Lambda}(\tau) = \sum_{ \lambda \in \Lambda}^{} e^{\pi i \langle \lambda, \lambda \rangle \tau},
+\]
+where $\langle \cdot , \cdot  \rangle$ is the standard inner product on $\mathbb{R}^n$. If $\Lambda = \mathbb{Z} \le \mathbb{R}$, then $\theta_{\Lambda} = \sum_{n \in \mathbb{Z}}^{} e^{\pi i n^2 \tau} = \theta$. In general, we will show on example sheet 4 that $\theta_\Lambda$ is holomorphic in $\mathfrak{h}$.
+\begin{prop}[Poisson summation formula in $\mathbb{R}^n$]
+    Let $\Lambda \le \mathbb{R}^n$ be a lattice, $f : \mathbb{R}^n \to \mathbb{C}$ continuous with $\exists C, \delta>0$ such that $\forall x \in \mathbb{R}^n$, $$|f(x)|\le \frac{C}{(1+||x||)^{n+\delta}}$$ and let \begin{align*}
+        \hat{f}(y) = \int_{x \in \mathbb{R}^n}^{} f(x)e^{-2\pi i \langle x, y \rangle}\mathrm{d}x.
+    \end{align*}
+    Suppose further that $\sum_{\mu \in \Lambda^{\vee}}^{} |\hat{f}(\mu)|<\infty$, where $\Lambda^\vee = {\{\mu \in \mathbb{R}^n \mid \forall \lambda \in \Lambda, \langle \lambda, \mu \rangle \in \mathbb{Z}\}}$ is the dual lattice. Then 
+    \begin{align*}
+        \sum_{ \lambda \in \Lambda}^{} f(\lambda) = m(\Lambda)^{-1} \sum_{\mu \in \Lambda^{\vee}} \hat{f}(\mu),
+    \end{align*}
+    where $m(\Lambda) = \int_{\mathbb{R}^n \setminus \Lambda}^{} \mathrm{d}x$ is the covolume of $\Lambda$.
+\end{prop}
+\begin{proof}
+    Reasonably straightforward generalization of the case $n=1$, which we've done already.
+\end{proof}
+We can use this to get the transformation formula for $\theta_{\Lambda}$. Let $f: \mathbb{R}^n \to \mathbb{R}$ be the function $$f(x) = e^{-\pi \langle x,x \rangle} = \prod_{i=1}^{n} e^{-\pi x_i^2}.$$
+We compute $\hat{f}(y) = f(y)$ (by separation of variables and using the known case $n=1$). Now 
+\begin{align*}
+    \theta_{\Lambda}(iy) = \sum_{\lambda \in \Lambda}^{} e^{-\pi \langle \lambda, \lambda \rangle y} = \sum_{\lambda \in y^{1/2}\Lambda}^{} e^{- \pi \langle \lambda, \lambda \rangle} = \sum_{\mu \in (y^{1/2}\Lambda)^\vee} e^{-\pi \langle \mu, \mu \rangle} m(y^{1/2}\Lambda)^{-1}.
+\end{align*}
+We have $(y^{1/2}\Lambda)^{\vee} = y^{-1/2}(\Lambda^\vee)$ and so $m(y^{1/2}\Lambda)=y^{n/2}m(\Lambda)$. We conclude that 
+\begin{align*}
+    \theta_{\Lambda}(iy) = m(\Lambda)^{-1} y^{-n/2} \sum_{\mu \in \Lambda^{\vee}} e^{- \langle \mu, \mu \rangle y^{-1}} = m(\Lambda)^{-1}y^{-n/2}\theta_{\Lambda^\vee}\left(\frac{i}{y}\right).
+\end{align*}
+Using the identity principle, we get \begin{align*}
+    \theta_\Lambda(\tau) = \frac{1}{m(\Lambda)} \left(\sqrt{\frac{\tau}{i}}\right)^{-n} \theta_{\Lambda^\vee} \left(-\frac{1}{\tau}\right) ~\forall \tau \in \mathfrak{h}.
+\end{align*}
+\begin{prop}
+    Suppose $n \in 8\mathbb{N}$, $\Lambda \le \mathbb{R}^n$ is a lattice, and:
+    \begin{itemize}
+        \item $\Lambda$ is self--dual, i.e. $\Lambda = \Lambda^\vee$.
+        \item $\Lambda$ is even, so $\forall \lambda \in \Lambda, \langle \lambda, \lambda \rangle \in 2\mathbb{Z}$.
+    \end{itemize}
+    Then $\theta_{\Lambda} \in M_{n/2}(\Gamma(1))$.
+\end{prop}
+First a non--example: Let $\Lambda = \mathbb{Z}^n \le \mathbb{R}^n$. Then $\Lambda = \Lambda^{\vee}$, but $\Lambda$ isn't even, since e.g. $\langle e_1, e_1 \rangle = 1$. In this case, $\theta_{\Lambda} = \theta^n \in M_{n/2}(\Gamma)$.
+\begin{proof}
+    $\theta_{\Lambda}(\tau)$ is holomorphic in $\mathfrak{h}$ and $\theta_{\Lambda}(\tau) = \sum_{\lambda \in \Lambda}^{} e^{\pi i \langle \lambda, \lambda \rangle \tau}$. Since $\langle \lambda, \lambda \rangle \in 2\mathbb{Z}$, $e^{ \pi i \langle \lambda, \lambda \rangle \tau}$ is an integer power of $q = e^{2\pi i \tau}$. So $\theta_{\Lambda}$ is a power series in $q$ and is invariant under $\tau \mapsto \tau+1$, i.e. $\theta_{\Lambda}|_{n/2}[T] = \theta_\Lambda$. For $S$ we find $$\theta_\Lambda \mid_{n/2}[S](\tau) = \theta_\Lambda \left(-\frac{1}{\tau}\right) \tau^{-n/2} \stackrel{8 \mid n}{=} \theta_\Lambda \left(-\frac{1}{\tau}\right) \sqrt{\frac{\tau}{i}}^{-n} = m(\Lambda^\vee)\theta_{\Lambda^{\vee}}(\tau).$$  
+    For any lattice $\Lambda \le \mathbb{R}^n$, $m(\Lambda)m(\Lambda^\vee)=1$, hence $\Lambda = \Lambda^{\vee}$ gives $m(\Lambda)^2=1 \implies m(\Lambda)=1$ (as the covolume is positive) and so $\theta_\Lambda \mid_{n/2}[S]=\theta_\Lambda$. We know that $S, T$ generate $\Gamma(1)$, so $\theta_{\Lambda}$ is weakly modular of weight $n/2$ and level $\Gamma(1)$. $\theta_\Lambda$ is holomorphic at $\infty$ and this is the only cusp, hence $\theta_\Lambda \in M_{n/2}(\Gamma(1))$.
+\end{proof}
+\begin{example}
+    Take $\Lambda = E_8$ root lattice inside $\mathbb{R}^8$ (for details, see the Lie Algebras course or google). Then $\Lambda$ is even (as any root lattice is even) and it is self--dual (since $E_8$ is simply connected). Hence $\theta_\Lambda \in M_{4}(\Gamma(1)) = \langle E_4 \rangle = 1 + 240\sum_{}^{} \sigma_3(n)q^n$. We know $\theta_{\Lambda} = \sum_{\lambda \in \Lambda}^{} e^{\pi i \langle \lambda, \lambda \rangle} = 1 + O(q)$, so $\theta_\Lambda = 1 + 240\sum_{}^{} \sigma_3(n)q^n$. This $240$ now has the interpretation as $240 = |\{\lambda \in \Lambda \mid \langle \lambda, \lambda \rangle = 2\}| = \{\text{roots of the lattice}\}$ (these are all Lie Algebras course details). Furthermore, $\text{dim }E_8 = \text{dim }\mathbb{R}^8 + \{\text{roots}\} = 248$.
+\end{example}
 
 
 \end{document}
