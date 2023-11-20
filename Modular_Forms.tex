@@ -1734,6 +1734,77 @@ Here $\sqrt{\frac{\tau}{i}}$ is the unique branch of the square root defined in 
         \theta^k|_{k/2}[\gamma] = \theta^k ~\forall \gamma \in \Gamma,
     \end{align*}
     hence $\theta^k$ is weakly modular of weight $\frac{k}{2}$ and level $\Gamma$.
+
+    \marginpar{17 Nov 2022, Lecture 19}
+
+    To complete the proof, we need to show $\theta^k$ is holomorphic at the cusps of $\Gamma$. But cusps $\leftrightarrow \Gamma\setminus \mathbb{P}^1(\mathbb{Q}) \leftrightarrow \Gamma\setminus \Gamma(1) / \Gamma_{\infty}$, which we'll compute. First we describe $G \setminus \Gamma(1)$ on a right $\Gamma(1)$--set, and then we describe $\Gamma\setminus \Gamma(1) / \Gamma_{\infty}$ as the set of right $\Gamma_{\infty}$--orbits. Then if $\{g_i\}$ is a set of double coset representatives, then $\{\Gamma\cdot g_i \infty\}$ will be the set of cusps of $\Gamma$. (This is all just repeated applications of the orbit--stabilizer theorem).
+    \vspace{1mm}
+     
+    To describe $\Gamma\setminus \Gamma(1)$, we want to write down a transitive right $\Gamma(1)$--set $X$ and $x \in X$ with $\text{Stab}_{\Gamma(1)}(x) = \Gamma$. Then there's a $\Gamma(1)$--equivalent bijection $\Gamma\setminus \Gamma(1) \stackrel{\sim}{\to} X$ by $\Gamma \gamma \mapsto x \gamma$. Let's let $\Gamma(1)$ act on $X = \mathbb{F}^2_2\setminus 0$ by taking the image under $\Gamma(1) \to SL_2(\mathbb{F}_2)$ and then acting by right multiplication on row vectors. 
+    \vspace{1mm}
+     
+    Then $X = \{(0,1), (1,1), (1,0)\}$, so take $x = \begin{pmatrix} 1&1 \end{pmatrix}$. Then $\begin{pmatrix} 1 &1 \end{pmatrix} \begin{pmatrix} a&b\\c&d \end{pmatrix}=\begin{pmatrix} a+c&b+d \end{pmatrix} = \begin{pmatrix} 1&1 \end{pmatrix}\iff a \neq c, b \neq d$ modulo 2. The possibilities are $a = 1$, so we get $\begin{pmatrix} 1&0\\0&1 \end{pmatrix}$, or $a=0$, so $\begin{pmatrix} 0 & 1\\1&0 \end{pmatrix}$. Hence 
+    $$\text{Stab}_{\Gamma(1)}(1,1) = \left\{\begin{pmatrix} a&b\\c&d \end{pmatrix} \in \Gamma(1) \mid \begin{pmatrix} a &b\\c&d \end{pmatrix} \equiv I_2 \text{ or }S \text{ mod }2\right\} = \Gamma(2) \sqcup \Gamma(2)S = \Gamma.$$
+    Next we compute the $\Gamma_{\infty}$--orbits on $X$: $\begin{pmatrix} 1 & 0 \end{pmatrix}\begin{pmatrix}  1 &1\\0&1 \end{pmatrix} = \begin{pmatrix} 1&1 \end{pmatrix}$, $\begin{pmatrix} 0 & 1  \end{pmatrix}\begin{pmatrix}  1 &1\\0&1 \end{pmatrix} = \begin{pmatrix} 0&1 \end{pmatrix}$ and $\begin{pmatrix} 1 & 1 \end{pmatrix}\begin{pmatrix}  1 &1\\0&1 \end{pmatrix} = \begin{pmatrix} 1&0 \end{pmatrix}$. Hence $X \setminus \Gamma_{\infty}$ has two elements $\implies \Gamma\setminus \Gamma(1) / \Gamma_{\infty}$ has two elements, with its representatives being $I_2$ and any $\gamma \in \Gamma(1)$ such that $x \gamma = \begin{pmatrix} 0 &1 \end{pmatrix}$. Hence a reasonable choice would be $\gamma = \begin{pmatrix} 1 & -1 \\ 1 & 0 \end{pmatrix}$, as then $\begin{pmatrix} 1&1 \end{pmatrix}\gamma = \begin{pmatrix} 0&1 \end{pmatrix}$.
+    \vspace{1mm}
+     
+    Thus $\Gamma$ has two cusps: $\Gamma\cdot \infty$ and $\Gamma \cdot \gamma \infty = \Gamma \cdot 1$. We have to show that $\theta^k$ and $\theta^k|_{k/2}\left[\begin{pmatrix} 1&-1\\1&0 \end{pmatrix}\right]$ are holomorphic at $\infty$. But $\theta^k = \left(\sum_{n \in \mathbb{Z}}^{} q_2^{n^2}\right)^k$ is holomorphic at $\infty$. For the other one, $\gamma \tau = \frac{\tau-1}{\tau} = 1 - \frac{1}{\tau}$. Hence \begin{align*}
+        &\theta(\tau) = \sum_{n \in \mathbb{Z}}^{} q_2^{n^2} = \sum_{n \in \mathbb{Z}}^{} e^{\pi i n^2 \tau}\\
+        &\theta(\tau+1) = \sum_{n \in \mathbb{Z}}^{} e^{\pi i n^2}e^{\pi i n^2 \tau} = \sum_{ n \in \mathbb{Z}}^{} (-1)^n e^{\pi i n^2 \tau}\\
+        &\theta(\tau)+\theta(\tau+1) = 2\sum_{n \in \mathbb{Z}}^{} e^{\pi i (2n)^2\tau} = 2 \theta(4 \tau)\\
+        &\theta \left(-\frac{1}{\tau}\right) + \theta \left(1-\frac{1}{\tau}\right) = 2\theta\left(-\frac{4}{\tau}\right)\\
+        &\theta \left(1-\frac{1}{\tau}\right) = 2\theta\left(-\frac{4}{\tau}\right) - \theta \left(-\frac{1}{\tau}\right) = 2\theta \left(\frac{\tau}{4}\right)\sqrt{\frac{\tau}{4i}} - \theta(\tau)\sqrt{\frac{\tau}{i}} = \\
+        &= \sqrt{\frac{\tau}{i}} \left(\theta \left(\frac{\tau}{4}\right) - \theta(\tau)\right).
+    \end{align*}
+    Hence $$\theta^k|_{k/2}[\gamma](\tau) = \theta \left(1-\frac{1}{\tau}\right)^k \tau^{-k/2} = \left(\sqrt{\frac{\tau}{i}}\right)^{k}\tau^{-k/2} \left(\theta \left(\frac{\tau}{4}\right) - \theta(\tau) \right)^k = \left(\theta \left(\frac{\tau}{4}\right) - \theta(\tau)\right)^k,$$
+    so $\theta^k|_{k/2}[\gamma]$ even vanishes at $\infty$ and so $\theta^k$ is a modular form.
 \end{proof}
+\begin{theorem}
+    Let $n \in \mathbb{N}$. Then 
+    \begin{align*}
+        r_{24}(n) = \frac{65536}{691}\sigma_{11}\left(\frac{n}{2}\right) - (-1)^n \frac{16}{691}\sigma_{11}(n) - \frac{65536}{691}\tau \left(\frac{n}{2}\right) - (-1)^n \frac{33152}{691}\tau(n)
+    \end{align*}
+    with the convention that $\sigma_{11}\left(\frac{n}{2}\right) = \tau \left(\frac{n}{2}\right) = 0$ if $n$ is odd, in which case we get 
+    \begin{align*}
+        r_{24}(n) = \frac{16}{691}\sigma_{11}(n) + \frac{33152}{691}\tau(n).
+    \end{align*}
+\end{theorem}
+\begin{proof}
+    $\theta^{24} = \sum_{n\ge 0}^{} r_{24}(n)q_2^n \in M_{12}(\Gamma)$. We'll show on the third example sheet that $\text{dim }M_k(\Gamma)\le 1 + \frac{k[\Gamma(1):\Gamma]}{12}$. Since here we have $[\Gamma(1):\Gamma] = |X| = 3$, we get $\text{dim }M_{12}(\Gamma)\le 1+3=4$. We also know $\Gamma\le \Gamma(1) \implies M_{12}(\Gamma(1))\le M_{12}(\Gamma)$ and $M_{12}(\Gamma(1)) = \langle F_{12}, \Delta \rangle$ where $F_{12} = \frac{691}{65520} + \sum_{n\ge 1}^{} \tau_n(n)q^n$ and $\Delta = \sum_{n\ge 1}^{} \tau(n)q^n$.
+    \vspace{1mm}
+     
+    Note that if $\alpha = \begin{pmatrix} 1&1\\0&2 \end{pmatrix}$, then $\Gamma \le \alpha^{-1} \Gamma(1) \alpha$, so if $f \in M_k(\Gamma(1))$, then $f|_k[\alpha] \in M_k(\Gamma)$. This is because $\Gamma \le \alpha^{-1}\Gamma \alpha \iff \alpha \Gamma \alpha^{-1} \le \Gamma(1)$, which is 
+    \begin{align*}
+        \alpha \begin{pmatrix} a&b \\c&d\end{pmatrix} \alpha^{-1}= \begin{pmatrix} 1&1\\0&2 \end{pmatrix}\begin{pmatrix} a&b \\c&d\end{pmatrix} \begin{pmatrix} 1 & -\frac{1}{2} \\ 0 & \frac{1}{2} \end{pmatrix} = \begin{pmatrix} a+c & \frac{b+d-(a+c)}{2} \\ 2c & d-c \end{pmatrix}.
+    \end{align*}
+    We need to check that if $\begin{pmatrix} a&b\\c&d \end{pmatrix} \in \Gamma$, then $\begin{pmatrix} a+c & \frac{b+d-(a+c)}{2} \\ 2c & d-c \end{pmatrix}$ has integer entries (since then it will automatically be in $\Gamma(1)$). We have the cases:
+    \begin{itemize}
+        \item $a,d$ odd and $b,c$ even. Then $(b+d)-(a+c)$ is even as desired.
+        \item $a,d$ even and $b,c$ odd. Then $(b+d)-(a+c)$ is again even.
+    \end{itemize}
+    Now compute 
+    \begin{align*}
+        f|_k[\alpha](\tau) = f \left(\frac{\tau+1}{2}\right) 2^{k-1} 2^{-k} = \frac{1}{2} f \left(\frac{\tau+1}{2}\right).
+    \end{align*}
+    We conclude that if $f \in M_k(\Gamma(1))$, then $f \left(\frac{\tau+1}{2}\right) \in M_k(\Gamma)$. We can now write down $4$ elements of $M_{12}(\Gamma)$: $F_{12}, \Delta$, $$F_{12}\left(\frac{\tau+1}{2}\right) = \frac{691}{65520} + \sum_{n\ge 1}^{} \left( \sigma_{11}(n)e^{2\pi i n \tau/2} e^{2 \pi i n/2}\right) = \frac{691}{65520} + \sum_{n\ge 1}^{} (-1)^n \sigma_{11}(n)q_2^n$$
+    and \begin{align*}
+        \Delta \left(\frac{\tau+1}{2}\right) = \sum_{n\ge 1}^{} \tau(n) e^{2\pi i n \tau/2} e^{2 \pi i n/2} = \sum_{n\ge 1}^{} (-1)^n \tau(n) q_2^n.
+    \end{align*}
+    We can check (using Mathematica) using $q$--expansions that these modular forms are linearly independent. For this, we use the map $M_{12}(\Gamma) \to \mathbb{C}^{N}$ by $f \mapsto (a_0(f), a_1(f), \ldots, a_{N-1}(f))$ for $f = \sum_{n\ge 0}^{} a_n(f)q_2^n$ and show the resulting matrix has nonzero determinant.
+    \vspace{1mm}
+     
+    We conclude that $\text{dim }M_{12}(\Gamma) = 4$ and a basis is $\{F_{12},\Delta,F_{12}\left(\frac{\tau+1}{2}\right), \Delta \left(\frac{\tau+1}{2}\right)\}$.
+
+    But we proved that $\theta^{24} \in M_{12}(\Gamma)$, so there's a unique expression $\theta^{24} = A F_{12}(\tau)+B \Delta(\tau) + C F_{12}\left(\frac{\tau+1}{2}\right) + D \Delta \left(\frac{\tau+1}{2}\right)$ for $A,B,C,D \in \mathbb{Q}$ and then $r_{24}(n)$ will be the coefficient of $q_2^n$ in $\theta^{24}$, which will be the coefficient of $q_2^n$ in the RHS. After we compute $A,B,C,D$, the formula in the statement will follow: these are \begin{align*}
+        A = \frac{65536}{691}, B = -\frac{65536}{691}, C = - \frac{16}{691}, D = -\frac{33152}{691}.
+    \end{align*}
+\end{proof}
+Another application of $\theta(\tau)$: the meromorphic continuation of $\zeta(s)$.
+\begin{theorem}
+    Let $\xi(s) = \pi^{-s/2}\Gamma \left(\frac{s}{2}\right)\zeta(s)$. Then $\xi(s)$ has a meromorphic continuation to $\mathbb{C}$ with simple poles at $s=0,1$ with residues $-1,1$ and no other poles, and it satisfies the functional equation $\xi(s) = \xi(1-s)$.
+\end{theorem}
+Consider $\int_{y=0}^{\infty} \theta(iy)y^{s/2}\frac{\mathrm{d}y}{y}$. We have $\theta(iy) = 1 + O (e^{-\pi y})$ as $y \to \infty$, so we must slightly modify our argument for the Mellin transform. This is where the poles come from.
+
+
 
 \end{document}
