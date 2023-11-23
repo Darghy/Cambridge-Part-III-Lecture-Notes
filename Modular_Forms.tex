@@ -1871,5 +1871,87 @@ First a non--example: Let $\Lambda = \mathbb{Z}^n \le \mathbb{R}^n$. Then $\Lamb
     Take $\Lambda = E_8$ root lattice inside $\mathbb{R}^8$ (for details, see the Lie Algebras course or google). Then $\Lambda$ is even (as any root lattice is even) and it is self--dual (since $E_8$ is simply connected). Hence $\theta_\Lambda \in M_{4}(\Gamma(1)) = \langle E_4 \rangle = 1 + 240\sum_{}^{} \sigma_3(n)q^n$. We know $\theta_{\Lambda} = \sum_{\lambda \in \Lambda}^{} e^{\pi i \langle \lambda, \lambda \rangle} = 1 + O(q)$, so $\theta_\Lambda = 1 + 240\sum_{}^{} \sigma_3(n)q^n$. This $240$ now has the interpretation as $240 = |\{\lambda \in \Lambda \mid \langle \lambda, \lambda \rangle = 2\}| = \{\text{roots of the lattice}\}$ (these are all Lie Algebras course details). Furthermore, $\text{dim }E_8 = \text{dim }\mathbb{R}^8 + \{\text{roots}\} = 248$.
 \end{example}
 
+\marginpar{22 Nov 2022, Lecture 21}
+
+We define the \textbf{Epstein zeta function} as $\zeta_{\Lambda}(s) = \sum_{\lambda \in \Lambda\setminus 0}^{} \langle \lambda,\lambda \rangle^{-s}$. 
+
+\begin{example}
+    $\Lambda = \mathbb{Z} \le \mathbb{R}$ gives $\zeta_{\mathbb{Z}}(s) = \sum_{n \in \mathbb{Z}}^{} n^{-2s} = 2\mathbb{Z}(2s)$.
+\end{example}
+We will show on example sheet 4 that $\zeta_\Lambda(s)$ converges absolutely when $\text{Re}(s)>\frac{n}{2}$ (and $\zeta_\Lambda$ is holomorphic there).
+
+\begin{theorem}
+    Define $\xi_\Lambda(s) = \pi^{-s}\Gamma(s)\zeta_{\Lambda}(s)$. Then $\xi_{\Lambda}$ admits a meromorphic continuation to $\mathbb{C}$ with simple poles at $s=0, \frac{n}{2}$ of residues $-1, \frac{1}{m(\Lambda)}$ and no other poles, and satisfies $\xi_\Lambda(s) = \frac{1}{m(\Lambda)}\xi_{\Lambda^\vee}\left(\frac{n}{2}-s \right)$.
+\end{theorem}
+\begin{proof}
+    Define $F(s) = \int_{t=0}^{\infty} (\theta_{\Lambda}(it)-1)t^s \frac{\mathrm{d}t}{t}$. We can show that $\theta_{\Lambda}(it)-1 = O(e^{-ct})$ as $t \to \infty$ for some $c>0$ and the integral converges absolutely when $\text{Re}(s)>\frac{n}{2}$ (details analogous to the Riemann zeta function case). Hence $F(s)$ is well--defined and holomorphic for $\text{Re}(s)>\frac{n}{2}$. Now 
+    \begin{align*}
+        F(s) = \int_{t=0}^{\infty} \sum_{\lambda \in \Lambda \setminus 0}^{} e^{-\pi \langle \lambda, \lambda \rangle t}t^s \frac{\mathrm{d}t}{t} = \sum_{\lambda \in \Lambda \setminus  0}^{} \pi^{-s} \langle \lambda, \lambda \rangle^{-s} \Gamma(s) = \pi^{-s}\Gamma(s)\zeta_{\Lambda}(s) = \xi_{\Lambda}(s),
+    \end{align*}
+    where swapping the sum and integral is justified by absolute convergence when $\text{Re}(s)>\frac{n}{2}$. Write 
+    \begin{align*}
+        F(s) = \sum_{t=1}^{\infty} (\theta_{\Lambda}(it)-1)t^s\frac{\mathrm{d}t}{t} + \int_{t=1}^{\infty} \left(\theta_\Lambda(i/t)-1\right)t^{-s}\frac{\mathrm{d}t}{t}.
+    \end{align*}
+    We know that $\theta_{\Lambda}(i/t) = \frac{1}{m(\Lambda)} t^{n/2} \theta_{\Lambda^{\vee}}(it)$, so the above becomes 
+    \begin{align*}
+        F(s) &= \sum_{t=1}^{\infty} (\theta_{\Lambda}(it)-1)t^s\frac{\mathrm{d}t}{t} + \int_{t=1}^{\infty} \left(\frac{1}{m(\Lambda)} \theta_\Lambda^{\vee}(it)t^{n/2}-1 \right) t^{-s} \frac{\mathrm{d}t}{t} \\
+        &= \sum_{t=1}^{\infty} (\theta_{\Lambda}(it)-1)t^s\frac{\mathrm{d}t}{t} + \frac{1}{m(\Lambda)}\int_{t=1}^{\infty} (\theta_{\Lambda^\vee}(it)-1)t^{\frac{n}{2}-s} \frac{\mathrm{d}t}{t} + \int_{t=1}^{\infty} \left(\frac{1}{m(\Lambda)} t^{\frac{n}{2}-s} - t^{-s}\right) \frac{\mathrm{d}t}{t}.
+    \end{align*}
+    Hence 
+    \begin{align*}
+        \xi_{\Lambda}(s) = \int_{t=1}^{\infty} (\theta_{\Lambda}(it) -1)t^s \frac{\mathrm{d}t}{t} + \frac{1}{m(\Lambda)} \int_{t=1}^{\infty} (\theta_{\Lambda^\vee}(it)-1)t^{\frac{n}{2}-s} \frac{\mathrm{d}t}{t} + \frac{1}{m(\Lambda)} \frac{1}{s-\frac{n}{2}} - \frac{1}{s}.
+    \end{align*}
+    The first two integrals are entire functions, and the last term has two simple poles. For the functional equation, we can compare expressions for $\xi_{\Lambda}$ and $\xi_{\Lambda^\vee}$ and use the fact that $m(\Lambda^\vee) = m(\Lambda)^{-1}$.
+\end{proof}
+\textbf{Remark.} $\zeta_{\Lambda}$ usually doesn't have an Euler product and hence is not an $L$--function.
+
+\section{Non--holomorphic Eisenstein series}
+Modular forms are the beginning of the story of automorphic forms. We will study the simplest examples of non--holomorphic automorphic forms.
+\begin{defn}
+    We define (for $\tau \in \mathfrak{h}$ and $s \in \mathbb{C}$)
+    $$G(\tau,s) = \sum_{(m,n) \in \mathbb{Z}^2 \setminus 0}^{} \frac{\text{Im}(\tau)^s}{|m \tau + n|^{2s}}.$$
+\end{defn}
+We can check that this converges absolutely and locally uniformly in the region $\mathfrak{h} \times \{s \in \mathbb{C} \mid \text{Re}(s)>1\}$. In this region, $G(\tau,s)$ is defined and continuous (but not holomorphic as a function of $\tau$ since $\text{Im}(\tau)^s/|m \tau + n|^{2s}$ is not).
+\vspace{1mm}
+ 
+We think of this as a family of automorphic forms on $\mathfrak{h}$ indexed by $s$. We can give a more group--theoretic description by saying 
+\begin{align*}
+    G(\tau,s) &= \sum_{d\ge 1}^{} d^{-2s} \sum_{\substack{(m,n) \in \mathbb{Z}^2\\ \gcd(m,n) = 1}}^{} \frac{\text{Im}(\tau)^s}{|m \tau + n|^{2s}} = 2 \sum_{d\ge 1}^{} d^{-2s} \sum_{\gamma \in \Gamma_{\infty} \setminus  \Gamma(1)} \frac{\text{Im}(\tau)^s}{|j(\gamma,\tau)|^{2s}} \\
+    &= 2\zeta(2s)\sum_{\gamma \in \Gamma_{\infty} \setminus  \Gamma(1)}\text{Im}(\gamma \tau)^s = 2\zeta(2s)E(\tau,s)
+\end{align*}
+by noting $\{(m,n) \in \mathbb{Z}^2 \mid \gcd(m,n) = 1\}/\{\pm 1\} \leftrightarrow \Gamma_{\infty} \setminus \Gamma(1)$ by the map $\gamma \mapsto (0,1)\gamma$. Here
+\begin{align*}
+    E(\tau, s) = \sum_{\gamma \in \Gamma_{\infty} \setminus  \Gamma(1)}^{} \text{Im}(\gamma \tau)^{s}.
+\end{align*}
+A consequence of this is that if $\delta \in \Gamma(1)$, then $E(\delta \tau, s) = \sum_{\gamma \in \Gamma_{\infty}\setminus \Gamma(1)} \text{Im}(\gamma \delta \tau)^s = E(\tau, s)$, hence $G(\delta \tau, s) = G(\tau, s)$. We can also observe that 
+\begin{align*}
+    G(\tau, s) = \sum_{(m,n) \in \mathbb{Z}^2 \setminus 0}^{} \frac{y^s}{(m \tau +n)^{2s}} = \sum_{\lambda \in \Lambda_\tau\setminus 0}^{} y^s  \langle \lambda, \lambda \rangle^{-s} = \zeta_{y^{-1/2}\Lambda_{\tau}}(s).
+\end{align*}
+Here the inner product comes from identifying $\mathbb{C}$ as $\mathbb{R}^2$ using the basis $(1,i)$, i.e. the standard norm of a complex number.
+
+\begin{lemma}
+    $m(y^{-1/2}\Lambda_{\tau}) = 1$ (for $\tau = x+iy$) and $(y^{-1/2}\Lambda_{\tau})^\vee = i y^{-1/2}\Lambda_{\tau}$.
+\end{lemma}
+\begin{proof}
+This is just a computation. $y^{-1/2}\Lambda_{\tau}$ has $\mathbb{Z}$--basis $y^{-1/2}, xy^{-1/2} + iy^{-1/2}$, so the covolume is $\left| \det\begin{pmatrix} y^{-1/2} & 0 \\ xy^{-1/2} & y^{1/2} \end{pmatrix}\right| = 1$. Meanwhile, $i y^{-1/2}\Lambda_\tau$ has $\mathbb{Z}$--basis $-y^{-1/2} + i xy^{-1/2}, iy^{-1/2}$. Now compute the inner products between all the basis vectors to conclude that $(y^{-1/2}\Lambda_{\tau})^\vee = i y^{-1/2}\Lambda_{\tau}$.
+\end{proof}
+\begin{prop}
+    \begin{enumerate}[(i)]
+        \item Define $G^{\star}(\tau, s) = \pi^{-s}\Gamma(s)G(\tau,s) = \xi_{y^{-1/2}\Lambda_\tau}(s)$. Then for any $\tau \in \mathfrak{h}$, $G^{\star}(\tau, s)$ has a meromorphic continuation to $\mathbb{C}$ with simple poles at $s=0,1$ of residues $-1,$ and no other poles.
+        \item $G^\star(\tau,s)$ satisfies $G^\star(\tau,s) = G^\star(\tau,1-s)$.
+        \item $G^\star(\tau,s) - \frac{1}{s(s-1)}$ extends to a $C^{\infty}$--function on $\mathfrak{h} \times \mathbb{C}$.
+    \end{enumerate}
+\end{prop}
+\begin{proof}
+    \begin{enumerate}[(i)]
+        \item This follows from the properties of the Epstein zeta function of $\xi_{y^{-1/2}\Lambda_{\tau}}(s)$.
+        \item We know $\xi_{y^{-1/2}\Lambda_{\tau}}(s) = m(y^{-1/2}\Lambda_\tau)^{-1} \xi_{i y^{-1/2}\Lambda_{\tau}}(1-s) = \xi_{y^{-1/2}\Lambda_\tau}(1-s)$, since the Epstein zeta function only involves the norm, which is invariant under multiplication by $i$.
+        \item We know that
+        \begin{align*}
+            G^\star(\tau, s) = \xi_{y^{-1/2}\Lambda_\tau}(s) = \int_{t=1}^{\infty} \left(\theta_{y^{-1/2}\Lambda_\tau}-1 \right)(t^s + t^{1-s})\frac{\mathrm{d}t}{t} + \frac{1}{s-1}-\frac{1}{s}.
+        \end{align*}
+        Hence $$G^\star(\tau,s) - \frac{1}{s(s-1)} = \int_{t=1}^{\infty} \left(\sum_{(m,n) \in \mathbb{Z}^2 \setminus 0}^{} e^{-\pi|m \tau + n|^2 t y^{-1}} \right)(t^s + t^{1-s})\frac{\mathrm{d}t}{t}$$ where the integral converges absolutely for any $\tau \in \mathfrak{h}, s \in \mathbb{C}$. We state as a fact that we can justify differentiation under the integral in this case to conclude that the LHS is $C^{\infty}$.
+    \end{enumerate}
+\end{proof}
 
 \end{document}
