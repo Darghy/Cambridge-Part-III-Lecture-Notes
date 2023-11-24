@@ -720,7 +720,7 @@ More generally:
     Let $(K, |\cdot|)$ be complete, nonarchimedean, and discretely valued and let $\overline{K}/K$ be the algebraic closure of $K$. Then $|\cdot|$ extends uniquely to an absolute value $|\cdot|_{\overline{K}}$ on $\overline{K}$.
 \end{cor}
 \begin{proof}
-    Let $x \in \overline{K}$, then $x \in L$ for some finite extension $L/K$. Define $|\cdot|_{\overline{K}} = |x|_L$. This is well--defined (i.e. independent of $L$) by uniqueness in Theorem 6.1 (for any $L,L'$, consider an extension containing both).
+    Let $x \in \overline{K}$, then $x \in L$ for some finite extension $L/K$. Define $|\cdot|_{\overline{K}} = |x|_L$. This is well--defined (i.e. independent of $L$) by uniqueness in Theorem \ref{theorem6.1} (for any $L,L'$, consider an extension containing both).
     \vspace{1mm}
      
     The axioms for $|x|_{\overline{K}}$ to be an absolute value can be checked over finite extensions.
@@ -819,7 +819,7 @@ More on inverse limits: Again let $(A_n)_{n=1}^{\infty}$ be a sequence of sets/g
     Let $K$ be a nonarchimedean local field and $L/K$ a finite extension. Then $L$ is a local field.
 \end{lemma}
 \begin{proof}
-    Theorem 6.1 shows that $L$ is complete and discretely valued, so it suffices to show that $k_L = \mathcal{O}_L/\mathfrak{m}_L$ is finite. Let $\alpha_1,\ldots,\alpha_n \in L$ be a basis for $L$ as a $K$--vector space. Then $||\cdot||_{\text{sup}}$, the sup norm, is equivalent to $|\cdot|_L$, so there exists $r>0$ such that $\mathcal{O}_L \subset \{x \in L \mid ||x||_{\text{sup}} \le r\}$. Then take $a \in K$ such that $|a|\ge r$, then $\mathcal{O}_L \subset \bigoplus_{i=1}^n a \alpha_i \mathcal{O}_K \subset L$. But this is a finitely generated module over a PID, hence noetherian, so $\mathcal{O}_L$ is finitely generated as an $\mathcal{O}_K$--module, so $k_L$ is finitely generated over $k$.
+    Theorem \ref{theorem6.1} shows that $L$ is complete and discretely valued, so it suffices to show that $k_L = \mathcal{O}_L/\mathfrak{m}_L$ is finite. Let $\alpha_1,\ldots,\alpha_n \in L$ be a basis for $L$ as a $K$--vector space. Then $||\cdot||_{\text{sup}}$, the sup norm, is equivalent to $|\cdot|_L$, so there exists $r>0$ such that $\mathcal{O}_L \subset \{x \in L \mid ||x||_{\text{sup}} \le r\}$. Then take $a \in K$ such that $|a|\ge r$, then $\mathcal{O}_L \subset \bigoplus_{i=1}^n a \alpha_i \mathcal{O}_K \subset L$. But this is a finitely generated module over a PID, hence noetherian, so $\mathcal{O}_L$ is finitely generated as an $\mathcal{O}_K$--module, so $k_L$ is finitely generated over $k$.
 \end{proof}
 \begin{defn}
     A nonarchimedean valued field $(K, |\cdot|)$ has \textbf{equal characteristic} if $\text{char}(K) = \text{char}(k)$. Otherwise, $K$ has \textbf{mixed characteristic}.
@@ -1948,5 +1948,56 @@ Once we have this, we can define the Artin map: (ii) implies that there exists a
     p^n u &\mapsfrom (n,u) \mapsto (\text{Fr}_{K^{\text{ur}}/K}^n, \Psi^{-1}(u^{-1})).
 \end{align*}
 Our goal now is to construct these $K_{\pi, n}$.
+\marginpar{23 Nov 2022, Lecture 21}
+
+\textbf{Remark.} There is no maximal totally ramified extension of $K$. Hence $\text{Art}_K$ depends on the choice $K_{\pi, \infty}$, and the isomorphism $K^{\times} \cong \mathbb{Z} \times \mathcal{O}_K^\times$. These choices are both dependent on the choice of $\pi$ -- they ''cancel out'' and $\text{Art}_K$ is canonical.
+
+\section{Lubin--Tate theory}
+\subsection{Formal group laws}
+Let $R$ be a ring. We denote by $R[[X_1,\ldots,X_n]] = \{\sum_{k_1,\ldots,k_n\ge 0}^{} a_{k_1\ldots,k_n}X^{k_1}\ldots X^{k_n} \mid a_{k_1\ldots k_n} \in R\}$ the ring of formal power series in variables over $R$.
+\begin{defn}
+    A (1--dimensional) \textbf{formal group law} over $R$ is a power series $F[[X,Y]] \in R[[X,Y]]$ satisfying
+    \begin{enumerate}
+        \item $F(X,Y) \equiv X + Y \pmod{\text{deg }2}$ (i.e. modulo $X^2,XY,Y^2$).
+        \item $F(X,F(Y,Z)) = F(F(X,Y), Z)$ -- the associativity axiom.
+        \item $F(X,Y) = F(Y,X)$.
+    \end{enumerate}
+\end{defn}
+\begin{example}
+    \begin{itemize}
+        \item $\hat{\mathcal{G}}_a = X + Y$. This is called the formal additive group.
+        \item $\hat{\mathcal{G}}_m = X + Y + XY$. This is the formal multiplicative group.
+    \end{itemize}
+\end{example}
+\begin{lemma}
+    For $F$ a formal group law over $R$,
+    \begin{enumerate}[(i)]
+        \item $F(X,0) = X$ and $F(0,Y) = Y$.
+        \item There exists a unique power series $i(X) \in X R[[X]]$ with   $F(X,i(X))=0$.
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+    Exercise on example sheet 4.
+\end{proof}
+If $K$ is a non--archimedean valued field and $F$ is a formal group law over $\mathcal{O}_K$, then $F(x,y)$ converges $\forall x,y \in \mathfrak{m}_K$ to an element in $\mathfrak{m}_K$. This allows us to define $x \cdot_F y = F(x,y)$, which turns $(\mathfrak{m}_K, \cdot_F)$ into a commutative group.
+
+\begin{example}
+    $\hat{\mathcal{G}}_m/\mathbb{Z}_p$, so $x \cdot_{\hat{\mathcal{G}}_m} y = x + y + xy$. Then $(p \mathbb{Z}_p, \hat{\mathcal{G}}_m) \cong (1 + p \mathbb{Z}_p, \times)$ by $x \mapsto 1 + x$.
+\end{example}
+\begin{defn}
+    Let $F,G$ be formal group laws over a ring $R$. A \textbf{homomorphism} $f : F \to G$ is an element $f(X) \in XR[[X]]$ such that $f(F(X,Y))=G(f(X),f(Y))$.
+    \vspace{1mm}
+     
+    A homomorphism $f : F \to G$ is an \textbf{isomorphism} if there exists a homomorphism $g : G \to F$ such that $f(g(X))=g(f(X))=X$.
+\end{defn}
+\begin{defn}
+    We define $\text{End}_R(F)$ to be the set of homomorphisms $f: F \to F$.
+\end{defn}
+\begin{prop}
+    Let $R$ be a $\mathbb{Q}$--algebra. Then there is an isomorphism of formal group laws $\exp : \hat{\mathcal{G}}_a \to \hat{\mathcal{G}}_m$ given by $\exp(X) = \sum_{n=1}^{\infty} \frac{X^n}{n!}$ (notice that the constant term is missing).
+\end{prop}
+\begin{proof}
+    
+\end{proof}
 
 \end{document}
