@@ -1997,7 +1997,76 @@ If $K$ is a non--archimedean valued field and $F$ is a formal group law over $\m
     Let $R$ be a $\mathbb{Q}$--algebra. Then there is an isomorphism of formal group laws $\exp : \hat{\mathcal{G}}_a \to \hat{\mathcal{G}}_m$ given by $\exp(X) = \sum_{n=1}^{\infty} \frac{X^n}{n!}$ (notice that the constant term is missing).
 \end{prop}
 \begin{proof}
-    
+    Define $\log(X) = \sum_{n=1}^{\infty} (-1)^{n-1}\frac{X^n}{n}$. Then there exists an equality (of formal power series) $\log(\exp(X))=\exp(\log(X))=X$ and $\exp(\hat{\mathcal{G}}_a(X,Y))=\hat{G}_m(X,Y)$. 
 \end{proof}
-
+Note that we need $R$ to be a $\mathbb{Q}$--algebra for $\frac{1}{n!}$ to make sense. An exercise on example sheet 4 shows that if we replace $R$ with a field of positive characteristic then there are no nontrivial homomorphisms between the additive group and the multiplicative group.
+\begin{lemma}
+    $\text{End}_R(F)$ is a ring with addition $(f +_{F} g) = F(f(X),g(X))$ and multiplication given by composition.
+\end{lemma}
+\begin{proof}
+    For $f, g \in \text{End}_R(F)$, we have 
+    \begin{align*}
+        &(f +_F g) \circ F(X,Y) = F(f(F(X,Y)), g(F(X,Y))) \\
+        =& F(F(f(X),f(Y)),F(g(X),g(Y)))\\
+        \stackrel{(\star)}{=} & F(F(f(X),g(X)),F(f(Y),g(Y)))\\
+        =& F(f +_F g(X), f +_F g(Y))\\
+        \implies & f +_F g \in \text{End}_R(F),
+    \end{align*}
+    where $(\star)$ follows by associativity and commutativity axioms.
+    \vspace{1mm}
+     
+    Also $f \circ g \circ F  = f \circ F \circ g = F \circ f \circ g$, so $f \circ g \in \text{End}_R(F)$. The ring axioms are left as an exercise.
+\end{proof}
+\subsection{Lubin--Tate formal groups}
+Let $K$ be a non--archimedean local field with residue field $k$ of size $q$.
+\begin{defn}
+    A \textbf{formal $\mathcal{O}_K$--module over $\mathcal{O}_K$} is a formal group law $F(X,Y) \in \mathcal{O}_K[[X,Y]]$ together with a ring homomorphism $[ ~]_F : \mathcal{O}_K \to \text{End}_{\mathcal{O}_K}(F)$ such that $\forall a \in \mathcal{O}_K, [a]_F(X) \equiv aX \pmod{X^2}$ (i.e. modulo degree 2 terms).
+    \vspace{1mm}
+     
+    A \textbf{homomorphism/isomorphism} of $f: F \to G$ of formal $\mathcal{O}_K$--modules s a homomorphism/isomorphism of formal group laws such that $f \circ [a]_F  = [a]_G \circ f ~\forall a \in \mathcal{O}_K$. 
+\end{defn}
+\begin{defn}
+    Let $\pi \in \mathcal{O}_K$ be a uniformizer. A \textbf{Lubin--Tate series} for $\pi$ is a power series $f(X) \in \mathcal{O}_K[[X]]$ such that
+    \begin{enumerate}[(i)]
+        \item $f(X) \equiv \pi X \pmod{X^2}$.
+        \item $f(X) \equiv X^q \pmod{\pi}$.
+    \end{enumerate}
+\end{defn}
+\begin{example}
+    $\pi X + X^q$ is a Lubin--Tate series.
+\end{example}
+\begin{theorem}\label{theorem18.4}
+    Let $f(X)$ be a Lubin--Tate series for $\pi$. Then 
+    \begin{enumerate}[(i)]
+        \item There exists a unique formal group law $F_f$ over $\mathcal{O}_K$ such that $f \in \text{End}_{\mathcal{O}_K}(F_f)$.
+        \item There exists a ring homomorphism $[~]_{F_f}: \mathcal{O}_K \to \text{End}_{\mathcal{O}_K}(F_f)$ satisfying $[\pi]_{F_f}(X)=f(X)$ which makes $F_f$ a formal $\mathcal{O}_K$--module over $\mathcal{O}_K$.
+        \item If $g(X)$ is another Lubin--Tate series for $\pi$, then $F_f \cong F_g$ as formal $\mathcal{O}_K$--modules.
+    \end{enumerate}
+    $F_f$ is called the \textbf{Lubin--Tate formal group law for $\pi$} (which by (iii) only depends on $\pi$ up to isomorphism).
+\end{theorem}
+\marginpar{26 Nov 2022, Lecture 22}
+\begin{example}
+    If $K= \mathbb{Q}_p$, then $f(X) = (X+1)^p-1$ is a Lubin--Tate series for (the uniformizer) $p$. The Lubin--Tate formal group law in this case is $\hat{\mathcal{G}}_m$. For this, it suffices to show that $f \circ \hat{\mathcal{G}}_m = \hat{\mathcal{G}}_m \circ f$, but we compute 
+    \begin{align*}
+        f \circ \hat{\mathcal{G}}_m(X,Y) &= (1+X)^p(1+Y)^p-1 = \hat{\mathcal{G}}_m(f(X),f(Y))
+    \end{align*}
+    using $\hat{\mathcal{G}}_m(X,Y) = (1+X)(1+Y)-1$.
+\end{example}
+The key to the proof of Theorem \ref{theorem18.4} is the following lemma:
+\begin{lemma}
+    Let $f(X),g(X)$ be Lubin--Tate series for $\pi$ and $L(X_1,\ldots,X_n) = \sum_{i=1}^{n} a_i X_i$ with $a_i \in \mathcal{O}_K$. Then there exists a unique power series $F(X_1,\ldots,X_n) \in \mathcal{O}_K[[X_1,\ldots,X_n]]$ such that
+    \begin{enumerate}[(i)]
+        \item $F(X_1,\ldots,X_n) \equiv L(X_1,\ldots,X_n) \pmod{\text{deg }2}$
+        \item $f(F(X_1,\ldots,X_n))  = F(g(X_1),\ldots, g(X_n))$.
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+    We show by induction that there exist unique polynomials $F_m \in \mathcal{O}_K[X_1,\ldots,X_m]$ of total degree $\le m$ satisfying:
+    \begin{enumerate}[(i)]
+        \item $f(F_m(X_1,\ldots,X_m)) \equiv F_m(g(X_1),\ldots,g(X_m)) \pmod{\text{deg }m+1}$.
+        \item $F_m(X_1,\ldots,X_n) \equiv L(X_1,\ldots,X_n) \pmod{\text{deg }2}$.
+        \item $F_m \equiv F_{m+1} \pmod{\text{deg }m+1}$.
+    \end{enumerate}
+    For $m=1$, take $F_1=L$.
+\end{proof}
 \end{document}
