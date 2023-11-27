@@ -2053,7 +2053,7 @@ Let $K$ be a non--archimedean local field with residue field $k$ of size $q$.
     using $\hat{\mathcal{G}}_m(X,Y) = (1+X)(1+Y)-1$.
 \end{example}
 The key to the proof of Theorem \ref{theorem18.4} is the following lemma:
-\begin{lemma}
+\begin{lemma}\label{lemma18.5}
     Let $f(X),g(X)$ be Lubin--Tate series for $\pi$ and $L(X_1,\ldots,X_n) = \sum_{i=1}^{n} a_i X_i$ with $a_i \in \mathcal{O}_K$. Then there exists a unique power series $F(X_1,\ldots,X_n) \in \mathcal{O}_K[[X_1,\ldots,X_n]]$ such that
     \begin{enumerate}[(i)]
         \item $F(X_1,\ldots,X_n) \equiv L(X_1,\ldots,X_n) \pmod{\text{deg }2}$
@@ -2062,11 +2062,53 @@ The key to the proof of Theorem \ref{theorem18.4} is the following lemma:
 \end{lemma}
 \begin{proof}
     We show by induction that there exist unique polynomials $F_m \in \mathcal{O}_K[X_1,\ldots,X_m]$ of total degree $\le m$ satisfying:
-    \begin{enumerate}[(i)]
-        \item $f(F_m(X_1,\ldots,X_m)) \equiv F_m(g(X_1),\ldots,g(X_m)) \pmod{\text{deg }m+1}$.
+    \begin{enumerate}[(a)]
+        \item $f(F_m(X_1,\ldots,X_n)) \equiv F_m(g(X_1),\ldots,g(X_n)) \pmod{\text{deg }m+1}$.
         \item $F_m(X_1,\ldots,X_n) \equiv L(X_1,\ldots,X_n) \pmod{\text{deg }2}$.
         \item $F_m \equiv F_{m+1} \pmod{\text{deg }m+1}$.
     \end{enumerate}
-    For $m=1$, take $F_1=L$.
+    For $m=1$, take $F_1=L$. It satisfies property (b), and (a) follows from the fact that $f(F(X_1,\ldots,X_n)) \stackrel{(\star)}{\equiv } \pi L(X_1,\ldots,X_n)\equiv F(g(X_1),\ldots,g(X_n)) \pmod{\text{deg }2}$, where $(\star)$ follows as $f(X) \equiv \pi X \pmod{X^2}$. 
+    \vspace{1mm}
+     
+    Now suppose we've constructed $F_m$ for some $m\ge 1$. We set $F_{m+1} = F_m + h$ for $h \in \mathcal{O}_K[X_1,\ldots,X_n]$ homogeneous of degree $m+1$. Since $f(X+Y) = f(X) + f'(X)Y + Y^2(\ldots)$ and $f'(X) \equiv \pi \pmod{X}$, we have $$f \circ (F_m + h) = f \circ F_m + \pi h \pmod{\text{deg }m+2}.$$ Similarly $(F_m + h) \circ g \stackrel{(\star)}{\equiv}  F_m \circ g + h(\pi X_1,\ldots,\pi X_n) \equiv F_m \circ g + \pi^{m+1}h(X_1,\ldots,X_n) \pmod{\text{deg }m+2}$ where $(\star)$ follows from $g(X) \equiv \pi X \pmod{X^2}$. Thus (a), (b), (c) will be satisfied if and only if $$f \circ F_m - F_m \circ g \equiv (\pi - \pi^{m+1})h \pmod{\text{deg }m+2}.$$ But using the fact that $f(X) \equiv g(X) \equiv X^q \pmod{\pi}$, we find $$f \circ F_m - F_m \circ g \equiv F_m(X_1,\ldots,X_n)^q - F_m(X_1^q,\ldots,X_n^q) \equiv 0 \pmod{\pi}.$$
+    Let $r(X_1,\ldots,X_n)$ be the degree $m+1$ terms in $f \circ F_m - F_m \circ g$. Then set $h =\frac{1}{\pi(1-\pi^m)}r \in \mathcal{O}_K[X_1,\ldots,X_n]$, so our computations show $F_{m+1}$ satifies (a), (b), (c). This is unique, since $h$ is determined by (a).
+    \vspace{1mm}
+     
+    Set $F = \lim_{m \to \infty}F_m$, so $F(X_1,\ldots,X_n) \in \mathcal{O}_K[[X_1,\ldots,X_n]]$ and $F$ satisfies properties (i) and (ii). The uniqueness of $F$ follows from the uniqueness of the $F_m$, as truncating the power series $F$ needs to give $F_m$.
+\end{proof}
+\begin{proof}[Proof of Theorem \ref{theorem18.4}]
+    \begin{enumerate}[(i)]
+        \item By Lemma \ref{lemma18.5}, there exists a unique $F_f(X,Y) \in \mathcal{O}_K[[X,Y]]$ such that 
+        \begin{itemize}
+            \item $F(X,Y) \equiv X + Y \pmod{\text{deg }2}$.
+            \item $f(F_f(X,Y)) = F_f(f(X),f(Y))$.
+        \end{itemize}
+        We need to check that $F_f$ is a formal group law. 
+        \begin{itemize}
+            \item Associativity: $F_f(X,F_f(Y,Z)) \equiv X + Y + Z \equiv F_f(F_f(X,Y),Z)\pmod{\text{deg }2}$ and $f \circ F_f(X,F_f(Y,Z)) = F_f(f(X),f(F_f(Y,Z))) = F_f(f(X),F_f(f(Y),F(Z)))$. Similarly we find $f \circ F_f(F_f(X,Y),Z) = F_f(F_f(f(X),f(Y)),f(Z))$. By uniqueness in Lemma \ref{lemma18.5}, we have $F_f(X,F_f(Y,Z)) = F_f(F_f(X,Y),Z)$.
+            \item Commutativity: analogously check that the two power series are equal, have the same linear terms and are both compatible with the Lubin--Tate series.
+        \end{itemize}
+        \item By Lemma \ref{lemma18.5}, for $a \in \mathcal{O}_K$ there exists a unique $[a]_{F_f} \in \mathcal{O}_K[[X]]$ such that $[a]_{F_f} \equiv a X \pmod{X^2}$ and $f \circ [a]_{F_f} = [a]_{F_f} \circ f$. Then $[a]_{F_f} \circ F_f = F_f \circ [a]_{F_f}$ by uniqueness, i.e. $[a]_{F_f} \in \text{End}_{\mathcal{O}_K}(F_f)$. The map $[~]_{F_f} : \mathcal{O}_K \to \text{End}_{\mathcal{O}_K}(F_f)$ is a ring homomorphism (again by uniqueness). This implies that $F_f$ is a formal $\mathcal{O}_K-$-module over $\mathcal{O}_K$. The fact that $[\pi]_{F_f} = f$ follows by uniqueness again.
+        \item If $g(X)$ is another Lubin--Tate series for $\pi$, then let $\theta(X) \in \mathcal{O}_K[[X]]$ such that
+        \begin{itemize}
+            \item $\theta(X) \equiv X \pmod{X^2}$
+            \item $\theta \circ f(X) = g \circ \theta(X)$.
+        \end{itemize}
+        Then $\theta \circ F_f = F_g \circ \theta$ (by uniqueness again), so $\theta \in \text{Hom}(F_f,F_g)$. Reversing the roles of $f$ and $g$ we obtain $\theta^{-1} \in \mathcal{O}_K[[X]]$ such that $\theta^{-1} \in \text{Hom}(F_g,F_f)$. Then $\theta \circ \theta^{-1}(X) = X = \theta^{-1} \circ \theta(X)$ (by uniqueness in Lemma \ref{lemma18.5}). Finally, uniqueness implies that $\theta \circ [a]_{F_f} = [a]_{F_g} \circ \theta ~\forall a \in \mathcal{O}_K$, so $\theta$ is an isomorphism of $\mathcal{O}_K$--modules.
+    \end{enumerate}
+\end{proof}
+\subsection{Lubin--Tate extensions}
+Let $\overline{K}$ be a separable closure of $K$ and $\overline{\mathfrak{m}} \subset \mathcal{O}_{\overline{K}}$ the maximal ideal.
+\begin{lemma}
+    Let $F$ be a formal $\mathcal{O}_K$--module over $\mathcal{O}_K$. Then $\overline{\mathfrak{m}}$ becomes a (genuine) $\mathcal{O}_K$--module with operations $x+_F y = F(x,y)$ for $x,y \in \overline{\mathfrak{m}}$ and $a \cdot _F x = [a]_F(x)$ for $a \in \mathcal{O}_K, x \in \overline{\mathfrak{m}}$. 
+\end{lemma}
+\begin{proof}
+    We can't apply the argument directly to $\overline{K}$, as it is not complete. Instead, $x \in \overline{\mathfrak{m}} \implies x \in \mathfrak{m}_L$ for some $L/K$ finite. Then $[a]_F \in \mathcal{O}_K[[X]] \implies [a]_F(x)$ converges in $L$ and since $\mathfrak{m}_L$ is closed, $[a]_F(x) \in \mathfrak{m}_L \subset \overline{\mathfrak{m}}$. 
+    \vspace{1mm}
+     
+    Similarly $x +_F y  \in \overline{\mathfrak{m}}$.
+    \vspace{1mm}
+     
+    The module structure follows from definitions.
 \end{proof}
 \end{document}
