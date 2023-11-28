@@ -1953,5 +1953,100 @@ This is just a computation. $y^{-1/2}\Lambda_{\tau}$ has $\mathbb{Z}$--basis $y^
         Hence $$G^\star(\tau,s) - \frac{1}{s(s-1)} = \int_{t=1}^{\infty} \left(\sum_{(m,n) \in \mathbb{Z}^2 \setminus 0}^{} e^{-\pi|m \tau + n|^2 t y^{-1}} \right)(t^s + t^{1-s})\frac{\mathrm{d}t}{t}$$ where the integral converges absolutely for any $\tau \in \mathfrak{h}, s \in \mathbb{C}$. We state as a fact that we can justify differentiation under the integral in this case to conclude that the LHS is $C^{\infty}$.
     \end{enumerate}
 \end{proof}
-
+\marginpar{24 Nov 2022, Lecture 22}
+Hence \[
+G^{\star}(\tau,s) = \sum_{n \in \mathbb{Z}}^{} A_n^{\star}(y,s)e^{2\pi i n x}
+\]
+for $$A_n^{\star}(y,s) = \int_{x=0}^{1} G^{\star}(\tau,s)e^{-2\pi i n x}\mathrm{d}x.$$
+If $n\neq 0$, then $A_n^{\star}(y,s)$ is $C^{\infty}$ on $(0,\infty) \times \mathbb{C}$ and is entire as a function of $s$ (for fixed $y$). If $n=0$, then $A_0^{\star}(y,s)$ is $C^{\infty}$ on $(0,\infty) \times (\mathbb{C} \setminus  \{0,1\})$ and $A_0^{\star}(y,s) - \frac{1}{s(s-1)}$ extends to a $C^{\infty}$--function on $(0,\infty) \times \mathbb{C}$ which is entire as a function of $s$.
+\begin{theorem}
+    \[
+    A_0^{\star}(y,s) = 2 \xi(2s)y^s + 2\xi(2s-1)y^{1-s} = 2\xi(2s)y^s +2\xi(2(1-s))y^{1-s}.
+    \]
+\end{theorem}
+\begin{proof}
+    The second equality is true by the functional equation for $\xi(s)$. For the first, note that both $A_0^{\star}(y,s)$ and $2\xi(2s)y^s + 2\xi(2s-1)y^{1-s}$ are meromorphic in $\mathbb{C}$, so it is enough to show they agree on some nonempty open subset (identity principle). We take $\{\text{Re}(s)>1\}$. In this region, 
+    \begin{align*}
+        &G^{\star}(\tau,s) = \int_{t=0}^{\infty} \left(\theta_{y^{-1/2}\Lambda_\tau-1}\right)(\tau)t^s \frac{\mathrm{d}t}{t} \\
+        \implies & A_0^{\star}(y,s) = \int_{x=0}^{1} \int_{t=0}^{\infty} \sum_{(m,n)\in\mathbb{Z}^2\setminus 0}^{} e^{-\pi |m \tau + n|^2 t/y}t^s \frac{\mathrm{d}t}{t}\mathrm{d}x.
+    \end{align*}
+    When $\text{Re}(s)>1$, this triple integral/sum is absolutely convergent. Hence $A_0^{\star}(y,s) = I_{m=0} + I_{m \neq 0}$, where 
+    \begin{align*}
+        &I_{m=0} = 2 \sum_{n\ge 1}^{} \int_{x=0}^{1} \int_{t=0}^{\infty} e^{-\pi n^2 t/y}t^s\frac{\mathrm{d}t}{t}\mathrm{d}x, \\
+        &I_{m\neq 0} = 2 \sum_{m\ge 1}^{} \sum_{n \in \mathbb{Z}}^{} \int_{x=0}^{1} \int_{t=0}^{\infty} e^{-\pi (m \tau + n)^2 t /y } e^{-\pi m^2 t y}t^s\frac{\mathrm{d}t}{t}\mathrm{d}x.
+    \end{align*} 
+    We find 
+    \begin{align*}
+        I_{m=0} = 2 \sum_{n\ge 1}^{} (\pi n^2/y)^{-s}\Gamma(s) = 2 \pi^{-s}y^s \Gamma(s)\xi(2s) = 2\xi(2s)y^s
+    \end{align*}
+    (using here the definition $\xi(s) = \pi^{-s/2}\Gamma \left(\frac{s}{2}\right)\zeta(s)$). To compute $I_{m\neq 0}$, first consider 
+    \begin{align*}
+        \sum_{n \in \mathbb{Z}}^{} \int_{x=0}^{1} e^{-\pi (mx + n)^2 t/y} \mathrm{d}x
+    \end{align*} 
+    for fixed $m\ge 1$. Changing variables twice, we get 
+    \begin{align*}
+        =&\frac{1}{m}\sum_{n \in \mathbb{Z}}^{} \int_{x=0}^{m} e^{-\pi (x+n)^2 t/y}\mathrm{d}x = \frac{1}{m}\int_{n \in \mathbb{Z}}^{} \int_{x=n}^{m+n} e^{-\pi x^2 t/y}\mathrm{d}x \\
+        =& \frac{1}{m} m \int_{x=-\infty}^{\infty} e^{-\pi x^2 t/y}\mathrm{d}x = \sqrt{\frac{y}{t}}
+    \end{align*}
+    since we are summing over intervals of length $m$. Hence 
+    \begin{align*}
+        I_{m \neq 0} &= 2 \sum_{m\ge 1}^{} \int_{t=0}^{\infty} \sqrt{y}e^{-\pi m^2 t y}t^{s-\frac{1}{2}}\frac{\mathrm{d}t}{t} = 2 \sum_{m\ge 1}^{} (\pi m^2 y)^{\frac{1}{2}-s} y^{\frac{1}{2}} \Gamma \left(s-\frac{1}{2}\right) \\
+        &= 2 \pi^{\frac{1-2s}{2}} \Gamma \left(\frac{2s-1}{2}\right)\zeta(2s-1)y^{1-s} = 2\xi(2s-1)y^{1-s}.
+    \end{align*}
+\end{proof}
+The non--constant Fourier coefficients will be expressed in terms of the $k$--Bessel functions ($c>0, s \in \mathbb{C}$) \[
+k_s(c) = \int_{t=0}^{\infty} e^{-c(t + t^{-1})}t^s\frac{\mathrm{d}t}{t}.
+\]
+The integrand decays rapidly as $t \to \infty$ and as $t \to 0$. Hence for fixed $c$, $k_s(c)$ is an entire function of $s$.
+\begin{theorem}
+    If $k \in \mathbb{Z}, k\neq 0$, then 
+    \begin{align*}
+        A_k^{\star}(y,s) = 2\sqrt{y}|k|^{s-\frac{1}{2}}\sigma_{1-2s}(|k|)k_{s-\frac{1}{2}}(\pi y |k|),
+    \end{align*}
+    where $\sigma_{1-2s}(|k|) = \sum_{d \mid |k|} d^{1-2s}$.
+\end{theorem}
+\begin{proof}
+    Both the LHS and RHS are entire as functions of $s$, so it is enough to show this holds when $\text{Re}(s)>1$ as in the previous theorem. When $\text{Re}(s)>1$, \begin{align*}
+        A_k^{\star}(y,s) = \int_{x=0}^{1} \int_{t=0}^{\infty} \sum_{(m,n) \in \mathbb{Z}^2-0}^{} e^{-\pi(mx+n)^2 t/y}e^{-\pi m^2 t y} e^{-2\pi i k x}t^s \frac{\mathrm{d}t}{t}\mathrm{d}x.
+    \end{align*}
+    If $m=0$, then we get
+    \begin{align*}
+        \int_{x=0}^{1} 2\sum_{n\ge 1}^{} e^{-\pi n^2 t/y}e^{-\pi m^2 t y}e^{-2\pi i k x}\mathrm{d}x = 0,
+    \end{align*}
+    as $\int_{x=0}^{1} e^{-2 \pi i k x}\mathrm{d}x = 0$ when $k \neq 0$. Hence
+    \begin{align*}
+        A_k^{\star}(y,s) = 2 \sum_{m\ge 1}^{} \int_{t=0}^{\infty} \sum_{n \in \mathbb{Z}}^{} \int_{x=0}^{1} e^{-\pi(mx+n)^2 t/y - 2\pi i k x}\mathrm{d}x e^{-\pi m^2 t y}t^s \frac{\mathrm{d}t}{t}.
+    \end{align*}
+    For fixed $m\ge 1$, we get 
+    \begin{align*}
+        &\sum_{n \in \mathbb{Z}}^{} \int_{x=0}^{1} e^{-\pi (mx + n)^2 t/y - 2\pi kx}\mathrm{d}x = \frac{1}{m}\sum_{n  \in \mathbb{Z}}^{} \int_{x=0}^{m} e^{-\pi (x+n)^2 t/y}e^{-2\pi i k x/m}\mathrm{d}x \\ 
+        =& \frac{1}{m}\sum_{ n \in \mathbb{Z}}^{} \int_{x=n}^{m+n} e^{-\pi x^2 t/y}e^{-2\pi i k x/m}e^{2\pi i k n/m}\mathrm{d}x \\
+        =& \frac{1}{m}\sum_{a \in \mathbb{Z}/m\mathbb{Z}}^{} e^{2\pi i k a / m}\sum_{\substack{n \in \mathbb{Z} \\ n \equiv a \text{ mod }m}}^{} \int_{x = n}^{n+m}e^{-\pi x^2 t/y-2\pi i k x/m} \mathrm{d}x \\
+        =& \frac{1}{m}\sum_{a \in \mathbb{Z}/m\mathbb{Z}}^{} e^{2\pi i k a /m} \int_{x=-\infty}^{\infty} e^{-\pi x^2 t/y - 2\pi i k x/m} \mathrm{d}x.
+    \end{align*}
+    Note that $\sum_{a \in \mathbb{Z}/m\mathbb{Z}}^{} e^{2\pi i k a /m} = \begin{cases}
+        0 & m \nmid k \\
+        m & m \mid k
+    \end{cases}$. Hence if $m \mid k$, then our above sum equals
+    \begin{align*}
+         &\int_{x=-\infty}^{\infty} e^{-\pi x^2 t/y - 2\pi i k x / m}\mathrm{d}x \\
+        =& \int_{x=-\infty}^{\infty} e^{-\pi \left(x \sqrt{\frac{t}{y}} + \frac{ik}{m}\sqrt{\frac{y}{t}}\right)^2}e^{-\pi k^2 y/(m^2 t)}\mathrm{d}x \\
+        =& \sqrt{\frac{y}{t}} e^{-\pi k^2 y/(m^2 t)}.
+    \end{align*}
+    Plugging this back in, we get
+    \begin{align*}
+         &A_k^{\star}(y,s) = 2 \sum_{m \mid |k|}^{} \int_{t=0}^{\infty} \sqrt{\frac{y}{t}}e^{-\pi k^2 y/ (m^2 t)}e^{-\pi m^2 t y }t^{s}\frac{\mathrm{d}t}{t}\\
+        =& 2 \sqrt{y}\sum_{m \mid |k|}^{} \int_{t=0}^{\infty} e^{-\pi |k| y \left(\frac{m^2 t}{|k|} + \frac{|k|}{m^2 t}\right)}t^{s-\frac{1}{2}}\frac{\mathrm{d}t}{t} \\
+        =& 2\sqrt{y} \sum_{m \mid |k|}^{} \left(\frac{m^2}{|k|}\right)^{\frac{1}{2}-s} \int_{t=0}^{\infty} e^{-\pi |k|y(t+t^{-1})}t^{s-\frac{1}{2}} \frac{\mathrm{d}t}{t} \\
+        =& 2 \sqrt{y}k_{s-\frac{1}{2}}(\pi |k|y)|k|^{s-\frac{1}{2}} \left(\sum_{m \mid  |k|}^{} m^{1-2s}\right).
+    \end{align*}
+\end{proof}
+\textbf{Observation.} $A_0^{\star}(y,s) = 2\xi(2s)y^s + 2\xi(2s-1)y^{1-s}$. Plug in $s = \frac{1+it}{2}$ for $t \in \mathbb{R}$ to get 
+\begin{align*}
+    2\xi(1+it)y^{\frac{1+it}{2}}+2\xi \left(1-it\right)y^{\frac{1-it}{2}}.
+\end{align*}
+We hope to show $\xi(1+it)$ is nonvanishing when $t \in \mathbb{R}^\times$. 
+\vspace{1mm}
+ 
+If $\zeta(1+it)=0$, then $\zeta(1-it)=0$, as $\overline{\zeta(1+it)}=\zeta(1-it)$. But then $A_0^{\star}(y,s_0) = 0$ for $s_0 = \frac{1+it}{2}$. For $s = s_0$, $G^{\star}(\tau, s_0)$ behaves ''like a cuspidal automorphic form''. However, there's a general principle that Eisenstein series are orthogonal to cuspidal automorphic forms.
 \end{document}
