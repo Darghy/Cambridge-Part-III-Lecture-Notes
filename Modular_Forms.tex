@@ -2049,4 +2049,98 @@ We hope to show $\xi(1+it)$ is nonvanishing when $t \in \mathbb{R}^\times$.
 \vspace{1mm}
  
 If $\zeta(1+it)=0$, then $\zeta(1-it)=0$, as $\overline{\zeta(1+it)}=\zeta(1-it)$. But then $A_0^{\star}(y,s_0) = 0$ for $s_0 = \frac{1+it}{2}$. For $s = s_0$, $G^{\star}(\tau, s_0)$ behaves ''like a cuspidal automorphic form''. However, there's a general principle that Eisenstein series are orthogonal to cuspidal automorphic forms.
+
+\marginpar{27 Nov 2022, Lecture 23}
+
+\begin{lemma}\label{lemma6.5}
+    \begin{enumerate}[(1)]
+        \item If $\sigma_0<\sigma_1$, $c_0>0$, then $\exists C=C(\sigma_0,\sigma_1,c_0)$ such that $\forall s \in \mathbb{C}, \text{Re}(s) \in [\sigma_0,\sigma_1], ~\forall c \ge c_0$, $|k_s(c)|\le Ce^{-c}$. 
+        \item If $s_0 \in \mathbb{C}, \exists c>0$ such that $k_{s_0}(c) \neq 0$.
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+    \begin{enumerate}[(1)]
+        \item We can write $k_s(c) = \int_{t=1}^{\infty} e^{-c(t + t^{-1})}(t^s+t^{-s})\frac{\mathrm{d}t}{t}$. Hence it's enough to find a bound for $\int_{t=1}^{\infty} e^{-c(t+t^{-1})}t^{\sigma}\frac{\mathrm{d}t}{t}$ when $\sigma$ lies in a compact interval. But this equals
+        \begin{align*}
+            \int_{t=1}^{2} e^{-c(t+t^{-1})}t^{\sigma}\frac{\mathrm{d}t}{t} + \int_{t=2}^{\infty} e^{-c(t+t^{-1})}t^{\sigma}\frac{\mathrm{d}t}{t}.
+        \end{align*}
+        When $t\ge 1, t+ t^{-1} \ge 1$, so $$\int_{t=1}^{2} e^{-c(t + t^{-1})}t^{\sigma}\frac{\mathrm{d}t}{t}\le e^{-c}\int_{t=1}^{2} t^{\sigma-1}\mathrm{d}t  = O(e^{-c}).$$
+        When $t\ge 2$, then $\frac{t}{2}\ge 1$, so $t \ge 1 + \frac{t}{2}$ and $e^{-ct} \le e^{-c}e^{-ct/2}$. Hence 
+        \begin{align*}
+            \int_{t=2}^{\infty} e^{-c(t+t^{-1})}t^{\sigma}\frac{\mathrm{d}t}{t}\le e^{-c}\int_{t=2}^{\infty} e^{-c(t/2+t^{-1})}t^{\sigma}\frac{\mathrm{d}t}{t} \le e^{-c}\int_{t=2}^{\infty} e^{-c_0(t/2 + t^{-1})}t^{\sigma}\frac{\mathrm{d}t}{t} = O(e^{-c}).
+        \end{align*}
+        \item We want to show $k_{s_0}(c)$ is not the zero function as a function of $c>0$. For this, we compute the Mellin transform.
+        \begin{align*}
+            \int_{c=0}^{\infty} k_{s_0}(c)c^s\frac{\mathrm{d}c}{c} = \int_{c=0}^{\infty} \int_{t=0}^{\infty} e^{-ct}e^{-ct^{-1}}c^st^{s_0}\frac{\mathrm{d}c~\mathrm{d}t}{ct}.
+        \end{align*}
+        Let $u = ct, v = ct^{-1}$ with inverses $c = (uv)^2, t = \sqrt{\frac{u}{v}}$, so $\mathrm{d}u = c \mathrm{d}t + t \mathrm{d}c$ and $\mathrm{d}v = -\frac{c}{t^2}\mathrm{d}t + t^{-1}\mathrm{d}c$, so $$\mathrm{d}u \wedge \mathrm{d}v = \frac{c}{t}\mathrm{d}t \wedge \mathrm{d}c - \frac{c}{t}\mathrm{d}c \wedge \mathrm{d}t = - 2v \mathrm{d}c \wedge \mathrm{d}t.$$
+        Hence $\frac{\mathrm{d}c \wedge \mathrm{d}t}{ct} = -\frac{1}{2}\frac{\mathrm{d}u \wedge \mathrm{d}v}{uv}$ and our transform becomes
+        \begin{align*}
+             &\int_{c=0}^{\infty} k_{s_0}(c)c^s \frac{\mathrm{d}c}{c} = \frac{1}{2}\int_{u=0}^{\infty} \int_{v=0}^{\infty} e^{-u}e^{-v} (uv)^{s/2} \left(\frac{u}{v}\right)^{s_0/2}\frac{\mathrm{d}u}{u}\frac{\mathrm{d}v}{v} \\
+            =& \frac{1}{2}\int_{u=0}^{\infty} \int_{v=0}^{\infty} e^{-u}u^{\frac{s+s_0}{2}}e^{-v}v^{\frac{s-s_0}{2}}\frac{\mathrm{d}u}{u}\frac{\mathrm{d}v}{v} = \frac{1}{2}\Gamma \left(\frac{s+s_0}{2}\right) \Gamma \left(\frac{s-s_0}{2}\right).
+        \end{align*}
+        This computation is valid whenever $\text{Re}\left(\frac{s+s_0}{2}\right)>1$ and $\text{Re}\left(\frac{s-s_0}{2}\right) > 1$, which is true for $\text{Re}(s)$ sufficiently large. We know $\Gamma$ is nonvanishing, so for these values of $s$, the Mellin transform of $k_{s_0}(c)$ is not the zero function, so $k_{s_0}(c)$ is not the zero function.
+    \end{enumerate}
+\end{proof}
+\begin{cor}\label{cor6.6}
+    Let $s \in \mathbb{C} \setminus \{0,1\}$. Then
+    \begin{enumerate}[(i)]
+        \item $G^\star(\tau, s)$ is not the zero function as a function of $\tau$ for $s$ fixed.
+        \item $|G^\star(\tau,s)-A_0^\star(y,s)| = O(e^{-\pi y/2})$ as $y \to \infty$.
+        \item $|G^{\star}(\tau,s)| = O(\max(y^{\sigma},y^{1-\sigma}))$ as $y \to \infty$.
+    \end{enumerate}
+\end{cor}
+Here (ii) is the analogue of what we used for holomorphic Eisenstein series, $|G_k(\tau)-G_k(\infty)| = O(e^{-2\pi y})$ as $y \to \infty$. (iii) says that $G^{\star}(\tau,s)$ has ''moderate growth''.
+\begin{proof}
+    \begin{enumerate}[(i)]
+        \item If $G^{\star}(\tau,s) \equiv 0$, then its Fourier series is zero, hence the first coefficient $A_1^\star(y,s) = 2\sqrt{y}k_{s-\frac{1}{2}}(\pi y) \equiv 0$, contradicting Lemma \ref{lemma6.5}.
+        \item $|G^{\star}(\tau,s) - A_0^{\star}(y,s)|\le 2\sum_{k \in \mathbb{Z}_{\neq 0}}^{} \sqrt{y}|k|^{\sigma-\frac{1}{2}}\sigma_{1-2\sigma}(|k|)|k_{s-\frac{1}{2}}(\pi |k| y)|$. Lemma \ref{lemma6.5} shows that if $y_0>0, \exists C>0$ such that $|k_{s-\frac{1}{2}}(\pi |k|y)|\le Ce^{-\pi|k|y}$ if $y>y_0$. Moreover, $\exists N> 1$ such that $|k|^{\sigma-\frac{1}{2}}\sigma_{1-2\sigma}(|k|)\le |k|^N$. Hence for $y\ge y_0$,
+        \begin{align*}
+            |G^{\star}(\tau,s)-A_0^{\star}(y,s)|\le 4\sqrt{y}\sum_{k\ge 1}^{} k^Ne^{-\pi k y} = O(e^{-\pi y/2}).
+        \end{align*}
+        \item As $y \to \infty$, \begin{align*}
+            |G^{\star}(\tau,s)| \le O(e^{-\pi y/2}) + |2\xi(2s)y^s+2\xi(2(1-s))y^{1-s}|\le O(e^{-\pi y/2}) + C \max(y^{\sigma},y^{1-\sigma}).
+        \end{align*}
+    \end{enumerate}
+\end{proof}
+\begin{theorem}
+    If $t \in \mathbb{R}^\times$, then $\zeta(1+it) \neq 0$. 
+\end{theorem}
+\textbf{Remark.} This allows us to deduce the Prime Number Theorem.
+\begin{proof}
+    Suppose $\exists t \in \mathbb{R}^\times$ such that $\zeta(1+it) = 0$. Then $\overline{\zeta(s)} = \zeta(\overline{s})$, so $\zeta(1-it) = 0$. If $s_0 = \frac{1+it}{2}$, then 
+    \begin{align*}
+        A_0^{\star}(y,s_0) = 2\xi(1+it)y^{s_0} + 2\xi(1-it)y^{1-s_0} = 0.
+    \end{align*}
+    By Corollary \ref{cor6.6} (ii), we have $|G^\star(\tau,s_0)| = O(e^{-\pi y/2})$ as $y \to \infty$. Consider
+    \begin{align*}
+        F(s) = \int_{\Gamma(1)\setminus \mathfrak{h}}^{} G^\star(\tau,s)\overline{G^\star(\tau,s_0)} \frac{\mathrm{d}x\mathrm{d}y}{y^2}
+    \end{align*}
+    for $s \in \mathbb{C} \setminus \{0,1\}$. We claim this is absolutely convergent for any $s \in \mathbb{C} \setminus \{0,1\}$ and defines a holomorphic function in $\mathbb{C}\setminus \{0,1\}$.\footnote{Why? The integrand is holomorphic as a function of $s$, so the key thing is the convergence of the integral and then the holomorphity will follow by Morera's Theorem.} For this, we need to show
+    \begin{align*}
+        \int_{\mathfrak{f'}}|G^{\star}(\tau,s)||G^{\star}(\tau,s_0)|\frac{\mathrm{d}x\mathrm{d}y}{y^2}<\infty. 
+    \end{align*}
+    But the integrand is $O(e^{-\pi y/2}\max(y^{\sigma},y^{1-\sigma}))$, which ensures convergence for any $s \neq 0,1$. We now compute $F(s)$ by unfolding. When $\text{Re}(s)>1$, we have
+    \begin{align*}
+        G^{\star}(\tau,s) = 2\xi(2s)E(\tau,s)
+    \end{align*}
+    for $E(\tau,s) = \sum_{\gamma \in \Gamma_{\infty}\setminus \Gamma(1)} \text{Im}(\gamma \tau)^s$. When $\text{Re}(s)>1$, we plug in to get
+    \begin{align*}
+        F(s) =& 2\xi(2s)\int_{\Gamma(1)\setminus \mathfrak{h}}^{} \sum_{\gamma \in \Gamma_{\infty}\setminus \Gamma(1)}^{} \text{Im}(\gamma \tau)^s \overline{G^\star(\gamma \tau, s_0)}\frac{\mathrm{d}x\mathrm{d}y}{y^2}\\
+        \stackrel{?}{=} & 2\xi(2s)\int_{x=-\frac{1}{2}}^{\frac{1}{2}}\int_{y=0}^{\infty} \overline{G^{\star}(\tau,s_0)}y^s \frac{\mathrm{d}x\mathrm{d}y}{y^2}, 
+    \end{align*}
+    provided that $\int_{x=-\frac{1}{2}}^{\frac{1}{2}} \int_{y=0}^{\infty}|G^{\star}(y,s_0)|y^{\sigma}|\frac{\mathrm{d}x\mathrm{d}y}{y^2}<\infty$. But note this is finite when $\text{Re}(s) = \sigma$ is big enough, since $|G^\star(\tau,s_0)| = O(e^{-\pi y/2})$ as $y \to \infty$ and as $y \to 0$, we note that $|G^{\star}(\tau,s_0)|$ is bounded in $\mathfrak{h}$ as it is $\Gamma(1)$--invariant and it is bounded in $\mathfrak{f}$. When $\sigma$ is large enough,
+    \begin{align*}
+        F(s) = 2\xi(2s)\int_{y=0}^{\infty} \underbrace{\int_{x=-\frac{1}{2}}^{\frac{1}{2}} \overline{G^\star(x+iy,s_0)}\mathrm{d}x}_{\overline{A_0^\star(y,s_0) = 0}}y^s\frac{\mathrm{d}y}{y^2} = 0.
+    \end{align*} 
+    But $F$ is holomorphic in $\mathbb{C}\setminus \{0,1\}$, so $F \equiv 0$ in $\mathbb{C} - \{0,1\}$ by the identity principle. Now plug in $s = s_0$ to get
+    \begin{align*}
+        F(s_0) =& \int_{\Gamma(1)\setminus \mathfrak{h}}^{} G^*(\tau,s_0)\overline{G^\star(\tau,s_0)}\frac{\mathrm{d}x\mathrm{d}y}{y^2} \\
+        =& \int_{\Gamma(1)\setminus \mathfrak{h}}^{} |\Gamma^\star(\tau,s_0)|^2\frac{\mathrm{d}x\mathrm{d}y}{y^2} = 0.
+    \end{align*}
+    We know $G^\star(\tau,s_0)$ is a $C^{\infty}$--function, hence continuous and not uniformly zero by (i) of Corollary \ref{cor6.6}. Hence $\int_{\Gamma(1)\setminus \mathfrak{h}}^{} |G^\star(\tau,s_0)|^2 \frac{\mathrm{d}x\mathrm{d}y}{y^2} \neq 0$, a contradiction.
+\end{proof}
+
+This concludes the examinable material for this course.
+
 \end{document}
