@@ -10,6 +10,7 @@
 \usepackage{tcolorbox}
 \usepackage{ stmaryrd }
 \tcbuselibrary{theorems}
+\usepackage{bbm}
 \usepackage{babel}
 \usepackage{enumerate}
 \usepackage{amsmath, amssymb, amsthm}
@@ -2142,5 +2143,59 @@ Here (ii) is the analogue of what we used for holomorphic Eisenstein series, $|G
 \end{proof}
 
 This concludes the examinable material for this course.
+
+\marginpar{29 Nov 2022, Lecture 24}
+\vspace{1mm}
+ 
+The last lecture is nonexaminable. We will discuss the relation between modular forms and the Langlands program -- in particular, the relation with Galois representations.
+\vspace{1mm}
+ 
+Let $K/\mathbb{Q}$ be a normal extension (e.g. $\overline{\mathbb{Q}}$). We define $\text{Gal}(K/\mathbb{Q}) = \text{Aut}(K/\mathbb{Q})$. We make this into a topological group by declaring each subgroup $\text{Gal}(K/M)$ where $K/M/\mathbb{Q}$ is an intermediate field, finite over $\mathbb{Q}$, to be open.
+\vspace{1mm}
+ 
+A \textbf{Galois representation} is a continuous representation $\rho : \text{Gal}(K/\mathbb{Q}) \to GL_n(L)$ for $L$ a local field (e.g. $L=\mathbb{C}$ or $L$ a finite extension of $\mathbb{Q}_p$).
+
+\begin{example}
+    Let $E/\mathbb{Q}$ be an elliptic curve, given by $y^2 = x^3+ax+b$ for $a, b \in \mathbb{Q}$. We projectivize this by writing $zy^2 = x^3 + axz^2 + bz^3$. It is a fact that $E$ gives rise to a compatible system of Galois representations $\rho_{E,p} : G_{\mathbb{Q}} \to GL_2(\mathbb{Q}_p)$ for $G_{\mathbb{Q}} = \text{Gal}(\overline{\mathbb{Q}}/\mathbb{Q})$ (we can take $G_{\mathbb{Q}} \curvearrowright E[p^{\infty}](\overline{\mathbb{Q}})$ or some Etale cohomology setup).
+    \vspace{1mm}
+     
+    $r_{E,p}$ will be unramified at all primes $l \nmid \Delta_e p$. This means that we can choose for any prime $l$ an embedding $\overline{\mathbb{Q}} \hookrightarrow \overline{\mathbb{Q}_l}$ extending $\mathbb{Q} \hookrightarrow \mathbb{Q}_l$. Then we get a map $G_{\mathbb{Q}_l} \to G_{\mathbb{Q}}$ by $\sigma \curvearrowright \overline{\mathbb{Q}_l} \mapsto \sigma|_{\overline{\mathbb{Q}}}$, the ''decomposition group''.
+    \vspace{1mm}
+     
+    We say $\rho_{E,p}$ is unramified at $l$ if $\rho_{E,p}|_{G_{\mathbb{Q}_l}} : G_{\mathbb{Q}_l} \to GL_2(\mathbb{Q}_p)$ factors through $\text{Gal}(\mathbb{Q}_l^{\text{ur}} /\mathbb{Q}_l)$ where $\mathbb{Q}_l^{\text{ur}}\le \overline{\mathbb{Q}_l}$ is the maximal unramified extension. If our representation is unramified at $l$, then $\rho_{E,p}(\text{Frob}_l)$ is defined. In particular, we get $\det(X-\rho_{E,p}(\text{Frob}_l))$ for any $l$. $\det(X-\rho_{E,p}(\text{Frob}_l))$ does not depend on any choices, and equals $X^2-a_l X + l$, where $a_l = l + 1 - |E(\mathbb{F}_l)|$.
+\end{example}
+What's the relation with modular forms? Modular forms also give rise to Galois representations.
+\begin{theorem}[Deligne, 1969]
+    Let $f \in S_k(\Gamma(1))$ be a normalized eigenform and let $\lambda$ lie in a non--archimedean place of $K_f = \mathbb{Q}(\{a_n(f)_{n\ge 1}\})$. Then there exists a Galois representation $\rho_{F,\lambda} : G_\mathbb{Q} \to GL_2(k_{f,\lambda})$ which is unramified at all primes $l \nmid \lambda$ and satisfies $\det(X-\rho_{f,\lambda}(\text{Frob}_l)) = X^2 - a_l(f)X + l^{k-1}$.
+\end{theorem}
+These representations can be applied to number--theoretic questions.
+\begin{example}
+    \begin{theorem}[Kummer]
+        Let $p$ be an odd prime. Then $p$ is regular $\iff$ for each even $k=2,4,\ldots,p-3$, $p$ does not divide the numerator of $B_k$ (the $k^{\text{th}}$ Bernoulli number).
+    \end{theorem}
+    Here $p$ is regular if $p$ does not divide the class number of the $p^{\text{th}}$ cyclotomic field, i.e. $p \nmid |\text{Pic}(\mathbb{Z}[e^{2\pi i/p}])|$.
+    \vspace{1mm}
+     
+    Kummer could prove FLT for the exponent $p$ for regular primes $p$ with this.
+    \begin{theorem}[Herbrand--Ribet, ~1975]
+        Consider the action of $\text{Gal}(\mathbb{Q}(e^{2\pi i/p})/\mathbb{Q}) = (\mathbb{Z}/p\mathbb{Z})^\times$ on $\text{Pic}(\mathbb{Z}[e^{2\pi i/p}])[p] = \bigoplus H_k$ (i.e. on the $p$--torsion of the ideal class group on the ring of integers of the $p$--cyclotomic field) for $H_k \{x \in \text{Pic}(\mathbb{Z}[e^{2\pi i /p}]) \mid ~\forall \sigma \in (\mathbb{Z}/p\mathbb{Z})^\times, \sigma(x)=\sigma^k x\}$. Then if $k$ is even, $2\le k\le p-3$, then $p \mid (\text{numerator of }B_k) \iff H_{1-k} \neq 0$.
+    \end{theorem}
+    The hardest part of this is to prove that if $p \mid B_k$, then $H_{1-k} \neq 0$. To show this, consider $F_k = -\frac{B_k}{2k}+\sum_{n\ge 1}^{} \sigma_{k-1}(n)q^n$. The constant term vanishes modulo $p$, so there is a congruence modulo $p$ between $F_k$ and a cuspidal normalized eigenform (e.g. we have already seen that for $k=12$, $F_{12} \equiv \Delta \pmod{691}$, i.e. their $q$--expansion coefficients are equivalent modulo 691).
+    \vspace{1mm}
+     
+    Let $f$ be the normalized eigenform which is cuspidal and congruent to $F_k$ modulo $p$. Then $\rho_{f,p} : G_\mathbb{Q} \to GL_2(k_f,p)$ has the property that the associated residual representation $\rho_{f,p} : G_{\mathbb{Q}} \to GL_2(k(p))$ is isomorphic to $\mathbbm{1} \oplus \chi_{\text{cyc}}^{k-1}$.
+    \vspace{1mm}
+     
+    Here the associated residual representation is the unique semisimple representation (up to isomorphism) such that for all unramified primes $l$, $\det(X-\rho_{f,p}(\text{Frob}_l))\text{ mod }p = \det(X-\overline{\rho}_{f,p}(\text{Frob}_l))$.
+    \vspace{1mm}
+     
+    In this case, $$\det(X-\overline{\rho}_{f,p}(\text{Frob}_l)) = X^2 - (1+l^{k-1})X + l^{k-1} = \det(X-(\mathbbm{1}\oplus \chi_{\text{cyc}}^{k-1})(\text{Frob}_l)).$$ $\rho_{f,p}:G_\mathbb{Q} \to GL_2(k_{f,p})$ factors through $\text{Gal}(L_{f,p}/\mathbb{Q})$ for $L_{f,p} = \overline{\mathbb{Q}}^{\text{ker}\rho_{p,p}}$, the ''field cut out by $\rho_{p,p}$''. The observation/proof of Ribet: the existence of this congruence forces $L_{f,p}$ to contain an everywhere unramified extension of $\mathbb{Q}(e^{2\pi/p})$, which by class field theory shows $H_{1-k}\neq 0$.
+\end{example}
+2014: ''Main conjecture of Iwasawa theory for $GL_2$'', proved by Skinner--Urban. Their work fed into the work of Bhargava, Skinner, and Zhang, who proved that the BSD conjecture holds for ''most'' elliptic curves over $\mathbb{Q}$.
+\vspace{1mm}
+ 
+Big picture: If we consider $L^2\left(GL_{n}(\mathbb{Q})\setminus GL_n(\mathbb{A}_{\mathbb{Q}}/\mathbb{R}_{\ge 0})\right) \curvearrowright GL_n(\mathbb{A}_\mathbb{Q})$ and we have an irreducible subrepresentation $\pi$, then that would be an example of an automorphic representation of $GL_n/\mathbb{A}_\mathbb{Q}$. The most general part of the Langlands program gives a conjecture that should be a bijection between $$\{\text{cuspidal automorphic representations of }GL_n(\mathbb{A}/\mathbb{Q})\}$$ and $$\{\text{compatible systems of irreducible representations of }(\rho_{\lambda}: G_{\mathbb{Q}} \to GL_n(\overline{\mathbb{Q}}_\lambda))_{\lambda}\}.$$ We are very far from proving this. One case we understand quite well is taking $n=2$, so $\pi$ corresponds to holomorphic modular forms.
+
+
 
 \end{document}
