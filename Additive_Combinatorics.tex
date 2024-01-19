@@ -1,0 +1,165 @@
+\documentclass{article}
+%build with recipe latexmk
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+
+\usepackage{tcolorbox}
+\tcbuselibrary{theorems}
+\usepackage{babel}
+\usepackage{enumerate}
+\usepackage{amsmath, amssymb, amsthm}
+%\usepackage{a4wide}
+\usepackage{float}
+\usepackage{tikz-cd}
+\usepackage{tikz}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{wrapfig}
+\usepackage{setspace}
+\setstretch{1.1}
+\usepackage{color}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true, %set true if you want colored links
+    linktoc=all,     %set to all if you want both sections and subsections linked
+    linkcolor=black,  %choose some color if you want links to stand out
+}
+
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{cor}[theorem]{Corollary}
+\newtheorem{prop}[theorem]{Proposition}
+\newtheorem{example}{Example}[section]
+\newtheorem{defn}{Definition}[section]
+
+\title{Introduction to Additive Combinatorics \\ Part III
+    \\ \large
+    Lectured by Julia Wolf
+}
+ 
+\author{Artur Avameri}
+\date{}
+ 
+\setcounter{section}{0}
+ 
+\begin{document}
+\maketitle
+\tableofcontents
+\newpage
+ 
+\section{Fourier--analytic techniques}
+
+\marginpar{19 Jan 2024, Lecture 1}
+
+
+Let $G = \mathbb{F}_{p^n}$ for $p$ a small fixed prime (usually $p = 2,3,5$) and $n$ is large (often we consider $n \to \infty$).
+\vspace{1mm}
+ 
+\textbf{Notation.} Given a finite set $B$ and any function $f : B \to \mathbb{C}$, we write $\mathbb{E}_{x \in B}f(x)$ to mean $\frac{1}{B}\sum_{x \in B} f(x)$. Also write $\omega = e^{2\pi i /p}$ for the $p^{\text{h}}$ root of unity. Note that $\sum_{a \in \mathbb{F}_p}^{} \omega^a = 0$.
+
+\begin{defn}
+    Given $f : \mathbb{F}_{p^n} : \mathbb{C}$, we define its \textbf{Fourier transform} $\hat{f} : \mathbb{F}_{p^n} \to \mathbb{C}$ by \[
+    \hat{f}(t) = \mathbb{E}_{x \in \mathbb{F}_{p^n}} f(x)\omega^{x \cdot t} ~\forall  t \in \mathbb{F}_{p^n}
+    \] 
+    where $x \cdot t$ is the standard scalar product.
+\end{defn}
+It is easy to verify the \textbf{inversion formula}:
+\[
+f(x) = \sum_{t \in \mathbb{F}_{p^n}}^{} \hat{f}(t) \omega^{-x \cdot t} ~\forall  x \in \mathbb{F}_{p^n}.
+\]
+Indeed, 
+\begin{align*}
+    &\sum_{t \in \mathbb{F}_{p^n}}^{} \hat{f}(t) \omega^{-x \cdot t} = \sum_{t \in \mathbb{F}_{p^n}}^{} \left(\mathbb{E}_y f(y) \omega^{y \cdot t} \right)\omega^{-x \cdot t}\\
+    =& \mathbb{E}_y f(y) \underbrace{\sum_{t \in \mathbb{F}_{p^n}}^{} \omega^{(y-x)\cdot t}}_{p^n 1_{\{y=x\}}} = f(x).
+\end{align*}
+
+\textbf{Remark.} We could use an unnormalized sum in our definition and a normalized sum in the inversion formula, or a minus sign in our definition and a plus sign in the inversion formula -- this doesn't matter as long as we're consistent.
+
+\vspace{1mm}
+ 
+Given a subset $A$ of a finite group $G$, write:
+\begin{itemize}
+    \item $1_A$ for the \textbf{characteristic function} of $A$, i.e. $1_A(x) = \begin{cases}
+            1 & \text{if }x \in A\\
+            0 & \text{if } x \not\in A
+    \end{cases}$. This is also called the \textbf{indicator function}.
+    \item $f_A$ for the \textbf{balanced function} of $A$, i.e. $f_A(x) = 1_A(x) - \alpha$, where $\alpha = \frac{|A|}{|G|}$.
+    \item $\mu_A$ for the \textbf{characteristic measure} of $A$, i.e. $\mu_A(x) = \alpha^{-1} 1_A(x)$.
+\end{itemize}
+Note $\mathbb{E}_{x \in G}f_A(x) = 0$ and $\mathbb{E}_{x \in G}\mu_A(x)=1$. Given $A \subset \mathbb{F}_{p^n}$, we have \[
+\hat{1}_A(t) = \mathbb{E}_{x \in \mathbb{F}_{p^n}} 1_A(x)\omega^{x \cdot t}.
+\]
+At $t=0$, we get $\hat{1}_A(0) = \mathbb{E}_{x \in \mathbb{F}_{p^n}}1_A(x) = \alpha$.
+\vspace{1mm}
+ 
+Writing $-A = \{-a \mid a \in A\}$, we have 
+\begin{align*}
+    &\hat{1}_{-A}(t) = \mathbb{E}_{x \in \mathbb{F}_{p^n}} 1_{-A}(x) \omega^{x\cdot t} = \mathbb{E}_{x \in \mathbb{F}_{p^n}} 1_A(-x)\omega^{x \cdot t} \\
+    \stackrel{y=-x}{=}&  \mathbb{E}_{y \in \mathbb{F}_{p^n}} 1_A(y) \omega^{-y \cdot t} = \overline{\mathbb{E}_{y \in \mathbb{F}_{p^n}}1_A(y)\omega^{y \cdot t}} = \overline{\hat{1}_A(t)}.
+\end{align*}
+\begin{example}\label{ex1.2}
+    Let $V \le \mathbb{F}_{p^n}$. Then 
+    \begin{align*}
+        &\hat{1}_V(t) = \mathbb{E}_{x \in \mathbb{F}_{p^n}}1_V(x)\omega^{x\cdot t} = \frac{|V|}{p^n} 1_{\{x\cdot t = 0 ~\forall x \in V\}} = \frac{|V|}{p^n}1_{V^{\perp}}(t),
+    \end{align*}
+    so $\hat{\mu}_V(t) = 1_{V^{\perp}}(t)$.
+    (Here we use the fact that if $t \not\in \{x \cdot t = 0 ~\forall x \in V\}$, then $x\cdot t$ runs over the values uniformly and the sum is zero - details left as an exercise).
+\end{example}
+\begin{example}
+    Let $R \subset \mathbb{F}_{p^n}$ be such that each $x \in \mathbb{F}_{p^n}$ lies in $R$ independently with probability $\frac{1}{2}$. Then with high probability (i.e. $\mathbb{P} \to 1$ as $n \to \infty$),
+    \[
+    \sup_{t \neq 0} |\hat{1}_R(t)| = O\left(\sqrt{\frac{\log (p^n)}{p^n}}\right).
+    \]
+    Proving this is on Ex. Sheet 1. This is proved using a Chernoff--type bound: given complex--valued independent random variables $X_1,\ldots,X_n$ with mean 0, $~\forall \theta \ge 0$, 
+    \[
+    \mathbb{P}\left(\left|\sum_{i=1}^{n} X_i\right| \ge \theta \sqrt{\sum_{i=1}^{n} ||X_i||^2_{L^\infty(\mathbb{P})}}\right) \le 4\exp \left(-\theta^2/4\right).
+    \]
+\end{example}
+\begin{example}
+    Let $Q = \{x \in \mathbb{F}_{p^n} \mid x \cdot x = 0\}$. Then $|Q| = \left(\frac{1}{p} + O(p^{-n}) \right)p^n$ and $\sup_{t \neq 0}|\hat{1}_Q(t)| = O(p^{-n/2})$. This is again on Ex. Sheet 1.
+\end{example}
+\textbf{Notation.} Given $f,g : \mathbb{F}_{p^n} \to \mathbb{C}$, write \[
+\langle f,g \rangle = \mathbb{E}_{x \in \mathbb{F}_{p^n}}f(x)\overline{g(x)}
+\]
+and \[
+\langle \hat{f},\hat{g}\rangle = \sum_{t \in \mathbb{F}_{p^n}}^{} \hat{f}(t)\overline{\hat{g}(t)}.
+\]
+Consequently, $||f||_2^2 = \mathbb{E}_x |f(x)|^2$ and $||\hat{f}||_2^2 = \sum_{t}^{} |\hat{f}(t)|^2$.
+
+TODO: all the definitions/examples/lemmas follow the same numbering
+
+\begin{lemma}
+    The following hold for all $f, g : \mathbb{F}_{p^n} \to \mathbb{C}$:
+    \begin{enumerate}[(i)]
+        \item $\langle f,g \rangle = \langle \hat{f}, \hat{g} \rangle$ (Plancheel's identity).
+        \item $||f||_2 = ||\hat{f}||_2$ (Parseval's identity).
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+    Exercise.
+\end{proof}
+\begin{defn}
+    Let $\rho > 0$ and $f : \mathbb{F}_{p^n} \to \mathbb{C}$. Define the \textbf{$\rho$--large spectrum} of $f$ to be
+    \[
+    \text{Spec}_{\rho}(f) = \{t \in \mathbb{F}_{p^n} \mid |\hat{f}(t)| \ge \rho ||f||_1\}.
+    \]
+\end{defn}
+\begin{example}
+    By Example \ref{ex1.2}, if $f = 1_V$ with $V \le \mathbb{F}_{p^n}$, then $\forall \rho >0$, $\text{Spec}_{\rho}(f) = V^\perp$.
+\end{example}
+\begin{lemma}
+    For all $\rho > 0$, $|\text{Spec}_{\rho}(f)| \le \rho^{-2}\frac{||f||_2^2}{||f||_1^2}$.
+\end{lemma}
+\begin{proof}
+    By Parseval,
+    \begin{align*}
+        ||f||_2^2 = ||\hat{f}||_2^2\ge \sum_{t \in \text{Spec}_{\rho}(f)}^{} |\hat{f}(t)^2| \ge |\text{Spec}_{\rho}(f)|(\rho ||f||_1)^2.
+    \end{align*}
+\end{proof}
+
+\end{document}
+ 
