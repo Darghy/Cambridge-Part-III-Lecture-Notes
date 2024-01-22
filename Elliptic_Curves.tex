@@ -53,6 +53,9 @@
  
 \section{Introduction}
 
+\marginpar{19 Jan 2024, Lecture 1}
+
+
 The best books for the course include \textit{The arithmetic of elliptic curves} by Silverman, Springer 1996, and \textit{Lectures on elliptic curves} by Cassels, CUP 1991. 
 
 \section{Fermat's Method of Infinite Descent}
@@ -115,12 +118,98 @@ In this course, we study $E(K)$ for $K$ a finite field, local field, number fiel
  
 Lemma \ref{lemma1.2} and Theorem \ref{theorem1.3} show that if $E : y^2 = x^3-x$, then $E(\mathbb{Q}) = \{0, (0,0), (\pm 1, 0)\}$.
 
-\begin{cor}
+\begin{cor}\label{cor1.5}
     Let $E/K$ be an elliptic curve. Then $E(K(t)) = E(K)$.
 \end{cor}
 \begin{proof}
     WLOG $K = \overline{K}$. By a change of coordinates, we may assume $y^2 = x(x-1)(x-\lambda)$ for some $\lambda \in K\setminus \{0,1\}$. Suppose $(x,y) \in E(K(t))$. Write $x = \frac{u}{v}$ for $u,v \in K(t)$ coprime. Then $w^2 = uv(u-v)(u-\lambda v)$ for some $w \in K[t]$. Unique factorization in $K[t]$ shows that $u,v, u-v, u- \lambda v$ are all squares, so by Lemma \ref{lemma1.4}, $u, v \in K$, so $x, y \in K$.
 \end{proof}
+
+\section{Some remarks on algebraic curves}
+
+\marginpar{22 Jan 2024, Lecture 2}
+
+In this section, work over an algebraically closed field $K = \overline{K}$.
+
+\begin{defn}\label{defn2.1}
+    A plane curve $C = \{f(x,y) = 0\} \subset \mathbb{A}^2$ (for $f \in K[x,y]$ irreducible) is \textbf{rational} if it has a rational parametrization, i.e. $\exists \phi, \psi \in K(t)$ such that
+    \begin{enumerate}[(i)]
+        \item The map $\mathbb{A}^1 \to \mathbb{A}^2$ by $t \mapsto (\phi(t), \psi(t))$ is injective on $\mathbb{A}^1\setminus \{\text{finite set}\}$.
+        \item $f(\phi(t),\psi(t))=0$ in $K(t)$.
+    \end{enumerate}
+\end{defn}
+\begin{example}
+    \begin{enumerate}[(a)]
+        \item Any nonsingular conic is rational. For example, for $x^2+y^2=1$, take a line with slope $t$ through $(-1,0)$ (the anchor) and solve to get the rational parametrization $(x,y) = \left(\frac{1-t^2}{1+t^2},\frac{2t}{1+t^2}\right)$.
+        \item Any singular plane cubic is rational, for example $y^2=x^3$ giving $(x,y) = (t^2, t^3)$ with the anchor at the singularity $(0,0)$ and $y^2 = x^2(x+1)$ with the parametrization to be computed on Ex. Sheet 1 (anchor still at $(0,0)$).
+        \item Corollary \ref{cor1.5} shows that elliptic curves are not rational.
+    \end{enumerate}
+\end{example}
+\textbf{Remark.}
+The genus $g(C) \in \mathbb{Z}_{\ge 0}$ is an invariant of a smooth projective curve $C$. If $K=\mathbb{C}$, then $g(C)$ is the genus of the Riemann surface. A smooth plane curve $C \subset \mathbb{P}^2$ of degree $d$ has genus $g(C) = \frac{(d-1)(d-2)}{2}$.
+\begin{prop}
+    (Here we still assume $K = \overline{K}$). Let $C$ be a smooth projective curve.
+    \begin{itemize}
+        \item $C$ is rational (see Definition \ref{defn2.1})$\iff$ $g(C)=0$.
+        \item $C$ is an elliptic curve $\iff$ $g(C)=1$.
+    \end{itemize}
+\end{prop}
+\begin{proof}
+    \begin{enumerate}[(i)]
+        \item Omitted.
+        \item $(\implies)$: Check $C$ is a smooth plane curve in $\mathbb{P}^2$ (see Ex. Sheet 1) and use the above remark.
+        \vspace{1mm}
+         
+        $(\impliedby)$: We will see this later.
+    \end{enumerate}
+\end{proof}
+
+\vspace{1mm}
+ 
+\textbf{Order of vanishing.} Let $C$ be an algebraic curve with function field $K(C)$ and let $P \in C$ be a smooth point. Write $\text{ord}_P(f)$ for the order of vanishing of $f \in K(C)$ at $P$ (which is negative if $f$ has a pole at $P$).
+\vspace{1mm}
+ 
+\textbf{Fact.} $\text{ord}_P : K(C)^\times \to \mathbb{Z}$ is a discrete valuation, i.e. $\text{ord}_P(f_1f_2) = \text{ord}_P(f_1) + \text{ord}_P(f_2)$ and $\text{ord}_P(f_1+f_2)\ge \min(\text{ord}_P(f_1),\text{ord}_P(f_2))$. 
+
+\begin{defn}
+    We say $t \in K(C)^\times$ is a \textbf{uniformizer} at $P$ if $\text{ord}_P(t)=1$.
+\end{defn}
+\begin{example}
+    $C =\{g = 0\} \subset \mathbb{A}^2$ for $g \in K[x,y]$. Then $K(C) = \text{Frac}\left(\frac{K[x,y]}{(g)}\right)$. Write $g = g_0+g_1(x,y) + g_2(x,y) + \ldots$ for $g_i$ homogeneous of degree $i$. Suppose $P = (0,0)$ is a smooth point, e.g. $g_0=0$ and let $g_1(x,y)=\alpha x + \beta y$ with $\alpha,\beta$ not both zero ($\alpha x + \beta y =0$ gives a tangent to the curve at $P$). Let $\gamma,\delta \in K$ and consider also the line $\gamma x + \delta y$ through $P$. Then it is a fact that $\gamma x + \delta y \in K(C)$ is a uniformizer at $P$ if and only if $\alpha \delta - \beta \gamma \neq 0$. 
+\end{example}
+\begin{example}\label{ex2.3}
+    Consider $\{y^2 = x(x-1)(x-\lambda)\} \subset \mathbb{A}^2$ for $\lambda \neq 0,1$ and consider its projective closure by taking $x =\frac{X}{Z}, y = \frac{Y}{Z}$ to get $\{Y^2Z = X(X-Z)(X-\lambda Z)\} \subset \mathbb{P}^2$. This has only one point at infinity, $P = (0 : 1 : 0)$. Our aim is to compute $\text{ord}_P(x)$ and $\text{ord}_P(y)$.
+    \vspace{1mm}
+     
+    For this, put $t = \frac{X}{Y}, w =\frac{Z}{Y}$, so $w \stackrel{(\dagger)}{=}  t(t-w)(t-\lambda w) $. Now $P$ is the point $(t,w) = (0,0)$, which is a smooth point with $\text{ord}_P(t) = \text{ord}_P(t-w) = \text{ord}_P(t-\lambda w) = 1$, so $(\dagger)$ gives $\text{ord}_P(w) = 3$. We now find
+    \begin{align*}
+        &\text{ord}_P(x) = \text{ord}_P\left(\frac{X}{Z}\right) = \text{ord}_P\left(\frac{t}{w}\right) = 1-3 = -2\\
+        &\text{ord}_P(y) = \text{ord}_P\left(\frac{Y}{Z}\right) = \text{ord}_P\left(\frac{1}{w}\right) = -3.
+    \end{align*}
+\end{example}
+
+\textbf{Riemann--Roch space.} Let $C$ be a smooth projective curve. 
+\begin{defn}
+    A \textbf{divisor} is a formal sum of points on $C$, say $D = \sum_{P \in C}^{} n_P P$ where $n_P \in \mathbb{Z}$ and $n_P = 0$ for all but finitely many $P \in C$. We say $\text{deg }D= \sum_{P \in C}^{} n_P$.
+    \vspace{1mm}
+     
+    $D$ is \textbf{effective} (written $D\ge 0$) if $n_P \ge 0 ~\forall P \in C$. If $f \in K(C)^\times$, then $\text{div}(f) = \sum_{P \in C}^{} \text{ord}_P(f)P$. The Riemann--Roch space of $D \in \text{Div}(C)$ is  
+    \[
+        \mathcal{L}(D) = \{f \in K(C)^\times \mid \text{div}(f) + D \ge 0\} \cup \{0\},
+    \]
+    i.e. the $K$--vector space of rational functions on $C$ with ''poles no worse than specified by $D$''.
+\end{defn}
+We quote Riemann--Roch for surfaces of genus 1: We have
+\begin{align*}
+    \text{dim }\mathcal{L}(D) = \begin{cases}
+        \text{deg }D &\text{if deg }D>0\\
+        0 \text{ or }1 &\text{if deg }D=0\\
+        0 &\text{if deg }D<0.
+    \end{cases}
+\end{align*}
+\begin{example}
+    We revisit Example \ref{ex2.3}. We have $\mathcal{L}(2P) = \langle 1,x \rangle$ and $\mathcal{L}(3P) = \langle 1,x,y \rangle$.
+\end{example}
 
 \end{document}
  
