@@ -154,7 +154,7 @@ Consequently, $||f||_2^2 = \mathbb{E}_x |f(x)|^2$ and $||\hat{f}||_2^2 = \sum_{t
 \begin{example}
     By Example \ref{ex1.2}, if $f = 1_V$ with $V \le \mathbb{F}_{p}^n$, then $\forall \rho >0$, $\text{Spec}_{\rho}(f) = V^\perp$.
 \end{example}
-\begin{lemma}
+\begin{lemma}\label{lemma1.8}
     For all $\rho > 0$, $|\text{Spec}_{\rho}(f)| \le \rho^{-2}\frac{||f||_2^2}{||f||_1^2}$.
 \end{lemma}
 \begin{proof}
@@ -162,6 +162,78 @@ Consequently, $||f||_2^2 = \mathbb{E}_x |f(x)|^2$ and $||\hat{f}||_2^2 = \sum_{t
     \begin{align*}
         ||f||_2^2 = ||\hat{f}||_2^2\ge \sum_{t \in \text{Spec}_{\rho}(f)}^{} |\hat{f}(t)^2| \ge |\text{Spec}_{\rho}(f)|(\rho ||f||_1)^2.
     \end{align*}
+\end{proof}
+
+\marginpar{22 Jan 2024, Lecture 2}
+
+\begin{defn}
+    Given $f, g : \mathbb{F}_p^n \to \mathbb{C}$, define their \textbf{convolution} $f * g :\mathbb{F}_p^n \to \mathbb{C}$ by $$f*g(x) = \mathbb{E}_{y \in \mathbb{F}_p^n}f(y)g(x-y) ~\forall x \in \mathbb{F}_p^n.$$
+\end{defn}
+\begin{example}
+    Given $A, B \subset \mathbb{F}_p^n$, 
+    \begin{align*}
+        1_A * 1_B(x) &= \mathbb{E}_{y \in \mathbb{F}_p^n}1_A(y)1_B(x-y) = \frac{1}{p^n}|A \cap (x-B)| \\
+        &= \frac{1}{p^n} \# \text{ways }x \text{ can be written as }x=a+b \text{ with }a \in A, b \in B.
+    \end{align*}
+    In particular, the support of $1_A * 1_B$ is the \textbf{sum set} \[
+    A+B = \{a+b \mid a \in A, b \in B\}
+    \]
+    of $A$ and $B$.
+\end{example}
+\begin{lemma}
+    Given $f, g : \mathbb{F}_p^n \to \mathbb{C}$, $$\widehat{f * g}(t) = \hat{f}(t)\hat{g}(t) ~\forall t \in \mathbb{F}_p^n.$$
+\end{lemma}
+\begin{proof}
+    Set $u = x-y$ to get
+    \begin{align*}
+        \widehat{f * g}(t) &= \mathbb{E}_{x \in \mathbb{F}_p^n}\left(\mathbb{E}_{y \in \mathbb{F}_p^n}f(y)g(x-y)\right)\omega^{x \cdot t} \\
+        &= \mathbb{E}_y f(y) \mathbb{E}_u g(u) \omega^{(u+y)\cdot t} \\
+        &= \hat{f}(t)\hat{g}(t).
+    \end{align*}
+\end{proof}
+\begin{example}
+    $||\hat{f}||_4^4 = \mathbb{E}_{x+y=z+w}f(x)f(y)\overline{f(z)f(w)}$. This is on Ex. Sheet 1.
+\end{example}
+\begin{lemma}[Bogolyubov's Lemma]
+    Given $A \subset \mathbb{F}_p^n$ of density $\alpha>0$, there exists a subspace $V\le \mathbb{F}_p^n$ of codimension at most $2\alpha^{-2}$ s.t. $A+A-A-A \supset V$. 
+\end{lemma}
+\begin{proof}
+    Observe that 
+    \begin{align*}
+        A+A-A-A = \text{supp}(\underbrace{1_A * 1_A * 1_{-A} * 1_{-A}}_{:= g}).
+    \end{align*}
+    Hence we wish to find $V \le \mathbb{F}_p^n$ such that $g(x) > 0 ~\forall x \in V$. Let $K = \text{Spec}_{\rho}(1_A)$ with $\rho$ to be determined later and let $V = \langle K \rangle^{\perp}$. By Lemma \ref{lemma1.8}, $|K|\le \rho^{-2}\alpha^{-1}$ and hence $\text{codim}(V)\le |K| \le \rho^{-2}\alpha^{-1}$. By the inversion formula, 
+    \begin{align*}
+        g(x) &= \sum_{t \in \mathbb{F}_p^n}^{} (\widehat{1_A * 1_A * 1_{-A} * 1_{-A}})(t)\omega^{-x\cdot t} \\
+        &= \sum_{t \in \mathbb{F}_p^n}^{} |\hat{1}_A(t)|^4 \omega^{-x\cdot t} \\
+        &= \alpha^4 + \underbrace{\sum_{t \in K \setminus \{0\}}^{} |\hat{1}_A(t)|^4 \omega^{-x \cdot t}}_{(1)} + \underbrace{\sum_{t \not\in K}^{} |\hat{1}_A(t)|^4 \omega^{-x \cdot t}}_{(2)}.
+    \end{align*}
+    For $(1)$, we see it is $\ge 0$ since $x \cdot t = 0 ~\forall t \in K, x \in V$. (Note we could give better lower bounds but we don't need them).
+    \vspace{1mm}
+     
+    For $(2)$, we have 
+    \begin{align*}
+        |(2)| &\le \sum_{t \not\in K}^{} |\hat{1}_A(t)|^4 \le \sup_{t \not\in K} |\hat{1}_A(t)|^2 \sum_{t \not\in K}^{} |\hat{1}_A(t)|^2 \le \sup_{t \not\in K} |\hat{1}_A(t)|^2 \sum_{t}^{} |\hat{1}_A(t)|^2 \\
+        &\le (\rho \alpha)^2 ||1_A||_2^2 = \rho^2 \alpha^3.
+    \end{align*}
+    Now pick $\rho$ such that $\rho^2 \alpha^3 \le \frac{\alpha^4}{2}$, e.g. $\rho = \sqrt{\frac{\alpha}{2}}$.
+\end{proof}
+\begin{example}
+    The set $A = \{x \in \mathbb{F}_2^n \mid |x|\ge \frac{n}{2}+\frac{\sqrt{n}}{2}\}$ has density at least $\frac{1}{4}$, and there is no coset $C$ of any subspace of codimension at most $\sqrt{n}$ such that $C \subset A + A$. This is on Ex. Sheet 1.
+\end{example}
+\begin{lemma}
+    Let $A \subset \mathbb{F}_p^n$ of density $\alpha$ be such that $\exists t \neq 0$ in $\text{Spec}_{\rho}(1_A)$. Then $\exists V \le \mathbb{F}_p^n$ of codimension 1 and $\exists x \in \mathbb{F}_p^n$ such that \[
+    |A \cap (x+V)| \ge \alpha \left(1+\frac{\rho}{2}\right)|V|.
+    \]
+\end{lemma}
+\begin{proof}
+    Let $t\neq 0$ be such that $|\hat{1}_A(t)|\ge \rho \alpha$ and let $V = \langle t \rangle^{\perp}$. Write $v_j + V$ for $j \in [p] := \{1,2,\ldots,p\}$ for the cosets of $V$ such that $v_j + V = \{x \in \mathbb{F}_p^n \mid x \cdot t = j\}$. Then 
+    \begin{align*}
+        \hat{1}_A(t) &= \hat{f}_A(t) \\
+        &= \mathbb{E}_{x \in \mathbb{F}_p^n}(1_A(x)-\alpha)\omega^{x \cdot t} \\
+        &= \mathbb{E}_{j \in [p]}\underbrace{\mathbb{E}_{x \in v_j+V}(1_A(x)-\alpha)}_{=: a_j = \frac{|A \cap (v_i +V)|}{|V|}-\alpha}\omega^j.
+    \end{align*}
+    By the triangle inequality, $\mathbb{E}_{j \in [p]} |a_j|\ge \rho \alpha$. Since $\mathbb{E}_{j \in [p]}a_j = 0$, $\mathbb{E}_{j \in [p]}(a_j + |a_j|) \ge \rho \alpha$, so $\exists j \in [p]$ such that $a_j + |a_j| \ge \rho \alpha \implies a_j \ge \frac{\rho \alpha}{2}$.
 \end{proof}
 
 \end{document}
