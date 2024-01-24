@@ -211,5 +211,105 @@ We quote Riemann--Roch for surfaces of genus 1: We have
     We revisit Example \ref{ex2.3}. We have $\mathcal{L}(2P) = \langle 1,x \rangle$ and $\mathcal{L}(3P) = \langle 1,x,y \rangle$.
 \end{example}
 
-\end{document}
+\marginpar{24 Jan 2024, Lecture 3}
+
+We still have $\text{char }K \neq 2$ and $\overline{K} = K$.
+
+\begin{prop}\label{prop2.2}
+    Let $C \subset \mathbb{P}^2$ be a smooth plane cubic and let $P \in C$ be a point of inflection. Then we may change coordinates such that $C : Y^2Z = X(X-z)(X-\lambda Z)$ and $P = (0:1:0)$ (for some $\lambda \neq 0,1$).
+\end{prop}
+\begin{proof}
+    First change coordinates such that $P = (0:1:0)$. Then change coordinates such that the tangent line becomes $T_p C = \{Z = 0\}$. Say $C = \{F(X,Y,Z) = 0\} \subset  \mathbb{P}^2$. A point on the tangent line is of the form $(t:1:0)$ and since $P \in C$ is a point of inflection, we get $F(t,1,0) = \text{const}\cdot t^3$, i.e. $F$ has no terms $X^2Y, XY^2$ or $Y^3$.
+    \vspace{1mm}
+     
+    Hence $F = \langle Y^2Z, XYZ, YZ^2, X^3, X^2Z, XZ^2, Z^3 \rangle$. Notably, $Y^2Z$ has a nonzero coefficient, otherwise $P \in C$ would be singular, a contradition to $C$ being smooth. The coefficient of $X^3$ is nonzero as well, otherwise $Z \mid F$. We are free to rescale $X,Y,Z,F$, so WLOG $C$ is defined by \[
+    Y^2Z + a_1 XYZ + a_3 YZ^2 = X^3 + a_2 X^2 Z + a_4 XZ^2 + a_6 Z^3.
+    \]
+    Substituting $Y \mapsto Y - \frac{1}{2}a_1 X - \frac{1}{2}a_3 Z$, we may assume $a_1 = a_3 = 0$. This gives \[
+    C : Y^2Z = Z^3 f \left(\frac{X}{Z}\right)
+    \]
+    for a monic cubic polynomial $f$. Since $C$ is smooth, $f$ has distinct roots, WLOG $0,1,\lambda$, so $C: Y^2Z = X(X-Z)(X-\lambda Z)$.
+\end{proof}
+The form $Y^2Z + a_1 XYZ + a_3 YZ^2 = X^3 + a_2 X^2 Z + a_4 XZ^2 + a_6 Z^3$ is the Weierstrass form. The form $ Y^2Z = X(X-Z)(X-\lambda Z)$ is the Legendre form.
+
+\textbf{Remark.} It can be shown that the points of inflection of a plane curve $C = \{F(X_1,X_2,X_3) = 0\} \subset \mathbb{P}^2$ are given by solving the Hessian:
+\[
+\begin{cases}
+    &F = \left(\frac{\partial^2 F}{\partial X_i \partial X_j} \right) = 0\\
+    &F(X_1,X_2,X_3) = 0.
+\end{cases}
+\]
+\subsection{The degree of a morphism}
+Let $\phi : C_1 \to C_2$ be a nonconstant morphism of smooth projective curves. Then $\phi^* : K(C_2) \to K(C_1)$ by $f \mapsto f \circ \phi$, giving an injective map $\phi^* K(C_2)$ to $K(C_1)$.
+
+\begin{defn}
+    The \textbf{degree} of $\phi$ is $\text{deg }\phi = [K(C_1) : \phi^* K(C_2)]$.
+    \vspace{1mm}
+     
+    We say $\phi$ is \textbf{separable} if $K(C_1)/\phi^* K(C_2)$ is a separable field extension.
+\end{defn}
+
+Suppose $P \in C_1, Q \in C_2$ and $\phi : P \mapsto Q$. Let $t \in K(C_2)$ be a uniformizer at $Q$.
+\begin{defn}
+    $e_{\phi}(P) = \text{ord}_P(\phi^* t)$, which is always $\ge 1$ and independent of $t$.
+\end{defn}
+\begin{theorem}
+    Let $\phi : C_1 \to C_2$ be a nonconstant morphism of smooth projective curves. Then \[
+    \sum_{P \in \phi^{-1}(Q)}^{} e_{\phi}(P) = \deg \phi ~\forall  Q \in C_2.
+    \]
+    Moreover, if $\phi$ is separable, then $e_{\phi}(P)=1$ for all but infitely many $P \in C_1$.
+\end{theorem}
+We don't prove this.
+\vspace{1mm}
  
+In particular, this shows that:
+\begin{itemize}
+    \item $\phi$ is surjective (very important here that we're in $\overline{K}$).
+    \item $|\phi^{-1}(Q)|\le \deg \phi$.
+    \item If $\phi$ is separable, then equality holds in (ii) for all but finitely many points $Q \in C_2$.
+\end{itemize}
+\textbf{Remark.} Let $C$ be an algebraic curve. A rational map is given by 
+\begin{align*}
+    C &\to \mathbb{P}^n \\
+    \phi &\mapsto (f_0,f_1,\ldots,f_n)
+\end{align*}
+where $f_0,\ldots,f_n \in K(C)$ are not all zero. Then we have a fact: If $C$ is smooth, then $\phi$ is a morphism. This saves us a lot of time (we can go from a rational map to a morphism immediately).
+
+\section{Weierstrass equations}
+
+We now drop the assumption that $\overline{K} = K$, but we will still assume that $K$ is perfect.
+
+\begin{defn}
+    An \textbf{elliptic curve} $E/K$ is a smooth projective curve of genus 1 defined over $K$ with a specified $K$--rational point $O = O_E$.
+\end{defn}
+\begin{example}
+    $\{X^3 + pY^3 + p^2Z^3 = 0\} \subset \mathbb{P}^2$ is not an elliptic curve over $\mathbb{Q}$, since it has no $\mathbb{Q}$--rational point.
+\end{example}
+\begin{theorem}
+    Every elliptic curve $E$ is isomorphic over $K$ to a curve in Weierstrass form via an isomorphism taking $O_E$ to $(0:1:0)$.
+\end{theorem}
+\textbf{Remark.} Proposition \ref{prop2.2} treated the special case where $E$ is a smooth plane cubic and $O_E$ is a point of inflection.
+\vspace{1mm}
+ 
+\textbf{Fact.} If $D \in \text{Div}(E)$ is defined over $K$, then $\mathcal{L}(D)$ has a basis in $K(E)$ (not just in $\overline{K}(E)$). Here $D$ is defined over $K$ if it is fixed by $\text{Gal}(\overline{K}/K)$ (this is unimportant for us and we just write it down to be rigorous).
+
+\begin{proof}
+    $\mathcal{L}(2O_E) \subset \mathcal{L}(3O_E)$. Pick bases $1,x$ and $1,x,y$. Note $\text{ord}_{O_E}(x) = -2$ and $\text{ord}_{O_E}(y) = -3$ (else $x,y$ don't give a basis). The 7 elements $1,x,y,x^2,xy,x^3,y^2$ lie in the 6--dimensional vector space $\mathcal{L}(6O_E)$ (as they have at most a sixth order pole), so they must satisfy a linear dependence relation. 
+
+    \vspace{1mm}
+     
+    Leaving out $x^3$ or $y^2$ leaves us with 6 elements, all with different order poles, giving a basis for $\mathcal{L}(6O_E)$. Hence the coefficients of $x^3$ and $y^2$ are nonzero, so by rescaling $x,y$ (if necessary) we get \[
+    y^2 + a_1xy + a_2y = x^3 + a_2 x^2 + a_4 x + a_6
+    \]
+    for some $a_i \in K$. Let $E'$ be the curve defined by this equation (or rather its projective closure). There is a morphism $\phi: E \to E' \subset \mathbb{P}^2$ by $P \mapsto (x(P):y(P):1) = \left(\frac{x}{y}(P): 1: \frac{1}{y}(P)\right)$. (Since $E$ is smooth, we know that this rational map is a morphism). Hence $O_E \mapsto (0:1:0)$.
+    \vspace{1mm}
+     
+    We have $E \stackrel{x}{\to} \mathbb{P}^1$ by $x \mapsto (x:1)$ (and similarly for $y$), so 
+    \begin{align*}
+        &[K(E):K(x)] = \deg(E \stackrel{x}{\to} \mathbb{P}^1) = \text{ord}_{O_E}\left(\frac{1}{x}\right) = 2\\
+        &[K(E):K(y)] = \deg(E \stackrel{y}{\to} \mathbb{P}^1) = \text{ord}_{O_E}\left(\frac{1}{y}\right) = 3.
+    \end{align*}
+    This gives an inclusion of fields $K(x) \le K(E)$ of degree 2, $K(y) \le K(E)$ of degree 3, while $K(X), K(y) \le K(x,y) \le  K(E)$, so tower law gives $[K(E):K(x,y)] = 1 \implies K(E)=K(x,y)=\phi^* K(E') \implies \deg \phi = 1$. (draw a picture!).
+\end{proof}
+
+\end{document}
