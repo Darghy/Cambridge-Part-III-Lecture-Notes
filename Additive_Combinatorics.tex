@@ -221,7 +221,7 @@ Consequently, $||f||_2^2 = \mathbb{E}_x |f(x)|^2$ and $||\hat{f}||_2^2 = \sum_{t
 \begin{example}
     The set $A = \{x \in \mathbb{F}_2^n \mid |x|\ge \frac{n}{2}+\frac{\sqrt{n}}{2}\}$ has density at least $\frac{1}{4}$, and there is no coset $C$ of any subspace of codimension at most $\sqrt{n}$ such that $C \subset A + A$. This is on Ex. Sheet 1.
 \end{example}
-\begin{lemma}
+\begin{lemma}\label{lemma1.15}
     Let $A \subset \mathbb{F}_p^n$ of density $\alpha$ be such that $\exists t \neq 0$ in $\text{Spec}_{\rho}(1_A)$. Then $\exists V \le \mathbb{F}_p^n$ of codimension 1 and $\exists x \in \mathbb{F}_p^n$ such that \[
     |A \cap (x+V)| \ge \alpha \left(1+\frac{\rho}{2}\right)|V|.
     \]
@@ -236,5 +236,59 @@ Consequently, $||f||_2^2 = \mathbb{E}_x |f(x)|^2$ and $||\hat{f}||_2^2 = \sum_{t
     By the triangle inequality, $\mathbb{E}_{j \in [p]} |a_j|\ge \rho \alpha$. Since $\mathbb{E}_{j \in [p]}a_j = 0$, $\mathbb{E}_{j \in [p]}(a_j + |a_j|) \ge \rho \alpha$, so $\exists j \in [p]$ such that $a_j + |a_j| \ge \rho \alpha \implies a_j \ge \frac{\rho \alpha}{2}$.
 \end{proof}
 
+\marginpar{24 Jan 2024, Lecture 3}
+
+\begin{lemma}\label{lemma1.16}
+    Let $p\ge 3$ and $A \subset \mathbb{F}_p^n$ of density $\alpha > 0$ be such that $$\sup_{t \neq 0} |\hat{1}_A(t)| = o(1).$$ Then $A$ contains $(\alpha^3+o(1))(p^n)^2$ 3--term arithmetic progressions (3--APs).
+\end{lemma}
+In other words, a set with small Fourier coefficients has the same number of 3--APs as a truly random set of the same density.
+\vspace{1mm}
+ 
+\textbf{Notation.} Given $f,g,h : \mathbb{F}_p^n \to \mathbb{C}$, $T_3(f,g,h) = \mathbb{E}_{x,d} f(x)g(x+d)h(x+2d)$. 
+
+\vspace{1mm}
+ 
+Given $A \subset \mathbb{F}_p^n$, write $2 \cdot A = \{2a \mid a \in A\}$. This is different from $2A = A + A =\{a + a' \mid a,a' \in A\}$.
+
+\begin{proof}
+    The number of 3--APs in $A$ is $(p^n)^2$ times $T_3(1_A,1_A,1_A)$, where
+    \begin{align*}
+        T_3(1_A,1_A,1_A) &= \mathbb{E}_{x,d}1_A(x)1_A(x+d)1_A(x+2d) \\
+        &= \mathbb{E}_{x,y}1_A(x)1_A(y)1_A(2y-x) &y=x+d\\
+        &= \mathbb{E}_{y}1_A(y) (1_A * 1_A)(2y) \\
+        &= \langle 1_{2\cdot A}, 1_A * 1_A \rangle &z=2y\\
+        &= \langle \hat{1}_{2\cdot A}, \widehat{1_A * 1_A}\rangle. &\text{by Plancherel}.
+    \end{align*}
+    Continue the last manipulation to get 
+    \begin{align*}
+        &= \langle \hat{1}_{2\cdot A}, \hat{1}_A^2 \rangle \\
+        &= \alpha^3 + \sum_{t \neq 0}^{} \hat{1}_A(t)^2 \overline{\widehat{1_{2\cdot A}}(t)}.
+    \end{align*}
+    The sum in absolute value is at most 
+    \begin{align*}
+        &\le \sup_{t \neq 0}|\hat{1}_A(t)|\sum_{t\neq0}^{} |\hat{1}_A(t)\overline{\hat{1}_{2\cdot A}(t)}| \\
+        &\le \sup_{t\neq 0}|\hat{1}_A(t)| \left(\sum_{t}^{} |\hat{1}_A(t)|^2\right)^{1/2}\left(\sum_{t}^{} |\hat{1}_{2\cdot A}(t)|^2\right)^{1/2}\\
+        &\le \sup_{t \neq 0}|\hat{1}_A(t)|\cdot \alpha^{1/2} \cdot \alpha^{1/2} 
+    \end{align*}
+    by Parseval.
+\end{proof}
+Using the above two results, we prove:
+\begin{theorem}[Meshulam's Theorem]
+    Let $p\ge 3$ and let $A \subset \mathbb{F}_p^n$ be a set containing no non--trivial 3--APs. Then $|A| = O\left(\frac{p^n}{n \log p}\right)$. 
+\end{theorem}
+\begin{proof}
+    By assumption, $T_3(1_A,1_A,1_A) = \frac{\alpha}{p^n}$, but as in Lemma \ref{lemma1.16}, \[
+    T_3(1_A,1_A,1_A) = \alpha^3 + \sum_{t\neq 0}^{} \hat{1}_A(t) \hat{1}_{2\cdot A}(t),
+    \]
+    so provided $p^n \ge 2\alpha^{-2}$, $\left|\frac{\alpha}{p^n}-\alpha^3 \right| \le  \sup_{t\neq 0} |\hat{1}_A(t)| \cdot \alpha$, so $\sup_{t\neq 0}|\hat{1}_A(t)| \ge \frac{a^2}{2}$.
+    By Lemma \ref{lemma1.15} with $\rho = \frac{\alpha}{2}$, $\exists V \le \mathbb{F}_p^n$ of codimension 1 and $x \in \mathbb{F}_p^n$ such that $|A \cap (x+V)| \ge \left(\alpha +\frac{\alpha^2}{4}\right)|V|$.
+    \vspace{1mm}
+     
+    We iterate this observation. Let $A_0 = A, V_0 = \mathbb{F}_p^n$, $\alpha_0 = \alpha = \frac{|A_0|}{|V_0|}$. At step $i$ of this iteration, we are given a set $A_{i-1} \subset V_{i-1}$ of density $\alpha_{i-1}$ with no nontrivial 3--APs. Provided that $p^{\text{dim}(V_{i-1})}\ge 2\alpha_{i-1}^{-2}$, $\exists V_i \le V_{i-1}$ of codimension 1 and $x_i \in V_{i-1}$ such that $|A_{i-1} \cap (x_i + V_i)|\ge \left(\alpha_{i-1} + \frac{\alpha_{i-1}^2}{4}\right)|V_{i}|$. Set $A_i = A_{i-1} - x$. Note $\alpha_i \ge \alpha_{i-1}+\frac{\alpha_{i-1}^2}{4}$ and $A_i$ is free of nontrivial 3--APs. Through this iteration, the density of $A$ increases from $\alpha$ to $2\alpha$ in at most $\frac{\alpha}{\alpha^2/4} = 4\alpha^{-1}$ steps, from $2\alpha$ to $4\alpha$ in at most $\frac{2\alpha}{(2\alpha)^2/4} = 2\alpha^{-1}$ steps, etc, which reaches 1 in at most 
+    \[
+        (4\alpha^{-1} + 2\alpha^{-1} + \alpha^{-1} + \ldots) = 8\alpha^{-1}
+    \]
+    steps. The argument must therefore end with $\text{dim}(V_i)\ge n - 8\alpha^{-1}$, at which point we must have had $p^{\text{dim}(V_i)}\le 2\alpha_i^{-2}\le 2\alpha^{-2}$ (or else we could have continued). But we may assume that $\alpha \ge \sqrt{2}p^{-n/4}$ (else we're done), whence $p^{n - 8 \alpha ^{-1}} \le p^{n/2}$, i.e. $\frac{n}{2} \le 8\alpha ^{-1}$, so $\alpha \le \frac{16}{n}$, finishing the proof. 
+\end{proof}
 \end{document}
  
