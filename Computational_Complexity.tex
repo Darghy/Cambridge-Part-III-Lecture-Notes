@@ -165,5 +165,52 @@ There are functions in PSPACE but not in PH. Good examples are games: "there exi
  
 \textbf{EXPTIME.} This is the class of functions that can be computed in time $\exp(O(n^k))$ for some $k$.
 
+\marginpar{25 Jan 2024, Lecture 3}
+
+\begin{prop}
+    PSPACE $\subset $ EXPTIME.
+\end{prop}
+\begin{proof}
+    Given a Turing machine in the middle of a computation, define its \textbf{configuration} to be its state, position on each tape, and the values in all the cells on the tapes. If $T$ uses only a polynomial amount of space $p(n)$ for input of size $n$ and has $k$ tapes, then the number of possible configurations is at most $|S|\cdot p(n)^k\cdot |A|^{k p(n)}$, where $A$ is our alphabet (usually $\{0,1\}$). Hence if the computation goes on for longer than the above amount of time, then the configuration repeats (by pigeonhole) and so is eventually periodic, so doesn't halt.
+\end{proof}
+\textbf{NEXPTIME.} $f \in \text{NEXPTIME} \iff \exists g \in \text{EXPTIME}$ with $f(x)=1 \iff \exists y~ g(x,y) = 1$.
+\vspace{1mm}
+ 
+\textbf{EXPSPACE.} This is the set of $f$ that can be computed using at most $\exp(p(n))$ space for an input of size $n$.
+\vspace{1mm}
+ 
+So far we have $$\text{P} \subset \text{NP} \subset \text{PSPACE} \subset \text{EXPTIME} \subset \text{NEXPTIME} \subset \text{EXPSPACE}.$$
+
+\subsection{Circuit complexity}
+
+A \textbf{circuit} is a directed acyclic graph (DAG) such that each vertex is labeled as an \textbf{input}, an AND gate, an OR gate, or a NOT gate. An input is a vertex of indegree 0, a NOT gate has to have indegree 1. All vertices of indegree >1 are AND gates or OR gates. Vertices of outdegree 0 are \textbf{outputs}. If the vertex preceeding a NOT gate has value $x$, then the vertex at the NOT gate has value $1-x$. The value at an AND gate is the minimum of the values at its predecessors, and the value at an OR gate is the maximum of the values at its predecessors.
+\vspace{1mm}
+ 
+Using these rules, we get a well--defined function from $\{0,1\}^{I}$ to $\{0,1\}^{O}$, where $I$ is the set of input vertices and $O$ is the set of output vertices. If any AND and OR gate has indegree $\le k$, then we say that the circuit is of $\text{fanin } \le k$. Often we restrict to circuits of fanin $\le 2$.
+\vspace{1mm}
+ 
+\textbf{Straight--line computations.} Let $f : \{0,1\}^n \to \{0,1\}$. A straight--line computation of $f$ is a sequence of functions $f_1,f_2,\ldots,f_m$ (we call $m$ the \textbf{length} of the computation) such that $f_i(x) = x_i$ for $1\le i\le n$, and for each $i>n$, either $f_i = f_{j_1} \wedge \ldots \wedge f_{j_k}$ for some $j_1,\ldots,j_k < i$, or $f_i = f_{j_1} \vee \ldots \vee f_{j_k}$ for some $j_1,\ldots,j_k < i$, or $f_i = 1 - f_j$ for some $j<i$, and $f_m = f$.
+\vspace{1mm}
+ 
+By considering a total ordering on the vertices of a DAG such that if $v_1 \to v_2$ in the DAG, then $v_1 < v_2$, we see that the smallest circuit that computes $f$ is the smallest length of a straight--line computation that computes $f$.
+
+\begin{lemma}
+    Every function $f : \{0,1\}^n \to \{0,1\}$ can be computed by a circuit of size at most exponential in $n$.
+\end{lemma}
+\begin{proof}
+    Left as an exercise on Ex. Sheet 1. 
+\end{proof}
+\begin{prop}
+    Let $f$ be a function that can be computed by a Turing machine $T$ with $k$ tapes in time $t(n)$ for inputs of size $n$. Then there is a family $(C_n)$ of circuits such that $|C_n| = O(t(n)^{k+2})$ and $C_n$ computes $f$ for inputs of size $n$. 
+\end{prop}
+\begin{proof}
+    Let $S = \{s_1,\ldots,s_r\}$ be the set of states of $T$ and assume that the alphabet is $\{0,1\}$. Then we can encode the configuation of $T$ at time $t$ using $\sigma_1(t),\ldots,\sigma_r(t), \pi_{i}^h(t)$ for $1\le i\le t(n),1\le h\le k$ and $v_i^h(t)$, where $\sigma_i(t) = 1 \iff$ T is in state $s_i$ at time $t$, $\pi_i^h(t) = 1 \iff$ the head is in position $i$ on tape $h$ at time $t$, and $v_i^h(t)$ is the value in cell $i$ of tape $h$ at time $t$.
+    \vspace{1mm}
+     
+    Note that $\sigma_i(t) = 1 \iff$ there exist $j\le r$ and $i_1,\ldots,i_k$ such that $\sigma_j(t-1)=1$ and $\pi_{i_b}^h(t-1) = 1$ for $1\le h\le k$ and $\tau(s_j, v_{i_1}^1(t-1), \ldots, v_{i_k}^k(t-1))$ has state component equal to $s_i$ (here $\tau$ is the transition function).  
+    \vspace{1mm}
+     
+    For any given $i_1,\ldots,i_k$, we have a function of $k+1$ variables to evaluate, which we can do with a circuit of bounded size. Hence we can calculate $\sigma_i(t)$ from the previous configuration in time $O((k+1)t(n)^k) = O(t(n)^k)$.
+\end{proof}
 
 \end{document}
