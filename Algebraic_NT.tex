@@ -320,7 +320,7 @@ We quote a result proved in Local Fields:
 \begin{defn}
     Let $P_{\mathfrak{m}} \subset I_K(\mathfrak{m})$ be the subgroup of principal fractional ideals which are coprime to $\mathfrak{m}$.
 \end{defn}
-\begin{prop}
+\begin{prop}\label{prop1.5}
     Let $P_{\mathfrak{m}} \subset I_K(\mathfrak{m})$ be as above. Then we have two exact sequences
     \begin{align*}
         1 \to P_{\mathfrak{m}} \to &I_K(\mathfrak{m}) \to \text{Cl}(K) \to 1\\
@@ -330,5 +330,102 @@ We quote a result proved in Local Fields:
 \begin{proof}
     Let $\mathfrak{a} \in I_K(\mathfrak{m})$ and define $f: I_K(\mathfrak{m}) \to \text{Cl}(K)$ by $\mathfrak{a}\mapsto [a]$. This is a group homomorphism, it is surjective by the previous remark with kernel $P_{\mathfrak{m}}$, so $1 \to P_{\mathfrak{m}} \to I_K(\mathfrak{m}) \to \text{Cl}(K) \to 1$. The second sequence follows immediately because $f$ is trivial on $P_K(\mathfrak{m})$.
 \end{proof}
+
+\marginpar{26 Jan 2024, Lecture 4}
+
+\begin{defn}
+    For $\mathfrak{m}$ a modulus, let 
+    \begin{align*}
+        &K_{\mathfrak{m}} = \{\alpha \in K^\times \mid (a) \in I_K(\mathfrak{m})\}\\
+        &K_{\mathfrak{m},1} = \{\alpha \in K^\times \mid  \alpha \equiv 1 \pmod{\mathfrak{m}_0}, \sigma(\alpha)>0 ~\forall \sigma \mid \mathfrak{m}_\infty\}.
+    \end{align*}
+\end{defn}
+Note $P_k(\mathfrak{m}) = \{(\alpha) \in I_K(\mathfrak{m}) \mid  \alpha \in K_{\mathfrak{m},1}\}$.
+
+\begin{theorem}
+    The ray class group $I_K(\mathfrak{m})/P_K(\mathfrak{m})$ is a finite group with size \[
+    h_K(\mathfrak{m}) = |I_K(\mathfrak{m})/P_K(\mathfrak{m})| = \frac{h_K \cdot \phi(\mathfrak{m})}{[\mathcal{O}_K^\times : (\mathcal{O}_K^\times \cap K_{\mathfrak{m},1})]},
+    \]
+    where $h_K$ is the class number of $K$ and $\phi(\mathfrak{m}) = \phi(\mathfrak{m}_0)\phi(\mathfrak{m}_{\infty})$ with $\phi(\mathfrak{m}_0) = |(\mathcal{O}_K/\mathfrak{m}_0)^\times| = N(\mathfrak{m}_0) \cdot \prod_{\mathfrak{p} \mid \mathfrak{m}_0}^{} (1-N(\mathfrak{p}^{-1}))$ and $\phi(\mathfrak{m}_{\infty}) = 2^{\# \mathfrak{m}_{\infty}}$ where $\# \mathfrak{m}_{\infty}$ is the number of infinite real primes dividing $\mathfrak{m}$.
+\end{theorem}
+\begin{proof}
+    \textbf{Step 1.} $P_{\mathfrak{m}}/P_K(\mathfrak{m}) \cong K_{\mathfrak{m}}/\mathcal{O}_K^\times K_{\mathfrak{m},1}$.
+    \begin{proof}[Proof of Step 1]
+        Consider $K_{\mathfrak{m}} \to P_{\mathfrak{m}}/P_K(\mathfrak{m})$ by $\alpha \mapsto (\alpha)P_K(\mathfrak{m})$. (TODO: add definition of $K_{\mathfrak{m}}$ defined at the beginning of this lecture during the recap). This is a surjective homomorphism with kernel 
+        \begin{align*}
+            &\{\alpha \in K_{\mathfrak{m}}\mid  (\alpha) \in P_K(\mathfrak{m})\} \\
+            =& \{\alpha \in K_{\mathfrak{m}} \mid \exists \beta \in K_{\mathfrak{m},1} \text{ s.t. }(\alpha)=(\beta)\} \\
+            =& \{\alpha \in K_{\mathfrak{m}} \mid \exists \beta \in K_{\mathfrak{m},1} \text{ s.t. }\beta = \alpha^\epsilon \text{ for some }\epsilon \in \mathcal{O}_K^\times\}.
+        \end{align*}
+    \end{proof}
+    \textbf{Step 2.} $K_{\mathfrak{m}}/K_{\mathfrak{m},1} \cong \{\pm 1\}^{\# \mathfrak{m}_{\infty}} \times (\mathcal{O}_K/\mathfrak{m}_0)^\times$.
+    \begin{proof}[Proof of Step 2]
+        We can write $\alpha \in K_{\mathfrak{m}}$ as $\alpha = \frac{a}{b}$ for $a,b \in \mathcal{O}_K$ coprime, and $(a)$, $(b)$ coprime to $\mathfrak{m}_0$. For such $a,b$, the images $\overline{a},\overline{b} \in \mathcal{O}_K/\mathfrak{m}_0$ lie in $(\mathcal{O}_K/\mathfrak{m}_0)^\times$. Consider the map 
+        \begin{align*}
+            K_{\mathfrak{m}} &\to \left( \prod_{\sigma \mid \mathfrak{m}_{\infty}}^{} \{\pm 1\}\right) \times (\mathcal{O}_K/\mathfrak{m}_0)^\times\\
+            \alpha &\mapsto \left(\prod_{\sigma \mid \mathfrak{m}_{\infty}}^{} \text{sgn}(\sigma(\alpha)) \right) \times \overline{\alpha}
+        \end{align*}
+        for $\overline{\alpha} = \overline{a} \overline{b}^{-1} \in (\mathcal{O}_K/\mathfrak{m}_0)^\times$. This map is surjective: this is an exercise, use the Approximation Theorem. It has kernel 
+        \begin{align*}
+            \{\alpha \in K_{\mathfrak{m}}\mid \sigma(\alpha) > 0 ~\forall \sigma \mid \mathfrak{m}_{\infty}, \alpha \equiv 1 \pmod{\mathfrak{m}_0}\} = K_{\mathfrak{m},1}.
+        \end{align*}
+    \end{proof}
+    \textbf{Step 3.} $\mathcal{O}_K^\times K_{\mathfrak{m},1}/K_{\mathfrak{m},1} \cong \mathcal{O}_K^\times/(\mathcal{O}_K^\times \cap K_{\mathfrak{m},1})$.
+    \vspace{1mm}
+     
+    Putting is all together:
+    \begin{align*}
+        I_K(\mathfrak{m})/P_K(\mathfrak{m}) \cong (I_K(\mathfrak{m})/P_{\mathfrak{m}})/(P_K({\mathfrak{m}})/P_(\mathfrak{m}))
+    \end{align*}
+    and \begin{align*}
+        (P_\mathfrak{m}/P_K(\mathfrak{m})) &\cong K_{\mathfrak{m}}/\mathcal{O}_K^\times K_{\mathfrak{m},1} \\
+        &\cong (K_{\mathfrak{m}}/K_{\mathfrak{m},1})/(\mathcal{O}_K^\times K_{\mathfrak{m},1}/K_{\mathfrak{m},1}) \\
+        &\cong (K_{\mathfrak{m}}/K_{\mathfrak{m},1})/(\mathcal{O}_K^\times/(\mathcal{O}_K^\times \cap K_{\mathfrak{m},1}))
+    \end{align*}
+    and \begin{align*}
+        I_K(\mathfrak{m})/P_\mathfrak{m} \cong \text{Cl}(K)
+    \end{align*}
+    by Proposition \ref{prop1.5}.
+    \vspace{1mm}
+     
+    This gives 
+    \begin{align*}
+        &[I_K(\mathfrak{m}) : P_K(\mathfrak{m})] = [I_K(\mathfrak{m}) : P_{\mathfrak{m}}][P_\mathfrak{m} : P_K(\mathfrak{m})] \\
+        =& |\text{Cl}(K)| \frac{[K_{\mathfrak{m}}:K_{\mathfrak{m},1}]}{[\mathcal{O}_K: (\mathcal{O}_K^\times \cap K_{\mathfrak{m},1})]} = \frac{h_K \cdot \phi(\mathfrak{\mathfrak{m}})}{[\mathcal{O}_K : (\mathcal{O}_K^\times \cap K_{\mathfrak{m},1})]}.
+    \end{align*}
+\end{proof}
+Next we have more general class groups, i.e. $I_K(\mathfrak{m})/H$ with $P_K(\mathfrak{m}) \subset H$.
+\begin{defn}
+    A subgroup $H \subset I_K(\mathfrak{m})$ is a \textbf{congruence subgroup} for $\mathfrak{m}$ if it satisfies $P_k(\mathfrak{m}) \subset  H \subset I_K(\mathfrak{m})$.
+\end{defn}
+Motivation: For ''suitably chosen'' moduli $\mathfrak{m}$, the congruence subgroup will be the kernel of the Artin map $\Phi_{\mathfrak{m}}$.
+
+\begin{defn}
+    Let $H$ be a congruence subgroup for $\mathfrak{m}$, then the quotient $I_K(\mathfrak{m})/H$ is called a \textbf{generalized ideal class group} for $\mathfrak{m}$.
+\end{defn}
+\textbf{Remark.} Recall that for $K=\mathbb{Q}$ and $\mathfrak{m}=(m)\infty$ for $m$ a positive integer, we saw $I_K(\mathfrak{m})/P_K(\mathfrak{m}) \cong (\mathbb{Z}/m\mathbb{Z})^\times$ and \[
+(\mathbb{Z}/m\mathbb{Z})^\times \cong \text{Gal}(\mathbb{Q}(\zeta_m)/\mathbb{Q}) \cong I_K(\mathfrak{m})/P_K(\mathfrak{m})
+\]
+via the Artin map, so $\text{ker}(\Phi_\mathfrak{m}) = P_K(\mathfrak{m})$ (TODO: what is this $\mathbb{Q}(\zeta_m)/\mathbb{Q}$ in the lecture?)
+\vspace{1mm}
+ 
+The idea of class field theory is that generalized ideal class groups are Galois groups of abelian extensions and that the link between them is given by the Artin map. We will prove that the Artin map is surjective. Determining the kernel is a lot more difficult (not done in this course).
+\vspace{1mm}
+ 
+What is the meaning of ''suitably chosen'' above? For $L/K$ abelian, we want to know for which moduli $\mathfrak{m}$ will $\text{ker}(\Phi_\mathfrak{m})$ be a congruence subgroup.
+\begin{lemma}
+    Let $L/K$ be abelian and let $\mathfrak{m}$ be a modulus divisible by all ramified primes. If $\mathfrak{n}$ is another modulus such that $\mathfrak{m} \mid \mathfrak{n}$, then \[
+    P_K(\mathfrak{m}) \subset \text{ker}(\Phi_{\mathfrak{m}}) \implies P_K(\mathfrak{n}) \subset  \text{ker}(\Phi_{\mathfrak{n}}).
+    \]
+\end{lemma}
+\begin{proof}
+    Note first that if $\mathfrak{m} \mid \mathfrak{n}$, then $I_K(\mathfrak{n}) \subset I_K(\mathfrak{m})$, so $\Phi_\mathfrak{n} : I_K(\mathfrak{n}) \to \text{Gal}(L/K)$ is well--defined and $\Phi_{\mathfrak{n}} = \Phi_{\mathfrak{m}}|_{I_K(\mathfrak{m})}$, so $\text{ker}(\Phi_{\mathfrak{n}}) = \text{ker}(\Phi_{\mathfrak{m}}) \cap I_K(\mathfrak{n})$. If $\mathfrak{m} \mid \mathfrak{n}$, then $P_K(\mathfrak{n}) \subset P_K(\mathfrak{m})$. Now $P_K(\mathfrak{n}) \subset P_K(\mathfrak{m}) \subset \text{ker}(\Phi_{\mathfrak{m}})$, so \[
+        (\alpha) \in P_K(\mathfrak{n}) \subset P_K(\mathfrak{m}) \cap I_K(\mathfrak{n}) \subset \text{ker}(\Phi_{\mathfrak{m}}) \cap I_K(\mathfrak{n}) = \text{ker}(\Phi_{\mathfrak{n}}).
+    \]
+\end{proof}
+In the above situation, if $\text{ker}(\Phi_{\mathfrak{m}})$ is a congruence subgroup for $\mathfrak{m}$, then $\text{ker}(\Phi_{\mathfrak{n}})$ is a congruence subgroup for $\mathfrak{n}$.
+\vspace{1mm}
+ 
+Now we find a special modulus that works for each extension, called \textbf{the conductor}. 
 
 \end{document}
