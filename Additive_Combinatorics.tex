@@ -109,7 +109,7 @@ Writing $-A = \{-a \mid a \in A\}$, we have
     so $\hat{\mu}_V(t) = 1_{V^{\perp}}(t)$.
     (Here we use the fact that if $t \not\in \{x \cdot t = 0 ~\forall x \in V\}$, then $x\cdot t$ runs over the values uniformly and the sum is zero - details left as exercise).
 \end{example}
-\begin{example}
+\begin{example}\label{ex1.3}
     Let $R \subset \mathbb{F}_{p}^n$ be such that each $x \in \mathbb{F}_{p}^n$ lies in $R$ independently with probability $\frac{1}{2}$. Then with high probability (i.e. $\mathbb{P} \to 1$ as $n \to \infty$),
     \[
     \sup_{t \neq 0} |\hat{1}_R(t)| = O\left(\sqrt{\frac{\log (p^n)}{p^n}}\right).
@@ -130,7 +130,7 @@ and \[
 \]
 Consequently, $||f||_2^2 = \mathbb{E}_x |f(x)|^2$ and $||\hat{f}||_2^2 = \sum_{t}^{} |\hat{f}(t)|^2$.
 
-\begin{lemma}
+\begin{lemma}\label{lemma1.5}
     The following hold for all $f, g : \mathbb{F}_{p}^n \to \mathbb{C}$:
     \begin{enumerate}[(i)]
         \item $\langle f,g \rangle = \langle \hat{f}, \hat{g} \rangle$ (Plancherel's identity).
@@ -145,7 +145,7 @@ Consequently, $||f||_2^2 = \mathbb{E}_x |f(x)|^2$ and $||\hat{f}||_2^2 = \sum_{t
     \end{align*}
     
 \end{proof}
-\begin{defn}
+\begin{defn}\label{defn1.6}
     Let $\rho > 0$ and $f : \mathbb{F}_{p}^n \to \mathbb{C}$. Define the \textbf{$\rho$--large spectrum} of $f$ to be
     \[
     \text{Spec}_{\rho}(f) = \{t \in \mathbb{F}_{p}^n \mid |\hat{f}(t)| \ge \rho ||f||_1\}.
@@ -166,10 +166,10 @@ Consequently, $||f||_2^2 = \mathbb{E}_x |f(x)|^2$ and $||\hat{f}||_2^2 = \sum_{t
 
 \marginpar{22 Jan 2024, Lecture 2}
 
-\begin{defn}
+\begin{defn}\label{defn1.9}
     Given $f, g : \mathbb{F}_p^n \to \mathbb{C}$, define their \textbf{convolution} $f * g :\mathbb{F}_p^n \to \mathbb{C}$ by $$f*g(x) = \mathbb{E}_{y \in \mathbb{F}_p^n}f(y)g(x-y) ~\forall x \in \mathbb{F}_p^n.$$
 \end{defn}
-\begin{example}
+\begin{example}\label{ex1.10}
     Given $A, B \subset \mathbb{F}_p^n$, 
     \begin{align*}
         1_A * 1_B(x) &= \mathbb{E}_{y \in \mathbb{F}_p^n}1_A(y)1_B(x-y) = \frac{1}{p^n}|A \cap (x-B)| \\
@@ -180,7 +180,7 @@ Consequently, $||f||_2^2 = \mathbb{E}_x |f(x)|^2$ and $||\hat{f}||_2^2 = \sum_{t
     \]
     of $A$ and $B$.
 \end{example}
-\begin{lemma}
+\begin{lemma}\label{lemma1.11}
     Given $f, g : \mathbb{F}_p^n \to \mathbb{C}$, $$\widehat{f * g}(t) = \hat{f}(t)\hat{g}(t) ~\forall t \in \mathbb{F}_p^n.$$
 \end{lemma}
 \begin{proof}
@@ -273,7 +273,7 @@ Given $A \subset \mathbb{F}_p^n$, write $2 \cdot A = \{2a \mid a \in A\}$. This 
     by Parseval.
 \end{proof}
 Using the above two results, we prove:
-\begin{theorem}[Meshulam's Theorem]
+\begin{theorem}[Meshulam's Theorem]\label{theorem1.17}
     Let $p\ge 3$ and let $A \subset \mathbb{F}_p^n$ be a set containing no non--trivial 3--APs. Then $|A| = O\left(\frac{p^n}{n \log p}\right)$. 
 \end{theorem}
 \begin{proof}
@@ -290,5 +290,58 @@ Using the above two results, we prove:
     \]
     steps. The argument must therefore end with $\text{dim}(V_i)\ge n - 8\alpha^{-1}$, at which point we must have had $p^{\text{dim}(V_i)}\le 2\alpha_i^{-2}\le 2\alpha^{-2}$ (or else we could have continued). But we may assume that $\alpha \ge \sqrt{2}p^{-n/4}$ (else we're done), whence $p^{n - 8 \alpha ^{-1}} \le p^{n/2}$, i.e. $\frac{n}{2} \le 8\alpha ^{-1}$, so $\alpha \le \frac{16}{n}$, finishing the proof. 
 \end{proof}
+
+\marginpar{26 Jan 2024, Lecture 4}
+
+So for $A \subset \mathbb{F}_3^n$ containing no nontrivial 3--APs, we have $|A| = O\left(\frac{3^n}{n}\right)$. The largest known subset of $\mathbb{F}_3^n$ containing no notrivial 3--APs has size $\ge (2.218)^n$. (Proving $2^n$ is trivial: take all combinations of zeroes and ones with no twos).
+
+\vspace{1mm}
+ 
+From now on, let $G$ be a finite abelian group. $G$ comes equipped with a set of \textbf{characters}, i.e. group homomorphisms $\gamma : G \to \mathbb{C}^\times$, which themselves form a group, denoted by $\hat{G}$, often referred to as the \textbf{dual} of $G$. It turns out that if $G$ is finite and abelian, then $\hat{G} \cong G$.For instance:
+\begin{itemize}
+    \item If $G = \mathbb{F}_p^n$, then $\hat{G} = \{\gamma_t : x \mapsto \omega^{x \cdot t} \mid t \in G\}$.
+    \item If $G = \mathbb{Z}_p := \mathbb{Z}/p\mathbb{Z}$, then $\hat{G} = \{\gamma_t : x \mapsto \omega^{xt} \mid t \in G\}$.
+\end{itemize}
+\begin{defn}
+    Given $f : G \to \mathbb{C}$, define its \textbf{Fourier transform} $\hat{f}: \hat{G} \to \mathbb{C}$ by \[
+    \hat{f}(\gamma) = \mathbb{E}_{x \in G}f(x)\gamma(x) ~\forall \gamma \in \hat{G}.
+    \]
+\end{defn}
+It is easy to verify that we have an inversion formula, given by \[
+f(x) = \sum_{\gamma \in \hat{G}}^{} \hat{f}(\gamma)\overline{\gamma(x)}.
+\]
+We can also check that Definition \ref{defn1.6} and \ref{defn1.9}, Examples \ref{ex1.3} and \ref{ex1.10} and Lemmas \ref{lemma1.5}, \ref{lemma1.8} and \ref{lemma1.11} go through in this general context.
+
+\begin{example}
+    Let $p$ be a prime, let $L\le p-1$ be even and consider $J = \left[-\frac{L}{2},\frac{L}{2}\right] \subset \mathbb{Z}_p$. Then $~\forall t \neq 0$, \[
+    |\hat{1}_J(t)| \le \min \left\{\frac{L+1}{p}, \frac{1}{2|t|}\right\}.
+    \]
+    This is on Ex. Sheet 1. 
+\end{example}
+\begin{theorem}[Roth's Theorem]
+    Let $A \subset [N] := \{1,2,\ldots,N\}$ be a set containing no non--trivial 3--APs. Then $|A| = O\left(\frac{N}{\log \log N}\right)$.
+\end{theorem}
+\begin{lemma}
+    Let $A \subset [N]$ be of density $\alpha > 0$ satisfying $N > 50\alpha^{-2}$ containing no nontrivial 3--APs. Let $p$ be a prime in $\left[\frac{N}{3},\frac{2N}{3}\right]$ and write $A' = A \cap [p] \subset \mathbb{Z}_p$. Then either 
+    \begin{enumerate}[(i)]
+        \item $\sup_{t \neq 0} |\hat{1}_{A'}(t)| \ge \frac{a^2}{10}$ (where the Fourier coefficient is computed in $\mathbb{Z}_p$); or
+        \item $\exists$ interval $J \subset [N]$ of length $\ge \frac{N}{3}$ such that $|A \cap J| \ge \alpha\left(1+\frac{\alpha}{400}\right)|J|$.
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+    We may assume that $|A'| = |A \cap [p]| \ge \alpha \left(1-\frac{\alpha}{200}\right)p$, since otherwise $|A \cap [p+1, N]| \ge \alpha(N-p) + \frac{\alpha^2p}{200} \ge \alpha \left(1 + \frac{\alpha}{400}\right) (N-p)$, so case (ii) holds with $J = [p+1,N]$.
+    \vspace{1mm}
+     
+    Let $A'' = A' \cap \left[\frac{p}{3},\frac{2p}{3}\right]$. Note that all 3--APs of the form $(x,x+d,x+2d) \in A' \times A'' \times A''$ are in fact proper APs  in $[N]$ (and not only in $\mathbb{Z}_p$, since there's no ''wrapping around''). If $\left|A' \cap \left[p/3\right]\right|$ or $\left|A' \cap \left[2p/3, p \right]\right|$ are at least $\frac{2|A'|}{5}$, then we are again in case (ii) (details left as exercise). Hence we may assume that $|A''|\ge \frac{|A'|}{5}$. Now as in Lemma \ref{lemma1.16} and Theorem \ref{theorem1.17} with $\alpha' = |A'|/p, \alpha'' = |A''|/p$, \[
+    \frac{\alpha''}{p} = \frac{|A''|}{p^2} = T_3(1_{A'},1_{A''},1_{A''}) = \alpha' \cdot \alpha''^2 + \sum_{t \neq 0}^{} \hat{1}_{A'}(t)\hat{1}_{A''}(t)\overline{\hat{1}_{2\cdot A''}(t)},
+    \]
+    so as before, 
+    \begin{align*}
+        &\frac{\alpha' \cdot \alpha''^2}{2} \le \sup_{t \neq 0}|\hat{1}_{A'}(t)|\cdot \alpha'' \\
+        \implies & \sup|\hat{1}_{A'}(t)|\ge \frac{\alpha' \cdot \alpha''}{2} \ge \frac{(\alpha')^2}{10}
+    \end{align*}
+    provided that $\frac{\alpha''}{p}\le \frac{\alpha'(\alpha'')^2}{2}$ which holds by assumption (as $p\ge \frac{N}{3}$ and $N > 50\alpha^{-2}$).
+\end{proof}
+
 \end{document}
  
