@@ -294,12 +294,12 @@ We now drop the assumption that $\overline{K} = K$, but we will still assume tha
 \textbf{Fact.} If $D \in \text{Div}(E)$ is defined over $K$, then $\mathcal{L}(D)$ has a basis in $K(E)$ (not just in $\overline{K}(E)$). Here $D$ is defined over $K$ if it is fixed by $\text{Gal}(\overline{K}/K)$ (this is unimportant for us and we just write it down to be rigorous).
 
 \begin{proof}
-    $\mathcal{L}(2O_E) \subset \mathcal{L}(3O_E)$. Pick bases $1,x$ and $1,x,y$. Note $\text{ord}_{O_E}(x) = -2$ and $\text{ord}_{O_E}(y) = -3$ (else $x,y$ don't give a basis). The 7 elements $1,x,y,x^2,xy,x^3,y^2$ lie in the 6--dimensional vector space $\mathcal{L}(6O_E)$ (as they have at most a sixth order pole), so they must satisfy a linear dependence relation. 
+    $\mathcal{L}(2\cdot O_E) \subset \mathcal{L}(3\cdot O_E)$. Pick bases $1,x$ and $1,x,y$. Note $\text{ord}_{O_E}(x) = -2$ and $\text{ord}_{O_E}(y) = -3$ (else $x,y$ don't give a basis). The 7 elements $1,x,y,x^2,xy,x^3,y^2$ lie in the 6--dimensional vector space $\mathcal{L}(6O_E)$ (as they have at most a sixth order pole), so they must satisfy a linear dependence relation. 
 
     \vspace{1mm}
      
     Leaving out $x^3$ or $y^2$ leaves us with 6 elements, all with different order poles, giving a basis for $\mathcal{L}(6O_E)$. Hence the coefficients of $x^3$ and $y^2$ are nonzero, so by rescaling $x,y$ (if necessary) we get \[
-    y^2 + a_1xy + a_2y = x^3 + a_2 x^2 + a_4 x + a_6
+    E': y^2 + a_1xy + a_2y = x^3 + a_2 x^2 + a_4 x + a_6
     \]
     for some $a_i \in K$. Let $E'$ be the curve defined by this equation (or rather its projective closure). There is a morphism $\phi: E \to E' \subset \mathbb{P}^2$ by $P \mapsto (x(P):y(P):1) = \left(\frac{x}{y}(P): 1: \frac{1}{y}(P)\right)$. (Since $E$ is smooth, we know that this rational map is a morphism). Hence $O_E \mapsto (0:1:0)$.
     \vspace{1mm}
@@ -309,7 +309,99 @@ We now drop the assumption that $\overline{K} = K$, but we will still assume tha
         &[K(E):K(x)] = \deg(E \stackrel{x}{\to} \mathbb{P}^1) = \text{ord}_{O_E}\left(\frac{1}{x}\right) = 2\\
         &[K(E):K(y)] = \deg(E \stackrel{y}{\to} \mathbb{P}^1) = \text{ord}_{O_E}\left(\frac{1}{y}\right) = 3.
     \end{align*}
-    This gives an inclusion of fields $K(x) \le K(E)$ of degree 2, $K(y) \le K(E)$ of degree 3, while $K(X), K(y) \le K(x,y) \le  K(E)$, so tower law gives $[K(E):K(x,y)] = 1 \implies K(E)=K(x,y)=\phi^* K(E') \implies \deg \phi = 1$. (draw a picture!).
+    This gives an inclusion of fields $K(x) \le K(E)$ of degree 2, $K(y) \le K(E)$ of degree 3, while $K(x), K(y) \le K(x,y) \le  K(E)$, so tower law gives $[K(E):K(x,y)] = 1 \implies K(E)=K(x,y)=\phi^* K(E') \implies \deg \phi = 1$. (draw a picture!). This gives us an inverse that is a rational map, which we want to show is a morphism. For this, we just need to show that $E'$ is smooth.
+    \vspace{1mm}
+     
+    If $E'$ were singular, then $E$ and $E'$ are rational, a contradiction. So $E'$ is smooth and hence $\phi^{-1}$ is a morphism, so $\phi$ is an isomorphism.
+\end{proof}
+\begin{prop}\label{prop3.2}
+    Let $E,E'$ be elliptic curves over $K$ in Weierstrass form. Then $E \cong E'$ over $K \iff$ the equations are related by a change of variables 
+    \begin{align*}
+    x &= u^2x' + r \\
+    y &= u^3y' + u^2sx' + t
+    \end{align*}
+    for $r,s,t,u \in K$ with $u \neq 0$. 
+\end{prop}
+\begin{proof}
+    $\mathcal{L}(2\cdot O_E) = \langle 1, x \rangle = \langle 1, x' \rangle \implies x = \lambda x' + r$ for some ${\lambda, r \in K, \lambda \neq 0}$. Similarly $\mathcal{L}(3\cdot O_E) = \langle 1,x,y \rangle = \langle 1,x',y' \rangle \implies y = \mu y' + \sigma x' + t$ for some $\mu, \sigma, t \in K, \mu \neq 0$. 
+    \vspace{1mm}
+     
+    Looking at the coefficients of $x^3$ and $y^2$ tells us that $\lambda^3 = \mu^2$, so $\lambda = u^2, \mu = u^3$ for some $u \in K^\times$. Put $s = \frac{\sigma}{u^2}$ to conclude.
+\end{proof}
+
+A Weierstrass equation defines an elliptic curve $\iff$ it defines a smooth curve $\iff \Delta(a_1,\ldots,a_6) \neq 0$, where $\Delta \in \mathbb{Z}[a_1,\ldots,a_6]$ is a certain polynomial.
+
+\vspace{1mm}
+ 
+If $\text{char }K \neq 2,3$, we may reduce to the case $E: y^2 = x^3 + ax + b$. In this case, the discriminant is $\Delta = -16(4a^3 + 27b^2)$.
+\begin{cor}
+    Assume $\text{char }K \neq 2,3$. Elliptic curves 
+    \begin{align*}
+        &E : y^2 = x^3 + ax + b \\
+        &E' : y^2 = x^3 + a'x + b'
+    \end{align*}
+    are isomorphic over $K \iff \begin{cases}
+        a' = u^4 a \\
+        b' = u^6 b
+    \end{cases}$ for some $u \in K^\times$.
+\end{cor}
+\begin{proof}
+    $E, E'$ are related by a substitution as in Proposition \ref{prop3.2} with $r=s=t=0$.
+\end{proof}
+\begin{defn}
+    The \textbf{$j$--invariant} is $j(E) = \frac{1728(4a^3)}{4a^3+27b^2}$.
+\end{defn}
+\begin{cor}
+    $E \cong E' \implies j(E) \cong j(E')$ and the converse holds if $K = \overline{K}$.
+\end{cor}
+\begin{proof}
+    $E \cong E' \iff \begin{cases}
+        a' &= u^4 a \\
+        b' &= u^6 b
+    \end{cases}$ for some $u \in K^\times \implies (a^3:b^2) = ((a')^3:(b')^2) \iff j(E) = j(E')$. The middle step is reversible if $K=\overline{K}$.
+\end{proof}
+\section{The Group Law}
+Let $E \subset \mathbb{P}^2$ be a smooth plane cubic with $O_E \in E(K)$ (not immediately assumed to be in Weierstrass form). $E$ meets any line in 3 points, counted with multiplicity.
+\vspace{1mm}
+ 
+For $P,Q \in E$, let $S$ be the $3^{\text{rd}}$ point of intersction of $PQ$ with $E$ and then let $R$ be the $3^{\text{rd}}$ intersection of $O_ES$ with $E$. We define $P \oplus Q = R$. (Later we drop the circle and just write $+$). If $P=Q$, instead take the tangent line at $P$, i.e. $T_PE$, etc. This is the ''chord and tangent process''.
+\begin{theorem}
+    $(E, \oplus)$ is an abelian group.
+\end{theorem}
+\textbf{Remark.} Here $E$ means $E(\overline{K})$ since we haven't specified a field yet.
+\begin{proof}
+    \begin{enumerate}[(i)]
+        \item $\oplus$ is commutative trivially.
+        \item $O_E$ is the identity, since the line through $O_EP$ meets $S$ for the $3^{\text{rd}}$ time at $S$ and then $SP$ meets $E$ for the $3^{\text{rd}}$ time at $O_E$ (drawing a picture makes this obvious).
+        \item Inverses: Let $S$ be the $3^{\text{rd}}$ intersection of $T_{O_E}E$ with $E$ and $Q$ the $3^{\text{rd}}$ intersection of $PS$ with $E$. Then $P \oplus Q = O_E$.
+        \item Associativity is much harder. We have some setup:
+    \end{enumerate}
+    \begin{defn}
+        $D_1,D_2 \in \text{Div}(E)$ are \textbf{linearly equivalent} if $\exists f \in K(E)^\times$ such that $\text{div}(f) = D_1 - D_2$. Write $D_1 \sim D_2$ and $[D] = \{D' \mid D' \sim D\}$.
+    \end{defn}
+    \begin{defn}
+        The \textbf{Picard group} is $\text{Pic}(E) = \text{Div}(E)/\sim$. Also define $\text{Pic}^0(E) = \text{Div}^0(E)/\sim$ where $\text{Div}^0(E) = \{D \in \text{Div}(E) \mid \text{deg}(D) = 0\}$.
+    \end{defn}
+    We define $\psi: E \to \text{Pic}^0(E)$ by $P \mapsto [(P)-(O_E)]$.
+    \begin{prop}
+        \begin{enumerate}[(i)]
+            \item $\psi(P \oplus Q) = \psi(P) + \psi(Q)$.
+            \item $\psi$ is a bijection.
+        \end{enumerate}
+    \end{prop}
+    \begin{proof}
+        \begin{enumerate}[(i)]
+            \item WLOG let the lines $PQ$ and $O_ES$ be given by $l=0$ and $m=0$. Then \[
+            \text{div}\left(\frac{l}{m}\right) = (P)+(S)+(Q)-(O_E)-(S)-(R),
+            \]
+            hence $(P)+(Q) \sim (P \oplus Q) + (O_E)$, so $(P\oplus Q)- (O_E) \sim (P)-(O_E) + (Q) - (O_E)$, so $\psi(P \oplus Q) = \psi(P) + \psi(Q)$.
+            \item Injectivity: Suppose $\psi(P) = \psi(Q)$ for $P \neq Q$. Then $\exists f \in \overline{K}(E)^\times$ such that $\text{div}(f) = (P)-(O_E)-(Q)+(O_E) = (P) - (Q) \implies E \stackrel{f}{\to} \mathbb{P}^1$ has degree $1$ (for example since evaluation at 0 on the affine line gives that $P$ has one root and $Q$ has one pole), so $E \cong \mathbb{P}^1$, a contradiction.
+            \vspace{1mm}
+             
+            Surjectivity: Let $[D] \in \text{Pic}^0(E)$. Then $D + (O_E)$ has degree 1, so by Riemann--Roch, $\text{dim}\mathcal{L}(D+(O_E)) = 1$, so $\exists 0\neq f \in \overline{K}(E)$ such that $\text{div}(f) + D + (O_E) \ge 0$, but $\text{div}(f) + D + (O_E)$ has degree 1, so $\text{div}(f) + D + (O_E) = (P)$ for some $P \in E \implies (P) - (O_E) \sim D \implies  \psi(P) = [D]$. 
+        \end{enumerate}
+    \end{proof}
+    We conclude that $\psi$ identifies $(E,\oplus)$ with $(\text{Pic}^0(E), +)$, so $\oplus$ is associative.
 \end{proof}
 
 \end{document}
