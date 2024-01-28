@@ -85,7 +85,7 @@ One tape is designated as the input tape and is never changed, another is the ou
 \section{Some complexity classes}
 
 \begin{defn}
-    The complexity class $P$ consists of all Boolean functions (i.e. problems) $f: \{0,1\}^* \to \{0,1\}$ such that there exists a Turing machine $T$ and a polynomial $p$ such that for every $x \in \{0,1\}^*$, $T$ computes $f(x)$ in at most $p(|x|)$ steps, where $|x| = m$ if $x \in \{0,1\}^m$.
+    The complexity class P consists of all Boolean functions (i.e. problems) $f: \{0,1\}^* \to \{0,1\}$ such that there exists a Turing machine $T$ and a polynomial $p$ such that for every $x \in \{0,1\}^*$, $T$ computes $f(x)$ in at most $p(|x|)$ steps, where $|x| = m$ if $x \in \{0,1\}^m$.
 \end{defn}
 
 \begin{example}
@@ -96,29 +96,29 @@ One tape is designated as the input tape and is never changed, another is the ou
 \end{example}
 \marginpar{23 Jan 2024, Lecture 2}
 
-We now talk about $NP$, which stands for nondeterministic polynomial time.
+We now talk about NP, which stands for nondeterministic polynomial time.
 \begin{example}
     Input: a graph $G$ with $n$ vertices. Output: 1 iff $G$ contains a Hamilton cycle (a cycle that contains every vertex).
 \end{example}
 Loosely, a nondeterministic algorithm is one that doesn't fully specify what it does. It outputs $f(x)=1$ if there is some sequence of choices that leads to $f(x)=1$. More formally, a \textbf{nondeterministic Turing machine} is one that has not one but two transition functions. At each step, it applies one or the other. We say that it computes $f$ if $f(x)=1 \iff$ there is some sequence of choices that leads to output $1$ when the input is $x$.
 \begin{defn}
-    $NP$ is the class of functions computable in polynomial time by a nondeterministic Turing machine.
+    NP is the class of functions computable in polynomial time by a nondeterministic Turing machine.
 \end{defn}
 \begin{defn}[Alternative definition]
-    $f \in NP$ if there is a polynomial $p$ and a function $g \in P$ such that for every $x \in \{0,1\}^{*} \iff \exists y \in \{0,1\}^{p(|x|)}$ such that $g(x,y)=1$.
+    $f \in $ NP $\iff$ there is a polynomial $p$ and a function $g \in$ P such that for every $x \in \{0,1\}^{*},~ \exists y \in \{0,1\}^{p(|x|)}$ such that $g(x,y)=1$.
 \end{defn}
 To see that this is equivalent, observe first that if $f$ satisfies the second definition, then we can write down $y$ nondeterministically and apply $g$. In the other direction, $y$ encodes choices made by the NDTM, so given $y$, the computation can be done deterministically.
 \vspace{1mm}
  
-Big open problem: does $P = NP$?
+Big open problem: does P = NP?
 
 \begin{defn}[co--NP]
-    $f \in \text{co--NP} \iff 1-f \in NP$.
+    $f \in \text{co--NP} \iff 1-f \in$ NP.
     \vspace{1mm}
      
     Alternatively, $f \in \text{co--NP} \iff$ there exists a polynomial $p$ and $g \in P$ such that $\forall x \in \{0,1\}^*$, $f(x)=1 \iff ~\forall y \in \{0,1\}^{p(|x|)}, g(x,y)=1$.
 \end{defn}
-For example, primality testing is in both $NP$ and co--NP (for co--NP, we need to find a polynomial time algorithm that verifies a number is prime, see Ex. Sheet 1).
+For example, primality testing is in both NP and co--NP (for co--NP, we need to find a polynomial time algorithm that verifies a number is prime, see Ex. Sheet 1).
 \vspace{1mm}
  
 \subsection{The polynomial hierarchy}
@@ -136,14 +136,14 @@ We define PH (the polynomial hierarchy) as \[
 \text{PH} = \bigcup_{k=0}^{\infty} \Sigma_k^P \cup \Pi_k^P.
 \]
 \begin{prop}
-    If $P = NP$, then $P = \text{PH}$.
+    If P = NP, then $\text{P} = \text{PH}$.
 \end{prop}
 \begin{proof}
-    Note first that if $P = NP$, then $P = \text{co--NP}$. If $f \in \Sigma_{k+1}^P$, then $\exists g \in \Pi_k^P$ such that $f(x)=1 \iff \exists y~ g(x,y)=1$. By induction, $g \in P$, so $f \in NP$, so $f \in P$. The proof for $\Pi_{k+1}^P$ is similar, just look at the negation.
+    Note first that if P = NP, then P $= \text{co--NP}$. If $f \in \Sigma_{k+1}^P$, then $\exists g \in \Pi_k^P$ such that $f(x)=1 \iff \exists y~ g(x,y)=1$. By induction, $g \in P$, so $f \in $ NP, so $f \in $ P. The proof for $\Pi_{k+1}^P$ is similar, just look at the negation.
 \end{proof}
 Exercises on Ex. Sheet 1: 
 \begin{itemize}
-    \item If $NP = \text{co--NP}$, then $\text{PH} = NP = \text{co--NP}$.
+    \item If $\text{NP} = \text{co--NP}$, then $\text{PH} = \text{NP} = \text{co--NP}$.
     \item If $\Sigma_k^P = \Sigma_{k+1}^P$ or $\Sigma_k^P = \Pi_k^P$, then $\text{PH} = \Sigma_k^P$.
 \end{itemize}
 
@@ -151,7 +151,7 @@ Exercises on Ex. Sheet 1:
  
 \textbf{PSPACE}. This consists of functions that can be computed by a Turing machine that uses only a polynomial amount of tape.
 \begin{prop}
-    $NP \subset \text{PSPACE}$.
+    $\text{NP} \subset \text{PSPACE}$.
 \end{prop}
 Again a reminder: all proofs involving Turing machines are really more proof sketches.
 \begin{proof}
@@ -186,7 +186,7 @@ So far we have $$\text{P} \subset \text{NP} \subset \text{PSPACE} \subset \text{
 A \textbf{circuit} is a directed acyclic graph (DAG) such that each vertex is labeled as an \textbf{input}, an AND gate, an OR gate, or a NOT gate. An input is a vertex of indegree 0, a NOT gate has to have indegree 1. All vertices of indegree >1 are AND gates or OR gates. Vertices of outdegree 0 are \textbf{outputs}. If the vertex preceeding a NOT gate has value $x$, then the vertex at the NOT gate has value $1-x$. The value at an AND gate is the minimum of the values at its predecessors, and the value at an OR gate is the maximum of the values at its predecessors.
 \vspace{1mm}
  
-Using these rules, we get a well--defined function from $\{0,1\}^{I}$ to $\{0,1\}^{O}$, where $I$ is the set of input vertices and $O$ is the set of output vertices. If any AND and OR gate has indegree $\le k$, then we say that the circuit is of $\text{fanin } \le k$. Often we restrict to circuits of fanin $\le 2$.
+Using these rules, we get a well--defined function from $\{0,1\}^{I}$ to $\{0,1\}^{O}$, where $I$ is the set of input vertices and $O$ is the set of output vertices. If every AND and OR gate has indegree $\le k$, then we say that the circuit is of $\text{fan--in} \le k$. Often we restrict to circuits of fan--in $\le 2$.
 \vspace{1mm}
  
 \textbf{Straight--line computations.} Let $f : \{0,1\}^n \to \{0,1\}$. A straight--line computation of $f$ is a sequence of functions $f_1,f_2,\ldots,f_m$ (we call $m$ the \textbf{length} of the computation) such that $f_i(x) = x_i$ for $1\le i\le n$, and for each $i>n$, either $f_i = f_{j_1} \wedge \ldots \wedge f_{j_k}$ for some $j_1,\ldots,j_k < i$, or $f_i = f_{j_1} \vee \ldots \vee f_{j_k}$ for some $j_1,\ldots,j_k < i$, or $f_i = 1 - f_j$ for some $j<i$, and $f_m = f$.

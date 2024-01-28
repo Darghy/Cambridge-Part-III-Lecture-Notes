@@ -257,19 +257,19 @@ Given $A \subset \mathbb{F}_p^n$, write $2 \cdot A = \{2a \mid a \in A\}$. This 
         &= \mathbb{E}_{x,y}1_A(x)1_A(y)1_A(2y-x) &y=x+d\\
         &= \mathbb{E}_{y}1_A(y) (1_A * 1_A)(2y) \\
         &= \langle 1_{2\cdot A}, 1_A * 1_A \rangle &z=2y\\
-        &= \langle \hat{1}_{2\cdot A}, \widehat{1_A * 1_A}\rangle. &\text{by Plancherel}.
+        &= \langle \widehat{1_{2\cdot A}}, \widehat{1_A * 1_A}\rangle. &\text{by Plancherel}.
     \end{align*}
     Continue the last manipulation to get 
     \begin{align*}
-        &= \langle \hat{1}_{2\cdot A}, \hat{1}_A^2 \rangle \\
-        &= \alpha^3 + \sum_{t \neq 0}^{} \hat{1}_A(t)^2 \overline{\widehat{1_{2\cdot A}}(t)}.
+        &= \langle \widehat{1_{2\cdot A}}, \hat{1}_A^2 \rangle \\
+        &= \alpha^3 + \sum_{t \neq 0}^{} \widehat{1_A}(t)^2 \overline{\widehat{1_{2\cdot A}}(t)}.
     \end{align*}
     The last sum in absolute value is at most 
     \begin{align*}
-        &\le \sup_{t \neq 0}|\hat{1}_A(t)|\sum_{t\neq0}^{} |\hat{1}_A(t)\overline{\hat{1}_{2\cdot A}(t)}| \\
-        &\le \sup_{t\neq 0}|\hat{1}_A(t)| \left(\sum_{t}^{} |\hat{1}_A(t)|^2\right)^{1/2}\left(\sum_{t}^{} |\hat{1}_{2\cdot A}(t)|^2\right)^{1/2}\\
-        &\le \sup_{t \neq 0}|\hat{1}_A(t)|\cdot \alpha^{1/2} \cdot \alpha^{1/2} \\
-        &\le \sup_{t \neq 0}|\hat{1}_A(t)|
+        &\le \sup_{t \neq 0}|\widehat{1_A}(t)|\sum_{t\neq0}^{} |\widehat{1_A}(t)\overline{\widehat{1_{2\cdot A}}(t)}| \\
+        &\le \sup_{t\neq 0}|\widehat{1_A}(t)| \left(\sum_{t}^{} |\widehat{1_A}(t)|^2\right)^{1/2}\left(\sum_{t}^{} |\widehat{1_{2\cdot A}}(t)|^2\right)^{1/2}\\
+        &\le \sup_{t \neq 0}|\widehat{1_A}(t)|\cdot \alpha^{1/2} \cdot \alpha^{1/2} \\
+        &\le \sup_{t \neq 0}|\widehat{1_A}(t)|
     \end{align*}
     by C--S and Parseval.
 \end{proof}
