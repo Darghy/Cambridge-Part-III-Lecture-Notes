@@ -268,7 +268,7 @@ In particular, this shows that:
     \item $|\phi^{-1}(Q)|\le \deg \phi$.
     \item If $\phi$ is separable, then equality holds in (ii) for all but finitely many points $Q \in C_2$.
 \end{itemize}
-\textbf{Remark.} Let $C$ be an algebraic curve. A rational map is given by 
+\textbf{Important remark.} Let $C$ be an algebraic curve. A rational map is given by 
 \begin{align*}
     C &\to \mathbb{P}^n \\
     \phi &\mapsto (f_0,f_1,\ldots,f_n)
@@ -403,5 +403,85 @@ For $P,Q \in E$, let $S$ be the $3^{\text{rd}}$ point of intersction of $PQ$ wit
     \end{proof}
     We conclude that $\psi$ identifies $(E,\oplus)$ with $(\text{Pic}^0(E), +)$, so $\oplus$ is associative.
 \end{proof}
+\marginpar{29 Jan 2024, Lecture 5}
+
+\textbf{Formulae for $E$ in Weierstrass form.}
+Let $E : y^2 + a_1xy + a_3 y  = x^3 +a_2x^2 + a_4 x + a_6$. Choose two points $P_1 = (x_1, y_1)$ and $P_2 = (x_2, y_2)$ on it. Let the line through $P_1$ and $P_2$ be given by $y = \lambda x + \nu$ and let it meet $E$ again at $P' = (x', y')$. We want to find $P_1 \oplus P_2 = P_3 = (x_3, y_3) = \ominus P'$ for $\ominus P$ the reflection of $P$ across the $x$--axis. We easily compute $\ominus P_1 = (x_1, -(a_1x +a_3)-y_1)$. 
+\vspace{1mm}
+ 
+Substituting $y = \lambda x + \nu$ into our equation for $E$ and looking at the coefficient of $x^2$ gives $\lambda^2 + a_1 \lambda - a_2 = x_1 + x_2 + x' = x_1 + x_2 + x_3$, so $x_3 = \lambda^2 +a_1 \lambda - a_2 - x_1 - x_2$. For $y_3$ we find $$y_3 = -(a_1x' + a_3) - y' = -(a_1x_3+a_3) - (\lambda x_3  + \nu) = - (\lambda+a_1)x_3 - a_3 - \nu.$$
+It remains to find formulas for $\lambda$ and $\nu$.
+\begin{itemize}
+    \item Case 1. $x_1 = x_2$, but $P_1 \neq P_2$. Then $P_1 \oplus P_2 = O_E$.
+    \item Case 2. $x_1 \neq x_2$. Then $\lambda = \frac{y_2-y_1}{x_2-x_1}$ and $\nu = y_1 - \lambda x_1 = \frac{x_2y_1-x_1y_2}{x_2-x_1}$.
+    \item Case 3. $P_1 = P_2$. In this case, compute the equation for the tangent line to get $\lambda, \nu$ as rational expressions in $x_1,x_2,y_1,y_2$.
+\end{itemize}
+\begin{cor}
+    $E(K)$ is an abelian group.
+\end{cor}
+\begin{proof}
+    $E(K)$ is a subgroup of $(E, \oplus)$.
+    \begin{itemize}
+        \item It has identity $O_E$ by definition.
+        \item We have closure and inverses through the formulae above.
+        \item Associativity and commutativity is inherited.
+    \end{itemize}
+\end{proof}
+\begin{theorem}
+    Elliptic curves are group varieties, i.e. 
+    \begin{align*}
+        [-1]&:E \to E, P \mapsto \ominus P\\
+        \oplus&: E \to E, (P,Q) \mapsto P \oplus Q
+    \end{align*}
+    are morphisms of algebraic varieties.
+\end{theorem}
+\begin{proof}
+    By the above formulae, $[-1]:E \to E$ is a rational map, i.e. a morphism by our important remark.
+    \vspace{1mm}
+     
+    For $\oplus$, note by the above formulae that $\oplus : E \to E$ is a rational map regular on 
+    \begin{align*}
+        U = \{(P,Q) \in E \times E \mid O_E \not\in \{P,Q, P \oplus Q, P \ominus Q  \}\}.
+    \end{align*}
+    For $P \in E$, let $\tau_P : E \to E$ be the ''translation by $P$'' map, given by $X \mapsto P \oplus X$. $\tau_P$ is a rational map, hence a morphism. Now for $A, B \in E$, we factor $\oplus$ as 
+    \begin{align*}
+        E \times E \stackrel{\tau_{\ominus A} \times \tau_{\ominus B}}{\to} E \times E \stackrel{\oplus}{\to} E \stackrel{\tau_{A\oplus B}}{\to} E.  
+    \end{align*}
+    This shows $\oplus$ is regular on $(\tau_{A} \times \tau_B)(U)$, so $\oplus$ is regular on $E \times E$.
+\end{proof}
+\textbf{Statement of results.}
+The following isomorphisms in (i), (ii), (iv) respect the relevant topologies.
+\begin{enumerate}[(i)]
+    \item $K=\mathbb{C}$. Then $E(\mathbb{C}) \cong \mathbb{C}/\Lambda \cong \mathbb{R}/\mathbb{Z} \times \mathbb{R}/\mathbb{Z}$ for $\Lambda$ a lattice.
+    \item $K=\mathbb{R}$. Then \[
+    E(\mathbb{R}) = \begin{cases}
+        \mathbb{Z}/2\mathbb{Z} \times \mathbb{R}/\mathbb{Z}& \text{ if }\Delta>0\\
+        \mathbb{R}/\mathbb{Z} &\text{ if }\Delta<0.
+    \end{cases}
+    \] 
+    \item $K = \mathbb{F}_q$. Then $\left| \left|E(\mathbb{F}_q)\right| - (q+1)\right| \le 2\sqrt{q}$. This is Hasse's Theorem.
+    \item For a local field $[K:\mathbb{Q}_p] <\infty$ with ring of integers $\mathcal{O}_K$, $E(K)$ has a subgroup of finite index isomorphic to $(\mathcal{O}_K,+)$.
+    \item For a number field $[K:Q]<\infty$, $E(K)$ is a finitely generated abelian group (this is the Mordell--Weil Theorem).
+    Basic group theory says that if $A$ is a finitely generated abelian group, then $A \cong (\text{finite subgroup})\times \mathbb{Z}^r$. Here $r$ is called the rank of $A$. The proof of Mordell--Weil gives an upper bound for $\text{rank }E(K)$, but there is no known algorithm to compute the rank in all cases.
+\end{enumerate}
+\textbf{Brief remarks on the case $K=\mathbb{C}$.} Let $\Lambda = \{a \omega_1 + b \omega_2 \mid a,b \in \mathbb{Z}\}$ where $\omega_1,\omega_2$ are a basis for $\mathbb{C}$ as an $\mathbb{R}$--vector space. Then meromorphic functions on the Riemann surface $\mathbb{C}/\Lambda$ correspond bijectively with $\Lambda$--invariant meromorphic functions in $\mathbb{C}$. The function field of $\mathbb{C}/\Lambda$ is generated by $\wp(z)$ and $\wp'(z)$, where 
+\begin{align*}
+    &\wp(z) = \frac{1}{z^2}+\sum_{\lambda \in \Lambda \setminus \{0\}}^{} \left(\frac{1}{(z-\lambda)^2} - \frac{1}{\lambda^2}\right)\\
+    &\wp'(z) = -2\sum_{\lambda \in \Lambda}^{} \frac{1}{(z-\lambda)^3}.
+\end{align*}
+These satisfy $\wp'(z)^2 = 4\wp(z)^3 - g_2\wp(z) - g_3$ for some constants $g_2,g_3 \in \mathbb{C}$ depending on $\Lambda$. One shows $\mathbb{C}/\Lambda \cong E(\mathbb{C})$, where $E: y^2 = 4x^3 - g_2x -g_3$ which is an isomorphism on both groups (via $z \mapsto (\wp(z),\wp'(z))$) and on Riemann surfaces. We have the following result:
+\begin{theorem}[Uniformization theorem]
+    Every elliptic curve over $\mathbb{C}$ arises in this way.
+\end{theorem}
+\begin{defn}
+    For $n \in \mathbb{Z}$, let $[n]: E \to E$ be given by $P \mapsto \underbrace{P\oplus P \oplus \ldots \oplus P}_{n\text{ copies}}$ if $n>0$ and $[-n] = [-1] \circ [n]$.
+\end{defn}
+\begin{defn}
+    The \textbf{$n$--torsion subgroup} of $E$ is \[
+    E[n] = \text{ker}(E \stackrel{[n]}{\longrightarrow} E).
+    \]
+\end{defn}
+If $K=\mathbb{C}$, then $E(\mathbb{C}) \cong \mathbb{C}/\Lambda$, so $E[n] \cong (\mathbb{Z}/n\mathbb{Z})^2$ and $\text{deg}[n] = n^2$. Call these results (1) and (2). We will show that (2) holds over any field $K$ and (1) holds if $\text{char }K \nmid n$.
+
 
 \end{document}
