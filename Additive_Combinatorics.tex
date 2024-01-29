@@ -319,7 +319,7 @@ We can also check that Definition \ref{defn1.6} and \ref{defn1.9}, Examples \ref
     \]
     This is on Ex. Sheet 1. 
 \end{example}
-\begin{theorem}[Roth's Theorem]
+\begin{theorem}[Roth's Theorem]\label{theorem1.20}
     Let $A \subset [N] := \{1,2,\ldots,N\}$ be a set containing no non--trivial 3--APs. Then $|A| = O\left(\frac{N}{\log \log N}\right)$.
 \end{theorem}
 \begin{lemma}
@@ -350,6 +350,62 @@ We can also check that Definition \ref{defn1.6} and \ref{defn1.9}, Examples \ref
     \end{align*}
     where the last step holds for $\alpha=1$ and hence for any $\alpha\le 1$.
 \end{proof}
+\marginpar{29 Nov 2024, Lecture 5}
+
+We first now convert the large Fourier coefficient into a density increment.
+\begin{lemma}\label{lemma1.22}
+    Let $m \in \mathbb{N}$ and let $\phi: [m] \to \mathbb{Z}_p$  by $x \mapsto xt$ for some nonzero $t$. Given $\epsilon>0$, there exists a partition of $[m]$ into progressions $P_i$ of length $\in \left[\epsilon \sqrt{m}/2, \epsilon \sqrt{m}\right]$ such that $\text{diam}(\phi(P_i)) = \max_{x,y \in P_i} \left|\phi(x)-\phi(y)\right|\le \epsilon p ~\forall i$. 
+\end{lemma}
+\begin{proof}
+    Set $u = \left\lfloor \sqrt{m} \right\rfloor$ and consider $0,t,2t,\ldots,ut$. By pigeonhole, we can find $0\le v<w\le u$ such that $\left|wt - vt \right| \le \frac{p}{u}$. Divide $[m]$ into residue classes mod $s$, where $s = w-v$ (so $\left|st \right|\le \frac{p}{u}$). Each of these has size at least $\frac{m}{s}\ge \frac{m}{u}$. But each residue class can be divided into progressions of the form $a, a+s, a+2s, a+ds$ with $\frac{\epsilon u }{2} < d \le \epsilon u$. The diameter of the image of each progression under $\phi$ is $\left|dst \right| \le \epsilon p$. 
+\end{proof}
+\begin{lemma}
+    Let $A \subset [N]$ be of density $\alpha>0$. Let $p$ be a prime in $\left[\frac{N}{3}, \frac{2N}{3}\right]$ and write $A' = A \cap [p]$ as a subset of $\mathbb{Z}_p$. Suppose $\exists t\neq 0$ such that $\left|\widehat{1_A'}(t)\right|\ge \frac{\alpha^2}{10}$. Then there exists a progression $P$ of length at least $\frac{\alpha^2\sqrt{N}}{500}$ such that $\left|A \cap P\right| \ge \alpha \left(1+\frac{\alpha}{80}\right)\left|P\right|$.
+\end{lemma}
+\begin{proof}
+    Let $\epsilon = \frac{\alpha^2}{40\pi}$ and use Lemma \ref{lemma1.22} to partition $[p]$ into progressions $P_i$ of length at least $\frac{\epsilon\sqrt{p}}{2} \ge \frac{\alpha^2}{40\pi}\sqrt{\frac{N}{3}}\cdot \frac{1}{2} \ge \alpha^2\sqrt{N}\cdot \frac{1}{500}$ and $\text{diam}(\phi(P_i))\le \epsilon p$. Fix one $x_i$ from each $P_i$. Now work with the balanced function: since $t\neq 0$, the Fourier coefficient at $t$ is the same for the indicator function and the balanced function.
+    \begin{align*}
+        \frac{\alpha^2}{10} &\le \left|\widehat{f_{A'}}(t) \right| = \frac{1}{p}\left|\sum_{x \in \mathbb{Z}_p}^{} f_{A'}(x)\omega^{xt}\right| = \frac{1}{p}\left|\sum_{i}^{} \sum_{x \in P_i}^{} f_{A'}(x)\omega^{xt} \right| \\
+        &=\frac{1}{p}\left|\sum_{i}^{} \sum_{x \in P_i}^{} f_{A'}(x)\omega^{x_it} + \sum_{i}^{} \sum_{x \in P_i}^{} f_{A'}(x)\left(\omega^{xt}-\omega^{x_it}\right) \right| \\
+        &\le \frac{1}{p}\sum_{i}^{} \left|\sum_{x \in P_i}^{} f_{A'}(x) \right| + \frac{1}{p}\sum_{i}^{} \sum_{x \in P_i}^{} \left|f_{A'}(x) \right|2\pi \epsilon \\
+        &\le \frac{1}{p}\sum_{i}^{} \left|\sum_{x \in P_i}^{} f_{A'}(x) \right| + \frac{\alpha^2}{20}
+    \end{align*}
+    since $\left|t(x_i-x) \right|\le \epsilon p ~\forall x \in P_i$. Hence $$\frac{1}{p}\sum_{i}^{} \left|\sum_{x \in P_i}^{} f_{A'}(x) \right| \ge \frac{\alpha^2}{20}.$$
+    Since $f_{A'}$ has mean zero, 
+    \begin{align*}
+        \sum_{i}^{} \left(\left|\sum_{x \in P_i}^{} f_{A'}(x) \right| + \sum_{x \in P_i}^{} f_{A'}(x) \right) \ge \frac{\alpha^2 p}{20},
+    \end{align*}
+    so $\exists i$ such that $\left|\sum_{x \in P_i}^{} f_{A'}(x) \right| + \sum_{x \in P_i}^{} f_{A'}(x) \ge \frac{a^2\left|P_i \right|}{40}$ and so 
+    \begin{align*}
+        \sum_{x \in P_i}^{} f_{A'}(x) \ge \frac{\alpha^2 \left|P_i \right|}{80}.
+    \end{align*}
+\end{proof}
+This is about as technical as we get in this course.
+\begin{proof}[Proof of Roth's Theorem, theorem \ref{theorem1.20}]
+    This is on Ex. Sheet 1.
+\end{proof}
+\begin{example}[Behrend's example]
+    There exists a set $A \subset [N]$ containing no nontrivial 3--APs of size $\left|A \right| \ge C \exp \left(-c \sqrt{\log N}\right)N$, where $c$ and $C$ are absolute constants. This is again on Ex. Sheet 1.
+\end{example}
+\begin{defn}
+    Let $\Gamma \subset \widehat{G}$ and $\rho>0$. By the \textbf{Bohr set}, written $B(\Gamma,\rho)$, we mean \[
+    B(\Gamma,\rho) = \{x \in G \mid \left|\gamma(x)-1 \right|\le \rho ~\forall \gamma \in \Gamma\}.
+    \]
+    We call $\left|\Gamma \right|$ the \textbf{rank} and $\rho$ the \textbf{radius} of the Bohr set.
+\end{defn}
+\begin{example}
+    When $G = \mathbb{F}_p^n$ and $p = 3$, we have $B(\Gamma,\rho) = \langle \Gamma \rangle^\perp ~\forall \rho<1$ (draw a picture!). For larger $p$, the same holds for smaller $\rho$.
+\end{example}
+\begin{lemma}
+    Let $\Gamma \subset \widehat{G}$ be of size $d$ and let $\rho > 0$. Then $\left|B(\Gamma,\rho) \right| \ge \left(\frac{\rho}{2\pi}\right)^d\left|G \right|$.
+\end{lemma}
+\begin{proof}
+    This is on Ex. Sheet 2.
+\end{proof}
+\begin{lemma}[Bogolyubov's lemma, again]
+    Given $A \subset \mathbb{Z}_p$ of density $\alpha > 0$, $\exists \Gamma \subset \widehat{\mathbb{Z}_p}$ of size at most $2\alpha^{-2}$ such that $B\left(\Gamma,\frac{1}{2}\right) \subset A + A - A - A$.
+\end{lemma}
+
 
 \end{document}
  

@@ -373,9 +373,9 @@ Note $P_k(\mathfrak{m}) = \{(\alpha) \in I_K(\mathfrak{m}) \mid  \alpha \in K_{\
     \textbf{Step 3.} $\mathcal{O}_K^\times K_{\mathfrak{m},1}/K_{\mathfrak{m},1} \cong \mathcal{O}_K^\times/(\mathcal{O}_K^\times \cap K_{\mathfrak{m},1})$.
     \vspace{1mm}
      
-    Putting is all together:
+    Putting it all together:
     \begin{align*}
-        I_K(\mathfrak{m})/P_K(\mathfrak{m}) \cong (I_K(\mathfrak{m})/P_{\mathfrak{m}})/(P_K({\mathfrak{m}})/P_(\mathfrak{m}))
+        [I_K(\mathfrak{m}):P_K(\mathfrak{m})] = [I_K(\mathfrak{m}):P_{\mathfrak{m}}][P_{\mathfrak{m}}:P_K(\mathfrak{m})]
     \end{align*}
     and \begin{align*}
         (P_\mathfrak{m}/P_K(\mathfrak{m})) &\cong K_{\mathfrak{m}}/\mathcal{O}_K^\times K_{\mathfrak{m},1} \\
@@ -427,5 +427,72 @@ In the above situation, if $\text{ker}(\Phi_{\mathfrak{m}})$ is a congruence sub
 \vspace{1mm}
  
 Now we find a special modulus that works for each extension, called \textbf{the conductor}. 
+
+\marginpar{29 Jan 2024, Lecture 5}
+
+\textbf{Statements of global class field theory (ideal theoretic).} For $L/K$ abelian, we are interested to find out for which $m \subset \mathcal{O}_K$ is $\text{ker}(\Phi_{L/K,\mathfrak{m}})$ a congruence subgroup (i.e. $P_K(\mathfrak{m}) \subset \text{ker}(\Phi_{L/K, \mathfrak{m}})$).
+\begin{theorem}[The Conductor Theorem]
+    Let $L/K$ be abelian. Then there is a modulus $\mathfrak{f}=\mathfrak{f}(L/K)$ such that 
+    \begin{itemize}
+        \item a prime of $K$, finite or infinite, ramifies in $L$ if and only if it divides $\mathfrak{f}_{L/K}$.
+        \item If $\mathfrak{m}$ is divisible by all primes that ramify, then $\text{ker}(\Phi_{L/K, \mathfrak{m}})$ is a congruence subgroup for $\mathfrak{m}$ if and only if $\mathfrak{f}_{L/K} \mid \mathfrak{m}$.
+    \end{itemize}
+\end{theorem}
+\begin{defn}
+    The modulus $\mathfrak{f}_{L/K}$ is uniquely determined by $L/K$ and called the \textbf{conductor}.
+\end{defn}
+\begin{example}
+    Let $K=\mathbb{Q}$ and let $L = \mathbb{Q}(\sqrt{N})$ for $N \neq 0,1$ squarefree. Then $\mathfrak{f}_{L/K} = \begin{cases}
+        \left|d_{L/K} \right| & N>0\\
+        \left|d_{L/K} \right|{\infty} & N<0.
+    \end{cases}$ ($\left|D_{L/K}\right|{\infty}$ is the real infinite place of $\mathbb{Q}$).
+\end{example}
+\textbf{Remark.} The conductor is not just the product of ramified primes. In Ex. Sheet 1, there will be a cubic extension $L/\mathbb{Q}$ which is ramified only at 3. However, for $\mathfrak{m} = (3)$ or $\mathfrak{m} = (3)\infty$, $\text{ker}(\Phi_{L/\mathbb{Q},\mathfrak{m}})$ is not a congruence subgroup, so $\mathfrak{f}_{L/Q}\nmid (3)$ and $\mathfrak{f}_{L/\mathbb{Q}}\nmid (3)\infty$.
+\vspace{1mm}
+ 
+Next we focus on the kernel. Recall that if $\mathcal{P} \subset \mathcal{O}_L$ is a prime ideal, then we have $N_{L/K}(\mathcal{P}) = \mathfrak{p}^{f_{\mathcal{P}/\mathfrak{p}}}$ if $\mathfrak{p} = \mathcal{P} \cap \mathcal{O}_K$.
+\vspace{1mm}
+ 
+\textbf{Notation.} Let $N_{L/K}: I_K \to I_K$ be the norm map, given by $\mathfrak{a} \mapsto N_{L/K}(\mathfrak{a})$. If $\mathfrak{a} =\prod_{i=1}^{n} \mathcal{P}_i^{r_i}$, then $N_{L/K}(\mathfrak{a}) = \prod_{i=1}^{n} (N(\mathcal{P}_i)^{r_i}) = \prod_{i=1}^{n} (\mathfrak{p}_i^{f_{\mathcal{P}_i/\mathfrak{p}_i}})^{r_i}$.
+\begin{defn}
+    Let $L/K$ be abelian and let $\mathfrak{m}$ be a modulus of $K$ divisible by $\mathfrak{f}(L/K)$. Then the \textbf{norm group} (also called a Tahagi group) is the congruence subgroup
+    \[
+    T_{L/K}(\mathfrak{m}) = P_K(\mathfrak{m})N_{L/K}(I_L(\mathfrak{m})),
+    \]
+    where $I_L(\mathfrak{m})$ is the subgroup of $I_L$ with elements fractional ideals that are coprime to $\mathfrak{m}\mathcal{O}_L$.
+\end{defn}
+\begin{theorem}[Artin Reciprocity Theorem]
+    Let $L/K$ be abelian and let $\mathfrak{m}$ be a modulus of $K$ divisible by all ramified primes (both finite and infinite). Then the Artin map $\Phi_{L/K,\mathfrak{m}}(I_K(\mathfrak{m})) \to \text{Gal}(L/K)$ is surjective.
+    \vspace{1mm}
+     
+    If also $\mathfrak{f}_{L/K} \mid \mathfrak{m}$, so that $\text{ker}(\Phi_{\mathfrak{m}})$ is a congruence subgroup, then $\text{ker}(\Phi_{L/K,\mathfrak{m}}) = T_{L/K}(\mathfrak{m})$ and the Artin map defines an isomorphism \[
+    I_K(\mathfrak{m})/T_{L/K}(\mathfrak{m}) \cong \text{Gal}(L/K).
+    \]
+    So $\text{Gal}(L/K)$ is the generalized ideal class group for $\mathfrak{m}$. 
+\end{theorem}
+Artin reciprocity gives us information about the decomposition of primes:
+\begin{theorem}[Decomposition law]
+    Let $L/K$ be abelian of degree $n$ and let $\mathfrak{p} \subset \mathcal{O}_K$ be an unramified prime ideal. Let $\mathfrak{m}$ be divisible by $\mathfrak{f}(L/K)$, but not by $\mathfrak{p}$. Let $H = \text{ker}(\Phi_{\mathfrak{m}})$ be the congruence subgroup for $\mathfrak{m}$. Let $f$ be the smallest positive integer such that $\mathfrak{p}^{f} \in H$, i.e. $f$ is the order of $\mathfrak{p}$ mod $H$ in $I_K(\mathfrak{m})/H$. Then $\mathfrak{p}$ decomposes in $L$ into a product $$\mathfrak{p}\mathcal{O}_L = \mathcal{P}_1 \ldots \mathcal{P}_g$$ for $g = \frac{n}{f}$ of distinct prime ideals of degree $f$ over $\mathfrak{p}$.
+\end{theorem}
+\begin{proof}
+    Let $\mathfrak{p}\mathcal{O}_L = \mathcal{P}_1\ldots\mathcal{P}_g$ be the prime decomposition in $L$. These have to be distinct as $\mathfrak{p}$ is unramified, and all $\mathcal{P}_i$ have the same residue field degree $f_{\mathcal{P}_i/\mathfrak{p}}$ (as the extension is abelian, in particular Galois). We know that $f_{\mathcal{P}_i/\mathfrak{p}}$ is the order of $\left(\frac{L/K}{\mathfrak{p}}\right)$ and so under the isomorphism $I_K(\mathfrak{m})/H \cong \text{Gal}(L/K)$, this means it is also the order of $\mathfrak{p}$ mod $H$ in $I_K(\mathfrak{m})/H$. The result follows since $[L:K] = n = efg = fg$.
+\end{proof}
+Next we want to show that every generalized ideal class group is the Galois group of some abelian extension and that this extension is unique.
+\begin{theorem}[The Existence Theorem]
+    Let $\mathfrak{m}$ be a modulus of $f$ and let $H$ be a congruence subgroup for $\mathfrak{m}$. Then there exists a unique abelian extension $L/K$ with the following properties:
+    \begin{itemize}
+        \item All its ramified primes, finite or infinite, divide $\mathfrak{m}$.
+        \item $H = T_{L/K}(\mathfrak{m})$.
+        \item $I_K(\mathfrak{m})/H \cong \text{Gal}(L/K)$ under the Artin map $\Phi_{L/K,\mathfrak{m}}$.
+    \end{itemize}
+\end{theorem}
+So for any number field $K$, we can find abelian extensions with specified ramification.
+\begin{defn}
+    Let $\mathfrak{m}$ be any modulus and let $H = P_K(\mathfrak{m})$. The \textbf{ray class field} is the unique abelian extension $K(\mathfrak{m})$ of $K$ such that $P_K(\mathfrak{m}) = \text{ker}(\Phi_{K(\mathfrak{m})/K, \mathfrak{m}})$. This explains the name $\text{Gal}(K(\mathfrak{m})/K) \cong I_K(\mathfrak{m})/P_K(\mathfrak{m})$.
+\end{defn}
+\begin{example}
+    Let $K=\mathbb{Q}$ and let $\mathfrak{m} = (m)\infty$ for $m$ odd or divisible by 4. Then $\mathbb{Q}(\mathfrak{m}) = \mathbb{Q}(\zeta_m)$. Taking $\mathfrak{m} = (m)$ instead gives $\mathbb{Q}(\mathfrak{m}) = \mathbb{Q}(\zeta_m + \zeta_m^{-1})$.
+\end{example}
+Next we want to show that every abelian extension is contained in a ray class field.
 
 \end{document}
