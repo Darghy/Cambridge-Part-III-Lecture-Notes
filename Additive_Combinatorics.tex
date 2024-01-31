@@ -405,7 +405,69 @@ This is about as technical as we get in this course.
 \begin{lemma}[Bogolyubov's lemma, again]
     Given $A \subset \mathbb{Z}_p$ of density $\alpha > 0$, $\exists \Gamma \subset \widehat{\mathbb{Z}_p}$ of size at most $2\alpha^{-2}$ such that $B\left(\Gamma,\frac{1}{2}\right) \subset A + A - A - A$.
 \end{lemma}
+\marginpar{31 Jan 2024, Lecture 6}
+\begin{proof}
+    Recall $1_A * 1_A * 1_{-A} * 1_{-A}(x) = \sum_{t \in \widehat{Z_p}}^{} \left|\widehat{1_A}(t) \right|^4 \omega^{-xt}$. Let $\Gamma = \text{Spec}_{\sqrt{\frac{\alpha}{2}}}(1_A)$ and note that for all $x \in B\left(\Gamma,\frac{1}{2}\right)$ and $t \in \Gamma$, $\cos(2\pi xt/p)>0$. Hence 
+    \begin{align*}
+        \text{Re}\left(\sum_{t \in \widehat{Z_p}}^{} \left|\widehat{1_A}(t) \right|^4\omega^{-xt}\right) = \underbrace{\sum_{t \in \Gamma}^{} \left|\widehat{1_A}(t) \right|^4 \cos \left(2\pi xt/p\right)}_{\ge \alpha^4} + \\
+        \underbrace{\sum_{t \not\in \Gamma}^{} \left|\widehat{1_A}(t) \right|^4 \cos(2\pi xt/p)}_{\text{in absolute value }\le \sup_{t \not\in \Gamma}\left|\widehat{1_A}(t) \right|^2\sum_{}^{} \left|\widehat{1_A}(t) \right|^2 \le \left(\sqrt{\frac{\alpha}{2}}\cdot \alpha\right)^2\cdot \alpha =\frac{\alpha^4}{2}}.
+    \end{align*}
+\end{proof}
+\section{Combinatorial methods}
+For now, let $G$ be an abelian group. Given $A,B \subset G$. We defined $A+B = \{a + b \mid a \in A, b \in B\}$ and can define $A - B = \{a-b \mid a \in A, b \in B\}$. If $A$ and $B$ are finite, then $$\max(\left|A \right|,\left|B \right|)\le \left|A\pm B \right| \le \left|A \right|\left|B \right|$$
+(and better bounds are available in certain settings).
+\begin{example}
+    Let $V\le \mathbb{F}_p^n$ be a subspace. Then $V+V=V$, so $\left|V+V \right| = \left|V \right|$. In fact, if $A \subset \mathbb{F}_p^n$ is such that $\left|A+A \right|=\left|A \right|$, then $A$ must be a coset of a subspace.
+\end{example}
+\begin{example}
+    Let $A \subset \mathbb{F}_p^n$ be such that $\left|A+A \right|<\frac{3}{2}\left|A \right|$. Then $\exists V \le \mathbb{F}_p^n$ such that $A \subset V$ and $\left|V\right|<\frac{3}{2}\left|A\right|$. This is on Ex. Sheet 2.
+\end{example}
+\begin{example}
+    Let $A \subset \mathbb{F}_p^n$ be a set of linearly independent vectors. Then $A+A$ has size ${\left|A\right|\choose 2}$. However, $\left|A\right|\le n$, which is a small set.
+    \vspace{1mm}
+     
+    Let $A \subset \mathbb{F}_p^n$ be a set chosen randomly with probability $p^{-\theta n}$ with $\theta \in \left(\frac{1}{2},1\right]$. Then with high probability, $\left|A+A\right| = (1-o(1))\frac{\left|A\right|^2}{2}$.
+\end{example}
+\begin{defn}
+    Given finite sets $A,B \subset G$, we define the \textbf{Rusza distance} $d(A,B)$ between $A$ and $B$ by $$d(A,B) = \log \frac{\left|A-B\right|}{\sqrt{\left|A\right|\left|B\right|}}.$$
+\end{defn}
+Observe that $d(A,B)$ is nonnegative and symmetric.
+\begin{lemma}[Rusza's triangle inequality]\label{lemma2.5}
+    Given finite sets $A,B,C$, we have \[
+    d(A,C) \le d(A,B) + d(B,C).
+    \]
+\end{lemma}
+\begin{proof}
+    Observe that $\left|B\right|\left|A-C\right| \le \left|A-B\right|\left|B-C\right|$. Indeed, writing each $d \in A-C$ as $d = a_d-c_d$ for some $a_d \in A, c_d \in C$, the map \begin{align*}
+        \phi: B \times (A-C) &\to (A-B)\times(B-C)\\
+        (b,d) &\mapsto (a_d-b)\times(b-c_d)
+    \end{align*}
+    is injective (easy exercise). The triangle inequality now follows from the definition of the Rusza distance. 
+\end{proof}
+\begin{defn}
+    Given a finite set $A \subset G$, we write $\sigma(A) = \frac{\left|A+A\right|}{\left|A\right|}$ for the \textbf{doubling constant} and $\delta(A)=\frac{\left|A-A\right|}{\left|A\right|}$ for the \textbf{difference constant}.
+\end{defn}
+Then by Lemma \ref{lemma2.5}, \[
+\log \delta(A) = d(A,A) \le d(A,-A) + d(A,-A) = 2 \log \sigma(A),
+\]
+so $\delta(A) \le \sigma(A)^2$, i.e. $\left|A-A\right|\le \frac{\left|A+A\right|^2}{\left|A\right|}$.
+\vspace{1mm}
 
+\textbf{Notation.} Given $A \subset G$ and $l,m \in \mathbb{Z}_{\ge 0}$, write $lA-mA$ for the set \[
+\underbrace{A + A + \ldots + A}_{l \text{ times}} - \underbrace{A - A - \ldots - A}_{m \text{ times}}.
+\]
+\begin{theorem}[Plünnecke's inequality]
+    Let $A,B \subset G$ be finite sets such that $\left|A+B\right| \le K\left|A\right|$ for some $K>0$. Then for any $l,m \in \mathbb{Z}_{\ge 0}$,
+    \[
+    \left|lB-mB\right|\le K^{l+m}\left|A\right|.
+    \]
+\end{theorem}
+\begin{proof}
+    WLOG assume that $\left|A+B\right|=K\left|A\right|$. Choose a nonempty subset $A' \subset A$ such that the ratio $\frac{\left|A'+B\right|}{\left|A'\right|}$ is minimized, and call this ratio $K'$. Then $\left|A'+B\right|=K'\left|A'\right|$, $K'\le K$ and $\left|A''+B\right|\ge K'\left|A''\right| ~\forall A'' \subset A$.
+    \vspace{1mm}
+     
+    \textbf{Claim.} For any finite $C \subset G$, $\left|A'+B+C\right|\le K'\left|A'+C\right|$.
+\end{proof}
 
 \end{document}
  
