@@ -413,7 +413,7 @@ The idea of class field theory is that generalized ideal class groups are Galois
 \vspace{1mm}
  
 What is the meaning of ''suitably chosen'' above? For $L/K$ abelian, we want to know for which moduli $\mathfrak{m}$ will $\text{ker}(\Phi_\mathfrak{m})$ be a congruence subgroup.
-\begin{lemma}
+\begin{lemma}\label{lemma1.7}
     Let $L/K$ be abelian and let $\mathfrak{m}$ be a modulus divisible by all ramified primes. If $\mathfrak{n}$ is another modulus such that $\mathfrak{m} \mid \mathfrak{n}$, then \[
     P_K(\mathfrak{m}) \subset \text{ker}(\Phi_{\mathfrak{m}}) \implies P_K(\mathfrak{n}) \subset  \text{ker}(\Phi_{\mathfrak{n}}).
     \]
@@ -494,5 +494,73 @@ So for any number field $K$, we can find abelian extensions with specified ramif
     Let $K=\mathbb{Q}$ and let $\mathfrak{m} = (m)\infty$ for $m$ odd or divisible by 4. Then $\mathbb{Q}(\mathfrak{m}) = \mathbb{Q}(\zeta_m)$. Taking $\mathfrak{m} = (m)$ instead gives $\mathbb{Q}(\mathfrak{m}) = \mathbb{Q}(\zeta_m + \zeta_m^{-1})$.
 \end{example}
 Next we want to show that every abelian extension is contained in a ray class field.
+\marginpar{31 Jan 2024, Lecture 6}
+In other words, given $K, \mathfrak{m}$, there is a unique abelian extension $K(\mathfrak{m})/K$ such that $P_K(\mathfrak{m}) = \text{ker}(\Phi_{K(\mathfrak{m})/K,\mathfrak{m}})$.
+
+\begin{prop}\label{prop1.12}
+    Let $K\le L\le M$ be a tower of abelian extensions. Suppose $\mathfrak{m}$ contains all prime ideals $\mathfrak{p} \subset \mathcal{O}_K$ that ramify in $M$. Write $\text{res}: \text{Gal}(M/K) \to \text{Gal}(L/K)$ for the restriction map $\sigma \mapsto \sigma_L$. Then we have a commutative diagram $\begin{tikzcd}[]
+        I_K(\mathfrak{m}) & \text{Gal}(M/K)\\
+         & \text{Gal}(L/K)
+        \arrow["\Phi_{M/K,\mathfrak{m}}", from=1-1, to=1-2]
+        \arrow["\text{res}", from=1-2, to=2-2]
+        \arrow["\Phi_{L/K,\mathfrak{m}}", from=1-1, to=2-2]
+    \end{tikzcd}$. 
+\end{prop}
+\begin{proof}
+    Exercise on Example Sheet 1.
+\end{proof}
+\begin{lemma}\label{lemma1.13}
+    Let $L/K$ and $M/K$ be abelian extensions. Then $ L \subset M$ if and only if there is a modulus $\mathfrak{m}$ divisible by all primes of $K$ which ramify in either $L$ or $M$ such that $P_K(\mathfrak{m}) \subset \text{ker}(\Phi_{M/K},\mathfrak{m}) \subset \text{ker}(\Phi_{L/K},\mathfrak{m})$.
+\end{lemma}
+\begin{proof}
+    Suppose $L \subset M$. Then by Artin reciprocity, there exists $\mathfrak{m}_1$ for $L/K$ and $\mathfrak{m}_2$ for $M/K$ such that $P_K(\mathfrak{m_1}) \subset \text{ker}(\Phi_{L/K},\mathfrak{m}_1)$ and $P_K(\mathfrak{m}_2) \subset \text{ker}(\Phi_{M/K,\mathfrak{m}_2})$. By Lemma \ref{lemma1.7}, we can find $\mathfrak{m}$ such that $P_K(\mathfrak{m}) \subset \text{ker}(\Phi_{L/K,\mathfrak{m}})$ and $P_K(\mathfrak{m}) \subset \text{ker}(\Phi_{M/K,\mathfrak{m}})$. By Proposition \ref{prop1.12}, we have $\text{res} \circ \Phi_{M/K,\mathfrak{m}} = \Phi_{L/K,\mathfrak{m}}$, so $P_K(\mathfrak{m}) \subset \text{ker}(\Phi_{M/K}, \mathfrak{m}) \subset \text{ker}(\Phi_{L/K,\mathfrak{m}})$.
+    \vspace{1mm}
+     
+    Now suppose we have $\mathfrak{m}$ such that $P_K(\mathfrak{m}) \subset \text{ker}(\Phi_{M/K}, \mathfrak{m}) \subset \text{ker}(\Phi_{L/K,\mathfrak{m}})$. Then we get that under the map $\Phi_{M/K,\mathfrak{m}} : I_K(\mathfrak{m}) \to \text{Gal}(M/K)$, the subgroup $\text{ker}(\Phi_{L/K,\mathfrak{m}}) \subset I_K(\mathfrak{m})$ maps to a subgroup $H \subset \text{Gal}(M/K)$. By Galois theory, $H$ corresponds to an intermediate field $K \subset \tilde{L} \subset M$. Now apply the first part of the proof to $\tilde{L}\subset M$ to obtain  $\text{ker}(\Phi_{L/K,\mathfrak{m}}) = \text{ker}(\Phi_{\tilde{L}/M,\mathfrak{m}})$. By uniqueness, in the Existence Theorem, $L = \tilde{L} \subset M$.
+\end{proof}
+\begin{cor}
+    Let $K$ be a number field. Then any abelian extension is contained in a ray class field.
+\end{cor}
+\begin{proof}
+    Suppose $L/K$ is abelian and let $\mathfrak{m}$ be a modulus of $K$ such that $\mathfrak{f}_{L/K} \mid  \mathfrak{m}$. Then $H = \text{ker}(\Phi_{L/K,\mathfrak{m}})$ is a congruence subgroup for $\mathfrak{m}$. So $P_K(\mathfrak{m}) = \text{ker}(\Phi_{K(\mathfrak{m})/K,\mathfrak{m}}) \subset H = \text{ker}(\Phi_{L/K},\mathfrak{m})$. By Lemma \ref{lemma1.13}, $L \subset K(\mathfrak{m})$.
+\end{proof}
+
+Before stating the Classification Theorem, we define an equivalence relation on the set of congruence subgroups. Why? 
+\begin{itemize}
+    \item If $\text{ker}(\Phi_\mathfrak{m})$ is a congruence subgroup for $\mathfrak{m}$, then $\text{ker}(\Phi_{\mathfrak{n}})$ is a congruence subgroup for $\mathfrak{n}$ for any modulus $\mathfrak{m} \mid  \mathfrak{n}$.
+    \item Say a prime $\mathfrak{p}$ is in the support of $\mathfrak{m}$ if $\mathfrak{p} \mid \mathfrak{m}$. If $\mathfrak{m}$ and $\mathfrak{n}$ have the same support, then $I_K(\mathfrak{m}) = I_K(\mathfrak{n})$, but $P_K(\mathfrak{m})$ may differ from $P_K(\mathfrak{n})$.
+\end{itemize}
+\begin{defn}
+    We say two congruence subgroups $H_1$ and $H_2$ are equivalent, written $H_1 \sim H_2$ if there is a modulus $\mathfrak{m}$ such that $I_K(\mathfrak{m}) \cap H_1 = I_K(\mathfrak{m}) \cap H_2$.
+\end{defn}
+Let $L/K$ be abelian. Let $\mathfrak{m}$ be such that $P_K(\mathfrak{m}) \subset \text{ker}(\Phi_{L/K,\mathfrak{m}})$ and let $\mathfrak{m}'$ be such that $P_K(\mathfrak{m}') \subset \text{ker}(\Phi_{L/K,\mathfrak{m}'})$. Then $\text{ker}(\Phi_{L/K,\mathfrak{m}}) \sim \text{ker}(\Phi_{L/K,\mathfrak{m}'})$ because $$\text{ker}(\Phi_{L/K,\mathfrak{m}}) \cap I_K(\mathfrak{m}\mathfrak{m}') = \text{ker}(\Phi_{L/K},\mathfrak{m}\mathfrak{m}') = \text{ker}(\Phi_{L/K,\mathfrak{m}'}) \cap I_K(\mathfrak{m}\mathfrak{m}').$$ 
+The collection of congruence subgroups $H$ for $\mathfrak{m}$ with $\mathfrak{m}$ such that $P_K(\mathfrak{m}) \subset \text{ker}(\Phi_{L/K,\mathfrak{m}})$ lie in a single equivalence class of congruence subgroups. We write $H(L/K)$ for this class.
+
+\begin{theorem}[The Classification Theorem]
+    Let $K$ be a number field. Then there is a one--to--one inclusion--reversing correspondence 
+    \begin{align*}
+        \{\text{abelian extensions }L/K\} &\leftrightarrow \{\text{congruence subgroups}/\sim\}\\
+        L/K &\mapsto H(L/K).
+    \end{align*}
+\end{theorem}
+\textbf{''Applications'' of main theorems.}
+\vspace{1mm}
+ 
+\begin{theorem}[Kronecker--Weber theorem]
+    Let $L/\mathbb{Q}$ be abelian. Then there is a positive integer $m$ such that $L \subset \mathbb{Q}(\zeta_m)$.
+\end{theorem}
+\begin{proof}
+    By Artin reciprocity, there is a modulus $\mathfrak{m}$ satisfying the inclusions $P_{\mathbb{Q}}(\mathfrak{m}) \subset \text{ker}(\Phi_{L/\mathbb{Q}},\mathfrak{m}) \subset I_\mathbb{Q}(\mathfrak{m})$. Any modulus of $\mathbb{Q}$ will be $(m)$ or $(m)\infty$ for some $m$. By Lemma \ref{lemma1.7}, we may assume $\mathfrak{m} = (m)\infty$. We have $P_{\mathbb{Q}}(\mathfrak{m}) = \text{ker}(\Phi_{\mathbb{Q}(\zeta_m)/\mathbb{Q},\mathfrak{m}})$, so $P_{\mathbb{Q}}(\mathfrak{m}) = \text{ker}(\Phi_{\mathbb{Q}(\zeta_m)/\mathbb{Q},\mathfrak{m}}) \subset \text{ker}(\Phi_{L/\mathbb{Q},\mathfrak{m}})$. By Lemma \ref{lemma1.13}, we have $L \subset \mathbb{Q}(\zeta_m)$.
+\end{proof}
+\textbf{Remark.} There exist proofs of Kronecker--Weber that don't use class field theory (see e.g. \textit{Number Fields} by Marcus).
+\vspace{1mm}
+ 
+Hilbert Class Field: Given a number field $K$, by the Existence Theorem we can find an abelian extension and ''control'' the ramification. Now take $\mathfrak{m} = (1)$, then the corresponding abelian extension $K(\mathfrak{m})/K$ will be unramified at all primes (finite and infinite). We have $\Phi_{\mathfrak{m}}: I_K = I_K(1) \to \text{Gal}(K(1)/K)$ with kernel $P_K((1)) = P_K$, so we obtain $\text{Cl}(K) = I_K/P_K \cong \text{Gal}(K(1)/K)$. By the Existence Theorem, we obtain an unramified abelian extension with Galois group equal to the ideal class group. 
+\begin{defn}
+    The Hilbert class field $F$ is the ray class field for the modulus $\mathfrak{m}=(1)$.
+\end{defn}
+\begin{example}
+    Let $K=\mathbb{Q}$. This is its own Hilbert class group (as $\text{Cl}(K)=1$).
+\end{example}
 
 \end{document}
