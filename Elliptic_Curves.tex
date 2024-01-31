@@ -253,7 +253,7 @@ Suppose $P \in C_1, Q \in C_2$ and $\phi : P \mapsto Q$. Let $t \in K(C_2)$ be a
 \begin{defn}
     $e_{\phi}(P) = \text{ord}_P(\phi^* t)$, which is always $\ge 1$ and independent of $t$.
 \end{defn}
-\begin{theorem}
+\begin{theorem}\label{theorem2.3}
     Let $\phi : C_1 \to C_2$ be a nonconstant morphism of smooth projective curves. Then \[
     \sum_{P \in \phi^{-1}(Q)}^{} e_{\phi}(P) = \deg \phi ~\forall  Q \in C_2.
     \]
@@ -280,34 +280,34 @@ where $f_0,\ldots,f_n \in K(C)$ are not all zero. Then we have a fact: If $C$ is
 We now drop the assumption that $\overline{K} = K$, but we will still assume that $K$ is perfect.
 
 \begin{defn}
-    An \textbf{elliptic curve} $E/K$ is a smooth projective curve of genus 1 defined over $K$ with a specified $K$--rational point $O = O_E$.
+    An \textbf{elliptic curve} $E/K$ is a smooth projective curve of genus 1 defined over $K$ with a specified $K$--rational point $O = 0_E$.
 \end{defn}
 \begin{example}
     $\{X^3 + pY^3 + p^2Z^3 = 0\} \subset \mathbb{P}^2$ is not an elliptic curve over $\mathbb{Q}$, since it has no $\mathbb{Q}$--rational point.
 \end{example}
 \begin{theorem}
-    Every elliptic curve $E$ is isomorphic over $K$ to a curve in Weierstrass form via an isomorphism taking $O_E$ to $(0:1:0)$.
+    Every elliptic curve $E$ is isomorphic over $K$ to a curve in Weierstrass form via an isomorphism taking $0_E$ to $(0:1:0)$.
 \end{theorem}
-\textbf{Remark.} Proposition \ref{prop2.2} treated the special case where $E$ is a smooth plane cubic and $O_E$ is a point of inflection.
+\textbf{Remark.} Proposition \ref{prop2.2} treated the special case where $E$ is a smooth plane cubic and $0_E$ is a point of inflection.
 \vspace{1mm}
  
 \textbf{Fact.} If $D \in \text{Div}(E)$ is defined over $K$, then $\mathcal{L}(D)$ has a basis in $K(E)$ (not just in $\overline{K}(E)$). Here $D$ is defined over $K$ if it is fixed by $\text{Gal}(\overline{K}/K)$ (this is unimportant for us and we just write it down to be rigorous).
 
 \begin{proof}
-    $\mathcal{L}(2\cdot O_E) \subset \mathcal{L}(3\cdot O_E)$. Pick bases $1,x$ and $1,x,y$. Note $\text{ord}_{O_E}(x) = -2$ and $\text{ord}_{O_E}(y) = -3$ (else $x,y$ don't give a basis). The 7 elements $1,x,y,x^2,xy,x^3,y^2$ lie in the 6--dimensional vector space $\mathcal{L}(6O_E)$ (as they have at most a sixth order pole), so they must satisfy a linear dependence relation. 
+    $\mathcal{L}(2\cdot 0_E) \subset \mathcal{L}(3\cdot 0_E)$. Pick bases $1,x$ and $1,x,y$. Note $\text{ord}_{0_E}(x) = -2$ and $\text{ord}_{0_E}(y) = -3$ (else $x,y$ don't give a basis). The 7 elements $1,x,y,x^2,xy,x^3,y^2$ lie in the 6--dimensional vector space $\mathcal{L}(60_E)$ (as they have at most a sixth order pole), so they must satisfy a linear dependence relation. 
 
     \vspace{1mm}
      
-    Leaving out $x^3$ or $y^2$ leaves us with 6 elements, all with different order poles, giving a basis for $\mathcal{L}(6O_E)$. Hence the coefficients of $x^3$ and $y^2$ are nonzero, so by rescaling $x,y$ (if necessary) we get \[
+    Leaving out $x^3$ or $y^2$ leaves us with 6 elements, all with different order poles, giving a basis for $\mathcal{L}(60_E)$. Hence the coefficients of $x^3$ and $y^2$ are nonzero, so by rescaling $x,y$ (if necessary) we get \[
     E': y^2 + a_1xy + a_2y = x^3 + a_2 x^2 + a_4 x + a_6
     \]
-    for some $a_i \in K$. Let $E'$ be the curve defined by this equation (or rather its projective closure). There is a morphism $\phi: E \to E' \subset \mathbb{P}^2$ by $P \mapsto (x(P):y(P):1) = \left(\frac{x}{y}(P): 1: \frac{1}{y}(P)\right)$. (Since $E$ is smooth, we know that this rational map is a morphism). Hence $O_E \mapsto (0:1:0)$.
+    for some $a_i \in K$. Let $E'$ be the curve defined by this equation (or rather its projective closure). There is a morphism $\phi: E \to E' \subset \mathbb{P}^2$ by $P \mapsto (x(P):y(P):1) = \left(\frac{x}{y}(P): 1: \frac{1}{y}(P)\right)$. (Since $E$ is smooth, we know that this rational map is a morphism). Hence $0_E \mapsto (0:1:0)$.
     \vspace{1mm}
      
     We have $E \stackrel{x}{\to} \mathbb{P}^1$ by $x \mapsto (x:1)$ (and similarly for $y$), so 
     \begin{align*}
-        &[K(E):K(x)] = \deg(E \stackrel{x}{\to} \mathbb{P}^1) = \text{ord}_{O_E}\left(\frac{1}{x}\right) = 2\\
-        &[K(E):K(y)] = \deg(E \stackrel{y}{\to} \mathbb{P}^1) = \text{ord}_{O_E}\left(\frac{1}{y}\right) = 3.
+        &[K(E):K(x)] = \deg(E \stackrel{x}{\to} \mathbb{P}^1) = \text{ord}_{0_E}\left(\frac{1}{x}\right) = 2\\
+        &[K(E):K(y)] = \deg(E \stackrel{y}{\to} \mathbb{P}^1) = \text{ord}_{0_E}\left(\frac{1}{y}\right) = 3.
     \end{align*}
     This gives an inclusion of fields $K(x) \le K(E)$ of degree 2, $K(y) \le K(E)$ of degree 3, while $K(x), K(y) \le K(x,y) \le  K(E)$, so tower law gives $[K(E):K(x,y)] = 1 \implies K(E)=K(x,y)=\phi^* K(E') \implies \deg \phi = 1$. (draw a picture!). This gives us an inverse that is a rational map, which we want to show is a morphism. For this, we just need to show that $E'$ is smooth.
     \vspace{1mm}
@@ -323,7 +323,7 @@ We now drop the assumption that $\overline{K} = K$, but we will still assume tha
     for $r,s,t,u \in K$ with $u \neq 0$. 
 \end{prop}
 \begin{proof}
-    $\mathcal{L}(2\cdot O_E) = \langle 1, x \rangle = \langle 1, x' \rangle \implies x = \lambda x' + r$ for some ${\lambda, r \in K, \lambda \neq 0}$. Similarly $\mathcal{L}(3\cdot O_E) = \langle 1,x,y \rangle = \langle 1,x',y' \rangle \implies y = \mu y' + \sigma x' + t$ for some $\mu, \sigma, t \in K, \mu \neq 0$. 
+    $\mathcal{L}(2\cdot 0_E) = \langle 1, x \rangle = \langle 1, x' \rangle \implies x = \lambda x' + r$ for some ${\lambda, r \in K, \lambda \neq 0}$. Similarly $\mathcal{L}(3\cdot 0_E) = \langle 1,x,y \rangle = \langle 1,x',y' \rangle \implies y = \mu y' + \sigma x' + t$ for some $\mu, \sigma, t \in K, \mu \neq 0$. 
     \vspace{1mm}
      
     Looking at the coefficients of $x^3$ and $y^2$ tells us that $\lambda^3 = \mu^2$, so $\lambda = u^2, \mu = u^3$ for some $u \in K^\times$. Put $s = \frac{\sigma}{u^2}$ to conclude.
@@ -361,10 +361,10 @@ If $\text{char }K \neq 2,3$, we may reduce to the case $E: y^2 = x^3 + ax + b$. 
     \end{cases}$ for some $u \in K^\times \implies (a^3:b^2) = ((a')^3:(b')^2) \iff j(E) = j(E')$. The middle step is reversible if $K=\overline{K}$.
 \end{proof}
 \section{The Group Law}
-Let $E \subset \mathbb{P}^2$ be a smooth plane cubic with $O_E \in E(K)$ (not immediately assumed to be in Weierstrass form). $E$ meets any line in 3 points, counted with multiplicity.
+Let $E \subset \mathbb{P}^2$ be a smooth plane cubic with $0_E \in E(K)$ (not immediately assumed to be in Weierstrass form). $E$ meets any line in 3 points, counted with multiplicity.
 \vspace{1mm}
  
-For $P,Q \in E$, let $S$ be the $3^{\text{rd}}$ point of intersction of $PQ$ with $E$ and then let $R$ be the $3^{\text{rd}}$ intersection of $O_ES$ with $E$. We define $P \oplus Q = R$. (Later we drop the circle and just write $+$). If $P=Q$, instead take the tangent line at $P$, i.e. $T_PE$, etc. This is the ''chord and tangent process''.
+For $P,Q \in E$, let $S$ be the $3^{\text{rd}}$ point of intersction of $PQ$ with $E$ and then let $R$ be the $3^{\text{rd}}$ intersection of $0_ES$ with $E$. We define $P \oplus Q = R$. (Later we drop the circle and just write $+$). If $P=Q$, instead take the tangent line at $P$, i.e. $T_PE$, etc. This is the ''chord and tangent process''.
 \begin{theorem}
     $(E, \oplus)$ is an abelian group.
 \end{theorem}
@@ -372,8 +372,8 @@ For $P,Q \in E$, let $S$ be the $3^{\text{rd}}$ point of intersction of $PQ$ wit
 \begin{proof}
     \begin{enumerate}[(i)]
         \item $\oplus$ is commutative trivially.
-        \item $O_E$ is the identity, since the line through $O_EP$ meets $S$ for the $3^{\text{rd}}$ time at $S$ and then $SP$ meets $E$ for the $3^{\text{rd}}$ time at $O_E$ (drawing a picture makes this obvious).
-        \item Inverses: Let $S$ be the $3^{\text{rd}}$ intersection of $T_{O_E}$ with $E$ and $Q$ the $3^{\text{rd}}$ intersection of $PS$ with $E$. Then $P \oplus Q = O_E$.
+        \item $0_E$ is the identity, since the line through $0_EP$ meets $S$ for the $3^{\text{rd}}$ time at $S$ and then $SP$ meets $E$ for the $3^{\text{rd}}$ time at $0_E$ (drawing a picture makes this obvious).
+        \item Inverses: Let $S$ be the $3^{\text{rd}}$ intersection of $T_{0_E}$ with $E$ and $Q$ the $3^{\text{rd}}$ intersection of $PS$ with $E$. Then $P \oplus Q = 0_E$.
         \item Associativity is much harder. We have some setup:
     \end{enumerate}
     \begin{defn}
@@ -382,7 +382,7 @@ For $P,Q \in E$, let $S$ be the $3^{\text{rd}}$ point of intersction of $PQ$ wit
     \begin{defn}
         The \textbf{Picard group} is $\text{Pic}(E) = \text{Div}(E)/\sim$. Also define $\text{Pic}^0(E) = \text{Div}^0(E)/\sim$ where $\text{Div}^0(E) = \{D \in \text{Div}(E) \mid \text{deg}(D) = 0\}$.
     \end{defn}
-    We define $\psi: E \to \text{Pic}^0(E)$ by $P \mapsto [(P)-(O_E)]$.
+    We define $\psi: E \to \text{Pic}^0(E)$ by $P \mapsto [(P)-(0_E)]$.
     \begin{prop}
         \begin{enumerate}[(i)]
             \item $\psi(P \oplus Q) = \psi(P) + \psi(Q)$.
@@ -391,14 +391,14 @@ For $P,Q \in E$, let $S$ be the $3^{\text{rd}}$ point of intersction of $PQ$ wit
     \end{prop}
     \begin{proof}
         \begin{enumerate}[(i)]
-            \item WLOG let the lines $PQ$ and $O_ES$ be given by $l=0$ and $m=0$. Then \[
-            \text{div}\left(\frac{l}{m}\right) = (P)+(S)+(Q)-(O_E)-(S)-(R),
+            \item WLOG let the lines $PQ$ and $0_ES$ be given by $l=0$ and $m=0$. Then \[
+            \text{div}\left(\frac{l}{m}\right) = (P)+(S)+(Q)-(0_E)-(S)-(R),
             \]
-            hence $(P)+(Q) \sim (P \oplus Q) + (O_E)$, so $(P\oplus Q)- (O_E) \sim (P)-(O_E) + (Q) - (O_E)$, so $\psi(P \oplus Q) = \psi(P) + \psi(Q)$.
-            \item Injectivity: Suppose $\psi(P) = \psi(Q)$ for $P \neq Q$. Then $\exists f \in \overline{K}(E)^\times$ such that $\text{div}(f) = (P)-(O_E)-(Q)+(O_E) = (P) - (Q) \implies E \stackrel{f}{\to} \mathbb{P}^1$ has degree $1$ (for example since evaluation at 0 on the affine line gives that $P$ has one root and $Q$ has one pole), so $E \cong \mathbb{P}^1$, a contradiction.
+            hence $(P)+(Q) \sim (P \oplus Q) + (0_E)$, so $(P\oplus Q)- (0_E) \sim (P)-(0_E) + (Q) - (0_E)$, so $\psi(P \oplus Q) = \psi(P) + \psi(Q)$.
+            \item Injectivity: Suppose $\psi(P) = \psi(Q)$ for $P \neq Q$. Then $\exists f \in \overline{K}(E)^\times$ such that $\text{div}(f) = (P)-(0_E)-(Q)+(0_E) = (P) - (Q) \implies E \stackrel{f}{\to} \mathbb{P}^1$ has degree $1$ (for example since evaluation at 0 on the affine line gives that $P$ has one root and $Q$ has one pole), so $E \cong \mathbb{P}^1$, a contradiction.
             \vspace{1mm}
              
-            Surjectivity: Let $[D] \in \text{Pic}^0(E)$. Then $D + (O_E)$ has degree 1, so by Riemann--Roch, $\text{dim}\mathcal{L}(D+(O_E)) = 1$, so $\exists 0\neq f \in \overline{K}(E)$ such that $\text{div}(f) + D + (O_E) \ge 0$, but $\text{div}(f) + D + (O_E)$ has degree 1, so $\text{div}(f) + D + (O_E) = (P)$ for some $P \in E \implies (P) - (O_E) \sim D \implies  \psi(P) = [D]$. 
+            Surjectivity: Let $[D] \in \text{Pic}^0(E)$. Then $D + (0_E)$ has degree 1, so by Riemann--Roch, $\text{dim}\mathcal{L}(D+(0_E)) = 1$, so $\exists 0\neq f \in \overline{K}(E)$ such that $\text{div}(f) + D + (0_E) \ge 0$, but $\text{div}(f) + D + (0_E)$ has degree 1, so $\text{div}(f) + D + (0_E) = (P)$ for some $P \in E \implies (P) - (0_E) \sim D \implies  \psi(P) = [D]$. 
         \end{enumerate}
     \end{proof}
     We conclude that $\psi$ identifies $(E,\oplus)$ with $(\text{Pic}^0(E), +)$, so $\oplus$ is associative.
@@ -412,7 +412,7 @@ Let $E : y^2 + a_1xy + a_3 y  = x^3 +a_2x^2 + a_4 x + a_6$. Choose two points $P
 Substituting $y = \lambda x + \nu$ into our equation for $E$ and looking at the coefficient of $x^2$ gives $\lambda^2 + a_1 \lambda - a_2 = x_1 + x_2 + x' = x_1 + x_2 + x_3$, so $x_3 = \lambda^2 +a_1 \lambda - a_2 - x_1 - x_2$. For $y_3$ we find $$y_3 = -(a_1x' + a_3) - y' = -(a_1x_3+a_3) - (\lambda x_3  + \nu) = - (\lambda+a_1)x_3 - a_3 - \nu.$$
 It remains to find formulas for $\lambda$ and $\nu$.
 \begin{itemize}
-    \item Case 1. $x_1 = x_2$, but $P_1 \neq P_2$. Then $P_1 \oplus P_2 = O_E$.
+    \item Case 1. $x_1 = x_2$, but $P_1 \neq P_2$. Then $P_1 \oplus P_2 = 0_E$.
     \item Case 2. $x_1 \neq x_2$. Then $\lambda = \frac{y_2-y_1}{x_2-x_1}$ and $\nu = y_1 - \lambda x_1 = \frac{x_2y_1-x_1y_2}{x_2-x_1}$.
     \item Case 3. $P_1 = P_2$. In this case, compute the equation for the tangent line to get $\lambda, \nu$ as rational expressions in $x_1,x_2,y_1,y_2$.
 \end{itemize}
@@ -422,12 +422,12 @@ It remains to find formulas for $\lambda$ and $\nu$.
 \begin{proof}
     $E(K)$ is a subgroup of $(E, \oplus)$.
     \begin{itemize}
-        \item It has identity $O_E$ by definition.
+        \item It has identity $0_E$ by definition.
         \item We have closure and inverses through the formulae above.
         \item Associativity and commutativity is inherited.
     \end{itemize}
 \end{proof}
-\begin{theorem}
+\begin{theorem}\label{theorem4.4}
     Elliptic curves are group varieties, i.e. 
     \begin{align*}
         [-1]&:E \to E, P \mapsto \ominus P\\
@@ -441,7 +441,7 @@ It remains to find formulas for $\lambda$ and $\nu$.
      
     For $\oplus$, note by the above formulae that $\oplus : E \to E$ is a rational map regular on 
     \begin{align*}
-        U = \{(P,Q) \in E \times E \mid O_E \not\in \{P,Q, P \oplus Q, P \ominus Q  \}\}.
+        U = \{(P,Q) \in E \times E \mid 0_E \not\in \{P,Q, P \oplus Q, P \ominus Q  \}\}.
     \end{align*}
     For $P \in E$, let $\tau_P : E \to E$ be the ''translation by $P$'' map, given by $X \mapsto P \oplus X$. $\tau_P$ is a rational map, hence a morphism. Now for $A, B \in E$, we factor $\oplus$ as 
     \begin{align*}
@@ -482,6 +482,107 @@ These satisfy $\wp'(z)^2 = 4\wp(z)^3 - g_2\wp(z) - g_3$ for some constants $g_2,
     \]
 \end{defn}
 If $K=\mathbb{C}$, then $E(\mathbb{C}) \cong \mathbb{C}/\Lambda$, so $E[n] \cong (\mathbb{Z}/n\mathbb{Z})^2$ and $\text{deg}[n] = n^2$. Call these results (1) and (2). We will show that (2) holds over any field $K$ and (1) holds if $\text{char }K \nmid n$.
-
+\marginpar{31 Jan 2024, Lecture 6}
+\begin{lemma}\label{lemma4.6}
+    Assume $\text{char }K \neq 2$ and $E: y^2=f(x)=(x-e_1)(x-e_2)(x-e_3)$ (with $e_i \in \overline{K}$). Then $E[2] = \{0, (e_1,0), (e_2,0), (e_3,0)\} \cong (\mathbb{Z}/2\mathbb{Z})^\times$.
+\end{lemma}
+\begin{proof}
+    Let $P = (x,y) \in E$. Then $2[P] = 0 \iff P = -P \iff (x,y) = (x,-y) \iff y=0$.
+\end{proof}
+\section{Isogenies}
+Let $E_1,E_2$ be elliptic curves 
+\begin{defn}
+    \begin{enumerate}[(i)]
+        \item An \textbf{isogeny} $\phi : E_1 \to E_2$ is a nonconstant morphism with $\phi(0_{E_1}) = 0_{E_2}$.
+        \item We say $E_1$ and $E_2$ are \textbf{isogenous} if there is an isogeny between them.
+    \end{enumerate}
+\end{defn}
+In (i), nonconstant is equivalent to surjective on $\overline{K}$--points. See Theorem \ref{theorem2.3}.
+\begin{defn}
+    $\text{Hom}(E_1,E_2) = \{\text{isogenies }E_1 \to E_2\} \cup \{0\}$ (the constant map at $0_E$). This is an abelian group under $(\phi + \psi)(P) = \phi(P) + \psi(P)$.
+\end{defn}
+If $E_1 \stackrel{\phi}{\to} E_2 \stackrel{\psi}{\to} E_3$ are isogenies, then $\psi \circ \phi$ is an isogeny. By tower law, $\text{deg}(\psi \circ \phi) = \text{deg}(\psi)\text{deg}(\phi)$.
+\begin{prop}
+    If $0 \neq n \in \mathbb{Z}$, then $[n] : E \to E$ is an isogeny.
+\end{prop}
+\begin{proof}
+    $[n]$ is a morphism by Theorem \ref{theorem4.4}. We need to show $[n] \neq [0]$. Assume $\text{char }K \neq 2$.
+    \begin{itemize}
+        \item Case $n=2$. Lemma \ref{lemma4.6} implies that $E[2] \neq E$, so $[2] \neq 0$.
+        \item Case $n$ odd. Lemma \ref{lemma4.6} implies that $\exists 0 \neq T \in E[2]$. Then $nT = T \neq 0$, so $[n] \neq [0]$.
+    \end{itemize}
+    Now use $[mn] = [m]\circ[n]$ to conclude.
+    \vspace{1mm}
+     
+    If $\text{char }K=2$, then we can replace Lemma \ref{lemma4.6} with an explicit lemma about 3--torsion points.
+\end{proof}
+\begin{cor}
+    $\text{Hom}(E_1,E_2)$ is a torsion--free $\mathbb{Z}$--module.
+\end{cor}
+\begin{theorem}\label{theorem5.3}
+    Let $\phi : E_1 \to E_2$ be an isogeny. Then \[
+    \phi(P+Q) = \phi(P)+\phi(Q) ~\forall P,Q \in E.
+    \]
+\end{theorem}
+\begin{proof}[Sketch proof.]
+    $\phi$ induces a map $\phi_* : \text{Div}^0(E_1) \to \text{Div}^0(E_2)$ by $\sum_{P \in E_1}^{} n_P P \mapsto \sum_{p \in E_1}^{} n_P \phi(P)$. Recall $\phi^* : K(E_2) \hookrightarrow K(E_1)$.
+    \vspace{1mm}
+     
+    \textbf{Fact.} If $f \in K(E_1)$, then $\text{div}(N_{K(E_1)/K(E_2)}f) = \phi^*(\text{div }f)$. So $\phi_*$ sends principal divisors to principal divisors. Since $\phi(0_{E_1}) = 0_{E_2}$, the following diagram commutes: $$\begin{tikzcd}[]
+        E_1 & E_2\\
+        \text{Pic}^0(E_1) & \text{Pic}^0(E_2)
+        \arrow["\phi", from=1-1, to=1-2]
+        \arrow["g", from=1-2, to=2-2]
+        \arrow["f", from=1-1, to=2-1]
+        \arrow["\phi_*", from=2-1, to=2-2]
+    \end{tikzcd}$$ (with $f(P) = [(P)-(0_{E_1})], g(Q) = [(Q)-(0_{E_2})]$). Since $\phi_*$ is a group homomorphism, $\phi$ is a group homomorphism.
+\end{proof}
+\begin{lemma}\label{lemma5.4}
+    Let $\phi : E_1 \to E_2$ be an isogeny. Then there exists a morphism $\xi$ making the following diagram commute:
+    $$\begin{tikzcd}[]
+        E_1 & E_2\\
+        \mathbb{P}^1 & \mathbb{P}^1
+        \arrow["\phi", from=1-1, to=1-2]
+        \arrow["x_1", from=1-2, to=2-2]
+        \arrow["x_2", from=1-1, to=2-1]
+        \arrow["\xi", from=2-1, to=2-2]
+    \end{tikzcd}$$
+    with $x_i$ the $x$--coordinate in a Weierstrass equation for $E_i$. Moreover, if $\xi(t)=\frac{r(t)}{s(t)}$ with $r,s \in K[t]$ coprime, then $\text{deg}(\phi) = \text{deg}(\xi) = \max(\text{deg}(r),\text{deg}(s))$.
+\end{lemma}
+\begin{proof}
+    For $i=1,2$, $K(E_i)/K(x_i)$ is a degree 2 Galois extension with Galois group generated by $[-1]^*$. By Theorem \ref{theorem5.3}, $\phi \circ [-1] = [-1] \circ \phi$, so if $f \in K(x_2)$, then $[-1]^*(\phi^*f) = \phi^*([-1]^* f) = \phi^* f$ and hence $\phi^* f \in K(x_1)$. Hence we find
+    $$\begin{tikzcd}[]
+         & K(E_1) = K(x_1,y_1)\\
+        K(x_1) & K(E_2) = K(x_2,y_2)\\
+        K(x_2) &
+        \arrow["2", from=2-1, to=1-2, dash]
+        \arrow["2", from=3-1, to=2-2, dash]
+        \arrow["", from=2-1, to=3-1, dash]
+        \arrow["", from=1-2, to=2-2, dash]
+    \end{tikzcd}.$$
+    In particular, $\phi^*x_2 = \xi(x_1)$ for some $\xi \in K(t)$. By tower law, $2 \text{deg}(\phi) = 2 \text{deg}(\xi) \implies \text{deg}(\phi) = \text{deg}(\xi)$. Now $K(x_2) \hookrightarrow K(x_1)$ by $x_2 \mapsto \xi(x_1) = \frac{r(x_1)}{s(x_1)}$ for $r,s \in K[t]$ coprime. Then minimal polynomial of $x_1$ over $K(x_2)$ is $F(t) =r(t) -s(t)x_2 \in K(x_2)[t]$. This is true as $F(x_1)=0$, $F$ is irreducible on $K[x_2,t]$ (since $r,s$ are coprime) and by Gauss' Lemma, $F$ is irreducible on $K(x_2)[t]$. Hence $\text{deg}(\phi) = \text{deg}(\xi) = [K(x_1):K(x_2)] = \text{deg}(F) = \max(\text{deg}(r),\text{deg}(s))$.
+\end{proof}
+\begin{lemma}
+    $\text{deg}[2] = 4$.
+\end{lemma}
+\begin{proof}
+    Assume $\text{char }K \neq 2,3$, so $E : y^2 = x^3+ax+b = f(x)$. If $P = (x,y)$, then $x(2P) = \left(\frac{3x^2+a}{2y}\right)^2-2x = \frac{(3x^2+a)^2-2xf(x)}{4f(x)}$. The numerator and denominator are coprime, since otherwise $\exists \theta \in \overline{K}$ with $f(\theta) = f'(\theta) = 0$, meaning $f$ has a multiple root, contradiction. We are now done by Lemma \ref{lemma5.4}, since $\text{deg}[2] = \max(3,4) = 4$.
+\end{proof}
+\begin{defn}
+    Let $A$ be an abelian group. Then a map $q : A \to \mathbb{Z}$ is a quadratic form if
+    \begin{enumerate}[(i)]
+        \item $q(nx) = n^2q(x)~\forall n \in \mathbb{Z}, q \in A$.
+        \item $(x,y) \mapsto q(x+y)-q(x)-q(y)$ is $\mathbb{Z}$--bilinear.
+    \end{enumerate}
+\end{defn}
+\begin{lemma}
+    $q : A \to \mathbb{Z}$ is a quadratic form if and only if it satisfies the paralellogram law $q(x+y)+q(x-y) = 2q(x)+2q(y) ~\forall x,y \in A$.
+\end{lemma}
+\begin{proof}
+    $(\implies)$. Let $\langle x,y \rangle = q(x+y)-q(x)-q(y)$. Then $\langle x,x \rangle = q(2x) - 2q(x) = 2q(x)$ by (i) with $n=2$. By (ii), $\langle x+y, x+y \rangle + \langle x-y, x-y \rangle = 2 \langle x,x \rangle + 2 \langle y, y \rangle$, which implies $q(x+y)+q(x-y)=2q(x)+2q(y)$.
+    \vspace{1mm}
+     
+    $(\impliedby)$. This is on Ex. Sheet 2.
+\end{proof}
 
 \end{document}
