@@ -200,17 +200,56 @@ By considering a total ordering on the vertices of a DAG such that if $v_1 \to v
 \begin{proof}
     Left as an exercise on Ex. Sheet 1. 
 \end{proof}
-\begin{prop}
+\begin{prop}\label{prop1.5}
     Let $f$ be a function that can be computed by a Turing machine $T$ with $k$ tapes in time $t(n)$ for inputs of size $n$. Then there is a family $(C_n)$ of circuits such that $|C_n| = O(t(n)^{k+2})$ and $C_n$ computes $f$ for inputs of size $n$. 
 \end{prop}
 \begin{proof}
-    Let $S = \{s_1,\ldots,s_r\}$ be the set of states of $T$ and assume that the alphabet is $\{0,1\}$. Then we can encode the configuation of $T$ at time $t$ using $\sigma_1(t),\ldots,\sigma_r(t), \pi_{i}^h(t)$ for $1\le i\le t(n),1\le h\le k$ and $v_i^h(t)$, where $\sigma_i(t) = 1 \iff$ T is in state $s_i$ at time $t$, $\pi_i^h(t) = 1 \iff$ the head is in position $i$ on tape $h$ at time $t$, and $v_i^h(t)$ is the value in cell $i$ of tape $h$ at time $t$.
+    Let $S = \{s_1,\ldots,s_r\}$ be the set of states of $T$ and assume that the alphabet is $\{0,1\}$. Then we can encode the configuation of $T$ at time $t$ using $\sigma_1(t),\ldots,\sigma_r(t), \pi_{i}^h(t)$ for $1\le i\le t(n),1\le h\le k$ and $v_i^h(t)$, where $\sigma_i(t) = 1 \iff$ $T$ is in state $s_i$ at time $t$, $\pi_i^h(t) = 1 \iff$ the head is in position $i$ on tape $h$ at time $t$, and $v_i^h(t)$ is the value in cell $i$ of tape $h$ at time $t$.
     \vspace{1mm}
      
     Note that $\sigma_i(t) = 1 \iff$ there exist $j\le r$ and $i_1,\ldots,i_k$ such that $\sigma_j(t-1)=1$ and $\pi_{i_b}^h(t-1) = 1$ for $1\le h\le k$ and $\tau(s_j, v_{i_1}^1(t-1), \ldots, v_{i_k}^k(t-1))$ has state component equal to $s_i$ (here $\tau$ is the transition function).  
     \vspace{1mm}
      
-    For any given $i_1,\ldots,i_k$, we have a function of $k+1$ variables to evaluate, which we can do with a circuit of bounded size. Hence we can calculate $\sigma_i(t)$ from the previous configuration in time $O((k+1)t(n)^k) = O(t(n)^k)$.
+    For any given $i_1,\ldots,i_k$, we have a function of $k+1$ variables to evaluate, which we can do with a circuit of bounded size. Hence we can calculate $\sigma_i(t)$ from the previous configuration in time $O((k+1)t(n)^k) = O(t(n)^k)$. Similarly we can compute each position variable $\pi_i^k(t)$ from the configuration at time $t-1$ with a circuit of size $O(t(n)^k)$, and also each state variable $\sigma_j(t)$. So we can compute the configuration at time $t$ from the configuration at time $t-1$ with a circuit of size $O(t(n)^{k+1})$, so the result follows.
 \end{proof}
+\marginpar{30 Jan 2024, Lecture 4}
+\textbf{P/poly}. This complexity class has three equivalent definitions. We say $f \in \text{P/poly}$ if one of the following (and hence all) holds:
+\begin{enumerate}[(i)]
+    \item There is a family $(C_n)$ of polynomial size circuits such that $C_n$ computes $f(x)$ when $\left|x \right| = n$. (So trivially, from Proposition 1.5, $\text{P} \subset \text{P/poly}$.)
+    \item There is a polynomial $p$ and a sequence $(y_n)$ with $\left|y_n \right| = p(n)$ and a function $g \in \text{P}$ such that $f(x)=1 \iff g(x,y_{\left|x \right|})=1$. (Think of $y_n$ as ''a piece of advice we will give the algorithm'').
+    \item There is a sequence $(T_n)$ of Turing machines and a polynomial $p$ such that $T_n$ has $\le p(n)$ states and $T_n$ computes $f(x)$ when $\left|x \right|=n$.
+\end{enumerate}
+A sequence $(C_n)$ of circuits is \textbf{P-uniform} if there is a polynomial time algorithm that generates it (i.e. given input $1^n := \{\underbrace{1,\ldots,1}_{n \text{ times}}\}$, it outputs $C_n$).
+\begin{proof}[Sketch proof of equivalence.]
+    (i) $\implies $ (ii): Let $Y_n$ be an encoding of $C_n$ and let $g(x,y)=1$ if the circuit encoded by $y$ outputs 1 with input $x$.
+    \vspace{1mm}
+     
+    (ii) $\implies $ (i): Fix an input size $n$, let $C_n'$ compute $g$ (using our proposition) on inputs of size $n$ and let $C_n$ be $C$ with the last $p(n)$ inputs restricted to $Y_n$.
+    \vspace{1mm}
+     
+    (ii) $\implies $ (iii): Fix $n$. Let $T$ compute $g$ and let $T_n$ be a Turing machine that prints out $Y_n$ and then uses $T$ to compute $g(x,y_n)$.
+    \vspace{1mm}
+     
+    (iii) $\implies $ (ii): Let $y_n$ be an encoding of $T_n$ and let $g(x,y)=1$ if the Turing machine encoded by $y_n$ outputs $1$ with input $x$.
+\end{proof}
+\section{Search problems and decision problems}
+Let $g$ be a Boolean function of two variables. Then we get the decision problem ''Does there exist $y$ such that $g(x,y)=1$?'' and a corresponding \textbf{search problem} ''If there exists $y$ such that $g(x,y)=1$, then find one.''. A solution to a search problem is an algorithm that outputs $y$ such that $g(x,y)=1$ if it exists. 
+
+\begin{prop}
+    If P = NP and $f \in $ NP and $f(x)=1 \iff \exists y$ of size $\left|y \right|=p(\left|x \right|)$ with $g(x,y)=1$ for $g \in \text{P}$, then there is a polynomial time algorithm that computes $h : \{0,1\}^* \to \{0,1\}^*$ such that if $f(x)=1$, then $g(x,h(x))=1$.
+\end{prop}
+\begin{proof}
+    For each $i$, let $g_i$ be the function that takes as input $x$ and $u_i$ with $\left|u_i \right|=i$, and outputs 1 if and only if $\exists v$ with $\left|v \right|=p(\left|x \right|)-i$ such that $g(x,u,v)=1$. Now run the following procedure: start by calculating $g_1(x,1)$ in polynomial time (since $\text{P}=\text{NP}$) and let $u_1=g_1(x,1)$. Note that if $\exists y$ such that $g(x,y)=1$, then $\exists v$ such that $g_1(x,u_1,v)=1$. Now let $u_2 = g_2(x, u_1), u_3=g_3(x,u_2)$ and so on. At the end, we obtain $u = (u_1,\ldots,u_{p(\left|x \right|)})$ such that $g(x,u)=1$.
+\end{proof}
+The idea of this proof is just to play 20 questions: can the first digit be 1? Can the second digit be 1? etc.
+\begin{lemma}
+    If $\text{NP}\subset \text{P/poly}$, then for $f$ as in the previous proposition, there is a polynomial sized family of circuits $(C_n)$ such that if $\left|x \right|=n$, then $C_n$ with input $x$ computes $y$ such that $g(x,y)=1$. 
+\end{lemma}
+\begin{proof}
+    Use the notation from the previous proof. For each $i$, since $\text{NP}\subset \text{P/poly}$, there is a polynomial sized circuit $C_i'$ that computes $g_i$. Now put together the circuits $C_1',\ldots,C_{p(n)}'$ as follows: $C_1'$ takes inputs $x_1,\ldots,x_n,1$ and outputs $u_1$. $C_2'$ takes inputs $x_1,\ldots,x_n,u_1,1$ and outputs $u_2$. $C_3'$ takes inputs $x_1,\ldots,x_n,u_1,u_2,1$. Continue all the way until $C_{p(n)}'$. Then the output if $\exists y$ such that $g(x,y)=1$ will be such a $y$.
+\end{proof}
+\begin{theorem}[Karp--Lipton Theorem]
+    If $\text{NP}\subset \text{P/poly}$, then $\Sigma_2^P = \pi_2^P$ (and therefore $\text{PH} = \Sigma_2^P = \Pi_2^P$).
+\end{theorem}
 
 \end{document}
