@@ -251,5 +251,52 @@ The idea of this proof is just to play 20 questions: can the first digit be 1? C
 \begin{theorem}[Karp--Lipton Theorem]
     If $\text{NP}\subset \text{P/poly}$, then $\Sigma_2^P = \pi_2^P$ (and therefore $\text{PH} = \Sigma_2^P = \Pi_2^P$).
 \end{theorem}
+\marginpar{01 Feb 2024, Lecture 5}
+\begin{proof}
+    Let $f \in \Pi_2^P$ and $h \in P$ be such that $f(x)=1 \iff ~\forall y ~\exists z ~ {h(x,y,z)=1}$ (for $y,z$ of appropriate polynomial size depending on $\left|x\right|$). Define $g(x,y)$ to be 1 if and only if $\exists z ~h(x,y,z)=1$. Then $g \in \text{NP}$, so by our hypothesis and the lemma above, there is a circuit family $(C_n)$ of polynomial size such that for every $x$, if $\left|x\right|=n$ and $g(x,y)=1$, then $h(x,y,C_n(x,y)) = 1$ (with $C_n(x,y)$ the output of $C_n$ with input $x,y$). So $f(x)=1 \implies \exists C_n ~\forall y ~ h(x,y, C_n(x,y))=1$. Checking whether $h(x,y, C_n(x,y))=1$ can be done in polynomial time. If $f(x)=0$, then $\exists y ~\forall z ~h(x,y,z)=0$, so the $\implies$ is in fact an if and only if. Therefore $f \in \Sigma_2^P$. By doing the same for $1-f$, we get the reverse inclusion.
+\end{proof}
+\begin{lemma}
+    For every $k$, there is a Boolean function $f$ that can be computed by a circuit family of size $n^{k+1}$, but not by a circuit family of size $n^k$.
+\end{lemma}
+\begin{proof}
+    This is on Ex. Sheet 1. Note that Gowers is also pretty happy with a proof for $n^{2k}$, but $n^{k+1}$ can be achieved.
+\end{proof}
+\begin{theorem}
+    For every $k$, there is a Boolean function $f \in \Sigma_4^P$ that cannot be computed by a family of circuits of size $n^k$.
+\end{theorem}
+\begin{proof}
+    For $n$ sufficiently large, the lemma gives us $f'_n : \{0,1\}^n \to \{0,1\}$ that can be computed by a circuit of size $n^{k+1}$, but not by a circuit of size $n^k$. Choose a sensible ordering on circuits of size $\le n^{k+1}$. Let $f_n(x)$ (if $\left|x\right|=n$) be $C_n(x)$, where $C_n$ is the first circuit (in this ordering) such that $\left|C_n\right|\le n^{k+1}$ and no circuit of size $\le n^k$ computes the same function as $C_n$. Then let $f = (f_n)_1^\infty$ (for large enough $n$, for $n<n_0$, let $f_n$ be arbitrary).
+    \vspace{1mm}
+     
+    Then if $\left|x\right|=n$, we have $f(x)=1$ if and only if 
+    \begin{align*}
+        \exists C_n, \left|C_n\right|\le n^{k+1} \text{ and }~\forall D, \left|D\right|\le n^k, \exists y ~ C_n(y) \neq D(y) \\
+        \text{and } ~\forall E, E \prec C_n, \exists F ~ \left|F\right|\le n^k ~\forall z ~ E(z)=F(z) \text{ and }C_n(x)=1.
+    \end{align*}
+    (Here $E \prec C_n$ means $E$ preceeds $C_n$ in our ordering.) Then $\exists ~\forall \exists ~\forall $ shows that $f \in \Sigma_4^P$.
+\end{proof}
+\begin{cor}
+    In fact, for every $k$ there is a function $f \in \Sigma_2^P \cap \Pi_2^P$ that cannot be computed by a circuit family of size $n^k$.
+\end{cor}
+\begin{proof}
+    By the Karp--Lipton theorem, if $\text{NP} \subset \text{P/poly}$, then $\text{PH} \subset \Sigma_2^P \cap \Pi_2^P$, so the function just defined does the job.
+    \vspace{1mm}
+     
+    If $\text{NP} \not\subset \text{P/poly}$, then we get the stronger result that there is $f \in \Sigma_1^P$ ($=\text{NP}$) that can't be computed by any circuit family of polynomial size.
+\end{proof}
+\textbf{The complexity class L.} Roughly, $\text{L}$ is the set of functions that can be computed with a logarithmic amount of memory. More formally, $f \in \text{L}$ if there is a Turing machine that computes $f$ with a read--only input tape that contains the input and cannot be modified and a work tape of size $O(\log n)$ for inputs of size $n$. (If we want several outputs instead of 1, then we also have a write--only output tape).
+\vspace{1mm}
+ 
+For example, during long multiplication in our head is in $\text{L}$, since we can do the computations digit--by--digit locally.
+\vspace{1mm}
+
+\textbf{The complexity class NL}. $\text{NL}$ is like $\text{L}$, except that the Turing machine is nondeterministic. We can also give a certificate definition of $\text{NL}$, but one has to be careful. We say that $f \in \text{NL}$ if there is a Turing machine with a read--only input tape, a work tape of size $O(\log n)$ and a read--once certificate tape (on which the head can only ever stay still or move to the right) such that $f(x)=1$ if and only if there is some $y$ with $\left|y\right|\le p(\left|x\right|)$ that can be put in the certificate tape such that the Turing machine outputs 1.
+
+\begin{prop}
+    $\text{NL} \subset \text{P}$.
+\end{prop}
+\begin{proof}
+    Let $T$ be a NDTM that computes a function $f$ and uses a logarithmic amount of space. The \textbf{configuration graph} of $T$ is a directed graph, where $\kappa \to \kappa'$ if and only if one of the transition functions takes $\kappa$ to $\kappa'$.
+\end{proof}
 
 \end{document}
