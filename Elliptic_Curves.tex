@@ -33,7 +33,7 @@
 \newtheorem{lemma}[theorem]{Lemma}
 \newtheorem{cor}[theorem]{Corollary}
 \newtheorem{prop}[theorem]{Proposition}
-\newtheorem{example}{Example}[section]
+\newtheorem{example}[theorem]{Example}
 \newtheorem{defn}{Definition}[section]
 
 \title{Part III - Elliptic Curves
@@ -576,7 +576,7 @@ If $E_1 \stackrel{\phi}{\to} E_2 \stackrel{\psi}{\to} E_3$ are isogenies, then $
     \end{enumerate}
 \end{defn}
 \begin{lemma}
-    $q : A \to \mathbb{Z}$ is a quadratic form if and only if it satisfies the paralellogram law $q(x+y)+q(x-y) = 2q(x)+2q(y) ~\forall x,y \in A$.
+    $q : A \to \mathbb{Z}$ is a quadratic form if and only if it satisfies the parallelogram law $q(x+y)+q(x-y) = 2q(x)+2q(y) ~\forall x,y \in A$.
 \end{lemma}
 \begin{proof}
     $(\implies)$. Let $\langle x,y \rangle = q(x+y)-q(x)-q(y)$. Then $\langle x,x \rangle = q(2x) - 2q(x) = 2q(x)$ by (i) with $n=2$. By (ii), $\langle x+y, x+y \rangle + \langle x-y, x-y \rangle = 2 \langle x,x \rangle + 2 \langle y, y \rangle$, which implies $q(x+y)+q(x-y)=2q(x)+2q(y)$.
@@ -584,5 +584,84 @@ If $E_1 \stackrel{\phi}{\to} E_2 \stackrel{\psi}{\to} E_3$ are isogenies, then $
      
     $(\impliedby)$. This is on Ex. Sheet 2.
 \end{proof}
+\marginpar{02 Jan 2024, Lecture 7}
+\begin{theorem}
+    $\text{deg}:\text{Hom}(E_1,E_2) \to \mathbb{Z}$ is a quadratic form (with $\text{deg}(0)=0$).
+\end{theorem}
+\begin{proof}
+    Assume $\text{char }K \neq 2,3$ and write $E_2 = y^2=x^3+ax+b$. Let $P, Q \in E_2$ with $P,Q,P+Q,P-Q$ all nonzero and let $x_1,x_2,x_3,x_4$ be the $x$--coordinates of these points.
+    \begin{lemma}\label{lemma5.8}
+        There exist polynomials $W_0,W_1,W_2 \in \mathbb{Z}[a,b][x_1,x_2]$ of degree $\le 2$ in $x_1$ and of degree $\le 2$ in $x_2$ such that 
+        \begin{align*}
+            (1:x_3+x_4:x_3x_4) = (W_0:W_1:W_2)
+        \end{align*}
+    \end{lemma}
+    \begin{proof}
+        Method 1: Direct calculation (results on the formula sheet) gives the result (e.g. $W_0 = (x_1-x_2)^2$).
+        \vspace{1mm}
+         
+        Method 2: Let $y = \lambda x + \nu$ be the line through $P$ and $Q$. Substituting, we get $x^3+ax+b -(\lambda x + \nu)^2 = (x-x_1)(x-x_2)(x-x_3) = x^3 - s_1x^2 + s_2 x - s_3$ where $s_i$ is the $i^{\text{th}}$ symmetric polynomial in $x_1,x_2,x_3$. Comparing coefficients gives $\lambda^2 = s_1,  -2\lambda \nu = s_2-a, \nu^2 = s_3+b$. Eliminating $\lambda$ and $\nu$ gives $$F(x_1,x_2,x_3) =(s_2-a)^2 - 4s_1(s_3+b) = 0,$$
+        where $F$ has degree at most $2$ in each $x_i$. Hence $x_3$ is a root of the quadratic $W(t) = F(x_1,x_2,t)$. Repeating this for the line through $P$ and $-Q$ shows that $x_4$ is the other root of $W(t)$. Therefore 
+        \begin{align*}
+            W(t) &= W_0(t-x_3)(t-x_4) = W_0t^2 - W_1t + W_2\\
+            \implies & (1:x_3+x_4:x_3x_4) = (W_0:W_1:W_2).
+        \end{align*}
+    \end{proof}
+    We now show that if $\phi, \psi \in \text{Hom}(E_1,E_2)$, then $\text{deg}(\phi + \psi) + \text{deg}(\phi - \psi) \le 2\text{deg}(\phi) + 2\text{deg}(\psi)$. We may assume that $\phi, \psi, \phi+\psi, \phi-\psi$ are not the zero maps (otherwise we're done trivially, or use $\text{deg}[-1]=1,~\text{deg}[2]=4$). Now
+    \begin{align*}
+        \phi: (x,y) \mapsto (\xi_1(x), \ldots)\\
+        \psi: (x,y) \mapsto (\xi_2(x), \ldots)\\
+        \phi+\psi: (x,y) \mapsto (\xi_3(x), \ldots)\\
+        \phi-\psi: (x,y) \mapsto (\xi_4(x), \ldots).
+    \end{align*}
+    Lemma \ref{lemma5.8} implies $(1:\xi_3+\xi_4: \xi_3\xi_4) = ((\xi_1-\xi_2)^2: \ldots)$. Say $\xi_i = \frac{r_i}{s_i}$ for $r_i,s_i \in K[t]$ coprime. This gives $$(s_3s_4:r_3s_4+r_4s_3:r_3r_4) \stackrel{(\star)}{=} ((r_1s_2-r_2s_1)^2 : \ldots)$$
+    where every term is quadratic in $r_3,r_4,s_3$ and $s_4$. Hence (as the terms on the LHS of $(\star)$ are coprime)
+    \begin{align*}
+        \text{deg}(\phi+\psi) + \text{deg}(\phi-\psi) &= \max(\text{deg}(r_3),\text{deg}(s_3)) + \max(\text{deg}(r_4),\text{deg}(s_4)) \\
+        &= \max(\text{deg}(s_3s_4),\text{deg}(r_3s_4+r_4s_3), \text{deg}(r_3r_4))\\
+        &\le 2\max(\text{deg}(r_1),\text{deg}(s_1)) + 2\max(\text{deg}(r_2),\text{deg}(s_2))\\
+        &= 2\text{deg}(\phi)+2\text{deg}(\psi).
+    \end{align*}
+    Now replace $\phi$ and $\psi$ by $\phi+\psi$ and $\phi-\psi$ and use $\text{deg}[2]=4$ to get \[
+    4\text{deg}(\phi) + 4\text{deg}(\psi) = \text{deg}(2\phi) + \text{deg}(2\psi) \le 2\text{deg}(\phi+\psi) + 2\text{deg}(\phi-\psi).
+    \]
+    This gives the parallelogram law, so $\text{deg}$ is a quadratic form.
+\end{proof}
+\begin{cor}
+    $\text{deg}(n \phi) = n^2 \text{deg}(\phi)$. In particular, $\text{deg}[n] = n^2$.
+\end{cor}
+\begin{example}
+    Let $E/K$ be an elliptic curve. Suppose $\text{char }K\neq 2$ and $0\neq T \in E(K)[2]$. WLOG let $E: y^2 = x(x^2+ax+b)$ for $a,b \in K, b(a^2-4b)\neq 0$ (by moving a root to zero) and WLOG $T=(0,0)$. 
+    \vspace{1mm}
+     
+    If $P = (x,y)$ and $P' = P+T = (x',y')$, then 
+    \begin{align*}
+        &x' = \left(\frac{y}{x}\right)^2-a-x = \frac{x^2+ax+b}{x}-a-x = \frac{b}{x}\\
+        &y' = -\left(\frac{y}{x}\right)x' = -\frac{by}{x^2}.
+    \end{align*}
+    We let $\xi = x + x' + a = \left(\frac{y}{x}\right)^2, \eta = y + y' = \frac{y}{x}\left(x-\frac{b}{x}\right)$.
+    Then 
+    \begin{align*}
+        \eta^2 = \left(\frac{y}{x}\right)^2\left(\left(x+\frac{b}{x}\right)^2-4b \right) = \xi((\xi-a)^2-4b) = \xi(\xi^2-2a\xi + a^2-4b).
+    \end{align*}
+    Let $E' : y^2 = x(x^2+a'x+b')$ with $a'=-2a, b' = a^2-4b$. There is an isogeny $\phi : E \to E'$ given by $(x,y) \mapsto \left(\left(\frac{y}{x}\right)^2 : \frac{y(x^2-b)}{x^2} : 1 \right)$.
+    \vspace{1mm}
+     
+    Sanity check/finding where $0_E$ maps to: $x$ is a double pole, $y$ is a triple pole, so $\left(\frac{y}{x}\right)^2$ is a double pole and $\frac{y(x^2-b)}{x^2}$ is a triple pole (and the last coordinate $1$ has degree 0). Multiplying through by a cube of a uniformizer, the degrees go from $(-2,-3,0)$ to $(1,0,3)$, so $0_E \mapsto (0:1:0)$.
+    \vspace{1mm}
+     
+    To compute $\text{deg}(\phi)$, $\left(\frac{y}{x}\right)^2 = \frac{x^2+ax+b}{x}$ with the numerator and denominator coprime as $b \neq 0$, so by Lemma \ref{lemma5.4}, $\text{deg}(\phi)=2$. We say $\phi$ is a \textbf{2--isogeny}.
+\end{example}
+\section{The invariant differential}
+For $C$ some algebraic curve over $K=\overline{K}$.
+\begin{defn}
+    The space of differentials $\Omega_C$ (sometimes called one--forms) is the $K(C)$--vector space generated by $\mathrm{d}f$ for all $f \in K(C)$ subject to the relations
+    \begin{enumerate}[(i)]
+        \item $\mathrm{d}(f+g)=\mathrm{d}f+\mathrm{d}g$.
+        \item $\mathrm{d}(fg)=f\mathrm{d}g+g\mathrm{d}f$.
+        \item $\mathrm{d}a = 0~\forall a \in K$.
+    \end{enumerate}
+\end{defn}
+\textbf{Fact.} $\Omega_C$ is a 1--dimensional $K(C)$--vector space. 
 
 \end{document}
