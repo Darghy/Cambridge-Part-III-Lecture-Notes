@@ -419,10 +419,10 @@ For now, let $G$ be an abelian group. Given $A,B \subset G$. We defined $A+B = \
 \begin{example}
     Let $V\le \mathbb{F}_p^n$ be a subspace. Then $V+V=V$, so $\left|V+V \right| = \left|V \right|$. In fact, if $A \subset \mathbb{F}_p^n$ is such that $\left|A+A \right|=\left|A \right|$, then $A$ must be a coset of a subspace.
 \end{example}
-\begin{example}
+\begin{example}\label{example2.2}
     Let $A \subset \mathbb{F}_p^n$ be such that $\left|A+A \right|<\frac{3}{2}\left|A \right|$. Then $\exists V \le \mathbb{F}_p^n$ such that $A \subset V$ and $\left|V\right|<\frac{3}{2}\left|A\right|$. This is on Ex. Sheet 2.
 \end{example}
-\begin{example}
+\begin{example}\label{example2.3}
     Let $A \subset \mathbb{F}_p^n$ be a set of linearly independent vectors. Then $A+A$ has size ${\left|A\right|\choose 2}$. However, $\left|A\right|\le n$, which is a small set.
     \vspace{1mm}
      
@@ -462,11 +462,66 @@ so $\delta(A) \le \sigma(A)^2$, i.e. $\left|A-A\right|\le \frac{\left|A+A\right|
     \left|lB-mB\right|\le K^{l+m}\left|A\right|.
     \]
 \end{theorem}
+\marginpar{02 Feb 2024, Lecture 7}
 \begin{proof}
     WLOG assume that $\left|A+B\right|=K\left|A\right|$. Choose a nonempty subset $A' \subset A$ such that the ratio $\frac{\left|A'+B\right|}{\left|A'\right|}$ is minimized, and call this ratio $K'$. Then $\left|A'+B\right|=K'\left|A'\right|$, $K'\le K$ and $\left|A''+B\right|\ge K'\left|A''\right| ~\forall A'' \subset A$.
     \vspace{1mm}
      
     \textbf{Claim.} For any finite $C \subset G$, $\left|A'+B+C\right|\le K'\left|A'+C\right|$.
+    \vspace{1mm}
+     
+    We first finish the proof assuming this claim, and then prove it. We first show that $\left|A'+mB\right|\le (K')^m\left|A\right| ~\forall m \in \mathbb{Z}_{\ge 0}$. The cases $m=0$ and $m=1$ are clear. Now suppose that $m>1$ and the result holds for $m-1$. By the claim with $C=(m-1)B$, \[
+    \left|A' + mB\right| = \left|A'+B+(m-1)B\right| \le K'\left|A'+(m-1)B\right|\le K'\cdot (K')^{m-1}\left|A'\right|.
+    \]
+    But as in the proof of Rusza's triangle inequality, 
+    \begin{align*}
+        &\left|A'\right|\left|lB-mB\right| \le \left|A' + lB\right|\left|A'+mB\right| \le (K')^l \left|A'\right|(K')^m \left|A'\right|\\
+        \implies & \left|lB-mB\right|\le (K')^{l+m}\left|A'\right|\le K^{l+m}\left|A\right|.
+    \end{align*}
+    Finally, we prove the claim by induction on $\left|C\right|$. For $\left|C\right|=1$, we are just translating sets, so the claim holds. Now suppose the claim holds for some $\left|C\right|$ and consider $C' = C \cup \{x\}$ for some $x \not\in C$. Observe 
+    \begin{align*}
+        A'+B+C' = (A' + B + C) \cup (A'+B+x)
+    \end{align*}
+    and in fact 
+    \begin{align*}
+        A'+B+C' = (A'+B+C) \cup (A'+B+x) \setminus (D+B+x)
+    \end{align*}
+    where $D = \{a \in A' \mid A'+B+x \subset A'+B+C\}$. By the definition of $K$, $\left|D+B\right|\ge K'\left|D\right|$, so 
+    \begin{align*}
+        \left|A'+B+C'\right| &\le \left|A'+B+C\right|+\left|(A'+B+x)\setminus (D+B+x)\right| \\
+        &\le \left|A'+B+C\right| + \left|A'+B\right| - \left|D+B\right|\\
+        &\le K'\left|A'+C\right| + K'\left|A'\right| - K'\left|D\right|\\
+        &= K'(\left|A'+C\right|+\left|A'\right|-\left|D\right|).
+    \end{align*}
+    Now apply the same argument again for $A'+C' = (A' + C) \sqcup ((A'+x)\setminus (E+x))$, where $E = \{a \in A' \mid a+x \in A'+C\} \subset D$. Notice that the union is disjoint in this case. We conclude that 
+    \begin{align*}
+        \left|A'+C'\right| = \left|A'+C\right| + \left|A'\right| - \left|E\right| \ge \left|A'+C\right| + \left|A'\right| - \left|D\right|\\
+        \implies \left|A'+B+C'\right|\le K'(\left|A'+C\right|+\left|A'\right|-\left|D\right|)\le K'\left|A'+C'\right|,
+    \end{align*}
+    proving the claim and hence the proof.
+\end{proof}
+We are now in a position to generalize Example \ref{example2.2}.
+\begin{theorem}[Freiman--Rusza theorem]
+    Let $A \subset \mathbb{F}_p^n$ be such that $\left|A+A\right|\le K\left|A\right|$ (i.e. $\sigma(A)=K$) for some $K>0$. Then $A$ is contained in a coset of a subspace $H\le \mathbb{F}_p^n$ of size $\left|H\right|\le K^2p^{K^4}\left|A\right|$.
+\end{theorem}
+\begin{proof}
+    Choose maximal $X \subset 2A-A$ such that the translates $x+A$ for $x \in X$ are disjoint. $X$ cannot be too large: $\forall x \in X, x+A \subset 3A-A$ and by Plünnecke, $\left|3A-A\right| \le K^4\left|A\right|$. But the translates $x+A$ for $x \in X$ are isjoint and each of size $\left|A\right|$, so
+    \[
+    \left|X\right|\left|A\right| = \left|\bigcup_{x \in X}(x+A) \right|\le \left|3A-A\right| \le K^4\left|A\right|,
+    \]
+    hence $\left|X\right|\le K^4$. We next show that $2A-A \stackrel{(\star)}{\subset}  X+A-A$. Indeed, if $y \in 2A-A$ and $y \not\in X$, then $y+A \cap (x+A) \neq \varnothing$ for some $x \in X$ by maximality of $X$, so $y \in X+A-A$. If $y \in X$, then trivially $y \in X+A-A$. It follows by induction from $(\star)$ that for all $l\ge 2$,
+    \begin{align*}
+        lA-A \stackrel{(\star\star)}{\subset}  (l-1)X + A -A,
+    \end{align*}
+    since using the induction hypothesis,
+    \begin{align*}
+        lA-A &= A+(l-1)A - A \stackrel{\text{hyp}}{\subset} A + (l-2)X + A - A \\
+        &= (l-2)X + 2A - A \stackrel{(\star)}{\subset } (l-2)X +X +(A-A) = (l-1)X+A-A.
+    \end{align*}
+    Now let $H$ be the subgroup of $\mathbb{F}_p^n$ generated by $A$, which we can write in the form $H = \cup_{l\ge 1}(lA-A) \stackrel{(\star\star)}{\subset} Y+A-A$, where $Y$ is the subgroup generated by $X$. Then $\left|Y\right|\le p^{\left|X\right|} \le p^{K^4}$, so
+    \begin{align*}
+        \left|H\right|\le \left|Y+A-A\right|\left|Y\right|\left|A-A\right|\le p^{K^4}K^2\left|A\right|.
+    \end{align*}
 \end{proof}
 
 \end{document}
