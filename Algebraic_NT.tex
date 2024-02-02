@@ -90,7 +90,7 @@ Let $K$ be a number field and write $\mathcal{O}_K$ for its ring of integers. Th
     \item If $\mathfrak{p}\mathcal{O}_L$ is prime, we say $\mathfrak{p}$ is inert (or remains inert) in $L$.
     \item If $g = [L:K]$, we say $\mathfrak{p}$ splits completely.
 \end{itemize}
-The quotient $\mathcal{O}_K/\mathfrak{p}$ is a finite field of characteristic $p$ ($\mathfrak{p} \cap \mathbb{Z} = p\mathbb{Z}$), called a residue field. If $\mathcal{P}/\mathfrak{p}$ (for $\mathcal{P} \in \mathcal{O}_L, \mathfrak{p} \in \mathcal{O}_K$), view $\mathcal{O}_K/\mathfrak{p}$ as a subfield of $\mathcal{O}_L/\mathcal{P}$. We call $f_{\mathcal{P}/\mathfrak{p}} = [\mathcal{O}_L/\mathcal{P} : \mathcal{O}_K/\mathfrak{p}]$ the residue field degree. If as before $\mathfrak{p}\mathcal{O}_L = \mathcal{P}_1^{e_1}\ldots \mathcal{P}_g^{e_g}$, then $\sum_{i=1}^{g} e_{\mathcal{P}_i/\mathfrak{p}} f_{\mathcal{P}_i/\mathfrak{p}} = [L:K]$. If $L/K$ is Galois, then the Galois group permutes the $\mathcal{P}_i$ transitively, so $e_1 = \ldots = e_g = e$. Also if $L/K$ is Galois, $f_{\mathcal{P}_1/\mathfrak{p}} = \ldots f_{\mathcal{P}_g/\mathfrak{p}} = f$, so $efg = [L:K]$. Recall also that 
+The quotient $\mathcal{O}_K/\mathfrak{p}$ is a finite field of characteristic $p$ ($\mathfrak{p} \cap \mathbb{Z} = p\mathbb{Z}$), called a residue field. If $\mathcal{P}\mid \mathfrak{p}$ (for $\mathcal{P} \in \mathcal{O}_L, \mathfrak{p} \in \mathcal{O}_K$), view $\mathcal{O}_K/\mathfrak{p}$ as a subfield of $\mathcal{O}_L/\mathcal{P}$. We call $f_{\mathcal{P}/\mathfrak{p}} = [\mathcal{O}_L/\mathcal{P} : \mathcal{O}_K/\mathfrak{p}]$ the residue field degree. If as before $\mathfrak{p}\mathcal{O}_L = \mathcal{P}_1^{e_1}\ldots \mathcal{P}_g^{e_g}$, then $\sum_{i=1}^{g} e_{\mathcal{P}_i/\mathfrak{p}} f_{\mathcal{P}_i/\mathfrak{p}} = [L:K]$. If $L/K$ is Galois, then the Galois group permutes the $\mathcal{P}_i$ transitively, so $e_1 = \ldots = e_g = e$. Also if $L/K$ is Galois, $f_{\mathcal{P}_1/\mathfrak{p}} = \ldots f_{\mathcal{P}_g/\mathfrak{p}} = f$, so $efg = [L:K]$. Recall also that 
 \begin{itemize}
     \item We can find the factorization of $\mathfrak{p}\mathcal{O}_L$ using the Kummer--Dedekind theorem.
     \item A prime $\mathfrak{p}$ in $\mathcal{O}_K$ ramifies in $L/K$ if and only if $\mathfrak{p} \mid d_{L/K}$ for $d_{L/K}$ the discriminant.
@@ -98,7 +98,7 @@ The quotient $\mathcal{O}_K/\mathfrak{p}$ is a finite field of characteristic $p
 If $L/K$ is Galois, write $\text{Gal}(L/K)$ for the Galois group. Let $\mathcal{P}$ be a prime ideal in $\mathcal{O}_L$.
 
 \begin{defn}
-    The \textbf{decomposition subgroup} of $\mathcal{P}$ is $$D_{\mathcal{P}} = \{\sigma \in \text{Gal}(L/K) \mid \sigma(\mathcal{P}=\mathcal{P})\}.$$
+    The \textbf{decomposition subgroup} of $\mathcal{P}$ is $$D_{\mathcal{P}} = \{\sigma \in \text{Gal}(L/K) \mid \sigma(\mathcal{P})=\mathcal{P}\}.$$
     The \textbf{inertial subgroup} of $\mathcal{P}$ is \[
     I_{\mathcal{P}} = \{\sigma \in \text{Gal}(L/K) \mid \sigma(\alpha) \equiv \alpha \pmod{\mathcal{P} ~\forall \alpha \in \mathcal{O}_L}\}.
     \]
