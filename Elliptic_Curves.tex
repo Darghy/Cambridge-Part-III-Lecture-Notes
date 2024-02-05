@@ -663,5 +663,89 @@ For $C$ some algebraic curve over $K=\overline{K}$.
     \end{enumerate}
 \end{defn}
 \textbf{Fact.} $\Omega_C$ is a 1--dimensional $K(C)$--vector space. 
+\marginpar{05 Feb 2024, Lecture 8}
+\vspace{1mm}
+ 
+Let $0\neq \omega \in \Omega_C$, let $P \in C$ be a smooth point and let $t \in K(C)$ be a uniformizer at $P$. Then $\omega = f \mathrm{d}t$ for some $f \in K(C)^\times$. We define $\text{ord}_P(\omega) = \text{ord}_P(f)$, which is independent of the choice of $t$.
+\vspace{1mm}
+ 
+\textbf{Fact.} Suppose $f \in K(C)^\times$ with $\text{ord}_P(f) = n \neq 0$. If $\text{char }K \nmid n$, then $\text{ord}_P(\mathrm{d}f)=n-1$. 
+\vspace{1mm}
+ 
+We assume that $C$ is a smooth projective curve.
+\begin{defn}
+    We define $\text{div}(\omega) = \sum_{P \in C}^{} \text{ord}_P(\omega)P \in \text{Div}(C)$. Here we use the fact that $\text{ord}_P(\omega) = 0$ for all but finitely many $P \in C$.
+\end{defn}
+\begin{defn}
+    A differential $\omega \in \Omega_C$ is regular if $\text{div}(\omega)\ge 0$. We define the genus $g(C)$ of $C$ to be \[
+    g(C) = \text{dim}_K \{\omega \in \Omega_C \mid \text{div}(\omega)\ge 0\},
+    \]
+    where the set on the RHS is the set of regular differentials.
+\end{defn}
+As a consequence of Riemann--Roch, we have that if $0 \neq \omega \in \Omega_C$, then $\text{deg}(\text{div}(\omega)) = 2g(C)-2$.
+\begin{lemma}
+    Assume $\text{char }K \neq 2$ and let $E : y^2 = (x-e_1)(x-e_2)(x-e_3)$ for $e_1,e_2,e_3$ distinct. Then $\omega = \frac{\mathrm{d}x}{y}$ is a differential on $E$ with no zeroes or poles, which implies $g(E)=1$. In particular, the $K$--vector space of regular differentials on $E$ is 1--dimensional, spanned by $\omega$.
+\end{lemma}
+\begin{proof}
+    Let $T_i = (e_i,0)$. Then $E[2]=\{0,T_1,T_2,T_3\}$ and $\text{div}(y) \stackrel{(\dagger)}{=} (T_1)+(T_2)+(T_3)-3(0)$. For $0 \neq P \in E$, $\text{div}(x-x_P) = (P)+(-P)-2(0)$. 
+    \begin{itemize}
+        \item If $P \in E\setminus E[2]$, then $\text{ord}(x-x_P)=1 \implies \text{ord}_P(\mathrm{d}x) = 0$.
+        \item If $P = T_i$, then $\text{ord}_P(x-x_P) = 2 \implies \text{ord}_P(\mathrm{d}x)=1$. 
+        \item If $P=0$, then $\text{ord}_P(x)= - 2 \implies \text{ord}_P(\mathrm{d}x) = -3$.
+    \end{itemize}
+    Hence $\text{div}(\mathrm{d}x) = (T_1)+(T_2)+(T_3) - 3(0)$, which with $(\dagger)$ gives $\text{div}\left(\frac{\mathrm{d}x}{y}\right) = 0$.
+\end{proof}
+\begin{defn}
+    For $\phi : C_1 \to C_2$ a nonconstant morphism, we define 
+    \begin{align*}
+        \phi^* : \Omega_{C_2} &\to \Omega_{C_1}\\
+        f \mathrm{d}g &\mapsto \phi^* f d(\phi^* g).
+    \end{align*}
+\end{defn}
+\begin{lemma}
+    Let $P \in E$, $\tau_P : E \to E$ by $X \mapsto X+P$ and $\omega = \frac{\mathrm{d}x}{y}$ as above. Then $\tau_P^*\omega = \omega$. We say $\omega$ is the \textbf{invariant differential}.
+\end{lemma}
+\begin{proof}
+    $\tau_P^*\omega$ is a regular differential on $E$, so $\tau_P^* \omega = \lambda_P \omega$ for some $\lambda_P \in K^\times$. The map $E \to \mathbb{P}^1$ by $P \mapsto \lambda_P$ is a morphism of smooth projectives curves, but it is not surjective (as it misses $0$ and $\infty$). Hence it is constant by Theorem \ref{theorem2.3}, i.e. $\exists \lambda \in K^\times$ such that $\tau_P^* \omega = \lambda \omega ~\forall P \in E$. Taking $P=0$ shows $\lambda=1$.
+\end{proof}
+\textbf{Remark.} If $K=\mathbb{C}$ and $\mathbb{C}/\Lambda \cong E(\mathbb{C})$ by $ z\mapsto (\wp(z),\wp'(z)) := (x,y)$, then $\frac{\mathrm{d}x}{y} = \frac{\wp'(z)\mathrm{d}z}{\wp'(z)}=\mathrm{d}z$, which is invariant under $z \mapsto z + \text{const}$.
+\begin{lemma}
+    Let $\phi,\psi \in \text{Hom}(E_1,E_2)$. Let $\omega$ be the invariant differential on $E_2$. Then $(\phi+\psi)^* \omega = \phi^* \omega + \psi^* \omega$.
+\end{lemma}
+\begin{proof}
+    Write $E$ for $E_2$. We have the maps
+    \begin{align*}
+        E \times E &\to E \\
+        \mu: (P,Q) &\mapsto P +Q\\
+        \text{pr}_1 : (P,Q)&\mapsto P\\
+        \text{pr}_2 : (P,Q)&\mapsto Q. 
+    \end{align*}
+    \textbf{Fact.} $\Omega_{E \times E}$ is a 2--dimensional $K(E \times E)$--vector space with basis $\text{pr}_1^*\omega$ and $\text{pr}_2^*\omega$. Consequently, $\mu^* \omega \stackrel{(\dagger)}{=} f \text{pr}_1^* \omega + g \text{pr}_2^* \omega$ for some $f,g \in K(E \times E)$.
+    \vspace{1mm}
+     
+    For fixed $Q \in E$, let $i_Q : E \to E \times E$ by $P \mapsto (P,Q)$. Applying $i^*_Q$ to $(\dagger)$ gives 
+    \begin{align*}
+        (\underbrace{\mu \circ i_Q}_{\tau_Q})^* \omega &= (i_Q^* f)(\underbrace{\text{pr}_1 \circ i_Q}_{\text{identity map}})^* \omega + (i_Q^* g)(\underbrace{\text{pr}_2 \circ i_Q}_{\text{constant map}})^* \omega\\
+        \implies & \tau_Q^* \omega = (i_Q^*f)\omega + 0.
+    \end{align*}
+    As $\tau_Q^*\omega = \omega$ by the previous lemma, we conclude $i_Q^*f = 1 ~\forall q \in E$, so $f(P,Q) = 1 ~\forall P,Q \in E$. Similarly $g(P,Q) = 1 ~\forall P,Q \in E$, so $(\dagger)$ gives $\mu^* \omega = \text{pr}_1^* \omega + \text{pr}_2^* \omega$. Now pull back using
+    \begin{align*}
+        E_1 &\to E \times E\\
+        P &\mapsto (\phi(P),\psi(P))
+    \end{align*}
+    to get $(\phi+\psi)^*\omega = \phi^* \omega + \psi^* \omega$.
+\end{proof}
+\begin{lemma}
+    Let $\phi : C_1 \to C_2$ be a nonconstant morphism. Then $\phi$ is separable if and only if $\phi^* : \Omega_{C_2} \to \Omega_{C_1}$ is nonzero.
+\end{lemma}
+\begin{proof}
+    Omitted.
+\end{proof}
+\begin{example}
+    Let $\mathbb{G}_m = \mathbb{A}^1 \setminus \{0\}$ be the multiplicative group. For $n\ge 2$ an integer, consider $\phi : \mathbb{G}_m \to \mathbb{G}_m$ by $x \mapsto x^n$. Then $\phi^*(\mathrm{d}x)=\mathrm{d}(x^n)=nx^{n-1}\mathrm{d}x$. So if $\text{char }K \nmid n$, then $\phi$ is separable, so $\left|\phi^{-1}(Q)\right|=\text{deg} \phi$ for all but at most finitely many $Q \in \mathbb{G}_m$.
+    \vspace{1mm}
+     
+    But $\phi$ is a group homomorphism, so $\left|\phi^{-1}(Q)\right|=\left|\text{ker}(Q)\right| ~\forall Q \in \mathbb{G}_m$. Hence $\left|\text{ker}Q \right| = \text{deg}\phi = n$. This shows that $K = \overline{K}$ contains exactly $n$ distinct $n^{\text{th}}$ roots of unity.
+\end{example}
 
 \end{document}
