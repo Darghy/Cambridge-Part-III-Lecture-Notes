@@ -565,5 +565,82 @@ Hilbert Class Field: Given a number field $K$, by the Existence Theorem we can f
 \begin{example}
     Let $K=\mathbb{Q}$. This is its own Hilbert class group (as $\text{Cl}(K)=1$).
 \end{example}
+\marginpar{02 Feb 2024, Lecture 7}
+\begin{theorem}
+    The Hilbert class field $F$ is the maximal unramified extension of $K$.
+\end{theorem}
+\begin{proof}
+    Let $M$ be another unramified abelian extension. By the Conductor theorem, $\mathfrak{f}_{M/K} = (1)$. For $\mathfrak{m} = (1)$ we have $$P_K(\mathfrak{f}_{M/K}) = \underbrace{P_K(\mathfrak{m})}_{=\text{ker}(\Phi_{F/K,\mathfrak{m}})} \subset \text{ker}(\Phi_{M/K,\mathfrak{f}_{M/K}}).$$ By Lemma \ref{lemma1.13}, we have $M \subset F$.
+\end{proof}
+\begin{cor}
+    Let $K$ be a number field. There is a one--to--one correspondence between unramified abelian expressions $M$ of $K$ and subgroups of the ideal class group $\text{Cl}(K)$. Furthermore, if $M/K$ corresponds to $H \subset \text{Cl}(K)$, then the Artin map induces an isomorphism 
+    \begin{align*}
+        \text{Cl}(K)/H \stackrel{\cong}{\to} \text{Gal}(M/K).
+    \end{align*}
+\end{cor}
+\begin{proof}
+    Let $F$ be the Hilbert class field at $K$. Then $\text{Gal}(F/K) \cong \text{Cl}(K)$. By Galois theory, there is a one-to-one inclusion-reversing correspondence between intermediate fields and subgroups of $\text{Gal}(F/K) \cong \text{Cl}(K)$. Since each unramified abelian extension is contained in $F$, the first part of the corollary follows.
+    \vspace{1mm}
+     
+    Let $H$ be a subgroup of $\text{Gal}(F/K)$ and let \[
+    M = F^H = \{x \in F \mid \sigma(x)=x ~\forall \sigma \in H\}.
+    \]
+    By Proposition \ref{prop1.12}, $\Phi_{M/K,\mathfrak{m}} : \text{Cl}(K) \to \text{Gal}(M/K)$ with $\Phi_{M/K,\mathfrak{m}} = \text{res} \circ \Phi_{F/K,\mathfrak{m}}$ and $\text{res}:\text{Gal}(F/K) \to \text{Gal}(M/K)$ by $\sigma \mapsto \sigma_M$. Now if $[a] \in H$, then $\Phi_{M/K,\mathfrak{m}}([a])=1$.
+\end{proof}
+\textbf{Fact.} Let $M_1/K$ and $M_2/K$ be extensions of number fields and $\mathfrak{p} \subset \mathcal{O}_K$ a prime ideal. If $\mathfrak{p}$ is unramified in both $M_1$ and $M_2$, then $\mathfrak{p}$ is unramified in the composite field $M_1M_2$.
+\begin{example}
+    Let $K = \mathbb{Q}(\sqrt{-5})$. We want to show the Hilbert class field $F$ is $\mathbb{Q}(\sqrt{-5},i)$. We know that $h_K=2$ and $\left|\text{Gal}(F/K)\right|=\left|\text{Cl}(K)\right|=2$, so $F$ is a quadratic unramified extension of $K$. Consider the diagram
+    $$\begin{tikzcd}
+        & \mathbb{Q}(\sqrt{-5},i) & \\
+        \mathbb{Q}(i) & \mathbb{Q}(\sqrt{-5}) & \mathbb{Q}(\sqrt{5}) \\
+        & \mathbb{Q} &
+        \arrow[from=1-2, to=2-1, dash]
+        \arrow[from=1-2, to=2-2, dash]
+        \arrow["e_2\le 2", from=1-2, to=2-3, dash]
+        \arrow[from=3-2, to=2-1, dash]
+        \arrow["e_2 = 2", from=3-2, to=2-2, dash]
+        \arrow["e_2 = 1", from=3-2, to=2-3, dash]
+    \end{tikzcd}.$$
+    \textbf{Fact.} If $\mathfrak{p}_F \subset \mathcal{O}_F$ and $\mathfrak{p}_M \subset \mathcal{O}_M$ with $M$ any of the intermediate fields, and if $p \in \mathbb{Z}$ is such that $\mathfrak{p}_F \mid \mathfrak{p}_M$ and $\mathfrak{p}_M \mid p$, then $e_{\mathfrak{p}_F/p} = e_{\mathfrak{p}_F/\mathfrak{p}_M}e_{\mathfrak{p}_M/p}\le [F:\mathbb{Q}] = 4$.
+
+    \vspace{1mm}
+     
+    Since $\mathbb{Q}(i)/\mathbb{Q}$ has discriminant 8, the only ramified prime is 2. Similarly the only prime that ramifies in $\mathbb{Q}(\sqrt{5})/\mathbb{Q}$ is 5.If $p \neq 2,5$, then $p$ is unramified in $\mathbb{Q}(i)$ and $\mathbb{Q}(\sqrt{5})$, hence in $\mathbb{Q}(\sqrt{5},i)$. So $p$ is unramified in $\mathbb{Q}(\sqrt{-5},i)/\mathbb{Q}(\sqrt{-5})$.
+    \vspace{1mm}
+     
+    Now $d_{K/\mathbb{Q}} = -20$, so the only ramified primes are 2 and 5. Suppose $2$ is ramified in $\mathbb{Q}(\sqrt{-5},i)/\mathbb{Q}(\sqrt{-5})$. Then $e_{\mathcal{P}_2/\mathfrak{p}_2}=2$, where $\mathfrak{p}_2$ is an ideal in $\mathbb{Q}(\sqrt{-5})$ such that $\mathfrak{p}_2 \mid 2$, $\mathcal{P}_2 \in \mathcal{O}_F$, $\mathcal{P}_2 \mid \mathfrak{p}_2$. Since 2 is unramified in $\mathbb{Q}(\sqrt{5})/\mathbb{Q}$, write $\mathfrak{q}_2$ for an ideal in $\mathbb{Q}(\sqrt{5})$ such that $\mathfrak{q}_2 \mid 2$. Then $e_{\mathcal{P}_2/2} = e_{\mathcal{P}_2/\mathfrak{q}_2}e_{\mathfrak{q_2}/2} = e_{\mathcal{P}_2/\mathfrak{q}_2}\cdot 1\le 2$ since $e_{\mathcal{P}_2/\mathfrak{q}_2}$ is at most $[F:\mathbb{Q}(\sqrt{5})]$. As $e_{\mathcal{P}_2/2} \neq 4$, 2 is unramified in $\mathbb{Q}(\sqrt{-5},i)/\mathbb{Q}(\sqrt{-5})$. In other words, just look at the diagram above (the notation here is bad but it's an easy example). The case $p=5$ is similar. Hence $\mathbb{Q}(\sqrt{-5},i)/\mathbb{Q}(\sqrt{-5})$ is unramified at all finite primes. In $\mathbb{Q}(\sqrt{-5})$ we only have one infinite prime, which is complex, so unramified by definition. Hence $(\sqrt{-5},i)$ is the Hilbert class field of $\mathbb{Q}(\sqrt{-5})$.
+\end{example}
+\begin{defn}
+    The \textbf{narrow Hilbert class field} is the maximal abelian extension unramified at all finite primes.
+\end{defn}
+\begin{cor}
+    Let $f$ be the Hilbert class field of $K$. Let $\mathfrak{p}$ be a prime ideal of $K$. Then $\mathfrak{p}$ splits completely in $F \iff \mathfrak{p}$ is a principal ideal.
+\end{cor}
+We can prove this in two ways: either we deduce this from the decomposition law, or we prove it directly, which we will now do.
+\begin{proof}
+    We know $\mathfrak{p}$ splits completely in $F$ if and only if $\left(\frac{F/K}{\mathfrak{p}}\right)=1$, and $\text{Cl}(K) \cong \text{Gal}(F/K)$. So \[
+    \left(\frac{F/K}{\mathfrak{p}}\right) = 1 \iff [p]=[1] \text{ in }\text{Cl}(K).
+    \qedhere\] 
+\end{proof}
+\begin{theorem}[Principal ideal theorem]
+    In the Hilbert class field, any ideal $\mathfrak{a}$ of $K$ becomes a principal ideal.
+\end{theorem}
+We don't prove this.
+\begin{example}
+    Let $K = \mathbb{Q}(\sqrt{-5})$. Then $\text{Cl}(K) = \langle[\mathcal{O}_K], [(2,1+\sqrt{-5})]\rangle$, $F = \mathbb{Q}(\sqrt{-5},i)$ and $(2,1+\sqrt{-5})\mathcal{O}_F$ is generated by $(1+i)$ in $\mathcal{O}_F$.
+\end{example}
+\subsection{Reciprocity theorems}
+Let $K$ be a number field containing a primitive $n^{\text{th}}$ root of unity $\zeta$. Then for $\alpha \in \mathcal{O}_K$ coprime to $\mathfrak{p}$, we have Fermat's little theorem: $\alpha^{N(\mathfrak{p})-1} \equiv 1 \pmod{\mathfrak{p}}$.
+\vspace{1mm}
+ 
+Exercise: Suppose $\mathfrak{p} \subset \mathcal{O}_K, \alpha \in \mathcal{O}_K$ such that $n, \alpha \not\in \mathfrak{p}$. Prove that:
+\begin{enumerate}[(i)]
+    \item $1, \zeta,\zeta^{n-1}$ are distinct mod $\mathfrak{p}$.
+    \item $n \mid N(\mathfrak{p})-1$.
+    \item $\alpha^{N(\mathfrak{p}-1)/n}$ is congruent to a unique $n^{\text{th}}$ root of unity mod $\mathfrak{p}$.
+\end{enumerate} 
+\begin{defn}
+    This unique root of unity is called the $n^{\text{h}}$ power Legendre symbol, written $\left(\frac{\alpha}{\mathfrak{p}}\right)_n$.
+\end{defn}
 
 \end{document}
