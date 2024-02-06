@@ -296,7 +296,54 @@ For example, during long multiplication in our head is in $\text{L}$, since we c
     $\text{NL} \subset \text{P}$.
 \end{prop}
 \begin{proof}
-    Let $T$ be a NDTM that computes a function $f$ and uses a logarithmic amount of space. The \textbf{configuration graph} of $T$ is a directed graph, where $\kappa \to \kappa'$ if and only if one of the transition functions takes $\kappa$ to $\kappa'$.
+    \marginpar{06 Feb 2024, Lecture 6}
+    Let $f  \in \text{NL}$ and let $T$ be a NDTM that computes a function $f$ and uses a logarithmic amount of space. The \textbf{configuration graph} of $T$ is a directed graph, whose vertices are the configurations, and $\kappa \to \kappa'$ if and only if one of the transition functions takes $\kappa$ to $\kappa'$ in one step. Let $G$ be the configuration graph of $T$. Then $f(x)=1 \iff$ there is a directed path in $G$ from the initial configuration to one such that $T$ has halted with output 1. Since $T$ uses $O(\log n)$ space, the number of vertices of $G$ is polynomial in $n$. But REACHABILITY, the problem of determining whether there is a directed path from a vertex $x$ to a subset $S$ of vertices in a directed graph is easily seen to be in $P$. 
+\end{proof}
+\textbf{Remark.} $\left|V(G)\right|\le 2^{O(\log n)}\left|S\right|=n^{O(1)}$, giving the polynomial bound in the above.
+
+\subsection{Low--depth computation}
+The class of $\text{NC}^i$ (for $i \in \mathbb{Z}_{\ge 0}$) consists of all functions that can be computed by a family of circuits of polynomial size, fan--in 2 and depth $O((\log n)^i)$, where the \textbf{depth} of a circuit is the length of the longest directed path in the associated DAG.
+\vspace{1mm}
+ 
+$\text{AC}^i$ is like $\text{NC}^i$, except that unbounded fan--in is allowed. It is an exercise on Ex. Sheet 1 to show that $\text{AC}^i \subset \text{NC}^{i+1}$.
+We write $\text{NC} = \bigcup_{i=0}^{\infty} \text{NC}^i, \text{AC} = \bigcup_{i=0}^{\infty} \text{AC}^i$ (which are of course equal, but both names come up in literature).
+\vspace{1mm}
+ 
+It is usual to impose a uniformity condition on $\text{NC}^i$. The favored condition is log space uniformity, i.e. $f \in \text{u--NC}^i$ if the circuits can be generated in log space (i.e. $\text{L}$).
+\vspace{1mm}
+ 
+Major open problem: is $\text{P} \subset \text{NC}$? In fact, it is not known whether $\text{PH} \subset \text{NC}^1$.
+
+\subsection{Randomized computation}
+A function $f$ is in $\text{RP}$ (randomized polynomial time) if there is a polynomial $p$ and a function $g \in \text{P}$ such that if $\left|x\right|=n$ and $m = p(n)$, then \[
+\mathbb{P}_{y \in \{0,1\}^m}\left(g(x,y)=1\right) = \begin{cases}
+    0 & f(x)=0\\
+    \ge \frac{1}{2}&f(x)=1.
+\end{cases}
+\]
+Note that if we run the computation on independent strings $y_1,\ldots,y_k$, then $\mathbb{P}(\exists i~g(x,y_i)=1) = \begin{cases}
+    0 & f(x)=0\\
+    \ge 1-\frac{1}{2^k}&f(x)=1\ldots
+\end{cases}$
+So we can make the error probability very small without much cost.
+\vspace{1mm}
+ 
+We say $f \in \text{co-RP}$ if $1-f \in\text{RP}$. We write $\text{ZPP} = \text{RP} \cap \text{co-RP}$ ($\text{ZPP}$ stands for zero--error probabilistic polynomial time). 
+\vspace{1mm}
+ 
+We say $f \in \text{BPP}$ (bounded--error probabilistic polynomial time) if there exists $g$ as above such that $\mathbb{P}_{y \in \{0,1\}^m}(g(x,y)=f(x))\ge \frac{2}{3}$. Again we can shrink the error probability. To do so, pick some $k$ and calculate $g(x,y_1),\ldots,g(x,y_k)$ for $(y_1,\ldots,y_k)$ independent random elements of $\{0,1\}^m$ and take the majority. The probability of getting the wrong answer is at most $e^{-k/48}$ by Chernoff estimates for the sum of independent Bernoulli random variables.
+
+\begin{cor}
+    $\text{BPP} \subset \text{P/poly}$.
+\end{cor}
+\begin{proof}
+    If $k \ge 48n$. then the probability that the majority of $g(x,y_i)$ is wrong is $<2^{-n}$. Therefore, there exist $y_1,\ldots,y_k$ such that for every $x$, the majority vote is correct. This $y_1,\ldots,y_k$ serves as an advice string, together with the function that computes the majority vote.
+\end{proof}
+\begin{prop}
+    $\text{BPP} \subset \Sigma_2^P \cap \Pi_2^P$.
+\end{prop}
+\begin{proof}
+    Let $g$ be such that $\mathbb{P}(g(x,y)=f(x))\ge \frac{2}{3}$. Then we have seen that we can find $h$ such that $\mathbb{P}(h(x,y)=f(x))\ge 1-2^{-n}$ (this $y$ is $48n$ times as long as the previous $y$, call this new length $m$). For each $x$, let $A_x = \{y \in \{0,1\}^m \mid h(x,y)=f(x)\}$.
 \end{proof}
 
 \end{document}
