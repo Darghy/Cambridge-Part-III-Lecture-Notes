@@ -577,12 +577,12 @@ In particular, if $A \subset G$ such that $\left|A+A\right|\le K\left|A\right|$,
 \begin{example}
     Let $G$ be our favorite abelian group (really our favorite class of abelian groups, e.g. $\mathbb{Z}_p$ for $p$ running over primes). Then there exist constants $\eta,\theta>0$ such that for all sufficiently large $n$, there exists $A \subset G$ with $\left|A\right| = n$ satisfying $E(A,A) \ge \eta$ and $\left|A+A\right|\ge \theta \left|A\right|^2$. This is on Ex. Sheet 2.
 \end{example}
-\begin{theorem}[Balog--Szemeredi--Gowers]
+\begin{theorem}[Balog--Szemeredi--Gowers]\label{theorem2.15}
     Let $G$ be an abelian group and let $A \subset G$ be finite such that $E(A,A) \ge \eta$ for some $\eta >0$. Then $\exists A' \subset A$ of size at least $c(\eta)\left|A\right|$ such that $$\left|A'+A'\right| \le C(\eta)\left|A\right|.$$
-    Furthermore, here $c(\eta)$ and $C(\eta)$ are polynomials in $\eta$.
+    Furthermore, here $c(\eta)$ and $C(\eta)$ are polynomials in $\eta$.\footnote{TODO: see beginning of lec 9 - shoudl it be $C(\eta)\left|A'\right|$ in the above?}
 \end{theorem}
 We first prove a technical lemma using a method called ''dependent random choice''. 
-\begin{lemma}
+\begin{lemma}\label{lemma2.16}
     Let $A_1,A_2,\ldots,A_m \subset [n]$ and suppose $\sum_{i,j \in [m]}^{} \left|A_i \cap A_j\right|\ge \delta^2 nm^2$. Then there exists $X \subset [m]$ of size at least $\frac{\delta^5 m}{\sqrt{2}}$ such that $\left|A_i \cap A_j\right|\ge \frac{\delta^2n}{2}$ for at least $90\%$ of the pairs $(i,j) \in X^2$.
 \end{lemma}
 \begin{proof}
@@ -594,7 +594,67 @@ We first prove a technical lemma using a method called ''dependent random choice
     \begin{align*}
         \mathbb{E}(\# \text{bad pairs in }X^2) \le \frac{\delta^{10}}{2^5}m^2.
     \end{align*}
-    Hence $\mathbb{E}\left(\left|X^2\right| - 16 \cdot \# \text{bad pairs in }X^2\right)=\frac{\delta^{10}}{2^5}m^2$, so there must be a choice of $x_1,x_2,\ldots,x_5$ such that $\left|X\right| \ge  \frac{\delta^5 m}{\sqrt{2}}$ and the proportion of bad pairs in $X$ is at most $\frac{1}{16}< 10\%$.
+    Hence $\mathbb{E}\left(\left|X^2\right| - 16 \cdot \# \text{bad pairs in }X^2\right)=\frac{\delta^{10}}{2^5}m^2$,\footnote{TODO: This $2^5$ should just be $2$, right?} so there must be a choice of $x_1,x_2,\ldots,x_5$ such that $\left|X\right| \ge  \frac{\delta^5 m}{\sqrt{2}}$ and the proportion of bad pairs in $X$ is at most $\frac{1}{16}< 10\%$.
 \end{proof}
+\begin{proof}[Proof of Theorem \ref{theorem2.15}]
+    \marginpar{07 Feb 2024, Lecture 9}
+    We call a difference $d$ ''popular'' if $d$ can be written as $d = x-y$ with $x,y \in A$ in at least $\eta \left|A\right|/2$ ways, i.e. $r_{A-A}(d)\ge \eta\left|A\right|/2$. There must be at least $\eta \left|A\right|2$ popular differences, for if not, we get a contradiction through
+    \begin{align*}
+        \sum_{d}^{} r_{A-A}(d)^2 &= \sum_{d \text{ popular}}^{} r_{A-A}(d)^2 + \sum_{d \text{ not popular}}^{} r_{A-A}(d)^2 \\
+        &< \eta \frac{\left|A\right|}{2}\left|A\right|^2 + \eta \frac{\left|A\right|}{2}\sum_{d }^{} r_{A-A}(d) \\
+        &\le \eta \frac{\left|A\right|}{2}\left|A\right|^2 + \eta \frac{\left|A\right|}{2}\left|A\right|^2.
+    \end{align*}
+    Define a graph with vertex set $A$, joining $x$ and $y$ by an edge if $y-x$ is a popular difference. Then 
+    \begin{align*}
+        \mathbb{E}_{x \in A} \left|N(x)\right| = \frac{1}{\left|A\right|}\sum_{x \in A}^{} \left|N(x)\right| \ge \frac{\eta \left|A\right|}{2}.
+    \end{align*}
+    We also have $\mathbb{E}_{x, y \in A}\left|N(x) \cap N(y)\right|\ge \frac{\eta^2\left|A\right|}{4}$. Indeed, by Cauchy--Schwarz,
+    \begin{align*}
+        &\mathbb{E}_{x,y \in A}\left|N(x) \cap N(y)\right| = \mathbb{E}_{x,y \in A}\sum_{z \in A}^{} 1_{N(x)}(z)1_{N(y)}(z) = \sum_{z \in A}^{} \left(\mathbb{E}_{x \in A}1_{N(x)}(z)\right)^2 \\
+        \ge& \frac{1}{\left|A\right|} \left(\sum_{z \in A}^{} \mathbb{E}_{x \in A}1_{N(x)}(z)\right)^2 = \frac{1}{\left|A\right|}\left(\mathbb{E}_{x \in A}\left|N(x)\right|\right)^2 \ge \frac{1}{\left|A\right|} \left(\frac{\eta \left|A\right|}{2}\right)^2 = \frac{\eta^2 \left|A\right|}{4}. 
+    \end{align*}
+    We apply Lemma \ref{lemma2.16} with $m=n=\left|A\right|$ and $\delta^2 = \frac{\eta^2}{4}$ to find a subset $A' \subset A$ of size $\ge \eta^{10}\frac{\left|A\right|}{2^{11}}$ with the property that $\left|N(x) \cap N(y)\right| \ge \frac{\eta^2\left|A\right|}{8}$ for at least $90\%$ of $(x,y) \in A'^2$. But then for at least $10\%$ of $x \in A'$, $\left|N(x) \cap N(y)\right| \ge \frac{\eta^2 \left|A\right|}{8}$ for at least $80\%$ of $y \in A'$. Hence $\exists  A'' \subset A'$ of size $\ge \frac{\eta^{10}\left|A\right|}{2^{15}}$ such that $\forall x \in A''$, at least $80\%$ of $z \in A'$ satisfy $\left|N(x) \cap N(z)\right|\ge \frac{\eta^2\left|A\right|}{8}$. In particular, if $x,y \in A''$, then there are at least $\frac{\eta^{10}\left|A\right|}{2^{12}}$ values of $z \in A'$ such that $\left|N(x) \cap N(z)\right|\ge \frac{\eta^2\left|A\right|}{8}$ and $\left|N(y) \cap N(z)\right|\ge \frac{eta^2\left|A\right|}{8}$.
+    \vspace{1mm}
+     
+    [We shall prove an upper bound of $\left|A'' - A''\right|$ by showing that each element of $A''-A''$ can be written as a linear combination of distinct octuples from $A$.] 
+
+    \vspace{1mm}
+     
+    For each such $z$, there are thus $\ge \left(\frac{\eta^2\left|A\right|}{8}\right)^2$ pairs $(u,v)$ such that $u \in N(x) \cap N(y)$ and $v \in N(y) \cap N(z)$. For each such pair $(u,v)$, the elements $u-x,z-u,v-z,y-v$ are all popular differences. Hence, for each pair $(u,v)$, there are at least $\left(\frac{\eta\left|A\right|}{2}\right)^4$ octuples $(a_1,a_2,\ldots,a_8) \in A^8$ such that \[
+    u-x = a_2-a_1,~ z-u = a_4-a_3, ~ v-z = a_6 - a_5, ~ y-v = a_8-a_7.
+    \]
+    In other words, there are at least 
+    \begin{align*}
+        \underbrace{\left(\frac{\eta^{10}\left|A\right|}{2^{12}}\right)}_{z}\underbrace{\left(\frac{\eta^2 \left|A\right|}{8}\right)^2}_{u,v} \underbrace{\left(\frac{\eta \left|A\right|}{2}\right)^4}_{(a_1,\ldots,a_8)} = \frac{\eta^{18}}{2^{22}}\left|A\right|^7
+    \end{align*}
+    octuples $(a_1,\ldots,a_8) \in A^8$ such that 
+    \begin{align*}
+        y-x &= (u-x)  +(z-u) + (v-z) + (y-v) \\
+        &= a_2-a_1 + a_4-a_3 + a_6-a_5 + a_8-a_7.
+    \end{align*}
+    But distinct $y-x$ give rise to distinct octuples, so 
+    \begin{align*}
+        &\frac{\eta^{18}}{2^{12}}\left|A\right|^7 \cdot \left|A''-A''\right| \le \left|A\right|^8 \\
+        \implies& \left|A''-A''\right| \le 2^{12}\eta^{-18}\left|A\right| \le 2^{27}\eta^{-28}\left|A''\right| 
+    \end{align*}
+    (and $\left|A''+A''\right|$ follows from Plünnecke).
+\end{proof}
+\section{Probabilistic tools}
+\begin{prop}[Khintchine's inequality]
+    Let $X_1,X_2,\ldots,X_n$ be independent random variables taking values $\pm x_i$ with probability $\frac{1}{2} ~\forall i=1,\ldots,n$. Then $\forall p \in [2,\infty)$, \[
+    ||\sum_{i=1}^{n} X_i||_p = O \left(p^{1/2}\left(\sum_{i=1}^{n} ||X_i||_2^2\right)^{1/2}\right)
+    \]
+\end{prop}
+\begin{proof}
+    By nesting of norms, it suffices to prove the case $p = 2k$ with $k \in \mathbb{N}$. For simplicity, write $X = \sum_{i=1}^{n} X_i$ and WLOG assume that $\sum_{i=1}^{n} ||X_i||_{\infty}^2 = \sum_{i=1}^{n} ||X_i||_2^2 = 1$. By Chernoff (Example \ref{ex1.3}), which states that $\forall \theta >0$, \[
+    \mathbb{P}\left(\left|X\ge \theta\right|\right) \le 4 \exp(-\theta^2/4),
+    \]
+    we have (using integration by parts, this is the alternative something formula, rewatch lecture to find out the name)
+    \begin{align*}
+        ||X||_{2k}^{2k} = \int_{0}^{\infty} 2k t^{2k-1}\mathbb{P}\left(\left|X\right|\ge t\right)\mathrm{d}t \le 8k \underbrace{\int_{0}^{\infty} t^{2k-1}\exp(-t^2/4)\mathrm{d}t}_{:=I(k)}.
+    \end{align*}
+    We shall prove by induction that $I(k) \le C^{2k}(2k)^k/4k$.
+\end{proof}
+
 
 \end{document}
