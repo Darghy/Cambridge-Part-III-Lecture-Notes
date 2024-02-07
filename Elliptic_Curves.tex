@@ -585,7 +585,7 @@ If $E_1 \stackrel{\phi}{\to} E_2 \stackrel{\psi}{\to} E_3$ are isogenies, then $
     $(\impliedby)$. This is on Ex. Sheet 2.
 \end{proof}
 \marginpar{02 Jan 2024, Lecture 7}
-\begin{theorem}
+\begin{theorem}\label{theorem5.7}
     $\text{deg}:\text{Hom}(E_1,E_2) \to \mathbb{Z}$ is a quadratic form (with $\text{deg}(0)=0$).
 \end{theorem}
 \begin{proof}
@@ -627,7 +627,7 @@ If $E_1 \stackrel{\phi}{\to} E_2 \stackrel{\psi}{\to} E_3$ are isogenies, then $
     \]
     This gives the parallelogram law, so $\text{deg}$ is a quadratic form.
 \end{proof}
-\begin{cor}
+\begin{cor}\label{cor5.9}
     $\text{deg}(n \phi) = n^2 \text{deg}(\phi)$. In particular, $\text{deg}[n] = n^2$.
 \end{cor}
 \begin{example}
@@ -709,7 +709,7 @@ As a consequence of Riemann--Roch, we have that if $0 \neq \omega \in \Omega_C$,
     $\tau_P^*\omega$ is a regular differential on $E$, so $\tau_P^* \omega = \lambda_P \omega$ for some $\lambda_P \in K^\times$. The map $E \to \mathbb{P}^1$ by $P \mapsto \lambda_P$ is a morphism of smooth projectives curves, but it is not surjective (as it misses $0$ and $\infty$). Hence it is constant by Theorem \ref{theorem2.3}, i.e. $\exists \lambda \in K^\times$ such that $\tau_P^* \omega = \lambda \omega ~\forall P \in E$. Taking $P=0$ shows $\lambda=1$.
 \end{proof}
 \textbf{Remark.} If $K=\mathbb{C}$ and $\mathbb{C}/\Lambda \cong E(\mathbb{C})$ by $ z\mapsto (\wp(z),\wp'(z)) := (x,y)$, then $\frac{\mathrm{d}x}{y} = \frac{\wp'(z)\mathrm{d}z}{\wp'(z)}=\mathrm{d}z$, which is invariant under $z \mapsto z + \text{const}$.
-\begin{lemma}
+\begin{lemma}\label{lemma6.3}
     Let $\phi,\psi \in \text{Hom}(E_1,E_2)$. Let $\omega$ be the invariant differential on $E_2$. Then $(\phi+\psi)^* \omega = \phi^* \omega + \psi^* \omega$.
 \end{lemma}
 \begin{proof}
@@ -735,7 +735,7 @@ As a consequence of Riemann--Roch, we have that if $0 \neq \omega \in \Omega_C$,
     \end{align*}
     to get $(\phi+\psi)^*\omega = \phi^* \omega + \psi^* \omega$.
 \end{proof}
-\begin{lemma}
+\begin{lemma}\label{lemma6.4}
     Let $\phi : C_1 \to C_2$ be a nonconstant morphism. Then $\phi$ is separable if and only if $\phi^* : \Omega_{C_2} \to \Omega_{C_1}$ is nonzero.
 \end{lemma}
 \begin{proof}
@@ -747,5 +747,88 @@ As a consequence of Riemann--Roch, we have that if $0 \neq \omega \in \Omega_C$,
      
     But $\phi$ is a group homomorphism, so $\left|\phi^{-1}(Q)\right|=\left|\text{ker}(Q)\right| ~\forall Q \in \mathbb{G}_m$. Hence $\left|\text{ker}Q \right| = \text{deg}\phi = n$. This shows that $K = \overline{K}$ contains exactly $n$ distinct $n^{\text{th}}$ roots of unity.
 \end{example}
+\marginpar{07 Feb 2024, Lecture 9}
+\begin{theorem}\label{theorem6.5}
+    If $\text{char }K \nmid n$, then $E[n] = (\mathbb{Z}/n\mathbb{Z})^2$.
+\end{theorem}
+\begin{proof}
+    Lemma \ref{lemma6.3} and induction imply $[n]^* \omega = n \omega$ where $\text{char }K \nmid n$, so $[n]$ is separable by Lemma \ref{lemma6.4}. Hence $\left|[n]^{-1}(Q)\right| = \text{deg}[n]$ for all but finitely many points $Q \in E$. But $[n]$ is a group homomorphism, so $\left|[n]^{-1} Q\right| = \left|E[n]\right| ~\forall Q \in E$. We conclude that $\left|E[n]\right|=\text{deg}[n] = n^2$ by Corollary \ref{cor5.9}.
+    \vspace{1mm}
+     
+    By classification of finite abelian groups, $E[n] \cong \mathbb{Z}/d_1\mathbb{Z} \times \ldots \times d_t\mathbb{Z}/\mathbb{Z}$ with $d_1 \mid d_2 \mid \ldots \mid d_t$, but $d_t \mid n$, and if $p$ is a prime with $p \mid d_1$, then $E[p] \cong (\mathbb{Z}/p\mathbb{Z})^t$, so $\left|E[p]\right| = p^2$, so $t=2$. Hence $d_1 \mid d_2 \mid n$ with $d_1d_2=n^2$, so $d_1=d_2=n$ and so $E[n] \cong (\mathbb{Z}/n\mathbb{Z})^2$.
+\end{proof}
+\textbf{Remark.} If $\text{char }K = p$, then $[p]$ is inseparable. It can be shown that either $E[p^r] \cong \mathbb{Z}/p^r \mathbb{Z} ~\forall r\ge 1$ or $E[p] = 0$ (the ''ordinary'' case and the ''supersingular'' case).
+
+\textbf{Remark about the remark.} Do not use this remark to trivialize a question on Ex. Sheet 2.
+
+\section{Elliptic curves over finite fields}
+\begin{lemma}\label{lemma7.1}
+    Let $A$ be an abelian group. Let $q : A \to \mathbb{Z}$ be a positive definite quadratic form. Then \[
+    \underbrace{\left|q(x+y)-q(x)-q(y)\right|}_{\langle x,y \rangle}\le 2\sqrt{q(x)q(y)}.
+    \] 
+\end{lemma}
+\begin{proof}
+    We may assume $x \neq 0$, otherwise the result is clear. Hence $q(x) \neq 0$. Let $m,n \in \mathbb{Z}$, then 
+    \begin{align*}
+        0&\le q(mx+ny) = \frac{1}{2}\langle mx+ny,mx+ny \rangle \\
+        &= m^2q(x) + mn \langle x,y \rangle +n^2q(y) \\
+        &= q(x) \left( m + \frac{\langle x,y \rangle}{2q(x)}n\right)^2 + \left(q(y)- \frac{\langle x,y \rangle^2}{4q(x)}\right)n^2.
+    \end{align*}
+    Get rid of the first term by taking $m = - \langle x, y \rangle$ and $n = 2q(x)$ to deduce $\langle x,y \rangle^2 \le 4q(x)q(y)$, so the result follows.
+\end{proof}
+\begin{theorem}[Hasse]
+    Let $E/\mathbb{F}_q$ be an elliptic curve. Then \[
+    \left|\# E(\mathbb{F}_q) - (q+1)\right| \le 2\sqrt{q}.
+    \]    
+\end{theorem}
+\begin{proof}
+    Recall $\text{Gal}(\mathbb{F}_{q^r}/\mathbb{F}_q)$ is cyclic of order $r$, generated by the Frobenius map $x \mapsto x^q$. Let $E$ have Weierstrass equation with coefficients $a_1,\ldots,a_6 \in \mathbb{F}_q$ (and note that $a_i^q = a_i ~\forall i$). 
+    \vspace{1mm}
+     
+    Define the Frobenius endomorphism $\phi: E \to E$ by $(x,y) \mapsto (x^q,y^q)$, which is an isogeny of degree $q$. Then $E(\mathbb{F}_q) = \{P \in E \mid \phi(P) = P\} = \text{ker}(1-\phi)$. We have
+    \begin{align*}
+        \phi^* \omega = \phi^* \left(\frac{\mathrm{d}x}{y}\right) = \frac{d(x^q)}{y^q} = \frac{qx^{q-1}\mathrm{d}x}{y^q} = 0
+    \end{align*}
+    as $q=p^n$, so $p \mid q$. By Lemma \ref{lemma6.3},
+    \begin{align*}
+        (1-\phi)^* \omega = \omega - \phi^* \omega = \omega \neq 0,
+    \end{align*}
+    so $1-\phi$ is separable. By Theorem \ref{theorem2.3} and the fact that $1-\phi$ is a group homomorphism, we argue in the proof of Theorem \ref{theorem6.5} that $$\underbrace{\left|\text{ker}(1-\phi)\right|}_{\left|E(\mathbb{F}_q)\right|} = \text{deg}(1-\phi).$$
+    The map $\text{deg}: \text{Hom}(E,E) \to \mathbb{Z}$ is a positive definite quadratic form by Theorem \ref{theorem5.7}. Hence by Lemma \ref{lemma7.1}, 
+    \begin{align*}
+        &\left|\text{deg}(1-\phi) - 1 - \text{deg}\phi\right|\le 2\sqrt{\text{deg}\phi}\\
+        \implies&\left|\# E(\mathbb{F}_q)-q-1\right| \le 2\sqrt{q}.
+        \qedhere
+    \end{align*}
+\end{proof}
+\begin{defn}
+    For $\phi, \psi \in \text{End}(E) = \text{Hom}(E,E)$, we put $\langle \phi, \psi \rangle = \text{deg}(\phi+\psi)-\text{deg}(\phi)-\text{deg}(\psi)$ and $\text{tr}(\phi) = \langle \phi,1 \rangle$.
+\end{defn}
+\begin{cor}
+    Let $E/\mathbb{F}_q$ be an elliptic curve and let $\phi \in \text{End}(E)$ be the $q^{\text{th}}$ power Frobenius map. Then $\# E(\mathbb{F}_q) = q+1 - \text{tr}(\phi)$ and $\left|\text{tr}(\phi)\right|\le 2\sqrt{q}$.
+\end{cor}
+\textbf{Zeta functions.} For $K$ a number field, 
+\begin{align*}
+    \zeta_K(s) = \sum_{\mathfrak{a} \subset \mathcal{O}_K}^{} \frac{1}{(N(\mathfrak{a}))^s} = \prod_{\mathfrak{p} \subset \mathcal{O}_K, \mathfrak{p} \text{ prime}}^{} \left(1-\frac{1}{(N(\mathfrak{p}))^s}\right)^{-1}.
+\end{align*} 
+For $K$ a function field, i.e. $K = \mathbb{F}_q(C)$ where $C$ is a smooth projective curve,
+\begin{align*}
+    \zeta_K(s) = \prod_{x \in \left|C\right|} \left(1-\frac{1}{(Nx))^2}\right)^{-1}, 
+\end{align*}
+where $\left|C\right| = \{\text{closed points of }C\} = \{\text{orbits for the action of Gal}(\overline{\mathbb{F}_q}/\mathbb{F}_q) \text{ on }C(\overline{\mathbb{F}_q})\}$ and $Nx = q^{\text{deg }x}$, where $\text{deg }x$ is the size of the corresponding orbit (these definitions are borrowed from scheme theory). We have $\zeta_K(s) = F(q^{-s})$ for some $F \in \mathbb{Q}[[T]]$. We have
+\begin{align*}
+    F(T) &= \prod_{x \in \left|C\right|}^{} \left(1-T^{\text{deg }x}\right)^{-1} \\
+    \implies \log F(T) &= \sum_{x \in \left|C\right|}^{} \sum_{m=1}^{\infty} \frac{1}{m}T^{m \text{deg }x} \\
+    \implies T\frac{\mathrm{d}}{\mathrm{d}T} \log F(T) &= \sum_{x \in \left|C\right|}^{} \sum_{m=1}^{\infty} \text{deg }x T^{m \text{deg }x} \\
+    &\stackrel{n = m\text{deg }x}{=} \sum_{n=1}^{\infty} \left(\sum_{x \in \left|C\right|,\text{deg }x \mid n}^{} \text{deg }x \right)T^n \\
+    &= \sum_{n=1}^{\infty} \# C(\mathbb{F}_{q^n})T^n \\
+    \implies F(T) &= \exp \left(\sum_{n=1}^{\infty} \frac{\# C(\mathbb{F}_{q^n})}{n}T^n \right).
+\end{align*}
+\begin{defn}
+    The zeta function of a smooth projective curve $C/\mathbb{F}_q$ is 
+    \[
+    Z_C(T) = \exp \left(\sum_{n=1}^{\infty} \frac{\# C(\mathbb{F}_{q^n})}{n}T^n \right).
+    \]
+\end{defn}
 
 \end{document}
