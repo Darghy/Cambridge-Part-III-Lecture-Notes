@@ -345,5 +345,67 @@ We say $f \in \text{BPP}$ (bounded--error probabilistic polynomial time) if ther
 \begin{proof}
     Let $g$ be such that $\mathbb{P}(g(x,y)=f(x))\ge \frac{2}{3}$. Then we have seen that we can find $h$ such that $\mathbb{P}(h(x,y)=f(x))\ge 1-2^{-n}$ (this $y$ is $48n$ times as long as the previous $y$, call this new length $m$). For each $x$, let $A_x = \{y \in \{0,1\}^m \mid h(x,y)=f(x)\}$.
 \end{proof}
+\marginpar{08 Feb 2024, Lecture 7}
+\begin{theorem}[Sipser, Lautemann]
+    $\text{BPP} \subset \Sigma_2^P \cap \Pi_2^P$.
+\end{theorem}
+\begin{proof}
+    If $f \in \text{BPP}$, then there exists a polynomial $p$ and $g \in \text{P}$ such that if $\left|x\right|=n$, then $\mathbb{P}_{y \in \{0,1\}^{p(n)}}\left(g(x,y)=f(x)\right) \ge 1 -2^{-n}$ (by the ''boosting'' argument given earlier). For each $x$, let $A_x \subset \{0,1\}^{p(n)}$ be $\{y \mid g(x,y) =1\}$. Then if $f(x)=1$, $A_x$ has density $\ge 1-2^{-n}$ and if $f(x)=0$, then $A_x$ has density $\le 2^{-n}$. 
+
+    \vspace{1mm}
+     
+    Suppose that $f(x)=1$ and let $y_1,\ldots,y_r$ be chosen independently and uniformly from $\{0,1\}^{p(n)}$. For each $y$, $\mathbb{P}\left(y \not\in \bigcup_{i=1}^r A_x \oplus y_i \right) \le 2^{-rn}$, where $A_x \oplus y_i$ is pointwise mod 2 addition. So if we choose $r > \frac{p(n)}{n}$, this probability is $<2^{-p(n)}$, so $f(x) = 1 \implies \exists y_1,\ldots,y_r$ such that $\bigcup_{i=1}^r A_x \oplus y_i = \{0,1\}^{p(n)}$.
+    \vspace{1mm}
+     
+    Equivalently, ${f(x)=1 \implies \exists y_1,\ldots,y_r ~ ~\forall y \in \{0,1\}^{p(n)} ~ \exists i ~ g(x, y \oplus y_i) = 1}$.\\
+    But if $f(x)=0$, then $A_x$ has density $\le 2^{-n}$ and $r$ is polynomial in $n$, so it is (for sufficiently large $n$) not possible that $\bigcup_{i=1}^r A_x \oplus y_i = \{0,1\}^{p(n)}$, so the implication $\impliedby$ is a double implication $\iff$. Therefore $f \in \Sigma_2^P$. By symmetry of $\text{BPP}$, $f \in \Pi_2^P$.
+\end{proof}
+Major open problem: does $\text{BPP} = \text{P}$?
+
+\vspace{1mm}
+ 
+\textbf{\#P}. This is a class of \textbf{counting problems}. A function $f : \{0,1\}^* \to \mathbb{Z}_{\ge 0}$ belongs to \#P if there exists a polynomial $p$ and $g \in P$ such that for every $x \in \{0,1\}^*$, $f(x) = \left|\{y \in \{0,1\}^{p(\left|x\right|)} \mid g(x,y)=1\}\right|$. Note that if we can count solutions, we can detect whether solutions exist, so \#P is at least as hard as NP.
+
+\begin{example}
+    Input: a graph $G$. Output: the number of Hamilton cycles in $G$.
+\end{example}
+\begin{example}[Important example.]
+    Input: a bipartite graph with vertex sets of the same size. Output: the number of perfect matchings.
+    \vspace{1mm}
+     
+    If $G$ is such a graph with two copies of $[n]$ as its vertex sets, and if $A_{ij} = \begin{cases}
+        1& ij \in E(G),\\
+        0& \text{otherwise},
+    \end{cases}$
+    then the number of perfect matchings is \[
+    \sum_{\sigma \in S_n}^{} \prod_{i=1}^{n} A_{i \sigma(i)}. 
+    \]
+    This is called the \textbf{permanent} of the $n \times n$ matrix $A$. It is the ''determinant without signs''. It is an example of a problem which is in P when we're considering it as a decision problem, but is very difficult when considering it as a counting problem in \#P.
+\end{example}
+\vspace{1mm}
+ 
+\textbf{Algebraic complexity} is about building up multivariable polynomials using $+$ and $\times$. An \textbf{arithmetic circuit} is a DAG where each vertex is either an input, a $+$-gate, or a $\times$-gate. The inputs are constants from some given field $\mathbb{F}$ and variables $x_1,\ldots,x_n$. As with Booleans, we can talk instead about straight-line computations.
+\vspace{1mm}
+ 
+The \textbf{degree} of a circuit is defined inductively. The degree of an input vertex is 0 if it is a constant and 1 if it is a variable, the degree at a $+$-gate is the maximum of the degrees of its inputs and the degree of a $\times$-gate is the sum of the degrees of its inputs. 
+
+\vspace{1mm}
+ 
+\textbf{VP}. This is the class of families of polynomials $(p_n)$ such that $p_n$ can be computed by an arithmetic circuit of polynomial size and polynomial degree.
+\vspace{1mm}
+ 
+Notice the condition of polynomial degree here -- without this, $x^{2^n}$ would be in our class since we could compute it in linear time.
+\begin{example}
+    The determinant (of a matrix $(x_ij)_{i,j=1}^n$) is in VP. (The proof will be given later).
+\end{example}
+\vspace{1mm}
+ 
+\textbf{VNP}. A polynomial family $(f_n)$ is in VNP if there is a polynomial $p$ and a polynomial family $(g_n)$ in VP such that \[
+f_n(x) = \sum_{y = (y_1,\ldots,y_m) \in \{0,1\}^m}^{} g_m(x,y). 
+\]
+for $m = p(\# \text{ of variables in }x)$.
+\vspace{1mm}
+ 
+Exercise: the permanent is in VNP.
 
 \end{document}
