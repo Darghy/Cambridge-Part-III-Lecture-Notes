@@ -642,5 +642,191 @@ Exercise: Suppose $\mathfrak{p} \subset \mathcal{O}_K, \alpha \in \mathcal{O}_K$
 \begin{defn}
     This unique root of unity is called the $n^{\text{h}}$ power Legendre symbol, written $\left(\frac{\alpha}{\mathfrak{p}}\right)_n$.
 \end{defn}
+\marginpar{05 Feb 2024, Lecture 8}
+Let $K$ be a number field containing a primitive $n^{\text{th}}$ root of $\zeta$. Let $\alpha \in \mathcal{O}_K$ and $\mathfrak{p} \subset \mathcal{O}_K$ such that $n \alpha \not\in \mathfrak{p}$. We saw that there was a unique $n^{\text{th}}$ root of unity congruent to $\alpha^{(N(\mathfrak{p})-1)/n}$ mod $\mathfrak{p}$.
+\vspace{1mm}
+ 
+Next let $I \subset \mathcal{O}_K$ be an ideal prime to both $n$ and $\alpha$, then if $I = \mathfrak{p}_1\ldots \mathfrak{p}_r, $\[
+\left(\frac{\alpha}{I}\right)_n = \prod_{i=1}^{r} \left(\frac{\alpha}{\mathfrak{p}_i}\right).
+\]
+Let $\mathfrak{m}$ be a modulus containing all primes that contain $n \alpha$. Then we get a homomorphism $\left(\frac{\alpha}{\cdot }\right)_{n} : I_K(\mathfrak{m}) \to  \mu_n$ with $\mu_n \subset \mathbb{C}^\times$ the group of $n^{\text{th}}$ roots of unity. Let $L = K(\sqrt[n]{\alpha})$. Then $L/K$ is a Galois extension. If $\sigma \in \text{Gal}(L/K)$, then $\sigma(\sqrt[n]{\alpha}) = \zeta \sqrt[n]{\alpha}$ for some $n^{\text{th}}$ root of unity, i.e. we obtain an injective homomorphism $\text{Gal}(L/K) \hookrightarrow \mu_n$ by $\sigma \mapsto \zeta$.
+\vspace{1mm}
+ 
+\textbf{Exercises.} 1. Show that if $n \alpha \not\in \mathfrak{p}$, then $\mathfrak{p}$ is unramified in $L$.
+\vspace{1mm}
+ 
+2. Show that $\left(\frac{L/K}{\mathfrak{p}}\right)(\sqrt[n]{\alpha}) = \left(\frac{\alpha}{\mathfrak{p}}\right)_n \sqrt[n]{\alpha}$.
+
+\begin{theorem}[Weak reciprocity]
+    Let $K$ be a number field containing a primitive $n^{\text{h}}$ root of unity. Let $\alpha \in \mathcal{O}_K$ be nonzero and $L = K(\sqrt[n]{\alpha})$. Let $\mathfrak{m}$ be a modulus divisible by all primes of $K$ containing $n \alpha$, and assume that $\text{ker}(\Phi_{L/K,\mathfrak{m}})$ is a congruence subgroup. Then there is a commutative diagram $\begin{tikzcd}[]
+        I_K(\mathfrak{m}) & \text{Gal}(L/K)\\
+         & \mu_n
+        \arrow["\Phi_{L/K,\mathfrak{m}}", from=1-1, to=1-2]
+        \arrow["", from=1-2, to=2-2]
+        \arrow["\left(\frac{\alpha}{\cdot }\right)_n", from=1-1, to=2-2, swap]
+    \end{tikzcd}$. 
+    Let $G$ be the image of $\text{Gal}(L/K)$ in $\mu_n$, then $\left(\frac{\alpha}{\cdot }\right)_n$ induces a surjective homomorphism \[
+    \left(\frac{\alpha}{\cdot }\right)_n : I_K(\mathfrak{m})/P_K(\mathfrak{m}) \to G \subset \mu_n.
+    \]
+\end{theorem}
+\begin{proof}
+    Commutativity follows from the second exercise above. Based on our assumptions, we have $P_K(\mathfrak{m}) \subset \text{ker}(\Phi_{L/K,\mathfrak{m}}) \subset I_K(\mathfrak{m})$. So by the commutative diagram, $\left(\frac{\alpha}{\cdot }\right)_n$ induces a surjective homomorphism $$I_K(\mathfrak{m})/P_K(\mathfrak{m}) \to I_K(\mathfrak{m})/\text{ker}(\Phi_{L/K},\mathfrak{m}) \cong \text{Gal}(L/K) \to G \subset \mu_n.$$
+\end{proof}
+Strong reciprocity gives a formula for computing $\left(\frac{\alpha}{\cdot }\right)_n$ using Hilbert symbols. We can use Weak reciprocity to prove:
+\begin{theorem}[Quadratic reciprocity]
+    Let $p$ and $q$ be distinct odd primes. Then $\left(\frac{p}{q}\right)\left(\frac{q}{p}\right) = (-1)^{\frac{(p-1)(q-1)}{4}}$.
+\end{theorem}
+\begin{proof}
+    A series of exercises.
+\end{proof}
+\section{Characters, zeta functions and $L$--series}
+\textbf{Motivation.} In number theory, many arithmetic properties are captured in analytic objects.
+\subsection{Dirichlet series}
+\begin{defn}\label{defn2.1}
+    A \textbf{Dirichlet series} is a series of the form \[
+    f(s) = \sum_{n=1}^{\infty} \frac{a_n}{n^s}
+    \]
+    where $a_n \in \mathbb{C}$ and $s \in \mathbb{C}$.
+\end{defn}
+\begin{lemma}[Abel summation/Abel's lemma]\label{lemma2.2}
+    If $(a_n)$ and $(b_n)$ are sequences of complex numbers, then \[
+    \sum_{n=N}^{M} a_nb_n = \sum_{n=N}^{M-1} \left(\sum_{k=N}^{n} a_k\right)(b_n-b_{n+1}) + \left(\sum_{k=N}^{M} a_k \right)b_M. 
+    \]
+\end{lemma}
+\begin{proof}
+    Exercise.
+\end{proof}
+\textbf{Interlude}: Convergence review.
+\begin{itemize}
+    \item We say a series $\sum_{n=1}^{\infty} a_n$ of complex numbers converges to $L$ if the sequence of partial sums $(A_n)$ with $A_n = \sum_{k=1}^{n} a_k$ converges to $L$.
+    \item We say a series $\sum_{n=1}^{\infty} a_n$ of complex numbers converges absolutely if the series $\sum_{n}^{} \left|a_n\right|$ of nonnegative real numbers converges.
+    \item A sequence of complex functions $(f_n(z))$ is uniformly convergent on $S \subset \mathbb{C}$ if $\forall \epsilon>0 ~ \exists N \in \mathbb{N}$ such that if $n>N$, then $\left|f_n(z) - f(z)\right|<\epsilon ~\forall z \in S$. 
+    \item A series of complex functions $\sum_{n=1}^{\infty} f_n(z)$ converges on $S$ if for each $z_0 \in S$, $\sum_{n=1}^{\infty} f_n(z_0)$ converges as a series of complex numbers. It converges uniformly on $S$ if the sequence of partial sums $(A_n(z))$ converges uniformly on $S$.
+    \item An infinite product $\prod_{n}^{} a_n$ of nonzero complex numbers is absolutely convergent when the sum $\sum_{n}^{} \log a_n$ is, in which case $\prod_{n}^{} a_n = \exp (\sum_{n}^{} \log a_n)$.
+\end{itemize}
+\begin{theorem}\label{theorem2.3}
+    Let $(a_n)$ be a sequence of complex numbers. If $f(s) = \sum_{n=1}^{\infty} \frac{a_n}{n^s}$ converges for some $s=s_0$, then it converges for any $s \in \mathbb{C}$ with $\text{Re}(s)>\text{Re}(s_0)$. Moreover, it converges uniformly on every domain of the form $\{s \mid \text{Re}(s)>\text{Re}(s_0), \left|\text{Arg}(s-s_0)\right|\le \theta\}$ for $\theta < \frac{\pi}{2}$.\footnote{We also need that our domain is compact.}
+\end{theorem}
+\begin{proof}
+    Note that 
+    \begin{align*}
+        f(s) &= \sum_{n=1}^{\infty} \frac{1}{n^{s_0}}\frac{a_n}{n^{s-s_0}} \\
+        &= \sum_{n=1}^{\infty} \frac{\tilde{a}_n}{n^{s-s_0}},
+    \end{align*}
+    where $\tilde{a}_n = \frac{a_n}{n^{s_0}}$. We can assume $s_0 = 0$, so $\sum_{n=1}^{\infty} a_n$ converges. Let $\epsilon>0$. Since $\sum_{n=1}^{\infty} a_n$ converges, there is a sufficiently large number $N_0$ such that if $M>N\ge N_0$, then $\left|\sum_{n=N}^{M} a_n\right|<\epsilon$. Let $b_n = n^{-s}$ and apply Abel's lemma to get
+    \begin{align*}
+        \sum_{n=N}^{M} a_n n^{-s} = \sum_{n=N}^{M-1} \left(\sum_{k=N}^{n} a_k\right)\left(n^{-s} - (n+1)^{-s}\right) + \left(\sum_{n=N}^{M} a_n \right)M^{-s}. 
+    \end{align*}
+    We have 
+    \begin{align*}
+        \left|e^{-cs}-e^{-ds}\right| \le \left|s\right|\int_{c}^{d} e^{-t \text{\text{Re}(s)}}\mathrm{d}t = \frac{\left|s\right|}{\text{Re}(s)}\left(e^{-c \text{Re}(s)} - e^{-d \text{Re}(s)}\right)
+    \end{align*}
+    and $\frac{\left|s\right|}{\text{Re}(s)}$ is bounded by some $B$ in our domain $\text{Re}(s)>0$, and $\left|\text{Arg}(s)\right|<\theta$ for some $\theta < \frac{\pi}{2}$. Choosing $c = \log n$ and $d = \log (n+1)$ gives \[
+    \left|n^{-s} - (n+1)^{-s}\right| \le \frac{\left|s\right|}{\text{Re}(s)} \left(n^{-\text{Re}(s)} - (n+1)^{-\text{Re}(s)}\right) \le B(n^{-\text{Re}(s)}-(n+1)^{-\text{Re}(s)}).
+    \]
+    This gives
+    \begin{align*}
+        &\left|\sum_{n=N}^{M} a_n n^{-s}\right| \le \sum_{n=N}^{M-1} \left|\sum_{k=N}^{n} a_k\right| \left|n^{-s} - (n+1)^{-s}\right| + \left|\sum_{n=N}^{M} a_n\right| \left|M^{-s}\right| \\
+        \le & B \epsilon \sum_{n=N}^{M-1} \left(n^{-\text{Re}(s)} - (n+1)^{-\text{Re}(s)}\right) + \epsilon M^{-\text{Re}(s)}\\
+        \le & \epsilon(B+1)
+    \end{align*}
+    for $N,M$ large enough. The final part follows since any $s$ with $\text{Re}(s)>0$ is contained in a domain of the form $\{s \mid \text{Re}(s)>0, \left|\text{Arg}(s)\right|\le \theta\}$ for some $\theta < \frac{\pi}{2}$.
+\end{proof}
+\marginpar{07 Feb 2024, Lecture 9}
+\begin{cor}\label{cor2.4}
+    Let $f(s) =\sum_{}^{} a_n/n^s$ be a Dirichlet series.
+    \begin{enumerate}[(i)]
+        \item If the $a_n$ are bounded, then $f(s)$ converges absolutely for $\text{Re}(s)>1$.
+        \item If $f(s)$ converges at $s=s_0$, then it converges absolutely for $\text{Re}(s)>\text{Re}(s_0)+1$.
+    \end{enumerate}
+\end{cor}
+\begin{proof}
+    Exercise.
+\end{proof}
+\begin{defn}\label{defn2.5}
+    Suppose a Dirichlet series $\sum_{}^{} a_n/n^s$ converges for some $s$. Then the smallest real number $\sigma_0$ such that the series converges for $\text{Re}(s)>\sigma_0$ is called the \textbf{abscissa of convergence}.
+\end{defn}
+\begin{theorem}\label{theorem2.6}
+    Assume there exists a number $C$ and $\sigma_1\ge 0$ such that $\left|A_n\right|=\left|a_1+\ldots+a_n\right|\le Cn^{\sigma_1} ~\forall n$. Then the abscissa of convergence of $\sum_{}^{} a_n/n^s$ is $\le \sigma_1$.
+\end{theorem}
+\begin{proof}
+    We omit this. See e.g. \textit{Algebraic Number Theory} by Lang for the proof.
+\end{proof}
+\subsection{Riemann zeta function}
+\begin{defn}\label{defn2.7}
+    Let $s \in \mathbb{C}$ with $\text{Re}(s)>1$. Then the Riemann zeta function is \[
+    \zeta(s) = \sum_{n=1}^{\infty} \frac{1}{n^s}.
+    \]
+    By Theorem \ref{theorem2.6}, we have $\sigma_1=1$, so we know $\zeta(s)$ converges for $\text{Re}(s)>1$.
+\end{defn}
+We will extend $\zeta(s)$ meromorphically to $\text{Re}(s)>0$. Recall first that a function is (complex) analytic on some open $S \subset \mathbb{C}$ if for any $z_0 \in S$, we can write $f(z) = \sum_{n=0}^{\infty} a_n(z-z_0)^n$, where $a_n \in \mathbb{C}$ and the series converges to $f(z)$ for $z$ in a neighborhood of $z_0$. This is equivalent to being holomorphic.
+\vspace{1mm}
+ 
+A function is meromorphic on $S \subset \mathbb{C}$ if it is holomorphic on all of $S$, except for a set of isolated points called poles. If $f$ is meromorphic, a pole of $f$ is a zero of $\frac{1}{f}$. Suppose $z_0$ is a pole, then for some integer $n$, $(z-z_0)^nf(z)$ is holomorphic and nonzero in a neighborhood of $z_0$, and then $z_0$ is a pole of order $n$. If $n=1$, then $z_0$ is called a simple pole and the residue is $\text{Res}(f,z_0) = \lim_{z \to z_0}(z-z_0)f(z)$.
+
+\vspace{1mm}
+ 
+If $f$ is a meromorphic/analytic function defined on some open $S \subset \mathbb{C}$ with $S \subset T$, $T \subset \mathbb{C}$ open, and $F$ is a meromorphic/analytic function defined on $T$ such that $F(z)=f(z) ~\forall z \in S$, then $F$ is called a meromorphic/analytic continuation of $f$.
+\begin{theorem}\label{theorem2.8}
+    The Riemann zeta function $\zeta(s)$ has a meromorphic continuation to $\text{Re}(s)>0$ with a simple pole at $s=1$ with residue equal to 1. If $\delta>0$, then the series $\sum_{n=1}^{\infty} 1/n^s$ converges absolutely in the region $\text{Re}(s)\ge 1+\delta$.
+\end{theorem}
+(In fact, the Riemann zeta function is analytic for $\text{Re}(s)>0$ except for the simple pole at $s=1$.)
+\begin{proof}
+    Let $s>1$ be real. Then 
+    \begin{align*}
+        \frac{1}{s-1} \le \int_{1}^{\infty} \frac{1}{x^s} \mathrm{d}x \le \zeta(s) \le 1 + \frac{1}{s-1},
+    \end{align*}
+    so for $s>1$, $1\le (s-1)\zeta(s) \le s$ and so $\lim_{s \to 1} (s-1)\zeta(s)=1$. If we continue/extend $\zeta(s)$, we see that $\zeta(s)$ has a simple pole at $s=1$ with residue 1.
+    \vspace{1mm}
+     
+    To continue $\zeta(s)$, consider the alternating Riemann zeta function \[
+    \zeta_2(s) = \sum_{n=1}^{\infty} \frac{(-1)^{n+1}}{n^s} = 1 - \frac{1}{2^s} + \frac{1}{3^s} - \ldots.
+    \]
+    Since the partial sums of the coefficients are 1 or 0, they are bounded, hence by Theorem \ref{theorem2.6}, this converges for $\text{Re}(s)>0$. We have 
+    \begin{align*}
+        &\frac{2}{2^s}\zeta(s) + \zeta_2(s) = \zeta(s) \\
+        \implies & \zeta(s) = \zeta_2(s) \left(1-\frac{1}{2^{s-1}}\right)^{-1}.
+    \end{align*}
+    This gives us an analytic continuation to the line $\text{Re}(s)=0$. We show there are no poles except at $s=1$. From our expression for $\zeta_2(s)$, we see the only possible poles other than $s=1$ satisfy $1-2^{1-s}=0 \iff 2^{s-1}=1 \iff s = \frac{2\pi i n}{\log 2}+1$ for some integer $n$. Consider for $r=2,3,\ldots$ the function \[
+    \zeta_r(s) = \frac{1}{1^s} + \frac{1}{2^s} + \ldots + \frac{1}{(r-1)^s} - \frac{r-1}{r^s} + \frac{1}{(r+1)^s},
+    \]
+    e.g. for $r=3$ we get
+    \[
+    \zeta_3(s) = \sum_{n=0}^{\infty} \frac{1}{(3n+1)^3} + \frac{1}{(3n+2)^3} - \frac{2}{(3n+3)^3}. 
+    \]
+    The partial sums of the coefficients are bounded by $r$, so $\zeta_r(s)$ converges for $\text{Re}(s)>0$ by Theorem \ref{theorem2.6}. We have 
+    \begin{align*}
+        &\zeta(s) = \frac{\zeta_r(s)}{1-\frac{1}{r^{s-1}}} \\
+        \implies & \zeta(s) = \frac{\zeta_3(s)}{1-3^{1-s}},
+    \end{align*}
+    so the only poles occur when $3^{s-1}=1 \iff s = \frac{2\pi i m}{\log 3}+1$ for some integer $m$. Hence at any such pole we need $3^n = 2^m$, so $n=m=0$.
+\end{proof}
+\begin{theorem}\label{theorem2.9}
+    Let $(a_n)$ be a sequence of complex numbers and let $A_n = a_1 + \ldots + a_n$. Let $0 \le \sigma_1 \le 1$ and assume there is $z_0 \in \mathbb{C}$ and a constant $C>0$ such that for all $n$, $\left|A_n - n z_0\right|\le Cn^{\sigma_1}$. Then $f(s) = \sum_{n=1}^{\infty} a_n/n^s$ (defined say for $\text{Re}(s)>1$) has an analytic continuation to $\text{Re}(s)>\sigma_1$ where it is analytic, except for a simple pole with residue $z_0$ at $s=1$. 
+\end{theorem}
+\begin{proof}
+    Consider $f(s)-z_0\zeta(s)$ and apply Theorem \ref{theorem2.6} and Theorem \ref{theorem2.8}.
+\end{proof}
+\begin{prop}\label{prop2.10}
+    We have \[
+    \zeta(s) = \prod_{p}^{} \frac{1}{1-p^{-s}}.
+    \]
+\end{prop}
+\begin{proof}
+    We write $E(s) = \prod_{p}^{} \frac{1}{1-p^{-s}}$, then $\log E(s) = \sum_{p}^{} \sum_{n=1}^{\infty} \frac{1}{np^{ns}}$. Let $\text{Re}(s)>1+\delta$. Then $\left|p^{ns}\right| = p^{n \text{Re}(s)} \ge p^{(1+\delta)n}$, so
+    \[
+    \sum_{p}^{} \sum_{n=1}^{\infty} \left(\frac{1}{p^{1+\delta}}\right)^n = \sum_{p}^{} \frac{1}{p^{1+\delta}-1} \le 2\sum_{p}^{} \frac{1}{p^{1+\delta}}
+    \]
+    which converges, so the series $E(s)$ converges absolutely. We need to show equality, so again use $\frac{1}{1-p^{-s}}= 1 + p^{-s} + p^{-2s} + \ldots$. Fix $N \in \mathbb{N}$ and let $p_1,\ldots,p_r$ be the primes less than $N$. Then 
+    \begin{align*}
+        \prod_{p\le N}^{}\frac{1}{1-p^{-s}} = \prod_{v_1,\ldots,v_r\ge 0}^{\infty} \frac{1}{(p_1^{v_1}\ldots p_r^{v_r})^s} = \sum_{n}^{'} \frac{1}{n^s} 
+    \end{align*}
+    where $\Sigma'$ denotes the sum over all natural numbers only divisible by primes $p\le N$. It contains all $n\le N$, so 
+    \begin{align*}
+        &\prod_{p\le N}^{} \frac{1}{1-r^{-s}} = \sum_{n\le N}^{} \frac{1}{n^s}  + \sum_{n>N}^{'} \frac{1}{n^s} \\
+        \implies & \left|\prod_{p\le N}^{} \frac{1}{1-r^{-s}} - \zeta(s)\right| \le \left|\sum_{n>N, p_i \nmid n}^{} \frac{1}{n^s}\right|\le \sum_{n>N}^{} \frac{1}{n^{1+\delta}} \stackrel{N \to \infty}{\to} 0. 
+        \qedhere
+    \end{align*}
+\end{proof}
 
 \end{document}
