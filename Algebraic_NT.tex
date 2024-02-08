@@ -752,7 +752,7 @@ Strong reciprocity gives a formula for computing $\left(\frac{\alpha}{\cdot }\ri
 \begin{proof}
     We omit this. See e.g. \textit{Algebraic Number Theory} by Lang for the proof.
 \end{proof}
-\subsection{Riemann zeta function}
+\subsection{The Riemann zeta function}
 \begin{defn}\label{defn2.7}
     Let $s \in \mathbb{C}$ with $\text{Re}(s)>1$. Then the Riemann zeta function is \[
     \zeta(s) = \sum_{n=1}^{\infty} \frac{1}{n^s}.
@@ -776,7 +776,7 @@ If $f$ is a meromorphic/analytic function defined on some open $S \subset \mathb
     \begin{align*}
         \frac{1}{s-1} \le \int_{1}^{\infty} \frac{1}{x^s} \mathrm{d}x \le \zeta(s) \le 1 + \frac{1}{s-1},
     \end{align*}
-    so for $s>1$, $1\le (s-1)\zeta(s) \le s$ and so $\lim_{s \to 1} (s-1)\zeta(s)=1$. If we continue/extend $\zeta(s)$, we see that $\zeta(s)$ has a simple pole at $s=1$ with residue 1.
+    so for $s>1$, $1\le (s-1)\zeta(s) \le s$ and so $\lim_{s \to 1^+} (s-1)\zeta(s)=1$. If we show that we can continue (i.e. extend) $\zeta(s)$, we can conclude that $\zeta(s)$ has a simple pole at $s=1$ with residue 1.
     \vspace{1mm}
      
     To continue $\zeta(s)$, consider the alternating Riemann zeta function \[
@@ -788,7 +788,7 @@ If $f$ is a meromorphic/analytic function defined on some open $S \subset \mathb
         \implies & \zeta(s) = \zeta_2(s) \left(1-\frac{1}{2^{s-1}}\right)^{-1}.
     \end{align*}
     This gives us an analytic continuation to the line $\text{Re}(s)=0$. We show there are no poles except at $s=1$. From our expression for $\zeta_2(s)$, we see the only possible poles other than $s=1$ satisfy $1-2^{1-s}=0 \iff 2^{s-1}=1 \iff s = \frac{2\pi i n}{\log 2}+1$ for some integer $n$. Consider for $r=2,3,\ldots$ the function \[
-    \zeta_r(s) = \frac{1}{1^s} + \frac{1}{2^s} + \ldots + \frac{1}{(r-1)^s} - \frac{r-1}{r^s} + \frac{1}{(r+1)^s},
+    \zeta_r(s) = \frac{1}{1^s} + \frac{1}{2^s} + \ldots + \frac{1}{(r-1)^s} - \frac{r-1}{r^s} + \frac{1}{(r+1)^s} + \ldots,
     \]
     e.g. for $r=3$ we get
     \[
@@ -823,8 +823,8 @@ If $f$ is a meromorphic/analytic function defined on some open $S \subset \mathb
     \end{align*}
     where $\Sigma'$ denotes the sum over all natural numbers only divisible by primes $p\le N$. It contains all $n\le N$, so 
     \begin{align*}
-        &\prod_{p\le N}^{} \frac{1}{1-r^{-s}} = \sum_{n\le N}^{} \frac{1}{n^s}  + \sum_{n>N}^{'} \frac{1}{n^s} \\
-        \implies & \left|\prod_{p\le N}^{} \frac{1}{1-r^{-s}} - \zeta(s)\right| \le \left|\sum_{n>N, p_i \nmid n}^{} \frac{1}{n^s}\right|\le \sum_{n>N}^{} \frac{1}{n^{1+\delta}} \stackrel{N \to \infty}{\to} 0. 
+        &\prod_{p\le N}^{} \frac{1}{1-p^{-s}} = \sum_{n\le N}^{} \frac{1}{n^s}  + \sum_{n>N}^{'} \frac{1}{n^s} \\
+        \implies & \left|\prod_{p\le N}^{} \frac{1}{1-p^{-s}} - \zeta(s)\right| \le \left|\sum_{n>N, p_i \nmid n}^{} \frac{1}{n^s}\right|\le \sum_{n>N}^{} \frac{1}{n^{1+\delta}} \stackrel{N \to \infty}{\to} 0. 
         \qedhere
     \end{align*}
 \end{proof}
