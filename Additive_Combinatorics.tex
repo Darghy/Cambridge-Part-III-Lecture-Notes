@@ -640,9 +640,10 @@ We first prove a technical lemma using a method called ''dependent random choice
     (and $\left|A''+A''\right|$ follows from Plünnecke).
 \end{proof}
 \section{Probabilistic tools}
-\begin{prop}[Khintchine's inequality]
+\textbf{Remark.} Assume in this chapter that all our probability spaces are finite, so we don't need to worry about convergence issues.
+\begin{prop}[Khintchine's inequality]\label{prop3.1}
     Let $X_1,X_2,\ldots,X_n$ be independent random variables taking values $\pm x_i$ with probability $\frac{1}{2} ~\forall i=1,\ldots,n$. Then $\forall p \in [2,\infty)$, \[
-    ||\sum_{i=1}^{n} X_i||_p = O \left(p^{1/2}\left(\sum_{i=1}^{n} ||X_i||_2^2\right)^{1/2}\right)
+    ||\sum_{i=1}^{n} X_i ||_{L^p(\mathbb{P})} = O \left(p^{1/2}\left(\sum_{i=1}^{n} ||X_i||_{L^2(\mathbb{P})}^2\right)^{1/2}\right)
     \]
 \end{prop}
 \begin{proof}
@@ -653,8 +654,65 @@ We first prove a technical lemma using a method called ''dependent random choice
     \begin{align*}
         ||X||_{2k}^{2k} = \int_{0}^{\infty} 2k t^{2k-1}\mathbb{P}\left(\left|X\right|\ge t\right)\mathrm{d}t \le 8k \underbrace{\int_{0}^{\infty} t^{2k-1}\exp(-t^2/4)\mathrm{d}t}_{:=I(k)}.
     \end{align*}
-    We shall prove by induction that $I(k) \le C^{2k}(2k)^k/4k$.
+    We shall prove by induction that $I(k) \le C^{2k}(2k)^k/4k$ for some constant $C>0$. For $k=1$, 
+    \begin{align*}
+        \int_{0}^{\infty} t \exp \left(-t^2/4\right) \mathrm{d}t = [-2\exp \left(-t^2/4\right)]_0^{\infty} = 2 \le C^2\frac{2}{4} 
+    \end{align*}
+    for $C \ge 2$. For $k>1$, we have 
+    \begin{align*}
+        I(k) &= \int_{0}^{\infty}  t^{2k-2} \cdot t \exp \left(-t^2/4\right) \mathrm{d}t \\
+        &= [t^{2k-2}(-2)\exp \left(-t^2/4\right)]_0^\infty - \int_{0}^{\infty} (2k-2)t^{2k-3}(-2)\exp \left(-t^2/4 \right)\mathrm{d}t \\
+        &= 4(k-1)\int_{0}^{\infty} t^{2(k-1)-1} \exp(-t^2/4)\mathrm{d}t \\
+        &= 4(k-1)I(k-1) \\
+        &\le 4(k-1) C^{2(k-1)}\frac{(2(k-1))^{k-1}}{4(k-1)} \\
+        &\le C^{2k}\frac{(2k)^k}{4k}
+    \end{align*}
+    for some $C$, where $C\ge \sqrt{2}$ is claimed to work.
 \end{proof}
-
+\begin{cor}[Rudin's inequality]\label{cor3.2}
+    Let $\Lambda \subset \widehat{\mathbb{F}_2^n}$ be a linearly independent set and let $p \in [2,\infty)$. Then $\forall \widehat{f} \in \ell^2(\Lambda)$, i.e. $\widehat{f} : \Lambda \to \mathbb{C}$,
+    \[
+    ||\sum_{\gamma \in \Lambda}^{} \widehat{f}(\gamma)\gamma ||_{L^p(\mathbb{F}_2^n)} = O \left(\sqrt{p} ||\widehat{f}||_{\ell^2(\Lambda)}\right)
+    \]
+\end{cor}
+\textbf{Remark.} Note that here the LHS uses $L^p$ for the normalized counting measure (i.e. $\mathbb{E}$), while the RHS uses $\ell^2$ for the counting measure (i.e. $\sum_{}^{} $). In other words, these are the same, except one is normalized. 
+\begin{cor}[Dual form of Rudin's inequality]\label{cor3.3}
+    Let $\Lambda \subset  \widehat{\mathbb{F}_2^n}$ be linearly independent and let $p \in (1,2]$. Then $\forall f \in L^p (\mathbb{F}_2^n)$, \[
+    ||\widehat{f}||_{\ell^2(\Lambda)} = O \left(\sqrt{\frac{p}{p-1}} ||f||_{L^p(\mathbb{F}_2^n)}\right).
+    \]
+\end{cor}
+\begin{proof}
+    Let $f \in L^p(\mathbb{F}_2^n)$ and write $g = \sum_{\gamma \in \Lambda}^{} \widehat{f}(\gamma)\gamma$. Then, as $g$ has the same Fourier coefficients as $f$,
+    \begin{align*}
+        ||\widehat{f}||_{\ell^2(\Lambda)}^2 = \sum_{\gamma \in \Lambda}^{} \left|\widehat{f}(\gamma)\right|^2 = \sum_{\gamma \in \Lambda} \widehat{f}(\gamma)\overline{\widehat{g}(\gamma)} = \langle \widehat{f},\widehat{g} \rangle_{\ell^2(\mathbb{F}_2^n)} = \langle f,g \rangle_{L^2(\mathbb{F}_2^n)},
+    \end{align*}
+    but by Hölder, $\langle f,g \rangle_{L^2(\mathbb{F}_2^n)} \le ||f||_{L^p(\mathbb{F}_2^n)}||g||_{L^{p'}(\mathbb{F}_2^n)}$, where $\frac{1}{p} + \frac{1}{p'} = 1$. By Rudin's inequality for $p' = \frac{p}{p-1}$, we get \[
+    ||g||_{L^{p'}(\mathbb{F}_2^n)} = O \left(\sqrt{p'} ||\widehat{g}||_{\ell^2(\Lambda)}\right) = O \left(\sqrt{\frac{p}{p-1}}||\widehat{f}||_{\ell^2(\Lambda)} \right),
+    \]
+    so 
+    \begin{align*}
+        &||\widehat{f}||^2_{\ell^2(\Lambda)} = ||f||_{L^p(\mathbb{F}_2^n)} O \left(\sqrt{\frac{p}{p-1}} ||\widehat{f}||_{\ell^2(\Lambda)}\right) \\
+        \implies & ||\widehat{f}||_{\ell^2(\Lambda)} = O \left(\sqrt{\frac{p}{p-1}} ||f||_{L^p(\mathbb{F}_2^n)}\right).
+        \qedhere
+    \end{align*}
+\end{proof}
+Recall that given $A \subset \mathbb{F}_2^n$ of density $\alpha>0$, $\left|\text{Spec}_{\rho}(1_A)\right| \le \rho^{-2}\alpha^{-1}$. This is the best possible, as the example of a subspace $H \le \mathbb{F}_2^n$ shows $\text{Spec}_1(1_H) = H^\perp$, so $\left|\text{Spec}_1(1_H)\right| = \left|H^\perp\right| = \frac{\left|\mathbb{F}_2^n\right|}{\left|H\right|} = \left(\frac{\left|H\right|}{\left|\mathbb{F}_2^n\right|}\right)^{-1} = \alpha^{-1}$.
+\begin{theorem}[Special case of Chen's theorem]\label{theorem3.4}
+    LEt $A \subset \mathbb{F}_2^n$ with density $\alpha>0$. Then $\forall \rho>0$, there exists a subspace $H \le \mathbb{F}_2^n$ of dimension at most $O \left(\rho^{-2} \log \alpha^{-1}\right)$ such that $\text{Spec}_{\rho}(1_A) \subset H$.
+\end{theorem}
+\begin{proof}
+    Let $\Lambda \subset \text{Spec}_{\rho}(1_A)$ be a maximal linearly independent subset of $\text{Spec}_{\rho}(1_A)$ and let $H = \langle \text{Spec}_\rho (1_A)\rangle$. Then $\text{dim}(H) = \left|\Lambda\right|$. By dual Rudin (Corollary \ref{cor3.3}), $\forall p \in (1,2]$,
+    \begin{align*}
+        (\rho \alpha)^2 \left|\Lambda\right| \le \sum_{\gamma \in \Lambda}^{} \left|\widehat{1_A}(\gamma)\right|^2 = ||\widehat{1_A}||^2_{\ell^2(\Lambda)} = O \left( \frac{p}{p-1} ||1_A||^2_{L^p(\mathbb{F}_2^n)}\right).
+    \end{align*}
+    We can explicitly compute 
+    \begin{align*}
+        ||1_A||^2_{L^p(\mathbb{F}_2^n)} = \left(\mathbb{E}_y |1_A(y)|^p \right)^{2/p} = \alpha^{2/p}.
+    \end{align*}
+    Thus $\left|\Lambda\right| \le \rho^{-2}\alpha^{-2} O \left(\frac{p}{p-1} \alpha^{2/p}\right)$. We want to choose $p$ very close to 1, so choose $p = 1 + \left(\log \alpha ^{-1}\right)^{-1}$ to conclude that \[
+    \left|\Lambda\right|\le O \left(\rho^{-2}\log \alpha^{-1} \right)
+    \]
+    (calculation details omitted).
+\end{proof}
 
 \end{document}
