@@ -828,5 +828,123 @@ If $f$ is a meromorphic/analytic function defined on some open $S \subset \mathb
         \qedhere
     \end{align*}
 \end{proof}
+\marginpar{09 Feb 2024, Lecture 10}
+\textbf{Remark.} If a Dirichlet series is convergent on some half plane $\text{Re}(s)>\sigma_0$, then it defines an analytic function on this half plane. This follows from Theorem \ref{theorem2.3}.
+\begin{defn}\label{defn2.11}
+    The \textbf{gamma function} is the absolutely convergent integral \[
+    \Gamma(s) = \int_{0}^{\infty} e^{-y}y^s \frac{\mathrm{d}y}{y},
+    \]
+    defined for $\text{Re}(s)>0$.
+\end{defn}
+\begin{prop}\label{prop2.12}
+    \begin{enumerate}[(i)]
+        \item The gamma function is analytic and admits a meromorphic continuation to all of $\mathbb{C}$.
+        \item The gamma function is nowhere zero and only has simple poles at $s = -n, n = 0,1,2,\ldots$ with residues $\frac{(-1)^n}{n!}$.
+        \item We have the functional equations
+        \begin{itemize}
+            \item $\Gamma(s+1)=s \Gamma(s)$,
+            \item $\Gamma(s) \Gamma(s-1) = \frac{\pi}{\sin(\pi s)}$,
+            \item $\Gamma(s) \Gamma\left(s+\frac{1}{2}\right) = \frac{2\sqrt{\pi}}{2^{2s}}\Gamma(2s)$.
+        \end{itemize}
+        \item The gamma function has special values 
+        \begin{itemize}
+            \item $\Gamma \left(\frac{1}{2}\right) = \sqrt{\pi}$,
+            \item $\Gamma(1)=1$,
+            \item $\Gamma(k+1) = k! ~\forall k \in \mathbb{Z}_{\ge 0}$.
+        \end{itemize}
+    \end{enumerate}
+\end{prop}
+\begin{proof}
+    Omitted.
+\end{proof}
+We use $\Gamma(s)$ to complete the Riemann zeta function. For $\Gamma(s) = \int_{0}^{\infty} e^{-y}y^s \frac{\mathrm{d}y}{y}$, substitue $y \mapsto \pi n^2y$ to get \[
+\pi^{-s}\Gamma(s)\frac{1}{n^{2s}} = \int_{0}^{\infty} e^{-\pi n^2 y} y^s \frac{\mathrm{d}y}{y}
+\]
+and summing over all $n$ gives 
+\begin{align*}
+    \pi^{-s}\Gamma(s)\zeta(2s) = \int_{0}^{\infty} \sum_{n=1}^{\infty} e^{-\pi n^2 y} y^s \frac{\mathrm{d}y}{y}.
+\end{align*}
+Note we can swap the order of the ingral and the sum, since \[
+\sum_{n=1}^{\infty} \int_{0}^{\infty} \left|e^{-\pi n^2 y}y^s\right|\frac{\mathrm{d}y}{y} = \sum_{n=1}^{\infty} \int_{0}^{\infty} e^{-\pi n^2 y}y^{\text{Re}(s)}\frac{\mathrm{d}y}{y} = \pi^{-\text{Re}(s)}\Gamma(\text{Re}(s))\zeta(2\text{Re}(s))
+\]
+for $\text{Re}(s)>1$.
+\begin{defn}\label{defn2.13}
+    The function \[
+    Z(s) = \pi^{-s/2}\Gamma \left(\frac{s}{2}\right) \zeta(s)
+    \]
+    is called the \textbf{complete zeta function}.
+\end{defn}
+\begin{defn}\label{defn2.14}
+    Let $\theta(z) = \sum_{n \in \mathbb{Z}} e^{\pi i n^2 z}$ be the \textbf{Jacobi theta series}.
+\end{defn}
+\begin{prop}\label{prop2.15}
+    The series $\theta(z)$ is analytic on $\mathfrak{h} = \{z \in \mathbb{C} \mid \text{Im}(z)>0\}$ and satisfies $\theta \left(-\frac{1}{z}\right) = \sqrt{\frac{z}{i}}\theta(z)$, where $\sqrt{\frac{z}{i}} = e^{\frac{1}{2}\log(z/i)}$.
+\end{prop}
+\begin{proof}
+    Omitted.
+\end{proof}
+\begin{prop}\label{prop2.16}
+    We have $Z(s) = \frac{1}{2}\int_{0}^{\infty} \left(\theta(iy)-1\right) y^{s/2} \frac{\mathrm{d}y}{y}$.
+\end{prop}
+\begin{proof}
+    Follows from the above and the fact that $\theta(z) = 1 + 2 \sum_{n=1}^{\infty} e^{\pi i n^2 z}$.
+\end{proof}
+\begin{defn}\label{defn2.17}
+    Let $f : \mathbb{R}_+ \to \mathbb{C}$ be a continuous function (here $\mathbb{R}_+$ is the group of positive real numbers). Then the \textbf{Mellin transform} is the improper integral \[
+    M(f,s) = \int_{0}^{\infty} (f(y)-f(\infty))y^s \frac{\mathrm{d}y}{y} 
+    \]
+    provided that the limit $f(\infty) = \lim_{y \to \infty}f(y)$ and the integral exist.
+\end{defn}
+\begin{theorem}[Mellin principle]\label{theorem2.18}
+    Let $f,g : \mathbb{R}_+ \to \mathbb{C}$ be continuous such that $f(y) = a_0 + O(e^{-c_0 y^{\alpha}})$ and $g(y) = b_0 + O(e^{-c_0 y^{\alpha}})$ with $c_0, \alpha$ positive constants. If $f \left(\frac{1}{y}\right) = Cy^k g(y)$ for some real $k>0$ and some $0 \neq C \in \mathbb{C}$, then:
+    \begin{enumerate}[(i)]
+        \item The integrals $M(f,s)$ and $M(g,s)$ converge absolutely and uniformly for $s$ in a compact subset of $\{s \in \mathbb{C} \mid  \text{Re}(s)>k\}$ and admit holomorphic continuations to $\mathbb{C} \setminus  \{0,k\}$.
+        \item The integrals have simple poles at $s=0$ and $s=k$ such that 
+        \begin{align*}
+            &\text{Res}_{s=0} M(f,s) = - a_0 &\text{Res}_{s=k} M(f,s) = C b_0\\
+            &\text{Res}_{s=0} M(g,s) = b_0 &\text{Res}_{s=k} M(g,s) = C^{-1} a_0.
+        \end{align*}
+        \item We have $M(f,s) = C M(f,k-s)$.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    Omitted.
+\end{proof}
+\begin{theorem}\label{theorem2.19}
+    The completed zeta function $Z(s)$ admits an analytic continuation to $\mathbb{C}\setminus \{0,1\}$. It has simple poles at $s=0$ and $s=1$ with residues $-1$ and $1$, and satisfies the functional equation $Z(s)=Z(1-s)$.
+\end{theorem}
+\begin{proof}
+    By Proposition \ref{prop2.16} and Definition \ref{defn2.17}, we have $Z(2s) = M(f,s)$ for $f(y) = \frac{1}{2\theta(iy)}$. Note $\theta(iy) = 1 + 2e^{-\pi y}(1+ \sum_{n=2}^{\infty} e^{-\pi(n^2-1)y})$, so we have $f(y) =\frac{1}{2} + O(e^{-\pi y})$. By Proposition \ref{prop2.15}, we have $$f \left(\frac{1}{y}\right) = \frac{1}{2}\theta(\frac{-1}{iy}) = \frac{1}{2}y^{1/2}\theta(iy) = y^{1/2}f(y).$$ So by the Mellin principle, $M(f,s)$ has a holomorphic continuation to $\mathbb{C}\setminus \left\{0,\frac{1}{2}\right\}$ with simple poles at $0$ and $\frac{1}{2}$ with residues $\frac{1}{2}$ and $-\frac{1}{2}$, and $M(f,s) = M(f,\frac{1}{2}-s)$. 
+    
+    \vspace{1mm}
+     
+    Hence $Z(s) = M\left(f,\frac{s}{2}\right)$ has a holomorphic continuation to $\mathbb{C} \setminus \{0,1\}$ with simple poles at $s=0$ and $s=1$ with residues $-1$ and $1$, and we obtain $Z(s) = M\left(f,\frac{s}{2}\right) = M \left(f, \frac{1-s}{2}\right) = Z(1-s)$.
+\end{proof}
+\begin{cor}\label{cor2.20}
+    The function $\zeta(s)$ admits an analytic continuation to $\mathbb{C} \setminus \{1\}$, has a simple pole at $s=1$ with residue 1 and satisfies $$\zeta(1-s) = 2 (2\pi)^{-s}\Gamma(s) \sin \left(\frac{\pi s}{2}\right) \zeta(s).$$
+\end{cor}
+\begin{proof}
+    Recall $z(s) = \pi^{-s/2}\Gamma \left(\frac{s}{2}\right)\zeta(s)$, which has a simple pole at $s=0$ and so does $\Gamma \left(\frac{s}{2}\right)$, hence $\zeta(s)$ has no pole at 0. At $s=1$, $Z(s)$ has a simple pole and $\Gamma \left(\frac{s}{2}\right)$ does not, so $\zeta(s)$ does. Now $$\text{Res}_{s=1}\zeta(s) = \pi^{1/2}\Gamma \left(\frac{1}{2}\right)^{-1} \text{Res}_{s=1}Z(s) = 1$$ by Theorem \ref{theorem2.19}. Now from the functional equation from Theorem \ref{theorem2.18}, \[
+    \zeta(1-s) \stackrel{(\dagger)}{=} \pi^{\frac{1}{2}-s}\frac{\Gamma \left(\frac{s}{2}\right)}{\Gamma \left(\frac{1-s}{2}\right)} \zeta(s).
+    \]
+    By Proposition \ref{prop2.12}, we have \begin{align*}
+        &\Gamma \left(\frac{s}{2}\right) \Gamma \left(\frac{1+s}{2}\right) = \frac{2\sqrt{\pi}}{2^s}\Gamma(s),\\
+        &\Gamma \left(\frac{1-s}{2}\right) \Gamma \left(\frac{1+s}{2}\right) = \frac{\pi}{\sin \left(\frac{\pi s}{2}\right)},\\
+        \implies & \frac{\Gamma \left(\frac{s}{2}\right)}{\Gamma \left(\frac{1-s}{2}\right)} = \frac{2}{2^s \sqrt{\pi}}\sin \left(\frac{\pi s}{2}\right) \Gamma(s).
+    \end{align*}
+    Insert this into $(\dagger)$ to get our result, i.e. 
+    \begin{align*}
+        \zeta(1-s) = 2 (2\pi)^{-s}\Gamma(s) \sin \left(\frac{\pi s}{2}\right) \zeta(s).
+    \end{align*}
+\end{proof}
+What about the zeroes of $\zeta(s)$? We have that 
+\begin{itemize}
+    \item $\zeta(s) \neq 0$ for $\text{Re}(s)>1$.
+    \item For $\text{Re}(s)<0$, we have trivial zeroes at $s=-2,-4,-6,\ldots$.
+    \item Any other zeroes have to lie in the critical strip $0\le \text{Re}(s)\le 1$.
+\end{itemize}
+The Riemann hypothesis says that all the nontrivial zeroes of $\zeta(s)$ lie on the line $\text{Re}(s) = \frac{1}{2}$.
+
+
 
 \end{document}
