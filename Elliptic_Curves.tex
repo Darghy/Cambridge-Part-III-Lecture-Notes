@@ -257,17 +257,17 @@ Suppose $P \in C_1, Q \in C_2$ and $\phi : P \mapsto Q$. Let $t \in K(C_2)$ be a
     Let $\phi : C_1 \to C_2$ be a nonconstant morphism of smooth projective curves. Then \[
     \sum_{P \in \phi^{-1}(Q)}^{} e_{\phi}(P) = \deg \phi ~\forall  Q \in C_2.
     \]
-    Moreover, if $\phi$ is separable, then $e_{\phi}(P)=1$ for all but infitely many $P \in C_1$.
+    Moreover, if $\phi$ is separable, then $e_{\phi}(P)=1$ for all but finitely many $P \in C_1$.
 \end{theorem}
 We don't prove this.
 \vspace{1mm}
  
 In particular, this shows that:
-\begin{itemize}
+\begin{enumerate}[(i)]
     \item $\phi$ is surjective (very important here that we're in $\overline{K}$).
     \item $|\phi^{-1}(Q)|\le \deg \phi$.
     \item If $\phi$ is separable, then equality holds in (ii) for all but finitely many points $Q \in C_2$.
-\end{itemize}
+\end{enumerate}
 \textbf{Important remark.} Let $C$ be an algebraic curve. A rational map is given by 
 \begin{align*}
     C &\to \mathbb{P}^n \\
@@ -804,7 +804,7 @@ As a consequence of Riemann--Roch, we have that if $0 \neq \omega \in \Omega_C$,
 \begin{defn}
     For $\phi, \psi \in \text{End}(E) = \text{Hom}(E,E)$, we put $\langle \phi, \psi \rangle = \text{deg}(\phi+\psi)-\text{deg}(\phi)-\text{deg}(\psi)$ and $\text{tr}(\phi) = \langle \phi,1 \rangle$.
 \end{defn}
-\begin{cor}
+\begin{cor}\label{cor7.3}
     Let $E/\mathbb{F}_q$ be an elliptic curve and let $\phi \in \text{End}(E)$ be the $q^{\text{th}}$ power Frobenius map. Then $\# E(\mathbb{F}_q) = q+1 - \text{tr}(\phi)$ and $\left|\text{tr}(\phi)\right|\le 2\sqrt{q}$.
 \end{cor}
 \textbf{Zeta functions.} For $K$ a number field, 
@@ -830,5 +830,90 @@ where $\left|C\right| = \{\text{closed points of }C\} = \{\text{orbits for the a
     Z_C(T) = \exp \left(\sum_{n=1}^{\infty} \frac{\# C(\mathbb{F}_{q^n})}{n}T^n \right).
     \]
 \end{defn}
+\marginpar{09 Feb 2024, Lecture 10}
+\begin{theorem}\label{theorem7.4}
+    Let $E/\mathbb{F}_q$ be an elliptic curve with $\#E(\mathbb{F}_q) = q+1 - a$. Then \[
+    Z_E(T) = \frac{1-aT+qT^2}{(1-T)(1-qT)}.
+    \]
+\end{theorem}
+\begin{proof}
+    Let $\phi : E \to E$ be the $q$--power Frobenius map. By Corollary \ref{cor7.3}, $\# E(\mathbb{F}_q) = q+1 - \text{tr}(q)$, so $\text{tr}(\phi) = a$ and $\text{deg}(\phi) = q$. By a result from Ex. Sheet 2, $\phi^2 - a \phi + q = 0$. Hence $\phi^{n+2} - a \phi^{n+1}  + q \phi^n = 0$. As the trace is linear, $\text{tr}(\phi^{n+2})-a \text{tr}(\phi^{n+1}) + q \text{tr}(\phi^n) = 0$. The second order difference equation with initial conditions $\text{tr}(1)=\langle 1,1 \rangle = 2^2-1^2-1^2 = 2$ and $\text{tr}(\phi) = a$ has solution \[
+    \text{tr}(\phi^n) = \alpha^n + \beta^n
+    \]
+    for $\alpha, \beta \in \mathbb{C}$ are roots of $X^2 - aX + q = 0$.\footnote{We don't need to worry about the case where the roots are equal, since we don't want a general solution, just a solution satisfying our initial conditions.} Apply Corollary \ref{cor7.3} again to get that $\#E(\mathbb{F}_{q^n}) = q^n +1 - \text{tr}(\phi^n) = 1 + q^n - \alpha^n - \beta^n$. Hence
+    \begin{align*}
+        Z_E(T) &= \exp \sum_{n=1}^{\infty} \left(\frac{T^n}{n}+\frac{(qT)^n}{n}-\frac{(\alpha T)^n}{n} - \frac{(\beta T)^n}{n} \right) \\
+        &= \exp \left( -\log(1-T) - \log(1-qT) + \log(1-\alpha T)+ \log(1 - \beta T) \right) \\
+        &= \frac{(1-\alpha T)(1 - \beta T)}{(1-T)(1-qT)} \\
+        &= \frac{1-a T +qT^2}{(1-T)(1-qT)}.
+        \qedhere
+    \end{align*}
+\end{proof}
+\textbf{Remark.} Hasse's theorem tells us that $\left|a\right|\le 2\sqrt{q}$, so the discriminant $a^2-q$ is nonpositive, so the roots are complex conjugates, i.e. $\alpha = \overline{\beta}$, and $\left|\alpha\right|=\left|\beta\right|\stackrel{(\dagger)}{=} \sqrt{q}$.
+\vspace{1mm}
+ 
+Let $K = \mathbb{F}_q(E)$, then $\zeta_K(s) = 0 \implies  Z_E(q^{-s}) = 0 \implies q^{-s} \in \{\frac{1}{\alpha},\frac{1}{\beta}\} \implies q^s \in \{\alpha,\beta\} \implies q^{\text{Re}(s)} = \left|\alpha\right| = \left|\beta\right| \implies \text{Re}(s) = \frac{1}{2}$. This proves the Riemann hypothesis for elliptic curves over finite fields.
+
+\section{Formal groups}
+\begin{defn}
+    Let $R$ be a ring and $I \subset R$ an ideal. The \textbf{$I$--adic topology} on $R$ has basis $\{r+I^n \mid r \in R, n\ge 1\}$.
+\end{defn}
+\begin{defn}
+    A sequence $(x_n)$ in $R$ is \textbf{Cauchy} if $\forall k, ~ \exists N$ such that $x_m - x_n \in I^k ~\forall m,n \ge N$.
+\end{defn}
+\begin{defn}
+    $R$ is \textbf{complete} if 
+    \begin{enumerate}[(i)]
+        \item $\bigcap_{n\ge 0} I^n = \{0\}$ (this is a Hausdorff--type condition).
+        \item Every Cauchy sequence converges.
+    \end{enumerate}
+\end{defn}
+\textbf{Useful remark.} If $x \in I$, then $\frac{1}{1-x}=1+x+x^2+\ldots$. This exists as the sequence of partial sums form a Cauchy sequence, and then we check that the result it converges to is an inverse for $\frac{1}{1-x}$. Hence $1-x \in R^{\times}$.
+\begin{example}
+    Basically the only two examples we care about in this course are:
+    \begin{itemize}
+        \item $R = \mathbb{Z}_p$, the $p$--adic integers, and $I = p \mathbb{Z}_p$.
+        \item $R = \mathbb{Z}[[t]]$ and $I=(t)$.
+    \end{itemize} 
+\end{example} 
+\begin{lemma}[Hensel's lemma]\label{lemma8.1}
+    Let $R$ be complete with respect to an ideal $I$. Let $F \in R[X]$, $s\ge 1$ with $s \in \mathbb{Z}$. Suppose $a \in R$ satisfies 
+    \begin{align*}
+        &F(a) \equiv 0 \pmod{I^s}\\
+        &F'(a) \in R^\times
+    \end{align*}
+    Then there exists a unique $b \in R$ such that $F(b)=0$ and $b \equiv a \pmod{I^s}$.
+\end{lemma}
+\begin{proof}
+    Let $u \in R^\times$ be such that $F'(a) = u \pmod{I}$ (e.g. we could take $u = F'(a)$). Replacing $F(X)$ by $\frac{F(X+a)}{u}$ we may assume $a = 0$ and ${F'(0) \equiv 1 \pmod{I}}$. We put $x_0 = 0$ and $x_{n+1} \stackrel{(\dagger)}{=}  x_n - F(x_n)$. Each induction shows that $x_n \equiv 0 \pmod{I^s} ~\forall n ~ (\ddagger)$. Now use the useful identity $$F(X)-F(Y)=(X-Y)(F'(0) + XG(X,Y) + YH(X,Y))$$
+    for some $G,H \in R[X,Y]$. Call this identity $(\star)$.
+    \vspace{1mm}
+     
+    We claim that $x_{n+1} \equiv x_n \pmod{I^{n+s}} ~\forall n\ge 0$. To prove this, use induction. The case $n=0$ is clear. Suppose $x_n \equiv x_{n-1} \pmod{I^{n+s-1}}$. By $(\star)$, 
+    \begin{align*}
+        F(x_n) - F(x_{n-1}) = (x_n-x_{n-1})(1+c)
+    \end{align*}
+    for some $c \in I$. Modulo $I^{n+s}$ we now use $(\dagger)$ to get
+    \begin{align*}
+        &F(x_n) - F(x_{n-1}) \equiv x_n-x_{n-1} \pmod{I^{n+s}} \\
+        \implies & x_n - F(x_n) = x_{n-1} - F(x_{n-1}) \pmod{I^{n+s}}\\
+        \implies & x_{n+1} \equiv x_n \pmod{I^{n+s}}.
+    \end{align*}
+    Hence $(x_n)_{n\ge 0}$ is Cauchy, and $R$ is complete, so $x_n \to b$ as $n \to \infty$ for some $b \in R$. Taking the limit in $(\dagger)$ gives $b = b - F(b)$ (as the polynomial is continuous in our topology), so $F(b) = 0$. Taking the limit in $(\ddagger)$ gives $b \equiv 0 \equiv a\pmod{I^s}$.
+
+    \vspace{1mm}
+     
+    For uniqueness, if $b_1,b_2$ work, then plug them into $(\star)$ and use the useful remark that $1-x$ is a unit to get that $b_1=b_2$. 
+\end{proof}
+Write $E: Y^2Z + a_1 XYZ + a_3 YZ^2 = X^3 + a_2 X^2Z + a_4 XZ^2 + a_6 Z^3$ and look at its affine piece $Y \neq 0$ with $t = -\frac{X}{Y}, w = -\frac{Z}{Y}$ (the minus signs are here to match Silverman's book). We get $$w = t^3 + a_1 tw + a_2 t^2w + a_3w^2 + a_4 tw^2+ a_6w^3 = f(t,w).$$
+We apply Hensel's lemma (Lemma \ref{lemma8.1}) with $R = \mathbb{Z}[a_1,\ldots,a_6][[t]]$, $I = (t)$ and $F(X) = X - f(t,X) \in R[X]$. We take $s=3$, $a=0$ and check that $F(a) = F(0) = -f(t,0) = -t^3 \equiv 0 \pmod{I^3}$ and $F'(0) = 1 - a_1t - a_2t^2 \in R^x$ by our useful remark, so the assumptions hold. Hence there exists a unique $\omega(t) \in R = \mathbb{Z}[a_1,\ldots,a_6][[t]]$ such that $\omega(t) = f(t,w(t))$ and $w(t) \equiv 0 \pmod{t^3}$.
+
+\vspace{1mm}
+ 
+\textbf{Remarks.} 
+\begin{enumerate}[(i)]
+    \item Taking $u=1$ in the proof of Hensel's lemma gives $w(t) = \lim_{n \to \infty} w_n(t)$ where $w_0(t)=0$, $w_{n+1}(t) = f(t,w_n(t))$.
+    \item In fact, $w(t) = t^3(1+A_1t + A_2t^2 + \ldots)$ where $A_1 = a_1$, $A_2 = a_1^2+a_2$, $A_3 = a_1^3 + 2a_1a_2 + 2a_3$, etc. (i.e. we can compute the series explicitly).
+\end{enumerate} 
 
 \end{document}
