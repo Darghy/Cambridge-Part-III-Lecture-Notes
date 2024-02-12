@@ -34,7 +34,7 @@
 \newtheorem{cor}[theorem]{Corollary}
 \newtheorem{prop}[theorem]{Proposition}
 \newtheorem{example}{Example}[section]
-\newtheorem{defn}{Definition}[section]
+\newtheorem{defn}[theorem]{Definition}
 
 \title{Part III - Algebraic Number Theory
     \\ \large
@@ -365,7 +365,7 @@ Note $P_k(\mathfrak{m}) = \{(\alpha) \in I_K(\mathfrak{m}) \mid  \alpha \in K_{\
             K_{\mathfrak{m}} &\to \left( \prod_{\sigma \mid \mathfrak{m}_{\infty}}^{} \{\pm 1\}\right) \times (\mathcal{O}_K/\mathfrak{m}_0)^\times\\
             \alpha &\mapsto \left(\prod_{\sigma \mid \mathfrak{m}_{\infty}}^{} \text{sgn}(\sigma(\alpha)) \right) \times \overline{\alpha}
         \end{align*}
-        for $\overline{\alpha} = \overline{a} \overline{b}^{-1} \in (\mathcal{O}_K/\mathfrak{m}_0)^\times$. This map is surjective: this is an exercise, use the Approximation Theorem. It has kernel 
+        for $\overline{\alpha} = \overline{a} \overline{b}^{-1} \in (\mathcal{O}_K/\mathfrak{m}_0)^\times$. This map is surjective: this is on Ex. Sheet 1, use the Approximation Theorem. It has kernel 
         \begin{align*}
             \{\alpha \in K_{\mathfrak{m}}\mid \sigma(\alpha) > 0 ~\forall \sigma \mid \mathfrak{m}_{\infty}, ~\alpha \equiv 1 \text{ (mod }\mathfrak{m}_0)\} = K_{\mathfrak{m},1}.
         \end{align*}
@@ -424,6 +424,7 @@ What is the meaning of ''suitably chosen'' above? For $L/K$ abelian, we want to 
 \begin{proof}
     Note first that if $\mathfrak{m} \mid \mathfrak{n}$, then $I_K(\mathfrak{n}) \subset I_K(\mathfrak{m})$, so $\Phi_\mathfrak{n} : I_K(\mathfrak{n}) \to \text{Gal}(L/K)$ is well--defined and $\Phi_{\mathfrak{n}} = \Phi_{\mathfrak{m}}|_{I_K(\mathfrak{m})}$, so $\text{ker}(\Phi_{\mathfrak{n}}) = \text{ker}(\Phi_{\mathfrak{m}}) \cap I_K(\mathfrak{n})$. If $\mathfrak{m} \mid \mathfrak{n}$, then $P_K(\mathfrak{n}) \subset P_K(\mathfrak{m})$. Now $P_K(\mathfrak{n}) \subset P_K(\mathfrak{m}) \subset \text{ker}(\Phi_{\mathfrak{m}})$, so \[
         (\alpha) \in P_K(\mathfrak{n}) \subset P_K(\mathfrak{m}) \cap I_K(\mathfrak{n}) \subset \text{ker}(\Phi_{\mathfrak{m}}) \cap I_K(\mathfrak{n}) = \text{ker}(\Phi_{\mathfrak{n}}).
+        \qedhere
     \]
 \end{proof}
 In the above situation, if $\text{ker}(\Phi_{\mathfrak{m}})$ is a congruence subgroup for $\mathfrak{m}$, then $\text{ker}(\Phi_{\mathfrak{n}})$ is a congruence subgroup for $\mathfrak{n}$.
@@ -433,7 +434,7 @@ Now we find a special modulus that works for each extension, called \textbf{the 
 
 \marginpar{29 Jan 2024, Lecture 5}
 
-\textbf{Statements of global class field theory (ideal theoretic).} For $L/K$ abelian, we are interested to find out for which $m \subset \mathcal{O}_K$ is $\text{ker}(\Phi_{L/K,\mathfrak{m}})$ a congruence subgroup (i.e. $P_K(\mathfrak{m}) \subset \text{ker}(\Phi_{L/K, \mathfrak{m}})$).
+\textbf{Statements of global class field theory (ideal theoretic).} For $L/K$ abelian, we are interested to find out for which $\mathfrak{m} \subset \mathcal{O}_K$ is $\text{ker}(\Phi_{L/K,\mathfrak{m}})$ a congruence subgroup (i.e. $P_K(\mathfrak{m}) \subset \text{ker}(\Phi_{L/K, \mathfrak{m}})$).
 \begin{theorem}[The Conductor Theorem]
     Let $L/K$ be abelian. Then there is a modulus $\mathfrak{f}=\mathfrak{f}(L/K)$ such that 
     \begin{itemize}
@@ -829,7 +830,7 @@ If $f$ is a meromorphic/analytic function defined on some open $S \subset \mathb
     \end{align*}
 \end{proof}
 \marginpar{09 Feb 2024, Lecture 10}
-\textbf{Remark.} If a Dirichlet series is convergent on some half plane $\text{Re}(s)>\sigma_0$, then it defines an analytic function on this half plane. This follows from Theorem \ref{theorem2.3}.
+\textbf{Remark.} If a Dirichlet series is convergent on some half plane $\text{Re}(s)>\sigma_0$, then it defines an analytic function on this half plane. This follows from Theorem \ref{theorem2.3}. TOOD: There are some mistakes in this lecture. The fixes are on Moodle, look them up.
 \begin{defn}\label{defn2.11}
     The \textbf{gamma function} is the absolutely convergent integral \[
     \Gamma(s) = \int_{0}^{\infty} e^{-y}y^s \frac{\mathrm{d}y}{y},
@@ -944,6 +945,147 @@ What about the zeroes of $\zeta(s)$? We have that
     \item Any other zeroes have to lie in the critical strip $0\le \text{Re}(s)\le 1$.
 \end{itemize}
 The Riemann hypothesis says that all the nontrivial zeroes of $\zeta(s)$ lie on the line $\text{Re}(s) = \frac{1}{2}$.
+
+\subsection{The Dedekind zeta function}
+
+\marginpar{12 Feb 2024, Lecture 11}
+
+Let $K$ be a number field.
+\begin{defn}\label{defn2.21}
+    The \textbf{Dedekind zeta function} of $K$ is the series 
+    \begin{align*}
+        \zeta_K(s) = \sum_{\mathfrak{a}}^{} \frac{1}{N(\mathfrak{a})^s} 
+    \end{align*}
+    for $\mathfrak{a}$ varying over integral ideals of $K$, and $N(\mathfrak{a})$ the absolute norm.
+\end{defn}
+\begin{prop}\label{prop2.22}
+    The series $\zeta_K(s)$ converges absolutely and uniformly in the domain $\{\text{Re}(s)>1+\delta\}$ for every $\delta>0$ and one has 
+    \begin{align*}
+        \zeta_K(s) = \prod_{\mathfrak{p}}^{} \frac{1}{1-N(\mathfrak{p})^s} 
+    \end{align*}
+    for $\mathfrak{p}$ running through the prime ideals of $K$.
+\end{prop}
+\begin{proof}
+    Exercise. This is similar to the same proof for $\zeta(s)$.
+\end{proof}
+We can also complete $\zeta_K(s)$. Let $Z_{\infty}(s) = \left|d_{K/\mathbb{Q}}\right|^{5/2}\pi^{-ns/2}\Gamma_k \left(\frac{s}{2}\right)$ for $n$ the degree of $K$, the ''Euler factor at infinity''.
+\begin{defn}\label{defn2.23}
+    The \textbf{completed zeta function} of the number field $K$ is 
+    \begin{align*}
+        Z_{K}(s) = Z_{\infty}(s)\zeta_K(s).
+    \end{align*}
+\end{defn}
+\begin{prop}\label{prop2.24}
+    The completed zeta function $Z_K(s)$ admits an analytic continuation to $\mathbb{C}\setminus \{0,1\}$ and satisfies $Z_K(s) = Z_K(1-s)$. It has simple poles at $s =0$ and $s=1$ with residues $-\frac{2^r h_K R}{\omega}$ and $\frac{2^r h_K R}{\omega}$, where $r$ is the number of infinite primes, $h_K$ is the class number, $\omega$ is the number of roots of unity in $K$, and $R$ is the regulator.
+\end{prop}
+\begin{cor}\label{cor2.25}
+    \begin{enumerate}[(i)]
+        \item The Dedekind zeta function $\zeta_K(s)$ admits an analytic continuation to $\Gamma\setminus \{1\}$.
+        \item At $s=1$, we have a simple pole with residue $$\text{Res}_{s=1}\zeta_K(s) = \frac{2^{r_1}(2\pi)^{r_2 }h_K R}{\omega \left|d_K\right|^{1/2}}$$
+        for $r_1$ the number of real infinite primes and $r_2$ the number of complex infinite primes.
+        \item We have the functional equation $\zeta_K(1-s) = A(s)\zeta_K(s)$.
+    \end{enumerate}
+\end{cor}
+\textbf{Remark.} The formula for $\text{Res}_{s=1}\zeta_K(s)$ is known as the analytic class number formula. Let $\kappa = \frac{2^{r_1}(2\pi)^{r_2}R}{\omega \left|d_K\right|^{1/2}}$, then $\text{Res}_{s=1} \zeta_K(s) = \kappa h_K$.
+\vspace{1mm}
+ 
+Let $K=\mathbb{Q}(\sqrt{N})$ for $N \neq 0,1$ squarefree. We get
+\begin{align*}
+    \zeta_K(s) &= \prod_{\mathfrak{p}}^{}\left(1-\frac{1}{N(\mathfrak{p}^s)}\right)^{-1} \\ 
+    &= \prod_{\mathfrak{p}\text{ splits}}^{} \left(1-\frac{1}{\mathfrak{p}^s}\right)^{-2} \prod_{\mathfrak{p}\text{ inert}}^{} \left(1-\frac{1}{\mathfrak{p}^{2s}}\right)^{-1} \prod_{\mathfrak{p}\text{ ramifies}}^{} \left(1-\frac{1}{\mathfrak{p}^s}\right)^{-1}.
+\end{align*}
+From this we see that $\zeta(s)$ divides $\zeta_K(s)$, and we have
+\begin{align*}
+    \zeta_K(s) = \prod_{\mathfrak{p}}^{} \left(1-\frac{1}{p^s}\right)^{-1} \prod_{\mathfrak{p}}^{} \left(1-\frac{\chi_K(\mathfrak{p})}{p^s}\right)^{-1},  
+\end{align*}
+where \[
+\chi_K(\mathfrak{p}) = \begin{cases}
+    1 & \mathfrak{p} \text{ splits}\\
+    -1 & \mathfrak{p} \text{ inert}\\
+    0 & \mathfrak{p} \text{ ramifies}
+\end{cases}
+\]
+is an (extended) Dirichlet character.
+\begin{defn}\label{2.26}
+    A \textbf{Dirichlet chracter} mod $m$ is a homomorphism $$\chi : (\mathbb{Z}/m\mathbb{Z})^\times \to \mathbb{C}^\times.$$ It is called \textbf{primitive} if it doesn't arise as the composite $\left(\mathbb{Z}/m\mathbb{Z}\right)^\times \to (\mathbb{Z}/m'\mathbb{Z})^\times \stackrel{\chi'}{\to} \mathbb{C}^\times$ for a Dirichlet character $\chi'$ mod $m'$ for a proper divisor $m' \mid m$.
+
+    \vspace{1mm}
+     
+    If $\chi$ is a Dirichlet character mod $\mathfrak{f}$ and $\chi$ is primitive, then $\mathfrak{f}$ is called the \textbf{conductor} of $\chi$.
+\end{defn}
+\textbf{Remark.} The conductor is the greatest common divisor of all $m' \mid m$ such that a Dirichlet character mod $m$ is induced from a character mod $m'$.
+\vspace{1mm}
+ 
+A Dirichlet character mod $m$ can be extended to all of $\mathbb{Z}$ as follows:
+\[
+\chi(n) = \begin{cases}
+    \chi(n \text{ mod }m) &(n,m)=1\\
+    0 &(n,m) \neq 1.
+\end{cases}
+\]
+\begin{example}
+    \[
+        \chi_K(\mathfrak{p}) = \begin{cases}
+        1 & \mathfrak{p} \text{ splits}\\
+        -1 & \mathfrak{p} \text{ inert}\\
+        0 & \mathfrak{p} \text{ ramifies}
+        \end{cases}
+    \]
+    is a Dirichlet character mod $d_K/\mathbb{Q}$.
+\end{example}
+\begin{defn}\label{defn2.27}
+    The \textbf{principal character} mod $m$ is the trivial character $\chi_0$ mod $m$,
+    \[
+    \chi_0(n) = \begin{cases}
+        1 & (n,m)=1\\
+        0 & \text{ otherwise}.
+    \end{cases}
+    \]
+\end{defn}
+Suppose $\chi_1, \chi_2$ are two Dirichlet characters mod $m$. Then define $\chi_1\chi_2$ by $\chi_1\chi_2(n)=\chi_1(n)\chi_2(n)$. This turns the collection of all characters of $(\mathbb{Z}/m\mathbb{Z})^\times$ into an abelian group. Write $\widehat{(\mathbb{Z}/m\mathbb{Z})^\times}$ with identity $\chi_0$ and the inverse of any $\chi$ equal to $n \mapsto \chi(n)^{-1}$.
+\vspace{1mm}
+ 
+Let $A$ be any abelian group. Let $\widehat{A}$ be the group of homomorphisms $\chi : A \to \mathbb{C}^\times$. This is the \textbf{character group} or \textbf{dual group} of $A$.
+\begin{prop}\label{prop2.28}
+    If $A$ is a finite abelian group, then $A \cong \widehat{A}$.
+\end{prop}
+\begin{proof}
+    Use induction on the order of $A$. Assume $A$ is cyclic with order $m$ and generator $y$. Then $y^m=1$, so $\chi(y)$ is an $m^{\text{th}}$ root of unity for every $\chi$ and every character is determined by $\chi(y)$. Let $\zeta$ be a primitive $m^{\text{th}}$ root of unity. Then for each $r=0,1,\ldots,m-1$, the function $\chi_r(y^s) = (\zeta^r)^j$ is a character, these are all distinct and $\chi_r = \chi_1^r$, so $\widehat{A}$ is the cyclic group generated by $\chi_1$. But $\chi_1^r(y) = 1 \iff \zeta^r = 1$, so $\chi_1$ must have order $m$, so $\widehat{A}$ is cyclic of order $m$, so $\widehat{A} \cong A$.
+    \vspace{1mm}
+     
+    Now suppose $A = A_1 \times A_2$ with $A_1,A_2$ cyclic and such that $A_i \neq 1$. We will to show that $\widehat{A} \cong \widehat{A}_1 \times \widehat{A}_2$. For this, define $\widehat{A} \to \widehat{A}_1 \times \widehat{A}_2$ by $\chi \mapsto (\chi|_{A_1}, \chi|_{A_2})$ which has inverse $\widehat{A}_1 \times \widehat{A}_2 \to \widehat{A}$ by $(\chi_1,\chi_2) \mapsto \chi$ via $(a_1,a_2) \mapsto \chi_1(a_1)\chi_2(a_2)$. It follows by induction that $\widehat{A}_i \cong A_i$, so we're done.
+\end{proof}
+Recall that $(\mathbb{Z}/m\mathbb{Z})^\times$ has order $\phi(m)$, hence so does $\widehat{(\mathbb{Z}/m\mathbb{Z})^\times}$.
+\begin{example}
+    Let $m=4$, so $\phi(m)=2$. We have two characters mod 4: these are $\chi_0$ mod 4 and $\chi_1$ given by $\chi_1(n) = \begin{cases}
+        1 & n \equiv 1 \pmod{4}\\
+        -1 & n \equiv 3 \pmod{4}\\
+        0 & 2 \mid n.
+    \end{cases}$.
+\end{example}
+\begin{cor}\label{cor2.29}
+    If $A$ is a finite abelian group, then $A \cong \widehat{\widehat{A}}$ via the correspondence sending 
+    \begin{align*}
+        &A \to \widehat{\widehat{A}}\\
+        &a \mapsto \tilde{a} : \widehat{A} \to \mathbb{C}^\times \text{ defined by }\chi \mapsto \chi(a).
+    \end{align*}
+\end{cor}
+\begin{proof}
+    Left as an exercise.
+\end{proof}
+\begin{prop}[Orthogonality relations]\label{prop2.30}
+    Let $A$ be a finite abelian group and $a \in A$. 
+    \begin{enumerate}[(i)]
+        \item If $\chi \in \widehat{A}$, $\sum_{a \in \Lambda}^{} \chi(a) = \begin{cases}
+            0 & \chi \neq \chi_0\\
+            \left|A\right| & \chi = \chi_0.
+        \end{cases}$
+        \item $\sum_{\chi \in \widehat{A}}^{} = \begin{cases}
+            0 & \text{ if }a \neq 1\\
+            \left|A\right| & \text{ if } a = 1.
+        \end{cases}$
+    \end{enumerate}
+\end{prop}
 
 
 
