@@ -647,6 +647,8 @@ We first prove a technical lemma using a method called ''dependent random choice
     \]
 \end{prop}
 \begin{proof}
+    \marginpar{09 Feb 2024, Lecture 10}
+    
     By nesting of norms, it suffices to prove the case $p = 2k$ with $k \in \mathbb{N}$. For simplicity, write $X = \sum_{i=1}^{n} X_i$ and WLOG assume that $\sum_{i=1}^{n} ||X_i||_{\infty}^2 = \sum_{i=1}^{n} ||X_i||_2^2 = 1$. By Chernoff (Example \ref{ex1.3}), which states that $\forall \theta >0$, \[
     \mathbb{P}\left(\left|X\ge \theta\right|\right) \le 4 \exp(-\theta^2/4),
     \]
@@ -714,5 +716,71 @@ Recall that given $A \subset \mathbb{F}_2^n$ of density $\alpha>0$, $\left|\text
     \]
     (calculation details omitted).
 \end{proof}
+\begin{theorem}[Chang's Theorem]\label{theorem3.6}
+    \marginpar{12 Feb 2024, Lecture 11}
+    Let $G$ be a finite abelian group and let $A \subset G$ have density $\alpha>0$. If $\Lambda \subset \text{Spec}_{\rho}(1_A)$ is dissociated, then $\left|\Lambda\right| = O \left(\rho^{-2}\log \alpha ^{-1}\right)$.
+\end{theorem}
+
+\textbf{Remark.} Last lecture, we wrote $f \in L^p(G)$ to mean that $f$ is a function on $G$ with bounded $L^p$--norm and then said $||f||_{L^p(G)} = \left(\mathbb{E}_{x \in G} f(x)^{p}\right)^{1/p}$. Since we assumed that our groups are finite, the condition ''with bounded $L^p$--norm'' is unnecessary here, but we keep it as it is in line with the usual notation. We also said that $\widehat{f} \in \ell^2(\Lambda)$ if $\widehat{f}$ is a function supported on $\Lambda \subset \widehat{G}$ with bounded $\ell^2$--norm: $||\widehat{f}||_{\ell^2(\Lambda)} = \left(\sum_{\gamma \in \Lambda}^{} \left|\widehat{f}(\gamma)\right|^2\right)^{1/2}$. Finally, $X \in L^p(\mathbb{P})$ means that the random variable $X$ has bounded $p^{\text{th}}$ moment, i.e. $\mathbb{E}\left|X\right|^p<\infty$ (with expectation taken with respect to $\mathbb{P}$).
+\vspace{1mm}
+ 
+\textbf{Remark.} The proofs of these probabilistic inequalities are nonexaminable. However, we are expected to be able to state them and apply them.  
+\vspace{1mm}
+ 
+We may boostrap Khintchine's inequality to obtain the following:
+\begin{theorem}[Marcinkiewicz--Zygmund Inequality]
+    Let $p \in [2,\infty)$ and let $X_1,X_2,\ldots,X_n \in L^P(\mathbb{P})$ be independent random variables with $\mathbb{E}\sum_{i=1}^{n} X_i = 0$. Then 
+    \begin{align*}
+        ||\sum_{i=1}^{n} X_i||_{L^P(\mathbb{P})} = O \left(p^{1/2}||\sum_{i=1}^{n} \left|X_i\right|^2||_{L^{p/2}(\mathbb{P})}^{1/2}\right).
+    \end{align*}
+\end{theorem}
+\begin{proof}
+    For $\mathbb{C}$--valued random variables, the result follows from the real caes by taking real and imaginary parts and applying the triangle inequality. 
+    \vspace{1mm}
+     
+    Next assume that the distribution of the $X_i$'s is symmetric, i.e. $\mathbb{P}\left(X_i=a\right)=\mathbb{P}\left(X_i=-a\right) ~\forall a \in \mathbb{R}$. Partition the probability space $\Omega$ into sets $\Omega_1,\Omega_2,\ldots,\Omega_M$, writing $\mathbb{P}_j$ for the induced probability measure on $\Omega_j$, such that all $X_i$'s are symmetric and take at most two values on each $\Omega_j$. Applying Khintchine, for each $j \in [M]$, 
+    \begin{align*}
+        ||\sum_{i=1}^{n} X_i||_{L^p(\mathbb{P}_j)}^{p} &= O (p^{p/2} \underbrace{\left(\sum_{i=1}^{n} ||X_i||^2_{L^2(\mathbb{P}_j)}\right)^{p/2}}_{= ||\sum_{i=1}^{n} \left|X_i\right|^2 ||_{L^{p/2}(\mathbb{P}_j)}^{p/2}})
+    \end{align*}
+    so summing over all $j \in [M]$ and taking the $p^{\text{th}}$ roots gives the symmetric case.
+
+    \vspace{1mm}
+     
+    Now suppose the $X_i$'s are arbitrary and let $Y_1,\ldots,Y_n$ be such that $X_i \sim Y_i ~\forall i$ and $X_1,\ldots,X_n,Y_1,\ldots,Y_n$ are independent. Applying the symmetric result to $X_i-Y_i$,
+    \begin{align*}
+        ||\sum_{i=1}^{n} (X_i-Y_i)||_{L^p(\mathbb{P} \times \mathbb{P})} &= O \left(p^{1/2} ||\sum_{i=1}^{n} \left|X_i-Y_i\right|^2||_{L^{p/2}(\mathbb{P} \times \mathbb{P})}^{1/2}\right) \\
+        &= O \left(p^{1/2} ||\sum_{i=1}^{n} \left|X_i\right|^2||_{L^{p/2}(\mathbb{P})}^{1/2} \right)
+    \end{align*}
+    by expanding $\left|X_i-Y_i\right|^2$ and bounding above by $4\left|X_i\right|^2$. But also 
+    \begin{align*}
+        ||\sum_{i=1}^{n} X_i||_{L^p(\mathbb{P})} &= ||\sum_{i=1}^{n} X_i - \mathbb{E} \sum_{i=1}^{n} Y_i||_{L^p(\mathbb{P})} \\
+        &\le ||\sum_{i=1}^{n} (X_i-Y_i)||_{L^p(\mathbb{P} \times \mathbb{P})}
+    \end{align*}
+    by convexity/Jensen.
+\end{proof}
+\begin{theorem}[Croot--Sisask Almost Periodicity]\label{Theorem3.8}
+    Let $G$ be a finite abelian group, let $\epsilon>0$ and let $p \in [2,\infty)$. Let $A,B \subset G$ be such that $\left|A+B\right|\le K\left|A\right|$ and let $f: G \to \mathbb{C}$. Then $\exists b \in B$ and a set $X \subset B-b$ such that $$\left|X\right|\ge (2K)^{-O(\epsilon^{-2}p)} \left|B\right|$$ and 
+    \begin{align*}
+        ||\tau_x (f * \mu_A) - f * \mu_A||_{L^p(G)} \le \epsilon ||f||_{L^p(G)} ~\forall x \in X,
+    \end{align*}
+    where $\tau_x g(y) = g(y+x)$ and $\mu_A$ is the characteristic measure of $A$, defined by $\mu_A(x) = \alpha^{-1} 1_A(x)$.
+\end{theorem}
+\textbf{Remark.} We only need $G$ to be discrete for the result to hold, but we consider the case ''finite and abelian'' as we don't want to introduce too much notation in the proof.
+\vspace{1mm}
+ 
+\textbf{Remark.} For intuition, work through the example $f = 1_{A-A}$.
+
+\begin{proof}
+    The main idea is to approximate $f * \mu_A(y) = \mathbb{E}_{x}\mu_A(x)f(y-x) =  \mathbb{E}_{x \in A}f(y-x)$ by $\frac{1}{k}\sum_{i=1}^{k} f(y-z_i)$ with $z_i$ samped independently at random from $A$ for some suitable choice $k$. 
+    \vspace{1mm}
+     
+    For each $y \in G$, define $Z_i(y) = \tau_{-z_i}(f)(y) - f * \mu_A(y)$ for $i \in [k]$. For fixed $y \in G$, these are independent and have mean 0, so by Marcinkiewicz--Zygmond, for each $y \in G$,
+    \begin{align*}
+        ||\sum_{i=1}^{k} Z_i(y)||_{L^p(\mathbb{P})}^p &= O \left(p^{p/2}||\sum_{i=1}^{k} \left|Z_i(y)\right|^2||_{L^{p/2}(\mathbb{P})}^{p/2} \right) \\
+        &= O \left(p^{p/2} \mathbb{E}\left|\sum_{i=1}^{n} \left|Z_i(y)\right|^2 \right|^{p/2} \right)
+    \end{align*}
+    TODO: finish this expression. So for each $y \in G$, $||Z_i(y)||_{L^p(\mathbb{P})}^p = O \left(p^{p/2} k^{\frac{p}{2}-1} \sum_{i=1}^{k} \left|Z_i(y)\right|^p\right)$.
+\end{proof}
+
 
 \end{document}
