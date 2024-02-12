@@ -33,7 +33,7 @@
 \newtheorem{lemma}[theorem]{Lemma}
 \newtheorem{cor}[theorem]{Corollary}
 \newtheorem{prop}[theorem]{Proposition}
-\newtheorem{example}[theorem]{Example}
+\newtheorem{example}{Example}[section]
 \newtheorem{defn}{Definition}[section]
 
 \title{Part III - Elliptic Curves
@@ -915,5 +915,98 @@ We apply Hensel's lemma (Lemma \ref{lemma8.1}) with $R = \mathbb{Z}[a_1,\ldots,a
     \item Taking $u=1$ in the proof of Hensel's lemma gives $w(t) = \lim_{n \to \infty} w_n(t)$ where $w_0(t)=0$, $w_{n+1}(t) = f(t,w_n(t))$.
     \item In fact, $w(t) = t^3(1+A_1t + A_2t^2 + \ldots)$ where $A_1 = a_1$, $A_2 = a_1^2+a_2$, $A_3 = a_1^3 + 2a_1a_2 + 2a_3$, etc. (i.e. we can compute the series explicitly).
 \end{enumerate} 
+\marginpar{12 Feb 2024, Lecture 11}
+\begin{lemma}\label{lemma8.2}
+    Let $R$ be an integral domain, complete with respect to an ideal $I$. Let $a_0,\ldots,a_6 \in R$ and let $K = \text{Frac}(R)$. Then \[
+    \widehat{E}(I) := \{(t,w) \in E(K) \mid t,w \in I\}
+    \]
+    is a subgroup of $E(K)$.
+\end{lemma}
+\textbf{Remark.} By uniqueness in Hensel's lemma, $\widehat{E}(I) = \{(t,w(t)) \in E(K) \mid t \in I\}$.
+\begin{proof}
+    Taking $(t,w) = (0,0)$ shows $0_E \in \widehat{E}(I)$. So it suffices to show that if $P_1,P_2 \in \widehat{E}(I)$, then $P_3 := -P_1 - P_2 \in \widehat{E}(I)$. Since we're working over an affine piece with the identity at 0, we know three points sum to zero if and only if they lie on the same line. Say $P_i = (t_i,w_i)$ with the line $P_1P_2$ given by $w = \lambda t + \nu$. We have $P_1,P_2 \in \widehat{E}(I) \implies t_1,t_2 \in I$ and $w_1 = w(t_1), w_2=w(t_2)$. Write $w(t) = \sum_{n=2}^{\infty} A_{n-2}t^{n+1}$ with $A_0=1$. We have 
+    \begin{align*}
+        &\lambda = \begin{cases}
+            \frac{w(t_2)-w(t_1)}{t_2-t_1} & \text{ if }t_1 \neq t_2\\
+            w'(t_1) & \text{ if }t_1=t_2
+        \end{cases} = \sum_{n=2}^{\infty} A_{n-2}(t_1^n + t_1^{n-1}t_2 + \ldots + t_2^n) \in I, \\
+        &\nu = w_1-\lambda t_1 \in I.
+    \end{align*}
+    Substituting $w = \lambda t + \nu$ into $w = f(t,w)$ gives
+    \begin{align*}
+        \lambda t + \nu = t^3 + a_1 t(\lambda t + \nu) + a_2 t^2 (\lambda t + \nu) + a_3 (\lambda t + \nu)^2 + a_4 t (\lambda t + \nu)^2 + a_6 (\lambda t + \nu)^3.
+    \end{align*}
+    Let
+    \begin{align*}
+        &A = (\text{coeff. of }t^3) = 1 + a_2 \lambda + a_4 \lambda^2 + a_6 \lambda^3,\\
+        &B = (\text{coeff. of }t^2) = a_1 \lambda + a_2 \nu + a_3 \lambda^2 + 2 a_4 \lambda \nu + 3 a_6 \lambda^2 \nu.
+    \end{align*}
+    We have $A \in R^\times$, $B \in I$. Hence $t_3 = \frac{-B}{A} - t_1 - t_2 \in I$ and $w_3 = \lambda t_3 + \nu \in I$.
+\end{proof}
+Taking $R = \mathbb{Z}[a_1,\ldots,a_6][[t]]$ and $I = (t)$ and using Lemma \ref{lemma8.2} implies $\exists \iota \in \mathbb{Z}[a_1,\ldots,a_6][[t]]$ with $\iota(0)=0$ such that $[-1](t,w(t)) = (\iota(t), w(\iota(t)))$.
+\vspace{1mm}
+ 
+Taking $R = \mathbb{Z}[a_1,\ldots,a_6][[t_1,t_2]]$ and $I = (t_1,t_2)$ and using Lemma \ref{lemma8.2} implies $\exists F \in \mathbb{Z}[a_1,\ldots,a_6][[t_1,t_2]]$ with $F(0,0)=0$ and 
+\begin{align*}
+    (t_1,w(t_1)) + (t_2,w(t_2)) = (F(t_1,t_2), w(F(t_1,t_2))).
+\end{align*}
+In fact, $F(X,Y) = X + Y - a_1XY - a_2(X^2Y + XY^2) + \ldots$.
+\vspace{1mm}
+ 
+By properties of the group law, we deduce
+\begin{enumerate}[(i)]
+    \item $F(X,Y)=F(Y,X)$,
+    \item $F(X,0)=X$ and $F(0,Y)=Y$,
+    \item $F(X,F(Y,Z)) = F(F(X,Y),Z)$,
+    \item $F(X,\iota(X))=0$.
+\end{enumerate}
+\begin{defn}\label{defn8.4}
+    Let $R$ be a ring. A \textbf{formal group} over $R$ is a power series $F(X,Y) \in R[[X,Y]]$ satisfying the first three axioms above.
+\end{defn}
+An exercise on Ex. Sheet 2 asks us to show that the first three conditions imply the fourth, i.e. there is a unique $\iota(X) = -X + \ldots \in R[[X]]$ such that $F(X,\iota(X))=0$.
+\begin{example}
+    \begin{enumerate}[(i)]
+        \item The additive formal group $F(X,Y)=X+Y$, called $\widehat{\mathbb{G}_a}$.
+        \item The multiplicative formal group $F(X,Y) = X + Y +XY = (1+X)(1+Y)-1$, called $\widehat{\mathbb{G}_m}$.
+        \item The formal group of an elliptic curve, $F(X,Y) = [\text{see above}]$, called $\widehat{E}$.
+    \end{enumerate}
+\end{example}
+\begin{defn}
+    Let $\mathcal{F}$ and $\mathcal{G}$ be formal groups over $R$ given by power serise $F$ and $G$.
+    \begin{enumerate}[(i)]
+        \item A \textbf{morphism} $\mathcal{F} \to \mathcal{G}$ is a power series $f \in R[[T]]$ such that $f(0)=0$ satisfying $f(F(X,Y))=G(f(X),f(Y))$.
+        \item We say $\mathcal{F}$ is \textbf{isomorphic} to $\mathcal{G}$, i.e. $\mathcal{F}\cong \mathcal{G}$ if there exist morphisms $\mathcal{F} \stackrel{f}{\to} \mathcal{G}$ and $\mathcal{G} \stackrel{g}{\to} \mathcal{F}$ such that $f(g(T))=g(f(T))=T$.
+    \end{enumerate}
+\end{defn}
+\begin{theorem}\label{theorem8.3}
+    If $\text{char }R = 0$, then any formal group $\mathcal{f}$ over $R$ is isomorphic to $\widehat{\mathbb{G}_a}$ over $R \otimes \mathbb{Q}$. (In other words, our conditions are $\text{char }R = 0$ and ''the integers are invertible''). More precisely:
+    \begin{enumerate}[(i)]
+        \item There is a unique power series $\log(T) = T + \frac{a_2}{2}T^2 + \frac{a_3}{3}T^3 + \ldots$ with $a_i \in R$ such that 
+        \[
+        \log(F(X,Y)) = \log(X) + \log(Y).~~ (\star)
+        \]
+        \item There is a unique power series $\exp(T) = T + \frac{b_2}{2!}T^2 + \frac{b_3}{3!}T^3 + \ldots$ with $b_i \in R$ such that \[
+        \exp(\log(T)) = \log(\exp(T)) = T.
+        \]
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    \begin{enumerate}[(i)]
+        \item Notation: Write $F_1(X,Y) = \frac{\partial F}{\partial X}(X,Y)$. Uniqueness: Let $p(T) = \frac{\mathrm{d}}{\mathrm{d}T}\log T = 1 + a_2 T + 1_3 T^2 + \ldots$. Differentiating $(\star)$ with respect to $X$ gives $p(F(X,Y))F_1(X,Y) = p(X) + 0$. Putting $X=0$ gives $P(Y)F_1(0,Y)=1$, so $p(Y) = \frac{1}{F_1(0,Y)}$, proving uniqueness.
+        \vspace{1mm}
+         
+        Existence: Let $p(T) = F_1(0,T)^{-1} = 1 + a_2T + a_3T^2 + \ldots$ for some $a_i \in R$. Define $\log T = T + \frac{a_2}{2}T^2 + \frac{a_3}{3}T^3 + \ldots$, so $p(T) = \frac{\mathrm{d}}{\mathrm{d}T}\log T$. Then 
+        \begin{align*}
+            &F(F(X,Y),Z) = F(X,F(Y,Z)) \\
+            \stackrel{\frac{\mathrm{d}}{\mathrm{d}X}}{\implies}& F_1(F(X,Y),Z)F_1(X,Y) = F_1(X,F(Y,Z))\\
+            \stackrel{X=0}{\implies}& F_1(Y,Z)p(Y)^{-1} = p(F(Y,Z))^{-1}\\
+            \implies& F_1(Y,Z)p(F(Y,Z)) = p(Y) \\
+            \stackrel{\text{intg. wrt }Y}{\implies}& \log(F(Y,Z)) = \log(Y) + h(Z) 
+        \end{align*}
+        for some power series $H$. But the symmetry in $Y$ and $Z$ implies that $h(Z)=\log Z$, so we're done.
+        \item
+    \end{enumerate}
+\end{proof} 
+
 
 \end{document}
