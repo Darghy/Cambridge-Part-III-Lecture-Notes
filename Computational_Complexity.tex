@@ -232,7 +232,7 @@ A sequence $(C_n)$ of circuits is \textbf{P-uniform} if there is a polynomial ti
      
     (iii) $\implies $ (ii): Let $y_n$ be an encoding of $T_n$ and let $g(x,y)=1$ if the Turing machine encoded by $y_n$ outputs $1$ with input $x$.
 \end{proof}
-\section{Search problems and decision problems}
+\subsection{Search problems and decision problems}
 Let $g$ be a Boolean function of two variables. Then we get the decision problem ''Does there exist $y$ such that $g(x,y)=1$?'' and a corresponding \textbf{search problem} ''If there exists $y$ such that $g(x,y)=1$, then find one.''. A solution to a search problem is an algorithm that outputs $y$ such that $g(x,y)=1$ if it exists. 
 
 \begin{prop}
@@ -386,7 +386,7 @@ Major open problem: does $\text{BPP} = \text{P}$?
  
 \textbf{Algebraic complexity} is about building up multivariable polynomials using $+$ and $\times$. An \textbf{arithmetic circuit} is a DAG where each vertex is either an input, a $+$-gate, or a $\times$-gate. The inputs are constants from some given field $\mathbb{F}$ and variables $x_1,\ldots,x_n$. As with Booleans, we can talk instead about straight-line computations.
 \vspace{1mm}
- 
+
 The \textbf{degree} of a circuit is defined inductively. The degree of an input vertex is 0 if it is a constant and 1 if it is a variable, the degree at a $+$-gate is the maximum of the degrees of its inputs and the degree of a $\times$-gate is the sum of the degrees of its inputs. 
 
 \vspace{1mm}
@@ -406,6 +406,67 @@ f_n(x) = \sum_{y = (y_1,\ldots,y_m) \in \{0,1\}^m}^{} g_m(x,y).
 for $m = p(\# \text{ of variables in }x)$.
 \vspace{1mm}
  
-Exercise: the permanent is in VNP.
+\begin{example}
+    The permanent is in VNP. This is a good exercise to try before next time.
+    \vspace{1mm}
+     
+    \marginpar{13 Feb 2024, Lecture 8}
+    We must find a suitable way of representing the polynomial $\sum_{\pi \in S_n}^{} \prod_{i=1}^{n} x_{i \pi(i)}$. Write this as $\sum_{y \in \{0,1\}^{[n]^2}}^{} \prod_{i=1}^{n} (\sum_{j=1}^{n} x_{ij}y_{ij})$. For each $i$, let $$r_i(y) = \sum_{j=1}^{n} y_{ij}\prod_{j' \neq j}^{} (y_{ij}-y_{ij'})$$
+    and note $r_i(y)=1$ if and only if there is exactly one $j$ such that $y_{ij} = 1$. Let $r(y) = \prod_{i=1}^{n} r_i(y)$. Similarly define a polynomial $c_i(y)$ that takes the value 1 if and only if $y$ has exactly 1 in each column. Then \[
+        \sum_{y \in \{0,1\}^{[n]^2}}^{} \prod_{i=1}^{n} (\sum_{j=1}^{n} x_{ij}y_{ij}) \cdot r(y)c(y) = \text{perm}(x)
+    \]
+    and the above formula gives a polynomial size and polynomial degree arithmetic circuit.
+\end{example}
+
+\section{Completeness}
+For many complexity classes, there are problems in the classes that can be shown to be at least as hard as any other problem in the class.
+
+\subsection{NP--completeness}
+Let $f$ and $g$ be Boolean functions. A function $h : \{0,1\}^* \to \{0,1\}^*$ is a \textbf{polynomial-time reduction} from $g$ to $f$ if $h$ can be computed in polynomial time and $g = f \circ h$.
+\vspace{1mm}
+ 
+Hence if $f \in P$ and $g$ can be polynomial-time reduced to $f$, then $g \in P$. We sometimes write $g \prec_P f$ for this. Note that this relation $\prec_P$ is transitive.
+\vspace{1mm}
+ 
+$f$ is said to be \textbf{NP-hard} is $g \prec_P f$ for every $g \in \text{NP}$. $f$ is \textbf{NP-complete} if $f$ is NP-hard and $f \in \text{NP}$.
+
+\begin{example}[Boring example]
+    Input: Turing machine $T$, some $x \in \{0,1\}^*$ and two sequences $1^m, 1^t$. Then $\phi(T,x,1^m,1^t) = 1 \iff$ there exists $y$ with $\left|y\right|=m$ such that $T$ halts on input $(x,y)$ in time $\le t$ and outputs 1.
+    \vspace{1mm}
+     
+    Clearly $\phi \in \text{NP}$. If $f \in \text{NP}$ and $p,q$ are polynomials and $g$ a function in $\text{P}$ such that $f(x)=1 \iff \exists y \in \{0,1\}^{p(\left|x\right|)}$ such that $g(x,y)=1$, then let $T,q$ be such that $T$ computes $q(x,y)$ in time $\le q(\left|x\right|)$. Then $f(x)=1 \iff \phi(T,x,1^{p(\left|x\right|)},1^{q(\left|x\right|)})=1$.
+\end{example}
+Call this problem \textbf{TSAT}. (This is nonstandard name!)
+\begin{example}
+    \textbf{CIRCUITSAT}. Here the input is a circuit $C$ with $n+m$ inputs and $x \in \{0,1\}^n$. The ouput is 1 $\iff \exists y \in \{0,1\}^n$ such that $C(x,y)=1$.
+\end{example}
+We can reduct \textbf{TSAT} to \textbf{CIRCUITSAT} as follows: Given an instance $(T,x,1^m,1^t)$ of \textbf{TSAT}, build a circuit $C_{T}$ that emulates $T$ for $t$ steps with inputs of size $\left|x\right|+m$. (If we look at the proof that $\text{P} \subset \text{P/poly}$, we will see that such circuits exist and can be built by an algorithm in polynomial time.) Then $\phi(T,x,1^m,1^t) =1 \iff \exists y$ such that $C_T(x,y)=1$, completing the reduction.
+\vspace{1mm}
+ 
+For the next example, we need some definitions.
+\begin{defn}
+    \begin{itemize}
+        \item A \textbf{variable} is a symbol $x$ that stands for an element of $\{0,1\}$ (or $\{\text{false},\text{true}\}$).
+        \item A \textbf{literal} is either $x$ or $\neg x$ for some variable $x$.
+        \item A \textbf{clause} is an expression of the form $u_1 \vee \ldots \vee u_k$ for $u_1,\ldots,u_k$ literals.
+        \item A \textbf{formula} (in conjunctive normal form) is a conjunction of clauses, for example $x_1 \wedge (x_2 \vee \neg x_3) \wedge (x_1 \vee x_3)$.
+        \item A formula $\phi$ is \textbf{satisfiable} if it is possible for to choose values for the variables such that $\phi$ evaluates to 1.
+    \end{itemize}
+\end{defn}
+\begin{example}
+    \textbf{SAT} takes as input a formula $x$ and outputs 1 if and only if it is satisfiable.
+    \vspace{1mm}
+     
+    \textbf{3SAT} is the special case where each clause has size at least 3.
+\end{example}
+
+We can reduce \textbf{CIRCUITSAT} to \textbf{3SAT}. Assume fan-in 2 for convenience. First, let $v_1,v_2,\ldots,v_m$ be some straight-line computation. For each $v_i$, we take a variable, which we shall also call $v_i$. 
+\begin{itemize}
+    \item If $v_i = \neg v_j$ for some $j<i$, put in clauses $\neg v_i \vee \neg v_j$ and $v_i \vee v_j$.
+    \item If $v_i = v_j \wedge v_k$ for some $j,k <i$, put in $\neg v_i \vee v_j$, $\neg v_i \vee v_k$, $\neg v_j \vee \neg v_k \vee v_i$.
+    \item If $v_i = v_j \vee v_k$ for some $j,k < i$, put in $\neg v_j \vee v_i$, $\neg v_k \vee v_i$, $\neg v_i \vee v_j \vee v_k$.
+\end{itemize} 
+So far, if $v_1,\ldots,v_m$ satisfy the formula, then they must take values corresponding to the straight line computation. Now add the clause $v_m$ to force the output to be 1. Finally, given $C$ and $x$, set the input corresponding to $x$ to be those values (i.e. plug in the given values) and simplify the resulting formula to some $\phi_x$ which is satisfiable if and only if $\exists y$ such that $C(x,y)=1$.
+
 
 \end{document}
