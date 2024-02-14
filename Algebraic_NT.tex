@@ -830,7 +830,7 @@ If $f$ is a meromorphic/analytic function defined on some open $S \subset \mathb
     \end{align*}
 \end{proof}
 \marginpar{09 Feb 2024, Lecture 10}
-\textbf{Remark.} If a Dirichlet series is convergent on some half plane $\text{Re}(s)>\sigma_0$, then it defines an analytic function on this half plane. This follows from Theorem \ref{theorem2.3}. TOOD: There are some mistakes in this lecture. The fixes are on Moodle, look them up.
+\textbf{Remark.} If a Dirichlet series is convergent on some half plane $\text{Re}(s)>\sigma_0$, then it defines an analytic function on this half plane. This follows from Theorem \ref{theorem2.3}.
 \begin{defn}\label{defn2.11}
     The \textbf{gamma function} is the absolutely convergent integral \[
     \Gamma(s) = \int_{0}^{\infty} e^{-y}y^s \frac{\mathrm{d}y}{y},
@@ -844,7 +844,7 @@ If $f$ is a meromorphic/analytic function defined on some open $S \subset \mathb
         \item We have the functional equations
         \begin{itemize}
             \item $\Gamma(s+1)=s \Gamma(s)$,
-            \item $\Gamma(s) \Gamma(s-1) = \frac{\pi}{\sin(\pi s)}$,
+            \item $\Gamma(s) \Gamma(1-s) = \frac{\pi}{\sin(\pi s)}$,
             \item $\Gamma(s) \Gamma\left(s+\frac{1}{2}\right) = \frac{2\sqrt{\pi}}{2^{2s}}\Gamma(2s)$.
         \end{itemize}
         \item The gamma function has special values 
@@ -903,9 +903,9 @@ for $\text{Re}(s)>1$.
         \item The integrals have simple poles at $s=0$ and $s=k$ such that 
         \begin{align*}
             &\text{Res}_{s=0} M(f,s) = - a_0 &\text{Res}_{s=k} M(f,s) = C b_0\\
-            &\text{Res}_{s=0} M(g,s) = b_0 &\text{Res}_{s=k} M(g,s) = C^{-1} a_0.
+            &\text{Res}_{s=0} M(g,s) = -b_0 &\text{Res}_{s=k} M(g,s) = C^{-1} a_0.
         \end{align*}
-        \item We have $M(f,s) = C M(f,k-s)$.
+        \item We have $M(f,s) = C M(g,k-s)$.
     \end{enumerate}
 \end{theorem}
 \begin{proof}
@@ -922,7 +922,7 @@ for $\text{Re}(s)>1$.
     Hence $Z(s) = M\left(f,\frac{s}{2}\right)$ has a holomorphic continuation to $\mathbb{C} \setminus \{0,1\}$ with simple poles at $s=0$ and $s=1$ with residues $-1$ and $1$, and we obtain $Z(s) = M\left(f,\frac{s}{2}\right) = M \left(f, \frac{1-s}{2}\right) = Z(1-s)$.
 \end{proof}
 \begin{cor}\label{cor2.20}
-    The function $\zeta(s)$ admits an analytic continuation to $\mathbb{C} \setminus \{1\}$, has a simple pole at $s=1$ with residue 1 and satisfies $$\zeta(1-s) = 2 (2\pi)^{-s}\Gamma(s) \sin \left(\frac{\pi s}{2}\right) \zeta(s).$$
+    The function $\zeta(s)$ admits an analytic continuation to $\mathbb{C} \setminus \{1\}$, has a simple pole at $s=1$ with residue 1 and satisfies $$\zeta(1-s) = 2 (2\pi)^{-s}\Gamma(s) \sin \left(\frac{\pi(1-s)}{2}\right) \zeta(s).$$
 \end{cor}
 \begin{proof}
     Recall $z(s) = \pi^{-s/2}\Gamma \left(\frac{s}{2}\right)\zeta(s)$, which has a simple pole at $s=0$ and so does $\Gamma \left(\frac{s}{2}\right)$, hence $\zeta(s)$ has no pole at 0. At $s=1$, $Z(s)$ has a simple pole and $\Gamma \left(\frac{s}{2}\right)$ does not, so $\zeta(s)$ does. Now $$\text{Res}_{s=1}\zeta(s) = \pi^{1/2}\Gamma \left(\frac{1}{2}\right)^{-1} \text{Res}_{s=1}Z(s) = 1$$ by Theorem \ref{theorem2.19}. Now from the functional equation from Theorem \ref{theorem2.18}, \[
@@ -935,7 +935,7 @@ for $\text{Re}(s)>1$.
     \end{align*}
     Insert this into $(\dagger)$ to get our result, i.e. 
     \begin{align*}
-        \zeta(1-s) = 2 (2\pi)^{-s}\Gamma(s) \sin \left(\frac{\pi s}{2}\right) \zeta(s).
+        \zeta(1-s) = 2 (2\pi)^{-s}\Gamma(s) \sin \left(\frac{\pi (1-s)}{2}\right) \zeta(s).
     \end{align*}
 \end{proof}
 What about the zeroes of $\zeta(s)$? We have that 
