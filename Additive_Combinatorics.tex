@@ -550,7 +550,7 @@ where $(\star)$ follows from Ex. Sheet 1, Q3.
 \begin{example}
     When $H \le \mathbb{F}_p^n$, then $E(V,V)=1$, i.e. the additive energy achieves its maximum. Exercise on Ex. Sheet 2: think of an example where the additive energy is small.
 \end{example}
-\begin{lemma}
+\begin{lemma}\label{lemma2.13}
     Let $G$ be abelian and let $A,B \subset G$ be finite. Then \[
     E(A,B) \ge \frac{\sqrt{\left|A\right|\left|B\right|}}{\left|A+B\right|}.
     \]
@@ -779,8 +779,61 @@ We may boostrap Khintchine's inequality to obtain the following:
         ||\sum_{i=1}^{k} Z_i(y)||_{L^p(\mathbb{P})}^p &= O \left(p^{p/2}||\sum_{i=1}^{k} \left|Z_i(y)\right|^2||_{L^{p/2}(\mathbb{P})}^{p/2} \right) \\
         &= O \left(p^{p/2} \mathbb{E}\left|\sum_{i=1}^{n} \left|Z_i(y)\right|^2 \right|^{p/2} \right)
     \end{align*}
-    TODO: finish this expression. So for each $y \in G$, $||Z_i(y)||_{L^p(\mathbb{P})}^p = O \left(p^{p/2} k^{\frac{p}{2}-1} \sum_{i=1}^{k} \left|Z_i(y)\right|^p\right)$.
+    TODO: finish this expression (in the lecture, she misses the expectation in the last line, but it should be there). So for each $y \in G$, $||\sum_{i=1}^{k} Z_i(y)||_{L^p(\mathbb{P})}^p = O \left(p^{p/2} k^{\frac{p}{2}-1} \mathbb{E}\sum_{i=1}^{k} \left|Z_i(y)\right|^p\right)$.
+    \marginpar{14 Feb 2024, Lecture 12}
+    \vspace{1mm}
+     
+    Summing over $y \in G$ gives 
+    \begin{align*}
+        \mathbb{E}_{y \in G} ||\sum_{i=1}^{k} Z_i(y)||_{L^p(\mathbb{P})}^{p} = O \left(p^{p/2}k^{\frac{p}{2}-1}\mathbb{E}\sum_{i=1}^{k} \mathbb{E}_{y \in G}\left|Z_i(y)\right|^p \right)
+    \end{align*}
+    with 
+    \begin{align*}
+        \left(\mathbb{E}_{y \in G}\left|Z_i(y)\right|^p \right)^{1/p} = ||Z_i||_{L^p(G)} \le  \underbrace{||\tau_{-z_i}(f)||_{L^p(G)}}_{= ||f||_{L^p(G)}} + \underbrace{||f * \mu_A||_{L^p(G)}}_{\le ||f||_{L^p(G)}} \le 2||f||_{L^p(G)},
+    \end{align*}
+    where the second underbrace estimate follows by Young's Convolution Inequality, which states that if $1+\frac{1}{r}=\frac{1}{p}+\frac{1}{q}$, then $||f * g||_r \le ||f||_{p} ||g||_{q}$. It follows that
+    \begin{align*}
+        \mathbb{E}_{(z_1,\ldots,z_k) \in A^k}\mathbb{E}_{y \in G} |\sum_{i=1}^{k} Z_i(y)|^p &= O \left(p^{p/2}k^{p/2-1}\mathbb{E}_{(z_1,\ldots,z_k) \in A^k}\sum_{i=1}^{k} 2\cdot ||f||^p_{L^p(G)} \right) \\
+        &= O \left(p^{p/2}k^{p/2}||f||_{L^p(G)}^p \right)\\
+        &= O \left((pk||f||^2_{L^p(G)})^{p/2}\right),
+    \end{align*}
+    which implies (after dividing through by $k^{p}$) 
+    \begin{align*}
+        \mathbb{E}_{(z_1,\ldots,z_k) \in A^k}\underbrace{\mathbb{E}_{y \in G}\left|\frac{1}{k}\sum_{i=1}^{k} \tau_{-z_i}(f)(y) - f * \mu_A (y)\right|^p}_{:= (\star)} = O \left((pk^{-1}||f||^2_{L^p(G)})^{p/2}\right)
+    \end{align*}
+    Choose $k = O(\epsilon^{-2}p)$ such that RHS is at most $\left(\frac{\epsilon}{4}||f||_{L^p(G)}\right)^{p}$. Write $$L = \left\{(z_1,\ldots,z_k) \in A^k \mid (\star) \le \left(\frac{\epsilon}{2}||f||_{L^p(G)}\right)^p \right\}.$$
+    By averaging/Markov, since $\mathbb{E}(\star)\le \left(\frac{\epsilon}{4}||f||_{L^p(G)}\right)^p = 2^{-p} \left(\frac{e}{2}||f||_{L^p(G)}\right)^p$, 
+    \begin{align*}
+        &\frac{\left|L^C\right|}{\left|A\right|^k} = \mathbb{P}\left((\star)\ge \left(\frac{\epsilon}{2}||f||_{L^p(G)}\right)^p\right) \le \mathbb{P}\left((\star)\ge 2^{p}\mathbb{E}(\star)\right) \le 2^{-p} \\
+        &\implies \frac{\left|L\right|}{\left|A\right|^k}\ge 1-2^{-p}.
+    \end{align*}
+    So in particular, $\left|L\right|\ge \frac{1}{2}\left|A\right|^k$. Let
+    \begin{align*}
+        D = \{\underbrace{(b,b,\ldots,b)}_{k \text{ times}} \mid b \in B\},
+    \end{align*}
+    so $L + D \subset (A+B)^k$, whence (as $\left|L\right|\ge \frac{1}{2}\left|A\right|^k$) $$\left|L+D\right|\le \left|(A+B)^k\right|\le (K\left|A\right|)^k = K^k \left|A\right|^k \le (2K)^k \left|L\right|$$
+    By Lemma \ref{lemma2.13}, $E(L+D,L+D) \ge \frac{\left|D\right|^2\left|L\right|}{(2K)^k}$, so there are at least $\frac{\left|D\right|^2}{(2K)^k}$ pairs $(b_1,b_2) \in D \times D$ such that $r_{L-L}(b_1-b_2) > 0$. In particular, there exists $b \in B$ and $X \subset B-b$ of size $\left|X\right|\ge \ge \frac{\left|D\right|}{(2K)^k} = \frac{\left|B\right|}{(2K)^k}$ such that $r_{L-L}(x) > 0 ~\forall x \in X$. In other words, $\forall x \in X$, $\exists l_1(x),l_2(x) \in L$ such that $\forall i \in [k]$, $l_1(x)_i = l_2(x)_i + x$. By the triangle inequality, for each $x \in X$, 
+    \begin{align*}
+        &||\tau_{-x}(f * \mu_A) - f * \mu_A||_{L^p(G)}\\
+        \le & ||t_{-x}(f*\mu_A)-\tau_{-x}\left(\frac{1}{k}\sum_{i=1}^{k}\tau_{-l_2(x)_i}(f)\right)||_{L^p(G)} + ||\tau_{-x}\left(\frac{1}{k}\sum_{i=1}^{k}\tau_{-l_2(x)_i}(f)\right)-f* \mu_A||_{L^p(G)}\\
+        =& ||f * \mu_A - \frac{1}{k}\sum_{i=1}^{k} \tau_{-l_2(x)_i}(f)||_{L^p(G)} + ||\frac{1}{k}\sum_{i=1}^{k} \tau_{-x-l_2(x)_i}(f)-f*\mu_A||_{L^p(G)}\\
+        \le& 2 \cdot \frac{\epsilon}{4} ||f||_{L^p(G)}
+    \end{align*}
+    by the definition of $L$.
 \end{proof}
+\begin{theorem}[Bogolyubov again, due to Sanders]\label{theorem3.9}
+    Let $A \subset \mathbb{F}_p^n$ be a set of density $\alpha>0$. Then there exists a subspace $V \le \mathbb{F}_p^n$ of codimension $O((\log(\alpha^{-1}))^4)$ such that $V \subset A+A-A-A$.
+\end{theorem}
+\begin{proof}
+    This is on Ex. Sheet 3. Use Croot--Sisask and Chang's theorem.
+\end{proof}
+\begin{theorem}[due to Schoen and Shlvedov]\label{theorem3.10}
+    Let $p \neq 5$ and let $A \subset \mathbb{F}_p^n$. Suppose that $A$ contains no nontrivial solutions to the equation 
+    \begin{align*}
+        x_1 + x_2 + x_3 + x_4 + x_5 = 5y,
+    \end{align*}
+    i.e. no solution $(y,(x_i)_{i=1}^5) \in A^6$ such that $y \neq x_i$ for some $i \in [5]$.
+\end{theorem}
 
 
 \end{document}
