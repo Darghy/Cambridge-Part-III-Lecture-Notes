@@ -777,9 +777,19 @@ We may boostrap Khintchine's inequality to obtain the following:
     For each $y \in G$, define $Z_i(y) = \tau_{-z_i}(f)(y) - f * \mu_A(y)$ for $i \in [k]$. For fixed $y \in G$, these are independent and have mean 0, so by Marcinkiewicz--Zygmond, for each $y \in G$,
     \begin{align*}
         ||\sum_{i=1}^{k} Z_i(y)||_{L^p(\mathbb{P})}^p &= O \left(p^{p/2}||\sum_{i=1}^{k} \left|Z_i(y)\right|^2||_{L^{p/2}(\mathbb{P})}^{p/2} \right) \\
-        &= O \left(p^{p/2} \mathbb{E}\left|\sum_{i=1}^{n} \left|Z_i(y)\right|^2 \right|^{p/2} \right)
+        &= O \left(p^{p/2} \mathbb{E}\left(\sum_{i=1}^{k} \left|Z_i(y)\right|^2 \right)^{p/2} \right)
     \end{align*}
-    TODO: finish this expression (in the lecture, she misses the expectation in the last line, but it should be there). So for each $y \in G$, $||\sum_{i=1}^{k} Z_i(y)||_{L^p(\mathbb{P})}^p = O \left(p^{p/2} k^{\frac{p}{2}-1} \mathbb{E}\sum_{i=1}^{k} \left|Z_i(y)\right|^p\right)$.
+    Applying Hölder with $\frac{2}{p}+\frac{1}{p'}=1$ (so $\frac{1}{p'}\cdot \frac{p}{2} = \frac{p}{2}-1$) to the expression inside the expectation gives that it is 
+    \begin{align*}
+        \left(\sum_{i=1}^{k} \left|Z_i(y)\right|^2\right)^{p/2} \le& \left(\sum_{i=1}^{k} 1^{p'}\right)^{\frac{1}{p'}\cdot \frac{p}{2}}\left(\sum_{i=1}^{k} \left|Z_i(y)\right|^{2\cdot \frac{p}{2}}\right)^{\frac{2}{p}\cdot \frac{p}{2}}\\
+        =& k^{\frac{p}{2}-1}\sum_{i=1}^{k} \left|Z_i(y)\right|^p.
+    \end{align*}
+    \vspace{1mm}
+     
+    So for each $y \in G$, 
+    \begin{align*}
+        ||\sum_{i=1}^{k} Z_i(y)||_{L^p(\mathbb{P})}^p = O \left(p^{p/2} k^{\frac{p}{2}-1} \mathbb{E}\sum_{i=1}^{k} \left|Z_i(y)\right|^p\right).
+    \end{align*}
     \marginpar{14 Feb 2024, Lecture 12}
     \vspace{1mm}
      
@@ -832,8 +842,11 @@ We may boostrap Khintchine's inequality to obtain the following:
     \begin{align*}
         x_1 + x_2 + x_3 + x_4 + x_5 = 5y,
     \end{align*}
-    i.e. no solution $(y,(x_i)_{i=1}^5) \in A^6$ such that $y \neq x_i$ for some $i \in [5]$.
+    i.e. no solution $(y,(x_i)_{i=1}^5) \in A^6$ such that $y \neq x_i$ for some $i \in [5]$. Then $\left|A\right| = \exp \left(-\Omega \left(n^{1/5}\right)\right)\left|\mathbb{F}_p^n\right|$.\footnote{$\Omega$ is the opposite to $O$, one lowerboudns while the other upperbounds.}
 \end{theorem}
+\begin{proof}
+    
+\end{proof}
 
 
 \end{document}
