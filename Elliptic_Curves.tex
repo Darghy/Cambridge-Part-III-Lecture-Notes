@@ -481,7 +481,7 @@ These satisfy $\wp'(z)^2 = 4\wp(z)^3 - g_2\wp(z) - g_3$ for some constants $g_2,
     E[n] = \text{ker}(E \stackrel{[n]}{\longrightarrow} E).
     \]
 \end{defn}
-If $K=\mathbb{C}$, then $E(\mathbb{C}) \cong \mathbb{C}/\Lambda$, so $E[n] \cong (\mathbb{Z}/n\mathbb{Z})^2$ and $\text{deg}[n] = n^2$. Call these results (1) and (2). We will show that (2) holds over any field $K$ and (1) holds if $\text{char }K \nmid n$.
+If $K=\mathbb{C}$, then $E(\mathbb{C}) \cong \mathbb{C}/\Lambda$, so $E[n] \cong (\mathbb{Z}/n\mathbb{Z})^2$ and $\text{deg}[n] = n^2$. Call these results (1) and (2). We will show that (2) holds over any field $K = \overline{K}$ and (1) holds if $\text{char }K \nmid n$.
 \marginpar{31 Jan 2024, Lecture 6}
 \begin{lemma}\label{lemma4.6}
     Assume $\text{char }K \neq 2$ and $E: y^2=f(x)=(x-e_1)(x-e_2)(x-e_3)$ (with $e_i \in \overline{K}$). Then $E[2] = \{0, (e_1,0), (e_2,0), (e_3,0)\} \cong (\mathbb{Z}/2\mathbb{Z})^\times$.
@@ -684,7 +684,7 @@ We assume that $C$ is a smooth projective curve.
 \end{defn}
 As a consequence of Riemann--Roch, we have that if $0 \neq \omega \in \Omega_C$, then $\text{deg}(\text{div}(\omega)) = 2g(C)-2$.
 \begin{lemma}
-    Assume $\text{char }K \neq 2$ and let $E : y^2 = (x-e_1)(x-e_2)(x-e_3)$ for $e_1,e_2,e_3$ distinct. Then $\omega = \frac{\mathrm{d}x}{y}$ is a differential on $E$ with no zeroes or poles, which implies $g(E)=1$. In particular, the $K$--vector space of regular differentials on $E$ is 1--dimensional, spanned by $\omega$.
+    Assume $\text{char }K \neq 2$ and let $E : y^2 = (x-e_1)(x-e_2)(x-e_3)$ for $e_1,e_2,e_3$ distinct. Then $\omega = \frac{\mathrm{d}x}{y}$ is a differential on $E$ with no zeroes or poles, which implies $g(E)=1$. In particular, the $K$--vector space of regular differentials on $E$ is 1--dimensional (see previous fact), spanned by $\omega$.
 \end{lemma}
 \begin{proof}
     Let $T_i = (e_i,0)$. Then $E[2]=\{0,T_1,T_2,T_3\}$ and $\text{div}(y) \stackrel{(\dagger)}{=} (T_1)+(T_2)+(T_3)-3(0)$. For $0 \neq P \in E$, $\text{div}(x-x_P) = (P)+(-P)-2(0)$. 
@@ -749,15 +749,15 @@ As a consequence of Riemann--Roch, we have that if $0 \neq \omega \in \Omega_C$,
 \end{example}
 \marginpar{07 Feb 2024, Lecture 9}
 \begin{theorem}\label{theorem6.5}
-    If $\text{char }K \nmid n$, then $E[n] = (\mathbb{Z}/n\mathbb{Z})^2$.
+    \footnote{Remember that $\overline{K} = K$ here.}If $\text{char }K \nmid n$, then $E[n] = (\mathbb{Z}/n\mathbb{Z})^2$.
 \end{theorem}
 \begin{proof}
     Lemma \ref{lemma6.3} and induction imply $[n]^* \omega = n \omega$ where $\text{char }K \nmid n$, so $[n]$ is separable by Lemma \ref{lemma6.4}. Hence $\left|[n]^{-1}(Q)\right| = \text{deg}[n]$ for all but finitely many points $Q \in E$. But $[n]$ is a group homomorphism, so $\left|[n]^{-1} Q\right| = \left|E[n]\right| ~\forall Q \in E$. We conclude that $\left|E[n]\right|=\text{deg}[n] = n^2$ by Corollary \ref{cor5.9}.
     \vspace{1mm}
      
-    By classification of finite abelian groups, $E[n] \cong \mathbb{Z}/d_1\mathbb{Z} \times \ldots \times d_t\mathbb{Z}/\mathbb{Z}$ with $d_1 \mid d_2 \mid \ldots \mid d_t$, but $d_t \mid n$, and if $p$ is a prime with $p \mid d_1$, then $E[p] \cong (\mathbb{Z}/p\mathbb{Z})^t$, so $\left|E[p]\right| = p^2$, so $t=2$. Hence $d_1 \mid d_2 \mid n$ with $d_1d_2=n^2$, so $d_1=d_2=n$ and so $E[n] \cong (\mathbb{Z}/n\mathbb{Z})^2$.
+    By classification of finite abelian groups, $E[n] \cong \mathbb{Z}/d_1\mathbb{Z} \times \ldots \times \mathbb{Z}/d_t\mathbb{Z}$ with $d_1 \mid d_2 \mid \ldots \mid d_t$, but $d_t \mid n$, and if $p$ is a prime with $p \mid d_1$, then $E[p] \cong (\mathbb{Z}/p\mathbb{Z})^t$, so $\left|E[p]\right| = p^2$, so $t=2$. Hence $d_1 \mid d_2 \mid n$ with $d_1d_2=n^2$, so $d_1=d_2=n$ and so $E[n] \cong (\mathbb{Z}/n\mathbb{Z})^2$.
 \end{proof}
-\textbf{Remark.} If $\text{char }K = p$, then $[p]$ is inseparable. It can be shown that either $E[p^r] \cong \mathbb{Z}/p^r \mathbb{Z} ~\forall r\ge 1$ or $E[p] = 0$ (the ''ordinary'' case and the ''supersingular'' case).
+\textbf{Remark.} If $\text{char }K = p$, then $[p]$ is inseparable. It can be shown that either $E[p^r] \cong \mathbb{Z}/p^r \mathbb{Z} ~\forall r\ge 1$ or $E[p^r] = 0~\forall r\ge 1$ (the ''ordinary'' case and the ''supersingular'' case).
 
 \textbf{Remark about the remark.} Do not use this remark to trivialize a question on Ex. Sheet 2.
 
@@ -813,7 +813,7 @@ As a consequence of Riemann--Roch, we have that if $0 \neq \omega \in \Omega_C$,
 \end{align*} 
 For $K$ a function field, i.e. $K = \mathbb{F}_q(C)$ where $C$ is a smooth projective curve,
 \begin{align*}
-    \zeta_K(s) = \prod_{x \in \left|C\right|} \left(1-\frac{1}{(Nx))^2}\right)^{-1}, 
+    \zeta_K(s) = \prod_{x \in \left|C\right|} \left(1-\frac{1}{(Nx)^{s}}\right)^{-1}, 
 \end{align*}
 where $\left|C\right| = \{\text{closed points of }C\} = \{\text{orbits for the action of Gal}(\overline{\mathbb{F}_q}/\mathbb{F}_q) \text{ on }C(\overline{\mathbb{F}_q})\}$ and $Nx = q^{\text{deg }x}$, where $\text{deg }x$ is the size of the corresponding orbit (these definitions are borrowed from scheme theory). We have $\zeta_K(s) = F(q^{-s})$ for some $F \in \mathbb{Q}[[T]]$. We have
 \begin{align*}
