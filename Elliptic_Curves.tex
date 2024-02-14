@@ -1004,12 +1004,74 @@ An exercise on Ex. Sheet 2 asks us to show that the first three conditions imply
             \stackrel{\text{intg. wrt }Y}{\implies}& \log(F(Y,Z)) = \log(Y) + h(Z) 
         \end{align*}
         for some power series $H$. But the symmetry in $Y$ and $Z$ implies that $h(Z)=\log Z$, so we're done.
-        \item
+        \marginpar{14 Feb 2024, Lecture 12}
+        
+        \item For this, use
+        \begin{lemma}\label{lemma8.4}
+            Let $f(T) = aT + \ldots \in R[[T]]$ with $a \in R^\times$. Then there exists a unique $g(T) = a^{-1}T + \ldots \in R[[T]]$ with $f(g(T))=g(f(T))=T$.
+        \end{lemma}
+        \begin{proof}
+            We construct polynomials $g_{n}(T) \in R[T]$ such that $f(g_n(T)) \equiv T \pmod{T^{n+1}}$ and $g_{n+1}(T) \equiv g_n(T) \pmod{T^{n+1}}$. Then $g(T) = \lim_{n \to \infty}g_n(T)$ satisfies $f(g(T))=T$. To start the induction, set $g_1(T) = a^{-1}T$.
+            \vspace{1mm}
+             
+            Now suppose $n\ge 2$, so $g_{n-1}(T)$ exists, so $f(g_{n-1}(T)) \equiv T + bT^n \pmod{T^{n+1}}$ for some $b \in R$. We put $g_n(T) = g_{n-1}(T) + \lambda T^n$ for $\lambda \in R$ to be chosen later. Then $f(g_n(T)) = f(g_{n-1}(T)+\lambda T^n) = f(g_{n-1}(T)) + \lambda a T^n \equiv T + (b+\lambda a)T^n\pmod{T^{n+1}}$, so we take $\lambda = -ba^{-1}$ (then $\lambda \in R$ as $b \in R, a \in R^\times$), completing the induction step.
+            \vspace{1mm}
+             
+            We get $g(T) = a^{-1}T + \ldots \in R[[T]]$ such that $f(g(T))=T ~ (\dagger)$. Applying the same construction to $g$ gives $h(T) = a  + \ldots \in R[[T]]$ such that $g(h(T))=T ~ (\ddagger)$. Now note that $f(T) \stackrel{(\ddagger)}{=} f(g(h(T))) \stackrel{(\dagger)}{=} h(T)$, so $f=h$.
+        \end{proof}
+        The result now follows from this lemma and Ex. Sheet 2 Q5 (which allows us to control the denominators, so they'd be $n!$).
     \end{enumerate}
 \end{proof} 
-
-$\frac{\frac{\partial \alpha}{\partial \beta}}{\frac{\partial \gamma}{\partial \bigcup_{i \in abd} d}e}f$.
-
+\textbf{Notation.} Let $\mathcal{F}$ be a formal group (e.g. $\widehat{\mathbb{G}_a}, \widehat{\mathbb{G}_m}, \widehat{E}$) given by a power series $F \in R [[X,Y]]$. Suppose $R$ is complete with respect to an ideal $I$. For $x, y \in I$. define $x \oplus_{\mathcal{F}} y = F(x,y) \in I$. Then $\mathcal{F}(I) = (I, \oplus_{\mathcal{F}})$ is an abelian group. 
+\begin{example}
+    \begin{itemize}
+        \item $\widehat{\mathbb{G}_a}(I) = (I,+)$,
+        \item $\widehat{\mathbb{G}_m}(I) = (1+I, \times)$,
+        \item $\widehat{E}(I) = \text{subgroup of }E(K)$ in Lemma \ref{lemma8.2}.
+    \end{itemize}
+\end{example}
+\begin{cor}\label{cor8.5}
+    Let $\mathcal{F}$ be a formal group over $R$ and $ n \in \mathbb{Z}$. Suppose $n \in R^\times$. Then 
+    \begin{enumerate}[(i)]
+        \item $[n] : \mathcal{F} \to \mathcal{F}$ is an isomorphism of formal groups.
+        \item If $R$ is complete with respect to an ideal $I$, then $\mathcal{F}(I) \stackrel{\times n}{\to} \mathcal{F}(I)$ is an isomorphism of groups. In particular, $\mathcal{F}(I)$ has no $n$-torsion.
+    \end{enumerate}
+\end{cor}
+\begin{proof}
+    We define $[I](T)=T$ and $[n](T) = F([n-1]T,T) ~\forall n\ge 2$. (For $n<0$, use $[-1](T) = \iota(T)$). Since $F(X,Y) = X+Y+XY(\ldots)$, we have $[2](T) = f(T,T) = 2T + \ldots$. By induction we get $[n](T) = nT + \ldots \in R[[T]]$. Lemma \ref{lemma8.4} shows that if $n \in R^\times$, then $[n]$ is an isomorphism. This proves (i). Part (ii) now follows.
+\end{proof}
+\section{Elliptic curves over local fields}
+Let $K$ be a field, compelte with respect to a discrete valuation $v : K \to \mathbb{Z}$. (Here complete means complete with respect to the matric given by the absolute value arising from $v$.)
+\begin{itemize}
+    \item The \textbf{valuation ring} is $\mathcal{O}_K = \{x \in K^\times \mid v(x)\ge 0\} \cup \{0\}$.
+    \item The \textbf{unit group} is $\mathcal{O}_K^\times = \{x \in K^\times \mid  v(x) = 0\}$.
+    \item The \textbf{maximal ideal} is $\pi \mathcal{O}_K$, where $v(\pi)=1$.
+    \item The \textbf{residue field} is $k = \mathcal{O}_K/\pi \mathcal{O}_K$.
+\end{itemize}
+We assume that $\text{char }K = 0$, but $\text{char}(k) = p >0$ (i.e. we are in the mixed characteristic case). The key example to keep in mind is $K = \mathbb{Q}_p, \mathcal{O}_K = \mathbb{Z}_p, k = \mathbb{F}_p$. Now let $E/K$ be an elliptic curve.
+\begin{defn}
+    A Weierstrass equation for $E$ with coefficients $a_1,\ldots,a_6 \in K$ is \textbf{integral} if $a_1,\ldots,a_6 \in \mathcal{O}_K$ and \textbf{minimal} if $v(\Delta)$ is minimal among all integral Weierstrass equations for $E$.
+\end{defn}
+\textbf{Remarks.}
+\begin{enumerate}[(i)]
+    \item Rescaling $x = u^2x', y= u^3y'$ gives $a_i = u^i a_i'$, so we can clear denominators, so integral Weierstrass equations exist.
+    \item $a_1,\ldots,a_6 \in \mathcal{O}_K \implies \Delta \in \mathcal{O}_K \implies v(\Delta)\ge 0 \implies $ minimal Weierstrass equations exist.
+    \item If $\text{char}(k) \neq 2,3$, then there exists a minimal Weierstrass equation of the form $y^2 = x^3+ax+b$.
+\end{enumerate} 
+\begin{lemma}\label{lemma9.1}
+    Let $E/K$ have integral Weierstrass equation $y^2+a_1xy+a_3y = x^3+a_2x^2+a_4x+a_6$. Let $0 \neq P = (x,y) \in E(K)$. Then either $x,y \in \mathcal{O}_K$ or $\begin{cases}
+        v(x) = -2s\\
+        v(y) = -3s
+    \end{cases}$
+    for some $s\ge 1$. (Compare this with Ex. Sheet 1 Q5.)
+\end{lemma}
+\begin{proof}
+    \begin{itemize}
+        \item Case $v(x)\ge 0$: Suppose $v(y)<0$. Then $v(\text{LHS})=v(y^2)<0$ while $v(\text{RHS})\ge 0$, a contradiction. Hence $v(y)\ge 0$, so $x,y \in \mathcal{O}_K$.
+        \item Case $v(x)<0$: We have $v(\text{LHS})\ge \min(2v(y),v(x)+v(y),v(y))$ and $v(\text{RHS})=3v(x)$. Go through 3 cases based on which element is minimal to get $v(y)<v(x)$ in every case. Now $v(\text{LHS})=2v(y)$, $v(\text{RHS})=3v(x)$, so we're done.
+    \end{itemize}
+\end{proof}
+If $K$ is complete, then $\mathcal{O}_K$ is complete with respect to $\pi^r\mathcal{O}_K$ for any $r\ge 1$. We fix a minimal Weierstrass equation for $E/K$. This gives rise to a formal group $\widehat{E}$ over $\mathcal{O}_K$. Take $R = \mathcal{O}_K$, $I = \pi^r \mathcal{O}_K$ for $r\ge 1$ in Lemma \ref{lemma8.2} to get $\widehat{E}(\pi^r \mathcal{O}_K) = \{(x,y) \in E(K) \mid -\frac{x}{y},-\frac{1}{y} \in \pi^r \mathcal{O}_K\}$.
 
 
 \end{document}
