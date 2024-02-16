@@ -459,7 +459,7 @@ Next we focus on the kernel. Recall that if $\mathcal{P} \subset \mathcal{O}_L$ 
  
 \textbf{Notation.} Let $N_{L/K}: I_K \to I_K$ be the norm map, given by $\mathfrak{a} \mapsto N_{L/K}(\mathfrak{a})$. If $\mathfrak{a} =\prod_{i=1}^{n} \mathcal{P}_i^{r_i}$, then $N_{L/K}(\mathfrak{a}) = \prod_{i=1}^{n} (N(\mathcal{P}_i)^{r_i}) = \prod_{i=1}^{n} (\mathfrak{p}_i^{f_{\mathcal{P}_i/\mathfrak{p}_i}})^{r_i}$.
 \begin{defn}
-    Let $L/K$ be abelian and let $\mathfrak{m}$ be a modulus of $K$ divisible by $\mathfrak{f}(L/K)$. Then the \textbf{norm group} (also called a Tahagi group) is the congruence subgroup
+    Let $L/K$ be abelian and let $\mathfrak{m}$ be a modulus of $K$ divisible by $\mathfrak{f}(L/K)$. Then the \textbf{norm group} (also called a Takagi group) is the congruence subgroup
     \[
     T_{L/K}(\mathfrak{m}) = P_K(\mathfrak{m})N_{L/K}(I_L(\mathfrak{m})),
     \]
@@ -1210,10 +1210,134 @@ Since $\zeta_K(s)$ and $\zeta(s)$ have poles at $s=1$, we have:
     \begin{align*}
         \lim_{s \to 1} \phi(m) \sum_{p \equiv a \text{ mod }m}^{} p^{-s} + \left(\text{finite constant}\right)
     \end{align*}
-    finite since the theorem is false?? wtf does this mean?
+    finite since the theorem is false?? wtf does this mean? TODO: check it
     \vspace{1mm}
      
     Since $L(\chi_0,s) = \zeta(s) \prod_{p \mid m}^{} (1-p^{-s})$, so $\log L(\chi_0,s) \to \infty$ as $s \to 1$ (since $\zeta(s)$ has a pole at $s=1$). We know $L(\chi,1)$ is defined for $\chi \neq \chi_0$ and $L(\chi,1) \neq 0$, so $\log L(\chi,1)$ will be finite for $\chi \neq \chi_0$, so $\sum_{\chi}^{} \chi(a)^{-1} \log L(\chi,s) \to \infty$ as $s \to 1^+$, so the same is true for the RHS. 
+\end{proof}
+
+\marginpar{16 Feb 2024, Lecture 13}
+Lecture start summary: Let $K/\mathbb{Q}$ be abelian. Then $K \subset \mathbb{Q}(\zeta_m)$ for some $m$. Let $G = \text{Gal}(K/\mathbb{Q})$ and consider its image in $(\mathbb{Z}/m\mathbb{Z})^\times \cong \text{Gal}(\mathbb{Q}(\zeta_m)/\mathbb{Q})$. We can consider characters of $G$ as Dirichlet characters mod $m$, and view $\widehat{G}$ as a subgroup of $\widehat{(\mathbb{Z}/m\mathbb{Z})^\times}$.
+
+\begin{prop}\label{prop2.38}
+    For $K$ as above, we have
+    \[
+    \zeta_K(s) = \prod_{\mathfrak{p} \mid m}^{} (1-N(\mathfrak{p})^{-s})^{-1} \prod_{\chi \in \widehat{G}}^{} L(\chi,s)
+    \]
+    for $\text{Re}(s)>1$.
+\end{prop}
+\begin{proof}
+    Similar to Proposition \ref{prop2.35}, left as an exercise.
+\end{proof}
+\begin{cor}\label{cor2.39}
+    We have \[
+    h_K = \left(\prod_{\mathfrak{p}\mid m}^{} \left(1-\frac{1}{p}\right)\left(1-\frac{1}{p^{f_p}}\right) \right)^{-r_p} \prod_{\chi \neq \chi_0}^{} L(\chi,1)/K.
+    \]
+\end{cor}
+\begin{proof}
+    Follows from the analytic class number formula and $$L(\chi,s) = \zeta(s) \prod_{ p \mid m}^{} \left(1-\frac{1}{p^s}\right)$$ and the fact that $\zeta(s)$ has a simple pole at $s=1$ with residue 1.
+\end{proof}
+There exist explicit formulae for $L(\chi,1)$ that we can use to compute $h_K$ (see e.g. Marcus). In Ex. Sheet 2, there is an exercise making this explicit in the quadratic case. If $K = \mathbb{Q}(\sqrt{N})$, for $N \neq 0,1$ squarefree, let $m = \left|d_{K/\mathbb{Q}}\right|$, then $K \subset \mathbb{Q}(\zeta_m)$.
+\vspace{1mm}
+ 
+Next we will prove a fundamental inequality and a more general version of Dirichlet's prime number theorem.
+\vspace{1mm}
+ 
+\textbf{Notation.} Write $f(s)\sim g(s)$ to mean that two functions which have a singularity at $s=1$ differ by a function that is analytic at $s=1$. So $\zeta(s) \sim\frac{1}{s-1}$, which is because 
+\begin{align*}
+    \log -\zeta(s) = \sum_{p}^{} \sum_{n\ge 1}^{} \frac{1}{np^{ns}} = \sum_{p}^{} \frac{1}{p^s} + \sum_{p}^{} \sum_{n\ge 2}^{} \frac{1}{np^{ns}}
+\end{align*}
+and the second term converges uniformly and absolutely for $\text{Re}(s)>\frac{1}{2}$, so only $\sum_{p}^{} p^{-s}$ contributes to the singularity at $s=1$, so $\log \zeta(s) \sim \sum_{p}^{} p^{-s} \sim \log \frac{1}{s-1}$.
+\vspace{1mm}
+ 
+Similarly, since $\log \zeta_K(s) = \sum_{\mathfrak{p}}^{} \sum_{n\ge 1}^{} \frac{1}{nN(\mathfrak{p})^s}$, we have $$\log \zeta_K(s) \sim \sum_{\mathfrak{p}} \frac{1}{N(\mathfrak{p})^s} \sim \sum_{\text{deg }\mathfrak{p}=1}^{} \frac{1}{N(\mathfrak{p})^s},$$
+where a degree one prime is a prime whose residue field degree over $\mathbb{Q}$ is 1, or equivalently a prime ideal whose absolute norm is a prime number. Note
+\[
+\zeta_K(s) = \sum_{C \in \text{Cl}(K)}^{} \zeta(C,s)
+\]
+for $\zeta(C,s)$ the \textbf{partial zeta function}, i.e.
+\[
+\zeta_K(s) = \sum_{\mathfrak{a} \in C}^{} \frac{1}{N(\mathfrak{a})^s}.
+\]
+\begin{prop}\label{prop2.40}
+    Let $[K:\mathbb{Q}]=n$ and let $C \in \text{Cl}(K)$ be an ideal class. Then $\zeta(C,s)$ is analytic for $\text{Re}(s)>1-\frac{1}{n}$, except for a simple pole at $s=1$ with residue $\kappa$.
+\end{prop}
+This is what is needed for the analytic class number formula. We skip the proof, since it needs estimates for the number of ideals in a given ideal class, see e.g. Lang.
+\vspace{1mm}
+ 
+More generally, let $\mathfrak{m}$ be a modulus of $K$ and 
+\[
+\zeta_K(\mathfrak{m},s) = \sum_{(\mathfrak{a},\mathfrak{m})=1}^{} \frac{1}{N(\mathfrak{a})^s}, 
+\]
+then $$\zeta_K(\mathfrak{m},s) = \prod_{\mathfrak{p}\nmid \mathfrak{m}}^{} \left(1-\frac{1}{N(\mathfrak{p})^s}\right)^{^{-1}}$$
+and \[
+\zeta_K(\mathfrak{m},s) = \sum_{C \in I_K(\mathfrak{m})/P_K(\mathfrak{m})}^{}\zeta(C,s) 
+\]
+is as before, but with $C$ a class in $I_K(\mathfrak{m})/P_K(\mathfrak{m})$.
+
+\begin{prop}\label{prop2.41}
+    Let $\mathfrak{m}$ be a modulus of $K$, $C$ a class in $I_K(\mathfrak{m})/P_K(\mathfrak{m})$. Then $\zeta(C,s)$ is analytic for $\text{Re}(s)>1-\frac{1}{n}$. except for a simple pole at $s=1$ with residue $\rho_{\mathfrak{m}}$ depending only on $\mathfrak{m}$ and not on $C$.
+    \vspace{1mm}
+     
+    Consequently, $\zeta_K(\mathfrak{m},s)$ is analytic for $\text{Re}(s)>1-\frac{1}{n}$, except for a simple pole at $s=1$ with residue $\rho_{\mathfrak{m}}h_{\mathfrak{m}}(K)$. 
+\end{prop}
+Note the product for $\zeta_K(\mathfrak{m},s)$ differs from $\zeta_K(s)$ by the factors corresponding to $p \mid \mathfrak{m}$, so only at finitely many primes. This finite product does not affect the singularity at $s=1$, so 
+\begin{align*}
+    \log \zeta_K(s) \sim \log \zeta_K(\mathfrak{m},s).
+\end{align*} 
+\begin{defn}\label{defn2.42}
+    We define a \textbf{generalized Dirichlet character} (also known as a \textbf{Weber character}) af modulus $\mathfrak{m}$ to be a group homomorphism
+    \[
+    \chi: I_K(\mathfrak{m})/P_K(\mathfrak{m}) \to \mathbb{C}^\times.
+    \]
+    The corresponding $L$-series $L_\mathfrak{m}(\chi,s)$ is 
+    \[
+    L_{\mathfrak{m}}(\chi,s) = \sum_{\mathfrak{a} \subset \mathcal{O}_K, (\mathfrak{a},\mathfrak{m})=1}^{} \frac{\chi(\mathfrak{a})}{N(\mathfrak{a})^s}
+    \]
+    are called \textbf{Weber $L$-functions}. We can write
+    \[
+    L_{\mathfrak{m}}(\chi,s) = \sum_{C \in I_K(\mathfrak{m})/P_K(\mathfrak{m})}^{} \chi(C) \zeta(C,s). 
+    \]
+\end{defn}
+\begin{prop}\label{prop2.43}
+    The Dirichlet series $L_{\mathfrak{m}}(\chi,s)$ is analytic for $\text{Re}(s)>1-\frac{1}{n}$. If $\chi \neq \chi_0$, then 
+    \[
+        L_{\mathfrak{m}}(\chi,s) = \prod_{\mathfrak{p} \nmid m}^{} \left(1-\frac{\chi(\mathfrak{p})}{N(\mathfrak{p})^s}\right)^{-1}.
+    \]
+\end{prop}
+\begin{proof}
+    Lang.
+\end{proof}
+Note $L_{\mathfrak{m}}(\chi_0,s) = \prod_{\mathfrak{p}\nmid \mathfrak{m}}^{} \left(1-\frac{1}{N(\mathfrak{p})^{s}}\right)^{-1} = \zeta_K(\mathfrak{m},s)$, so by Proposition \ref{prop2.41}, this is analytic for $\text{Re}(s)>1-\frac{1}{n}$, except for a simple pole at $s=1$.
+\vspace{1mm}
+ 
+Let $L/K$ be Galois. Recall that we had the norm for the Takagi group $T_{L/K}(\mathfrak{m})=P_K(\mathfrak{m})N_{L/K}(I_L(\mathfrak{m}))$, which will be the kernel of $\Phi_{\mathfrak{m}}$ for suitable $\mathfrak{m}$. We call $[I_K(\mathfrak{m}) : T_{L/K}(\mathfrak{m})]$ the \textbf{norm index}.
+\begin{theorem}[Universal Norm Index Inequality]\label{theorem2.45}
+    Let $L/K$ be Galois and let $\mathfrak{m}$ be divisible by all primes of $K$ that ramify in $L$. Then \[
+    [I_K(\mathfrak{m}): T_{L/K}(\mathfrak{m})] \le [L:K].
+    \]
+\end{theorem}
+\begin{proof}
+    Let $\chi \neq \chi_0$ be a character of $I_K(\mathfrak{m})/T_{L/K}(\mathfrak{m})$. We can also view this as a character of $I_K(\mathfrak{m})/P_K(\mathfrak{m})$. Let $m(\chi)$ be the order of the zero at $s=1$ of $L_{\mathfrak{m}}(\chi,s)$. By Proposition \ref{prop2.43}, $m(\chi)\ge 0$ (as the series is analytic). Write \[
+    L_{\mathfrak{m}}(\chi,s) = (s-1)^{m(\chi)}g(\chi,s),
+    \]
+    so \[
+    \log L_{\mathfrak{m}}(\chi,s) \sim m(\chi) \log(s-1) = -m(\chi) \log \frac{1}{s-1}.
+    \]
+    Let $\text{Re}(s)>1$ and let $\chi$ be any character of $I_K(\mathfrak{m})/T_{L/K}(\mathfrak{m})$. By the Euler product, 
+    \begin{align*}
+        \log L_{\mathfrak{m}}(\chi,s) = \sum_{\mathfrak{p} \nmid \mathfrak{m}}^{} \sum_{n\ge 1}^{} \frac{\chi(\mathfrak{p})^{n}}{n N(\mathfrak{p})^{ns}} = \sum_{\mathfrak{p} \nmid \mathfrak{m}}^{} \frac{\chi(\mathfrak{p})}{N(\mathfrak{p})^s} + \sum_{\mathfrak{p} \nmid \mathfrak{m}}^{} \sum_{n\ge 2}^{} \frac{\chi(\mathfrak{p})}{n N(\mathfrak{p})^{ns}} \sim \sum_{\mathfrak{p} \nmid \mathfrak{m}}^{} \frac{\chi(\mathfrak{p})}{N(\mathfrak{p})^s}.
+    \end{align*}
+    Write $h = [I_K(\mathfrak{m}): T_{L/K}(\mathfrak{m})]$. Since $\chi$ is trivial on $T_{L/K}(\mathfrak{m})$, we get \[
+    \sum_{\chi}^{} \chi(\mathfrak{p}) = \begin{cases}
+        h & \mathfrak{p} \in T_{L/K}(\mathfrak{m})\\
+        0 & \mathfrak{p} \not\in T_{L/K}(\mathfrak{m})
+    \end{cases}
+    \]
+    by the orthogonality relation. Let $s \to 1$ from above, and take the sum over all characters to get 
+    \[
+    \sum_{\chi}^{} \log L_{\mathfrak{m}}(\chi,s) \sim h \sum_{\mathfrak{p} \in T_{L/K}(\mathfrak{m})}^{} \frac{1}{N(\mathfrak{p})^s}.
+    \]
 \end{proof}
 
 
