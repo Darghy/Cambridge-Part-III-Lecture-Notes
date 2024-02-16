@@ -431,7 +431,7 @@ It remains to find formulas for $\lambda$ and $\nu$.
     Elliptic curves are group varieties, i.e. 
     \begin{align*}
         [-1]&:E \to E, P \mapsto \ominus P\\
-        \oplus&: E \to E, (P,Q) \mapsto P \oplus Q
+        \oplus&: E \times E\to E, (P,Q) \mapsto P \oplus Q
     \end{align*}
     are morphisms of algebraic varieties.
 \end{theorem}
@@ -439,7 +439,7 @@ It remains to find formulas for $\lambda$ and $\nu$.
     By the above formulae, $[-1]:E \to E$ is a rational map, i.e. a morphism by our important remark.
     \vspace{1mm}
      
-    For $\oplus$, note by the above formulae that $\oplus : E \to E$ is a rational map regular on 
+    For $\oplus$, note by the above formulae that $\oplus : E \times E \to E$ is a rational map regular on 
     \begin{align*}
         U = \{(P,Q) \in E \times E \mid 0_E \not\in \{P,Q, P \oplus Q, P \ominus Q  \}\}.
     \end{align*}
@@ -481,7 +481,7 @@ These satisfy $\wp'(z)^2 = 4\wp(z)^3 - g_2\wp(z) - g_3$ for some constants $g_2,
     E[n] = \text{ker}(E \stackrel{[n]}{\longrightarrow} E).
     \]
 \end{defn}
-If $K=\mathbb{C}$, then $E(\mathbb{C}) \cong \mathbb{C}/\Lambda$, so $E[n] \cong (\mathbb{Z}/n\mathbb{Z})^2$ and $\text{deg}[n] = n^2$. Call these results (1) and (2). We will show that (2) holds over any field $K = \overline{K}$ and (1) holds if $\text{char }K \nmid n$.
+If $K=\mathbb{C}$, then $E(\mathbb{C}) \cong \mathbb{C}/\Lambda$, so $E[n] \cong (\mathbb{Z}/n\mathbb{Z})^2$ and $\text{deg}[n] = n^2$. Call these results (1) and (2). We will show that (2) holds over any field $K = \overline{K}$ and (1) holds if $\text{char }K \nmid n$. We sometimes abuse notation and write $E[n] = E[n](\overline{K})$.
 \marginpar{31 Jan 2024, Lecture 6}
 \begin{lemma}\label{lemma4.6}
     Assume $\text{char }K \neq 2$ and $E: y^2=f(x)=(x-e_1)(x-e_2)(x-e_3)$ (with $e_i \in \overline{K}$). Then $E[2] = \{0, (e_1,0), (e_2,0), (e_3,0)\} \cong (\mathbb{Z}/2\mathbb{Z})^\times$.
@@ -1071,7 +1071,80 @@ We assume that $\text{char }K = 0$, but $\text{char}(k) = p >0$ (i.e. we are in 
         \item Case $v(x)<0$: We have $v(\text{LHS})\ge \min(2v(y),v(x)+v(y),v(y))$ and $v(\text{RHS})=3v(x)$. Go through 3 cases based on which element is minimal to get $v(y)<v(x)$ in every case. Now $v(\text{LHS})=2v(y)$, $v(\text{RHS})=3v(x)$, so we're done.
     \end{itemize}
 \end{proof}
-If $K$ is complete, then $\mathcal{O}_K$ is complete with respect to $\pi^r\mathcal{O}_K$ for any $r\ge 1$. We fix a minimal Weierstrass equation for $E/K$. This gives rise to a formal group $\widehat{E}$ over $\mathcal{O}_K$. Take $R = \mathcal{O}_K$, $I = \pi^r \mathcal{O}_K$ for $r\ge 1$ in Lemma \ref{lemma8.2} to get $\widehat{E}(\pi^r \mathcal{O}_K) = \{(x,y) \in E(K) \mid -\frac{x}{y},-\frac{1}{y} \in \pi^r \mathcal{O}_K\}$.
-
+If $K$ is complete, then $\mathcal{O}_K$ is complete with respect to $\pi^r\mathcal{O}_K$ for any $r\ge 1$. We fix a minimal Weierstrass equation for $E/K$. This gives rise to a formal group $\widehat{E}$ over $\mathcal{O}_K$. Take $R = \mathcal{O}_K$, $I = \pi^r \mathcal{O}_K$ for $r\ge 1$ in Lemma \ref{lemma8.2} to get 
+\begin{align*}
+    \widehat{E}(\pi^r \mathcal{O}_K) &= \left\{(x,y) \in E(K) \mid -\frac{x}{y},-\frac{1}{y} \in \pi^r \mathcal{O}_K \right\} \cup \{0\} \\
+    &= \left\{(x,y) \in E(K) \mid v \left(\frac{x}{y}\right)\ge r, v \left(\frac{1}{y}\right)\ge r\right\} \cup \{0\} \\
+    &= \left\{(x,y) \in E(K) \mid v(x)=-2s, v(y)=-3s \text{ for some }s\ge r \right\} \cup\{0\} \\
+    &= \left\{(x,y) \in E(K) \mid v(x) \le -2r, v(y) \le -3r \right\} \cup \{0\}.
+\end{align*}
+\marginpar{16 Feb 2024, Lecture 13}
+By Lemma \ref{lemma8.2} this is a subgroup of $E(K)$, call it $E_r(K)$. It is also clear that $\ldots \subset E_3(K) \subset E_2(K) \subset E_1(K) \subset E(K)$. More generally, for $\mathcal{F}$ a formal group over $\mathcal{O}_K$ we have $\ldots \subset \mathcal{F}(\pi^3 \mathcal{O}_K) \subset \mathcal{F}(\pi^2 \mathcal{O}_K) \subset \mathcal{F}(\mathcal{O}_K)$. We claim that 
+\begin{itemize}
+    \item $\mathcal{F}(\pi^r \mathcal{O}_K) \cong (\mathcal{O}_K, +)$ for $r$ sufficiently large,
+    \item $\mathcal{F}(\pi^r \mathcal{O}_K)/\mathcal{F}(\pi^{r+1} \mathcal{O}_K) \cong (k,+) ~\forall r\ge 1$.
+\end{itemize}
+\textbf{Reminder.} Remember that we always have $\text{char }K = 0, \text{char}(k) = p > 0$.
+\begin{theorem}\label{theorem9.2}
+    Let $\mathcal{F}$ be a formal group over $\mathcal{O}_K$. Let $e = v(p)$. If $r > \frac{e}{p-1}$, then \[
+    \log : \mathcal{F}(\pi^r \mathcal{O}_K) \stackrel{\sim}{\longrightarrow} \widehat{\mathbb{G}_a}(\pi^r \mathcal{O}_K)
+    \]
+    is an isomorphism of groups with inverse \[
+    \exp : \widehat{\mathbb{G}_a}(\pi^r \mathcal{O}_K) \stackrel{\sim}{\longrightarrow} \mathcal{F}(\pi^r \mathcal{O}_K). 
+    \]
+\end{theorem} 
+\textbf{Remark.} We have $\widehat{\mathbb{G}_a}(\pi^r \mathcal{O}_K) = (\pi^r \mathcal{O}_K, +) \cong (\mathcal{O}_K, +)$.
+\begin{proof}
+    For $x \in \pi^r \mathcal{O}_K$, we must show that the power series $\log(x)$ and $\exp(x)$ converge to elements in $\pi^r \mathcal{O}_K$. Recall $\exp(T) = T + \frac{b_2}{2!}T^2 + \frac{b_3}{3!}T^3 + \ldots$ with $b_i \in \mathcal{O}_K$.
+    \vspace{1mm}
+     
+    \textbf{Claim.} $v_p(n!)\le \frac{n-1}{p-1}$.
+    \begin{proof}[Proof of claim.]
+        Write 
+        \begin{align*}
+            v_p(n!) = \sum_{r=1}^{\infty} \left\lfloor \frac{n}{p^r} \right\rfloor < \sum_{r=1}^{\infty} \frac{n}{p^r} = \frac{n \cdot \frac{1}{p}}{1-\frac{1}{p}} = \frac{n}{p-1}.
+        \end{align*}
+        Clearing denominators, $(p-1)v_p(n!)<n \implies v_p(n!) \le \frac{n-1}{p-1}$.
+    \end{proof}
+    Now $v\left(\frac{b_nx^n}{n!}\right) \ge nr - e \left(\frac{n-1}{p-1}\right) = (n-1)\underbrace{\left( r - \frac{e}{p-1}\right)}_{>0} + r$. This is always $\ge r$ and tends to infinity as $n \to \infty$. Hence $\exp(x)$ converges to an element of $\pi^r \mathcal{O}_K$. The same argument works for $\log$.
+\end{proof}
+\begin{lemma}\label{lemma9.3}
+    We have $\mathcal{F}(\pi^r \mathcal{O}_K)/\mathcal{F}(\pi^{r+1}\mathcal{O}_K) \cong (k,+) ~\forall r\ge 1$.
+\end{lemma}
+\begin{proof}
+    Our definition of a formal group gives $F(X,Y) = X + Y + XY(\ldots)$. So if $x, y \in \mathcal{O}_K$, then $F(\pi^r x, \pi^r y) \equiv \pi^r(x+y) \pmod{\pi^{r+1}}$. Therefore $\mathcal{F}(\pi^r \mathcal{O}_K) \to (k,+)$ by $\pi^r x \mapsto x $ mod $\pi$ is a surjective group homomorphism with kernel $\mathcal{F}(\pi^{r+1}\mathcal{O}_K)$.
+\end{proof}
+\begin{cor}
+    If $\left|k\right|<\infty$, then $\mathcal{F}(\pi \mathcal{O}_K)$ has a subgroup of finite index isomorphic to $(\mathcal{O}_K,+)$.
+\end{cor}
+\textbf{Notation.} Denote reduction mod $\pi$, $\mathcal{O}_K \to \mathcal{O}_K/\pi \mathcal{O}_K = k$ by $x \mapsto \widetilde{x}$.
+\begin{prop}\label{prop9.4}
+    Let $E/K$ be an elliptic curve. Then the reductions mod $\pi$ of any two minimal Weierstrass equations for $E$ define isomorphic curves over $k$.
+\end{prop}  
+\begin{proof}
+    Say the Weierstrass equations are related by $[u,r,s,t]$ with $u \in K^\times, r,s,t \in K$. Then $\Delta_1 = u^{12}\Delta_2$, but both equations are minimal, so $v(u) = 0 \implies u \in \mathcal{O}_K^\times$. The transformation formulae (on the formula sheet) for the $a_i$ and $b_i$ combined with the fact that $\mathcal{O}_K$ is algebraically closed imply $r,s,t \in \mathcal{O}_K$. The Weierstrass equations of the reduction mod $\pi$ are now related by $[\widetilde{u},\widetilde{r,}\widetilde{s},\widetilde{t}]$ with $\widetilde{u} \in k^\times$, $\widetilde{r},\widetilde{s},\widetilde{t} \in k$.
+\end{proof}
+\begin{defn}
+    The reduction $\widetilde{E}/k$ of $E/K$ is defined by the reduction mod $\pi$ of a minimal Weierstrass equation for $E$. We say $E$ has \textbf{good reduction} if $\widetilde{E}$ is nonsingular (and so $\widetilde{E}$ is an elliptic curve), otherwise $E$ has \textbf{bad reduction}.
+\end{defn}
+For an integral Weierstrass equation,
+\begin{itemize}
+    \item $v(\Delta)=0 \implies$ good reduction.
+    \item $0<v(\Delta)<12 \implies $ bad reduction.
+    \item $v(\Delta)\ge 12 \implies $ beware that the equation might not be minimal, more information is needed. 
+\end{itemize}
+There is a well-defined map $\mathbb{P}^2(K) \to \mathbb{P}^2(k)$ by $(x:y:z) \mapsto (\widetilde{x}:\widetilde{y}:\widetilde{z})$. (Here we must choose a representative for $(x:y:z)$ such that $\min(v(x),v(y),v(z))=0$.) We restrict to get a map $E(K) \to \widetilde{E}(k)$ by $P \mapsto \widetilde{P}$. 
+\vspace{1mm}
+ 
+IF $P=(x,y) \in E(K)$, then by Lemma \ref{lemma9.1}, either $x, y \in \mathcal{O}_K$, so $\widetilde{P}=(\widetilde{x},\widetilde{y}) \in \widetilde{E}(k)$, or $v(x)=-2s,v(y)=-3s$ for some $s\ge 1$, so $P=(x:y:1) = (\pi^{3s}x : \pi^{3s}y : \pi^{3s})$, so $\widetilde{P} = (0:1:0)$. Therefore \[
+\widehat{E}(\pi \mathcal{O}_K) = E_1(K) = \{P \in E(K) \mid  \widetilde{P} = 0\},
+\]
+the \textbf{kernel of reduction}. Let \[
+\widetilde{E}_{\text{ns}} = \begin{cases}
+    \widetilde{E} & \text{ if }E \text{ has good reduction,}\\
+    \widetilde{E}\setminus \{\text{singular point}\} & \text{ if }E \text{ has bad reduction.}
+\end{cases}
+\]
+We have a remarkable fact: the chord and tangent process still defines a group law on $\widetilde{E}_{\text{ns}}$. However, in the case of bad reductions, either $\widetilde{E}_{\text{ns}} \cong \mathbb{G}_a$ or $\widetilde{E}_{\text{ns}} \cong \mathbb{G}_m$ (the additive reduction or the multiplicative reduction).
 
 \end{document}
