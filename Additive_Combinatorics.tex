@@ -837,16 +837,64 @@ We may boostrap Khintchine's inequality to obtain the following:
 \begin{proof}
     This is on Ex. Sheet 3. Use Croot--Sisask and Chang's theorem.
 \end{proof}
-\begin{theorem}[due to Schoen and Shlvedov]\label{theorem3.10}
+\begin{theorem}[due to Schoen and Shkredov]\label{theorem3.10}
     Let $p \neq 5$ and let $A \subset \mathbb{F}_p^n$. Suppose that $A$ contains no nontrivial solutions to the equation 
     \begin{align*}
         x_1 + x_2 + x_3 + x_4 + x_5 = 5y,
     \end{align*}
-    i.e. no solution $(y,(x_i)_{i=1}^5) \in A^6$ such that $y \neq x_i$ for some $i \in [5]$. Then $\left|A\right| = \exp \left(-\Omega \left(n^{1/5}\right)\right)\left|\mathbb{F}_p^n\right|$.\footnote{$\Omega$ is the opposite to $O$, one lowerboudns while the other upperbounds.}
+    i.e. no solution $(y,(x_i)_{i=1}^5) \in A^6$ such that $y \neq x_i$ for some $i \in [5]$. Then\footnote{$\Omega$ is the opposite to $O$, one lowerbounds while the other upperbounds.}
+    \begin{align*}
+        \left|A\right| &= \exp \left(-\Omega \left(n^{1/5}\right)\right)\left|\mathbb{F}_p^n\right| \\
+        &= \exp (-\Omega_p (\log \left|\mathbb{F}_p^n\right|^{1/5}))\left|\mathbb{F}_p^n\right|.
+    \end{align*}
 \end{theorem}
 \begin{proof}
+    \marginpar{16 Feb 2024, Lecture 13}
+    Let $\alpha = \frac{\left|A\right|}{\left|\mathbb{F}_p^n\right|}$ and partition $A$ into $A_1 \sqcup A_2$ with approximately equal sizes $\left|A_1\right| = \left\lfloor \frac{\alpha}{2} p^n \right\rfloor$, $\left|A_2\right| = \left\lceil \frac{\alpha}{2}p^n \right\rceil$. By averaging, $\exists z \in \mathbb{F}_p^n$ such that $\left|A_1 \cap (z-A_2)\right| \ge \frac{\alpha^2}{4}p^n$. Let $A' = A_1 \cap (z-A_2)$. By Theorem \ref{theorem3.9}, there exists a subspace $V\le \mathbb{F}_p^n$ of codimension $O(\log^4 \alpha^{-1})$ such that $V \subset A'+A'-A'-A'$ and hence $$2z + V \subset 2z + A' + A' - A' - A' \subset A_1 + A_1 + A_2 + A_2.$$ Consequently, $(5 \cdot A - A) \cap (2z + V) = \varnothing$, for if there were $x,y \in A$ with $5y-x \in 2z + V$, then we could write $5y - x = a_1 + a_1' + a_2 + a_2'$ for $a_1,a_1' \in A_1$, $a_2,a_2' \in A_2$, which (since $A_1, A_2$ are disjoint) would yield a nontrivial solution. It follows that for all $w \in \mathbb{F}_p^n$, at most one of $A \cap (w+V)$ and $5\cdot A \cap (w+2z+V)$ can be nonempty (else $a_1-a_2$ for $a_i$ in the corresponding set would lie in the above empty set). Therefore,
+    \begin{align*}
+        2\left|A\right| &= \sum_{w \in V^\perp}^{} \left(\left|A \cap (w + V)\right| + \left|5\cdot A \cap (w+2z + V)\right|\right) \\
+        &\le \left|V^{\perp}\right| \sup_{w \in V^{\perp}} \left|A \cap (w +V)\right|.
+    \end{align*} 
+    Hence $\exists w \in V^\perp$ such that $\left|A \cap(w+V)\right| \ge \frac{2\left|A\right|}{\left|V^{\perp}\right|} = \frac{2\alpha \left|\mathbb{F}_p^n\right|}{\left|\mathbb{F}_p^n\right|/\left|V\right|} = 2\alpha\left|V\right|$. The set $A \cap (w +V) \subset w + V$ of density at least $2\alpha$, or equivalently $(A-w)\cap V \subset V$ of density at least $2\alpha$ contains no nontrivial solutions to $x_1+x_2+x_3+x_4+x_5=5y$. 
+    
+    \vspace{1mm}
+     
+    After $t$ iterations, we obtain a subspace $W$ of codimension $O(t \log^4 \alpha^{-1})$ and $w \in \mathbb{F}_p^n$ such that $\left|A \cap (w+V)\right| \ge 2^t \alpha \left|W\right|$. Arguing as in the proof of Meshulam's Theorem (Theorem \ref{theorem1.17}) yields the result.
+\end{proof}
+We have a similar bound in $\mathbb{Z}_N$, where Behrend's construction offers a comparable lower bound.
+
+\section{Further topics}
+In $\mathbb{F}_p^n$, we can do much better, even for 3-APs.
+\begin{theorem}[due to Ellenberg-Gijswijt, based on Croot-Lev-Pach]\label{theorem4.1}
+    Let $A \subset \mathbb{F}_3^n$ be a set containing no nontrivial 3-APs. Then \[
+    \left|A\right| = o(2.765^n).
+    \]
+\end{theorem}
+\textbf{Remark.} The proof goes through for general $p$, but we do the case $p=3$ to avoid having to constantly write $p-1$.
+\vspace{1mm}
+ 
+We first have some setup for the proof.
+\begin{lemma}\label{lemma4.2}
+    Let $A \subset \mathbb{F}_3^n$ and suppose $P \in V_n^d$ is such that $P(a+a') = 0 ~\forall a \neq a' \in A$. Then \[
+    \left|\{a \in A \mid P(2a) \neq 0\}\right| \le 2 m_{d/2}.
+    \]
+\end{lemma}
+\begin{proof}
+    Every $P \in V_n^d$ can be written as a linear combination of monomials from $M_n^d$, so $$P(x,y) = \sum_{\substack{m,m' \in M_n^d, \\ \text{deg}(m\cdot m')\le d}}^{} c_{m,m'}m(x)m'(y)$$
+    for some coefficients $c_{m,m'}$. Since at least one of $m,m'$ has to have degree at most $d/2$, we can write \[
+    P(x+y) = \sum_{m \in M_n^{d/2}}^{} m(x)F_m(y) + \sum_{m' \in M_n^{d/2}}^{} m'(y) G_{m'}(x),
+    \]
+    where $(F_m)_{m \in M_n^{d/2}}$ and $(G_{m'})_{m' \in M_n^{d/2}}$ are polynomials. Viewing $(P(x+y))_{x,y \in A}$ as an $\left|A\right|\times\left|A\right|$-matrix $C$, we see that $C$ can be written as a sum of at most $2m_{d/2}$ matrices of rank at most 1 (as $m_x F_m(y)$ for fixed $x$ and $y$ running over $A$ gives the rows, which are all multiples of each other), hence $\text{rank}(C) \le 2m_{d/2}$.
+    \vspace{1mm}
+        
+    But by our assumption, $C$ is a diagonal matrix whose rank equals the number of nonzero elements on the diagonal, i.e. $\left|\{a \in A \mid P(2a)=0\}\right|$.
+\end{proof}
+\begin{prop}\label{prop4.3}
+    Let $A \subset \mathbb{F}_3^n$ be a set containing no nontrivial 3-APs. Then $\left|A\right|\le 3m_{2n/3}$.
+\end{prop}
+\begin{proof}
+    \marginpar{19 Feb 2024, Lecture 14}
     
 \end{proof}
-
 
 \end{document}
