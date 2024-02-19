@@ -1338,7 +1338,124 @@ Let $L/K$ be Galois. Recall that we had the norm for the Takagi group $T_{L/K}(\
     \[
     \sum_{\chi}^{} \log L_{\mathfrak{m}}(\chi,s) \sim h \sum_{\mathfrak{p} \in T_{L/K}(\mathfrak{m})}^{} \frac{1}{N(\mathfrak{p})^s}.
     \]
+    \marginpar{Feb 19 2024, Lecture 14}
+    If $\chi = \chi_0$, we get $L_{\mathfrak{m}}(\chi,s) = \zeta_K(\mathfrak{m},s)$, so $\log L(\chi,s) \sim \log \zeta_K(s) \sim \log\frac{1}{s-1}$ as $s \to 1$. Thus
+    \begin{align*}
+        &\sum_{\chi}^{} \log L_{\mathfrak{m}}(\chi,s) \sim \log \zeta_K(s) + \sum_{\chi \neq \chi_0}^{} \log L_{\mathfrak{m}}(\chi,s) \\
+        \sim& \log \frac{1}{s-1} - \sum_{\chi \neq 1}^{} m(\chi)\log \left(\frac{1}{s-1}\right) = \left(1-\sum_{\chi \neq 1}^{} m(\chi)\right) \log\frac{1}{s-1}. 
+    \end{align*}
+    If $\mathfrak{p}$ splits completely in $L$, then $\mathcal{P} \in \mathcal{O}_L$ with $\mathcal{P} \mid \mathfrak{p}$, then $f_{\mathcal{P}|\mathfrak{p}}=1$, so $N_{L/K}(\mathcal{P})=\mathfrak{p}$. So then (if $\mathfrak{p}\nmid \mathfrak{m}$), then $\mathfrak{p} \in T_{L/K}(\mathfrak{m}) = P_{K}(\mathfrak{m})N_{L/K}(I_L(\mathfrak{m}))$. Then there are $[L:K]$ primes of $L$ above $\mathfrak{p}$, so
+    \begin{align*}
+        h \sum_{\mathfrak{p} \in T_{L/K}(\mathfrak{m})}^{} \frac{1}{N(\mathfrak{p})^s} = h \left(\sum_{\substack{\mathfrak{p} \in T_{L/K}(\mathfrak{m})\\\text{splits completely}}}^{}N(\mathfrak{p})^{-s} + \sum_{\substack{\mathfrak{p} \in T_{L/K}(\mathfrak{m})\\f_{\mathcal{P}\mid \mathfrak{p}}>1}}^{}N(\mathfrak{p})^{-s}\right) 
+    \end{align*}
+    since $\mathfrak{m}$ is divisible by all ramified primes. The second series does not contribute to the singularity, as $N(\mathfrak{p}) \ge p^2$.
+    \vspace{1mm}
+     
+    If $\mathcal{P} \subset \mathcal{O}_L$ is a degree one prime and if for $\mathfrak{p} \subset \mathcal{O}_K$ we have $\mathcal{P} \mid \mathfrak{p}$, then $f_{\mathcal{P}\mid \mathfrak{p}} = 1$. If $\mathfrak{p}$ is unramified in $L$, then $\mathfrak{p}$ splits completely with $[L:K]$ primes above it.
+    \vspace{1mm}
+     
+    Write $\gtrsim$ to mean that the RHS is less than or equal to the LHS plus some constant in a neighborhood of $s=1$. We get
+    \begin{align*}
+        h \sum_{\mathfrak{p} \in T_{L/K}(\mathfrak{m})}^{} \frac{1}{N(\mathfrak{p})^s} \gtrsim h \sum_{\mathfrak{p}\text{ splits comp.}}^{}  \frac{1}{N(\mathfrak{p})^s} \gtrsim \frac{h}{[L:K]} \sum_{\text{deg}(\mathcal{P})=1}^{} \frac{1}{N(\mathcal{P})^s} \gtrsim \frac{h}{[L:K]} \log\frac{1}{s-1}. 
+    \end{align*}
+    Hence
+    \begin{align*}
+        \left(1-\sum_{\chi \neq1}^{} m(\chi)\right)\log\frac{1}{s-1} \gtrsim\frac{h}{[L:K]} \log\frac{1}{s-1},
+    \end{align*}
+    which means that $m(\chi)=0 ~\forall \chi \neq 1$ and $h \le [L:K]$.
 \end{proof}
+The fact that $L_{\mathfrak{m}}(\chi,s) \neq 0$ for $\chi \neq \chi_0$ is important for the generalization of the Prime Number Theorem.
+\section{Density results}
+To motivate the definition, reconsider the proof of Dirichlet's Prime Number Theorem. For some $m$ with $(a,m)=1$, we had 
+\begin{align*}
+    \sum_{\chi \in \widehat{(\mathbb{Z}/m\mathbb{Z})^\times}}^{}\chi(a)^{-1} \log L(\chi,s) = \phi(m) \sum_{p \equiv a \text{ mod }m}^{} p^{-s} + \left(\text{abs. conv. part for }\text{Re}(s)>\frac{1}{2}\right),
+\end{align*}
+so
+\begin{align*}
+    \sum_{\chi}^{} \chi(a)^{-1} \log L(\chi,s) \sim \phi(m) \sum_{p \equiv a \text{ mod } m}^{} \frac{1}{p^s} \sim \log L(\chi_0,s) \sim \log \zeta(s)
+\end{align*}
+as $L(\chi,s) = \prod_{p \mid m}^{} (1-p^{-s})\zeta(s)$, so
+\begin{align*}
+    \sum_{ p \equiv  a \text{ mod }m}^{}\frac{1}{p^s} \sim \phi(m) \log \zeta(s). 
+\end{align*}
+Let $s \to 1^+$, which diverges, which finished the proof, and 
+\begin{align*}
+    \lim_{s \to 1^+} \frac{\sum_{p \equiv a \text{ mod }m}^{} p^{-s}}{\log \frac{1}{s-1}} = \frac{1}{\phi(m)}.
+\end{align*}
+Why did we just do this? Let $S$ be any set of primes. If 
+\[
+\lim_{s \to 1^+} \frac{\sum_{p \in S}^{} p^{-s}}{\log\frac{1}{s-1}}
+\]
+exists, then we say this set $S$ has Dirichlet density $\delta=\delta(S)$. If $S$ is finite, we say $\delta(S)=0$. So we can ''rephrase'' Dirichlet's Prime Number Theorem by saying
+\[
+\delta(S) = \frac{1}{\phi(m)},
+\]
+where $S = \{p \in \mathbb{Z} \mid p \text{ prime, }p \equiv a \pmod{m}\}$.
+\begin{prop}\label{prop3.1}
+    Let $K/\mathbb{Q}$ be Galois. Let $$\mathcal{S}_K = \{p \in \mathbb{Z} \mid p \text{ prime, }p \text{ splits completely in }K/\mathbb{Q}\}.$$ Then $\delta(\mathcal{S}_K)=\frac{1}{[K:\mathbb{Q}]}$.
+\end{prop}
+\begin{proof}
+    We have seen 
+    \begin{align*}
+        &\log \zeta_K(s) \sim \log \left(\frac{1}{s-1}\right) \sim \sum_{\mathfrak{p}}^{} N(\mathfrak{p})^{-s} \\
+        \sim& \sum_{\substack{\mathfrak{p}\\ f_{\mathcal{P}\mid \mathfrak{p}} = 1 = e_{\mathcal{P}\mid \mathfrak{p}}}}^{} p^{-s} + \sum_{\substack{\mathfrak{p} \\ f_{\mathcal{P}\mid \mathfrak{p}}>1}}^{} p^{-f_{\mathcal{P}\mid \mathfrak{p}}s} + \sum_{\substack{\mathfrak{p}\\ f_{\mathcal{P}\mid \mathfrak{p}}>1 \\e_{\mathcal{P}\mid \mathfrak{p}}>1}}^{} p^{-s} \\
+        \sim& \sum_{p \in \mathcal{S}_K}^{} [K:\mathbb{Q}]p^{-s}.
+    \end{align*}
+    So 
+    \begin{align*}
+        \log \left(\frac{1}{s-1}\right) = [K:\mathbb{Q}]\sum_{p \in \mathcal{S}_K}^{} p^{-s} + g(s)
+    \end{align*}
+    for $g(s)$ bounded as $s \to 1^+$, so 
+    \begin{align*}
+        \delta(\mathcal{S}_K) = \lim_{s \to 1^+} \frac{\sum_{p \in \mathcal{S}_K}^{} p^{-s}}{\log \left(\frac{1}{s-1}\right)} = \lim_{s \to 1^+} \left(\frac{[K:\mathbb{Q}]\sum_{p \in \mathcal{S}_K}^{} p^{-s} + g(s)}{\sum_{p \in \mathcal{S}_K}^{} p^{-s}}\right)^{-1} = \frac{1}{[K:\mathbb{Q}]}.   
+    \end{align*}
+\end{proof}
+\begin{defn}\label{defn3.2}
+    Let $K$ be a number field. Let $S$ be a set of prime ideals in $\mathcal{O}_K$. If the limit \[
+    \lim_{s \to 1^+} \frac{\sum_{\mathfrak{p} \in S}^{} N(\mathfrak{p})^{-s}}{\log \left(\frac{1}{s-1}\right)}
+    \]
+    exists, then we say this set $S$ has \textbf{Dirichlet density} $\delta = \delta(S)$.
+\end{defn}
+Note that since $\log \left(\frac{1}{s-1}\right) \sim \sum_{\mathfrak{p}}^{} \frac{1}{N(\mathfrak{p})^s}$, we can also write 
+\[
+\delta(S) = \lim_{s \to 1^+} \frac{\sum_{\mathfrak{p} \in S}^{} N(\mathfrak{p}) ^{-s}}{\sum_{\mathfrak{p}}^{} N(\mathfrak{p})^{-s}}.
+\]
+\begin{lemma}\label{lemma3.3}
+    Let $\mathcal{P}_K$ be the set of all prime ideals of $K$. Let $S, T$ be subsets of $\mathcal{P}_K$. Then
+    \begin{enumerate}[(i)]
+        \item $\delta(\mathcal{P}_K)=1$.
+        \item If $S \subset T$ and $\delta(S),\delta(T)$ exist, then $\delta(S)\le \delta(T)$.
+        \item If $\delta(S)$ exists, then $0\le \delta(S)\le 1$.
+        \item If $S$ and $T$ are disjoint and $\delta(S),\delta(T)$ exist, then $\delta(S \cup T)=\delta(S)+\delta(T)$. 
+        \item If $S$ is finite, then $\delta(S)=0$.
+        \item If $\delta(S)$ exists and $T$ differs from $S$ by only finitely many elements, then $\delta(T)=\delta(S)$.
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+    Exercises. Note that it might be simpler to prove this in some order different than the one listed above.
+\end{proof}
+\begin{lemma}\label{lemma3.4}
+    Let $L/K$ be Galois and let $$\mathcal{S}_{L/K} = \{\mathfrak{p} \in \mathcal{O}_K \mid \mathfrak{p} \text{ splits completely in }L\}.$$
+    Then $\delta(\mathcal{S}_{L/K}) = \frac{1}{[L:K]}$.
+\end{lemma}
+\begin{proof}
+    Left as an exericse.
+\end{proof}
+\begin{lemma}\label{lemma3.5}
+    Let $\mathcal{S}_1$ be the set of prime ideals of degree one. Then $\delta(\mathcal{S}_1)=1$, and if $\mathcal{S}$ is a set of prime ideals of $K$ and $\delta(\mathcal{S})$ exists, then $\delta(\mathcal{S}) = \delta(\mathcal{S} \cup \mathcal{S}_1)$.
+\end{lemma}
+\begin{proof}
+    Similarly to before we write
+    \begin{align*}
+        \log P_K(\mathcal{S}) = \sum_{\mathfrak{p}}^{} \frac{1}{N(\mathfrak{p})^s} = \sum_{\mathfrak{p} \in \mathcal{S}_1}^{} \frac{1}{N(\mathfrak{p})^s} + \sum_{\mathfrak{p} \not\in \mathcal{S}_1}^{}\frac{1}{N(\mathfrak{p})^s} \sim \sum_{\mathfrak{p} \in \mathcal{S}_1}^{} \frac{1}{N(\mathfrak{p})^s}, 
+    \end{align*}
+    since $N(\mathfrak{p}) = p^f = p^2$ for all $\mathfrak{p} \not\in \mathcal{S}_1$. Hence from the definition we get $\delta(\mathcal{S}_1)=1$, and $\sum_{\substack{\mathfrak{p} \in \mathcal{S}\\ \mathfrak{p} \not\in \mathcal{S}_1}}^{} N(\mathfrak{p})^{-s}=0$, so 
+    \[
+    \sum_{\mathfrak{p} \in \mathcal{S}}^{} N(\mathfrak{p})^{-s} \sim \sum_{\mathfrak{p} \in \mathcal{S} \cup \mathcal{S}_1}^{} N(\mathfrak{p})^{-s}.
+    \qedhere
+    \]
+\end{proof}
+
 
 
 \end{document}
