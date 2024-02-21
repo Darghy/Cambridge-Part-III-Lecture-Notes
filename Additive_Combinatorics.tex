@@ -945,9 +945,91 @@ Moreover, if $f=f_A = 1_A - \alpha$, then
 where $(\star)$ is six terms: three terms of the form $(-\alpha)\mathbb{E}_{x,d}1_A(x+d)1_A(x+2d)$, which after reparametrizing ($x+d=u,x+2d=u+d$) gives $-\alpha^3$; plus three other terms of the form $(-\alpha^2)\mathbb{E}_{x,d}1_A(x+3d) = \alpha^3$, so these cancel.
 \vspace{1mm}
  
-We could therefore reformulate the first step in the proof of Meshulam's Theorem as follows: if $p^n\ge 2\alpha^{-2}$, then 
+We could therefore reformulate the first step in the proof of Meshulam's Theorem (Theorem \ref{theorem1.17}) as follows: if $p^n\ge 2\alpha^{-2}$, then 
 \begin{align*}
    \frac{\alpha^3}{2}\le |\underbrace{T_3(1_A,1_A,1_A)}_{=\frac{\alpha}{p^n}}-\alpha^3| \le ||f_A||_{U^2(G)}
 \end{align*}
-by Lemma \ref{lemma4.6}.
+by Lemma \ref{lemma4.6}. It remains to show that if $||f_A||_{U^2}$ is not too small, then there exists a subspace $V \le \mathbb{F}_p^n$ of bounded codimension on which $A$ has increased density.
+\marginpar{21 Feb 2024, Lecture 15}
+\begin{theorem}\label{theorem4.7}[$U^2$-Inverse Theorem]
+    Let $f : \mathbb{F}_p^n \to \mathbb{C}$ satisfying $||f||_{\infty}\le 1$ and $||f||_{U^2}\ge \delta$ for some $\delta>0$. Then $\exists b \in \mathbb{F}_p^n$ such that 
+    \begin{align*}
+        \left|\mathbb{E}_{x} f(x)\omega^{x\cdot b}\right| \ge \delta^2.
+    \end{align*}
+    In other words, $\left|\langle f, \phi \rangle\right|\ge \delta^2$ for $\phi(x)=\omega^{x\cdot b}$, and we say ''$f$ correlates with a linear function''.
+\end{theorem}
+\begin{proof}[''Proof''.]
+    We have seen $||f||_{U^2}^2 \le ||\widehat{f}||_{\infty}||f||_2 \le ||\widehat{f}||_{\infty}$, so \[
+    \delta^2 \le ||\widehat{f}||_{\infty} = \mathbb{E}_x f(x)\omega^{x\cdot b}
+    \]
+    for some $b \in \mathbb{F}_p^n$.
+\end{proof}
+\begin{defn}\label{defn4.8}
+    Given $f : G \to \mathbb{C}$ for $G$ a finite abelian group, we define its \textbf{$U^3$-norm} by 
+    \begin{align*}
+        ||f||_{U^3(G)}^8 = \mathbb{E}_{x,a,b,c \in G}f(x)\overline{f(x+a)}&\overline{f(x+b)f(x+c)}\\
+        &f(x+a+b)f(x+b+c)f(x+a+c)\overline{f(x+a+b+c)}\\
+        = \mathbb{E}_{x,h_1,h_2,h_3} \prod_{\epsilon \in \{0,1\}^3}^{} \mathcal{C}^{\left|\epsilon\right|}f(x+&\epsilon\cdot h)
+    \end{align*}
+    where $\mathcal{C}g(x) = \overline{g(x)}$ and $\left|\epsilon\right|$ counts the number of ones in $\epsilon$.
+\end{defn}
+
+It is easy to verify that $||f||_{U^3(G)}^8 = \mathbb{E}_{h}||\Delta_h f||_{U^2(G)}^4$, where $\Delta_h f(x) = f(x)\overline{f(x+h)}$.
+
+\begin{defn}\label{defn4.9}
+    Given functions $f_{\epsilon} : G \to \mathbb{C}$ for $\epsilon \in \{0,1\}^3$, define the \textbf{Gowers inner product} (or \textbf{$U^3$-inner product}) by 
+    \begin{align*}
+        \langle (f_{\epsilon})_{\epsilon \in \{0,1\}^3} \rangle_{U^3(G)} = \mathbb{E}_{x,h_1,h_2,h_3} \prod_{\epsilon \in \{0,1\}^3}^{} \mathcal{C}^{\left|\epsilon\right|} f_{\epsilon}(x+\epsilon\cdot h).
+    \end{align*}
+    Observe that $\langle f,f\ldots,f \rangle_{U^3(G)} = ||f||_{U^3(G)}^8$.
+\end{defn}
+\begin{lemma}[Gowers-Cauchy-Schwarz inequality]\label{lemma4.10}
+    Given $f_\epsilon : G \to \mathbb{C}$ for $\epsilon \in \{0,1\}^3$,
+    \begin{align*}
+        \left|\langle (f_\epsilon)_{\epsilon \in \{0,1\}^3} \rangle_{U^3(G)}\right| \le \prod_{\epsilon \in \{0,1\}^3}^{} ||f_\epsilon||_{U^3(G)}. 
+    \end{align*}
+\end{lemma}
+\begin{proof}
+    This is on Ex. Sheet 3. 
+\end{proof}
+Setting $f_\epsilon = f$ for $\epsilon \in \{0,1\}^2 \times \{0\}$ (or any other face of the cube) and $f_{\epsilon} \equiv 1$ otherwise gives that the LHS equals $||f||_{U^2(G)}^4$, so $||f||_{U^2(G)}\le ||f||_{U^3(G)}$.
+\begin{prop}\label{prop4.11}
+    Let $f : G \to \mathbb{C}$ with $||f||_{L^{\infty}(G)}\le 1$. Then 
+    \begin{align*}
+        \left|T_4(f,f,f,f)\right|\le ||f||_{U^3(G)}.
+    \end{align*}
+\end{prop}
+\begin{proof}
+    Reparametrizing, we have $$T_4(f,f,f,f) = \mathbb{E}_{a,b,c,d}f(3a+2b+c)f(2a+b-d)f(a-c-2d)f(-b-2c-3d),$$
+    so using Cauchy--Schwarz many times gives
+    \begin{align*}
+        &\left|T_4(f,f,f,f)\right|^8\\
+        &\le \left(\mathbb{E}_{a,b,c} \left|\mathbb{E}_d f(2a+b-d)f(a-c-2d)f(-b-2c-3d)\right|^2 \right)^4 \\
+        &= (\mathbb{E}_{d,d'} \mathbb{E}_{a,b} f(2a+b-d)\overline{f(2a+b-d')}\\
+        &~\mathbb{E}_c f(a-c-2d)f(-b-2c-3d)\overline{f(a-c-2d')f(-b-2c-3d')})^4 \\
+        &= \left(\mathbb{E}_{d,d'}\mathbb{E}_{a,b}|\mathbb{E}_c \text{ time to expand what's in here }|^2\right)^2 \\
+        &= (\mathbb{E}_{c,c',d,d'} \mathbb{E}_a f(a-c-2d)\overline{f(a-c-2d')}\overline{f(a-c'-2d)}f(a-c'-2d')\\
+        &~ \mathbb{E}_b f(-b-2c-3d)\overline{f(-b-2c-3d')}\overline{f(-b-2c'-3d)f(-b-2c'-3d')} )^2 \\
+        &\le \mathbb{E}_{c,c',d,d'} \mathbb{E}_a | \mathbb{E}_b f(-b-2c-3d)\overline{f(-b-2c-3d')f(-b-2c'-3d)}f(-b-2c'-3d')|^2\\
+        &= \le \mathbb{E}_{c,c',d,d'} | \mathbb{E}_b f(-b-2c-3d)\overline{f(-b-2c-3d')f(-b-2c'-3d)}f(-b-2c'-3d')|^2\\
+        &\mathbb{E}_{b,b',c,c',d,d'} f(-b-2c-3d)\overline{f(-b-2c-3d')f(-b-2c'-3d)}f(-b-2c'-3d')\\
+        &\overline{f(-b'-2c-3d)}f(-b'-2c-3d')f(-b'-2c'-3d)\overline{f(-b'-2c'-3d')}
+        \qedhere
+    \end{align*}
+\end{proof}
+One might hope to generalize Meshulam's Theorem (Theorem \ref{theorem1.17}) as follows:
+\begin{theorem}[Szemeredi's Theorem (for progressions of length 4)]\label{theorem4.12} 
+    Let $A \subset \mathbb{F}_p^n$ be a set containing no nontrivial 4-APs. Then $\left|A\right| = o(p^n).$
+\end{theorem}
+\textbf{Idea.} By Proposition \ref{prop4.11} with $f = f_A = 1_A -\alpha$, 
+\begin{align*}
+    T_4(1_A,1_A,1_A,1_A)-\alpha^4 = T_4(f_A,f_A,f_A,f_A) + (\star)
+\end{align*} 
+where $(\star)$ consists of terms in which one, two, or three of the inputs are equal to $1_A$, each of which is controlled by $||f_A||_{U^2}$ (strictly speaking, we haven't shown this for e.g. $T_4(f,\alpha,f,f)$, but this is similar enough to a 3-AP so we can make it work). Hence 
+\begin{align*}
+    \left|T_4(1_A,1_A,1_A,1_A)-\alpha^4\right| \le 14||f_A||_{U^3}
+\end{align*}
+(since $||f_A||_{U^2}\le ||f_A||_{U^3}$). So if $A$ contains no nontrivial 4-APs and $p^n \ge 2\alpha^{-3}$, then $\frac{\alpha^4}{2}\le 14||f_A||_{U^3}$.
+
+
 \end{document}
