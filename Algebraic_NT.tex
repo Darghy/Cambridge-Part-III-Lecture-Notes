@@ -482,7 +482,7 @@ Artin reciprocity gives us information about the decomposition of primes:
     Let $\mathfrak{p}\mathcal{O}_L = \mathcal{P}_1\ldots\mathcal{P}_g$ be the prime decomposition in $L$. These have to be distinct as $\mathfrak{p}$ is unramified, and all $\mathcal{P}_i$ have the same residue field degree $f_{\mathcal{P}_i/\mathfrak{p}}$ (as the extension is abelian, in particular Galois). We know that $f_{\mathcal{P}_i/\mathfrak{p}}$ is the order of $\left(\frac{L/K}{\mathfrak{p}}\right)$ and so under the isomorphism $I_K(\mathfrak{m})/H \cong \text{Gal}(L/K)$, this means it is also the order of $\mathfrak{p}$ mod $H$ in $I_K(\mathfrak{m})/H$. The result follows since $[L:K] = n = efg = fg$.
 \end{proof}
 Next we want to show that every generalized ideal class group is the Galois group of some abelian extension and that this extension is unique.
-\begin{theorem}[The Existence Theorem]
+\begin{theorem}[The Existence Theorem]\label{theorem1.26}
     Let $\mathfrak{m}$ be a modulus of $f$ and let $H$ be a congruence subgroup for $\mathfrak{m}$. Then there exists a unique abelian extension $L/K$ with the following properties:
     \begin{itemize}
         \item All its ramified primes, finite or infinite, divide $\mathfrak{m}$.
@@ -1366,6 +1366,7 @@ Let $L/K$ be Galois. Recall that we had the norm for the Takagi group $T_{L/K}(\
 \end{proof}
 The fact that $L_{\mathfrak{m}}(\chi,s) \neq 0$ for $\chi \neq \chi_0$ is important for the generalization of the Prime Number Theorem.
 \section{Density results}
+\subsection{Dirichlet density}
 To motivate the definition, reconsider the proof of Dirichlet's Prime Number Theorem. For some $m$ with $(a,m)=1$, we had 
 \begin{align*}
     \sum_{\chi \in \widehat{(\mathbb{Z}/m\mathbb{Z})^\times}}^{}\chi(a)^{-1} \log L(\chi,s) = \phi(m) \sum_{p \equiv a \text{ mod }m}^{} p^{-s} + \left(\text{abs. conv. part for }\text{Re}(s)>\frac{1}{2}\right),
@@ -1455,7 +1456,87 @@ Note that since $\log \left(\frac{1}{s-1}\right) \sim \sum_{\mathfrak{p}}^{} \fr
     \qedhere
     \]
 \end{proof}
+\marginpar{21 Feb 2024, Lecture 15}
 
+By the Existence Theorem (Theorem \ref{theorem1.26}), for a number field $K$ and a modulus $\mathfrak{m}$ of $K$, and any congruence subgroup $P_K(\mathfrak{m}) \subset H \subset I_K(\mathfrak{m})$, we can find an abelian extension $L/K$ such that $H = T_{L/K}(\mathfrak{m})$. In particular, we can find this for $P_K(\mathfrak{m})$. Hence we obtain
+\begin{theorem}\label{theorem3.6}
+    Let $\mathfrak{m}$ be a modulus of $K$ and $\chi$ a nontrivial character of $I_K(\mathfrak{m})/P_K(\mathfrak{m})$. Then $L(\chi,1) \neq 0$.
+\end{theorem}
+\begin{cor}[Generalized version of Dirichlet's Prime Number Theorem]\label{cor3.7}
+    Let $h_K(\mathfrak{m}) = \left|I_K(\mathfrak{m})/P_K(\mathfrak{m})\right|$ and let $C_0$ be an ideal class in $I_K(\mathfrak{m})/P_K(\mathfrak{m})$. Let $S$ be the set of prime ideals in $C_0$, then \[
+    \delta(S) = \frac{1}{h_K(\mathfrak{m})}.
+    \]
+\end{cor}
+\begin{proof}
+    For $\text{Re}(s)>1$, we have
+    \begin{align*}
+        \log L_{\mathfrak{m}}(\chi,s) \sim& \sum_{\mathfrak{p} \nmid \mathfrak{m}}^{} \frac{\chi(\mathfrak{p})}{N(\mathfrak{p})^s} \\
+        \sim& \sum_{C \in I_K(\mathfrak{m})/P_K(\mathfrak{m})}^{} \chi(C) \sum_{\mathfrak{p}\in C}^{} \frac{1}{N(\mathfrak{p})^s}.
+    \end{align*}
+    Multiply this by $\chi(C_0^{-1})$ and sum over all $\chi$ to get
+    \begin{align*}
+        \log \zeta_K(s) \sim \sum_{C}^{} \sum_{\chi}^{} \chi(C C_0^{-1}) \sum_{\mathfrak{p} \in C}^{} \frac{1}{N(\mathfrak{p})^s}.
+    \end{align*}
+    By the orthogonality relation, the sum over $\chi$ is zero unless $C C_0^{-1} = 1$, hence 
+    \begin{align*}
+        \log \frac{1}{s-1} \sim h_K(\mathfrak{m}) \sum_{\mathfrak{p} \in C_0}^{} \frac{1}{N(\mathfrak{p})^s}.
+        \qedhere
+    \end{align*}
+\end{proof}
+Hence any ideal class contains infinitely many prime ideals, and they are equidistributed.
 
+\subsection{Frobenius Density theorems}
+Let $K \subset E \subset L$ with $L/K$ Galois but $E/K$ not necessarily Galois. Let $G = \text{Gal}(L/K)$ and let $H$ be the elements of $G$ fixing $E$ elementwise. Consider a coset decomposition $G = H_{\sigma_1} \cup \ldots \cup H_{\sigma_k}$. Any $\sigma \in G$ permutes these cosets by right multiplication $H_{\sigma_i} \mapsto H_{\sigma_i \sigma}$. A sequence 
+\begin{align*}
+    H_{\sigma_i}, H_{\sigma_i \sigma}, H_{\sigma_i \sigma^2}, \ldots, H_{\sigma_i \sigma^{t-1}}
+\end{align*}
+is a cycle of length $t$, if these are $t$ distinct cosets and $H_{\sigma_i} = H_{\sigma_i \sigma^t}$. The collection of all cosets of $H$ is partitioned into disjoint cycles of $\sigma$.
+
+\begin{prop}\label{prop3.8}
+    Let $K \subset E \subset L$ with $L/K$ Galois. Let $\mathcal{P} \subset \mathcal{O}_L, \mathfrak{p} = \mathcal{P} \cap \mathcal{O}_K$ for $\mathfrak{p}$ unramified in $L$. Let $\sigma = \left(\frac{L/K}{\mathfrak{P}}\right)$. Suppose $\sigma$ has cycles of length $t_1,\ldots,t_s$ (when acting on the cosets of $H = \text{Gal}(L/E)$). Then $\mathfrak{p}\mathcal{O}_E$ factors as a product of $s$ distinct prime ideals of $E$, with degrees $t_1,\ldots,t_s$. As a consequence, the number of prime ideals in $E$ dividing $\mathfrak{p}$ equals the number of cosets $H_{\sigma_i}$ for which $\sigma_i D_{\mathcal{P}\mid \mathfrak{p}}\sigma_i^{-1} \subset H$.
+\end{prop}
+\begin{proof}
+    Can be found in Janusz, chapter 3.
+\end{proof}
+\begin{defn}\label{defn3.9}
+    Let $L/K$ be Galois, $G = \text{Gal}(L/K)$ and let $\sigma \in G$ be an element of order $n$. Then the \textbf{division} of $\sigma$ is the set of all elements of $G$ which are conjugate to some $\sigma^m$ for some $m$ relatively prime to $n$.
+\end{defn}
+\begin{lemma}\label{lemma3.10}
+    Let $\sigma \in G$, $H = \langle \sigma \rangle$ and let $t$ be the number of elements in the division of $\sigma$. Then 
+    \begin{align*}
+        t = \phi(n) [G:N_G(H)],
+    \end{align*}
+    where $\phi$ is the Euler totient function and $N_G(H) = \{g \in G \mid g H g^{-1} = H\}$ is the normalizer of $H$ in $G$.
+\end{lemma}
+\begin{proof}
+    Exercise. Use the fact that for any $g \in G$, the number of elements in its conjugacy class is $[G:C_G(g)]$, where $C_G(g) = \{a \in G \mid ag=ga\}$ is the centralizer of $g$ in $G$.
+\end{proof}
+\begin{theorem}[Frobenius Density Theorem]\label{theorem3.11}
+    Let $L/K$ be Galois and let $\sigma \in G = \text{Gal}(L/K)$. Suppose $\sigma$ has $t$ elements in its division. Let $S$ be the set of prime ideals $\mathfrak{p}$ of $K$ such that there is $\mathcal{P} \subset \mathcal{O}_L$ with $\mathcal{P} \mid \mathfrak{p}$ with $\left(\frac{L/K}{\mathcal{P}}\right)$ in the division of $\sigma$, i.e. 
+    \begin{align*}
+        S = \{\mathfrak{p} \in P_K \mid \exists \mathcal{P} \subset \mathcal{O}_L \text{ with }\mathcal{P}\mid \mathfrak{p} \text{ and }\left(\frac{L/K}{\mathcal{P}}\right) \text{ conjugate to }\sigma^m \\
+    \text{ with }m \text{ coprime to the order of }\sigma\}.
+    \end{align*}
+    Then $\delta(S) = \frac{t}{\left|G\right|}$.
+\end{theorem}
+\begin{proof}
+    Induct on $n$, the order of $\sigma$. If $n=1$, so $\sigma=1$, then $S=S_{L/K}$ and the result follows from Lemma \ref{lemma3.4}. Assume now that $\sigma$ has order $n>1$. Let $t_d$ be the number of elements in the division of $\sigma^d$ for $d \mid n$. Let $S_d$ be the set of primes divisible by some prime of $L$ whose Artin symbol belongs to the division of $\sigma^d$. Note that $S_1=S$. By induction, we have $\delta(S_d)=\frac{t_d}{\left|G\right|}$ for $d \neq 1$. Let $H = \langle \sigma \rangle$ and let $E = L^H = \{x \in L \mid \sigma(x)=x ~\forall \sigma \in H\}$.
+    \vspace{1mm}
+     
+    By Proposition \ref{prop3.8}, a prime $\mathfrak{p} \subset \mathcal{O}_K$ is divisible by at least one prime of $E$ having relative degree one if $\mathfrak{p}$ is divisible by a prime $\mathcal{P} \subset \mathcal{O}_L$ such that $\left(\frac{L/K}{\mathcal{P}}\right)$ has a cycle of length one (when acting as permutations on the cosets $H_{\gamma}$ of $H$ in $G$). This occurs precisely when $\gamma \left(\frac{L/K}{\mathcal{P}}\right) \gamma^{-1} \in H$, which means that $\mathfrak{p} \in S_d$ for some $d$.
+    \vspace{1mm}
+     
+    Let $S_E$ be the primes of $E$ with degree one over $K$. For each prime $\mathfrak{p} \in S_E$, let $n(\mathfrak{p})$ be the number of primes in $S_E$ dividing $\mathfrak{p}$. Then $\mathfrak{p} \in S_d$ is the norm of exactly $n(\mathfrak{p})$ primes in $S_E$. Since $S_E$ contains all the primes of $E$ with degree one over $\mathbb{Q}$, we get $\delta(S_E)=1$. Then 
+    \begin{align*}
+        -\log(s-1) \sim \sum_{\mathfrak{p}_E \in S_E}^{} \frac{1}{N_{K/\mathbb{Q}}(N_{E/K}(\mathfrak{p}_E))^s} \sim \sum_{d \mid n}^{} \sum_{\mathfrak{p} \in S_d}^{} \frac{n(\mathfrak{p})^s}{N(\mathfrak{p})^s}. ~~~ (\dagger)
+    \end{align*} 
+    By Proposition \ref{prop3.8}, for $\mathfrak{p} \in S_d$, $n(\mathfrak{p})$ is the number of distinct cosets $H \gamma$ such that $H \gamma \sigma^d = H \gamma$, or equivalently $\gamma \sigma^d \gamma^{-1}\in H$. But $H$ is cyclic, so this can only happen if $\gamma \sigma^d \sigma^{-1} \in \langle \sigma^d \rangle$, so $\gamma \in N_G(\langle \sigma^d \rangle)$. Putting this all together, $n(\mathfrak{p}) = [N_G(\langle \sigma^d \rangle) : H]$ for $\mathfrak{p} \in S_d$.
+    \vspace{1mm}
+     
+    Using $(\dagger)$ above and induction hypothesis for the sum over $S_d$ for $d \neq 1$, we find 
+    \begin{align*}
+        [N_G(H):H]\sum_{\mathfrak{p} \in S_1}^{} N(\mathfrak{p})^{-s} \sim \left(-1 + \sum_{d \mid n,d \neq 1}^{} \frac{[N_G(\langle \sigma^d \rangle):H]t_d}{\left|G\right|}\right)\log(s-1).
+    \end{align*}
+\end{proof}
 
 \end{document}
