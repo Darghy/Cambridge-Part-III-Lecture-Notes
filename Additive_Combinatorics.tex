@@ -502,7 +502,7 @@ so $\delta(A) \le \sigma(A)^2$, i.e. $\left|A-A\right|\le \frac{\left|A+A\right|
     proving the claim and hence the proof.
 \end{proof}
 We are now in a position to generalize Example \ref{example2.2}.
-\begin{theorem}[Freiman--Rusza theorem]
+\begin{theorem}[Freiman--Rusza theorem]\label{theorem2.8}
     Let $A \subset \mathbb{F}_p^n$ be such that $\left|A+A\right|\le K\left|A\right|$ (i.e. $\sigma(A)=K$) for some $K>0$. Then $A$ is contained in a coset of a subspace $H\le \mathbb{F}_p^n$ of size $\left|H\right|\le K^2p^{K^4}\left|A\right|$.
 \end{theorem}
 \begin{proof}
@@ -1030,6 +1030,53 @@ where $(\star)$ consists of terms in which one, two, or three of the inputs are 
     \left|T_4(1_A,1_A,1_A,1_A)-\alpha^4\right| \le 14||f_A||_{U^3}
 \end{align*}
 (since $||f_A||_{U^2}\le ||f_A||_{U^3}$). So if $A$ contains no nontrivial 4-APs and $p^n \ge 2\alpha^{-3}$, then $\frac{\alpha^4}{2}\le 14||f_A||_{U^3}$.
+\vspace{1mm}
+ 
+\marginpar{23 Feb 2024, Lecture 16}
+What can we say about functions whose $U^3$-norm is large?
+\begin{example}\label{example4.13}
+    Let $M$ be an $n\times n$ (symmetric) matrix with entries in $\mathbb{F}_p$. Then $f(x)= \omega^{x^T M x}$ satisfies $||f||_{U^3}=1$.
+\end{example}
+\begin{theorem}[$U^3$-Inverse Theorem]\label{theorem4.15}
+    Let $f : \mathbb{F}_p^n \to \mathbb{C}$ satisfy $||f||_{\infty}\le 1$ and $||f||_{U^3}\ge \delta$ for some $\delta>0$. Then there exists a symmetric $n \times n$ matrix $M$ with entires in $\mathbb{F}_p$ and $b \in \mathbb{F}_p^n$ such that
+    \begin{align*}
+        \left|\mathbb{E}_x f(x)\omega^{x^T M x + b^T x}\right| \ge c(\delta),
+    \end{align*}
+    where $c(\delta)$ is a polynomial in $\delta$ (depending on $p$).
+\end{theorem}
+In other words, $\left| \langle f, \phi \rangle\right|\ge c(\delta)$ for $\phi(x)=\omega^{x^T M x + b^T x}$ and we say that ''$f$ correlates with a quadratic phase function''.
+\begin{proof}[Sketch of proof.]
+    Suppose $||f||_{U^3}\ge \delta$. We divide the sketch into four steps.
+    \vspace{1mm}
+     
+    \textbf{Step 1.} If $||f||_{U^3}^8 = \mathbb{E}_h ||\Delta_h f||_{U^2}^4\ge \delta^8$, then for at least a $\delta^8/2$-proportion of $h \in \mathbb{F}_p^n$, $||\Delta_h f||_{U^2}^4 \ge \frac{\delta^8}{2}$. For each such $h$, $\exists t_h$ such that $||\widehat{\Delta_h}(t_h)||^2\ge \frac{\delta^8}{2}$. Working a bit harder (details omitted as they are uninsightful), one can obtain the following:
+    \begin{prop}\label{prop4.15}
+        Let $f : \mathbb{F}_p^n \to \mathbb{C}$ satisfy $||f||_{\infty}\le 1$ and $||f||_{U^3}\ge \delta$ for some $\delta\ge 0$. Suppose that $\left|\mathbb{F}_p^n\right| = \Omega_{\delta}(1)$, i.e. $\mathbb{F}_p^n$ is bounded below by some constant depending on $\delta$. Then $\exists S \subset \mathbb{F}_p^n$ with $\left|S\right|/\left|\mathbb{F}_p^n\right| = \Omega_{\delta}(1)$ and a function $\phi: S \to \mathbb{F}_p^n$ such that
+        \begin{enumerate}[(i)]
+            \item $\left|\widehat{\Delta_hf}(\phi(h))\right| = \Omega_\delta(1)$,
+            \item there are at least $\Omega_{\delta}(\left|\mathbb{F}_p^n\right|^3)$ additive quadruples $(s_1,s_2,s_3,s_4) \in S^4$ with $s_1+s_2=s_3+s_4$ such that $\phi(s_1)+\phi(s_2)=\phi(s_3)+\phi(s_4)$.
+        \end{enumerate}
+    \end{prop}
+    \textbf{Step 2.} If $S$ and $\phi$ are as above, then there is a linear map $\psi : \mathbb{F}_p^n \to \widehat{\mathbb{F}_p^n}$ which coincides with $\phi$ for many elements of $S$. More precisely:
+    \begin{prop}\label{prop4.16}
+        Let $S$ and $\phi$ be given as in Proposition \ref{prop4.15}. Then there exists an $n \times n$ matrix $M$ with entries in $\mathbb{F}_p$ and $b \in \mathbb{F}_p^n$ such that the map $\psi : \mathbb{F}_p^n \to \widehat{\mathbb{F}_p^n}$ by $x \mapsto Mx+b$ satisfies $\psi(x)=\phi(x)$ for $\Omega_\delta(\left|\mathbb{F}_p^n\right|)$ elements $x \in S$.
+    \end{prop}
+    \begin{proof}
+        Consider the graph $\Gamma = \{(h,\phi(h)) \mid h \in S\} \subset \mathbb{F}_p^n \times \widehat{\mathbb{F}_p^n}$. By Proposition \ref{prop4.15}, $\Gamma$ has $\Omega_\delta(\left|\mathbb{F}_p^n\right|)$ additive quadruples. By the Balog-Szemeredi-Gowers theorem (Theorem \ref{theorem2.15}), $\exists \Gamma' \subset \Gamma$ with $\left|\Gamma'\right|=\Omega_\delta(\left|\Gamma\right|) = \Omega_\delta(\left|\mathbb{F}_p^n\right|)$ and $\left|\Gamma'+\Gamma'\right| = O_{\delta}(\left|\Gamma'\right|)$. Define $S'$ by $\Gamma' = \{(h,\phi(h)) \mid h \in S'\}$ and note that $\left|S'\right| = \Omega_\delta(\left|\mathbb{F}_p^n\right|)$. By the Freiman-Rusza theorem (Theorem \ref{theorem2.8}) applied to $\Gamma' \subset \mathbb{F}_p^n \times \widehat{\mathbb{F}_p^n}$, there exists a subspace $H \le \mathbb{F}_p^n \times \widehat{\mathbb{F}_p^n}$ with $\left|H\right| = O_\delta(\left|\Gamma\right|)=O_\delta(\left|\mathbb{F}_p^n\right|)$ such that $\Gamma' \subset H$. Denote by $\pi : \mathbb{F}_p^n \times \widehat{\mathbb{F}_p^n} \to \mathbb{F}_p^n$ the projection of the first $n$ coordinates. By construction, $\pi(H) \supset S'$. Moreover, since $\left|S'\right|=\Omega_\delta(\left|\mathbb{F}_p^n\right|)$, 
+        \begin{align*}
+            \left|\text{ker}(\pi|_H)\right| = \frac{\left|H\right|}{\left|\text{Im}(\pi|_H)\right|} \le \frac{O_\delta(\left|\mathbb{F}_p^n\right|)}{\left|S'\right|}=O_{\delta}(1).
+        \end{align*}
+        We may thus partition $H$ into $O_{\delta}(1)$ cosets of $H^* = \text{ker}(\pi|_H)$ such that $\pi$ is injective on each coset. By averaging, there exists a coset $x+H^*$ such that $\left|\Gamma' \cap (x +H^*)\right|=\Omega_\delta(\left|\Delta'\right|) = \Omega_\delta(\left|\mathbb{F}_p^n\right|)$. Set $\Gamma'' = \Gamma' \cap (x+H^*)$ and define $S''$ accordingly. Now $\pi|_{x+H^*}$ is both injective and surjective onto its image $V = \text{Im}(\pi|_{x+H^*})$. But this means that there exists an affine linear map $\psi : V \to \widehat{\mathbb{F}_p^n}$ such that $(h,\psi(h)) \in \Gamma'' ~\forall h \in S''$.
+    \end{proof}
+    \textbf{Step 3.} The symmetry argument (for $p>2$). Having obtained $\psi(x) = Mx+b$ for some matrix $M$ and vector $b$ such that $(h,Mh+b) \in \Gamma'' ~\forall h \in S''$, we need to turn $M$ into a symmetric matrix in preparation for Step 4.
+    \vspace{1mm}
+     
+    \textbf{Step 4.} The integration step (for $p>2$).
+    \begin{prop}\label{4.18}
+        Suppose $f,M,b$ are as in Step 3 and $\mathbb{E}_h\left|\widehat{\Delta_hf}(Mh+b)\right|^2 = \Omega_\delta(1)$. Then there exists $b' \in \mathbb{F}_p^n$ such that $\mathbb{E}_x f(x)\omega^{x^T(M+M^T)x/2 + b^Tx} = \Omega_{\delta}(1)$.
+    \end{prop}
+\end{proof}
+The details of the last two steps are on Ex. Sheet 3.
 
 
 \end{document}
