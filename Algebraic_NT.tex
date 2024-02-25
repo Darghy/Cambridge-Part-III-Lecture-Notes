@@ -1485,7 +1485,7 @@ By the Existence Theorem (Theorem \ref{theorem1.26}), for a number field $K$ and
 \end{proof}
 Hence any ideal class contains infinitely many prime ideals, and they are equidistributed.
 
-\subsection{Frobenius Density theorems}
+\subsection{Frobenius density theorems}
 Let $K \subset E \subset L$ with $L/K$ Galois but $E/K$ not necessarily Galois. Let $G = \text{Gal}(L/K)$ and let $H$ be the elements of $G$ fixing $E$ elementwise. Consider a coset decomposition $G = H_{\sigma_1} \cup \ldots \cup H_{\sigma_k}$. Any $\sigma \in G$ permutes these cosets by right multiplication $H_{\sigma_i} \mapsto H_{\sigma_i \sigma}$. A sequence 
 \begin{align*}
     H_{\sigma_i}, H_{\sigma_i \sigma}, H_{\sigma_i \sigma^2}, \ldots, H_{\sigma_i \sigma^{t-1}}
@@ -1514,7 +1514,7 @@ is a cycle of length $t$, if these are $t$ distinct cosets and $H_{\sigma_i} = H
 \begin{theorem}[Frobenius Density Theorem]\label{theorem3.11}
     Let $L/K$ be Galois and let $\sigma \in G = \text{Gal}(L/K)$. Suppose $\sigma$ has $t$ elements in its division. Let $S$ be the set of prime ideals $\mathfrak{p}$ of $K$ such that there is $\mathcal{P} \subset \mathcal{O}_L$ with $\mathcal{P} \mid \mathfrak{p}$ with $\left(\frac{L/K}{\mathcal{P}}\right)$ in the division of $\sigma$, i.e. 
     \begin{align*}
-        S = \{\mathfrak{p} \in P_K \mid \exists \mathcal{P} \subset \mathcal{O}_L \text{ with }\mathcal{P}\mid \mathfrak{p} \text{ and }\left(\frac{L/K}{\mathcal{P}}\right) \text{ conjugate to }\sigma^m \\
+        S = \{\mathfrak{p} \in P_K \mid \exists \mathcal{P} \in \mathcal{P}_L \text{ with }\mathcal{P}\mid \mathfrak{p} \text{ and }\left(\frac{L/K}{\mathcal{P}}\right) \text{ conjugate to }\sigma^m \\
     \text{ with }m \text{ coprime to the order of }\sigma\}.
     \end{align*}
     Then $\delta(S) = \frac{t}{\left|G\right|}$.
@@ -1535,8 +1535,89 @@ is a cycle of length $t$, if these are $t$ distinct cosets and $H_{\sigma_i} = H
      
     Using $(\dagger)$ above and induction hypothesis for the sum over $S_d$ for $d \neq 1$, we find 
     \begin{align*}
-        [N_G(H):H]\sum_{\mathfrak{p} \in S_1}^{} N(\mathfrak{p})^{-s} \sim \left(-1 + \sum_{d \mid n,d \neq 1}^{} \frac{[N_G(\langle \sigma^d \rangle):H]t_d}{\left|G\right|}\right)\log(s-1).
+        [N_G(H):H]\sum_{\mathfrak{p} \in S_1}^{} N(\mathfrak{p})^{-s} \sim \left(-1 + \sum_{\substack{d \mid n, d \neq 1}}^{} \frac{[N_G(\langle \sigma^d \rangle):H]t_d}{\left|G\right|}\right)\log(s-1).
     \end{align*}
+    \marginpar{23 Feb 2024, Lecture 16}
+    By Lemma \ref{lemma3.10}, we have $t_d = \phi \left(\frac{n}{d}\right) [G:N_G(\langle \sigma^d \rangle)]$, so the expression in the brackets above is
+    \begin{align*}
+        &-1 + \sum_{d \mid n, d \neq 1}^{} \phi \left(\frac{n}{d}\right)\frac{[G:N_G(\langle \sigma^d \rangle)][N_G(\langle \sigma^d \rangle):H]}{\left|G\right|} \\
+        =& -1 + \sum_{d \mid n, d \neq 1}^{} \phi \left(\frac{n}{d}\right)\frac{[G:H]}{\left|G\right|} \\
+        =& -1 + \sum_{d \mid n, d\neq 1}^{} \frac{1}{n} \phi \left(\frac{n}{d}\right) = -1 - \frac{\phi(n)}{n} + \frac{1}{n}\sum_{d \mid n}^{} \phi \left(\frac{n}{d}\right).
+    \end{align*}
+    We have $\sum_{d \mid n}^{} \phi \left(\frac{n}{d}\right) = n$, so 
+    \begin{align*}
+        \sum_{\mathfrak{p} \in S}^{} \frac{1}{N(\mathfrak{p})^s} \sim \frac{-\phi(n)}{[N_G(H):H]}\log(s-1) = \frac{-t}{\left|G\right|}\log(s-1)
+    \end{align*}
+    by Lemma \ref{lemma3.10}.
+\end{proof}
+We are now in a position to prove the surjectivity of the Artin map.
+\begin{theorem}[Surjectivity of the Artin map]\label{theorem3.12}
+    Let $L/K$ be abelian and let $\mathfrak{m}$ be a modulus divisible by all ramified prime ideals. Then the Artin map $\Phi_{\mathfrak{m}}: I_K(\mathfrak{m}) \to \text{Gal}(L/K)$ is surjective.
+\end{theorem}
+\begin{proof}
+    Let $\sigma \in \text{Gal}(L/K)$. Since this is abelian, the division of $\sigma$ consists of elements which are all generators of the cyclic group $\langle \sigma \rangle$. By the Frobenius density theorem, there exist infinitely many prime ideals $\mathcal{P}$ of $L$ whose Artin symbol $\left(\frac{L/K}{\mathcal{P}}\right)$ generates $\langle \sigma \rangle$.
+    \vspace{1mm}
+     
+    Since only finitely many primes divide $\mathfrak{m}$, we can pick $\mathcal{P}$ with $\mathfrak{p} = \mathcal{P} \cap \mathcal{O}_K$ coprime to $\mathfrak{m}$. Then $\Phi_{\mathfrak{m}}(\mathfrak{p}) = \sigma'$, where $\sigma'$ is some generator of $\langle \sigma \rangle$. Hence $\sigma$ is in the image of $\Phi_{\mathfrak{m}}$.
+\end{proof}
+\subsection{Chebotarov's density theorem}
+\begin{theorem}[Chebotarov's density theorem]\label{theorem3.13}
+    Let $L/K$ be Galois and let $\sigma \in \text{Gal}(L/K)$. Suppose $\sigma$ has $c$ conjugates in $\text{Gal}(L/K)$. Let $$S = \{\mathfrak{p} \subset \mathcal{O}_K \mid \left(\frac{L/K}{\mathcal{P}}\right) = \sigma \text{ for some }\mathcal{P}\mid \mathfrak{p}\}.$$
+    Then this set $S$ has density $$\delta(S)=\frac{c}{\left|\text{Gal}(L/K)\right|}.$$
+\end{theorem}
+Note that the original proof of this does not use class field theory, but most proofs in modern textbooks do.
+\vspace{1mm}
+ 
+\textbf{Notation.} If $L/K$ is not abelian, we can still write $\left(\frac{L/K}{\mathfrak{p}}\right)$ which refers to the conjugacy class of $\left(\frac{L/K}{\mathcal{P}}\right)$ for any $\mathcal{P} \mid \mathfrak{p}$.
+\begin{cor}\label{cor3.14}
+    Let $L/K$ be abelian, $\mathfrak{m}$ a modulus divisible by all primes that ramify in $L$, and $\sigma \in \text{Gal}(L/K)$. If \[
+    S = \left\{\mathfrak{p} \subset \mathcal{O}_K \mid \mathfrak{p}\nmid \mathfrak{m}, \left(\frac{L/K}{\mathcal{P}}\right) = \sigma\right\},
+    \]
+    then $\delta(S)=\frac{1}{[L:K]}$.
+\end{cor}
+Chebotarov gives an alternative proof for Lemma \ref{lemma3.4}.
+\begin{proof}[Alternate proof of Lemma \ref{lemma3.4}]
+    Let $\sigma=1$. Then the set of primes with $\left(\frac{L/K}{\mathcal{P}}\right)$ has density $\frac{1}{[L:K]}$. But $\left(\frac{L/K}{\mathcal{P}}\right)$ if and only if $\mathfrak{p}$ splits completely.
+\end{proof}
+We next show that the primes that split completely characterize the extension $L/K$.
+\vspace{1mm}
+ 
+\textbf{Notation.} Given two sets $S,T$, we say $S \stackrel{\cdot }{\subset} T$ if $S \subset T \cup \Sigma$ for some finite set $\Sigma$. Write $S \stackrel{\cdot }{=} T$ if $S \stackrel{\cdot }{\subset} T$ and $T \stackrel{\cdot }{\subset} S$.
+\begin{theorem}\label{theorem3.15}
+    Let $L$ and $M$ be Galois extensions of $K$. Then
+    \begin{enumerate}[(i)]
+        \item $L \subset M$ if and only if $S_{M/K} \stackrel{\cdot }{\subset } S_{L/K}$.
+        \item $L=M$ if and only if $S_{M/K} \stackrel{\cdot }{=} S_{L/K}$.
+    \end{enumerate}
+\end{theorem}
+\begin{prop}\label{prop3.16}
+    Let $L$ and $M$ be finite extensions of $K$.
+    \begin{enumerate}[(i)]
+        \item If $M/K$ is Galois, then $L \subset M \iff S_{M/K} \stackrel{\cdot }{\subset } S_{L/K}$.
+        \item If $L/K$ is Galois, then $L \subset M \iff \widetilde{S}_{M/K} \stackrel{\cdot }{\subset } S_{L/K}$, where \[
+            \widetilde{S}_{M/K} = \{\mathfrak{p} \subset \mathcal{O}_K  \mid \mathfrak{p} \text{ unramified in }M, f_{\mathcal{P}|\mathfrak{p}}=1 \text{ for some }\mathcal{P} \subset \mathcal{O}_M \text{ with } \mathcal{P}\mid \mathfrak{p}\}.
+        \]
+    \end{enumerate}
+\end{prop}
+\begin{lemma}\label{lemma3.17}
+    Let $L/K$ is a finite extension with Galois closure $M/K$. Then \[
+    \delta(S_{L/K}) = \delta(S_{M/K}) = \frac{1}{[L:K]}. 
+    \]
+\end{lemma}
+\begin{proof}
+    Note that a prime $\mathfrak{p}$ of $K$ splits completely in $L$ if and only if it splits completely in all of the conjugates of $L$ in $M$, i.e. $\sigma(L)$ for $\sigma \in \text{Gal}(M/K)$. But the Galois closure $M$ is the compositum of the conjugates of $L$. Hence $\mathfrak{p}$ splits completely in $L$ if and only if it does so in $M$. 
+\end{proof}
+\begin{proof}[Proof of Proposition \ref{prop3.16}.]
+    We first prove (ii). The direction $\implies $, i.e. if $L \subset M$, then $\widetilde{S}_{M/K} \stackrel{\cdot }{\subset } S_{L/K}$, is left as an exercise.
+    \vspace{1mm}
+     
+    Now assume $\widetilde{S}_{M/K} \stackrel{\cdot }{\subset } S_{L/K}$. Let $N$ be a Galois extension of $K$ containing both $L$ and $M$. To prove $L \subset M$, by Galois theory it suffices to show that $\text{Gal}(N/M) \subset \text{Gal}(N/L)$. In other words, for any $\sigma \in \text{Gal}(N/M)$, we need to show $\sigma|_L = 1$. By Chebotarov, we can find a prime $\mathfrak{p} \subset \mathcal{O}_K$ unramified in $N$ such that $\left(\frac{N/K}{\mathfrak{p}}\right)$ is the conjugacy class of $\sigma$. In particular, there is $\mathcal{P} \subset \mathcal{O}_N$ such that $\mathcal{P} \mid \mathfrak{p}$ and $\left(\frac{N/K}{\mathcal{P}}\right) = \sigma$. We show $\mathfrak{p} \in \widetilde{S}_{M/K}$. Let $\mathcal{P}_M = \mathcal{P} \mathbb{N} \mathcal{O}_M$. Then for $\alpha \in \mathcal{O}_M$ we have $$\alpha \equiv \sigma(\alpha) \equiv \alpha^{N(\mathfrak{p})} \pmod{\mathcal{P}_M},$$ where the left equality uses $\sigma|_M=1$ and the right uses the definition of the Artin symbol. It follows that $\mathcal{O}_M/\mathcal{P}_M \cong \mathcal{O}_K/\mathcal{P}$, so $f_{\mathcal{P}_M|\mathfrak{p}}=1$ and hence $\mathfrak{p} \in \widetilde{S}_{M/K}$. By Chebotarov, we can find infinitely many such $\mathfrak{p}$, so we can assume $\mathfrak{p} \in S_{L/K}$. Since we assumed $\widetilde{S}_{M/K} \stackrel{\cdot }{\subset } S_{L/K}$, we have $\left(\frac{L/K}{\mathfrak{p}}\right)=1$. We also have $\left(\frac{L/K}{\mathfrak{p}}\right) = \left(\frac{N/K}{\mathcal{P}}\right)|_L$ and since $\sigma = \left(\frac{L/K}{\mathcal{P}}\right)$, this implies $\sigma|_L=1$.
+    \vspace{1mm}
+     
+    For the first part, direction $\impliedby$, suppose $S_{M/K} \stackrel{\cdot }{\subset } S_{L/K}$. By the proof of the previous lemma (Lemma \ref{lemma3.17}), we have $S_{L/K} = S_{L'/K}$ for $L'$ the Galois closure of $L$ over $K$. Since $M/K$ is Galois, we have $\widetilde{S}_{M/K} = S_{M/K}$ (exercise!). Hence $S_{M/K} \stackrel{\cdot }{\subset } S_{L/K} \implies \widetilde{S}_{M/K} \stackrel{\cdot }{\subset } S_{L'/K}$, but by the second part of this proposition we have $L' \subset M$, $L \subset M$.
+    \vspace{1mm}
+     
+    The direction $\implies$ is left as an exercise.
 \end{proof}
 
 \end{document}
