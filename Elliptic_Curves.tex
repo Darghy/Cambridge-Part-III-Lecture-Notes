@@ -15,7 +15,9 @@
 \usepackage{float}
 \usepackage{tikz-cd}
 \usepackage{tikz}
+\usetikzlibrary{matrix, arrows}
 \usepackage{graphicx}
+\usepackage{stmaryrd}
 \usepackage{caption}
 \usepackage{wrapfig}
 \usepackage{setspace}
@@ -1145,6 +1147,275 @@ the \textbf{kernel of reduction}. Let \[
     \widetilde{E}\setminus \{\text{singular point}\} & \text{ if }E \text{ has bad reduction.}
 \end{cases}
 \]
-We have a remarkable fact: the chord and tangent process still defines a group law on $\widetilde{E}_{\text{ns}}$. However, in the case of bad reductions, either $\widetilde{E}_{\text{ns}} \cong \mathbb{G}_a$ or $\widetilde{E}_{\text{ns}} \cong \mathbb{G}_m$ (the additive reduction or the multiplicative reduction).
+We have a remarkable fact: the chord and tangent process still defines a group law on $\widetilde{E}_{\text{ns}}$. However, in the case of bad reductions, either $\widetilde{E}_{\text{ns}} \cong \mathbb{G}_a$ (over $k$) or $\widetilde{E}_{\text{ns}} \cong \mathbb{G}_m$ (over $k$ or possibly over a quadratic extension of $k$). These are the additive reduction and the multiplicative reduction.
+\marginpar{19 Feb 2024, Lecture 14}
+\vspace{1mm}
+ 
+For simplicity, assume $\text{char }k \neq 2$. Then for $\widetilde{E} : y^2=f(x)$, $\text{deg}f=3$, we have that $\widetilde{E}$ is singular if and only if $f$ has a repeated root.
+\begin{itemize}
+    \item If this is a double root, we get $\mathbb{G}_m$ (e.g. for $y^2=x^2(x+1)$, a curve with a node).
+    \item If this is a triple root, we get $\mathbb{G}_a$ (e.g. for $y^2=x^3$, a curve with a cusp).
+\end{itemize}
+The proof of the former is on Ex. Sheet 3. For the latter, consider the map $\mathbb{G}_a \to \widetilde{E}_{\text{ns}}$ by $t \mapsto (t^{-2},t^{-3})$, so $\frac{x}{y}\mapsfrom (x,y)$ and the point at infinity $\leftrightarrow 0$. Suppose we have a line through $P_1$, $P_2$ meeting the curve again at $P_3$ (with none of these points at the origin), so this line is $ax+by=1$. Write $P_i = (x_i,y_i)$ for $i =1,2,3$, and $t_i = \frac{x_i}{y_i}$. Then 
+\begin{align*}
+    &x_i^3=y_i^2=y_i^2(ax_i+by_i)\\
+    \implies & t_i^3at_i-b=0\\
+    \implies & t_1,t_2,t_3 \text{ are roots of }X^3-aX-b=0.
+\end{align*}
+Looking at the coefficient of $X^2$ gives $t_1+t_2+t_3=0$, so $\widetilde{E}_{\text{ns}} \cong \mathbb{G}_a$.
+\begin{defn}
+    We define
+    \begin{align*}
+        E_0(K) = \{P \in E(K) \mid \widetilde{P} \in \widetilde{E}_{\text{ns}}(k)\}.
+    \end{align*}
+\end{defn}
+\begin{prop}\label{prop9.5}
+    $E_0(K)$ is a subgroup of $E(K)$ and reduction mod $\pi$ is a surjective group homomorphism $E_0(K) \to \widetilde{E}_{\text{ns}}(K)$.
+\end{prop}
+\begin{proof}
+    The group homomorphism part: A line $\ell$ in $\mathbb{P}^2$ defined over $K$ has equation $\ell : aX+bY+cZ=0$ for $a,b,c \in K$, where we may assume that $\min(v(a),v(b),v(c))=0$ by scaling.
+    \vspace{1mm}
+     
+    Reduction mod $\pi$ gives a line $\widetilde{\ell}: \widetilde{a}X+\widetilde{b}Y+\widetilde{c}Z=0$. If $P_1,P_2,P_3 \in E(K)$ with $P_1+P_2+P_3=0$, then these points lie on a line $\ell$, so $\widetilde{P}_1, \widetilde{P}_2, \widetilde{P}_3$ lie on the line $\widetilde{\ell}$. If $\widetilde{P}_1,\widetilde{P}_2 \in \widetilde{E}_{\text{ns}}(k)$, then $\widetilde{P}_3 \in \widetilde{E}_{\text{ns}}(k)$. Hence if $P_1,P_2 \in E_0(K)$, then $P_3 \in E_0(K)$ and $\widetilde{P}_1 + \widetilde{P}_2 + \widetilde{P}_3=0$. It is left as an exercise to check that this still works if $\#\{\widetilde{P}_1,\widetilde{P}_2,\widetilde{P}_3\}<3$.
+    \vspace{1mm}
+     
+    For surjectivity, let $f(x,y) = y^2+a_1xy+a_3y-(x^3+\ldots)$. Let $\widetilde{P} \in \widetilde{E}_{\text{ns}}(k) \setminus \{0\}$, say $\widetilde{P}=(\widetilde{x}_0,\widetilde{y}_0)$ for some $x_0,y_0 \in \mathcal{O}_K$. As $\widetilde{P}$ is nonsingular, we either have $\frac{\partial f}{\partial x}(x_0,y_0) \not\equiv 0$ mod $\pi$ or $\frac{\partial f}{\partial y}(x_0,y_0) \not\equiv 0$ mod $\pi$.
+    \vspace{1mm}
+     
+    In the first case, we put $g(t)=f(t,y_0) \in \mathcal{O}_K[t]$ to get $\begin{cases}
+        g(x_0)\equiv \pmod{\pi},\\
+        g'(x_0) \in \mathcal{O}_K^\times,
+    \end{cases}$ so by Hensel's lemma $\exists b \in \mathcal{O}_K$ such that $\begin{cases}
+        g(b)=0,\\
+        b \equiv x_0 \pmod{\pi}. 
+    \end{cases}$ Then $(b,y_0) \in E(K)$ has reduction $\widetilde{P}$. The second case is analogous.
+\end{proof}
+Recall that for $r\ge 1$, we put \[
+E_r(K)= \{(x,y) \in E(K) \mid v(x)\le -2r,v(y)\le -3r\} \cup \{0\}
+\]
+and we have $\ldots \subset E_r(K) \subset \ldots \subset E_1(K) \subset E_0(K)\subset E_K$. Recall that $\widehat{E}(\pi^r \mathcal{O}_K) = E_r(K)$ by definition. We know that we have $E_r(K) \cong (\mathcal{O}_K,+)$ if $r>\frac{e}{p-1}$ and $E_r(K)/E_{r+1}(K) \cong (k,+) ~\forall r\ge 1$. We can extend this to include $E_0(K)/E_1(K) \cong \widetilde{E}_{\text{ns}}(K)$. What about $E_0(K)/E(K)$?
+\begin{lemma}\label{lemma9.6}
+    If $\left|k\right|<\infty$, then $E_0(K)\subset E_K$ has finite index.
+\end{lemma}
+\begin{proof}
+    $\left|k\right|<\infty \implies \frac{\mathcal{O}_K}{\pi^r \mathcal{O}_K}$ is finite $~\forall r\ge 1$. Hence $\mathcal{O}_K = \lim_{\stackrel{\leftarrow}{r} } \mathcal{O}_K/\pi^r \mathcal{O}_K$ is a profinite group, hence compact. Then $\mathbb{P}^n(K)$ is a union of sets of the form \[
+    \{(a_0:a_1:a_2:\ldots:a_{i-1}:1:a_{i+1}:\ldots a_n) \mid a_j \in \mathcal{O}_K\}
+    \]
+    and hence is compact (with respect to the $\pi$-adic topology on $K$). $E(K) \subset \mathbb{P}^2(K)$ is a closed subset and hence compact, so $E(K)$ is a compact topological group. If $\widetilde{E}$ has a singular point $(\widetilde{x}_0,\widetilde{y}_0)$, then \[
+    E(K) \setminus E_0(K) = \{(x,y) \in E(K) \mid v(x-x_0)\ge 1,v(y-y_0)\ge 1\}
+    \]
+    is a closed subset of $E(K)$, so $E_0(K)$ is an open subgroup of $E(K)$. But the cosets of $E_0(K)$ are open, so $[E(K):E_0(K)]<\infty$ by compactness of $E(K)$.
+\end{proof}
+\begin{defn}
+    $c_K(E) = [E_K:E_0(K)]$ is called the \textbf{Tamagawa number}.
+\end{defn}
+\textbf{Remarks.}
+\begin{enumerate}[(i)]
+    \item Good reduction implies $c_K(E)=1$, but the converse is false.
+    \item It can be shown that either $c_K(E) = v(\Delta)$ or $c_K(E)\le 4$ (here it is essential that we work with a minimal Weierstrass equation). 
+\end{enumerate} 
+We deduce the following:
+\begin{theorem}\label{theorem9.7}
+    If $[K:\mathbb{Q}_p]<\infty$, then $E(K)$ contains a subgroup of finite index isomorphic to $(\mathcal{O}_K,+)$.
+\end{theorem}
+Some setup: Let $[K:\mathbb{Q}_p]<\infty$, $L/K$ a finite extension with residue fields $k$ and $k'$ and $f = [k':k]$. This gives us the map 
+\begin{tikzcd}
+    K^\times \rar{v_K} & \mathbb{Z} \dar{\times e} \\
+    L^\times \arrow[draw=none]{u}[sloped,auto=false, rotate=180]{\subset}  \rar{v_L} & \mathbb{Z}
+\end{tikzcd}.
+\vspace{1mm}
+
+\textbf{Facts.} 
+\begin{enumerate}[(i)]
+    \item $[L:K] = ef$.
+    \item If $L/K$ is Galois, then the natural map $\text{Gal}(L/K) \to \text{Gal}(k'/k)$ is surjective with kernel of order $e$.
+\end{enumerate}
+\begin{defn}
+    $L/K$ is \textbf{unramified} if $e=1$.
+\end{defn}
+\marginpar{21 Feb 2024, Lecture 15}
+\textbf{Facts.}
+\begin{enumerate}[(i)]
+    \item For each $m\ge 1$, $k$ has a unique extension of degree $m$ (say $k_m$).
+    \item For each $m\ge 1$, $K$ has a unique unramified extension of degree $m$ (say $K_m$).
+\end{enumerate} 
+These extensions are Galois with cyclic Galois group.
+\begin{defn}
+    We have the maximal unramified extension of $K$, $$K^{\text{nr}} = \bigcup_{m\ge 1} K_m \subset \overline{K}.$$
+\end{defn}
+\begin{theorem}\label{theorem9.8}
+    Let $[K:\mathbb{Q}]<\infty$. Suppose $E/K$ has good reduction and $p \nmid n$. If $P \in E(K)$, then $K([n]^{-1}P)/K$ is unramified.
+\end{theorem}
+\textbf{Notation.} We have
+\[
+[n]^{-1}(P)=\{Q \in E(\overline{K}) \mid nQ=P\}
+\] 
+and we let 
+\[
+K(\{Q_1,\ldots,Q_r\})=K(x_1,y_1,\ldots,x_r,y_r),
+\]
+where $Q_i = (x_i,y_i)$.
+\begin{proof}
+    For each $m\ge 1$, there is a short exact sequence $$0 \to E_1(K_m) \to E(K_m) \to \widetilde{E}_{k_m} \to 0.$$
+    Taking the union $\bigcup_{m\ge 1} $ gives us a commutative diagram with exact rows:
+    $$\begin{tikzcd}[]
+        0 & E_1(K^{\text{nr}}) & E(K^{\text{nr}}) & \widetilde{E}(\overline{k}) & 0 \\
+        0 & E_1(K^{\text{nr}}) & E(K^{\text{nr}}) & \widetilde{E}(\overline{k}) & 0
+        \arrow["", from=1-1, to=1-2]
+        \arrow["", from=1-2, to=1-3]
+        \arrow["", from=1-3, to=1-4]
+        \arrow["", from=1-4, to=1-5]
+        \arrow["", from=2-1, to=2-2]
+        \arrow["", from=2-2, to=2-3]
+        \arrow["", from=2-3, to=2-4]
+        \arrow["", from=2-4, to=2-5]
+        \arrow["\times n", from=1-2, to=2-2]
+        \arrow["\times n", from=1-3, to=2-3]
+        \arrow["\times n", from=1-4, to=2-4]
+    \end{tikzcd},$$
+    The first multiplication map is an isomorphism by Corollary \ref{cor8.5} applied to each $K_m$ (using $p \nmid n$). 
+    \vspace{1mm}
+    
+    The third is surjective by Theorem \ref{theorem2.3}, and has kernel $\cong (\mathbb{Z}/n\mathbb{Z})^2$ by Theorem \ref{theorem6.5} (again using $p \nmid n$). Using the snake lemma on this diagram gives $E(K^{\text{nr}})[n] \cong(\mathbb{Z}/n\mathbb{Z})^2$ and $E(K^{\text{nr}})/nE(K^{\text{nr}}) = 0$. So if $P \in E(K)$, then $\exists Q \in E(K^{\text{nr}})$ with $nQ=P$ and $[n]^{-1}P = \{Q+T \mid T \in E[n]\} \subset E(K^{\text{nr}})$. Hence $K([n]^{-1}P) \subset K^{\text{nr}}$ and so $K([n]^{-1}P)/K$ is unramified.
+\end{proof}
+\section{Elliptic curves over number fields}
+\subsection{The torsion subgroup} 
+\textbf{Notation.} Let $E/K$ be an elliptic curve for $[K:\mathbb{Q}]<\infty$. We write $\mathfrak{p}$ for a prime of $K$ (i.e. of $\mathcal{O}_K$), $K_{\mathfrak{p}}$ for the $\mathfrak{p}$-adic completion of $K$, and $k_{\mathfrak{p}}=\mathcal{O}_K/\mathfrak{p}$.
+
+\begin{defn}
+    $\mathfrak{p}$ is a prime of good reduction for $E/K$ if $E/K_{\mathfrak{p}}$ has good reduction.
+\end{defn}
+\begin{lemma}\label{lemma10.1}
+    $E/K$ has only finitely many primes of bad reduction.
+\end{lemma}
+\begin{proof}
+    Take a Weierstrass equation for $E$ with $a_1,\ldots,a_6 \in \mathcal{O}_K$. Since $E$ is nonsingular, $0 \neq \Delta \in \mathcal{O}_K$. Write $(\Delta)=\mathfrak{p}_1^{\alpha_1}\ldots \mathfrak{p}_r^{\alpha_r}$ for the factorization into prime ideals and let $S = \{\mathfrak{p}_1,\ldots,\mathfrak{p}_r\}$. If $\mathfrak{p} \not\in S$, then $v_{\mathfrak{p}}(\Delta)=0$, so $E/K_{\mathfrak{p}}$ has good reduction. Hence $\{\text{bad primes of }E\}\subset S$ is finite.
+\end{proof}
+\textbf{Remark.} If $K$ has class number 1 (e.g. if $K=\mathbb{Q}$), then we can always find a Weierstrass equation for $E$ with $a_1,\ldots,a_6 \in \mathcal{O}_K$ which is minimal at all primes $\mathfrak{p}$.
+\vspace{1mm}
+ 
+\textbf{Basic group theory.} If $A$ is a finitely generated abelian group, then $$A \cong (\text{finite group}) \times \mathbb{Z}^r$$ for the finite group the \textbf{torsion subgroup} and $r$ the \textbf{rank}. 
+
+\begin{lemma}\label{lemma10.2}
+    $E(K)_{\text{tors}}$ is finite.
+\end{lemma}
+\begin{proof}
+    Take any prime $\mathfrak{p}$. We saw that $E(K_{\mathfrak{p}})$ has a subgroup $A$ of finite index with $A \cong (\mathcal{O}_{\mathfrak{p}},+)$. In particular, $A$ is torsion-free. Hence we get \[
+    E(K)_{\text{tors}} \subset E(K_{\mathfrak{p}})_{\text{tors}} \hookrightarrow E(K_{\mathfrak{p}})/A,
+    \]
+    and this last group is finite.
+\end{proof}
+\begin{lemma}\label{lemma10.3}
+    Let $\mathfrak{p}$ be a prime of good reduction. Then reduction mod $\mathfrak{p}$ gives an injective group homomorphism $E(K)[n] \hookrightarrow \widetilde{E}(k_{\mathfrak{p}})$.
+\end{lemma}
+\begin{proof}
+    Proposition \ref{prop9.5} implies that $E(K_{\mathfrak{p}}) \to \widetilde{E}(k_{\mathfrak{p}})$ is a group homomorphism with kernel $E_1(K_{\mathfrak{p}})$. Corollary \ref{cor8.5} and the fact that $\mathfrak{p}\nmid n$ imply now that $E_1(K_{\mathfrak{p}})$ has no $n$-torsion.
+\end{proof}
+\begin{example}
+    Let $E/\mathbb{Q}$ be given by $y^2+y=x^3-x^2$. Then $\Delta=-11$, so $E$ has good reduction at all $p \neq 11$. We can count
+    $$\begin{tabular}{ c|cccccc } 
+        $p$ & 2 & 3 & 5 & 7 & 11 & 13 \\ 
+        \hline
+        $\# \widetilde{E}(\mathbb{F}_p)$ & 5 & 5 & 5 & 10 & -- & 10 \\ 
+    \end{tabular}.$$
+    By Lemma \ref{lemma10.3}, $\# E(\mathbb{Q})_{\text{tors}} \mid 5\cdot 2^a$ for some $a\ge 0$ and $\# E(\mathbb{Q})_{\text{tors}} \mid 5 \cdot 3^b$ for some $b\ge 0$. This implies that $\#E(\mathbb{Q}) \mid 5$. If we let $T=(0,0) \in E(\mathbb{Q})$, then calculation shows $5T=0$, so $E(\mathbb{Q})_{\text{tors}} \cong \mathbb{Z}/5\mathbb{Z}$.
+\end{example}
+\begin{example}
+    Let $E/\mathbb{Q}$ be given by $y^2+y=x^3+x^2$. Then $\Delta=-43$, and we get
+    $$\begin{tabular}{ c|cccccc } 
+        $p$ & 2 & 3 & 5 & 7 & 11 & 13 \\ 
+        \hline
+        $\# \widetilde{E}(\mathbb{F}_p)$ & 5 & 6 & 10 & 8 & 9 & 19 \\ 
+    \end{tabular}.$$
+    By Lemma \ref{lemma10.3}, $\#E(\mathbb{Q})_{\text{tors}} \mid 5\cdot 2^a$ for some $a\ge 0$ and $\#E(\mathbb{Q})_{\text{tors}} \mid 9\cdot 11^b$ for some $b\ge 0$, so $E(\mathbb{Q})_{\text{tors}} = \{0\}$. Hence the point $P = (0,0)$ is a point of infinite order. In particular, $E(\mathbb{Q})$ is infinite.
+\end{example}
+\marginpar{23 Feb 2024, Lecture 16}
+\begin{example}
+    Let $E_D/\mathbb{Q}$ be given by $E_D: y^2=x^3-D^2x$ for $D \in \mathbb{Z}$ squarefree. Then $\Delta=2^6 D^6$ and we spot \[
+    E_D(\mathbb{Q})_{\text{tors}} \supset \{0, (0,0), (\pm D,0)\} \cong (\mathbb{Z}/2\mathbb{Z})^2.
+    \]
+    Let $f(x)=x^3-D^2x$. If $p \nmid 2D$, then $$\# \widetilde{E}_D(\mathbb{F}_p) = 1 + \sum_{x \in \mathbb{F}_p}^{} \left(\left(\frac{f(x)}{p}\right)+1\right).$$ If $p \equiv 3$ mod 4, then $\# \widetilde{E}_D(\mathbb{F}_p)=p+1$, since 
+    \begin{align*}
+        \left( \frac{f(-x)}{p} \right) = \left( \frac{-f(x)}{p} \right) = \left( \frac{-1}{p} \right) \left( \frac{f(x)}{p} \right) = - \left( \frac{f(x)}{p} \right).
+    \end{align*}
+    Let $m = \#E_D(\mathbb{Q})_{\text{tors}}$. We have $4 \mid m \mid (p+1)$ for all sufficiently large primes $p$ with $p \equiv 3$ mod 4 ($p \nmid 2Dm$ suffices).
+    \vspace{1mm}
+     
+    If $8 \mid m$ or $l \mid m$ for some odd prime $l$, then this contradicts Dirichlet's Theorem on primes in arithmetic progressions. Hence $m=4$ and so $E_D(\mathbb{Q})_{\text{tors}} = (\mathbb{Z}/2\mathbb{Z})^2$. Thus 
+    \[
+    \text{rank }E_D(\mathbb{Q})\ge 1 \iff \exists x,y \in \mathbb{Q} \text{ with }y\neq 0 \text{ and }y^2=x^3-D^2x.
+    \]
+    By Lecture 1, this is equivalent to $D$ being a congruent number.
+\end{example}
+\begin{lemma}\label{lemma10.4}
+    Let $E/\mathbb{Q}$ be given by a Weierstrass equation with $a_1,\ldots,a_6 \in \mathbb{Z}$. Suppose $0 \neq T = (x,y) \in E(\mathbb{Q})_{\text{tors}}$. Then
+    \begin{enumerate}[(i)]
+        \item $4x,8y \in \mathbb{Z}$.
+        \item If $2 \mid a_1$ or $2T \neq 0$, then $x,y \in \mathbb{Z}$.
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+    The Weierstrass equation defines a formal group $\widehat{E}$ over $\mathbb{Z}$. For $r \ge 1$, we have 
+    \[
+    \widehat{E}(p^r \mathbb{Z}_p) = \{(x,y) \in E(\mathbb{Q}_p) \mid v_p(x)\le -2r, v_p(y)\le -3r\} \cup \{0\}.
+    \]
+    By Theorem \ref{theorem9.2}, $\widehat{E}(p^r\mathbb{Z}_p) \cong (\mathbb{Z}_p,+)$ if $r>\frac{1}{p-1}$. Hence $\widehat{E}(4\mathbb{Z}_2)$ and $\widehat{E}(p\mathbb{Z}_p)$ for $p$ odd are torsion-free. This means that $v_2(x)\ge -2, v_2(y)\ge -3$ and $v_p(x),v_p(y)\ge 0$ for all odd primes $p$, which proves (i).
+    \vspace{1mm}
+     
+    For the second part, suppose $T \in \widehat{E}(4\mathbb{Z}_2)$, i.e. $v_2(x)=-2,v_2(y)=-3$. Since $\widehat{E}(2\mathbb{Z}_2)/\widehat{E}(4\mathbb{Z}_2)\cong (\mathbb{F}_2,+)$ and $\widehat{E}(4\mathbb{Z}_2)$ is torsion-free, we get $2T=0$. Also, $(x,y) = T = -T = (x,-y-a_1x-a_3) \implies 2y+a_1x+a_3=0$, so $8y+a_1(4x)+4a_3=0$. Since $8y, 4x, 4a_3$ are even, we require $a_1$ to be odd. So if $2T \neq 0$ or $a_1$ is even, then $T \not\in \widehat{E}(2\mathbb{Z}_2)$, so $x, y \in \mathbb{Z}$.
+\end{proof}
+\begin{example}
+    For $E:y^2+xy=x^3+4x+1$, $\left(-\frac{1}{4},\frac{1}{8}\right) \in E(\mathbb{Q})[2]$.
+\end{example}
+\begin{theorem}[Lutz-Nagell]
+    Let $E/\mathbb{Q}$ be given by $y^2=x^3+ax+b=f(x)$ for $a,b \in \mathbb{Z}$. Suppose $0 \neq T = (x,y) \in E(\mathbb{Q})_{\text{tors}}$. Then $x,y \in \mathbb{Z}$ and either $y=0$ or $y^2 \mid (4a^3+27b^2)$.
+\end{theorem}
+\begin{proof}
+    Lemma \ref{lemma10.4} implies that $x,y \in \mathbb{Z}$. If $2T=0$, then $y=0$. Otherwise, $0 \neq 2T = (x_2,y_2) \in E(\mathbb{Q})_{\text{tors}}$, so by Lemma \ref{lemma10.4}, $x_2,y_2 \in \mathbb{Z}$. But $x_2 = \left(\frac{f'(x)}{2y}\right)^2-2x \implies y \mid f'(x)$. As $E$ is nonsingular, $f(X)$ and $f'(X)$ are coprime, so $f(X)$ and $f'(X)^2$ are coprime, so $\exists g,h \in \mathbb{Q}[X]$ with $g(X)f(X)+h(X)f'(X)^2=1$. In fact, we can check that
+    \begin{align*}
+        (3X^2+4a)f'(X)^2-27(X^3+aX-b)f(X)=4a^3+27b^2.
+    \end{align*}
+    Since $y \mid f'(x)$ and $y^2 = f(x)$, we get $y^2 \mid (4a^3+27b^2)$.
+\end{proof}
+\textbf{Remark.} Mazur showed that if $E/\mathbb{Q}$ is an elliptic curve, then
+\begin{align*}
+    E(\mathbb{Q})_{\text{tors}} \cong \begin{cases}
+        \mathbb{Z}/n\mathbb{Z} & 1\le n\le 12, n \neq 11,\\
+        \mathbb{Z}/2\mathbb{Z} \times \mathbb{Z}/2n\mathbb{Z} & 1\le n\le 4.
+    \end{cases}
+\end{align*}
+Moreover, all 15 possibilies occur.
+\section{Kummer theory}
+Let $K$ be a field with $\text{char }K \nmid n$. Assume $\mu_n \subset K$ for $\mu_n$ the set of $n^{\text{th}}$ (primitive?) roots of unity.
+\begin{lemma}\label{lemma11.1}
+    Let $\Delta \subset K^\times/(K^\times)^n$ be a finite subgroup and let $L = K(\sqrt[n]{\Delta})$. Then $L/K$ is Galois and $\text{Gal}(L/K) \cong \text{Hom}(\Delta,\mu_n)$.
+\end{lemma}
+\begin{proof}
+    $L/K$ is Galois since $\mu_n \subset K \implies L/K$ normal and $\text{char }K \nmid n \implies L/K$ separable. Define the \textbf{Kummer pairing} 
+    \begin{align*}
+        \langle ~,~ \rangle : \text{Gal}(L/K) \times \Delta &\to \mu_n \\
+        (\sigma,x) &\mapsto \frac{\sigma(\sqrt[n]{x})}{\sqrt[n]{x}}.
+    \end{align*}
+    This is well-defined: If $\alpha,\beta \in L$ with $\alpha^n=\beta^n=x$, then $\left(\frac{\alpha}{\beta}\right)^n=1$, so $\frac{\alpha}{\beta} \in \mu_n \subset K$, so $\sigma \left(\frac{\alpha}{\beta}\right) = \frac{\alpha}{\beta}$ and so $\frac{\sigma(\alpha)}{\alpha} = \frac{\sigma(\beta)}{\beta}$.
+    \vspace{1mm}
+     
+    This is bilinear: we have
+    \begin{align*}
+        \langle \sigma \tau, x \rangle = \frac{\sigma(\tau \sqrt[n]{x})}{(\tau \sqrt[n]{x})} \frac{\tau \sqrt[n]{x}}{\sqrt[n]{x}} = \langle \sigma,x \rangle \langle \tau, x \rangle,\\
+        \langle \sigma,xy \rangle = \frac{\sigma \sqrt[n]{xy}}{\sqrt[n]{xy}} = \frac{\sigma \sqrt[n]{x}}{\sqrt[n]{x}}\frac{\sigma \sqrt[n]{y}}{\sqrt[n]{y}} = \langle \sigma,x \rangle \langle \sigma,y \rangle.
+    \end{align*} 
+    This is nondegenerate: Let $\sigma \in \text{Gal}(L/K)$. If $\langle \sigma,x \rangle = 1 ~\forall x \in \Delta$, then $\sigma(\sqrt[n]{x})=\sqrt[n]{x} ~\forall x \in \Delta$, so $\sigma$ fixes $L$ pointwise, i.e. $\sigma=1$. Now let $x(K^\times)^n \in \Delta$. If $\langle \sigma, x \rangle = 1~\forall \sigma \in \text{Gal}(L/K)$, then $\sigma(\sqrt[n]{x})=\sqrt[n]{x}~\forall \sigma \in \text{Gal}(L/K)$, so $\sqrt[n]{x} \in K$, so $x \in (K^\times)^n$ and so $x(K^{\times})^n \in \Delta$ is trivial.
+    \vspace{1mm}
+     
+    We get injective group homomorphisms
+    \begin{enumerate}[(i)]
+        \item $\text{Gal}(L/K) \hookrightarrow \text{Hom}(\Delta,\mu_n)$,
+        \item $\Delta \hookrightarrow \text{Hom}(\text{Gal}(L/K),\mu_n)$.
+    \end{enumerate}
+    From (i), $\text{Gal}(L/K)$ is abelian and of exponent dividing $n$. Recall the following \textbf{Fact}: If $G$ is a finite abelian group of exponent dividing $n$, then $\text{Hom}(G,\mu_n)\cong G$ (non-canonically). Hence $\left|\text{Gal}(L/K)\right|\stackrel{(i)}{\le } \left|\Delta\right| \stackrel{(ii)}{\le } \left|\text{Gal}(L/K)\right|$, so (i) and (ii) are isomorphisms.
+\end{proof}
+\begin{example}
+    $\text{Gal}(\mathbb{Q}(\sqrt{2},\sqrt{3},\sqrt{5})/\mathbb{Q}) \cong (\mathbb{Z}/2\mathbb{Z})^3$.
+\end{example}
 
 \end{document}
