@@ -1417,5 +1417,78 @@ Let $K$ be a field with $\text{char }K \nmid n$. Assume $\mu_n \subset K$ for $\
 \begin{example}
     $\text{Gal}(\mathbb{Q}(\sqrt{2},\sqrt{3},\sqrt{5})/\mathbb{Q}) \cong (\mathbb{Z}/2\mathbb{Z})^3$.
 \end{example}
+\marginpar{26 Feb 2024, Lecture 17}
+Reminder: we are assuming $\text{char }K \nmid n$ and $\mu_n \subset K$.
+\begin{theorem}\label{theorem11.2}
+    There is a bijection 
+    \begin{align*}
+        \{\text{finite subgroups of }K^\times/(K^\times)^n\} &\leftrightarrow \{\text{finite abelian extensions }L/K \text{ of exponent dividing }n\}\\
+        \Delta &\mapsto K(\sqrt[n]{\Delta})\\
+        ((L^\times)^n \cap K^\times)/(K^\times)^n &\mapsfrom L
+    \end{align*}
+\end{theorem}
+\begin{proof}
+    (i). Let $\Delta \subset K^\times/(K^\times)^n$ be a finite subgroup. Let $L = K(\sqrt[n]{\Delta})$ and $\Delta' = ((L^\times)^n \cap K^\times)/(K^\times)^n$. We must show $\Delta= \Delta'$. Clearly $\Delta \subset \Delta'$. Also 
+    \begin{align*}
+        &L = K(\sqrt[n]{\Delta}) \subset K(\sqrt[n]{\Delta'}) \subset L\\
+        \implies & K(\sqrt[n]{\Delta}) = K(\sqrt[n]{\Delta'}).
+    \end{align*}
+    Thus $\left|\Delta\right|=\left|\Delta'\right|$ by Lemma \ref{lemma11.1}. Since $\Delta \subset \Delta'$, we get $\Delta= \Delta'$.
+    \vspace{1mm}
+     
+    (ii). Let $L/K$ be a finite abelian extension of exponent dividing $n$. Let $\Delta=((L^\times)^n\cap K^\times)/(K^\times)^n$, then $K(\sqrt[n]{\Delta})\subset L$ and we aim to prove that these are equal. Let $G = \text{Gal}(L/K)$. The Kummer pairing gives an injection $\Delta \hookrightarrow \text{Hom}(G,\mu_n)$, which we claim is surjective. Given the claim, we would have $[K(\sqrt[n]{\Delta}):K] = \left|\Delta\right|=\left|G\right| = [L:K]$ by Lemma \ref{lemma11.1}. Since $K(\sqrt[n]{\Delta})\subset L$, $L=K(\sqrt[n]{\Delta})$ follows.
+    \vspace{1mm}
+     
+    It remains to prove the surjectivity claim. For this, let $\chi : G \to \mu_n$ be a group homomorphism. Distinct automorphisms are linearly independent, so $\exists a \in L$ such that $y := \sum_{\tau \in G}^{} \chi(\tau)^{-1} \tau(a) \neq 0$. Let $\sigma \in G$. Then 
+    \begin{align*}
+        &\sigma(y) = \sum_{\tau \in G}^{} \chi(\tau)^{-1}\sigma \tau(a) \\
+        \stackrel{\tau \mapsto \sigma^{-1}\tau}{=}& \sum_{\tau \in G}^{} \chi(\sigma^{-1} \tau)^{-1}\tau(a)\\
+        =&\chi(\sigma)\sum_{\tau \in G}^{} \chi(\tau)^{-1}\tau(a)\\
+        =&\chi(\sigma)y.
+    \end{align*}
+    Hence $\sigma(y^n)=y^n ~\forall \sigma \in G$, so $y^n \in K$. Let $x = y^n$, then $x \in (L^\times)^{n} \cap K^\times$, so $x(K^{\times})^n \in \Delta$. Also by the calculation above, $\chi : \sigma \mapsto \frac{\sigma(y)}{y} = \frac{\sigma(\sqrt[n]{x})}{\sqrt[n]{x}}$, so the map $\Delta \hookrightarrow \text{Hom}(G,\mu_n)$ sends $x \mapsto \chi$, which proves the claim.
+\end{proof}
+\begin{prop}\label{prop11.3}
+    Let $K$ be a number field and $\mu_n \subset K$. Let $S$ be a finite set of primes of $K$. Then there are only finitely many extensions $L/K$ such that
+    \begin{enumerate}[(i)]
+        \item $L/K$ is finite and abelian of exponent dividing $n$.
+        \item $L/K$ is unramified at all primes $\mathfrak{p} \not\in S$.
+    \end{enumerate}
+\end{prop}
+\begin{proof}
+    Theorem \ref{theorem11.2} implies that this extension is of the form $L = K(\sqrt[n]{\Delta})$ for some finite subgroup $\Delta \subset K^\times/(K^\times)^n$. Let $\mathfrak{p}$ be a prime of $K$. We have $\mathfrak{p}\mathcal{O}_L = \mathcal{P}_1^{e_1}\ldots \mathcal{P}_r^{e_r}$ for $\mathcal{P}_i$ distinct primes of $L$. If $x \in K^\times$ represents an element of $\Delta$, then $n v_{\mathcal{P}_i}(\sqrt[n]{x}) = v_{\mathcal{P}_i}(x) = e_i v_{\mathfrak{p}}(x)$. \vspace{1mm}
+     
+    If $\mathfrak{p} \not\in S$, then all $e_i=1$, so $v_{\mathfrak{p}}(x) \equiv 0 \pmod{n}$. Hence $\Delta \subset K(S,n)$, where
+    \begin{align*}
+        K(S,n) = \{x \in K^\times/(K^\times)^n \mid v_{\mathfrak{p}}(x)\equiv 0\pmod{n}~\forall \mathfrak{p} \not\in S\}.
+    \end{align*}
+    We now complete the proof using the following lemma.
+\end{proof}
+\begin{lemma}\label{lemma11.4}
+    $K(S,n)$ is finite.
+\end{lemma}
+\begin{proof}
+    The map $K(S,n) \to (\mathbb{Z}/n\mathbb{Z})^{\left|S\right|}$ by $x \mapsto (v_{\mathfrak{p}}(x) \text{ mod }n)_{\mathfrak{p} \in S}$ is a group homomorphism with kernel $K(\varnothing,n)$. Since $\left|S\right|<\infty$, it suffices to prove the lemma with $S=\varnothing$. 
+    \vspace{1mm}
+     
+    Now, if $x \in K^\times$ represents an element of $K(\varnothing,n)$, then $(x) = \mathfrak{a}^n$ for some fractional ideal $\mathfrak{a}$. There is an exact short sequence
+    \begin{align*}
+        0 \to \mathcal{O}_K^\times/(\mathcal{O}_K^\times)^n \to K(\varnothing,n) &\to \text{Cl}_K[n] \to 0\\
+        x &\mapsto [\mathfrak{\alpha}].
+    \end{align*}
+    Since $\text{Cl}_K[n]$ is finite and $\mathcal{O}_K^\times$ is a finitely generated abelian group (by Dirichlet's unit theorem), we conclude that $K(\varnothing,n)$ is finite.
+\end{proof}
+\section{Elliptic curves over number fields continued}
+\subsection{The weak Mordell-Weil theorem}
+\begin{lemma}\label{lemma12.1}
+    Let $E/K$ be an elliptic curve and $L/K$ a finite Galois extension. Then the natural map $E(K)/nE(K) \to E(L)/nE(L)$ has finite kernel.
+\end{lemma}
+\begin{proof}
+    For each element in the kernel, we pick a coset representative $P \in E(K)$ and then $Q \in E(L)$ such that $nQ=P$. For any $\sigma \in \text{Gal}(L/K)$, $n(\sigma(Q)-Q) = \sigma P - P = 0$, so $\sigma(Q)-Q \in E[n]$. Since $\text{Gal}(L/K)$ and $E[n]$ are finite, there are only finitely many possibilities for the map $\text{Gal}(L/K) \to E[n]$ given by $\sigma \mapsto \sigma(Q)-Q$. But if $P_1,P_2 \in E(K)$ with $P_i = nQ_i$ for $Q_i \in E(L)$ and $\sigma(Q_1)-Q_1=\sigma(Q_2)-Q_2 ~\forall \sigma \in \text{Gal}(L/K)$, then $\sigma(Q_1-Q_2)=Q_1-Q_2 ~\forall \sigma \in\text{Gal}(L/K)$, so $Q_1-Q_2 \in E(K)$ and so $P_1-P_2 \in nE(K)$. We conclude that
+    \begin{align*}
+        \text{ker}(E(K)/nE(K) \to E(L)/nE(L)) \hookrightarrow \text{Maps}(\text{Gal}(L/K),E[n])
+    \end{align*}
+    and the set on the right is finite, which finishes the proof.
+\end{proof}
 
 \end{document}
