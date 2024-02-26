@@ -1560,8 +1560,8 @@ We are now in a position to prove the surjectivity of the Artin map.
      
     Since only finitely many primes divide $\mathfrak{m}$, we can pick $\mathcal{P}$ with $\mathfrak{p} = \mathcal{P} \cap \mathcal{O}_K$ coprime to $\mathfrak{m}$. Then $\Phi_{\mathfrak{m}}(\mathfrak{p}) = \sigma'$, where $\sigma'$ is some generator of $\langle \sigma \rangle$. Hence $\sigma$ is in the image of $\Phi_{\mathfrak{m}}$.
 \end{proof}
-\subsection{Chebotarov's density theorem}
-\begin{theorem}[Chebotarov's density theorem]\label{theorem3.13}
+\subsection{Chebotarev's density theorem}
+\begin{theorem}[Chebotarev's density theorem]\label{theorem3.13}
     Let $L/K$ be Galois and let $\sigma \in \text{Gal}(L/K)$. Suppose $\sigma$ has $c$ conjugates in $\text{Gal}(L/K)$. Let $$S = \{\mathfrak{p} \subset \mathcal{O}_K \mid \left(\frac{L/K}{\mathcal{P}}\right) = \sigma \text{ for some }\mathcal{P}\mid \mathfrak{p}\}.$$
     Then this set $S$ has density $$\delta(S)=\frac{c}{\left|\text{Gal}(L/K)\right|}.$$
 \end{theorem}
@@ -1575,7 +1575,7 @@ Note that the original proof of this does not use class field theory, but most p
     \]
     then $\delta(S)=\frac{1}{[L:K]}$.
 \end{cor}
-Chebotarov gives an alternative proof for Lemma \ref{lemma3.4}.
+Chebotarev gives an alternative proof for Lemma \ref{lemma3.4}.
 \begin{proof}[Alternate proof of Lemma \ref{lemma3.4}]
     Let $\sigma=1$. Then the set of primes with $\left(\frac{L/K}{\mathcal{P}}\right)$ has density $\frac{1}{[L:K]}$. But $\left(\frac{L/K}{\mathcal{P}}\right)$ if and only if $\mathfrak{p}$ splits completely.
 \end{proof}
@@ -1590,6 +1590,7 @@ We next show that the primes that split completely characterize the extension $L
         \item $L=M$ if and only if $S_{M/K} \stackrel{\cdot }{=} S_{L/K}$.
     \end{enumerate}
 \end{theorem}
+To prove this, we first prove a proposition and a lemma.
 \begin{prop}\label{prop3.16}
     Let $L$ and $M$ be finite extensions of $K$.
     \begin{enumerate}[(i)]
@@ -1611,7 +1612,7 @@ We next show that the primes that split completely characterize the extension $L
     We first prove (ii). The direction $\implies $, i.e. if $L \subset M$, then $\widetilde{S}_{M/K} \stackrel{\cdot }{\subset } S_{L/K}$, is left as an exercise.
     \vspace{1mm}
      
-    Now assume $\widetilde{S}_{M/K} \stackrel{\cdot }{\subset } S_{L/K}$. Let $N$ be a Galois extension of $K$ containing both $L$ and $M$. To prove $L \subset M$, by Galois theory it suffices to show that $\text{Gal}(N/M) \subset \text{Gal}(N/L)$. In other words, for any $\sigma \in \text{Gal}(N/M)$, we need to show $\sigma|_L = 1$. By Chebotarov, we can find a prime $\mathfrak{p} \subset \mathcal{O}_K$ unramified in $N$ such that $\left(\frac{N/K}{\mathfrak{p}}\right)$ is the conjugacy class of $\sigma$. In particular, there is $\mathcal{P} \subset \mathcal{O}_N$ such that $\mathcal{P} \mid \mathfrak{p}$ and $\left(\frac{N/K}{\mathcal{P}}\right) = \sigma$. We show $\mathfrak{p} \in \widetilde{S}_{M/K}$. Let $\mathcal{P}_M = \mathcal{P} \mathbb{N} \mathcal{O}_M$. Then for $\alpha \in \mathcal{O}_M$ we have $$\alpha \equiv \sigma(\alpha) \equiv \alpha^{N(\mathfrak{p})} \pmod{\mathcal{P}_M},$$ where the left equality uses $\sigma|_M=1$ and the right uses the definition of the Artin symbol. It follows that $\mathcal{O}_M/\mathcal{P}_M \cong \mathcal{O}_K/\mathcal{P}$, so $f_{\mathcal{P}_M|\mathfrak{p}}=1$ and hence $\mathfrak{p} \in \widetilde{S}_{M/K}$. By Chebotarov, we can find infinitely many such $\mathfrak{p}$, so we can assume $\mathfrak{p} \in S_{L/K}$. Since we assumed $\widetilde{S}_{M/K} \stackrel{\cdot }{\subset } S_{L/K}$, we have $\left(\frac{L/K}{\mathfrak{p}}\right)=1$. We also have $\left(\frac{L/K}{\mathfrak{p}}\right) = \left(\frac{N/K}{\mathcal{P}}\right)|_L$ and since $\sigma = \left(\frac{L/K}{\mathcal{P}}\right)$, this implies $\sigma|_L=1$.
+    Now assume $\widetilde{S}_{M/K} \stackrel{\cdot }{\subset } S_{L/K}$. Let $N$ be a Galois extension of $K$ containing both $L$ and $M$. To prove $L \subset M$, by Galois theory it suffices to show that $\text{Gal}(N/M) \subset \text{Gal}(N/L)$. In other words, for any $\sigma \in \text{Gal}(N/M)$, we need to show $\sigma|_L = 1$. By Chebotarev, we can find a prime $\mathfrak{p} \subset \mathcal{O}_K$ unramified in $N$ such that $\left(\frac{N/K}{\mathfrak{p}}\right)$ is the conjugacy class of $\sigma$. In particular, there is $\mathcal{P} \subset \mathcal{O}_N$ such that $\mathcal{P} \mid \mathfrak{p}$ and $\left(\frac{N/K}{\mathcal{P}}\right) = \sigma$. We show $\mathfrak{p} \in \widetilde{S}_{M/K}$. Let $\mathcal{P}_M = \mathcal{P} \mathbb{N} \mathcal{O}_M$. Then for $\alpha \in \mathcal{O}_M$ we have $$\alpha \equiv \sigma(\alpha) \equiv \alpha^{N(\mathfrak{p})} \pmod{\mathcal{P}_M},$$ where the left equality uses $\sigma|_M=1$ and the right uses the definition of the Artin symbol. It follows that $\mathcal{O}_M/\mathcal{P}_M \cong \mathcal{O}_K/\mathcal{P}$, so $f_{\mathcal{P}_M|\mathfrak{p}}=1$ and hence $\mathfrak{p} \in \widetilde{S}_{M/K}$. By Chebotarev, we can find infinitely many such $\mathfrak{p}$, so we can assume $\mathfrak{p} \in S_{L/K}$. Since we assumed $\widetilde{S}_{M/K} \stackrel{\cdot }{\subset } S_{L/K}$, we have $\left(\frac{L/K}{\mathfrak{p}}\right)=1$. We also have $\left(\frac{L/K}{\mathfrak{p}}\right) = \left(\frac{N/K}{\mathcal{P}}\right)|_L$ and since $\sigma = \left(\frac{L/K}{\mathcal{P}}\right)$, this implies $\sigma|_L=1$.
     \vspace{1mm}
      
     For the first part, direction $\impliedby$, suppose $S_{M/K} \stackrel{\cdot }{\subset } S_{L/K}$. By the proof of the previous lemma (Lemma \ref{lemma3.17}), we have $S_{L/K} = S_{L'/K}$ for $L'$ the Galois closure of $L$ over $K$. Since $M/K$ is Galois, we have $\widetilde{S}_{M/K} = S_{M/K}$ (exercise!). Hence $S_{M/K} \stackrel{\cdot }{\subset } S_{L/K} \implies \widetilde{S}_{M/K} \stackrel{\cdot }{\subset } S_{L'/K}$, but by the second part of this proposition we have $L' \subset M$, $L \subset M$.
@@ -1619,5 +1620,67 @@ We next show that the primes that split completely characterize the extension $L
      
     The direction $\implies$ is left as an exercise.
 \end{proof}
+\begin{proof}[Proof of Theorem \ref{theorem3.15}.]
+    \marginpar{26 Feb 2024, Lecture 17}
+    Note that (ii) follows from (i), and (i) follows from Proposition \ref{prop3.16} since $\widetilde{S}_{M/K} = S_{M/K}$ for $M/K$ Galois.
+\end{proof}
+Next we use Chebotarev to prove some class field theory statements.
+\begin{theorem}\label{theorem3.18}
+    Let $\mathfrak{m}$ be a modulus of $K$ and let $L$ and $M$ be abelian extensions of $K$ which are both unramified at primes which do not divide $\mathfrak{m}$. If $\text{ker}(\Phi_{L/K,\mathfrak{m}})=\text{ker}(\Phi_{M/K,\mathfrak{m}})$, then $L=M$. In particular, the ray class field is unique if it exists.
+\end{theorem}
+\begin{proof}
+    Let $S$ be the set of primes of $K$ that do not divide $\mathfrak{m}$. Then $\mathfrak{p} \in S$ is unramified in both $L$ and $M$ and $\mathfrak{p}$ splits completely in $L$ (respectively $M$) if and only if it lies in the kernel of $\Phi_{L/K,\mathfrak{m}}$ (respectively $\Phi_{M/K,\mathfrak{m}}$). If $\text{ker}(\Phi_{L/K,\mathfrak{m}}) = \text{ker}(\Phi_{M/K},\mathfrak{m})$, then $$S_{L/K} \stackrel{\cdot }{=} (S \cap \text{ker}(\Phi_{L/K,\mathfrak{m}})) = (S \cap \text{ker}(\Phi_{M/K,\mathfrak{m}})) \stackrel{\cdot }{=} S_{M/K},$$
+    so $L = M$ by Theorem \ref{theorem3.15}.
+\end{proof}
+\begin{prop}\label{prop3.19}
+    Let $L/K$ abelian and let $\mathfrak{m}$ be a modulus divisible by $\mathfrak{f}_{L/K}$. Then $\text{ker}(\Phi_{\mathfrak{m}}) \subset T_{L/K}(\mathfrak{m})$.
+\end{prop}
+\begin{proof}
+    Since $\mathfrak{m}$ is divisible by $\mathfrak{f}_{L/K}$, we have $P_K(\mathfrak{m})\subset \text{ker}(\Phi_{\mathfrak{m}})\subset I_{K}(\mathfrak{m})$. In particular, for any $\mathfrak{a} \in I_K(\mathfrak{m})$, we know $\left(\frac{L/K}{\mathfrak{a}}\right)$ depends only on the class of $\mathfrak{a}$ mod $P_K(\mathfrak{m})$. Recall $P_K(\mathfrak{m}) = \text{ker}(\Phi_{K_{\mathfrak{m}}/K,\mathfrak{m}})$. Now by Chebotarev, for any $\sigma \in \text{Gal}(K_{\mathfrak{m}}/K)$, there are infinitely many primes $\mathfrak{p}$ such that $\left(\frac{K_\mathfrak{m}/K}{\mathfrak{p}}\right)=\sigma$ (so $\mathfrak{p} \nmid \mathfrak{m}$). Since we have an isomorphism $I_K(\mathfrak{m})/P_{K}(\mathfrak{m}) \cong \text{Gal}(K_{\mathfrak{m}}/K)$, so every ideal $\mathfrak{a}$ in $I_K(\mathfrak{m})$ is equivalent to a prime $\mathfrak{p}$ mod $P_K(\mathfrak{m})$. Now suppose $\mathfrak{p} \subset \mathcal{O}_K$ is such that $\mathfrak{p} \in \text{ker}(\Phi_{L/K,\mathfrak{m}})$, so $\left(\frac{L/K}{\mathfrak{p}}\right) = 1$. Hence $\mathfrak{p}$ splits completely in $L$. If $\mathcal{P} \in \mathcal{O}_L$ is such that $\mathcal{P} \mid \mathfrak{p}$, then $N_{L/K}(\mathcal{P})=\mathfrak{p}$, so $\mathfrak{p} \in N_{L/K}(I_L(\mathfrak{m})) \subset T_{L/K}(\mathfrak{m})$.
+\end{proof}
+\section{Global class field theory using the language of id\'eles}
+\textbf{Recap of local fields.} Let $K$ be a number field. Recall that an absolute value on $K$ is equivalent (by Ostrowski's theorem) to either $\left|x\right|_{\mathfrak{p}} = c^{v_{\mathfrak{p}}(x)}$ for $\mathfrak{p}$ some prime ideal or $\left|x\right|_{\sigma} = \left|\sigma(x)\right|_{\infty}$ for $\sigma: K \hookrightarrow \mathbb{R}$ or $\sigma: K \hookrightarrow \mathbb{C}$. As before, write $\mathfrak{p}$ for both finite and infinite primes. Recall the product formula $\prod_{\mathfrak{p}} \left|x\right|_{\mathfrak{p}} = 1$ for $x \in K^\times$. Recall that $\left|\cdot \right|_{\mathfrak{p}}$ induces a (metric) topology on $K$. An absolute value $\left|\cdot \right|_{\mathfrak{p}}$ on $K$ is nonarchimedean if it satisfies $\left|x+y\right|\le \max(\left|x\right|,\left|y\right|)$ and archimedean if it is not equivalent to an evaluation satisfying the condition above, which is the case for infinite primes. If $\left|\cdot \right|_{\mathfrak{p}}$ is non--archimedean, let $R = \{x \in K \mid \left|x\right|_{\mathfrak{p}}\le 1\}$ and $\mathfrak{p} = \{x \in K \mid \left|x\right|<1\}$. Then $R$ is a local ring with maximal ideal $\mathfrak{p}$ and quotient field $K$, called the valuation ring of $\left|\cdot \right|_{\mathfrak{p}}$. For any $\left|\cdot \right|_{\mathfrak{p}}$, we write $K_{\mathfrak{p}}$ for the completion of $K$ with respect to $\left|\cdot \right|_{\mathfrak{p}}$. If $\mathfrak{p}$ is infinite, then $K_{\mathfrak{p}}\cong \mathbb{R}$ or $\mathbb{C}$ depending on whether $\mathfrak{p}$ is real or complex. For a nonarchimedean local field $K_{\mathfrak{p}}$, we have $\mathcal{O}_{K_{\mathfrak{p}}} = \{x \in K_{\mathfrak{p}}\mid \left|x\right|_{\mathfrak{p}}\le 1\}$ as the ring of integers, which is compact and a discrete valuation, i.e. the value group is isomorphic to the integers under addition. This is an open subring of $K_{\mathfrak{p}}$ with units $\mathcal{O}_{K_\mathfrak{p}}^\times = \{x \in K_{\mathfrak{p}} \mid \left|x\right|_{\mathfrak{p}}=1\}$ and unique maximal ideal $\mathfrak{p}\mathcal{O}_{K_{\mathfrak{p}}}=\{x \in K_{\mathfrak{p}}\mid \left|x\right|_{\mathfrak{p}}<1\}$.
 
+\begin{example}
+    Take $K=\mathbb{Q}$, $p$ a rational prime. Then $K_{\mathfrak{p}} = \mathbb{Q}_{p}$ and $\mathcal{O}_{K_{\mathfrak{p}}}=\mathbb{Z}_p$.
+\end{example}
+
+For each $\mathfrak{p}$, we can embed $\iota_{\mathfrak{p}}: K \hookrightarrow K_{\mathfrak{p}}$. If $\alpha \in K$ is nonzero, then $\iota_{\mathfrak{p}}(\alpha)$ is a nonzero element of $K_{\mathfrak{p}}$ for every $\mathfrak{p}$, and $\iota_{\mathfrak{p}}(\alpha)$ is a unit in $K_{\mathfrak{p}}$ for all but finitely many primes $\mathfrak{p}$. (Here we distinguish between ''units of $K_{\mathfrak{p}}$'' being $\mathcal{O}_{K_{\mathfrak{p}}}^\times$ for $\mathfrak{p}$ finite and $K_{\mathfrak{p}}^\times$ for $\mathfrak{p}$ infinite.)
+\vspace{1mm}
+ 
+We would like to use local data, e.g. the study of local fields and valuation theory to study number fields. To do this, we would like to ''embed'' $K$ into all completions $K_{\mathfrak{p}}$ simultaneously. But $\prod_{\mathfrak{p}}^{} K_{\mathfrak{p}}$ is not ''nice'' in a topological sense, as it is not locally compact. Thus we adjust $\prod_{\mathfrak{p}}^{} K_{\mathfrak{p}}$ to get something locally compact, that is the Restricted Product Topology.
+
+\subsection{The restricted product topology}
+\begin{defn}\label{defn4.1}
+    Let $(X_i)$ be a family of topological spaces, indexed by $i \in I$, and let $(U_i)$ be a family of open sets $U_i \subset X_i$. Then the \textbf{restricted product} $\prod' (X_i,U_i)$ is the topological space
+    \begin{align*}
+        \prod \hspace{0mm} ' (X_i,U_i) = \{(x_i) \mid x_i \in U_i \text{ for all but finitely many }i \in I\} \subset \prod_{}^{} X_i
+    \end{align*}
+    with the bases of open sets
+    \begin{align*}
+        B = \left\{\prod_{}^{} V_i \mid V_i \subset X_i \text{ open for all }i \in I, V_i = U_i \text{ for all but finitely many }i \in I \right\}.
+    \end{align*}
+    Note that this is in general not equal to the subspace topology that the set $\prod' (X_i,U_i)$ inherits from $\prod_{}^{} X_i$, since it has more open sets.
+\end{defn}
+\begin{prop}\label{prop4.2}
+    Let $(X_i)_{i \in I}$ be a family of locally compact topological spaces, and let $(U_i)_{i \in I}$ be a corresponding family of open subsets $U_i \subset X_i$, almost all of which are compact. Then $X=\prod' (X_i,U_i)$ is locally compact.
+\end{prop}
+\begin{proof}
+    Omitted.
+\end{proof}
+Our next step is to define adeles and id\'eles. These words are shorthand for ''additive id\'ele'' and ''ideal element''.
+\begin{defn}\label{defn4.3}
+    An \textbf{adele} of a number field $K$ is a family 
+    \begin{align*}
+        \alpha = (\alpha_{\mathfrak{p}})
+    \end{align*}
+    of elements $\alpha_{\mathfrak{p}} \in K_{\mathfrak{p}}$, where $\mathfrak{p}$ runs through all primes of $K$ and $\alpha_{\mathfrak{p}}$ is integral in $K_{\mathfrak{p}}$, i.e. $\alpha_{\mathfrak{p}} \in \mathcal{O}_{K_{\mathfrak{p}}}$ for almost all $\mathfrak{p}$.
+\end{defn}
+Note again that if $\mathfrak{p}$ is finite, then $\mathcal{O}_{K_{\mathfrak{p}}} = \{\alpha \in K_{\mathfrak{p}} \mid \left|\alpha\right|_{\mathfrak{p}}\le 1\}$ and if $\mathfrak{p}$ is infinite, then $\mathcal{O}_{K_{\mathfrak{p}}} = K_{\mathfrak{p}}$.
+\vspace{1mm}
+ 
+The adeles form a ring $\mathbb{A}$ by defining addition and multiplication component-wise. We have 
+\begin{align*}
+    \mathbb{A} = \{(\alpha_\mathfrak{p}) \subset \prod_{\mathfrak{p}}^{} K_{\mathfrak{p}} \mid \alpha_{\mathfrak{p}} \in \mathcal{O}_{K_{\mathfrak{p}}} \text{ for almost all }\mathfrak{p}\} = \prod_{\mathfrak{p}}^{} \hspace{0mm}' (K_{\mathfrak{p}},\mathcal{O}_{K_{\mathfrak{p}}}).
+\end{align*}
 \end{document}
