@@ -63,7 +63,7 @@ Let $G = \mathbb{F}_{p}^n$ for $p$ a small fixed prime (usually $p = 2,3,5$) and
 \textbf{Notation.} Given a finite set $B$ and any function $f : B \to \mathbb{C}$, we write $\mathbb{E}_{x \in B}f(x)$ to mean $\frac{1}{B}\sum_{x \in B} f(x)$. Also write $\omega = e^{2\pi i /p}$ for the $p^{\text{th}}$ root of unity. Note that $\sum_{a \in \mathbb{F}_p}^{} \omega^a = 0$.
 
 \begin{defn}
-    Given $f : \mathbb{F}_{p}^n : \mathbb{C}$, we define its \textbf{Fourier transform} $\hat{f} : \mathbb{F}_{p}^n \to \mathbb{C}$ by \[
+    Given $f : \mathbb{F}_{p}^n \to \mathbb{C}$, we define its \textbf{Fourier transform} ${\hat{f} : \mathbb{F}_{p}^n \to \mathbb{C}}$ by \[
     \hat{f}(t) = \mathbb{E}_{x \in \mathbb{F}_{p}^n} f(x)\omega^{x \cdot t} ~\forall  t \in \mathbb{F}_{p}^n
     \] 
     where $x \cdot t$ is the standard scalar product.
@@ -108,7 +108,7 @@ Writing $-A = \{-a \mid a \in A\}$, we have
         &\hat{1}_V(t) = \mathbb{E}_{x \in \mathbb{F}_{p}^n}1_V(x)\omega^{x\cdot t} = \frac{|V|}{p^n} 1_{\{x\cdot t = 0 ~\forall x \in V\}} = \frac{|V|}{p^n}1_{V^{\perp}}(t),
     \end{align*}
     so $\hat{\mu}_V(t) = 1_{V^{\perp}}(t)$.
-    (Here we use the fact that if $t \not\in \{x \cdot t = 0 ~\forall x \in V\}$, then $x\cdot t$ runs over the values uniformly and the sum is zero - details left as exercise).
+    (Here we use the fact that if $t \not\in \{x \cdot t = 0 ~\forall x \in V\}$, then $x\cdot t$ runs over the values uniformly and the sum is zero -- details left as exercise).
 \end{example}
 \begin{example}\label{ex1.3}
     Let $R \subset \mathbb{F}_{p}^n$ be such that each $x \in \mathbb{F}_{p}^n$ lies in $R$ independently with probability $\frac{1}{2}$. Then with high probability (i.e. $\mathbb{P} \to 1$ as $n \to \infty$),
@@ -161,7 +161,7 @@ Consequently, $||f||_2^2 = \mathbb{E}_x |f(x)|^2$ and $||\hat{f}||_2^2 = \sum_{t
 \begin{proof}
     By Parseval,
     \begin{align*}
-        ||f||_2^2 = ||\hat{f}||_2^2\ge \sum_{t \in \text{Spec}_{\rho}(f)}^{} |\hat{f}(t)^2| \ge |\text{Spec}_{\rho}(f)|(\rho ||f||_1)^2.
+        ||f||_2^2 = ||\hat{f}||_2^2\ge \sum_{t \in \text{Spec}_{\rho}(f)}^{} |\hat{f}(t)^2| \ge |\text{Spec}_{\rho}(f)|(\rho ||f||_1)^2. ~~~~~~~~~~~~~~~~\qedhere
     \end{align*}
 \end{proof}
 
@@ -189,7 +189,7 @@ Consequently, $||f||_2^2 = \mathbb{E}_x |f(x)|^2$ and $||\hat{f}||_2^2 = \sum_{t
     \begin{align*}
         \widehat{f * g}(t) &= \mathbb{E}_{x \in \mathbb{F}_p^n}\left(\mathbb{E}_{y \in \mathbb{F}_p^n}f(y)g(x-y)\right)\omega^{x \cdot t} \\
         &= \mathbb{E}_y f(y) \mathbb{E}_u g(u) \omega^{(u+y)\cdot t} \\
-        &= \hat{f}(t)\hat{g}(t).
+        &= \hat{f}(t)\hat{g}(t).\qedhere
     \end{align*}
 \end{proof}
 \begin{example}
@@ -203,7 +203,7 @@ Consequently, $||f||_2^2 = \mathbb{E}_x |f(x)|^2$ and $||\hat{f}||_2^2 = \sum_{t
     \begin{align*}
         A+A-A-A = \text{supp}(\underbrace{1_A * 1_A * 1_{-A} * 1_{-A}}_{:= g}).
     \end{align*}
-    Hence we wish to find $V \le \mathbb{F}_p^n$ such that $g(x) > 0 ~\forall x \in V$. Let $K = \text{Spec}_{\rho}(1_A)$ with $\rho$ to be determined later and let $V = \langle K \rangle^{\perp}$. By Lemma \ref{lemma1.8}\footnote{Here $f = 1_A$ and $\alpha = \frac{||f||_1^2}{||f||_2^2} = \frac{\left(\frac{1}{p^n}\sum_{}^{} |f|\right)^2}{\left(\frac{1}{p^n}\sum_{}^{} |f|^2\right)} = \frac{|A|}{p^n} = \alpha$.}, $|K|\le \rho^{-2}\alpha^{-1}$ and hence $\text{codim}(V)\le |K| \le \rho^{-2}\alpha^{-1}$. By the inversion formula, 
+    Hence we wish to find $V \le \mathbb{F}_p^n$ such that $g(x) > 0 ~\forall x \in V$. Let $K = \text{Spec}_{\rho}(1_A)$ with $\rho$ to be determined later and let $V = \langle K \rangle^{\perp}$. By Lemma \ref{lemma1.8}\footnote{Here $f = 1_A$ and we get $\frac{||f||_2^2}{||f||_1^2} = \frac{\left(\frac{1}{p^n}\sum_{}^{} |f|^2\right)}{\left(\frac{1}{p^n}\sum_{}^{} |f|\right)^2} = \frac{p^n}{|A|} = \alpha^{-1}$.}, $|K|\le \rho^{-2}\alpha^{-1}$ and hence $\text{codim}(V)\le |K| \le \rho^{-2}\alpha^{-1}$. By the inversion formula, 
     \begin{align*}
         g(x) &= \sum_{t \in \mathbb{F}_p^n}^{} (\widehat{1_A * 1_A * 1_{-A} * 1_{-A}})(t)\omega^{-x\cdot t} \\
         &= \sum_{t \in \mathbb{F}_p^n}^{} |\hat{1}_A(t)|^4 \omega^{-x\cdot t} \\
@@ -234,7 +234,7 @@ Consequently, $||f||_2^2 = \mathbb{E}_x |f(x)|^2$ and $||\hat{f}||_2^2 = \sum_{t
         &= \mathbb{E}_{x \in \mathbb{F}_p^n}(1_A(x)-\alpha)\omega^{x \cdot t} \\
         &= \mathbb{E}_{j \in [p]}\underbrace{\mathbb{E}_{x \in v_j+V}(1_A(x)-\alpha)}_{:= a_j = \frac{|A \cap (v_j +V)|}{|V|}-\alpha}\omega^j.
     \end{align*}
-    By the triangle inequality, $\mathbb{E}_{j \in [p]} |a_j|\ge \rho \alpha$. Since $\mathbb{E}_{j \in [p]}a_j = \frac{|A|}{p^{n-1}}- p \alpha = 0$, $\mathbb{E}_{j \in [p]}(a_j + |a_j|) \ge \rho \alpha$, so $\exists j \in [p]$ such that $a_j + |a_j| \ge \rho \alpha \implies a_j \ge \frac{\rho \alpha}{2}$.
+    By the triangle inequality, $\mathbb{E}_{j \in [p]} |a_j|\ge \rho \alpha$. Since $p\cdot \mathbb{E}_{j \in [p]}a_j = \frac{|A|}{p^{n-1}}- p \alpha = 0$, $\mathbb{E}_{j \in [p]}(a_j + |a_j|) \ge \rho \alpha$, so $\exists j \in [p]$ such that $a_j + |a_j| \ge \rho \alpha \implies a_j \ge \frac{\rho \alpha}{2}$.
 \end{proof}
 
 \marginpar{24 Jan 2024, Lecture 3}
@@ -270,6 +270,7 @@ Given $A \subset \mathbb{F}_p^n$, write $2 \cdot A = \{2a \mid a \in A\}$. This 
         &\le \sup_{t \neq 0}|\widehat{1_A}(t)|\sum_{t\neq0}^{} |\widehat{1_A}(t)\overline{\widehat{1_{2\cdot A}}(t)}| \\
         &\le \sup_{t\neq 0}|\widehat{1_A}(t)| \left(\sum_{t}^{} |\widehat{1_A}(t)|^2\right)^{1/2}\left(\sum_{t}^{} |\widehat{1_{2\cdot A}}(t)|^2\right)^{1/2}\\
         &\le \sup_{t \neq 0}|\widehat{1_A}(t)|\cdot \alpha^{1/2} \cdot \alpha^{1/2} \\
+        &= \sup_{t \neq 0}|\widehat{1_A}(t)|\cdot \alpha\\
         &\le \sup_{t \neq 0}|\widehat{1_A}(t)|
     \end{align*}
     by C--S and Parseval.
@@ -406,9 +407,9 @@ This is about as technical as we get in this course.
 \begin{lemma}[Bogolyubov's lemma, again]
     Given $A \subset \mathbb{Z}_p$ of density $\alpha > 0$, $\exists \Gamma \subset \widehat{\mathbb{Z}_p}$ of size at most $2\alpha^{-2}$ such that $B\left(\Gamma,\frac{1}{2}\right) \subset A + A - A - A$.
 \end{lemma}
-\marginpar{31 Jan 2024, Lecture 6}
 \begin{proof}
-    Recall $1_A * 1_A * 1_{-A} * 1_{-A}(x) = \sum_{t \in \widehat{Z_p}}^{} \left|\widehat{1_A}(t) \right|^4 \omega^{-xt}$. Let $\Gamma = \text{Spec}_{\sqrt{\frac{\alpha}{2}}}(1_A)$ and note that for all $x \in B\left(\Gamma,\frac{1}{2}\right)$ and $t \in \Gamma$, $\cos(2\pi xt/p)>0$. Hence 
+    \marginpar{31 Jan 2024, Lecture 6}
+    Recall $1_A * 1_A * 1_{-A} * 1_{-A}(x) = \sum_{t \in \widehat{\mathbb{Z}_p}}^{} \left|\widehat{1_A}(t) \right|^4 \omega^{-xt}$. Let $\Gamma = \text{Spec}_{\sqrt{\frac{\alpha}{2}}}(1_A)$ and note that for all $x \in B\left(\Gamma,\frac{1}{2}\right)$ and $t \in \Gamma$, $\cos(2\pi xt/p)>0$. Hence 
     \begin{align*}
         \text{Re}\left(\sum_{t \in \widehat{Z_p}}^{} \left|\widehat{1_A}(t) \right|^4\omega^{-xt}\right) = \underbrace{\sum_{t \in \Gamma}^{} \left|\widehat{1_A}(t) \right|^4 \cos \left(2\pi xt/p\right)}_{\ge \alpha^4} + \\
         \underbrace{\sum_{t \not\in \Gamma}^{} \left|\widehat{1_A}(t) \right|^4 \cos(2\pi xt/p)}_{\text{in absolute value }\le \sup_{t \not\in \Gamma}\left|\widehat{1_A}(t) \right|^2\sum_{}^{} \left|\widehat{1_A}(t) \right|^2 \le \left(\sqrt{\frac{\alpha}{2}}\cdot \alpha\right)^2\cdot \alpha =\frac{\alpha^4}{2}}.
