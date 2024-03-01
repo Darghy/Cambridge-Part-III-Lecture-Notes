@@ -1683,4 +1683,94 @@ The adeles form a ring $\mathbb{A}$ by defining addition and multiplication comp
 \begin{align*}
     \mathbb{A} = \{(\alpha_\mathfrak{p}) \subset \prod_{\mathfrak{p}}^{} K_{\mathfrak{p}} \mid \alpha_{\mathfrak{p}} \in \mathcal{O}_{K_{\mathfrak{p}}} \text{ for almost all }\mathfrak{p}\} = \prod_{\mathfrak{p}}^{} \hspace{0mm}' (K_{\mathfrak{p}},\mathcal{O}_{K_{\mathfrak{p}}}).
 \end{align*}
+\marginpar{28 Feb 2024, Lecture 18}
+If $\alpha \in \mathbb{A}_K$, then we write $\alpha_{\mathfrak{p}}$ for the projection of $\alpha$ in $K_{\mathfrak{p}}$.
+\begin{example}
+    If $K=\mathbb{Q}$, then
+    \begin{align*}
+        &\mathbb{A}_{\mathbb{Q}} = \prod_{\mathfrak{p}}^{} \hspace{0mm}' (\mathbb{Q}_{\mathfrak{p}}, \mathcal{O}_{\mathbb{Q}_{\mathfrak{p}}}) \\
+        =& \mathbb{R} \times \{(\alpha_{\mathfrak{p}})_{\mathfrak{p}} \in \prod_{\mathfrak{p} \text{ finite}}^{} \mathbb{Q}_{\mathfrak{p}} \mid \alpha_{\mathfrak{p}} \in \mathbb{Z}_{\mathfrak{p}} \text{ for almost all }\mathfrak{p}\}\\
+        =& \mathbb{R} \times \{\alpha \in \prod_{\mathfrak{p} \text{ finite}}^{} \mathbb{Q}_{\mathfrak{p}} \mid \left|\alpha\right|_{\mathfrak{p}}\le 1 \text{ for almost all }\mathfrak{p}\}.
+    \end{align*}
+\end{example}
+\begin{prop}\label{prop4.4}
+    The ring of adeles $\mathbb{A}_K$ is locally compact and Hausdorff.
+\end{prop}
+\begin{proof}
+    Note first that all local fields $K_{\mathfrak{p}}$ are locally compact and all but finitely many $\mathcal{O}_{K_{\mathfrak{p}}}$ are valuation rings of a nonarchimedean local field. Hence by Proposition \ref{prop4.2}, $\mathbb{A}_K$ is locally compact. Now $\prod_{\mathfrak{p}}^{} K_{\mathfrak{p}}$ is Hausdorff as each $K_{\mathfrak{p}}$ is Hausdorff, since the topology on the adeles is finer than the subspace topology. This means that $\mathbb{A}_K$ is also Hausdorff.
+\end{proof}
+Let $S$ be a finite set of primes. Then we have a subring of $\mathbb{A}_K$, called the $S$-adeles
+\[
+\mathbb{A}_{K,S} = \prod_{\mathfrak{p} \in S}^{} K_{\mathfrak{p}} \times \prod_{\mathfrak{p} \not\in S}^{} \mathcal{O}_{K_{\mathfrak{p}}}. 
+\]
+The canonical embeddings $K \hookrightarrow K_{\mathfrak{p}}$ induces a canonical embedding $K \hookrightarrow \mathbb{A}_K$ by $x \mapsto (\ldots,x,x,x,\ldots)$. Note that for each $x \in K$ we have $x \in \mathcal{O}_{K_{\mathfrak{p}}}$ for all but finitely many $\mathfrak{p}$. The image of $K$ in $\mathbb{A}_K$ is the subring of principal adeles.
+\subsection{The group of id\'eles}
+The idele group of $K$ is the unit group of the ring of adeles,
+\begin{align*}
+    \mathbb{A}_K^\times = \{\alpha = (\alpha_{\mathfrak{p}})_{\mathfrak{p}} \in \mathbb{A}_K \mid \alpha_{\mathfrak{p}} \in K_{\mathfrak{p}}^\times \text{ for all }\mathfrak{p}, \alpha_{\mathfrak{p}} \in \mathcal{O}_{K_{\mathfrak{p}}} \text{ for almost all }\mathfrak{p}\}.
+\end{align*}
+Note that as a subspace of $\mathbb{A}_K$, this is not a topological group.
+\begin{defn}\label{defn4.5}
+    The \textbf{group of id\'eles} of $K$ is the topological group 
+    \[
+    \mathbb{I}_K = \prod_{\mathfrak{p}}^{} \hspace{0mm}' (K_{\mathfrak{p}}^\times, \mathcal{O}_{K_{\mathfrak{p}}}^\times)
+    \]
+    with multiplication defined componentwise.
+\end{defn}
+\begin{prop}\label{prop4.6}
+    The id\'ele group $\mathbb{I}_K$ is locally compact and Hausdorff.
+\end{prop}
+\begin{proof}
+    Note that the topology on $\mathbb{I}_K$ is finer than the topology of $\mathbb{A}_K^\times \subset \mathbb{A}_K$, which is Hausdorff, so $\mathbb{I}_K$ is Hausdorff. For each finite prime $\mathfrak{p}$, $\mathcal{O}_{K_{\mathfrak{p}}}^\times = \{x \in K_{\mathfrak{p}}^\times \mid \left|x\right|_{\mathfrak{p}}=1\}$ is a closed subset of the compact set $\mathcal{O}_{K_{\mathfrak{p}}}$, so it is compact. This applies to almost all primes $\mathfrak{p}$, and the $K_{\mathfrak{p}}^\times$ are locally compact, so by Proposition \ref{prop4.2} $\mathbb{I}_K = \prod_{\mathfrak{p}}^{} \hspace{0mm}' (K_{\mathfrak{p}}^\times, \mathcal{O}_{K_{\mathfrak{p}}}^\times)$ is locally compact.
+\end{proof}
+The canonical embedding $K \hookrightarrow \mathbb{A}_K$ restricts to a canonical embedding $K^\times \hookrightarrow \mathbb{I}_K$. We view $K$ as a subgroup of $\mathbb{I}_K$.
+\begin{defn}\label{defn4.7}
+    The elements of $K^\times$ in $\mathbb{I}_K$ are called \textbf{principal id\'eles}, and the quotient group $C_K = \mathbb{I}_K\setminus K^\times$ is called the \textbf{id\'ele class group} of $K$.
+\end{defn}
+For any finite set of primes $S$, we let the $S$-id\'eles be 
+\begin{align*}
+    \mathbb{I}_{K,S} =& \prod_{\mathfrak{p} \in S}^{} K_{\mathfrak{p}}^\times \times \prod_{\mathfrak{p} \not\in S}^{} \mathcal{O}_{K_{\mathfrak{p}}}^\times \\
+    =& \prod_{\mathfrak{p} \mid \infty}^{} K_{\mathfrak{p}}^\times \times \prod_{\substack{\mathfrak{p} \nmid \infty\\ \mathfrak{p} \in S}}^{} K_{\mathfrak{p}}^\times \times \prod_{\mathfrak{p} \not\in S}^{} \mathcal{O}_{K_{\mathfrak{p}}}^\times. 
+\end{align*}
+Hence $\mathbb{I}_K = \bigcup_{S \text{ finite}} \mathbb{I}_{K,S}$. Let $S_{\infty} = \{\text{infinite primes }\mathfrak{p}\}$, then 
+\[
+\mathbb{I}_{K,S_{\infty}} = \prod_{\mathfrak{p} \mid  \infty}^{} K_{\mathfrak{p}}^\times \times \prod_{\mathfrak{p} \nmid \infty}^{} \mathcal{O}_{K_{\mathfrak{p}}}^\times.
+\]
+The id\'ele class group is not finite, in contrast to the ideal class group.
+\begin{prop}\label{prop4.8}
+    We have $\mathbb{I}_K/\mathbb{I}_{K,S_{\infty}} \cong I_K$ and $\text{Cl}(K) \cong \mathbb{I}_K/\mathbb{I}_{K,S_{\infty}}K^\times$.
+\end{prop}
+\begin{proof}
+    Consider the surjective homomorphism $(~): \mathbb{I}_K \to I_K$ given by $\alpha \mapsto (\alpha) = \prod_{\mathfrak{p} \nmid \infty}^{} \mathfrak{p}^{v_{\mathfrak{p}}(\alpha_{\mathfrak{p}})}$. We see the map ignores the infinite primes and hence has kernel $\prod_{\mathfrak{p} \mid \infty}^{} K_{\mathfrak{p}}^\times \times \prod_{\mathfrak{p} \nmid \infty}^{} \mathcal{O}_{K_{\mathfrak{p}}}^\times = \mathbb{I}_{K,S_{\infty}}$. Moreover, it is a continuous map with respect to the discrete topology on $I_K$. Note the composite $K^\times \hookrightarrow \mathbb{I}_K \to I_K$ has image $P_K$, the set of principal fractional ideals. Hence the map induces a surjective homomorphism from $C_K = \mathbb{I}_K/K$ to $\text{Cl}(K) = I_K/P_K$ with kernel $\mathbb{I}_{K,S_{\infty}}K^\times$.
+\end{proof}
+Since $I_K/P_K$ is finite, we can enlarge $S_{\infty}$ to a set $S$ such that $\mathbb{I}_K = \mathbb{I}_{K,S}K^\times$. More formally:
+\begin{prop}\label{prop4.9}
+    We have $\mathbb{I}_K = \mathbb{I}_{K,S}K^\times$ and $C_K = \mathbb{I}_{K,S}/K^\times$ for $S$ a sufficiently large (but finite) set of primes of $K$.  
+\end{prop}
+\begin{proof}
+    Let $\mathfrak{a}_1,\ldots,\mathfrak{a}_h$ be ideals representing the $h$ classes of $I_K/P_K$. For each of these classes, there are only finitely many prime ideals $\mathfrak{p}_1,\ldots,\mathfrak{p}_n$ dividing $\mathfrak{a}_i$. We claim $\mathbb{I}_K = \mathbb{I}_{K,S}K^\times$ for $S$ any finite set of primes containing all these primes and all the infinite primes.
+    \vspace{1mm}
+     
+    We have $\mathbb{I}_K/\mathbb{I}_{K,S_{\infty}} \cong I_K$. Let $\alpha \in I_K$, then $(\alpha) = \prod_{\mathfrak{p}\nmid \infty}^{} \mathfrak{p}^{v_{\mathfrak{p}}(\alpha_{\mathfrak{p}})}$ belongs to some class $\mathfrak{a}_i P_K$, i.e. there is a principal ideal $(a)$ such that $(\alpha) = \mathfrak{a}_i (a)$. Consider the id\'ele $\alpha' = \alpha a^{-1}$. Then under the map $\mathbb{I}_K \to I_K$, $\alpha'$ is mapped to the ideal $\mathfrak{a}_i = \prod_{\mathfrak{p} \nmid \infty}^{} \mathfrak{p}^{v_{\mathfrak{p}}(\alpha_{\mathfrak{p}}')}$. Since the prime ideals occurring in $\mathfrak{a}_i$ lie in $S$, we have $v_{\mathfrak{p}}(\alpha_{\mathfrak{p}}') = 0$, i.e. $\alpha_{\mathfrak{p}}' \in \mathcal{O}_{K_{\mathfrak{p}}}^\times$ for $\mathfrak{p} \not\in S$. This means $\alpha' = \alpha a^{-1} \in \mathbb{I}_{K,S}$, so $\alpha \in \mathbb{I}_{K,S}K^\times$.
+\end{proof}
+\begin{prop}\label{prop4.10}
+    $K^\times$ is a discrete subgroup of $\mathbb{I}_K$.
+\end{prop}
+\begin{proof}
+    Since $\mathbb{I}_K$ is a topological group, it suffices to show that $1 \in \mathbb{I}_K$ has a neighborhood containing no other elements of $K^\times$, i.e. no other principal id\'ele. Consider the following neighborhood of 1:
+    \begin{align*}
+        U = \{\alpha \in \mathbb{I}_K \mid \left|\alpha_{\mathfrak{p}}\right|_{\mathfrak{p}}=1 \text{ for }\mathfrak{p}\nmid \infty, \left|\alpha_{\mathfrak{p}}-1\right|<1 \text{ for }\mathfrak{p} \mid \infty\}.
+    \end{align*}
+    Let $x \in U$ be a principal id\'ele with $x \neq 1$. Then by the product formula,
+    \begin{align*}
+        1 =& \prod_{\mathfrak{p}}^{} \left|x-1\right|_{\mathfrak{p}} = \prod_{\mathfrak{p}\nmid \infty}^{} \left|x-1\right|_{\mathfrak{p}} \prod_{\mathfrak{p} \mid \infty}^{} \left|x-1\right|_{\mathfrak{p}}\\
+        <& \prod_{\mathfrak{p}\nmid \infty}^{} \left|x-1\right|_{\mathfrak{p}}\\
+        \le & \prod_{\mathfrak{p}\nmid \infty}^{} \max(\left|x\right|_{\mathfrak{p},1}) = 1, 
+    \end{align*}
+    a contradiction.
+\end{proof}
+Hence $K^\subset \mathbb{I}_K$ is a closed subgroup, and the quotient topology on the id\'eles class group $C_K$ is therefore Hausdorff and locally compact.
+\marginpar{01 Mar 2024, Lecture 19}
+
+
 \end{document}
