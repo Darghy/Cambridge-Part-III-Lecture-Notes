@@ -1659,4 +1659,102 @@ H(P) = \prod_{v}^{} \max_{0\le i\le n} \left|a_i\right|_v
 \]
 where the product is over all places $v$ of $K$, and the absolute values are normalized such that $\prod_{v}^{} \left|\lambda\right|_v =1 ~\forall \lambda \in K^\times$. All results proved in this section then generalize from $\mathbb{Q}$ to $K$. Note further that the places are the finite places given by $\left|x\right|_{\mathfrak{p}} = c^{v_{\mathfrak{p}}(x)}$ for some $c<1$ and the infinite places $\left|x\right|_{\sigma} = \left|\sigma(x)\right|^d$ for some $d>0$ (and now we choose appropriate $c,d$ to satisfy the product formula).
 
+\section{Dual isogenies and the Weil pairing}
+\marginpar{04 Mar 2024, Lecture 20}
+Let $K$ be a perfect field and $E/K$ an elliptic curve.
+\begin{prop}\label{prop14.1}
+    Let $\Phi \subset E(\overline{K})$ be a finite $\text{Gal}(\overline{K}/K)$-stable subgroup. Then there exists an elliptic curve $E'/K$ and a separable isogeny $\phi : E \to E'$ defined over $K$ with kernel $\Phi$ such that every isogeny $\psi : E \to E''$ with $\Phi \subset \text{ker}(\psi)$ factors uniquely via $\phi$ as 
+    $$\begin{tikzcd}[]
+        E & & E''\\
+        & E' & 
+        \arrow["\psi", from=1-1, to=1-3]
+        \arrow["\phi", from=1-1, to=2-2]
+        \arrow["\exists \text{ unique}", from=2-2, to=1-3]
+    \end{tikzcd}.$$
+\end{prop}
+\begin{proof}
+    Omitted. (See e.g. Silverman, Chapter 3, Proposition 4.12).
+\end{proof}
+\begin{prop}\label{prop14.2}
+    Let $\phi :E \to E'$ be an isogeny of degree $n$. Then there exists a unique isogeny $\widehat{\phi}:E' \to E$ (called the \textbf{dual isogeny}) such that $\widehat{\phi}\phi = [n]$.
+\end{prop}
+\begin{proof}
+    If $\phi$ is separable, then $\left|\text{ker}(\phi)\right|=n$, so $\text{ker}(\phi) \subset E[n]$. Apply Proposition \ref{prop14.1} with $\psi = [n]$ to get the result.
+    \vspace{1mm}
+     
+    The case where $\phi$ is inseparable is omitted.
+    \vspace{1mm}
+     
+    For uniqueness, if $\psi_1 \phi = \psi_2 \phi$, then $(\psi_1-psi_2)\phi=0$, so $\text{deg}(\psi_1-\psi_2)\text{deg}(\phi) = 0$, but $\text{deg}(\phi) \neq 0$, so $\psi_1=\psi_2$.
+\end{proof}
+\textbf{Remarks.}
+\begin{enumerate}[(i)]
+    \item Write $E_1 \sim E_2 \iff E_1,E_2$ are isogenous. Then $\sim$ is an equivalence relation.
+    \item $\text{deg }[n] = n^2 \implies  \begin{cases}
+        \text{deg }\phi = \text{deg }\widehat{\phi},\\
+        \widehat{[n]} = [n].
+    \end{cases}$ 
+    \item $\phi \widehat{\phi}\phi = \phi[n]_E = [n]_{E'}\phi$, so $\phi\widehat{\phi}=[n]_{E'}$. In particular, $\widehat{\widehat{\phi}}=\phi$.
+    \item If $E \stackrel{\psi}{\to} E' \stackrel{\phi}{\to} E''$, then $\widehat{\phi \psi} = \widehat{\psi}\widehat{\phi}$.
+    \item If $\phi \in \text{End}(E)$, then $\phi^2-[\text{tr}(\phi)]\phi + [\text{deg }\phi]=0$, so $\phi([\text{tr}(\phi)]-\phi) = [\text{deg }\phi]$, so $\widehat{\phi} = [\text{tr}(\phi)]-\phi$, so $[\text{tr}(\phi)] = \phi + \widehat{\phi}$.
+\end{enumerate} 
+\begin{lemma}\label{lemma14.3}
+    If $\phi,\psi \in \text{Hom}(E,E')$, then $\widehat{\phi+\psi}\widehat{\phi}+\widehat{\psi}$.
+\end{lemma}
+\begin{proof}
+    \begin{enumerate}[(i)]
+        \item If $E = E'$, then this follows from $\text{tr}(\phi+\psi)=\text{tr}(\phi)+\text{tr}(\psi)$.
+        \item In general, let $\alpha : E' \to E$ be any isogeny (e.g. $\alpha = \widehat{\phi}$) and we get
+        \begin{align*}
+            &\widehat{\alpha \phi + \alpha \psi} = \widehat{\alpha \phi} + \widehat{\alpha \psi}\\
+            \implies &\widehat{\phi+\psi}\widehat{\alpha} = (\widehat{\phi}+\widehat{\psi})\widehat{\alpha}\\
+            \implies & \widehat{\phi + \psi} = \widehat{\phi}+\widehat{\psi}
+        \end{align*}
+        where the first line follows by (i).
+    \end{enumerate}
+\end{proof}
+\textbf{Remark.} In Silverman's book, he proves Lemma \ref{lemma14.3} first and uses this to show that $\text{deg }: \text{Hom}(E,E') \to \mathbb{Z}$ is a quadratic form.
+\begin{defn}
+    We define the following map: $\text{sum}: \text{Div}(E) \to E$ by $\sum_{}^{} n_P P \mapsto \sum_{}^{} n_P P$ where on the left we have a formal sum and on the right we sum using the group law.
+\end{defn}
+Recall that $E \stackrel{\sim}{\to} \text{Pic}^0(E)$ by $P\mapsto [(P)-(0_E)]$. Hence $\text{sum}(D) \mapsto [D] ~\forall D \in \text{Div}^0(E)$. Thus we conclude:
+\begin{lemma}\label{lemma14.4}
+    Let $D \in \text{Div}(E)$. Then 
+    \begin{align*}
+        D \sim 0 \iff \begin{cases}
+            \text{deg }D = 0,\\
+            \text{sum }D = 0_E.
+        \end{cases}
+    \end{align*}
+\end{lemma}
+Now let $\phi : E \to E'$ be a isogeny of degree $n$ with dual isogeny $\widehat{\phi} :E' \to E$. Assume that $\text{char }K \nmid n$ (so $\phi, \widehat{\phi}$ are separable). Write $E[\phi]$ for $\text{ker}(\phi)$. We define the \textbf{Weil pairing}
+\[
+e_{\phi} : E[\phi] \times E'[\widehat{\phi}] \to \mu_n
+\]
+as follows: Let $T \in E'[\widehat{\phi}]$. Then $nT = 0$, so there exists $f \in \overline{K}(E')^\times$ such that $\text{div}(f)=n(T)-n(0)$. Pick $T_0 \in E(\overline{K})$ with $\phi(T_0) = T$. Then $\phi^*(T)-\phi^*(0) = \sum_{P \in E[\phi]}^{} (P+T_0) - \sum_{P \in E[\phi]}^{} (P)$ has sum $nT_0 = \widehat{\phi}\phi T_0 = \widehat{\phi}(T) = 0$. So there exists $g \in \overline{K}(E)^\times$ such that $\text{div}(g)=\phi^*(T)-\phi^*(0)$. Now $\text{div}(\phi^* f) = \phi*(\text{div }f) = n(\phi^*(T)-\phi^*(0))=\text{div}(g^n)$. Hence $\phi^* f = cg^n$ for some $c \in \overline{K}^\times$. Rescaling $f$ allows us to wlog assume $c=1$, i.e. $\phi^* f = g^n$.
+\vspace{1mm}
+ 
+If $S \in E[\phi]$, then $\tau_S^*(\text{div }g)=\text{div }g$, so $\text{div}(\tau_S^* g) =\text{div }g$ and so $\tau_S^* g = \zeta g$ for some $\times \in \overline{K}^\times$, i.e. $\zeta = \frac{g(X+S)}{g(X)}$ is independent of the choice of $X \in E(\overline{K})$. Now $\zeta^n = \frac{g(X+S)^n}{g(X)^n} = \frac{f(\phi(X+S))}{f(\phi(X))} = 1$ since $S \in E[\phi]$, so $\zeta \in \mu_n$. We hence define $e_{\phi}(S,T) = \frac{g(X+S)}{g(X)}$.
+
+\begin{prop}\label{prop14.5}
+    $e_\phi$ is bilinear and nondegenerate.
+\end{prop}
+\begin{proof}
+    \begin{enumerate}[(i)]
+        \item Linearity in the first argument:
+        \begin{align*}
+            e_\phi(S_1+S_2,T) = \frac{g(X+S_1+S_2)}{g(X+S_2)}\frac{g(X+S_2)}{g(X)} =e_\phi(S_1,T)e_\phi(S_2,T).
+        \end{align*}
+        \item Linearity in the second argument: Let $T_1,T_2 \in E'[\widehat{\phi}]$ with $\text{div}(f_i)n(T_i)-n(0)$ and $\phi^* f_i = g_i^n$ for $i=1,2$. There exists $h \in \overline{K}(E')^\times$ such that $\text{div}(h)=(T_1)+(T_2)-(T_1+T_2)-(0)$. We put $f = \frac{f_1f_2}{h^n}$ and $g = \frac{g_1g_2}{\phi^*h}$.
+        \vspace{1mm}
+         
+        We can check $\text{div}(f) = n(T_1+T_2)-n(0)$ and $\phi^* f = \frac{\phi^* f_1 + \phi^* f_2}{(\phi^* h)^n} = \left(\frac{g_1g_2}{\phi^* h}\right)^n = g^n$, so 
+        \begin{align*}
+            e_{\phi}(S,T_1+T_2) &= \frac{g(X+S)}{g(X)} = \frac{g_1(X+S)}{g_1(X)}\frac{g_2(X+S)}{g_2(X)}\frac{h(\phi(X_1))}{h(\phi(X+S))} \\&= e_\phi(S,T_1)e_{\phi}(S,T_2)
+        \end{align*}
+        where the last term cancels since $S \in E[\phi]$.
+        \item $e_\phi$ is nondegenerate. Fix $T \in E'[\widehat{\phi}]$ and suppose $e_\phi(S,T)=1 ~\forall S \in E[\phi]$, so $\tau_S^*g = g ~\forall S \in E[\phi]$.
+    \end{enumerate}
+\end{proof}
+
 \end{document}
