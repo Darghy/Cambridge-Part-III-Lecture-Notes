@@ -2030,14 +2030,14 @@ This gives injective group homomorphisms
      
     Conversely, if $(u,v,w)$ is a solution to our equation, then $uv \neq 0$ and hence $\left(b_1\left(\frac{u}{v}\right)^2, b_1 \frac{uw}{v^3}\right) \in E(K)$.
 \end{proof}
-Not take $K =\mathbb{Q}$.
+Now take $K =\mathbb{Q}$.
 \begin{example}
     $E: y^2=x^3-x$, so $a=0,b=-1$. Then $\text{Im}(\alpha_E) = \langle -1 \rangle \subset \mathbb{Q}^\times/(\mathbb{Q}^\times)^2$. We have $E' : y^2=x^3+4x$ and $\text{Im}(\alpha_{E'}) \subset \langle -1,2 \rangle \subset \mathbb{Q}^\times/(\mathbb{Q}^\times)^2$.
     \vspace{1mm}
      
     Applying the previous lemma (Lemma \ref{lemma16.5}) to $b_1=1, b_1 = 2, b_1=-2$ gives the equations $w^2 = -u^4 - 4 v^4$, $w^2 = 2u^4 + 2v^4, w^2  = -2u^4 - 2v^4$. The first and third have no nontrivial solutions over $\mathbb{R}$, while for the second we can take $(u,v,w)=(1,1,2)$. Hence $\text{Im}(\alpha_{E'}) = \langle 2 \rangle \subset \mathbb{Q}^\times/(\mathbb{Q}^\times)^2$ and so $2^{\text{rank}E(\mathbb{Q})}=\frac{2\cdot 2}{4}=1$, so $\text{rank}E(\mathbb{Q})=0$ and hence 1 is not a congruent number.
 \end{example}
-\begin{example}
+\begin{example}\label{example16.2}
     Take $E: y^2=x^3+px$ for $p$ a prime that is 5 modulo 8. Taking $b_1=-1$ gives $w^2 = -u^4-pv^4$, which has no nontrivial solutions over $\mathbb{R}$, so $\text{Im}(\alpha_{E}) = \langle p \rangle \subset \mathbb{Q}^\times/(\mathbb{Q}^\times)^2$.
     \vspace{1mm}
      
@@ -2055,6 +2055,85 @@ Not take $K =\mathbb{Q}$.
     \end{cases}
     \]
 \end{example}
-
+\marginpar{13 Mar 2024, Lecture 24}
+The setup from last time is $E:y^2=x(x^2+ax+b)$ with an isogeny $\phi : E \to E'$ and the equation $w^2=b_1u^4+au^2v^2+b_2v^4~ (\dagger)$ (for $b_2 = b/b_1$). We have the exact sequence
+\[
+\begin{tikzcd}
+    0 \arrow{r} & E(\mathbb{Q})/\widehat{\phi}E'(\mathbb{Q})\arrow{r}\arrow{dr}{\alpha_E} & S^{(\widehat{\phi})}(E'/\mathbb{Q}) \arrow{r} \arrow[draw=none]{d}[sloped,auto=false, rotate=0]{\subset}& \Sha(E'/\mathbb{Q})[\widehat{\phi}_*] \arrow{r} & 0. \\
+    & & \mathbb{Q}^\times/(\mathbb{Q}^\times)^2
+\end{tikzcd}
+\]
+The image of $\alpha_E$ is $\text{Im}(\alpha_E) = \{b_1 \in (\mathbb{Q}^\times)^2 \mid (\dagger) \text{ is soluble over }\mathbb{Q}\}$, which is contained in \[
+S^{(\widehat{\phi})}(E'/\mathbb{Q}) = \{b_1 \in (\mathbb{Q}^\times)^2 \mid (\dagger) \text{ is soluble over }\mathbb{R} \text{ and over }\mathbb{Q}_p ~\forall p\}.
+\]
+\textbf{Fact.} If $a,b_1,b_2 \in \mathbb{Z}$ and $p \nmid 2b(a^2-4b)$, then $(\dagger)$ is soluble over $\mathbb{Q}_p$. This follows from Ex. Sheet 3, Q9 and Hensel's lemma.
+\vspace{1mm}
+ 
+\textbf{Example \ref{example16.2} continued.} We have $E: y^2=x^3+px$ for $p$ a prime that is 5 modulo 8 and $w^2 = pu^4-4v^4$ with \[
+    \text{rank}E(\mathbb{Q}) = \begin{cases}
+        0 &\text{if } w^2=pu^4-4v^4 \text{ has no nontrivial solutions over }\mathbb{Q},\\
+        1 &\text{if } w^2=pu^4-4v^4 \text{ has a nontrivial solution over }\mathbb{Q}.
+    \end{cases}
+    \]
+This equation is soluble over $\mathbb{Q}_p$, since $\left(\frac{-1}{p}\right)=+1 \implies -1 \in (\mathbb{Z}_p^\times)^2$. It is also soluble over $\mathbb{Q}_2$, since $p-1 \equiv 4 \pmod{8} => p-4 \in (\mathbb{Z}_2^\times)^2$. (Here both implication signs use Hensel's lemma). Finally, this equation is soluble over $\mathbb{R}$, since $\sqrt{p} \in \mathbb{R}$.
+\vspace{1mm}
+ 
+A conjecture by Selmer says that $\text{rank}E(\mathbb{Q})=1~\forall p \equiv 5 \pmod{8}$. Indeed, numerical evidence suggests  
+\begin{center}
+    \begin{tabular}{ c|ccc } 
+        $p$ & $u$ & $v$ & $w$ \\
+        \hline
+        5&1&1&1\\
+        13 & 1&1&3 \\ 
+        29 & 1&1&5 \\ 
+        37&5&3&151\\
+        53&1&1&7
+    \end{tabular}
+\end{center}
+\begin{example}[Lund]
+    Let $E:y^2=x^3+17x$. Then $\text{Im}(\alpha_E) = \langle 17 \rangle \subset \mathbb{Q}^\times/(\mathbb{Q}^\times)^2$ and $E' : y^2=x^3-68x$ with $\text{Im}(\alpha_{E'}) \subset  \langle -1,2,17 \rangle \mathbb{Q}^\times/(\mathbb{Q}^\times)^2$. Take $b_1=2$, so $w^2 =2u^4-34v^4$. Replace $w \mapsto 2$ and divide by 2 to get \[
+    C: 2w^2 = u^4-17v^4.
+    \]
+    \textbf{Notation.} Write $C(K) = \{(u,v,w) \in K^3\setminus \{0\} \text{ satisfying our equation}\}/\sim$ where $(u,v,w)\sim(u,\lambda v, \lambda^2 w)$.
+    \vspace{1mm}
+     
+    We have $C(\mathbb{Q}_2) \neq \varnothing$ since $17 \in (\mathbb{Q}_2^\times)^4$, $C(\mathbb{Q}_{17}) \neq \varnothing$ since $2 \in (\mathbb{Z}_{17}^\times)^2$, and $C(\mathbb{R}) \neq \varnothing$ since $\sqrt{2} \in \mathbb{R}$. Consequently, $C(\mathbb{Q}_v) \neq \varnothing$ for all places $v$ of $\mathbb{Q}$.
+    \vspace{1mm}
+     
+    Suppose $(u,v,w) \in C(\mathbb{Q})$, WLOG $u,v,w \in \mathbb{Z}$ with $\gcd(u,v)=1$. If $17 \mid w$, then $17 \mid  u$ and so $17 \mid v$, contradiction. Thus if $p \mid w$, then $p \neq 17$ and $\left( \frac{17}{p} \right) = +1 \implies \left( \frac{p}{17} \right) = \left( \frac{17}{p} \right) = +1$ by quadratic reciprocity. This only works for $p$ odd, but also $\left( \frac{2}{17} \right) =+1$, so we're fine. Hence $\left( \frac{w}{17} \right) =+1$. But $2w^2 \equiv u^4 \pmod{17}$, so $2 \in (\mathbb{F}_{17}^\times)^2 = \{\pm 1, \pm 4\}$, a contradiction, so $C(\mathbb{Q}) = \varnothing$. In other words, $C$ is a counterexample to the Hasse principle. It represents a nontrivial element of $\Sha(E/\mathbb{Q})$.
+\end{example}
+\subsection{The Birch-Swinnerton-Dyer conjecture}
+Let $E/\mathbb{Q}$ be an elliptic curve.
+\begin{defn}
+    We define $$L(E,s) = \prod_{p}^{} L_p(E,s)$$ where $$L_p(E,s) = \begin{cases}
+        (1-a_p p^{-s}+p^{1-2s})^{-1} &\text{if good reduction,}\\
+        (1-p^{-s})^{-1} &\text{if split mult. reduction,}\\
+        (1+p^{-s})^{-1} &\text{if additive reduction}.
+    \end{cases}$$
+    where $\#\widetilde{E}(\mathbb{F}_p)=p+1-a_p$.
+\end{defn}
+Hasse's Theorem implies $\left|a_p\right|\le 2\sqrt{p}$, so $L(E,s)$ converges for $\text{Re}(s)>\frac{3}{2}$.
+\begin{theorem}[Wiles, Breuil, Conrad, Diamond, Taylor]
+    $L(E,s)$ is the $L$-function of a weight 2 modular form and hence has an analytic continuation to all of $\mathbb{C}$ (and a functional equation relating $L(E,s)$ to $L(E,2-s)$).
+\end{theorem}
+\begin{prop}[Weak BSD]
+    We have $\text{ord}_{s=1}L(E,s)= \text{rank}E(\mathbb{Q})$.
+\end{prop}
+Call this rank $r$.
+\begin{prop}[Strong BSD]
+    We have
+    \begin{align*}
+        \lim_{s \to 1} \frac{1}{(s-1)^r}L(E,s) = \frac{\Omega_E ~ \text{Reg}E(\mathbb{Q})\left|\Sha(E/\mathbb{Q})\right|\prod_{p}^{} c_p}{\left|E(\mathbb{Q})_{\text{tors}}\right|^2}
+    \end{align*}
+    where 
+    \begin{itemize}
+        \item $c_p$ is the Tamagawa number of $E/\mathbb{Q}_p$, i.e. $[E(\mathbb{Q}_p):E_0(\mathbb{Q}_p)]$.
+        \item For the regulator, suppose $E(\mathbb{Q})/E(\mathbb{Q})_{\text{tors}} = \langle P_1,\ldots,P_r \rangle$, then $\text{Reg}E(\mathbb{Q}) = \det([P_i,P_j])_{1\le i,j\le r}$ where $[P,Q] = \widehat{h}(P+Q)-\widehat{h}(P)-\widehat{h}(Q)$.
+        \item $\Omega_E = \int_{E(\mathbb{R})}^{} \left|\frac{\mathrm{d}x}{2y+a_1x+a_3}\right|$, where $a_i$ are the coefficients of a globally minimal Weierstrass equation.
+    \end{itemize}
+\end{prop}
+\begin{theorem}[Kolyvagin]
+    If $\text{ord}_{s=1}L(E,s)=0$ or $1$, then weak BSD holds and $\left|\Sha(E/\mathbb{Q})\right|<\infty$.
+\end{theorem}
 
 \end{document}
