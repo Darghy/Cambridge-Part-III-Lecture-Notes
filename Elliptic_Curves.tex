@@ -97,7 +97,7 @@ Fermat showed that $1$ is not a congruent number.
     WLOG assume $u,v$ are coprime and that $u,w > 0$. If $v<0$, then replace $(u,v,w)$ by $(-v,u,w)$. If $u,v$ are both odd, then replace $(u,v,w)$ by $\left(\frac{u+v}{2},\frac{u-v}{2},\frac{w}{2}\right)$. Then $u,v,u+v,u-v$ are pairwise coprime positive integers with their product a square, so by unique factorization in $\mathbb{Z}$, $u=a^2, v = b^2, u+v = c^2, u-v = d^2$ for $a,b,c,d \in \mathbb{Z}$. 
     \vspace{1mm}
      
-    Since $u \not\equiv v \pmod{2}$, both $c$ and $d$ are odd. Then $\left(\frac{c+d}{2}\right)^2 + \left(\frac{c-d}{2}\right)^2 = \frac{c^2+d^2}{2} = u = a^2$. This gives a primitive triangle with area $\frac{c^2-d^2}{8} = \frac{v}{4} = \left(\frac{b^2}{2}\right)$. Let $w_1 = \frac{b}{2}$, then by Lemma \ref{lemma1.1}, $w_1^2 = u_1v_1(u_1+v_1)(u_1-v_1)$ for some $u_1, v_1 \in \mathbb{Z}$. Hence we have a new solution to our original question, with $4w_1^2 = b^2 = v \mid w^2 \implies w_1 \le \frac{w}{2}$, so we're done by infinite descent.
+    Since $u \not\equiv v \pmod{2}$, both $c$ and $d$ are odd. Then $\left(\frac{c+d}{2}\right)^2 + \left(\frac{c-d}{2}\right)^2 = \frac{c^2+d^2}{2} = u = a^2$. This gives a primitive triangle with area $\frac{c^2-d^2}{8} = \frac{v}{4} = \left(\frac{b}{2}\right)^2$. Let $w_1 = \frac{b}{2}$, then by Lemma \ref{lemma1.1}, $w_1^2 = u_1v_1(u_1+v_1)(u_1-v_1)$ for some $u_1, v_1 \in \mathbb{Z}$. Hence we have a new solution to our original question, with $4w_1^2 = b^2 = v \mid w^2 \implies w_1 \le \frac{w}{2}$, so we're done by infinite descent.
 \end{proof}
 \vspace{1mm}
  
@@ -885,7 +885,7 @@ Let $K = \mathbb{F}_q(E)$, then $\zeta_K(s) = 0 \implies  Z_E(q^{-s}) = 0 \impli
     Let $R$ be complete with respect to an ideal $I$. Let $F \in R[X]$, $s\ge 1$ with $s \in \mathbb{Z}$. Suppose $a \in R$ satisfies 
     \begin{align*}
         &F(a) \equiv 0 \pmod{I^s}\\
-        &F'(a) \in R^\times
+        &F'(a) \in I^\times
     \end{align*}
     Then there exists a unique $b \in R$ such that $F(b)=0$ and $b \equiv a \pmod{I^s}$.
 \end{lemma}
@@ -984,7 +984,7 @@ An exercise on Ex. Sheet 2 asks us to show that the first three conditions imply
     \end{enumerate}
 \end{defn}
 \begin{theorem}\label{theorem8.3}
-    If $\text{char }R = 0$, then any formal group $\mathcal{f}$ over $R$ is isomorphic to $\widehat{\mathbb{G}_a}$ over $R \otimes \mathbb{Q}$. (In other words, our conditions are $\text{char }R = 0$ and ''the integers are invertible''). More precisely:
+    If $\text{char }R = 0$, then any formal group $\mathcal{F}$ over $R$ is isomorphic to $\widehat{\mathbb{G}_a}$ over $R \otimes \mathbb{Q}$. (In other words, our conditions are $\text{char }R = 0$ and ''the integers are invertible''). More precisely:
     \begin{enumerate}[(i)]
         \item There is a unique power series $\log(T) = T + \frac{a_2}{2}T^2 + \frac{a_3}{3}T^3 + \ldots$ with $a_i \in R$ such that 
         \[
@@ -1046,7 +1046,7 @@ An exercise on Ex. Sheet 2 asks us to show that the first three conditions imply
     We define $[I](T)=T$ and $[n](T) = F([n-1]T,T) ~\forall n\ge 2$. (For $n<0$, use $[-1](T) = \iota(T)$). Since $F(X,Y) = X+Y+XY(\ldots)$, we have $[2](T) = f(T,T) = 2T + \ldots$. By induction we get $[n](T) = nT + \ldots \in R[[T]]$. Lemma \ref{lemma8.4} shows that if $n \in R^\times$, then $[n]$ is an isomorphism. This proves (i). Part (ii) now follows.
 \end{proof}
 \section{Elliptic curves over local fields}
-Let $K$ be a field, compelte with respect to a discrete valuation $v : K \to \mathbb{Z}$. (Here complete means complete with respect to the matric given by the absolute value arising from $v$.)
+Let $K$ be a field, complete with respect to a discrete valuation $v : K \to \mathbb{Z}$. (Here complete means complete with respect to the metric given by the absolute value arising from $v$.)
 \begin{itemize}
     \item The \textbf{valuation ring} is $\mathcal{O}_K = \{x \in K^\times \mid v(x)\ge 0\} \cup \{0\}$.
     \item The \textbf{unit group} is $\mathcal{O}_K^\times = \{x \in K^\times \mid  v(x) = 0\}$.
