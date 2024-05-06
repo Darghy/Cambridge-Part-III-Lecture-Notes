@@ -527,7 +527,7 @@ We are now in a position to generalize Example \ref{example2.2}.
 \end{proof}
 \marginpar{05 Feb 2024, Lecture 8}
 \begin{example}
-    This example shows that we need a constant that is exponential in $K$ in the previous result. Let $A = H \cup R \subset \mathbb{F}_p^n$ where $H \le \mathbb{F}_p^n$ is a subspace of dimension $d$ with $K \ll d \ll n-K$, and $R$ consists of $K-1$ linearly independent vectors in $H^\perp$. Then $\left|A\right| = \left|H \cup R\right| \approx \left|H\right|$ and 
+    This example shows that we need a constant that is exponential in $K$ in the previous result. Let $A = H \cup R \subset \mathbb{F}_p^n$ where $H \le \mathbb{F}_p^n$ is a subspace of dimension $d$ with $K \ll d \ll n-K$, and $R$ consists of $K-1$ linearly independent vectors in the complementary subspace of $H$. Then $\left|A\right| = \left|H \cup R\right| \approx \left|H\right|$ and 
     \begin{align*}
         \left|A+A\right| = \left|(H\cup R)+(H\cup R)\right| = \left|(H+H)\cup(H+R)\cup(R+R)\right| \approx K\left|H\right| \approx K\left|A\right|
     \end{align*}
@@ -648,19 +648,20 @@ We first prove a technical lemma using a method called ''dependent random choice
     (and $\left|A''+A''\right|$ follows from Plünnecke, we get $\left|A''+A''\right|\le 2^{82}\eta^{-64}\left|A''\right|$).
 \end{proof}
 \section{Probabilistic tools}
-\textbf{Remark.} Assume in this chapter that all our probability spaces are finite, so we don't need to worry about convergence issues.
+\textbf{Remark.} Assume in this chapter that all our probability spaces are finite, so we don't need to worry about convergence issues. Also, it is later stated that the proofs of these inequalities are nonexaminable, but we are expected to be able to state and apply them.
 \begin{prop}[Khintchine's inequality]\label{prop3.1}
     Let $X_1,X_2,\ldots,X_n$ be independent random variables taking values $\pm x_i$ with probability $\frac{1}{2} ~\forall i=1,\ldots,n$. Then $\forall p \in [2,\infty)$, \[
     ||\sum_{i=1}^{n} X_i ||_{L^p(\mathbb{P})} = O \left(p^{1/2}\left(\sum_{i=1}^{n} ||X_i||_{L^2(\mathbb{P})}^2\right)^{1/2}\right)
     \]
 \end{prop}
+\textbf{Remark.} Note that here $||X||_{p}$ for random variables $X$ will refer to its $p^{\text{th}}$ moment -- in particular, this involves expectations (i.e. the LHS above is actually an expected value of a random variable).
 \begin{proof}
     \marginpar{09 Feb 2024, Lecture 10}
     
     By nesting of norms, it suffices to prove the case $p = 2k$ with $k \in \mathbb{N}$. For simplicity, write $X = \sum_{i=1}^{n} X_i$ and WLOG assume that $\sum_{i=1}^{n} ||X_i||_{\infty}^2 = \sum_{i=1}^{n} ||X_i||_2^2 = 1$. By Chernoff (Example \ref{ex1.3}), which states that $\forall \theta >0$, \[
     \mathbb{P}\left(\left|X\ge \theta\right|\right) \le 4 \exp(-\theta^2/4),
     \]
-    we have (using integration by parts, this is the alternative something formula, rewatch lecture to find out the name)
+    we have (from the alternative expectation formula which we can by integrating by parts)
     \begin{align*}
         ||X||_{2k}^{2k} = \int_{0}^{\infty} 2k t^{2k-1}\mathbb{P}\left(\left|X\right|\ge t\right)\mathrm{d}t \le 8k \underbrace{\int_{0}^{\infty} t^{2k-1}\exp(-t^2/4)\mathrm{d}t}_{:=I(k)}.
     \end{align*}
@@ -677,7 +678,7 @@ We first prove a technical lemma using a method called ''dependent random choice
         &\le 4(k-1) C^{2(k-1)}\frac{(2(k-1))^{k-1}}{4(k-1)} \\
         &\le C^{2k}\frac{(2k)^k}{4k}
     \end{align*}
-    for some $C$, where $C\ge \sqrt{2}$ is claimed to work.
+    for some $C$, where $C\ge \sqrt{2}$ works, so $C=2$ works for our proof.
 \end{proof}
 \begin{cor}[Rudin's inequality]\label{cor3.2}
     Let $\Lambda \subset \widehat{\mathbb{F}_2^n}$ be a linearly independent set and let $p \in [2,\infty)$. Then $\forall \widehat{f} \in \ell^2(\Lambda)$, i.e. $\widehat{f} : \Lambda \to \mathbb{C}$,
@@ -707,8 +708,8 @@ We first prove a technical lemma using a method called ''dependent random choice
     \end{align*}
 \end{proof}
 Recall that given $A \subset \mathbb{F}_2^n$ of density $\alpha>0$, $\left|\text{Spec}_{\rho}(1_A)\right| \le \rho^{-2}\alpha^{-1}$. This is the best possible, as the example of a subspace $H \le \mathbb{F}_2^n$ shows $\text{Spec}_1(1_H) = H^\perp$, so $\left|\text{Spec}_1(1_H)\right| = \left|H^\perp\right| = \frac{\left|\mathbb{F}_2^n\right|}{\left|H\right|} = \left(\frac{\left|H\right|}{\left|\mathbb{F}_2^n\right|}\right)^{-1} = \alpha^{-1}$.
-\begin{theorem}[Special case of Chen's theorem]\label{theorem3.4}
-    LEt $A \subset \mathbb{F}_2^n$ with density $\alpha>0$. Then $\forall \rho>0$, there exists a subspace $H \le \mathbb{F}_2^n$ of dimension at most $O \left(\rho^{-2} \log \alpha^{-1}\right)$ such that $\text{Spec}_{\rho}(1_A) \subset H$.
+\begin{theorem}[Special case of Chang's theorem]\label{theorem3.4}
+    Let $A \subset \mathbb{F}_2^n$ with density $\alpha>0$. Then $\forall \rho>0$, there exists a subspace $H \le \mathbb{F}_2^n$ of dimension at most $O \left(\rho^{-2} \log \alpha^{-1}\right)$ such that $\text{Spec}_{\rho}(1_A) \subset H$.
 \end{theorem}
 \begin{proof}
     Let $\Lambda \subset \text{Spec}_{\rho}(1_A)$ be a maximal linearly independent subset of $\text{Spec}_{\rho}(1_A)$ and let $H = \langle \text{Spec}_\rho (1_A)\rangle$. Then $\text{dim}(H) = \left|\Lambda\right|$. By dual Rudin (Corollary \ref{cor3.3}), $\forall p \in (1,2]$,
@@ -728,6 +729,10 @@ Recall that given $A \subset \mathbb{F}_2^n$ of density $\alpha>0$, $\left|\text
     \marginpar{12 Feb 2024, Lecture 11}
     Let $G$ be a finite abelian group and let $A \subset G$ have density $\alpha>0$. If $\Lambda \subset \text{Spec}_{\rho}(1_A)$ is dissociated, then $\left|\Lambda\right| = O \left(\rho^{-2}\log \alpha ^{-1}\right)$.
 \end{theorem}
+\textbf{Remark.} A set is said to be \textbf{dissociated} if we can't make its elements add up to zero by only using a linear combination containing $\{-1,0,1\}$.
+\begin{proof}
+    On Example Sheet 3.
+\end{proof}
 
 \textbf{Remark.} Last lecture, we wrote $f \in L^p(G)$ to mean that $f$ is a function on $G$ with bounded $L^p$--norm and then said $||f||_{L^p(G)} = \left(\mathbb{E}_{x \in G} f(x)^{p}\right)^{1/p}$. Since we assumed that our groups are finite, the condition ''with bounded $L^p$--norm'' is unnecessary here, but we keep it as it is in line with the usual notation. We also said that $\widehat{f} \in \ell^2(\Lambda)$ if $\widehat{f}$ is a function supported on $\Lambda \subset \widehat{G}$ with bounded $\ell^2$--norm: $||\widehat{f}||_{\ell^2(\Lambda)} = \left(\sum_{\gamma \in \Lambda}^{} \left|\widehat{f}(\gamma)\right|^2\right)^{1/2}$. Finally, $X \in L^p(\mathbb{P})$ means that the random variable $X$ has bounded $p^{\text{th}}$ moment, i.e. $\mathbb{E}\left|X\right|^p<\infty$ (with expectation taken with respect to $\mathbb{P}$).
 \vspace{1mm}
@@ -735,15 +740,15 @@ Recall that given $A \subset \mathbb{F}_2^n$ of density $\alpha>0$, $\left|\text
 \textbf{Remark.} The proofs of these probabilistic inequalities are nonexaminable. However, we are expected to be able to state them and apply them.  
 \vspace{1mm}
  
-We may boostrap Khintchine's inequality to obtain the following:
+We may bootstrap Khintchine's inequality to obtain the following:
 \begin{theorem}[Marcinkiewicz--Zygmund Inequality]
-    Let $p \in [2,\infty)$ and let $X_1,X_2,\ldots,X_n \in L^P(\mathbb{P})$ be independent random variables with $\mathbb{E}\sum_{i=1}^{n} X_i = 0$. Then 
+    Let $p \in [2,\infty)$ and let $X_1,X_2,\ldots,X_n \in L^p(\mathbb{P})$ be independent random variables with $\mathbb{E}\sum_{i=1}^{n} X_i = 0$. Then 
     \begin{align*}
-        ||\sum_{i=1}^{n} X_i||_{L^P(\mathbb{P})} = O \left(p^{1/2}||\sum_{i=1}^{n} \left|X_i\right|^2||_{L^{p/2}(\mathbb{P})}^{1/2}\right).
+        ||\sum_{i=1}^{n} X_i||_{L^p(\mathbb{P})} = O \left(p^{1/2}||\sum_{i=1}^{n} \left|X_i\right|^2||_{L^{p/2}(\mathbb{P})}^{1/2}\right).
     \end{align*}
 \end{theorem}
 \begin{proof}
-    For $\mathbb{C}$--valued random variables, the result follows from the real caes by taking real and imaginary parts and applying the triangle inequality. 
+    For $\mathbb{C}$--valued random variables, the result follows from the real case by taking real and imaginary parts and applying the triangle inequality. 
     \vspace{1mm}
      
     Next assume that the distribution of the $X_i$'s is symmetric, i.e. $\mathbb{P}\left(X_i=a\right)=\mathbb{P}\left(X_i=-a\right) ~\forall a \in \mathbb{R}$. Partition the probability space $\Omega$ into sets $\Omega_1,\Omega_2,\ldots,\Omega_M$, writing $\mathbb{P}_j$ for the induced probability measure on $\Omega_j$, such that all $X_i$'s are symmetric and take at most two values on each $\Omega_j$. Applying Khintchine, for each $j \in [M]$, 
@@ -767,7 +772,7 @@ We may boostrap Khintchine's inequality to obtain the following:
     by convexity/Jensen.
 \end{proof}
 \begin{theorem}[Croot--Sisask Almost Periodicity]\label{Theorem3.8}
-    Let $G$ be a finite abelian group, let $\epsilon>0$ and let $p \in [2,\infty)$. Let $A,B \subset G$ be such that $\left|A+B\right|\le K\left|A\right|$ and let $f: G \to \mathbb{C}$. Then $\exists b \in B$ and a set $X \subset B-b$ such that $$\left|X\right|\ge (2K)^{-O(\epsilon^{-2}p)} \left|B\right|$$ and 
+    Let $G$ be a finite abelian group, let $\epsilon>0$ and let $p \in [2,\infty)$. Let $A,B \subset G$ be such that $\left|A+B\right|\le K\left|A\right|$ and let $f: G \to \mathbb{C}$. Then $\exists b \in B$ and a set $X \subset B-b$ such that\footnote{Here $B-b$ is the translate of $B$ by $b$. In particular, $\left|B-b\right|=\left|B\right|$.} $$\left|X\right|\ge (2K)^{-O(\epsilon^{-2}p)} \left|B\right|$$ and 
     \begin{align*}
         ||\tau_x (f * \mu_A) - f * \mu_A||_{L^p(G)} \le \epsilon ||f||_{L^p(G)} ~\forall x \in X,
     \end{align*}
@@ -820,7 +825,7 @@ We may boostrap Khintchine's inequality to obtain the following:
         \mathbb{E}_{(z_1,\ldots,z_k) \in A^k}\underbrace{\mathbb{E}_{y \in G}\left|\frac{1}{k}\sum_{i=1}^{k} \tau_{-z_i}(f)(y) - f * \mu_A (y)\right|^p}_{:= (\star)} = O \left((pk^{-1}||f||^2_{L^p(G)})^{p/2}\right)
     \end{align*}
     Choose $k = O(\epsilon^{-2}p)$ such that RHS is at most $\left(\frac{\epsilon}{4}||f||_{L^p(G)}\right)^{p}$. Write $$L = \left\{(z_1,\ldots,z_k) \in A^k \mid (\star) \le \left(\frac{\epsilon}{2}||f||_{L^p(G)}\right)^p \right\}.$$
-    By averaging/Markov, since $\mathbb{E}(\star)\le \left(\frac{\epsilon}{4}||f||_{L^p(G)}\right)^p = 2^{-p} \left(\frac{e}{2}||f||_{L^p(G)}\right)^p$, 
+    By averaging/Markov, since $\mathbb{E}(\star)\le \left(\frac{\epsilon}{4}||f||_{L^p(G)}\right)^p = 2^{-p} \left(\frac{\epsilon}{2}||f||_{L^p(G)}\right)^p$, 
     \begin{align*}
         &\frac{\left|L^C\right|}{\left|A\right|^k} = \mathbb{P}\left((\star)\ge \left(\frac{\epsilon}{2}||f||_{L^p(G)}\right)^p\right) \le \mathbb{P}\left((\star)\ge 2^{p}\mathbb{E}(\star)\right) \le 2^{-p} \\
         &\implies \frac{\left|L\right|}{\left|A\right|^k}\ge 1-2^{-p}.
@@ -829,8 +834,11 @@ We may boostrap Khintchine's inequality to obtain the following:
     \begin{align*}
         D = \{\underbrace{(b,b,\ldots,b)}_{k \text{ times}} \mid b \in B\},
     \end{align*}
-    so $L + D \subset (A+B)^k$, whence (as $\left|L\right|\ge \frac{1}{2}\left|A\right|^k$) $$\left|L+D\right|\le \left|(A+B)^k\right|\le (K\left|A\right|)^k = K^k \left|A\right|^k \le (2K)^k \left|L\right|$$
-    By Lemma \ref{lemma2.13}, $E(L+D,L+D) \ge \frac{\left|D\right|^2\left|L\right|}{(2K)^k}$, so there are at least $\frac{\left|D\right|^2}{(2K)^k}$ pairs $(b_1,b_2) \in D \times D$ such that $r_{L-L}(b_1-b_2) > 0$. In particular, there exists $b \in B$ and $X \subset B-b$ of size $\left|X\right|\ge \ge \frac{\left|D\right|}{(2K)^k} = \frac{\left|B\right|}{(2K)^k}$ such that $r_{L-L}(x) > 0 ~\forall x \in X$. In other words, $\forall x \in X$, $\exists l_1(x),l_2(x) \in L$ such that $\forall i \in [k]$, $l_1(x)_i = l_2(x)_i + x$. By the triangle inequality, for each $x \in X$, 
+    so $L + D \subset (A+B)^k$, whence (as $\left|L\right|\ge \frac{1}{2}\left|A\right|^k$) $$\left|L+D\right|\le \left|(A+B)\right|^k \le (K\left|A\right|)^k = K^k \left|A\right|^k \le 2K^k \left|L\right|$$
+    By the proof of Lemma \ref{lemma2.13}, 
+    $$\left|D\right|^{3/2}\left|L\right|^{3/2}E(L,D) \ge \frac{\left|D\right|^2\left|L\right|^2}{\left|L+D\right|}\ge \frac{\left|D\right|^2\left|L\right|}{2K^k},$$
+    so there are at least $\frac{\left|D\right|^2}{(2K)^k}$ pairs $(b_1,b_2) \in D \times D$ such that $r_{L-L}(b_1-b_2) > 0$ (recall that the left-hand side of the displayed equation represents the number of additive
+    quadruples in $L \times L \times D \times D$). In particular, there exists $b \in B$ and $X \subset B-b$ of size $\left|X\right| \ge \frac{\left|D\right|}{(2K)^k} = \frac{\left|B\right|}{(2K)^k}$ such that $r_{L-L}(x) > 0 ~\forall x \in X$. In other words, $\forall x \in X$, $\exists l_1(x),l_2(x) \in L$ such that $\forall i \in [k]$, $l_1(x)_i = l_2(x)_i + x$. By the triangle inequality, for each $x \in X$, 
     \begin{align*}
         &||\tau_{-x}(f * \mu_A) - f * \mu_A||_{L^p(G)}\\
         \le & ||t_{-x}(f*\mu_A)-\tau_{-x}\left(\frac{1}{k}\sum_{i=1}^{k}\tau_{-l_2(x)_i}(f)\right)||_{L^p(G)} + ||\tau_{-x}\left(\frac{1}{k}\sum_{i=1}^{k}\tau_{-l_2(x)_i}(f)\right)-f* \mu_A||_{L^p(G)}\\
@@ -858,16 +866,19 @@ We may boostrap Khintchine's inequality to obtain the following:
 \end{theorem}
 \begin{proof}
     \marginpar{16 Feb 2024, Lecture 13}
-    Let $\alpha = \frac{\left|A\right|}{\left|\mathbb{F}_p^n\right|}$ and partition $A$ into $A_1 \sqcup A_2$ with approximately equal sizes $\left|A_1\right| = \left\lfloor \frac{\alpha}{2} p^n \right\rfloor$, $\left|A_2\right| = \left\lceil \frac{\alpha}{2}p^n \right\rceil$. By averaging, $\exists z \in \mathbb{F}_p^n$ such that $\left|A_1 \cap (z-A_2)\right| \ge \frac{\alpha^2}{4}p^n$. Let $A' = A_1 \cap (z-A_2)$. By Theorem \ref{theorem3.9}, there exists a subspace $V\le \mathbb{F}_p^n$ of codimension $O(\log^4 \alpha^{-1})$ such that $V \subset A'+A'-A'-A'$ and hence $$2z + V \subset 2z + A' + A' - A' - A' \subset A_1 + A_1 + A_2 + A_2.$$ Consequently, $(5 \cdot A - A) \cap (2z + V) = \varnothing$, for if there were $x,y \in A$ with $5y-x \in 2z + V$, then we could write $5y - x = a_1 + a_1' + a_2 + a_2'$ for $a_1,a_1' \in A_1$, $a_2,a_2' \in A_2$, which (since $A_1, A_2$ are disjoint) would yield a nontrivial solution. It follows that for all $w \in \mathbb{F}_p^n$, at most one of $A \cap (w+V)$ and $5\cdot A \cap (w+2z+V)$ can be nonempty (else $a_1-a_2$ for $a_i$ in the corresponding set would lie in the above empty set). Therefore,
+    Let $\alpha = \frac{\left|A\right|}{\left|\mathbb{F}_p^n\right|}$ and partition $A$ into $A_1 \sqcup A_2$ with approximately equal sizes $\left|A_1\right| = \left\lfloor \frac{\alpha}{2} p^n \right\rfloor$, $\left|A_2\right| = \left\lceil \frac{\alpha}{2}p^n \right\rceil$. By averaging, $\exists z \in \mathbb{F}_p^n$ such that $\left|A_1 \cap (z-A_2)\right| \ge \frac{\alpha^2}{4}p^n$ (this is because for randomly chosen $z$, each element of $z-A_2$ lies in $A_1$ with probability $\frac{\alpha}{2}$). Let $A' = A_1 \cap (z-A_2)$. By Theorem \ref{theorem3.9}, there exists a subspace $V\le \mathbb{F}_p^n$ of codimension $O(\log^4 \alpha^{-1})$ such that $V \subset A'+A'-A'-A'$ and hence $$2z + V \subset 2z + A' + A' - A' - A' \subset A_1 + A_1 + A_2 + A_2.$$ Consequently, $(5 \cdot A - A) \cap (2z + V) = \varnothing$, for if there were $x,y \in A$ with $5y-x \in 2z + V$, then we could write $5y - x = a_1 + a_1' + a_2 + a_2'$ for $a_1,a_1' \in A_1$, $a_2,a_2' \in A_2$, which (since $A_1, A_2$ are disjoint) would yield a nontrivial solution. It follows that for all $w \in \mathbb{F}_p^n$, at most one of $A \cap (w+V)$ and $5\cdot A \cap (w+2z+V)$ can be nonempty (else $a_2-a_1$ for $a_i$ in the corresponding set would lie in the above empty set). Therefore, since the cosets of $V$ partition $\mathbb{F}_p^n$, we observe that $\left|A\right|\left|V\right|=\sum_{w \in V}^{} \left|A \cap (w+V)\right|$ and thus
     \begin{align*}
-        2\left|A\right| &= \sum_{w \in V^\perp}^{} \left(\left|A \cap (w + V)\right| + \left|5\cdot A \cap (w+2z + V)\right|\right) \\
-        &\le \left|V^{\perp}\right| \sup_{w \in V^{\perp}} \left|A \cap (w +V)\right|.
+        2\left|A\right|\left|V\right| &= \sum_{w \in \mathbb{F}_p^n}^{} \left(\left|A \cap (w + V)\right| + \left|5\cdot A \cap (w+2z + V)\right|\right) \\
+        &\le \left|\mathbb{F}_p^n\right| \sup_{w \in \mathbb{F}_p^n} \left|A \cap (w +V)\right|.
     \end{align*} 
-    Hence $\exists w \in V^\perp$ such that $\left|A \cap(w+V)\right| \ge \frac{2\left|A\right|}{\left|V^{\perp}\right|} = \frac{2\alpha \left|\mathbb{F}_p^n\right|}{\left|\mathbb{F}_p^n\right|/\left|V\right|} = 2\alpha\left|V\right|$. The set $A \cap (w +V) \subset w + V$ of density at least $2\alpha$, or equivalently $(A-w)\cap V \subset V$ of density at least $2\alpha$ contains no nontrivial solutions to $x_1+x_2+x_3+x_4+x_5=5y$. 
+    where the inequality holds as at most one of $A \mathbb{N} (w+V)$ and $5\cdot A \cap (w+2z+V)$ are nonempty for any $w \in \mathbb{F}_p^n$. Hence $\exists w \in \mathbb{F}_p^n$ such that $\left|A \cap(w+V)\right| \ge \frac{2\left|A\right|\left|V\right|}{\left|\mathbb{F}_p^n\right|} = 2\alpha\left|V\right|$. The set $A \cap (w +V) \subset w + V$ of density at least $2\alpha$, or equivalently $(A-w)\cap V \subset V$ of density at least $2\alpha$ contains no nontrivial solutions to $x_1+x_2+x_3+x_4+x_5=5y$. 
     
     \vspace{1mm}
      
-    After $t$ iterations, we obtain a subspace $W$ of codimension $O(t \log^4 \alpha^{-1})$ and $w \in \mathbb{F}_p^n$ such that $\left|A \cap (w+V)\right| \ge 2^t \alpha \left|W\right|$. Arguing as in the proof of Meshulam's Theorem (Theorem \ref{theorem1.17}) yields the result.
+    After $t$ iterations, we obtain a subspace $W$ of codimension $O(t \log^4 \alpha^{-1})$ and $w \in \mathbb{F}_p^n$ such that $\left|A \cap (w+W)\right| \ge 2^t \alpha \left|W\right|$. Arguing as in the proof of Meshulam's Theorem (Theorem \ref{theorem1.17}) yields the result (details left for Example Sheet 3).
+    \vspace{1mm}
+     
+    To write it out, $2^t \alpha = 1 \iff t = \frac{\log(\alpha^{-1})}{\log 2}$, so for this value of $t$, the corresponding $W$ can only have one element, i.e. it has codimension $n$, so $O(\log^5 \alpha^{-1}) = n \implies \alpha = \exp \left(-\Omega(n^{1/5})\right)$ as desired.
 \end{proof}
 We have a similar bound in $\mathbb{Z}_N$, where Behrend's construction offers a comparable lower bound.
 
@@ -875,7 +886,7 @@ We have a similar bound in $\mathbb{Z}_N$, where Behrend's construction offers a
 In $\mathbb{F}_p^n$, we can do much better, even for 3-APs.
 \begin{theorem}[due to Ellenberg-Gijswijt, based on Croot-Lev-Pach]\label{theorem4.1}
     Let $A \subset \mathbb{F}_3^n$ be a set containing no nontrivial 3-APs. Then \[
-    \left|A\right| = o(2.765^n).
+    \left|A\right| = o(2.756^n).
     \]
 \end{theorem}
 \textbf{Remark.} The proof goes through for general $p$, but we do the case $p=3$ to avoid having to constantly write $p-1$.
@@ -889,14 +900,14 @@ We first have some setup for the proof. Let $M_n$ be the set of monomials in var
     \]
 \end{lemma}
 \begin{proof}
-    Every $P \in V_n^d$ can be written as a linear combination of monomials from $M_n^d$, so $$P(x,y) = \sum_{\substack{m,m' \in M_n^d, \\ \text{deg}(m\cdot m')\le d}}^{} c_{m,m'}m(x)m'(y)$$
+    Every $P \in V_n^d$ can be written as a linear combination of monomials from $M_n^d$, so $$P(x+y) = \sum_{\substack{m,m' \in M_n^d, \\ \text{deg}(m\cdot m')\le d}}^{} c_{m,m'}m(x)m'(y)$$
     for some coefficients $c_{m,m'}$. Since at least one of $m,m'$ has to have degree at most $d/2$, we can write \[
     P(x+y) = \sum_{m \in M_n^{d/2}}^{} m(x)F_m(y) + \sum_{m' \in M_n^{d/2}}^{} m'(y) G_{m'}(x),
     \]
     where $(F_m)_{m \in M_n^{d/2}}$ and $(G_{m'})_{m' \in M_n^{d/2}}$ are polynomials. Viewing $(P(x+y))_{x,y \in A}$ as an $\left|A\right|\times\left|A\right|$-matrix $C$, we see that $C$ can be written as a sum of at most $2m_{d/2}$ matrices of rank at most 1 (as $m_x F_m(y)$ for fixed $x$ and $y$ running over $A$ gives the rows, which are all multiples of each other), hence $\text{rank}(C) \le 2m_{d/2}$.
     \vspace{1mm}
         
-    But by our assumption, $C$ is a diagonal matrix whose rank equals the number of nonzero elements on the diagonal, i.e. $\left|\{a \in A \mid P(2a)=0\}\right|$.
+    But by our assumption, $C$ is a diagonal matrix whose rank equals the number of nonzero elements on the diagonal, i.e. $\left|\{a \in A \mid P(2a)\neq 0\}\right|$.
 \end{proof}
 \begin{prop}\label{prop4.3}
     Let $A \subset \mathbb{F}_3^n$ be a set containing no nontrivial 3-APs. Then $\left|A\right|\le 3m_{2n/3}$.
@@ -909,7 +920,7 @@ We first have some setup for the proof. Let $M_n$ be the set of monomials in var
         & m_d - (3^n - \left|A\right|)\le \text{dim}(W) \le \left|\text{supp}(P)\right| \le 2m_{d/2} \\
         \implies & \left|A\right|\le (3^n - m_d)+ 2 m_{d/2}.
     \end{align*}
-    But the monomials in $M_n\setminus M_{n^d}$ are in bijection with those of degree at most $2n-d$ (via sending $x_1^{\alpha_1}\ldots x_n^{\alpha_n} \mapsto x_1^{2-\alpha_1}\ldots x_n^{2-\alpha_n}$), whence $3^n - m_d = m_{2n-d}$. Setting $d = \frac{4n}{3}$ gives $\left|A\right|\le 3m_{2n/3}$.    
+    But the monomials in $M_n\setminus M_{n}^d  $ are in bijection with those of degree at most $2n-d$ (via sending $x_1^{\alpha_1}\ldots x_n^{\alpha_n} \mapsto x_1^{2-\alpha_1}\ldots x_n^{2-\alpha_n}$), whence $3^n - m_d = m_{2n-d}$. Setting $d = \frac{4n}{3}$ gives $\left|A\right|\le 3m_{2n/3}$.    
 \end{proof}
 We will now deduce Theorem \ref{theorem4.1} on Ex. Sheet 3.
 \vspace{1mm}
@@ -917,7 +928,7 @@ We will now deduce Theorem \ref{theorem4.1} on Ex. Sheet 3.
 \textbf{Remark.} We do not know a comparable bound for 4-APs. Fourier-analytic methods also fail.
 
 \begin{example}\label{example4.4}
-    Recall from Lemma \ref{lemma1.16} that $|T_3(1_A,1_A,1_A) - \alpha^3| \le \text{sup}_{t\neq 0}|\widehat{1_A}(t)|$. But it is impossible to bound $|T_4(1_A,1_A,1_A,1_A) - \alpha^4| = |\mathbb{E}_{x,d} 1_A(x)1_A(x+d)1_A(x+2d)1_A(x+3d)-\alpha^4|$ by $\sup_{t\neq 0}|\widehat{1_A}(t)|$. Indeed, consider $Q = \{x \in \mathbb{F}_p^n \mid x\cdot x = 0\}$. By Problem 2 (ii) on Ex. Sheet 1, we have $\frac{\left|Q\right|}{p^n}= \frac{1}{p}+O(p^{-n/2})$ and $\sup_{t\neq 0} \left|\widehat{1_Q}(t)\right|=O(p^{-n/2})$. But given a 3-AP $(x,x+d,x+2d)$ in $Q$, we automatically have that $x+3d \in Q$, because $\forall x,d \in \mathbb{F}_p^n$, \[
+    Recall from Lemma \ref{lemma1.16} that $|T_3(1_A,1_A,1_A) - \alpha^3| \le \text{sup}_{t\neq 0}|\widehat{1_A}(t)|$. But it is impossible to bound $$|T_4(1_A,1_A,1_A,1_A) - \alpha^4| = |\mathbb{E}_{x,d} 1_A(x)1_A(x+d)1_A(x+2d)1_A(x+3d)-\alpha^4|$$ by $\sup_{t\neq 0}|\widehat{1_A}(t)|$. Indeed, consider $Q = \{x \in \mathbb{F}_p^n \mid x\cdot x = 0\}$. By Problem 2 (ii) on Ex. Sheet 1, we have $\frac{\left|Q\right|}{p^n}= \frac{1}{p}+O(p^{-n/2})$ and $\sup_{t\neq 0} \left|\widehat{1_Q}(t)\right|=O(p^{-n/2})$. But given a 3-AP $(x,x+d,x+2d)$ in $Q$, we automatically have that $x+3d \in Q$, because $\forall x,d \in \mathbb{F}_p^n$, \[
     x\cdot x - 3(x+d)\cdot (x+d) + 3(x+2d)\cdot (x+2d) - (x+3d)\cdot (x+3d) = 0.
     \]
     So 
@@ -964,7 +975,7 @@ by Lemma \ref{lemma4.6}. It remains to show that if $||f_A||_{U^2}$ is not too s
     \begin{align*}
         \left|\mathbb{E}_{x} f(x)\omega^{x\cdot b}\right| \ge \delta^2.
     \end{align*}
-    In other words, $\left|\langle f, \phi \rangle\right|\ge \delta^2$ for $\phi(x)=\omega^{x\cdot b}$, and we say ''$f$ correlates with a linear function''.
+    In other words, $\left|\langle f, \phi \rangle\right|\ge \delta^2$ for $\phi(x)=\omega^{x\cdot b}$, and we say ''$f$ correlates with a linear phase function''.
 \end{theorem}
 \begin{proof}[''Proof''.]
     We have seen $||f||_{U^2}^2 \le ||\widehat{f}||_{\infty}||f||_2 \le ||\widehat{f}||_{\infty}$, so \[
@@ -1013,27 +1024,25 @@ Setting $f_\epsilon = f$ for $\epsilon \in \{0,1\}^2 \times \{0\}$ (or any other
     \begin{align*}
         &\left|T_4(f,f,f,f)\right|^8\\
         &\le \left(\mathbb{E}_{a,b,c} \left|\mathbb{E}_d f(2a+b-d)f(a-c-2d)f(-b-2c-3d)\right|^2 \right)^4 \\
-        &= (\mathbb{E}_{d,d'} \mathbb{E}_{a,b} f(2a+b-d)\overline{f(2a+b-d')}\\
-        &~\mathbb{E}_c f(a-c-2d)f(-b-2c-3d)\overline{f(a-c-2d')f(-b-2c-3d')})^4 \\
+        &= \left(\mathbb{E}_{d,d'} \mathbb{E}_{a,b} f(2a+b-d)\overline{f(2a+b-d')}\mathbb{E}_c f(a-c-2d)f(-b-2c-3d)\overline{f(a-c-2d')f(-b-2c-3d')}\right)^4 \\
         &= \left(\mathbb{E}_{d,d'}\mathbb{E}_{a,b}|\mathbb{E}_c \text{ time to expand what's in here }|^2\right)^2 \\
         &= (\mathbb{E}_{c,c',d,d'} \mathbb{E}_a f(a-c-2d)\overline{f(a-c-2d')}\overline{f(a-c'-2d)}f(a-c'-2d')\\
-        &~ \mathbb{E}_b f(-b-2c-3d)\overline{f(-b-2c-3d')}\overline{f(-b-2c'-3d)f(-b-2c'-3d')} )^2 \\
+        &~ ~~~~\mathbb{E}_b f(-b-2c-3d)\overline{f(-b-2c-3d')}\overline{f(-b-2c'-3d)f(-b-2c'-3d')} ~)^2 \\
         &\le \mathbb{E}_{c,c',d,d'} \mathbb{E}_a | \mathbb{E}_b f(-b-2c-3d)\overline{f(-b-2c-3d')f(-b-2c'-3d)}f(-b-2c'-3d')|^2\\
-        &= \le \mathbb{E}_{c,c',d,d'} | \mathbb{E}_b f(-b-2c-3d)\overline{f(-b-2c-3d')f(-b-2c'-3d)}f(-b-2c'-3d')|^2\\
-        &\mathbb{E}_{b,b',c,c',d,d'} f(-b-2c-3d)\overline{f(-b-2c-3d')f(-b-2c'-3d)}f(-b-2c'-3d')\\
-        &\overline{f(-b'-2c-3d)}f(-b'-2c-3d')f(-b'-2c'-3d)\overline{f(-b'-2c'-3d')}
-        \qedhere
+        &= \mathbb{E}_{c,c',d,d'} | \mathbb{E}_b f(-b-2c-3d)\overline{f(-b-2c-3d')f(-b-2c'-3d)}f(-b-2c'-3d')|^2\\
+        &\le \mathbb{E}_{b,b',c,c',d,d'} f(-b-2c-3d)\overline{f(-b-2c-3d')f(-b-2c'-3d)}f(-b-2c'-3d')\\
+        &\hspace{20mm}\overline{f(-b'-2c-3d)}f(-b'-2c-3d')f(-b'-2c'-3d)\overline{f(-b'-2c'-3d')}.
     \end{align*}
 \end{proof}
 One might hope to generalize Meshulam's Theorem (Theorem \ref{theorem1.17}) as follows:
 \begin{theorem}[Szemeredi's Theorem (for progressions of length 4)]\label{theorem4.12} 
     Let $A \subset \mathbb{F}_p^n$ be a set containing no nontrivial 4-APs. Then $\left|A\right| = o(p^n).$
 \end{theorem}
-\textbf{Idea.} By Proposition \ref{prop4.11} with $f = f_A = 1_A -\alpha$, 
+\textbf{Idea.} By Proposition \ref{prop4.11} with $f = f_A = 1_A -\alpha$, writing $1_A = f_A+\alpha$,
 \begin{align*}
     T_4(1_A,1_A,1_A,1_A)-\alpha^4 = T_4(f_A,f_A,f_A,f_A) + (\star)
 \end{align*} 
-where $(\star)$ consists of terms in which one, two, or three of the inputs are equal to $1_A$, each of which is controlled by $||f_A||_{U^2}$ (strictly speaking, we haven't shown this for e.g. $T_4(f,\alpha,f,f)$, but this is similar enough to a 3-AP so we can make it work). Hence 
+where $(\star)$ consists of terms in which one, two, or three of the inputs are equal to $f_A$, each of which is controlled by $||f_A||_{U^2}$ (strictly speaking, we haven't shown this for e.g. $T_4(f,\alpha,f,f)$, but this is similar enough to a 3-AP so we can make it work). Hence 
 \begin{align*}
     \left|T_4(1_A,1_A,1_A,1_A)-\alpha^4\right| \le 14||f_A||_{U^3}
 \end{align*}
@@ -1057,9 +1066,9 @@ In other words, $\left| \langle f, \phi \rangle\right|\ge c(\delta)$ for $\phi(x
     Suppose $||f||_{U^3}\ge \delta$. We divide the sketch into four steps.
     \vspace{1mm}
      
-    \textbf{Step 1.} If $||f||_{U^3}^8 = \mathbb{E}_h ||\Delta_h f||_{U^2}^4\ge \delta^8$, then for at least a $\delta^8/2$-proportion of $h \in \mathbb{F}_p^n$, $||\Delta_h f||_{U^2}^4 \ge \frac{\delta^8}{2}$. For each such $h$, $\exists t_h$ such that $||\widehat{\Delta_h}(t_h)||^2\ge \frac{\delta^8}{2}$. Working a bit harder (details omitted as they are uninsightful), one can obtain the following:
+    \textbf{Step 1.} If $||f||_{U^3}^8 = \mathbb{E}_h ||\Delta_h f||_{U^2}^4\ge \delta^8$, then for at least a $\delta^8/2$-proportion of $h \in \mathbb{F}_p^n$, $||\Delta_h f||_{U^2}^4 \ge \frac{\delta^8}{2}$. For each such $h$, $\exists t_h$ such that $||\widehat{\Delta_h}(t_h)||^2\ge \frac{\delta^8}{2}$.\footnote{In fact, the $U^2$-inverse theorem gives $\delta^4$ here, but we will now stop being precise about the exponents of $\delta$.} Working a bit harder (details omitted as they are uninsightful), one can obtain the following:
     \begin{prop}\label{prop4.15}
-        Let $f : \mathbb{F}_p^n \to \mathbb{C}$ satisfy $||f||_{\infty}\le 1$ and $||f||_{U^3}\ge \delta$ for some $\delta\ge 0$. Suppose that $\left|\mathbb{F}_p^n\right| = \Omega_{\delta}(1)$, i.e. $\mathbb{F}_p^n$ is bounded below by some constant depending on $\delta$. Then $\exists S \subset \mathbb{F}_p^n$ with $\left|S\right|/\left|\mathbb{F}_p^n\right| = \Omega_{\delta}(1)$ and a function $\phi: S \to \mathbb{F}_p^n$ such that
+        Let $f : \mathbb{F}_p^n \to \mathbb{C}$ satisfy $||f||_{\infty}\le 1$ and $||f||_{U^3}\ge \delta$ for some $\delta\ge 0$. Suppose that $\left|\mathbb{F}_p^n\right| = \Omega_{\delta}(1)$, i.e. $\mathbb{F}_p^n$, meaning $n$, is bounded below by some constant depending on $\delta$. Then $\exists S \subset \mathbb{F}_p^n$ with $\frac{\left|S\right|}{\left|\mathbb{F}_p^n\right|} = \Omega_{\delta}(1)$ and a function $\phi: S \to \mathbb{F}_p^n$ such that
         \begin{enumerate}[(i)]
             \item $\left|\widehat{\Delta_hf}(\phi(h))\right| = \Omega_\delta(1)$,
             \item there are at least $\Omega_{\delta}(\left|\mathbb{F}_p^n\right|^3)$ additive quadruples $(s_1,s_2,s_3,s_4) \in S^4$ with $s_1+s_2=s_3+s_4$ such that $\phi(s_1)+\phi(s_2)=\phi(s_3)+\phi(s_4)$.
@@ -1070,11 +1079,17 @@ In other words, $\left| \langle f, \phi \rangle\right|\ge c(\delta)$ for $\phi(x
         Let $S$ and $\phi$ be given as in Proposition \ref{prop4.15}. Then there exists an $n \times n$ matrix $M$ with entries in $\mathbb{F}_p$ and $b \in \mathbb{F}_p^n$ such that the map $\psi : \mathbb{F}_p^n \to \widehat{\mathbb{F}_p^n}$ by $x \mapsto Mx+b$ satisfies $\psi(x)=\phi(x)$ for $\Omega_\delta(\left|\mathbb{F}_p^n\right|)$ elements $x \in S$.
     \end{prop}
     \begin{proof}
-        Consider the graph $\Gamma = \{(h,\phi(h)) \mid h \in S\} \subset \mathbb{F}_p^n \times \widehat{\mathbb{F}_p^n}$. By Proposition \ref{prop4.15}, $\Gamma$ has $\Omega_\delta(\left|\mathbb{F}_p^n\right|)$ additive quadruples. By the Balog-Szemeredi-Gowers theorem (Theorem \ref{theorem2.15}), $\exists \Gamma' \subset \Gamma$ with $\left|\Gamma'\right|=\Omega_\delta(\left|\Gamma\right|) = \Omega_\delta(\left|\mathbb{F}_p^n\right|)$ and $\left|\Gamma'+\Gamma'\right| = O_{\delta}(\left|\Gamma'\right|)$. Define $S'$ by $\Gamma' = \{(h,\phi(h)) \mid h \in S'\}$ and note that $\left|S'\right| = \Omega_\delta(\left|\mathbb{F}_p^n\right|)$. By the Freiman-Rusza theorem (Theorem \ref{theorem2.8}) applied to $\Gamma' \subset \mathbb{F}_p^n \times \widehat{\mathbb{F}_p^n}$, there exists a subspace $H \le \mathbb{F}_p^n \times \widehat{\mathbb{F}_p^n}$ with $\left|H\right| = O_\delta(\left|\Gamma\right|)=O_\delta(\left|\mathbb{F}_p^n\right|)$ such that $\Gamma' \subset H$. Denote by $\pi : \mathbb{F}_p^n \times \widehat{\mathbb{F}_p^n} \to \mathbb{F}_p^n$ the projection of the first $n$ coordinates. By construction, $\pi(H) \supset S'$. Moreover, since $\left|S'\right|=\Omega_\delta(\left|\mathbb{F}_p^n\right|)$, 
+        Consider the graph $\Gamma = \{(h,\phi(h)) \mid h \in S\} \subset \mathbb{F}_p^n \times \widehat{\mathbb{F}_p^n}$. By Proposition \ref{prop4.15}, $\Gamma$ has $\Omega_\delta(\left|\mathbb{F}_p^n\right|)$ additive quadruples.
+        \vspace{1mm}
+         
+        By the Balog-Szemeredi-Gowers theorem (Theorem \ref{theorem2.15}), $\exists \Gamma' \subset \Gamma$ with $\left|\Gamma'\right|=\Omega_\delta(\left|\Gamma\right|) = \Omega_\delta(\left|\mathbb{F}_p^n\right|)$ and $\left|\Gamma'+\Gamma'\right| = O_{\delta}(\left|\Gamma'\right|)$. Define $S'$ through $\Gamma' = \{(h,\phi(h)) \mid h \in S'\}$ and note that $\left|S'\right| = \Omega_\delta(\left|\mathbb{F}_p^n\right|)$. 
+        \vspace{1mm}
+         
+        By the Freiman-Rusza theorem (Theorem \ref{theorem2.8}) applied to $\Gamma' \subset \mathbb{F}_p^n \times \widehat{\mathbb{F}_p^n}$, there exists a subspace $H \le \mathbb{F}_p^n \times \widehat{\mathbb{F}_p^n}$ with $\left|H\right| = O_\delta(\left|\Gamma\right|)=O_\delta(\left|\mathbb{F}_p^n\right|)$ such that $\Gamma' \subset H$. Denote by $\pi : \mathbb{F}_p^n \times \widehat{\mathbb{F}_p^n} \to \mathbb{F}_p^n$ the projection of the first $n$ coordinates. By construction, $\pi(H) \supset S'$. Moreover, as $\left|S'\right|=\Omega_\delta(\left|\mathbb{F}_p^n\right|)$ and $\text{Im}(\pi|_H) \supset S'$, 
         \begin{align*}
-            \left|\text{ker}(\pi|_H)\right| = \frac{\left|H\right|}{\left|\text{Im}(\pi|_H)\right|} \le \frac{O_\delta(\left|\mathbb{F}_p^n\right|)}{\left|S'\right|}=O_{\delta}(1).
+            \left|\text{ker}(\pi|_H)\right| = \frac{\left|H\right|}{\left|\text{Im}(\pi|_H)\right|} = O_{\delta}(1).
         \end{align*}
-        We may thus partition $H$ into $O_{\delta}(1)$ cosets of $H^* = \text{ker}(\pi|_H)$ such that $\pi$ is injective on each coset. By averaging, there exists a coset $x+H^*$ such that $\left|\Gamma' \cap (x +H^*)\right|=\Omega_\delta(\left|\Delta'\right|) = \Omega_\delta(\left|\mathbb{F}_p^n\right|)$. Set $\Gamma'' = \Gamma' \cap (x+H^*)$ and define $S''$ accordingly. Now $\pi|_{x+H^*}$ is both injective and surjective onto its image $V = \text{Im}(\pi|_{x+H^*})$. But this means that there exists an affine linear map $\psi : V \to \widehat{\mathbb{F}_p^n}$ such that $(h,\psi(h)) \in \Gamma'' ~\forall h \in S''$.
+        Let $H^*$ be the subspace obtained upon quotienting $H$ by said kernel. We may thus partition $H$ into $O_{\delta}(1)$ cosets of $H^*$ such that $\pi|_H$ is injective on each coset. By averaging, there exists a coset $x+H^*$ such that $\left|\Gamma' \cap (x +H^*)\right|=\Omega_\delta(\left|\Delta'\right|) = \Omega_\delta(\left|\mathbb{F}_p^n\right|)$. Set $\Gamma'' = \Gamma' \cap (x+H^*)$ and define $S''$ accordingly. Now $\pi|_{x+H^*}$ is both injective and surjective onto its image $V = \text{Im}(\pi|_{x+H^*})$. But this means that there exists an affine linear map $\psi : V \to \widehat{\mathbb{F}_p^n}$ such that $(h,\psi(h)) \in \Gamma'' ~\forall h \in S''$.
     \end{proof}
     \textbf{Step 3.} The symmetry argument (for $p>2$). Having obtained $\psi(x) = Mx+b$ for some matrix $M$ and vector $b$ such that $(h,Mh+b) \in \Gamma'' ~\forall h \in S''$, we need to turn $M$ into a symmetric matrix in preparation for Step 4.
     \vspace{1mm}
