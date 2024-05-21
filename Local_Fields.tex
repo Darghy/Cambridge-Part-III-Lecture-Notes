@@ -527,7 +527,7 @@ Let $(K, |\cdot|)$ be a non--archimedean valued field and $\pi \in \mathcal{O}_K
     The element $[a] \in \mathcal{O}_K$ is called the \textbf{Teichmüller lift} of $a$.
 \end{defn}
 \begin{lemma}
-    Let $(K,|\cdot|)$ be a complete discretely valued field\footnote{(do we need the residue field to be perfect here? lectures said let $(K,|\cdot|)$ be as in above theorem).} and fix $\pi \in \mathcal{O}_K$ a uniformizer. Let $x,y \in \mathcal{O}_K$ be such that $x \equiv y \pmod{\pi^k}$ for $k\ge 1$. Then $x^p \equiv y^p \pmod{\pi^{k+1}}$. 
+    Let $(K,|\cdot|)$ be a complete discretely valued field\footnote{(do we need the residue field to be perfect here? lectures said let $(K,|\cdot|)$ be as in above theorem). ANSWER: we need $\mathcal{O}_K/\mathfrak{m}$ to be of characteristic $p$, but not necessarily perfect.} and fix $\pi \in \mathcal{O}_K$ a uniformizer. Let $x,y \in \mathcal{O}_K$ be such that $x \equiv y \pmod{\pi^k}$ for $k\ge 1$. Then $x^p \equiv y^p \pmod{\pi^{k+1}}$. 
 \end{lemma}
 \begin{proof}
     Let $x = y + u\cdot \pi^k$ for some $u \in \mathcal{O}_K$. Then \begin{align*}
@@ -559,7 +559,7 @@ Let $(K, |\cdot|)$ be a non--archimedean valued field and $\pi \in \mathcal{O}_K
     \vspace{1mm}
     
     If $\text{char }K = p$, then $u_i+y_i$ is a lift of $a^{\frac{1}{p^i}}+b^{\frac{1}{p^i}} = \left(a+b \right)^{\frac{1}{p^i}}$. Then \[
-    [a+b] = \lim_{i \to \infty} (y_i+u_i)^{p^i} = \lim_{i \to \infty}y_i^{p^i} + u_i^{p_i} = \lim_{i \to \infty}x_i + z_i = [a] + [b].
+    [a+b] = \lim_{i \to \infty} (y_i+u_i)^{p^i} = \lim_{i \to \infty}y_i^{p^i} + u_i^{p^i} = \lim_{i \to \infty}x_i + z_i = [a] + [b].
     \]
     Finally, it is easy to check that $[0] = 0$ and $[1] = 1$ (take $y_i=0$ and $y_i=1$). So $[]$ is a ring homomorphism.
     \vspace{1mm}
@@ -580,7 +580,7 @@ More generally:
     Let $(K, |\cdot|)$ be a complete discretely valued field of characteristic $p > 0$. Assume $k = \mathcal{O}_K/\mathfrak{m}$ is perfect. Then $K \cong k((t))$.
 \end{theorem}
 \begin{proof}
-    Since $K = \text{Frac}(\mathcal{O}_K)$, it suffices to show that $\mathcal{O}_K \cong k[[t]]$. For this, fix $\pi \in \mathcal{O}_K$ a uniformizer and let $[]: k \to \mathcal{O}_K$ be the Teichmüller map. Define $\phi : k[[t]] \to \mathcal{O}_K$ by $\phi\left(\sum_{i=0}^{\infty} a_i t^i \right) = \sum_{i=0}^{\infty} a_i \pi^i$. Then $\phi$ is a ring homomorphism since $[]$ is a ring homomorphism, but it is also a bijection by Proposition 3.3.
+    Since $K = \text{Frac}(\mathcal{O}_K)$, it suffices to show that $\mathcal{O}_K \cong k[[t]]$. For this, fix $\pi \in \mathcal{O}_K$ a uniformizer and let $[]: k \to \mathcal{O}_K$ be the Teichmüller map. Define $\phi : k[[t]] \to \mathcal{O}_K$ by $\phi\left(\sum_{i=0}^{\infty} a_i t^i \right) = \sum_{i=0}^{\infty} [a_i] \pi^i$. Then $\phi$ is a ring homomorphism since $[]$ is a ring homomorphism, but it is also a bijection by Proposition 3.3.
 \end{proof}
 
 \section{Extensions of complete valued fields}
@@ -603,7 +603,7 @@ More generally:
     \item Let $X^n + a_{n-1}X^{n-1}+\ldots+a_0 \in K[X]$ be the minimal polynomial of $y \in L$. Then $N_{L/K}(y) = \pm a_0^m$ for some $m\ge 1$. In particular, $N_{L/K}(x)=0 \iff x = 0$.
 \end{itemize} 
 \begin{defn}
-    Let $(K,|\cdot|)$ be a nonarchimedean valued field and $V$ a vector spce over $K$. Then a \textbf{norm} on $V$ is a function $||\cdot || : V \to \mathbb{R}_{\ge 0}$ satisfying
+    Let $(K,|\cdot|)$ be a nonarchimedean valued field and $V$ a vector space over $K$. Then a \textbf{norm} on $V$ is a function $||\cdot || : V \to \mathbb{R}_{\ge 0}$ satisfying
     \begin{itemize}
         \item $||x|| = 0 \iff x = 0$.
         \item $||\lambda x|| = |\lambda| \cdot ||x|| ~\forall x \in V, \lambda \in K$.
@@ -643,7 +643,7 @@ More generally:
     For $n>1$, set $V_i = \langle e_1,\ldots,e_{i-1}, e_{i+1},\ldots,e_n \rangle$. By induction, the norm on $V_i$ is equivalent to the sup norm, so $V_i$ is complete with respect to $||\cdot||$, hence closed. Then the translate $e_i + V_i$ is also closed for all $i$, hence \[
     S = \bigcup_{i=1}^n e_i + V_i
     \]
-    is a closed subset not containing zero. Hence $\exists C > 0$ such that $S \cap B(0,C) = \varnothing$, where $B(0,c) = \{x \in V \mid ||x||<C\}$. We claim this $C$ works. To see this, let $0 \neq x = \sum_{i=1}^{n} x_ie_i$ and suppose $|x_j| = \max_i |x_i|$. Then $||x||_{\text{sup}} = |x_j|$ and $\frac{1}{x_j}x \in S$ (since the $j^{\text{th}}$ coefficient will be equal to 1). Thus $||\frac{1}{x_j}x||\ge C$, so $||x||\ge C |x_j| = C ||x||_{\text{sup}}$.
+    is a closed subset not containing zero. Hence $\exists C > 0$ such that $S \cap B(0,C) = \varnothing$, where $B(0,C) = \{x \in V \mid ||x||<C\}$. We claim this $C$ works. To see this, let $0 \neq x = \sum_{i=1}^{n} x_ie_i$ and suppose $|x_j| = \max_i |x_i|$. Then $||x||_{\text{sup}} = |x_j|$ and $\frac{1}{x_j}x \in S$ (since the $j^{\text{th}}$ coefficient will be equal to 1). Thus $||\frac{1}{x_j}x||\ge C$, so $||x||\ge C |x_j| = C ||x||_{\text{sup}}$.
     \vspace{1mm}
      
     Finally, $V$ is complete since it is complete with respect to $||\cdot||_{\text{sup}}$.
@@ -656,7 +656,7 @@ More generally:
         \item For this, we need some preparation:
     \end{enumerate}
     \begin{defn}
-        Let $R \subset S$ be a subring. We say $s \in S$ is \textbf{integral} over $R$ if $s$ is a root of a monic polynomial with coefficients in $R$, i.e. monic $f \in R[X]$ such that $f(s)=0$.
+        Let $R \subset S$ be a subring. We say $s \in S$ is \textbf{integral} over $R$ if $s$ is a root of a monic polynomial with coefficients in $R$, i.e. $\exists$ monic $f \in R[X]$ such that $f(s)=0$.
         \vspace{1mm}
          
         The \textbf{integral closure} $R^{\text{int}(S)}$ of $R$ in $S$ is the set of elements of $S$ that are integral over $R$, i.e. \[
@@ -682,7 +682,7 @@ More generally:
     Now we show (iii): Set $\mathcal{O}_L = \{y \in L \mid |y|_L \le 1\}$. We claim that $\mathcal{O}_L$ is the integral closure of $\mathcal{O}_K$ inside $L$. In particular, $\mathcal{O}_L$ is a subring of $L$. 
     \vspace{1mm}
      
-    Assuming this, let $x, y \in L$ and WLOG assume $|x|_L \le |y|_L$. Then we he $\left|\frac{x}{y}\right|_L\le 1 \implies \frac{x}{y} \in \mathcal{O}_L$. Since $\mathcal{O}_L$ is a ring, $1 \in \mathcal{O}_L$, so $1 + \frac{x}{y} \in \mathcal{O}_L$ and hence $\left|1 +\frac{x}{y}\right|_L \le 1$, so $|x+y|_L \le |y|_L = \max (|x|_L, |y|_L)$, giving the ultrametric inequality property.
+    Assuming this, let $x, y \in L$ and WLOG assume $|x|_L \le |y|_L$. Then we have $\left|\frac{x}{y}\right|_L\le 1 \implies \frac{x}{y} \in \mathcal{O}_L$. Since $\mathcal{O}_L$ is a ring, $1 \in \mathcal{O}_L$, so $1 + \frac{x}{y} \in \mathcal{O}_L$ and hence $\left|1 +\frac{x}{y}\right|_L \le 1$, so $|x+y|_L \le |y|_L = \max (|x|_L, |y|_L)$, giving the ultrametric inequality property.
 
     \marginpar{21 Oct 2022, Lecture 7}
     
@@ -692,10 +692,10 @@ More generally:
     $(\impliedby)$: This direction is clear.
     \vspace{1mm}
      
-    $(\implies )$: Let $g(x) \in \mathcal{O}_K[X]$ be monic such that $g(y)=0$. Then $f \mid g$ in $K[X]$ and hence every root of $f$ is a root of $g$. Hence every root of $f$ considered in $\overline{K}$ is integral over $\mathcal{O}_K$. Hence the $a_i$ are integral over $\mathcal{O}_K$ for $0\le i \le d-1$. Hence $a_i \in \mathcal{O}_K$ by a lemma from last time.
+    $(\implies )$: Let $g(x) \in \mathcal{O}_K[X]$ be monic such that $g(y)=0$. Then $f \mid g$ in $K[X]$ and hence every root of $f$ is a root of $g$. Hence every root of $f$ considered in $\overline{K}$ is integral over $\mathcal{O}_K$. Hence the $a_i$ are integral over $\mathcal{O}_K$ for $0\le i \le d-1$. Hence $a_i \in \mathcal{O}_K$ by a lemma from last time, proving our claim.
     \vspace{1mm}
      
-    By the corollary of the second version of Hensel's lemma, $|a_i|\le \max(|a_0|,1)$. By a property of the norm $N_{L/K}$, we have $N_{L/K}(y) = \pm a_0^m \in \mathcal{O}_K$. Hence $y \in \mathcal{O}_L \iff |N_{L/K}(y)|\le 1 \iff |a_0|\le 1$, so by our corollary this happens $\iff |a_i|\le 1~\forall i$, i.e. $a_i \in \mathcal{O}_K ~\forall i$, so $y$ is integral.
+    Now, by the corollary of the second version of Hensel's lemma, $|a_i|\le \max(|a_0|,1)$. By a property of the norm $N_{L/K}$, we have $N_{L/K}(y) = \pm a_0^m \in \mathcal{O}_K$. Hence $y \in \mathcal{O}_L \iff |N_{L/K}(y)|\le 1 \iff |a_0|\le 1$, so by our corollary this happens $\iff |a_i|\le 1~\forall i$, i.e. $a_i \in \mathcal{O}_K ~\forall i$, so $y$ is integral.
     \vspace{1mm}
      
     Since $N_{L/K}(x)=x^n$ for $x \in K$, $|x|_L$ extends $|\cdot|$ on $K$. If $|\cdot|_L'$ is another absolute value on $L$ extending $|\cdot|$, then $|\cdot|_L, |\cdot|_L'$ are norms on $L$, which are equivalent and hence induce the same topology on $L$, so $|\cdot|_L' = |\cdot|_L^c$ for some $c>0$. But since they both extend $|\cdot|$ on $K$, we must have $c=1$.
@@ -720,7 +720,7 @@ More generally:
     Let $(K, |\cdot|)$ be complete, nonarchimedean, and discretely valued and let $\overline{K}/K$ be the algebraic closure of $K$. Then $|\cdot|$ extends uniquely to an absolute value $|\cdot|_{\overline{K}}$ on $\overline{K}$.
 \end{cor}
 \begin{proof}
-    Let $x \in \overline{K}$, then $x \in L$ for some finite extension $L/K$. Define $|\cdot|_{\overline{K}} = |x|_L$. This is well--defined (i.e. independent of $L$) by uniqueness in Theorem \ref{theorem6.1} (for any $L,L'$, consider an extension containing both).
+    Let $x \in \overline{K}$, then $x \in L$ for some finite extension $L/K$. Define $|x|_{\overline{K}} = |x|_L$. This is well--defined (i.e. independent of $L$) by uniqueness in Theorem \ref{theorem6.1} (for any $L,L'$, consider an extension containing both).
     \vspace{1mm}
      
     The axioms for $|x|_{\overline{K}}$ to be an absolute value can be checked over finite extensions.
@@ -728,7 +728,7 @@ More generally:
      
     Uniqueness again follows from the finite case: if two absolute values disagree on some value, then consider a finite extension containing that value.
 \end{proof}
-\textbf{Remark.} $|\cdot|_{\overline{K}}$ on $\overline{K}$ is never discrete. For example, if $K = \mathbb{Q}_p$, then $\sqrt[n]{p} \in \overline{\mathbb{Q}_p}$ and $\forall n\ge 0$, $v_p(\sqrt[n]{p}) = \frac{1}{n}v_p(n) = \frac{1}{n}$, giving a non--discrete valuation. Furthermore, $\overline{\mathbb{Q}_p}$ is not complete with respect to $|\cdot |_{\overline{\mathbb{Q}}_p}$. Showing this is an exercise on example sheet 2. On the sheet we also show that if we take $\mathbb{C}_p$, the completion of $\overline{\mathbb{Q}_p}$ with respect to $|\cdot|_{\overline{\mathbb{Q}_p}}$, then $\mathbb{C}_p$ is algebraically closed.
+\textbf{Remark.} $|\cdot|_{\overline{K}}$ on $\overline{K}$ is never discrete. For example, if $K = \mathbb{Q}_p$, then $\sqrt[n]{p} \in \overline{\mathbb{Q}_p}$ and $\forall n\ge 0$, $v_p(\sqrt[n]{p}) = \frac{1}{n}v_p(p) = \frac{1}{n}$, giving a non--discrete valuation. Furthermore, $\overline{\mathbb{Q}_p}$ is not complete with respect to $|\cdot |_{\overline{\mathbb{Q}}_p}$. Showing this is an exercise on example sheet 2. On the sheet we also show that if we take $\mathbb{C}_p$, the completion of $\overline{\mathbb{Q}_p}$ with respect to $|\cdot|_{\overline{\mathbb{Q}_p}}$, then $\mathbb{C}_p$ is algebraically closed.
 
 \begin{prop}\label{prop6.8}
     Let $L/K$ is a finite extension of complete discretely valued fields with $n = [L:K]$. Assume that
@@ -745,13 +745,13 @@ More generally:
         \item $\exists \beta \in \mathcal{O}_K[\alpha]$ a uniformizer for $\mathcal{O}_L$.
         \item $\mathcal{O}_K[\alpha] \to k_L$ is surjective.
     \end{enumerate}
-    First note that $k_L/k$ is separable, so $\exists \overline{\alpha} \in k$ such that $k_L = k(\overline{\alpha})$. Let $\alpha \in \mathcal{O}_L$ be a lift of $\overline{\alpha}$ and $g(X) \in \mathcal{O}_K[X]$ a monic lift of the minimal polynomial of $\overline{\alpha}$. Also fix $\pi_L \in \mathcal{O}_L$ a uniformizer. Then $\overline{g}(X) \in k[X]$ is irreducible and separable, so $\overline{\alpha}$ is a simple root of $\overline{g}$, so $g(\alpha) \equiv 0 \pmod{\pi_L}$ and $g'(\alpha) \not\equiv 0 \pmod{\pi_L}$.
+    First note that $k_L/k$ is separable, so $\exists \overline{\alpha} \in k_L$ such that $k_L = k(\overline{\alpha})$. Let $\alpha \in \mathcal{O}_L$ be a lift of $\overline{\alpha}$ and $g(X) \in \mathcal{O}_K[X]$ a monic lift of the minimal polynomial of $\overline{\alpha}$. Also fix $\pi_L \in \mathcal{O}_L$ a uniformizer. Then $\overline{g}(X) \in k[X]$ is irreducible and separable, so $\overline{\alpha}$ is a simple root of $\overline{g}$, so $g(\alpha) \equiv 0 \pmod{\pi_L}$ and $g'(\alpha) \not\equiv 0 \pmod{\pi_L}$.
     \vspace{1mm}
      
     If $g(\alpha) \equiv  0 \pmod{\pi_L^2}$, then \[
     g(\alpha + \pi_L) \equiv  g(\alpha) + \pi_L g'(\alpha) \pmod{\pi_L^2}.
     \]
-    Thus $v_L(g(\alpha+\pi_L)) = v_L(\pi_Lg'(\alpha)) = v_L(\pi) = 1$ for $v_L$ the normalized valuation on $L$. Hence either $v_L(g(\alpha))= 1$ or $v_L(\gamma(\alpha+\pi_L)) = 1$. Possibly replacing $\alpha$ by $\alpha + \pi_L$, we may assume that $g(\alpha)$ is a uniformizer, i.e. $v_L(g(\alpha)) = 1$.
+    Thus $v_L(g(\alpha+\pi_L)) = v_L(\pi_Lg'(\alpha)) = v_L(\pi) = 1$ for $v_L$ the normalized valuation on $L$. Hence either $v_L(g(\alpha))= 1$ or $v_L(g(\alpha+\pi_L)) = 1$. Possibly replacing $\alpha$ by $\alpha + \pi_L$, we may assume that $g(\alpha)$ is a uniformizer, i.e. $v_L(g(\alpha)) = 1$.
     \vspace{1mm}
      
     Now set $\beta = g(\alpha) \in \mathcal{O}_K[\alpha]$, a uniformizer. Then $\mathcal{O}_K[\alpha] \subset L$ is the image of a continuous map $\mathcal{O}_K^n \to L$ given by $(x_0,\ldots,x_{n-1}) \mapsto \sum_{i=0}^{n-1} x_i \alpha^i$. Since $\mathcal{O}_K$ is compact, $\mathcal{O}_K[\alpha]$ is compact, hence closed.
@@ -819,7 +819,7 @@ More on inverse limits: Again let $(A_n)_{n=1}^{\infty}$ be a sequence of sets/g
     Let $K$ be a nonarchimedean local field and $L/K$ a finite extension. Then $L$ is a local field.
 \end{lemma}
 \begin{proof}
-    Theorem \ref{theorem6.1} shows that $L$ is complete and discretely valued, so it suffices to show that $k_L = \mathcal{O}_L/\mathfrak{m}_L$ is finite. Let $\alpha_1,\ldots,\alpha_n \in L$ be a basis for $L$ as a $K$--vector space. Then $||\cdot||_{\text{sup}}$, the sup norm, is equivalent to $|\cdot|_L$, so there exists $r>0$ such that $\mathcal{O}_L \subset \{x \in L \mid ||x||_{\text{sup}} \le r\}$. Then take $a \in K$ such that $|a|\ge r$, then $\mathcal{O}_L \subset \bigoplus_{i=1}^n a \alpha_i \mathcal{O}_K \subset L$. But this is a finitely generated module over a PID, hence noetherian, so $\mathcal{O}_L$ is finitely generated as an $\mathcal{O}_K$--module, so $k_L$ is finitely generated over $k$.
+    Theorem \ref{theorem6.1} shows that $L$ is complete and discretely valued, so it suffices to show that $k_L = \mathcal{O}_L/\mathfrak{m}_L$ is finite. Let $\alpha_1,\ldots,\alpha_n \in L$ be a basis for $L$ as a $K$--vector space. Then $||\cdot||_{\text{sup}}$, the sup norm, is equivalent to $|\cdot|_L$, so there exists $r>0$ such that $\mathcal{O}_L \subset \{x \in L \mid ||x||_{\text{sup}} \le r\}$. Then take $a \in K$ such that $|a|\ge r$, then $\mathcal{O}_L \subset \bigoplus_{i=1}^n a \alpha_i \mathcal{O}_K \subset L$. But this is a finitely generated module over a PID, hence Noetherian, so $\mathcal{O}_L$ is finitely generated as an $\mathcal{O}_K$--module, so $k_L$ is finitely generated over $k$.
 \end{proof}
 \begin{defn}
     A nonarchimedean valued field $(K, |\cdot|)$ has \textbf{equal characteristic} if $\text{char}(K) = \text{char}(k)$. Otherwise, $K$ has \textbf{mixed characteristic}.
@@ -829,7 +829,7 @@ More on inverse limits: Again let $(A_n)_{n=1}^{\infty}$ be a sequence of sets/g
 \end{example}
 It turns out equal characteristic local fields are very easy to classify:
 \begin{theorem}
-    Let $K$ be a nonarchimedean local field of equal characteristic $p>0$.\footnote{Note the residue field of an an equal characteristic nonarchimedean local field is finite, so the characteristic must be positive.} Then \[
+    Let $K$ be a nonarchimedean local field of equal characteristic $p>0$.\footnote{Note the residue field of an equal characteristic nonarchimedean local field is finite, so the characteristic must be positive.} Then \[
     K \cong \mathbb{F}_{p^n}((t))
     \]
     for some $n\ge 1$.
@@ -841,14 +841,14 @@ It turns out equal characteristic local fields are very easy to classify:
     An absolute value $|\cdot|$ on a field $K$ is nonarchimedean $\iff$ $|n|$ is bounded $\forall n \in \mathbb{Z}$.
 \end{lemma}
 \begin{proof}
-    ($\implies $): Since $|-1|=|1|$, $|-n|=|n|$. Thus it suffices to show that $|n|$ is bounded for $n\ge 1$, but $|n| = |1| + \ldots |1| \le |1| = 1$ by the ultrametric inequality.
+    ($\implies $): Since $|-1|=|1|$, $|-n|=|n|$. Thus it suffices to show that $|n|$ is bounded for $n\ge 1$, but $|n| = |1| + \ldots +|1| \le |1| = 1$ by the ultrametric inequality.
     \vspace{1mm}
      
     ($\impliedby$): Suppose $|n|\le B~\forall n \in \mathbb{Z}$. Take $x,y \in K$ with $|x|\le |y|$. Then we have 
     \begin{align*}
         |x+y|^m = \left|\sum_{i=0}^{m} {m\choose i}x^i y^{m-i}\right| \le \sum_{i=0}^{m} \left|{m\choose i}x^i y^{m-i}\right| \le |y|^m B (m+1).
     \end{align*}
-    Take $n^{\text{th}}$ roots to get $|x+y|\le |y|\sqrt[n]{B(m+1)} \stackrel{n \to \infty}{\to} |y| = \max(|x|,|y|)$.
+    Take $m^{\text{th}}$ roots to get $|x+y|\le |y|\sqrt[n]{B(n+1)} \stackrel{n \to \infty}{\to} |y| = \max(|x|,|y|)$.
 \end{proof}
 
 \marginpar{26 Oct 2022, Lecture 9}
@@ -877,7 +877,7 @@ It turns out equal characteristic local fields are very easy to classify:
     $K$ has mixed characteristic $\implies \text{char}(K) = 0 \implies \mathbb{Q} \subset K$. Also, $K$ is nonarchimedean $\implies |\cdot| |_{\mathbb{Q}} \sim |\cdot|_p$ for some $p$. Since $K$ is complete, $\mathbb{Q}_p \subset K$. Hence it suffices to show that $\mathcal{O}_K$ is finite as a $\mathbb{Z}_p$--module.
     \vspace{1mm}
      
-    Let $\pi \in \mathcal{O}_K$ be a uniformizer and $v$ a normalized valuation on $K$. Set $v(p) = e$. Then $\mathcal{O}_K/p \mathcal{O}_K \cong \mathcal{O}_K/\pi^e \mathcal{O}_K$, which is finite (since $\pi^i \mathcal{O}_K/\pi^{i+1}\mathcal{O}_K \cong k$ is finite). $\mathbb{F}_p = \mathbb{Z}_p/ \mathbb{Z}_p \hookrightarrow \mathcal{O}_K/p\mathcal{O}_K$, so $\mathcal{O}_K/p \mathcal{O}_K$ is a finite--dimensional vector space over $\mathbb{F}_p$. Let $x_1,\ldots,x_n \in \mathcal{O}_K$ be coset representatives for the $\mathbb{F}_p$--basis of $\mathcal{O}_K/p \mathcal{O}_K$. Then \[
+    Let $\pi \in \mathcal{O}_K$ be a uniformizer and $v$ a normalized valuation on $K$. Set $v(p) = e$. Then $\mathcal{O}_K/p \mathcal{O}_K \cong \mathcal{O}_K/\pi^e \mathcal{O}_K$, which is finite (since $\pi^i \mathcal{O}_K/\pi^{i+1}\mathcal{O}_K \cong k$ is finite). $\mathbb{F}_p = \mathbb{Z}_p/ p\mathbb{Z}_p \hookrightarrow \mathcal{O}_K/p\mathcal{O}_K$, so $\mathcal{O}_K/p \mathcal{O}_K$ is a finite--dimensional vector space over $\mathbb{F}_p$. Let $x_1,\ldots,x_n \in \mathcal{O}_K$ be coset representatives for the $\mathbb{F}_p$--basis of $\mathcal{O}_K/p \mathcal{O}_K$. Then \[
     \left\{\sum_{i=1}^{n} a_j x_j \mid a_j \in \{0,\ldots,p-1\}\right\}
     \] gives a set of coset representatives for $\mathcal{O}_K/p\mathcal{O}_K$.
     \vspace{1mm}
@@ -926,7 +926,7 @@ In summary, if $K$ is a local field, then either:
 \end{prop}
 Informally, ''nearby'' polynomials define the same extension.
 \begin{proof}
-    Let $\alpha=\alpha_1,\alpha_2,\ldots,a_n \in \overline{K}$ be the roots of $f$, which are distinct. Then $f'(\alpha_1) \neq 0$. We choose $\epsilon$ such that $|g(\alpha_1)|<|f'(\alpha_1)|^2$ and $|f'(\alpha_1) - g'(\alpha_1)| < |f'(\alpha_1)|$. Then  $|g(\alpha_1)| < |f'(\alpha_1)^2| = |g'(\alpha_1)^2|$ (as all triangles are isosceles). By Hensel's lemma applied to the field $K(\alpha_1)$, there exists $\beta \in K(\alpha_1)$ such that $g(\beta)=0$ and $|\beta-\alpha_1|<|g'(\alpha_1)|$. But $|g'(\alpha_1)| = |f'(\alpha_1)| = \prod_{i=2}^{n} |\alpha_1-\alpha_i| \le |\alpha_1 - \alpha_i|$ for $2\le i\le n$ (using $|\alpha_1-\alpha_i|\le 1$ since $\alpha_i$ is integral as $f$ is monic). Since $|\beta-\alpha_1|<|\alpha_1-\alpha_i| = |\beta-\alpha_i|$ (again by isosceles condition), Krasner's lemma tells us that $\alpha \in K(\beta)$ and so $K(\alpha)=K(\beta)$.
+    Let $\alpha=\alpha_1,\alpha_2,\ldots,a_n \in \overline{K}$ be the roots of $f$, which are distinct. Then $f'(\alpha_1) \neq 0$. We choose $\epsilon$ such that any $g$ satisfying the conditions has $|g(\alpha_1)|<|f'(\alpha_1)|^2$ and $|f'(\alpha_1) - g'(\alpha_1)| < |f'(\alpha_1)|$. Then  $|g(\alpha_1)| < |f'(\alpha_1)^2| = |g'(\alpha_1)^2|$ (as all triangles are isosceles). By Hensel's lemma applied to the field $K(\alpha_1)$, there exists $\beta \in K(\alpha_1)$ such that $g(\beta)=0$ and $|\beta-\alpha_1|<|g'(\alpha_1)|$. But $$|g'(\alpha_1)| = |f'(\alpha_1)| = \prod_{i=2}^{n} |\alpha_1-\alpha_i| \le |\alpha_1 - \alpha_i|$$ for $2\le i\le n$ (using $|\alpha_1-\alpha_i|\le 1$ since $\alpha_i$ is integral as $f$ is monic). Since $|\beta-\alpha_1|<|\alpha_1-\alpha_i| = |\beta-\alpha_i|$ (again by isosceles condition), Krasner's lemma tells us that $\alpha \in K(\beta)$ and so $K(\alpha)=K(\beta)$.
 \end{proof}
 \marginpar{29 Oct 2022, Lecture 10}
 \begin{theorem}
@@ -1022,7 +1022,7 @@ If $\mathfrak{p}$ is a prime ideal in $R$, we write $R_{(\mathfrak{p})}$ for the
 \begin{example}
     If $R = \mathbb{Z}$ and $\mathfrak{p} = (p)$, then $v_p$ is the $p$--adic valuation.
 \end{example}
-\begin{theorem}
+\begin{theorem}\label{theorem9.5}
     Let $R$ be a Dedekind domain. Then every nonzero prime ideal $R$ can be written uniquely as a product of prime ideals.
 \end{theorem}
 \textbf{Remark.} This is clear for PIDs (as PID $\implies $ UFD).
@@ -1035,7 +1035,7 @@ If $\mathfrak{p}$ is a prime ideal in $R$, we write $R_{(\mathfrak{p})}$ for the
             \mathfrak{p}_2 R_{(\mathfrak{p}_2)} & \mathfrak{p}_1 = \mathfrak{p}_2.
         \end{cases}$
     \end{enumerate}
-    Let $I \subset R$ be a nonzero ideal. Then by Lemma \ref{lemma9.2} there exist distinct prime ideals $\mathfrak{p}_1,\ldots,\mathfrak{p}_r$ such that $\mathfrak{p}_1^{\beta_1}\ldots \mathfrak{p}_r^{\beta_r} \subset I$, where $\beta_i > 0$. Let $0 \neq \mathfrak{p}$ be a prime ideal, $\mathfrak{p} \not\in \{\mathfrak{p_1},\ldots,\mathfrak{p}_r\}$. Then by (ii), $\mathfrak{p}_i R_{(\mathfrak{p})} = R_{(\mathfrak{p})}$ and hence $IR_{(\mathfrak{p})} = IR_{(\mathfrak{p})}$.
+    Let $I \subset R$ be a nonzero ideal. Then by Lemma \ref{lemma9.2} there exist distinct prime ideals $\mathfrak{p}_1,\ldots,\mathfrak{p}_r$ such that $\mathfrak{p}_1^{\beta_1}\ldots \mathfrak{p}_r^{\beta_r} \subset I$, where $\beta_i > 0$. Let $0 \neq \mathfrak{p}$ be a prime ideal, $\mathfrak{p} \not\in \{\mathfrak{p_1},\ldots,\mathfrak{p}_r\}$. Then by (ii), $\mathfrak{p}_i R_{(\mathfrak{p})} = R_{(\mathfrak{p})}$ and hence $IR_{(\mathfrak{p})} = R_{(\mathfrak{p})}$.
     \vspace{1mm}
      
     By Corollary \ref{cor9.4}, $I R_{(\mathfrak{p}_i)} = (\mathfrak{p}_i R_{(\mathfrak{p}_i)})^{\alpha_i} = \mathfrak{p}_i^{\alpha_i}R_{(\mathfrak{p}_i)}$ for some $0\le \alpha_i \le \beta_i$. Thus $I = \mathfrak{p}_1^{\alpha_1} \ldots \mathfrak{p}_r^{\alpha_r}$ by (i).
@@ -1122,7 +1122,7 @@ Let $K$ be a number field. If $\sigma : K \twoheadrightarrow \mathbb{R}, \mathbb
     Case 2: $|\cdot|$ is archimedean. This is an exercise on example sheet 2.
 \end{proof}
 \subsection{Completions}
-Let $\mathcal{O}_K$ be a Dedekind domain and $L/K$ a finite separable extension.Let $\mathfrak{p} \subset \mathcal{O}_K, \mathcal{P} \subset \mathcal{O}_L$ be nonzero prime ideals with $\mathcal{P} \mid  \mathfrak{p}$. We write $K_{\mathfrak{p}}$ and $L_{\mathcal{P}}$ for the completions of $K$ and $L$ with respect to the absolute values $|\cdot|_{\mathfrak{p}}$ and $|\cdot|_{\mathcal{P}}$ respectively.
+Let $\mathcal{O}_K$ be a Dedekind domain and $L/K$ a finite separable extension. Let $\mathfrak{p} \subset \mathcal{O}_K, \mathcal{P} \subset \mathcal{O}_L$ be nonzero prime ideals with $\mathcal{P} \mid  \mathfrak{p}$. We write $K_{\mathfrak{p}}$ and $L_{\mathcal{P}}$ for the completions of $K$ and $L$ with respect to the absolute values $|\cdot|_{\mathfrak{p}}$ and $|\cdot|_{\mathcal{P}}$ respectively.
 
 \begin{lemma}\label{lemma10.7}
     \begin{enumerate}[(i)]
@@ -1131,7 +1131,7 @@ Let $\mathcal{O}_K$ be a Dedekind domain and $L/K$ a finite separable extension.
     \end{enumerate}
 \end{lemma}
 \begin{proof}
-    Let $M = \text{Im}(\Pi_p) = LK_{\mathfrak{P}} \subset L_\mathcal{P}$. Write $L = K(\alpha)$, so $M = K_{\mathfrak{p}}(\alpha)$. Hence $M$ is a finite extension of $K_{\mathfrak{p}}$ and $[M:K_{\mathfrak{p}}]\le [L:K]$. Moreover, $M$ is complete (by Theorem \ref{theorem6.1}) and $L \subset M \subset L_{\mathcal{P}}$, hence $M = L_{\mathcal{P}}$, so both results follow.
+    Let $M = \text{Im}(\Pi_p) = LK_{\mathfrak{p}} \subset L_\mathcal{P}$. Write $L = K(\alpha)$, so $M = K_{\mathfrak{p}}(\alpha)$. Hence $M$ is a finite extension of $K_{\mathfrak{p}}$ and $[M:K_{\mathfrak{p}}]\le [L:K]$. Moreover, $M$ is complete (by Theorem \ref{theorem6.1}) and $L \subset M \subset L_{\mathcal{P}}$, hence $M = L_{\mathcal{P}}$, so both results follow.
 \end{proof}
 \begin{lemma}[CRT for commutative rings]
     Let $R$ be a ring and $I_1,\ldots,I_n \subset R$ be ideals such that $I_i + I_j = R ~\forall i \neq j$ (i.e. the ideals are pairwise coprime). Then:
@@ -1159,7 +1159,7 @@ Let $\mathcal{O}_K$ be a Dedekind domain and $L/K$ a finite separable extension.
     \end{enumerate}
     To prove these:
     \begin{enumerate}[(i)]
-        \item Since $[L_i : K_{\mathfrak{p}}]<\infty$, there is a unique absolute value $|\cdot|$ on $L_i$ extending $|\cdot|_{\mathfrak{p}}$ on $K_{\mathfrak{p}}$. Then Theorem \ref{theorem10.5} implies that $|\cdot| |_{L}$ is equivalent to $|\cdot|_{\mathcal{P}}$ for some $\mathcal{P} \mid \mathfrak{p}$. Since $L$ is dense in $L_i$ and $L_i$ is complete, we must have $L = L_{\mathcal{P}}$.
+        \item Since $[L_i : K_{\mathfrak{p}}]<\infty$, there is a unique absolute value $|\cdot|$ on $L_i$ extending $|\cdot|_{\mathfrak{p}}$ on $K_{\mathfrak{p}}$. Then Theorem \ref{theorem10.5} implies that $|\cdot|_{L_i}$ is equivalent to $|\cdot|_{\mathcal{P}}$ for some $\mathcal{P} \mid \mathfrak{p}$. Since $L$ is dense in $L_i$ and $L_i$ is complete, we must have $L = L_{\mathcal{P}}$.
         \item Suppose $\phi : L_i \to L_j$ is an isomorphism preserving $L$ and $K_{\mathfrak{p}}$. Then $\phi: K_{\mathfrak{p}}[X]/f_i(X) \to K_{\mathfrak{p}}[X]/f_j(X)$ takes $X$ to $X$ and hence $f_i(X) = f_j(X) \implies i = j$.
         \item By Lemma \ref{lemma10.7}, the natural map $\Pi_p : L \otimes_K K_{\mathfrak{p}} \to L_\mathcal{P}$ is surjective for any $\mathcal{P} \mid  \mathfrak{p}$. Since $L_\mathcal{P}$ is a field, $\Pi_p$ factors through $L_i$ for some $i$ and hence $L_i \cong L_{\mathcal{P}}$ by surjectivity.
     \end{enumerate}
@@ -1172,7 +1172,7 @@ Let $\mathcal{O}_K$ be a Dedekind domain and $L/K$ a finite separable extension.
 \marginpar{04 Nov 2022, Lecture 13}
 
 \begin{cor}\label{cor10.10}
-    Take $0 \neq \mathfrak{p} \subset \mathcal{O}_K$ a prime ideal. For $x \in L$, $$N_{L/K}(x) = \prod_{\mathcal{P} \mid  \mathfrak{p}}^{} N_{L_{\mathcal{P}/K_{\mathfrak{p}}}}(x).$$
+    Take $0 \neq \mathfrak{p} \subset \mathcal{O}_K$ a prime ideal. For $x \in L$, $$N_{L/K}(x) = \prod_{\mathcal{P} \mid  \mathfrak{p}}^{} N_{L_{\mathcal{P}}/K_{\mathfrak{p}}}(x).$$
 \end{cor}
 \begin{proof}
     Let $B_1,\ldots,B_r$ be a basis for $L_{\mathcal{P}_1},\ldots, L_{\mathcal{P}_r}$ as $K_{\mathfrak{p}}$--vector spaces (here $\mathfrak{p}\mathcal{O}_L = \mathcal{P}_1^{e_1}\ldots \mathcal{P}_r^{e_r}$). Then $B = \bigcup_{i} B_i$ is a basis for $L \otimes_K K_{\mathfrak{p}}$ over $K_{\mathfrak{p}}$. Let $[\text{mult}(x)]_{B}$ (respectively $\text{mult}(x)_{B_i}$) denote the matrix for the multiplication by $x$ map $\text{mult}(x) : L \otimes_K K_{\mathfrak{p}} \to L \otimes_K K_{\mathfrak{p}}$ (respectively $L_{\mathcal{P}_i} \to L_{\mathcal{P}_i}$) with respect to $B$ (respectively the $B_i$). Then we get a block matrix
@@ -1214,7 +1214,7 @@ As before, let us work over a finite separable Dedekind domain. Let $\mathfrak{p
     Let $S = \mathcal{O}_K/\mathfrak{p}$. The following properties of localization are left as an exercise:
     \begin{enumerate}[(1)]
         \item $S^{-1}\mathcal{O}_L$ is the integral closure of $S^{-1}\mathcal{O}_K$ in $L$.
-        \item $S^{-1}\mathfrak{p} s^{-1}\mathcal{O}_L \cong S^{-1} \mathcal{P}_1^{e_1}\ldots S^{-1}\mathcal{P}_r^{e_r}$.
+        \item $S^{-1}\mathfrak{p} S^{-1}\mathcal{O}_L \cong S^{-1} \mathcal{P}_1^{e_1}\ldots S^{-1}\mathcal{P}_r^{e_r}$.
         \item $S^{-1}\mathcal{O}_L/S^{-1}\mathcal{P}_i \cong \mathcal{O}_L/\mathcal{P}_i$ and $S^{-1}\mathcal{O}_K/S^{-1}\mathfrak{p} \cong \mathcal{O}_K/\mathfrak{p}$.
     \end{enumerate}
     In particular, (2) and (3) imply that $e_i, f_i$ don't change when we replace $\mathcal{O}_K$ and $\mathcal{O}_L$ by $S^{-1}\mathcal{O}_K$ and $S^{-1}\mathcal{O}_L$. Thus we may assume that $\mathcal{O}_K$ is a DVR (and hence a PID). By CRT, we have $$\mathcal{O}_L/\mathfrak{p}\mathcal{O}_L \cong \prod_{i=1}^{r} \mathcal{O}_L/\mathcal{P}_i^{e_i}.$$ Now it suffices to count dimensions on both sides as $k=\mathcal{O}_K/\mathfrak{p}$--vector spaces.
@@ -1256,7 +1256,7 @@ Now assume $[L:K]$ is Galois. Then for any $\sigma \in \text{Gal}(L/K)$, $\sigma
 \end{proof}
 If $L/K$ is an extension of complete discretely valued fields with normalized valuations $v_L$ and $v_K$ with uniformizers $\pi_L$, $\pi_K$, then the ramification index is $e = e_{L/K} = v_L(\pi_K)$ (i.e. $\pi_K \mathcal{O}_L = \pi_L^e \mathcal{O}_L$). The residue class degree is $f = f_{L/K} = [k_L:k]$.
 \begin{cor}\label{cor11.4}
-    Let $L/K$ be finite and separable. Then $[L:K] = ef$.
+    Let $L/K$ be finite and separable. Then $[L:K] = ef$. \footnote{I think this should instead read "with $L/K$ as in the setup above, $[L:K] = ef$".}
 \end{cor}
 \textbf{Remark.} This corollary holds even if $L/K$ is not separable.
 
@@ -1281,13 +1281,13 @@ By Proposition \ref{prop11.2}, for any $\mathcal{P}, \mathcal{P}'$ dividing $\ma
 \end{prop}
 \begin{proof}
     \begin{enumerate}[(i)]
-        \item $L/K$ is Galois, so $L$ is the splitting field of a separable polynomial $f(X) \in K[X]$. Then $L_{\mathcal{P}}$ is the splitting field of $f(X)$ over $K_{\mathfrak{p}}[X]$. Hence $L_{\mathcal{P}}/\mathfrak{p}$ is Galois.
+        \item $L/K$ is Galois, so $L$ is the splitting field of a separable polynomial $f(X) \in K[X]$. Then $L_{\mathcal{P}}$ is the splitting field of $f(X)$ over $K_{\mathfrak{p}}[X]$. Hence $L_{\mathcal{P}}/K_\mathfrak{p}$ is Galois.
         \item Let $\sigma \in \text{Gal}(L_{\mathcal{P}}/K_{\mathfrak{p}})$. Then $\sigma(L)=L$ since $L/K$ is normal. Hence we have a map $\text{res}: \text{Gal}(L_{\mathcal{P}}/K_{\mathfrak{p}}) \to \text{Gal}(L/K)$ by $\sigma \mapsto \sigma|_L$. Since $L$ is dense in $L_{\mathcal{P}}$, $\text{res}$ is injective. By Lemma \ref{lemma8.1}, $|\sigma(x)|_\mathcal{P}=|x|_{\mathcal{P}}~\forall \sigma \in \text{Gal}(L_{\mathcal{P}}/K_{\mathfrak{p}}), x \in L_{\mathcal{P}}$. Hence $\sigma(\mathcal{P}) = \mathcal{P} ~\forall \sigma \in \text{Gal}(L_{\mathcal{P}}/K_{\mathfrak{p}})$ and thus $\text{res}(\sigma) \in G_{\mathcal{P}}~\forall \sigma \in \text{Gal}(L_{\mathcal{P}}/K_{\mathfrak{p}})$. 
         \vspace{1mm}
          
         To show injectivity, it suffices to show that $[L_{\mathcal{P}}: K_{\mathfrak{p}}] = ef = |G_{\mathcal{P}}|$.
         \begin{itemize}
-            \item $|G_{\mathcal{P}}|=ef$ follows from Proposition \ref{prop11.2}, corollary \ref{cor11.3} and the orbit--stabilizer theorem.
+            \item $|G_{\mathcal{P}}|=ef$ follows from Proposition \ref{prop11.2}, Corollary \ref{cor11.3} and the orbit--stabilizer theorem.
             \item $[L_{\mathcal{P}}:K_{\mathfrak{p}}]=ef$ follows from Corollary \ref{cor11.4}, noting that $e$ and $f$ don't change when we take completions.
         \end{itemize}
     \end{enumerate}
@@ -1320,7 +1320,7 @@ If $x_1,\ldots,x_n \in \mathcal{O}_L$, then $\Delta(x_1,\ldots,x_n) \in \mathcal
 \begin{proof}
     \begin{enumerate}[(i)]
         \item Let $\mathfrak{p}\mathcal{O}_L = \mathcal{P}_1^{e_1}\ldots \mathcal{P}_r^{e_r}$ with the $\mathcal{P}_i$ distinct and $e_i > 0$. CRT implies that \[
-        R = \mathcal{O_L}/\mathfrak{p}\mathcal{O}_L \cong \prod_{i=1}^{r} \mathcal{O}_L/\mathcal{P}_i^{e_i}.
+        R := \mathcal{O}_L/\mathfrak{p}\mathcal{O}_L \cong \prod_{i=1}^{r} \mathcal{O}_L/\mathcal{P}_i^{e_i}.
         \]
         If $\mathfrak{p}$ ramifies in $L$, then $\mathcal{O}_L/\mathfrak{p}\mathcal{O}_L$ has nilpotent elements. By Lemma \ref{lemma12.1}, the trace form $\text{Tr}_{R/k}$ (for $k$ the residue field at $\mathfrak{p}$) is degenerate, so $\Delta(\overline{x_1},\ldots,\overline{x_n}) = 0 ~\forall \overline{x_i} \in \mathcal{O}_L/\mathfrak{p}\mathcal{O}_L$. Hence $\Delta(x_1,\ldots,x_n) \equiv 0 \pmod{\mathfrak{p}}$ for any $x_1,\ldots,x_n \in \mathcal{O}_L$ through the commutativity of the diagram 
         $\begin{tikzcd}[]
@@ -1357,7 +1357,7 @@ If $x_1,\ldots,x_n \in \mathcal{O}_L$, then $\Delta(x_1,\ldots,x_n) \in \mathcal
     Hence $\lambda_i \in \frac{1}{d}\mathcal{O}_K$, so $x \in \frac{1}{_L} \mathcal{O}_L$, so $D^{-1}_{L/K} \subset \frac{1}{d}\mathcal{O}_L$, so $D^{-1}_{L/K}$ is a fractional ideal.
     \vspace{1mm}
      
-    Finally, $\text{Tr}(x) \in \mathcal{O}_K ~\forall \in \mathcal{O}_L$, so $\mathcal{O}_L \subset D^{-1}_{L/K}$.
+    Finally, $\text{Tr}(x) \in \mathcal{O}_K ~\forall x \in \mathcal{O}_L$, so $\mathcal{O}_L \subset D^{-1}_{L/K}$.
 \end{proof}
 \begin{defn}
     The inverse $D_{L/K} \subset \mathcal{O}_L$ of $D^{-1}_{L/K}$ is the \textbf{different ideal}.
@@ -1365,13 +1365,13 @@ If $x_1,\ldots,x_n \in \mathcal{O}_L$, then $\Delta(x_1,\ldots,x_n) \in \mathcal
 
 \marginpar{09 Nov 2022, Lecture 15}
 
-Let $L/K$ be a degree $n$ extension of number fields, and let $I_L, I_K$ be the groups of fractional ideals. Then (todo: lectures said Proposition 9.7 -- I think that corresponds to Theorem 9.5 in my notes?) Proposition 9.7 gives us that 
+Let $L/K$ be a degree $n$ extension of number fields, and let $I_L, I_K$ be the groups of fractional ideals. Then Theorem \ref{theorem9.5} gives us that 
 \begin{align*}
-    &I_L \cong \bigoplus_{\substack{0 \neq \mathfrak{p}\\\mathfrak{p} \text{ prime ideal in }\mathcal{O}_L}} \mathbb{Z} \\
-    &I_K \cong \bigoplus_{\substack{0 \neq \mathfrak{p}\\\mathfrak{p} \text{ prime ideal in }\mathcal{O}_K}} \mathbb{Z}.
+    &I_L \cong \bigoplus_{\substack{0 \neq \mathfrak{p}\\\mathfrak{p} \text{ prime ideal in }\mathcal{O}_L}} \mathfrak{p} \\
+    &I_K \cong \bigoplus_{\substack{0 \neq \mathfrak{p}\\\mathfrak{p} \text{ prime ideal in }\mathcal{O}_K}} \mathfrak{p}.
 \end{align*}
 
-Define $N_{L/K}: I_L \to I_K$ induced by $\mathcal{P} \mapsto \mathfrak{p}^f$ for $\mathfrak{p} = \mathcal{P} \cap \mathcal{O}_K$ and $f = f(\mathcal{P}/\mathfrak{p})$. Then it is a fact that the following diagram commutes: $\begin{tikzcd}[]
+Define $N_{L/K}: I_L \to I_K$ induced by $\mathcal{P} \mapsto \mathfrak{p}^f$ for $\mathfrak{p} = \mathcal{P} \cap \mathcal{O}_K$ and $f = f_{\mathcal{P}/\mathfrak{p}}$. Then it is a fact that the following diagram commutes: $\begin{tikzcd}[]
     L^{\times} & I_L\\
     K^{\times} & I_K
     \arrow["", from=1-1, to=1-2]
@@ -1396,7 +1396,7 @@ One way to see this is to use Corollary \ref{cor10.10} and $v_{\mathfrak{p}}(N_{
     Thus $d_{L/K}^{-1} = N_{L/K}(D_{L/K}^{-1})^2 d_{L/K}$, so $N_{L/K}(D_{L/K})=d_{L/K}$.
     \vspace{1mm}
      
-    In general, localize at $S = \mathcal{O}_K/\mathfrak{p}$ and note that localizing $\mathcal{O}_K$ gives a DVR (hence a PID), localizing $\mathcal{O}_L$ gives a Dedekind domain with finitely many prime ideals (hence a PID by example sheet 2) and that $S^{-1}D_{L/K} = D_{S^{-1}\mathcal{O}_L/S^{-1}\mathcal{O}_K}$ and $S^{-1} d_{L/K} = d_{S^{-1} \mathcal{O}_L/s^{-1} \mathcal{O}_K}$ (details left as exercise).
+    In general, localize at $S = \mathcal{O}_K/\mathfrak{p}$ and note that localizing $\mathcal{O}_K$ gives a DVR (hence a PID), localizing $\mathcal{O}_L$ gives a Dedekind domain with finitely many prime ideals (hence a PID by example sheet 2) and that $S^{-1}D_{L/K} = D_{S^{-1}\mathcal{O}_L/S^{-1}\mathcal{O}_K}$ and $S^{-1} d_{L/K} = d_{S^{-1} \mathcal{O}_L/S^{-1} \mathcal{O}_K}$ (details left as exercise).
 \end{proof}
 
 \begin{theorem}\label{theorem12.6}
@@ -1413,7 +1413,7 @@ One way to see this is to use Corollary \ref{cor10.10} and $v_{\mathfrak{p}}(N_{
 Take $\mathcal{P}$ a nonzero prime ideal of $\mathcal{O}_L$ and $\mathfrak{p} = \mathcal{P} \cap \mathcal{O}_K$. We can define $D_{L_\mathcal{P}/K_\mathfrak{p}}$ using $\mathcal{O}_{L_\mathcal{P}}$ and $\mathcal{O}_{K_{\mathfrak{p}}}$. We can identify $D_{L_\mathcal{P}/K_\mathfrak{p}}$ with a power of $\mathcal{P}$. 
 
 \begin{theorem}\label{theorem12.7}
-    $D_{L/K} = \prod_{\mathcal{P}}^{} D_{L_\mathcal{P}/K_\mathfrak{p}}$. 
+    $D_{L/K} = \prod_{\mathcal{P}\mid \mathfrak{p}}^{} D_{L_\mathcal{P}/K_\mathfrak{p}}$. 
 \end{theorem}
 Note that we will later verify that the product is finite.
 \begin{proof}
@@ -1460,7 +1460,7 @@ In this section, let $L/K$ be a finite separable extension of non--archimedean l
     Moreover, $[K_0 : K] = f_{L/K}$, $[L:K_0] = e_{L/K}$ and $K_0/K$ is Galois.
 \end{theorem}
 \begin{proof}
-    Let $k = \mathbb{F}_q$, so that $k_L = \mathbb{F}_{q^f}$ for $f = f_L/K$ the residue class degree. Set $m = q^f - 1$ and $[~] : \mathbb{F}_{q^f} \to L$ the Teichmüller map for $L$. Let $\zeta_m = [\alpha]$ for $\alpha$ a generator for $\mathbb{F}_{q^f}^\times$. Then $\zeta_m$ is a primitive $m^{\text{th}}$ root of unity. Set $K_0 = K(\zeta_m) \subset L$, then $K_0/K$ is Galois and $K_0$ has residue field $k_0 = \mathbb{F}(\alpha) = k_L$. Hence $f_{L/K_0} = 1$, so $L/K_0$ is totally ramified.
+    Let $k = \mathbb{F}_q$, so that $k_L = \mathbb{F}_{q^f}$ for $f = f_L/K$ the residue class degree. Set $m = q^f - 1$ and $[~] : \mathbb{F}_{q^f} \to L$ the Teichmüller map for $L$. Let $\zeta_m = [\alpha]$ for $\alpha$ a generator for $\mathbb{F}_{q^f}^\times$. Then $\zeta_m$ is a primitive $m^{\text{th}}$ root of unity. Set $K_0 = K(\zeta_m) \subset L$, then $K_0/K$ is Galois and $K_0$ has residue field $k_0 = \mathbb{F}_q(\alpha) = k_L$. Hence $f_{L/K_0} = 1$, so $L/K_0$ is totally ramified.
     \vspace{1mm}
      
     Let $\text{res}: \text{Gal}(K_0/K) \to \text{Gal}(k_0/k)$ be the natural map. For $\sigma \in \text{Gal}(K_0/K)$, we have $\sigma(\zeta_m) = \zeta_m \iff \sigma(\zeta_m) \equiv \zeta_m \pmod{\mathfrak{m}_0}$, since by Hensel's lemma, we have a bijection between $\mu_m(K_0)$ and $\mu_m(k_0)$. Hence $\text{res}$ is injective. Thus $|\text{Gal}(K_0/K)|\le |\text{Gal}(k_0/k)| = f_{K_0/K}$. Hence $[K_0:K] = f_{K_0/K}$, so $\text{res}$ is an isomorphism and $K_0/K$ is unramified.
@@ -1493,18 +1493,18 @@ Note that:
 \end{itemize}
 
 \begin{defn}
-    Let $f(X)=X^n + a_{n-1}X^{n-1} + \ldots + a_0 \in \mathcal{O}_K[X]$. We say $f$ is \textbf{Eisenstein} if $v_{K}(a_i)\ge 1$ and $v_K(a_0) = 1$ for $v_K$ the normalized evaluation on $K$.
+    Let $f(X)=X^n + a_{n-1}X^{n-1} + \ldots + a_0 \in \mathcal{O}_K[X]$. We say $f$ is \textbf{Eisenstein} if $v_{K}(a_i)\ge 1 ~\forall 0<i<n$ and $v_K(a_0) = 1$ for $v_K$ the normalized evaluation on $K$.
 \end{defn}
 \textbf{Fact.} $f(x)$ Eisenstein $\implies f(x)$ irreducible.
 \begin{theorem}\label{theorem13.5}
     \begin{enumerate}[(i)]
         \item Let $L/K$ be a finite totally ramified extension and let $\pi_L \in \mathcal{O}_L$ be a uniformizer. Then the minimal polynomial of $\pi_L$ is Eisenstein and $\mathcal{O}_L = \mathcal{O}_K[\pi_L]$ (so $L = K(\pi_L)$).
-        \item Conversely, if $f(X) \in \mathcal{O}_K[X]$ is Eisenstein and $\alpha$ is a root of $f$, then $K(\alpha)/K$ is totally ramified and $\alpha$ is a uniformizer in $\mathcal{O}_L$.
+        \item Conversely, if $f(X) \in \mathcal{O}_K[X]$ is Eisenstein and $\alpha$ is a root of $f$, then $K(\alpha)/K$ is totally ramified and $\alpha$ is a uniformizer in $\mathcal{O}_L$ (for $L = K(\alpha)$).
     \end{enumerate}
 \end{theorem}
 \begin{proof}
     \begin{enumerate}[(i)]
-        \item Let $[L:K] = e = e_{L/K}$ and let $f(X) = X^n + a_{n-1}X^{n-1} + \ldots + a_0 \in \mathcal{O}_K[X]$ be the minimal polynomial for $\pi_L$. Then $m\le e$. Since $v_L(K^\times) = e \mathbb{Z}$, we have $v_L(a_i \pi_L^i) \equiv  i \pmod{e}$ for $i\le m$. Hence $a_i \pi_L^i$ have distinct valuations. As $\pi_L^m = \sum_{i=0}^{m-1} a_i \pi_L^i$, we have $$m = v_L(\pi_L^m) = \min_{0\le i\le m-1}(i + e v_K(a_i)).$$
+        \item Let $[L:K] = e = e_{L/K}$ and let $f(X) = X^m + a_{m-1}X^{m-1} + \ldots + a_0 \in \mathcal{O}_K[X]$ be the minimal polynomial for $\pi_L$. Then $m\le e$. Since $v_L(K^\times) = e \mathbb{Z}$, we have $v_L(a_i \pi_L^i) \equiv  i \pmod{e}$ for $i\le m$. Hence $a_i \pi_L^i$ have distinct valuations. As $\pi_L^m = - \sum_{i=0}^{m-1} a_i \pi_L^i$, we have $$m = v_L(\pi_L^m) = \min_{0\le i\le m-1}(i + e v_K(a_i)).$$
         Hence $v_K(a_i)\ge 1 ~\forall i$ and hence $v_K(a_0) = 1$ and $m = e$. Thus $f(X)$ is Eisenstein and $L = K(\pi_L)$.
         \vspace{1mm}
          
@@ -1516,7 +1516,7 @@ Note that:
 \section{Structure of units}
 
 \begin{prop}
-    Let $K$ be a finite extension of $\mathbb{Q}_p$, write $e = e_{K/\mathbb{Q}_p}$ and let $\pi$ be a unit in $K$. If $r>\frac{e}{p-1}$, then $\text{exp}(x)= \sum_{n=0}^{\infty} \frac{x^n}{n!}$ converges on $\pi^r \mathcal{O}_K$ and induces an isomorphism $(\pi^r \mathcal{O}_K, +) \cong (1 + \pi^r \mathcal{O}_K, \times)$.
+    Let $K$ be a finite extension of $\mathbb{Q}_p$, write $e = e_{K/\mathbb{Q}_p}$ and let $\pi$ be a uniformizer in $\mathcal{O}_K$. If $r>\frac{e}{p-1}$, then $\text{exp}(x)= \sum_{n=0}^{\infty} \frac{x^n}{n!}$ converges on $\pi^r \mathcal{O}_K$ and induces an isomorphism $(\pi^r \mathcal{O}_K, +) \cong (1 + \pi^r \mathcal{O}_K, \times)$.
 \end{prop}
 \begin{proof}
     $v_K(n!) = e v_p(n!) \stackrel{(\star)}{=} \frac{e(n-s_p(n))}{p-1} \le e \left(\frac{n-1}{p-1}\right)$ for $(\star)$ from example sheet 1. For $x \in \pi^r \mathcal{O}_K$ and $n\ge 1$, compute $v_K(\frac{x^n}{n!})\ge nr - e \frac{n-1}{p-1} = r + (n-1)\left(r-\frac{e}{p-1}\right)$, so $v_K(\frac{x^n}{n!}) \to \infty$ as $n\to \infty$. Hence $\text{exp}(x)$ converges on $\pi^r \mathcal{O}_K$. Since $v_K(\frac{x^n}{n!})\ge r ~\forall n\ge 1$, $\text{exp}(x) \in 1 + \pi^r \mathcal{O}_K$.
@@ -1531,7 +1531,7 @@ When $K$ is a local field, possibly of equal characteristic, write $U_K = \mathc
 \end{defn}
 \begin{prop}\label{prop14.2}
     \begin{enumerate}[(i)]
-        \item $U_K^{(0)}/U_{K}^{(1)} \cong (k^{x}, \times)$ (for $k = \mathcal{O}_K/\mathfrak{m}$).
+        \item $U_K^{(0)}/U_{K}^{(1)} \cong (k^{\times}, \times)$ (for $k = \mathcal{O}_K/\mathfrak{m}$).
         \item $U_K^{(s)}/U_{K}^{(s+1)} \cong (k,+)$ for $s\ge 1$.
     \end{enumerate}
 \end{prop}
@@ -1549,10 +1549,10 @@ When $K$ is a local field, possibly of equal characteristic, write $U_K = \mathc
 \end{proof}
 \textbf{Remark.} This is not true for $K$ of equal characteristic, since $\exp$ is not defined.
 \begin{example}
-    Consider $\mathbb{Z}_p^\times$ for $p>2$, so $e=1$. Then we can take $r=1$, so $\mathbb{Z}_p^\times \cong (\mathbb{Z}/p \mathbb{Z})^\times \times (1 + p \mathbb{Z}_p)$ by $x \mapsto (x \pmod{p}, \frac{x}{[x \pmod{p}]})$. We can rewrite $\mathbb{Z}_p^\times \cong (\mathbb{Z}/p \mathbb{Z})^\times \times (1 + p \mathbb{Z}_p) \cong \mathbb{F}_p^\times \times \mathbb{Z}_p \cong \mathbb{Z}/(p-1)\mathbb{Z} \times \mathbb{Z}_p$.
+    Consider $\mathbb{Z}_p^\times$ from $K=\mathbb{Q}_p$ for $p>2$, so $e=1$. Then we can take $r=1$, so $\mathbb{Z}_p^\times \cong (\mathbb{Z}/p \mathbb{Z})^\times \times (1 + p \mathbb{Z}_p)$ by $x \mapsto (x \pmod{p}, \frac{x}{[x \pmod{p}]})$. We can rewrite $\mathbb{Z}_p^\times \cong (\mathbb{Z}/p \mathbb{Z})^\times \times (1 + p \mathbb{Z}_p) \cong \mathbb{F}_p^\times \times \mathbb{Z}_p \cong \mathbb{Z}/(p-1)\mathbb{Z} \times \mathbb{Z}_p$.
     \vspace{1mm}
      
-    If $p=2$, take $r=2$ to get $\mathbb{Z}_2^{\times} \cong (\mathbb{Z}/4\mathbb{Z})^\times \times (1 + 4\mathbb{Z}_p)$ by $x \mapsto (x \pmod{4}, \frac{x}{\epsilon(x)})$ where $\epsilon(x) = \begin{cases}
+    If $p=2$, take $r=2$ to get $\mathbb{Z}_2^{\times} \cong (\mathbb{Z}/4\mathbb{Z})^\times \times (1 + 4\mathbb{Z}_2)$ by $x \mapsto (x \pmod{4}, \frac{x}{\epsilon(x)})$ where $\epsilon(x) = \begin{cases}
         1 & x \equiv 1\pmod{4}\\
         -1 & x \equiv 3\pmod{4}
     \end{cases}$. Again note $\mathbb{Z}_2^{\times} \cong (\mathbb{Z}/4\mathbb{Z})^\times \times (1 + 4\mathbb{Z}_p) \cong \mathbb{Z}/2\mathbb{Z} \times \mathbb{Z}_2$.
@@ -1569,7 +1569,7 @@ Fix a finite Galois extension $L/K$ of local fields. From now on, assume a local
         G_s(L/K) = \{\sigma \in \text{Gal}(L/K) \mid v_L(\sigma(x)-x)\ge s+1 ~\forall x \in \mathcal{O}_L\}.
     \end{align*}
 \end{defn}
-\textbf{Remark.} $G_s$ only changes at the integers. $s \in R_{\ge -1}$ is used to define upper numbering (to be done later).
+\textbf{Remark.} $G_s$ only changes at the integers. $s \in \mathbb{R}_{\ge -1}$ is used to define upper numbering (to be done later).
 \begin{example}
     $G_{-1}(L/K) = \text{Gal}(L/K)$ and 
     \begin{align*}
@@ -1581,7 +1581,7 @@ Fix a finite Galois extension $L/K$ of local fields. From now on, assume a local
 \begin{theorem}\label{theorem15.1}
     \begin{enumerate}[(i)]
         \item For $s\ge 1$, $G_s = \{\sigma \in G_0 \mid v_L(\sigma(\pi_L)-\pi_L)\ge s+1\}$.
-        \item $\bigcap_{n=0}^{\infty} = \{1\}$.
+        \item $\bigcap_{n=0}^{\infty} G_n= \{1\}$.
         \item Let $s \in \mathbb{Z}_{\ge 0}$. Then there exists an injective group homomorphism 
         \begin{align*}
             G_s/G_{s+1} &\hookrightarrow U_L^{(s)}/U_L^{(s+1)}\\
@@ -1595,7 +1595,7 @@ Fix a finite Galois extension $L/K$ of local fields. From now on, assume a local
     \begin{enumerate}[(i)]
         \item By Theorem \ref{theorem13.5}, $\mathcal{O}_L = \mathcal{O}_K[\pi_L]$. Suppose $v_L(\sigma(\pi_L)-\pi_L)\ge s+1$. Let $x \in \mathcal{O}_L$, then $x = f(\pi_L)$, where $f(X) \in \mathcal{O}_K[X]$. Then compute 
         \begin{align*}
-            \sigma(x)-x = \sigma(f(\pi_L))f(\pi_L) = f(\sigma(\pi_L)) - f(\pi_L) = (\sigma(\pi_L)-\pi_L)g(\pi_L)
+            \sigma(x)-x = \sigma(f(\pi_L)) - f(\pi_L) = f(\sigma(\pi_L)) - f(\pi_L) = (\sigma(\pi_L)-\pi_L)g(\pi_L)
         \end{align*}
         for $g(X) \in \mathcal{O}_K[X]$, since $X - Y \mid f(X) - f(Y)$. Thus 
         \begin{align*}
@@ -1674,7 +1674,7 @@ If $L/K$ is a finite separable extension of local fields, then we say $L/K$ is \
     \end{itemize}
     To find the higher ramification group, we compute
     \begin{align*}
-        V_L(\sigma_m(\pi)-\pi) = v_L(\zeta_{p^n}^m - \zeta_{p^n}) = v_L(\zeta_{p^n}^{m-1}-1).
+        v_L(\sigma_m(\pi)-\pi) = v_L(\zeta_{p^n}^m - \zeta_{p^n}) = v_L(\zeta_{p^n}^{m-1}-1).
     \end{align*}
     Let $k$ be maximal such that $p^k \mid m-1$. Then $\zeta_{p^n}^{m-1}$ is a primitive $p^{(n-k)^{\text{th}}}$ root of unity and hence $(\zeta_{p^n}^{m-1}-1)$ is a uniformizer in $L' = \mathbb{Q}_p(\zeta_{p^n}^{m-1})$. Hence $$v_L(\zeta_{p^n}^{m-1}-1) = e_{L/L'} = \frac{e_{L/\mathbb{Q}_p}}{e_{L'/\mathbb{Q}_p}} = \frac{[L:\mathbb{Q}_p]}{[L':\mathbb{Q}_p]} = \frac{p^{n-1}(p-1)}{p^{n-k-1}(p-1)}=p^k.$$
     Now Theorem \ref{theorem15.1} (i) tells us that $\sigma \in G_i \iff p^k\ge i+1$. Thus $$G_i \cong \begin{cases}

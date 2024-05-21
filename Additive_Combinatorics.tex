@@ -472,7 +472,7 @@ so $\delta(A) \le \sigma(A)^2$, i.e. $\left|A-A\right|\le \frac{\left|A+A\right|
     \textbf{Claim.} For any finite $C \subset G$, $\left|A'+B+C\right|\le K'\left|A'+C\right|$.
     \vspace{1mm}
      
-    We first finish the proof assuming this claim, and then prove it. We first show that $\left|A'+mB\right|\le (K')^m\left|A\right| ~\forall m \in \mathbb{Z}_{\ge 0}$. The cases $m=0$ and $m=1$ are clear. Now suppose that $m>1$ and the result holds for $m-1$. By the claim with $C=(m-1)B$, \[
+    We first finish the proof assuming this claim, and then prove it. We first show that $\left|A'+mB\right|\le (K')^m\left|A'\right| ~\forall m \in \mathbb{Z}_{\ge 0}$. The cases $m=0$ and $m=1$ are clear. Now suppose that $m>1$ and the result holds for $m-1$. By the claim with $C=(m-1)B$, \[
     \left|A' + mB\right| = \left|A'+B+(m-1)B\right| \le K'\left|A'+(m-1)B\right|\le K'\cdot (K')^{m-1}\left|A'\right|.
     \]
     But as in the proof of Rusza's triangle inequality, 
@@ -650,8 +650,8 @@ We first prove a technical lemma using a method called ''dependent random choice
 \section{Probabilistic tools}
 \textbf{Remark.} Assume in this chapter that all our probability spaces are finite, so we don't need to worry about convergence issues. Also, it is later stated that the proofs of these inequalities are nonexaminable, but we are expected to be able to state and apply them.
 \begin{prop}[Khintchine's inequality]\label{prop3.1}
-    Let $X_1,X_2,\ldots,X_n$ be independent random variables taking values $\pm x_i$ with probability $\frac{1}{2} ~\forall i=1,\ldots,n$. Then $\forall p \in [2,\infty)$, \[
-    ||\sum_{i=1}^{n} X_i ||_{L^p(\mathbb{P})} = O \left(p^{1/2}\left(\sum_{i=1}^{n} ||X_i||_{L^2(\mathbb{P})}^2\right)^{1/2}\right)
+    Let $X_1,X_2,\ldots,X_n$ be independent random variables taking values $\pm x_i \in \mathbb{C}$ with probability $\frac{1}{2} ~\forall i=1,\ldots,n$. Then $\forall p \in [2,\infty)$, \[
+    \mathbb{E} \left[|\sum_{i=1}^{n} X_i|^p\right]^{1/p} := ||\sum_{i=1}^{n} X_i ||_{L^p(\mathbb{P})} = O \left(p^{1/2}\left(\sum_{i=1}^{n} ||X_i||_{L^2(\mathbb{P})}^2\right)^{1/2}\right)
     \]
 \end{prop}
 \textbf{Remark.} Note that here $||X||_{p}$ for random variables $X$ will refer to its $p^{\text{th}}$ moment -- in particular, this involves expectations (i.e. the LHS above is actually an expected value of a random variable).
@@ -659,7 +659,7 @@ We first prove a technical lemma using a method called ''dependent random choice
     \marginpar{09 Feb 2024, Lecture 10}
     
     By nesting of norms, it suffices to prove the case $p = 2k$ with $k \in \mathbb{N}$. For simplicity, write $X = \sum_{i=1}^{n} X_i$ and WLOG assume that $\sum_{i=1}^{n} ||X_i||_{\infty}^2 = \sum_{i=1}^{n} ||X_i||_2^2 = 1$. By Chernoff (Example \ref{ex1.3}), which states that $\forall \theta >0$, \[
-    \mathbb{P}\left(\left|X\ge \theta\right|\right) \le 4 \exp(-\theta^2/4),
+    \mathbb{P}\left(\left|X\right|\ge \theta\right) \le 4 \exp(-\theta^2/4),
     \]
     we have (from the alternative expectation formula which we can by integrating by parts)
     \begin{align*}
@@ -734,7 +734,7 @@ Recall that given $A \subset \mathbb{F}_2^n$ of density $\alpha>0$, $\left|\text
     On Example Sheet 3.
 \end{proof}
 
-\textbf{Remark.} Last lecture, we wrote $f \in L^p(G)$ to mean that $f$ is a function on $G$ with bounded $L^p$--norm and then said $||f||_{L^p(G)} = \left(\mathbb{E}_{x \in G} f(x)^{p}\right)^{1/p}$. Since we assumed that our groups are finite, the condition ''with bounded $L^p$--norm'' is unnecessary here, but we keep it as it is in line with the usual notation. We also said that $\widehat{f} \in \ell^2(\Lambda)$ if $\widehat{f}$ is a function supported on $\Lambda \subset \widehat{G}$ with bounded $\ell^2$--norm: $||\widehat{f}||_{\ell^2(\Lambda)} = \left(\sum_{\gamma \in \Lambda}^{} \left|\widehat{f}(\gamma)\right|^2\right)^{1/2}$. Finally, $X \in L^p(\mathbb{P})$ means that the random variable $X$ has bounded $p^{\text{th}}$ moment, i.e. $\mathbb{E}\left|X\right|^p<\infty$ (with expectation taken with respect to $\mathbb{P}$).
+\textbf{Remark.} Last lecture, we wrote $f \in L^p(G)$ to mean that $f$ is a function on $G$ with bounded $L^p$--norm and then said $||f||_{L^p(G)} = \left(\mathbb{E}_{x \in G} |f(x)|^{p}\right)^{1/p}$. Since we assumed that our groups are finite, the condition ''with bounded $L^p$--norm'' is unnecessary here, but we keep it as it is in line with the usual notation. We also said that $\widehat{f} \in \ell^2(\Lambda)$ if $\widehat{f}$ is a function supported on $\Lambda \subset \widehat{G}$ with bounded $\ell^2$--norm: $||\widehat{f}||_{\ell^2(\Lambda)} = \left(\sum_{\gamma \in \Lambda}^{} \left|\widehat{f}(\gamma)\right|^2\right)^{1/2}$. Finally, $X \in L^p(\mathbb{P})$ means that the random variable $X$ has bounded $p^{\text{th}}$ moment, i.e. $\mathbb{E}\left|X\right|^p<\infty$ (with expectation taken with respect to $\mathbb{P}$).
 \vspace{1mm}
  
 \textbf{Remark.} The proofs of these probabilistic inequalities are nonexaminable. However, we are expected to be able to state them and apply them.  
